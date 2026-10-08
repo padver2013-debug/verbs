@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><title>Helpful Tasks Verbs Flashcards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#e8f8f1;--card:#fff;--g:#2fb08e;--o:#ff8a3d;--t:#1d3b33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10261f;--card:#173a30;--t:#e6fff6}}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Arial,sans-serif}
+h1{margin:0;padding:12px 10px 2px;text-align:center;font-size:clamp(16px,4.5vw,26px);color:var(--g)}
+p.s{margin:0 0 6px;text-align:center;font-size:12px;color:var(--o)}
+.tabs{display:flex;gap:6px;padding:6px 8px;justify-content:center;flex-wrap:wrap}
+.tabs button{border:2px solid var(--g);background:none;color:var(--g);border-radius:20px;padding:6px 12px;font:inherit;font-size:13px}
+.tabs button.on{background:linear-gradient(90deg,var(--g),var(--o));border-color:transparent;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;max-width:900px;margin:auto}
+.c{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--g);display:flex;flex-direction:column;text-align:center}
+.ph{height:clamp(60px,18vw,110px);display:flex;align-items:center;justify-content:center;font-size:clamp(34px,10vw,60px);background:linear-gradient(135deg,#bff0dc,#ffd0a8);position:relative}
+.ph b{position:absolute;left:6px;top:4px;font-size:11px;background:var(--o);color:#fff;border-radius:8px;padding:1px 6px}
+.tx{padding:6px;flex:1}
+.vb{font-size:clamp(18px,5.5vw,26px);font-weight:bold;color:var(--g)}
+.ipa,td.i{font-family:"Times New Roman",Times,serif;font-style:normal}
+.ipa{font-size:clamp(13px,3.6vw,17px)}
+.pp{font-size:clamp(12px,3.2vw,15px);margin-top:2px}.pp i{color:var(--o);font-style:normal;font-weight:bold}
+.th{display:none;margin-top:4px;color:var(--o);font-size:clamp(13px,3.6vw,16px)}.th.show{display:block}
+.sp{border:0;background:var(--g);color:#fff;padding:7px;font-size:15px}.sp:active{background:var(--o)}
+.w{overflow-x:auto;padding:8px;max-width:900px;margin:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
+th{background:var(--g);color:#fff}th,td{border:1px solid var(--g);padding:5px 7px;text-align:left}
+td.t{color:var(--o)}td:first-child{width:30px}
+</style></head><body>
+<h1>🌿 Helpful Tasks Verbs Flashcards</h1>
+<p class="s">กด 🔊 ฟังเสียงชาย (UK) + เผยคำแปลไทย</p>
+<div class="tabs" id="tabs"></div><div class="grid" id="g"></div>
+<div class="w"><table><thead><tr><th>No</th><th>Verbs</th><th>IPA (UK)</th><th>Translate</th><th>Example sentence</th><th>Translate</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const R=`answer|ˈɑːnsə(r)|ตอบ|🙋
+carry|ˈkæri|แบก, หิ้ว, ขนย้าย|🎒
+help|help|ช่วย, ช่วยเหลือ|🆘
+open|ˈəʊpən|เปิด|🚪
+pay|peɪ|จ่ายเงิน|💳
+drive|draɪv|ขับรถ|🚗
+make|meɪk|ทำ, สร้าง|🛠️
+clean|kliːn|ทำความสะอาด|🧹
+show|ʃəʊ|แสดง|🖼️
+cook|kʊk|ทำอาหาร|🍳
+check|tʃek|ตรวจสอบ|✔️
+lend|lend|ให้ยืม|🤲
+wait|weɪt|รอ|⏳
+send|send|ส่ง|📨
+fix|fɪks|ซ่อมแซม|🔧
+order|ˈɔːdə(r)|สั่งซื้อ, สั่งอาหาร|🍽️
+translate|trænzˈleɪt|แปลภาษา|🌐
+print|prɪnt|พิมพ์ (เอกสาร)|🖨️
+lock|lɒk|ล็อก, ปิดล็อก|🔒
+find|faɪnd|หา, พบ|🔎
+take|teɪk|เอา, พา|🎁
+water|ˈwɔːtə(r)|รดน้ำ, น้ำ|🪴
+turn|tɜːn|หมุน, เลี้ยว|↪️
+feed|fiːd|ให้อาหาร|🐟
+park|pɑːk|จอดรถ|🅿️
+share|ʃeə(r)|แบ่งปัน|🍰
+reserve|rɪˈzɜːv|จอง, สำรอง|🎫
+post|pəʊst|โพสต์, ส่งไปรษณีย์|📮
+explain|ɪkˈspleɪn|อธิบาย|🧑‍🏫
+wash|wɒʃ|ซัก, ล้าง|🧺
+give|ɡɪv|ให้|🎀
+clear|klɪə(r)|ทำให้ชัดเจน, เคลียร์|🌤️
+guide|ɡaɪd|นำทาง, แนะนำ|🧭
+pick|pɪk|เลือก, เก็บ|🍎
+recommend|ˌrekəˈmend|แนะนำ|👍
+organize|ˈɔːɡənaɪz|จัดระเบียบ, จัดงาน|🗂️
+search|sɜːtʃ|ค้นหา|🔍
+hold|həʊld|ถือ, จับ|🤝
+proofread|ˈpruːfriːd|ตรวจทานต้นฉบับ|📖
+track|træk|ติดตาม|📍
+set|set|ตั้งค่า, จัดเตรียม|⚙️
+save|seɪv|บันทึก, ประหยัด|💾
+remind|rɪˈmaɪnd|เตือนความจำ|⏰
+greet|ɡriːt|ทักทาย|👋
+substitute|ˈsʌbstɪtjuːt|แทนที่, สำรอง|🔁
+double-check|ˌdʌbl ˈtʃek|ตรวจสอบซ้ำ|✅✅
+gather|ˈɡæðə(r)|รวบรวม|🧺
+bring|brɪŋ|นำมา|🛍️
+rearrange|ˌriːəˈreɪndʒ|จัดเรียงใหม่|🪑
+book|bʊk|จอง|📅
+test|test|ทดสอบ|🧪
+switch|swɪtʃ|สลับ, เปลี่ยน|🔀
+wipe|waɪp|เช็ด|🧽
+reset|ˌriːˈset|รีเซ็ต, ตั้งค่าใหม่|🔄
+pack|pæk|แพ็ก, ห่อ|📦
+draft|drɑːft|ร่าง (เอกสาร)|📝
+verify|ˈverɪfaɪ|ตรวจสอบความถูกต้อง|🔐
+fetch|fetʃ|ไปเอามา, ไปหยิบมา|🐕
+collect|kəˈlekt|สะสม, รวบรวม|🗃️
+waterproof|ˈwɔːtəpruːf|กันน้ำ|☔
+provide|prəˈvaɪd|จัดหาให้|📦
+inspect|ɪnˈspekt|ตรวจสอบ|🕵️`;
+const seen=new Set(),D=[];R.split("\n").forEach(l=>{const[v,i,t,e]=l.split("|");if(!seen.has(v)){seen.add(v);D.push({v,i:"/"+i+"/",t,e})}});
+const dbl=["set","reset"],ex={};
+function ing(v){if(ex[v])return ex[v];if(dbl.includes(v))return v+v.slice(-1)+"ing";if(v.endsWith("ie"))return v.slice(0,-2)+"ying";if(/[^eyo]e$/.test(v))return v.slice(0,-1)+"ing";return v+"ing"}
+const first=t=>t.split(/[,(]/)[0].trim();
+let cur=0;const T=document.getElementById("tabs"),G=document.getElementById("g"),B=document.getElementById("tb");
+const spk=t=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));u.voice=vs.find(v=>/GB|UK|British/i.test(v.lang+v.name)&&/male|daniel|george|ryan|oliver/i.test(v.name)&&!/female/i.test(v.name))||vs.find(v=>/male|david|daniel|alex|guy|mark/i.test(v.name)&&!/female/i.test(v.name))||vs[0]||null;u.pitch=.5;u.rate=.8;speechSynthesis.speak(u)};
+function show(n){[...T.children].forEach((b,i)=>b.classList.toggle("on",i==n));G.innerHTML=B.innerHTML="";
+D.slice(n*25,n*25+25).forEach((d,k)=>{const no=n*25+k+1,p=ing(d.v),ex=`Can you ${d.v} it for me?`,et=first(d.t).startsWith('ช่วย')?`${first(d.t)}ให้หน่อยได้ไหม`:`ช่วย${first(d.t)}ให้หน่อยได้ไหม`;
+const c=document.createElement("div");c.className="c";
+c.innerHTML=`<div class="ph"><b>${no}</b>${d.e}</div><div class="tx"><div class="vb">${d.v}</div><div class="ipa">${d.i} UK</div><div class="pp">V-ing: <i>${p}</i></div><div class="th">${d.t}</div></div><button class="sp">🔊 ฟัง / แปล</button>`;
+c.querySelector(".sp").onclick=()=>{c.querySelector(".th").classList.add("show");spk(d.v+". "+p)};G.append(c);
+B.insertAdjacentHTML("beforeend",`<tr><td>${no}</td><td><b>${d.v}</b></td><td class="i">${d.i}</td><td class="t">${d.t}</td><td>${ex}</td><td class="t">${et}</td></tr>`)});scrollTo(0,0)}
+for(let i=0;i<Math.ceil(D.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(D.length,i*25+25)})`;b.onclick=()=>show(i);T.append(b)}
+speechSynthesis.getVoices();show(0);
+</script></body></html>

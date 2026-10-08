@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><title>Modal Verb: DARE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#e8f8f1;--card:#fff;--g:#2fb08e;--o:#ff8a3d;--t:#1d3b33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10261f;--card:#173a30;--t:#e6fff6}}
+:root[data-theme=dark]{--bg:#10261f;--card:#173a30;--t:#e6fff6}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Arial,sans-serif;font-weight:300}
+h1{margin:0;padding:12px 10px 2px;text-align:center;font-size:clamp(16px,4.5vw,26px);color:var(--g);font-weight:400}
+p.s{margin:0 0 8px;text-align:center;font-size:12px;color:var(--o)}
+.tabs{display:flex;gap:6px;padding:6px 8px;justify-content:center;flex-wrap:wrap}
+.tabs button{border:2px solid var(--g);background:none;color:var(--g);border-radius:20px;padding:6px 12px;font:inherit;font-size:13px}
+.tabs button.on{background:linear-gradient(90deg,var(--g),var(--o));border-color:transparent;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;max-width:900px;margin:auto}
+.c{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--g);display:flex;flex-direction:column}
+.ph{height:clamp(60px,18vw,120px);display:flex;align-items:center;justify-content:center;font-size:clamp(34px,10vw,64px);background:linear-gradient(135deg,#bff0dc,#ffd0a8);position:relative}
+.ph b{position:absolute;left:6px;top:4px;font-size:11px;background:var(--o);color:#fff;border-radius:8px;padding:1px 6px;font-weight:400}
+.tx{padding:6px 8px;font-size:clamp(12px,3.2vw,15px);flex:1}
+.th{display:none;margin-top:4px;color:var(--o);font-size:clamp(11px,3vw,14px)}.th.show{display:block}
+.sp{border:0;background:var(--g);color:#fff;padding:6px;font-size:15px}.sp:active{background:var(--o)}
+.v{background:#ffe3cc;color:#c4500a;border-radius:3px;padding:0 2px;font-weight:400}
+.k{font-weight:bold;color:var(--g)}
+.w{overflow-x:auto;padding:8px;max-width:900px;margin:auto}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--card)}
+th{background:var(--g);color:#fff;font-weight:400}th,td{border:1px solid var(--g);padding:5px 7px;text-align:left}
+td:first-child{width:30px}td.t{color:var(--o)}
+</style></head><body>
+<h1>🦁 Modal Verb: DARE — Boldness to do something</h1>
+<p class="s">กด 🔊 เพื่อฟังเสียงชายหนักแน่น + เผยคำแปลไทย</p>
+<div class="tabs" id="tabs"></div><div class="grid" id="g"></div>
+<div class="w"><table><thead><tr><th>No</th><th>Sentence (verb = ส้ม, <b>connector</b> = ตัวหนา)</th><th>Translate</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`Few people dare speak out against the corruption.|มีคนน้อยที่กล้าพูดต่อต้านการทุจริต
+She had the dare to question the expert's thesis.|เธอกล้าตั้งคำถามต่อวิทยานิพนธ์ของผู้เชี่ยวชาญ
+He dare to dream big despite his humble background.|เขากล้าฝันใหญ่แม้มีพื้นฐานต่ำต้อย
+Who would dare to climb that treacherous mountain peak?|ใครจะกล้าปีนยอดเขาอันตรายนั้น?
+They dare to innovate in a conservative industry.|พวกเขากล้าสร้างนวัตกรรมในอุตสาหกรรมอนุรักษ์นิยม
+You must dare to take risks if you want to succeed.|คุณต้องกล้าเสี่ยงถ้าอยากประสบความสำเร็จ
+She dare to wear unconventional fashion styles.|เธอกล้าแต่งตัวแฟชั่นนอกกรอบ
+He had the dare to invest his entire life savings.|เขากล้าลงทุนเงินเก็บทั้งชีวิต
+We dare to challenge the status quo every day.|เรากล้าท้าทายสภาพเดิมทุกวัน
+Only a few explorers dare to explore the deep cave.|มีนักสำรวจไม่กี่คนที่กล้าสำรวจถ้ำลึก
+She dare to propose a radical new company policy.|เธอกล้าเสนอนโยบายบริษัทใหม่ที่รุนแรง
+He had the dare to defend his friends in danger.|เขากล้าปกป้องเพื่อนที่ตกอยู่ในอันตราย
+They dare to pursue their passions against all odds.|พวกเขากล้าไล่ตามความหลงใหลแม้โอกาสริบหรี่
+You dare to stand up for what you believe in.|คุณกล้ายืนหยัดเพื่อสิ่งที่เชื่อ
+She dare to confront her deepest inner fears.|เธอกล้าเผชิญความกลัวลึกสุดในใจ
+He had the dare to quit his stable job to start a business.|เขากล้าลาออกจากงานมั่นคงเพื่อเริ่มธุรกิจ
+We dare to imagine a sustainable future.|เรากล้าจินตนาการถึงอนาคตที่ยั่งยืน
+They dare to experiment with unusual ingredients.|พวกเขากล้าทดลองวัตถุดิบแปลกๆ
+She dare to express her unique artistic vision.|เธอกล้าแสดงวิสัยทัศน์ศิลปะเฉพาะตัว
+He had the dare to share his failures publicly.|เขากล้าแบ่งปันความล้มเหลวต่อสาธารณะ
+You dare to question conventional wisdom.|คุณกล้าตั้งคำถามกับภูมิปัญญาเดิมๆ
+She dare to embark on a solo cross-country journey.|เธอกล้าออกเดินทางข้ามประเทศคนเดียว
+They dare to lead the way through uncharted territory.|พวกเขากล้านำทางผ่านดินแดนที่ยังไม่เคยสำรวจ
+He had the dare to test the experimental vehicle.|เขากล้าทดสอบยานพาหนะต้นแบบ
+We dare to hope for a better social change.|เรากล้าหวังถึงการเปลี่ยนแปลงสังคมที่ดีขึ้น
+She dare to demand accountability from management.|เธอกล้าเรียกร้องความรับผิดชอบจากผู้บริหาร
+He had the dare to perform his magic tricks on stage.|เขากล้าแสดงมายากลบนเวที
+They dare to redefine modern architecture.|พวกเขากล้านิยามสถาปัตยกรรมสมัยใหม่ใหม่
+You dare to speak up when others remain silent.|คุณกล้าพูดเมื่อคนอื่นเงียบ
+She dare to trust someone after being hurt.|เธอกล้าไว้ใจใครอีกครั้งหลังเจ็บปวด
+He had the dare to break traditional rules.|เขากล้าฝ่าฝืนกฎเดิมๆ
+We dare to tackle complex global issues.|เรากล้าจัดการปัญหาโลกที่ซับซ้อน
+They dare to create art that provokes thought.|พวกเขากล้าสร้างศิลปะที่กระตุ้นความคิด
+She had the dare to admit her shortcomings openly.|เธอกล้ายอมรับข้อบกพร่องของตนอย่างเปิดเผย
+He dare to investigate controversial mysteries.|เขากล้าสืบสวนปริศนาที่เป็นที่ถกเถียง
+You dare to visualize a completely new career path.|คุณกล้าวาดภาพเส้นทางอาชีพใหม่เอี่ยม
+She dare to protect vulnerable community members.|เธอกล้าปกป้องสมาชิกชุมชนที่เปราะบาง
+He had the dare to pitch a disruptive startup concept.|เขากล้านำเสนอไอเดียสตาร์ทอัพพลิกวงการ
+They dare to explore untouched digital frontiers.|พวกเขากล้าสำรวจพรมแดนดิจิทัลที่ยังไม่มีใครแตะ
+We dare to build a better path forward.|เรากล้าสร้างเส้นทางข้างหน้าที่ดีกว่า
+She dare to defy expectations with her music.|เธอกล้าท้าทายความคาดหวังด้วยดนตรี
+He had the dare to pursue professional athletics late in life.|เขากล้าเป็นนักกีฬาอาชีพตอนปลายชีวิต
+They dare to speak truth to institutional power.|พวกเขากล้าพูดความจริงต่ออำนาจสถาบัน
+You dare to accept challenging responsibilities.|คุณกล้ารับหน้าที่ที่ท้าทาย
+She dare to pioneer a new educational program.|เธอกล้าบุกเบิกโครงการการศึกษาใหม่
+He had the dare to reveal his vulnerabilities.|เขากล้าเปิดเผยจุดอ่อนของตน
+We dare to transform our traditional processes.|เรากล้าเปลี่ยนกระบวนการแบบดั้งเดิม
+They dare to question obsolete rules.|พวกเขากล้าตั้งคำถามกับกฎล้าสมัย
+She dare to dream beyond ordinary limitations.|เธอกล้าฝันเกินขีดจำกัดธรรมดา
+He had the dare to stand against corruption.|เขากล้ายืนหยัดต่อต้านการทุจริต
+You dare to rethink your life choices.|คุณกล้าทบทวนทางเลือกในชีวิต
+She dare to champion environmental causes.|เธอกล้าเป็นแชมป์เปี้ยนด้านสิ่งแวดล้อม
+They dare to confront complex global crisis situations.|พวกเขากล้าเผชิญวิกฤตโลกที่ซับซ้อน
+He had the dare to create an unprecedented masterpiece.|เขากล้าสร้างผลงานชิ้นเอกที่ไม่เคยมีมาก่อน
+We dare to imagine a world without boundaries.|เรากล้าจินตนาการโลกไร้พรมแดน
+She dare to challenge the traditional curriculum.|เธอกล้าท้าทายหลักสูตรดั้งเดิม
+He had the dare to launch a revolutionary tech startup.|เขากล้าเปิดตัวสตาร์ทอัพเทคโนโลยีปฏิวัติวงการ
+They dare to question established medical practices.|พวกเขากล้าตั้งคำถามกับแนวปฏิบัติทางการแพทย์ที่ยึดถือ
+You dare to propose a bold new architectural design.|คุณกล้าเสนอแบบสถาปัตยกรรมใหม่ที่ทะเยอทะยาน
+She had the dare to explore remote mountain ranges alone.|เธอกล้าสำรวจเทือกเขาห่างไกลตามลำพัง
+We dare to reimagine corporate social responsibility.|เรากล้าคิดใหม่เรื่องความรับผิดชอบต่อสังคมขององค์กร
+He dare to express unconventional political views.|เขากล้าแสดงความเห็นทางการเมืองนอกกรอบ
+They had the dare to defend human rights globally.|พวกเขากล้าปกป้องสิทธิมนุษยชนทั่วโลก
+You dare to confront difficult personal truths.|คุณกล้าเผชิญความจริงส่วนตัวที่ยาก
+She dare to pursue a career in fine arts.|เธอกล้าประกอบอาชีพด้านวิจิตรศิลป์
+He had the dare to investigate corporate fraud.|เขากล้าสืบสวนการฉ้อโกงในองค์กร
+We dare to experiment with renewable energy solutions.|เรากล้าทดลองแนวทางพลังงานหมุนเวียน
+They dare to break away from industrial norms.|พวกเขากล้าแหกจากบรรทัดฐานอุตสาหกรรม
+She had the dare to share her personal struggles openly.|เธอกล้าเล่าความยากลำบากส่วนตัวอย่างเปิดเผย
+He dare to demand transparency from leaders.|เขากล้าเรียกร้องความโปร่งใสจากผู้นำ
+You dare to test new productivity methods.|คุณกล้าทดสอบวิธีเพิ่มผลิตภาพใหม่ๆ
+She had the dare to embark on a solo expedition.|เธอกล้าออกเดินทางสำรวจคนเดียว
+We dare to hope for global peace and unity.|เรากล้าหวังถึงสันติภาพและความสามัคคีของโลก
+They dare to redefine industry standards.|พวกเขากล้านิยามมาตรฐานอุตสาหกรรมใหม่
+He had the dare to stand against political injustice.|เขากล้ายืนหยัดต่อต้านความอยุติธรรมทางการเมือง
+You dare to speak truth to institutional authority.|คุณกล้าพูดความจริงต่ออำนาจสถาบัน
+She dare to trust her instincts over advice.|เธอกล้าเชื่อสัญชาตญาณมากกว่าคำแนะนำ
+He had the dare to tackle systemic economic flaws.|เขากล้าแก้ข้อบกพร่องเชิงระบบทางเศรษฐกิจ
+We dare to create groundbreaking digital tools.|เรากล้าสร้างเครื่องมือดิจิทัลล้ำสมัย
+They dare to protect endangered animal species.|พวกเขากล้าปกป้องสัตว์ใกล้สูญพันธุ์
+She had the dare to pitch an unconventional concept.|เธอกล้านำเสนอแนวคิดนอกกรอบ
+He dare to explore uncharted scientific fields.|เขากล้าสำรวจสาขาวิทยาศาสตร์ที่ยังไม่มีใครเคยไป
+You dare to defy conventional wisdom daily.|คุณกล้าท้าทายภูมิปัญญาเดิมทุกวัน
+She had the dare to pioneer organic farming methods.|เธอกล้าบุกเบิกวิธีเกษตรอินทรีย์
+We dare to transform our community infrastructure.|เรากล้าปรับเปลี่ยนโครงสร้างพื้นฐานชุมชน
+They dare to dream of a fully sustainable future.|พวกเขากล้าฝันถึงอนาคตที่ยั่งยืนเต็มรูปแบบ
+He had the dare to reveal his inner creative vision.|เขากล้าเปิดเผยวิสัยทัศน์สร้างสรรค์ในใจ
+You dare to accept massive professional risks.|คุณกล้ารับความเสี่ยงทางอาชีพมหาศาล
+She dare to champion universal education rights.|เธอกล้าเป็นแชมป์เปี้ยนสิทธิการศึกษาถ้วนหน้า
+He had the dare to confront complex market crises.|เขากล้าเผชิญวิกฤตตลาดที่ซับซ้อน
+We dare to imagine alternative energy grids.|เรากล้าจินตนาการโครงข่ายพลังงานทางเลือก
+They dare to question stagnant business processes.|พวกเขากล้าตั้งคำถามกับกระบวนการธุรกิจที่หยุดนิ่ง
+You dare to propose bold environmental initiatives.|คุณกล้าเสนอโครงการสิ่งแวดล้อมที่กล้าหาญ
+She had the dare to launch a global arts movement.|เธอกล้าเปิดตัวขบวนการศิลปะระดับโลก
+He dare to express unpopular political opinions.|เขากล้าแสดงความเห็นทางการเมืองที่ไม่เป็นที่นิยม
+They had the dare to defend minority communities.|พวกเขากล้าปกป้องชุมชนชนกลุ่มน้อย
+We dare to pursue groundbreaking medical research.|เรากล้าทำวิจัยทางการแพทย์ล้ำสมัย
+You dare to confront personal emotional barriers.|คุณกล้าเผชิญกำแพงทางอารมณ์ของตนเอง
+She had the dare to investigate deep-sea ecosystems.|เธอกล้าศึกษาระบบนิเวศใต้ทะเลลึก
+He dare to experiment with advanced software algorithms.|เขากล้าทดลองอัลกอริทึมซอฟต์แวร์ขั้นสูง`.split("\n").map(l=>l.split("|"));
+const E=[[/corrupt|fraud/,'🕵️'],[/mountain|peak/,'⛰️'],[/cave/,'🔦'],[/dream|imagine|vision/,'💭'],[/invest|savings|market|econom/,'💰'],[/fashion|wear/,'👗'],[/stage|magic/,'🎩'],[/music/,'🎸'],[/art|masterpiece/,'🎨'],[/energy|renewable/,'🔋'],[/medical/,'🩺'],[/software|digital|tech|algorithm/,'💻'],[/environment|organic|farming|species|animal/,'🌱'],[/educat|curriculum/,'📚'],[/journey|expedition|solo/,'🧭'],[/deep-sea/,'🐙'],[/peace/,'🕊️'],[/rights|justice|injustice/,'⚖️'],[/startup|business|company|corporate|job/,'🚀'],[/athlet/,'🏃'],[/architect/,'🏛️'],[/ingredient/,'🍳'],[/fear|emotional|truths|struggles|vulnerab/,'🛡️'],[/friends|community|minority/,'🤝'],[/risk|challenge|status/,'🔥'],[/speak|silent|up/,'📣'],[/scientific|research|vehicle/,'🔬']];
+const pic=s=>{const l=s.toLowerCase();for(const[r,e]of E)if(r.test(l))return e;return'🦁'};
+const hl=s=>s.replace(/(had the dare to|dare to|dare)(\s+)(\w+)/,'<span class="k">$1</span>$2<span class="v">$3</span>');
+let cur=0;const T=document.getElementById('tabs'),G=document.getElementById('g'),B=document.getElementById('tb');
+const spk=t=>{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));u.voice=vs.find(v=>/male|david|daniel|alex|james|guy|mark|george/i.test(v.name)&&!/female/i.test(v.name))||vs[0]||null;u.pitch=.5;u.rate=.85;speechSynthesis.speak(u)};
+function show(n){cur=n;[...T.children].forEach((b,i)=>b.classList.toggle('on',i==n));G.innerHTML='';B.innerHTML='';
+D.slice(n*20,n*20+20).forEach(([e,t],i)=>{const no=n*20+i+1;const c=document.createElement('div');c.className='c';
+c.innerHTML=`<div class="ph"><b>${no}</b>${pic(e)}</div><div class="tx">${hl(e)}<div class="th">${t}</div></div><button class="sp">🔊 ฟัง / แปล</button>`;
+c.querySelector('.sp').onclick=()=>{c.querySelector('.th').classList.add('show');spk(e)};G.append(c);
+B.insertAdjacentHTML('beforeend',`<tr><td>${no}</td><td>${hl(e)}</td><td class="t">${t}</td></tr>`)});scrollTo(0,0)}
+for(let i=0;i<5;i++){const b=document.createElement('button');b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);T.append(b)}
+speechSynthesis.getVoices();show(0);
+</script></body></html>

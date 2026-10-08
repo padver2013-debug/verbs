@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8"><title>Present Verbs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--mint:#d9f5ec;--mint2:#2bb59a;--or:#ff8a3d;--ink:#17493f;--card:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mint);color:var(--ink);font-family:"Segoe UI",Tahoma,sans-serif}
+h1{margin:0;padding:10px;text-align:center;font-size:clamp(16px,2.6vw,28px);color:#fff;background:linear-gradient(90deg,var(--mint2),var(--or))}
+.tabs{display:flex;gap:6px;padding:8px;justify-content:center;flex-wrap:wrap}
+.tabs button{border:2px solid var(--mint2);background:#fff;color:var(--mint2);border-radius:20px;padding:6px 14px;font-weight:700;cursor:pointer;font-size:clamp(11px,1.6vw,15px)}
+.tabs button.on{background:var(--or);border-color:var(--or);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(4px,1vw,12px);padding:0 clamp(4px,1vw,12px)}
+.card{background:var(--card);border:2px solid var(--mint2);border-top:5px solid var(--or);border-radius:12px;padding:clamp(3px,.8vw,10px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
+.pic{font-size:clamp(26px,6vw,70px);line-height:1.1;background:var(--mint);border-radius:10px;width:100%}
+.v{font-weight:800;font-size:clamp(13px,2.2vw,26px);color:var(--or)}
+.ipa{font-family:"Times New Roman",Times,serif;font-style:normal;font-size:clamp(10px,1.5vw,18px)}
+.pp{font-size:clamp(8px,1.2vw,14px);color:var(--mint2);font-weight:600;overflow-wrap:anywhere}
+.th{min-height:1.3em;font-size:clamp(10px,1.6vw,18px);font-weight:700;color:var(--ink)}
+.snd{border:0;background:var(--mint2);color:#fff;border-radius:50%;width:clamp(24px,3.4vw,40px);height:clamp(24px,3.4vw,40px);font-size:clamp(11px,1.6vw,18px);cursor:pointer}
+.snd:active{background:var(--or)}
+.wrap{overflow-x:auto;padding:12px}
+table{border-collapse:collapse;width:100%;min-width:640px;background:#fff;font-size:clamp(11px,1.4vw,15px)}
+th{background:var(--mint2);color:#fff}th,td{border:1px solid var(--mint);padding:5px 8px;text-align:left}
+tr:nth-child(even) td{background:#fff4ec}
+td.i{font-family:"Times New Roman",Times,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){}}
+</style></head><body>
+<h1>🌿 Present Verbs · กริยา 100 คำ 🍊</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>No</th><th>Verbs</th><th>IPA</th><th>Translate</th><th>Example sentence</th><th>Translate</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D={};
+`build|bɪld|สร้าง|🏗️|I build a house.|ฉันสร้างบ้าน
+cook|kʊk|ทำอาหาร|🍳|I cook dinner.|ฉันทำอาหารเย็น
+need|niːd|ต้องการ|🙏|I need help.|ฉันต้องการความช่วยเหลือ
+play|pleɪ|เล่น|⚽|We play football.|เราเล่นฟุตบอล
+improve|ɪmˈpruːv|ปรับปรุง|📈|I improve my English.|ฉันพัฒนาภาษาอังกฤษ
+absorb|əbˈzɔːb|ดูดซับ|🧽|Sponges absorb water.|ฟองน้ำดูดซับน้ำ
+show|ʃəʊ|แสดง|🖼️|I show my photo.|ฉันแสดงรูปของฉัน
+harvest|ˈhɑːvɪst|เก็บเกี่ยว|🌾|They harvest rice.|พวกเขาเก็บเกี่ยวข้าว
+celebrate|ˈselɪbreɪt|ฉลอง|🎉|We celebrate New Year.|เราฉลองปีใหม่
+offer|ˈɒfə|เสนอ|🤝|I offer a seat.|ฉันเสนอที่นั่งให้
+drink|drɪŋk|ดื่ม|🥤|I drink water.|ฉันดื่มน้ำ
+sing|sɪŋ|ร้องเพลง|🎤|She sings well.|เธอร้องเพลงเพราะ
+catch|kætʃ|จับ|🧤|I catch the ball.|ฉันจับลูกบอล
+provide|prəˈvaɪd|จัดหาให้|📦|We provide food.|เรามีอาหารให้
+love|lʌv|รัก|❤️|I love my family.|ฉันรักครอบครัว
+help|help|ช่วยเหลือ|🆘|I help my friend.|ฉันช่วยเพื่อน
+attract|əˈtrækt|ดึงดูด|🧲|Magnets attract metal.|แม่เหล็กดึงดูดโลหะ
+protect|prəˈtekt|ปกป้อง|🛡️|We protect nature.|เราปกป้องธรรมชาติ
+flow|fləʊ|ไหล|🌊|The river flows.|แม่น้ำไหล
+face|feɪs|เผชิญหน้า|😤|I face my fear.|ฉันเผชิญความกลัว
+share|ʃeə|แบ่งปัน|🍰|I share my cake.|ฉันแบ่งเค้กให้
+grow|grəʊ|เติบโต|🌱|Plants grow fast.|พืชโตเร็ว
+bring|brɪŋ|นำมา|🎒|I bring my bag.|ฉันนำกระเป๋ามา
+inspire|ɪnˈspaɪə|สร้างแรงบันดาลใจ|💡|Teachers inspire us.|ครูสร้างแรงบันดาลใจให้เรา
+heal|hiːl|รักษา|🩹|Time heals pain.|เวลาเยียวยาความเจ็บปวด
+open|ˈəʊpən|เปิด|🚪|I open the door.|ฉันเปิดประตู
+water|ˈwɔːtə|รดน้ำ|🚿|I water the plants.|ฉันรดน้ำต้นไม้
+wear|weə|สวมใส่|👕|I wear a hat.|ฉันสวมหมวก
+read|riːd|อ่าน|📖|I read a book.|ฉันอ่านหนังสือ
+explain|ɪkˈspleɪn|อธิบาย|🗣️|I explain the rule.|ฉันอธิบายกฎ
+write|raɪt|เขียน|✍️|I write a letter.|ฉันเขียนจดหมาย
+pass|pɑːs|ผ่าน / ส่ง|🏈|I pass the exam.|ฉันสอบผ่าน
+borrow|ˈbɒrəʊ|ยืม|📚|I borrow a pen.|ฉันยืมปากกา
+complete|kəmˈpliːt|ทำให้เสร็จ|✅|I complete my work.|ฉันทำงานเสร็จ
+grade|ɡreɪd|ให้คะแนน|💯|Teachers grade tests.|ครูตรวจให้คะแนนข้อสอบ
+paint|peɪnt|ทาสี / วาดภาพ|🎨|I paint a wall.|ฉันทาสีผนัง
+memorize|ˈmeməraɪz|ท่องจำ|🧠|I memorize words.|ฉันท่องจำคำศัพท์
+learn|lɜːn|เรียนรู้|🎓|I learn English.|ฉันเรียนภาษาอังกฤษ
+make|meɪk|ทำ / สร้าง|🛠️|I make tea.|ฉันชงชา
+ask|ɑːsk|ถาม|🙋|I ask a question.|ฉันถามคำถาม
+hold|həʊld|ถือ|🤲|I hold a cup.|ฉันถือถ้วย
+enjoy|ɪnˈdʒɔɪ|สนุก / เพลิดเพลิน|😄|I enjoy music.|ฉันเพลิดเพลินกับดนตรี
+encourage|ɪnˈkʌrɪdʒ|ให้กำลังใจ|💪|I encourage him.|ฉันให้กำลังใจเขา
+draw|drɔː|วาด|✏️|I draw a cat.|ฉันวาดแมว
+solve|sɒlv|แก้ปัญหา|🧩|I solve the puzzle.|ฉันแก้ปริศนา
+take|teɪk|เอา / พา|🚌|I take a bus.|ฉันนั่งรถบัส
+fly|flaɪ|บิน|✈️|Birds fly high.|นกบินสูง
+buy|baɪ|ซื้อ|🛒|I buy fruit.|ฉันซื้อผลไม้
+explore|ɪkˈsplɔː|สำรวจ|🧭|We explore caves.|เราสำรวจถ้ำ
+reach|riːtʃ|ไปถึง|🏔️|We reach the top.|เราไปถึงยอดเขา
+pack|pæk|แพ็ค / จัดกระเป๋า|🧳|I pack my bag.|ฉันจัดกระเป๋า
+visit|ˈvɪzɪt|เยี่ยมชม|🏛️|I visit my aunt.|ฉันไปเยี่ยมป้า
+follow|ˈfɒləʊ|ติดตาม|👣|Follow me.|ตามฉันมา
+book|bʊk|จอง|🏨|I book a room.|ฉันจองห้องพัก
+cross|krɒs|ข้าม|🚸|I cross the road.|ฉันข้ามถนน
+rent|rent|เช่า|🔑|I rent a flat.|ฉันเช่าแฟลต
+discover|dɪˈskʌvə|ค้นพบ|🔭|We discover stars.|เราค้นพบดวงดาว
+taste|teɪst|ชิมรส|😋|I taste the soup.|ฉันชิมซุป
+carry|ˈkæri|แบก / ถือ|📦|I carry a box.|ฉันแบกกล่อง
+sail|seɪl|แล่นเรือ|⛵|We sail at sea.|เราแล่นเรือในทะเล
+exchange|ɪksˈtʃeɪndʒ|แลกเปลี่ยน|🔄|We exchange gifts.|เราแลกของขวัญกัน
+speak|spiːk|พูด|💬|I speak English.|ฉันพูดภาษาอังกฤษ
+welcome|ˈwelkəm|ต้อนรับ|👋|We welcome guests.|เราต้อนรับแขก
+sign|saɪn|ลงนาม|🖊️|I sign the form.|ฉันเซ็นแบบฟอร์ม
+answer|ˈɑːnsə|ตอบ|✔️|I answer the phone.|ฉันรับโทรศัพท์
+manage|ˈmænɪdʒ|บริหาร / จัดการ|📋|She manages a shop.|เธอบริหารร้านค้า
+launch|lɔːntʃ|เปิดตัว / ปล่อย|🚀|We launch a product.|เราเปิดตัวสินค้า
+attend|əˈtend|เข้าร่วม|🏫|I attend class.|ฉันเข้าเรียน
+receive|rɪˈsiːv|ได้รับ|📬|I receive a letter.|ฉันได้รับจดหมาย
+create|kriˈeɪt|สร้างสรรค์|✨|I create a design.|ฉันสร้างสรรค์งานออกแบบ
+interview|ˈɪntəvjuː|สัมภาษณ์|🎙️|We interview him.|เราสัมภาษณ์เขา
+calculate|ˈkælkjʊleɪt|คำนวณ|🧮|I calculate the cost.|ฉันคำนวณค่าใช้จ่าย
+pitch|pɪtʃ|นำเสนอ / ขายไอเดีย|📊|I pitch an idea.|ฉันนำเสนอไอเดีย
+finish|ˈfɪnɪʃ|เสร็จสิ้น|🏁|I finish work.|ฉันเลิกงาน
+check|tʃek|ตรวจสอบ|🔍|I check my email.|ฉันตรวจอีเมล
+print|prɪnt|พิมพ์|🖨️|I print a file.|ฉันพิมพ์ไฟล์
+value|ˈvæljuː|ให้คุณค่า|💎|I value honesty.|ฉันให้คุณค่ากับความซื่อสัตย์
+choose|tʃuːz|เลือก|☑️|I choose red.|ฉันเลือกสีแดง
+update|ʌpˈdeɪt|อัปเดต|🔃|I update the app.|ฉันอัปเดตแอป
+support|səˈpɔːt|สนับสนุน|🤗|I support my team.|ฉันสนับสนุนทีมของฉัน
+set|set|ตั้ง / กำหนด|⏰|I set an alarm.|ฉันตั้งนาฬิกาปลุก
+call|kɔːl|โทร / เรียก|📞|I call my mom.|ฉันโทรหาแม่
+organize|ˈɔːɡənaɪz|จัดระเบียบ / จัดงาน|🗂️|I organize files.|ฉันจัดระเบียบไฟล์
+fix|fɪks|ซ่อม / แก้ไข|🔧|I fix the bike.|ฉันซ่อมจักรยาน`.split("\n").forEach(l=>{const a=l.split("|");D[a[0]]=a});
+const L="build cook need play improve absorb show harvest play celebrate offer drink sing catch provide love help attract protect flow face share grow bring inspire heal open water wear read explain write pass wear borrow complete grade share paint memorize learn make ask paint share hold enjoy encourage draw solve take fly buy explore reach pack visit follow book cross visit rent offer discover follow taste carry sail exchange speak pack cross welcome show sign answer manage launch attend receive create interview build calculate pitch finish build check print value attend choose update write support wear set call organize fix".split(" ");
+const IR={build:"built",drink:"drunk",sing:"sung",catch:"caught",bring:"brought",grow:"grown",wear:"worn",read:"read",write:"written",take:"taken",fly:"flown",buy:"bought",hold:"held",draw:"drawn",speak:"spoken",choose:"chosen",show:"shown",set:"set",make:"made"};
+const ing=w=>w=="set"?"setting":w.endsWith("e")&&!w.endsWith("ee")?w.slice(0,-1)+"ing":w+"ing";
+const pp=w=>IR[w]||(w.endsWith("e")?w+"d":/[^aeiou]y$/.test(w)?w.slice(0,-1)+"ied":w+"ed");
+let cur=0;
+const $=id=>document.getElementById(id);
+function speak(t){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";const vs=speechSynthesis.getVoices().filter(v=>/en[-_]GB/i.test(v.lang)||/^en/i.test(v.lang));
+u.voice=vs.find(v=>/male|daniel|george|ryan|arthur/i.test(v.name)&&!/female/i.test(v.name)&&/GB/i.test(v.lang))||vs.find(v=>/male|daniel|david|mark|james|guy/i.test(v.name)&&!/female/i.test(v.name))||vs.find(v=>/GB/i.test(v.lang))||null;
+u.pitch=.6;u.rate=.85;u.volume=1;speechSynthesis.speak(u)}
+function render(){
+ [...$("tabs").children].forEach((b,i)=>b.classList.toggle("on",i==cur));
+ let g="",t="";
+ for(let i=cur*25;i<cur*25+25;i++){const w=L[i],d=D[w];
+  g+=`<div class="card"><div class="pic">${d[3]}</div><div class="v">${w}</div><div class="ipa">/${d[1]}/</div><div class="pp">${ing(w)} / ${pp(w)}</div><div class="th" id="t${i}"></div><button class="snd" onclick="say(${i})" aria-label="play">🔊</button></div>`;
+  t+=`<tr><td>${i+1}</td><td><b>${w}</b></td><td class="i">/${d[1]}/</td><td>${d[2]}</td><td>${d[4]}</td><td>${d[5]}</td></tr>`}
+ $("grid").innerHTML=g;$("tb").innerHTML=t}
+function say(i){const d=D[L[i]];$("t"+i).textContent=d[2];speak(L[i])}
+for(let k=0;k<4;k++){const b=document.createElement("button");b.textContent=`Tab ${k+1} · ${k*25+1}-${k*25+25}`;b.onclick=()=>{cur=k;render();scrollTo(0,0)};$("tabs").appendChild(b)}
+speechSynthesis.getVoices();render();
+</script></body></html>
