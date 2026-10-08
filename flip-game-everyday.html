@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><title>Flipping Card — Everyday Actions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#fff3e6;--g:#ff9f55;--o:#e8761f;--t:#5a3414;--p:#fffaf4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#2b1d12;--t:#ffe9d6;--p:#3d2a1a}}
+*{-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Arial,sans-serif;font-weight:300}
+h1{margin:0;padding:10px 8px 2px;text-align:center;font-size:clamp(16px,4.8vw,26px);font-weight:400;color:var(--g)}
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:4px 8px}
+.tabs button{border:2px solid var(--g);background:none;color:var(--g);border-radius:20px;padding:5px 12px;font:inherit;font-size:13px}
+.tabs button.on{background:linear-gradient(90deg,var(--g),var(--o));border-color:transparent;color:#fff}
+.bar{display:flex;gap:6px;justify-content:center;align-items:center;flex-wrap:wrap;padding:4px 8px;max-width:900px;margin:auto}
+.st{background:var(--p);border:2px solid var(--g);border-radius:14px;padding:3px 10px;font-size:clamp(13px,3.6vw,16px);box-shadow:0 2px 5px #0002}
+.st b{color:var(--o)}
+.bar button{border:0;border-radius:14px;padding:6px 12px;font:inherit;font-size:clamp(12px,3.4vw,15px);color:#fff;background:var(--g);box-shadow:0 3px 6px #0003}
+.bar button.r{background:var(--o)}.bar button.c{background:#b59a85}.bar button:disabled{opacity:.4}
+#msg{text-align:center;min-height:20px;font-size:13px;color:var(--o);padding:2px 8px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(6px,2vw,12px);padding:8px 10px 20px;max-width:900px;margin:auto}
+@media(min-width:640px){.grid{grid-template-columns:repeat(5,1fr)}}
+.card{perspective:700px;aspect-ratio:1/1.2;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.fc,.bc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4px;box-sizing:border-box;box-shadow:0 6px 12px #0003,inset 0 3px 6px #fff8,inset 0 -5px 8px #0002}
+.fc{background:radial-gradient(circle at 30% 20%,#fff1e2,#ffd1a3 70%,#ffb879)}
+.bc{background:radial-gradient(circle at 30% 20%,#fffdf8,#ffe6c9 70%,#ffcf9f);transform:rotateY(180deg)}
+.n{position:absolute;top:5px;left:9px;font-size:10px;color:#5a3414aa}
+.em{font-size:clamp(28px,9vw,46px);line-height:1;margin-bottom:2px;filter:drop-shadow(0 2px 2px #0003)}
+.v{font-size:clamp(15px,4.6vw,23px);font-weight:bold;color:#7a3600;line-height:1.1;word-break:break-word}
+.ip{font-size:clamp(10px,2.7vw,13px);color:#7a3600cc;margin-top:3px}
+.th{font-size:clamp(14px,4.2vw,20px);color:#8a3d00;font-weight:bold;line-height:1.2}
+.ab{display:flex;gap:5px;margin-top:6px}
+.ab button{border:0;border-radius:50%;width:clamp(26px,7vw,34px);height:clamp(26px,7vw,34px);font-size:clamp(13px,3.6vw,17px);background:#fff;box-shadow:0 2px 4px #0004;padding:0}
+.card.d .fc{background:radial-gradient(circle at 30% 20%,#fff,#ffeedd 70%,#ffdcb8);opacity:.75}
+.card.d .fc::after{content:"✓";position:absolute;top:2px;right:8px;font-size:clamp(16px,5vw,24px);color:var(--g);font-weight:bold}
+.card:active .in{filter:brightness(.97)}
+</style></head><body>
+<h1>🔄 Everyday Actions | การกระทำทั่วไป</h1>
+<div class="tabs" id="tabs"></div>
+<div class="bar"><span class="st">⏱ <b id="tm">00:00</b></span><span class="st">⭐ <b id="sc">0</b></span><span class="st">✓ <b id="kn">0</b>/<span id="tt">25</span></span>
+<button id="bs">▶ เริ่มเล่น</button><button id="br" class="r">🔄 เล่นใหม่</button><button id="bc" class="c">✖ ยกเลิก</button></div>
+<div id="msg">กดการ์ดเพื่อพลิกดูคำแปลและฟังเสียง · กด "เริ่มเล่น" เพื่อจับเวลาและเก็บคะแนน</div>
+<div class="grid" id="g"></div>
+<script>
+const R=`wake up|weɪk ʌp|ตื่นนอน|⏰
+get up|ɡet ʌp|ลุกขึ้น|🛏️
+wash|wɒʃ|ล้าง, ซัก|🧼
+brush|brʌʃ|แปรง|🪥
+shower|ˈʃaʊə|อาบน้ำ|🚿
+dress|dres|แต่งตัว|👗
+comb|kəʊm|หวีผม|💇
+eat|iːt|กิน|🍽️
+drink|drɪŋk|ดื่ม|🥤
+cook|kʊk|ทำอาหาร|🍳
+prepare|prɪˈpeə|เตรียม|📝
+make|meɪk|ทำ, สร้าง|🛠️
+clean|kliːn|ทำความสะอาด|🧹
+sweep|swiːp|กวาด|🍂
+mop|mɒp|ถูพื้น|🪣
+dry|draɪ|ทำให้แห้ง, ตาก|☀️
+tidy|ˈtaɪdi|จัดให้เรียบร้อย|✨
+organise|ˈɔːɡənaɪz|จัดระเบียบ|🗂️
+put|pʊt|วาง, ใส่|📥
+take|teɪk|เอา, พา|🎒
+go|ɡəʊ|ไป|🚶
+come|kʌm|มา|👋
+walk|wɔːk|เดิน|🚶‍♂️
+run|rʌn|วิ่ง|🏃
+drive|draɪv|ขับรถ|🚗
+ride|raɪd|ขี่|🚴
+buy|baɪ|ซื้อ|🛒
+shop|ʃɒp|ซื้อของ|🛍️
+pay|peɪ|จ่ายเงิน|💳
+work|wɜːk|ทำงาน|💼
+study|ˈstʌdi|เรียน, ศึกษา|📚
+read|riːd|อ่าน|📖
+write|raɪt|เขียน|✍️
+learn|lɜːn|เรียนรู้|🎓
+listen|ˈlɪsən|ฟัง|🎧
+watch|wɒtʃ|ดู|📺
+use|juːz|ใช้|🖱️
+check|tʃek|ตรวจสอบ|✔️
+call|kɔːl|โทร, เรียก|📞
+talk|tɔːk|พูดคุย|💬
+help|help|ช่วยเหลือ|🆘
+play|pleɪ|เล่น|⚽
+exercise|ˈeksəsaɪz|ออกกำลังกาย|🏋️
+rest|rest|พักผ่อน|🛋️
+relax|rɪˈlæks|ผ่อนคลาย|😌
+sleep|sliːp|นอนหลับ|😴
+finish|ˈfɪnɪʃ|เสร็จ, จบ|🏁
+pack|pæk|จัดกระเป๋า, แพ็ก|🧳
+leave|liːv|ออกเดินทาง, จากไป|🚪
+turn on|tɜːn ɒn|เปิด (ไฟ/เครื่อง)|💡
+turn off|tɜːn ɒf|ปิด (ไฟ/เครื่อง)|🔌
+open|ˈəʊpən|เปิด|📂
+close|kləʊz|ปิด|🙈
+lock|lɒk|ล็อก|🔐
+unlock|ʌnˈlɒk|ปลดล็อก|🔓
+sit|sɪt|นั่ง|🪑
+stand|stænd|ยืน|🧍
+lie|laɪ|นอนราบ, โกหก|🛌
+move|muːv|เคลื่อนย้าย, ขยับ|📦
+carry|ˈkæri|แบก, หิ้ว|🧺
+bring|brɪŋ|นำมา|🎁
+give|ɡɪv|ให้|🤲
+get|ɡet|ได้รับ|📬
+find|faɪnd|หา, พบ|🔎
+lose|luːz|ทำหาย, แพ้|😞
+keep|kiːp|เก็บ, รักษา|🗃️
+hold|həʊld|ถือ, จับ|🤝
+touch|tʌtʃ|สัมผัส|👆
+shave|ʃeɪv|โกน|🪒
+wear|weə|สวมใส่|👕
+change|tʃeɪndʒ|เปลี่ยน|🔄
+fold|fəʊld|พับ|👔
+iron|ˈaɪən|รีดผ้า|♨️
+hang|hæŋ|แขวน, ตาก|🧥
+feed|fiːd|ให้อาหาร|🐟
+water|ˈwɔːtə|รดน้ำ|🪴
+dust|dʌst|ปัดฝุ่น|🪶
+vacuum|ˈvækjuːm|ดูดฝุ่น|🌀
+empty|ˈempti|ทำให้ว่าง, เทออก|🫙
+throw|θrəʊ|โยน, ทิ้ง|🗑️
+recycle|ˌriːˈsaɪkəl|รีไซเคิล|♻️
+repair|rɪˈpeə|ซ่อมแซม|🔧
+order|ˈɔːdə|สั่ง (อาหาร/ของ)|🍕
+choose|tʃuːz|เลือก|☝️
+decide|dɪˈsaɪd|ตัดสินใจ|✅
+plan|plæn|วางแผน|🗺️
+remember|rɪˈmembə|จำได้|🧠
+forget|fəˈɡet|ลืม|🫥
+wait|weɪt|รอ|⏳
+meet|miːt|พบ, เจอ|🤗
+visit|ˈvɪzɪt|เยี่ยมเยียน|🏡
+return|rɪˈtɜːn|กลับมา, คืน|↩️`;
+const D=R.split("\n").map(l=>{const[v,i,t,e]=l.split("|");return{v,i:"/"+i+"/",t,e}});
+const $=id=>document.getElementById(id);
+let tab=0,items=[],run=false,t0=0,tmr=null,known=0,score=0;
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+function speak(w){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));u.voice=vs.find(v=>/GB|UK|British/i.test(v.lang+v.name)&&/male|daniel|george|ryan|oliver/i.test(v.name)&&!/female/i.test(v.name))||vs.find(v=>/male|david|daniel|alex|guy|mark/i.test(v.name)&&!/female/i.test(v.name))||vs[0]||null;u.pitch=.5;u.rate=.8;speechSynthesis.speak(u)}
+function stop(){run=false;clearInterval(tmr)}
+function upd(){$("sc").textContent=score;$("kn").textContent=known;$("tt").textContent=items.length}
+function build(shuf){stop();known=0;score=0;$("tm").textContent="00:00";
+items=D.slice(tab*25,tab*25+25);if(shuf)items=items.slice().sort(()=>Math.random()-.5);
+const g=$("g");g.innerHTML="";
+items.forEach((d,k)=>{const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="fc"><span class="n">${k+1}</span><div class="em">${d.e}</div><div class="v">${d.v}</div><div class="ip">${d.i}</div></div><div class="bc"><div class="th">${d.t}</div><div class="ab"><button class="s" title="ฟังเสียง">🔊</button><button class="y" title="จำได้">✓</button><button class="x" title="ยังไม่แน่ใจ">✗</button></div></div></div>`;
+const ab=c.querySelector(".ab"),y=c.querySelector(".y"),x=c.querySelector(".x");
+const mark=()=>{y.style.display=x.style.display=run?"":"none"};
+c.onclick=e=>{if(c.classList.contains("d"))return;
+if(e.target.closest(".s")){speak(d.v);return}
+if(e.target.closest(".y")){c.classList.remove("f");c.classList.add("d");known++;score+=10;upd();if(known==items.length)finish();return}
+if(e.target.closest(".x")){c.classList.remove("f");return}
+if(c.classList.contains("f")){c.classList.remove("f")}else{mark();c.classList.add("f");speak(d.v)}};
+g.append(c)});
+$("bs").disabled=false;$("bc").disabled=true;upd()}
+function start(){if(run)return;build(false);run=true;t0=Date.now();$("bs").disabled=true;$("bc").disabled=false;
+tmr=setInterval(()=>{$("tm").textContent=fmt(Math.floor((Date.now()-t0)/1000))},500);
+$("msg").textContent="เริ่มแล้ว! พลิกการ์ด ดูคำแปล แล้วกด ✓ ถ้าจำได้ หรือ ✗ ถ้ายังไม่แน่ใจ (✓ = +10 คะแนน)"}
+function finish(){const s=Math.floor((Date.now()-t0)/1000);stop();$("tm").textContent=fmt(s);$("bs").disabled=false;$("bc").disabled=true;
+$("msg").textContent="🎉 เสร็จแล้ว! ได้ "+score+" คะแนน ใช้เวลา "+fmt(s)+" กด 'เล่นใหม่' เพื่อเล่นอีกครั้ง"}
+function cancel(){if(!run)return;build(false);$("msg").textContent="ยกเลิกเกมแล้ว · กด 'เริ่มเล่น' เพื่อเริ่มใหม่"}
+function restart(){build(true);run=true;t0=Date.now();$("bs").disabled=true;$("bc").disabled=false;
+tmr=setInterval(()=>{$("tm").textContent=fmt(Math.floor((Date.now()-t0)/1000))},500);$("msg").textContent="เล่นใหม่! สลับตำแหน่งการ์ดแล้ว เริ่มจับเวลา"}
+$("bs").onclick=start;$("bc").onclick=cancel;$("br").onclick=restart;
+for(let i=0;i<Math.ceil(D.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(D.length,i*25+25)})`;b.onclick=()=>{tab=i;[...$("tabs").children].forEach((x,j)=>x.classList.toggle("on",j==i));$("msg").textContent="กดการ์ดเพื่อพลิกดูคำแปลและฟังเสียง · กด \"เริ่มเล่น\" เพื่อจับเวลาและเก็บคะแนน";build(false)};$("tabs").append(b)}
+$("tabs").children[0].classList.add("on");speechSynthesis.getVoices();build(false);
+</script></body></html>
