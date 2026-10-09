@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flipping Cards – Health-Related Actions</title>
+<style>
+:root{--bg:linear-gradient(160deg,#e3f1ff,#fff8d9 50%,#ffe6f0);--tx:#41405e;--f1:#ffffff;--f2:#f4f4ff;--b1:#9ccbf5;--b2:#cde6ff;--sh:rgba(150,140,190,.32);--pill:#ffffffd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;padding:12px}
+h1{font-size:clamp(1.1rem,3.2vw,1.6rem);margin:4px 0 10px;text-align:center}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px}
+.pill{background:var(--pill);padding:8px 14px;border-radius:999px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+button{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;color:#38385a;background:linear-gradient(135deg,var(--b1),var(--b2));box-shadow:0 4px 10px var(--sh)}
+button.c{background:linear-gradient(135deg,#ff6b6b,#d63a5a);color:#fff}
+button:active{transform:scale(.96)}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{background:var(--pill);color:var(--tx);box-shadow:0 2px 6px var(--sh)}
+.tabs button.on{background:linear-gradient(135deg,var(--b1),var(--b2));color:#38385a}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,16px);max-width:1000px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:800px;aspect-ratio:4/3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;
+box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6px 10px rgba(170,150,210,.2);background:linear-gradient(160deg,var(--f1),var(--f2))}
+.bk{transform:rotateY(180deg);background:linear-gradient(135deg,var(--b1),var(--b2));color:#38385a}
+.w{font-weight:800;font-size:clamp(.9rem,2.6vw,1.6rem);word-break:break-word}
+.p{font-size:clamp(.6rem,1.5vw,.85rem);opacity:.7;margin-top:3px}
+.th{font-size:clamp(.95rem,2.6vw,1.5rem);font-weight:700}
+.sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
+.done .fc:not(.bk){outline:2px solid #3ccf8e}
+#msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
+body{min-height:100vh;background-attachment:fixed}.card:nth-child(3n+1) .bk{background:linear-gradient(135deg,#bfe0ff,#e2f1ff)}.card:nth-child(3n+1) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e2f1ff)}.card:nth-child(3n+2) .bk{background:linear-gradient(135deg,#fff0a8,#fff9d6)}.card:nth-child(3n+2) .fc:not(.bk){background:linear-gradient(160deg,#fff,#fff9d6)}.card:nth-child(3n+3) .bk{background:linear-gradient(135deg,#ffc6dc,#ffe6f0)}.card:nth-child(3n+3) .fc:not(.bk){background:linear-gradient(160deg,#fff,#ffe6f0)}.tabs button{padding:6px 11px;font-size:.85rem}</style></head><body>
+<h1>21. Health-Related Actions | การดูแลสุขภาพ</h1>
+<div class="bar">
+<span class="pill">⏱ <span id="t">00:00</span></span>
+<span class="pill">⭐ <span id="s">0</span>/<span id="n"></span></span>
+<button id="rs">▶ เริ่มเล่น</button><button id="cc" class="c">✖ ยกเลิก</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="g"></div>
+<div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
+<script>
+const RAW=`ache|eɪk|ปวดตื้อ ๆ
+bandage|ˈbæn.dɪdʒ|พันผ้าพันแผล
+breathe|briːð|หายใจ
+check|tʃek|ตรวจเช็ก
+cough|kɒf|ไอ
+cure|kjʊər|รักษาให้หาย
+diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัย
+diet|ˈdaɪ.ət|ควบคุมอาหาร
+exercise|ˈek.sə.saɪz|ออกกำลังกาย
+faint|feɪnt|เป็นลม
+fast|fɑːst|อดอาหาร
+feel|fiːl|รู้สึก
+heal|hiːl|เยียวยา / สมานแผล
+hydrate|ˈhaɪ.dreɪt|ดื่มน้ำให้เพียงพอ
+immunize|ˈɪm.jə.naɪz|สร้างภูมิคุ้มกัน
+inspect|ɪnˈspekt|ตรวจดู
+isolate|ˈaɪ.sə.leɪt|แยกตัว / กักกัน
+massage|ˈmæs.ɑːʒ|นวด
+medicate|ˈmed.ɪ.keɪt|ให้ยา
+monitor|ˈmɒn.ɪ.tər|เฝ้าติดตามอาการ
+nauseate|ˈnɔː.zi.eɪt|ทำให้คลื่นไส้
+nudge|nʌdʒ|สะกิด / ดันเบา ๆ
+nurse|nɜːs|พยาบาล / ดูแลผู้ป่วย
+operate|ˈɒp.ər.eɪt|ผ่าตัด
+palpate|ˈpæl.peɪt|คลำตรวจ
+prescribe|prɪˈskraɪb|สั่งยา
+prevent|prɪˈvent|ป้องกัน
+recover|rɪˈkʌv.ər|ฟื้นตัว
+rehabilitate|ˌriː.həˈbɪl.ɪ.teɪt|ฟื้นฟูสมรรถภาพ
+remedy|ˈrem.ə.di|เยียวยา / วิธีรักษา
+rest|rest|พักผ่อน
+resuscitate|rɪˈsʌs.ɪ.teɪt|ปั๊มหัวใจฟื้นคืนชีพ
+sanitize|ˈsæn.ɪ.taɪz|ทำให้ปราศจากเชื้อ
+scan|skæn|สแกน
+scratch|skrætʃ|เกา
+screen|skriːn|คัดกรอง
+sneeze|sniːz|จาม
+soothe|suːð|บรรเทา
+stretch|stretʃ|ยืดเส้น
+suffer|ˈsʌf.ər|ทุกข์ทรมาน
+surgeon|ˈsɜː.dʒən|ศัลยแพทย์
+survive|səˈvaɪv|รอดชีวิต
+sweat|swet|เหงื่อออก
+symptom|ˈsɪmp.təm|อาการ
+therapize|ˈθer.ə.paɪz|บำบัดรักษา
+transplant|trænzˈplɑːnt|ปลูกถ่ายอวัยวะ
+treat|triːt|รักษา
+vaccinate|ˈvæk.sɪ.neɪt|ฉีดวัคซีน
+vomit|ˈvɒm.ɪt|อาเจียน
+amputate|ˈæm.pju.teɪt|ตัดอวัยวะ
+anesthetize|əˈnes.θə.taɪz|วางยาสลบ
+aspirate|ˈæs.pɪ.reɪt|ดูดสิ่งคัดหลั่ง
+assess|əˈses|ประเมินอาการ
+auscultate|ˈɔːs.kəl.teɪt|ฟังเสียงในร่างกาย
+biopsy|ˈbaɪ.ɒp.si|ตัดชิ้นเนื้อตรวจ
+cauterize|ˈkɔː.tə.raɪz|จี้แผลให้ปิด
+catheterize|ˈkæθ.ə.tə.raɪz|ใส่สายสวน
+cleanse|klenz|ชำระล้าง
+consult|kənˈsʌlt|ปรึกษาแพทย์
+contract|kənˈtrækt|ติดเชื้อ / หดตัว
+convalesce|ˌkɒn.vəˈles|พักฟื้น
+counsel|ˈkaʊn.səl|ให้คำปรึกษา
+cramp|kræmp|เป็นตะคริว
+decontaminate|diːˈkɒn.tæm.ɪ.neɪt|ขจัดสิ่งปนเปื้อน
+deflate|diˈfleɪt|ยุบลง
+degenerate|dɪˈdʒen.ə.reɪt|เสื่อมสภาพ
+detoxify|diːˈtɒk.sɪ.faɪ|ล้างพิษ
+dialyze|ˈdaɪ.ə.laɪz|ฟอกไต
+discharge|dɪsˈtʃɑːdʒ|จำหน่ายผู้ป่วย / ระบายออก
+disinfect|ˌdɪs.ɪnˈfekt|ฆ่าเชื้อโรค
+dispense|dɪˈspens|จ่ายยา
+drain|dreɪn|ระบายของเหลว
+elicit|ɪˈlɪs.ɪt|ชักนำให้เกิดการตอบสนอง
+emaciate|ɪˈmeɪ.si.eɪt|ทำให้ผอมแห้ง
+evaluate|ɪˈvæl.ju.eɪt|ประเมินผล
+exhale|eksˈheɪl|หายใจออก
+flinch|flɪntʃ|สะดุ้ง
+gasp|ɡɑːsp|หอบ / สูดลมหายใจ
+graft|ɡrɑːft|ปลูกถ่ายผิวหนัง / เนื้อเยื่อ
+hemorrhage|ˈhem.ər.ɪdʒ|เลือดออกมาก
+immobilize|ɪˈməʊ.bəl.aɪz|ตรึงให้อยู่นิ่ง
+incubate|ˈɪŋ.kjə.beɪt|ฟักตัว / บ่มเชื้อ
+infect|ɪnˈfekt|ติดเชื้อ
+infuse|ɪnˈfjuːz|ให้สารน้ำทางหลอดเลือด
+inject|ɪnˈdʒekt|ฉีด
+inoculate|ɪˈnɒk.jə.leɪt|ฉีดเชื้อเพื่อสร้างภูมิ
+intubate|ˈɪn.tʃuː.beɪt|ใส่ท่อช่วยหายใจ
+irrigate|ˈɪr.ɪ.ɡeɪt|ล้างแผล / ชะล้าง
+malfunction|ˌmælˈfʌŋk.ʃən|ทำงานผิดปกติ
+numb|nʌm|ชา
+nursing|ˈnɜː.sɪŋ|การพยาบาล
+obviate|ˈɒb.vi.eɪt|ขจัดความจำเป็น
+overdose|ˈəʊ.və.dəʊs|ใช้ยาเกินขนาด
+overexert|ˌəʊ.və.ɪɡˈzɜːt|ออกแรงมากเกินไป
+palliative|ˈpæl.i.ə.tɪv|ประคับประคองอาการ
+paralyze|ˈpær.ə.laɪz|ทำให้เป็นอัมพาต
+pasteurize|ˈpɑːs.tʃər.aɪz|พาสเจอร์ไรซ์
+patch|pætʃ|แผ่นแปะ / ปะ
+perforate|ˈpɜː.fə.reɪt|ทะลุเป็นรู
+perspire|pəˈspɪər|เหงื่อออก
+phlebotomize|fləˈbɒt.ə.maɪz|เจาะเลือด
+physiotherapy|ˌfɪz.i.əˈθer.ə.pi|กายภาพบำบัด
+pill|pɪl|ยาเม็ด
+placebo|pləˈsiː.bəʊ|ยาหลอก
+poison|ˈpɔɪ.zən|วางยาพิษ / ยาพิษ
+practice|ˈpræk.tɪs|ประกอบวิชาชีพ / ฝึกฝน
+pre-diagnose|ˌpriːˈdaɪ.əɡ.nəʊz|วินิจฉัยเบื้องต้น
+pre-screen|ˌpriːˈskriːn|คัดกรองเบื้องต้น
+scribble|ˈskrɪb.əl|เขียนยุกยิก
+scrub|skrʌb|ขัดถู / ล้างมือก่อนผ่าตัด
+sedate|sɪˈdeɪt|ให้ยากล่อมประสาท
+seep|siːp|ซึมออกมา
+seize|siːz|ชัก / คว้า
+sense|sens|รับรู้
+sew|səʊ|เย็บ
+shiver|ˈʃɪv.ər|ตัวสั่น
+shock|ʃɒk|ช็อก
+simulate|ˈsɪm.jə.leɪt|จำลองสถานการณ์
+sling|slɪŋ|ผ้าคล้องแขน
+slump|slʌmp|ฟุบลง / ทรุด
+smother|ˈsmʌð.ər|ทำให้หายใจไม่ออก
+sniff|snɪf|สูดจมูก
+sore|sɔː|เจ็บ / ระบม
+spasm|ˈspæz.əm|เกร็ง / กล้ามเนื้อกระตุก
+splint|splɪnt|เฝือกชั่วคราว
+sprain|spreɪn|แพลง
+stabilize|ˈsteɪ.bəl.aɪz|ทำให้อาการคงที่
+sterilize|ˈster.ɪ.laɪz|ฆ่าเชื้อ / ทำหมัน
+stet|stet|ให้คงไว้ตามเดิม
+stiff|stɪf|เกร็ง / ตึง
+stimulate|ˈstɪm.jə.leɪt|กระตุ้น
+stitch|stɪtʃ|เย็บแผล
+strain|streɪn|เคล็ด / ฝืน
+stretcher|ˈstretʃ.ər|เปลหาม
+strangle|ˈstræŋ.ɡəl|บีบคอ
+stumble|ˈstʌm.bəl|สะดุด
+suffocate|ˈsʌf.ə.keɪt|หายใจไม่ออก
+surge|sɜːdʒ|พุ่งสูงขึ้น
+surgically|ˈsɜː.dʒɪ.kli|ด้วยการผ่าตัด
+susceptible|səˈsep.tɪ.bəl|เสี่ยงต่อ / ไวต่อ
+swab|swɒb|เก็บตัวอย่างด้วยไม้พันสำลี
+swell|swel|บวม
+swoon|swuːn|เป็นลมวูบ
+symptomatology|ˌsɪmp.tə.mɪˈtɒl.ə.dʒi|วิทยาการอาการ
+syphon|ˈsaɪ.fən|ดูดผ่านท่อ
+syringe|sɪˈrɪndʒ|กระบอกฉีดยา
+systematize|ˈsɪs.tə.mə.taɪz|จัดเป็นระบบ
+tack|tæk|เย็บเก็บชั่วคราว
+take|teɪk|รับประทาน / เอา
+tamper|ˈtæm.pər|ไปยุ่งโดยไม่ได้รับอนุญาต
+tap|tæp|แตะ / เจาะระบายน้ำ
+target|ˈtɑː.ɡɪt|มุ่งเป้า
+tasteless|ˈteɪst.ləs|ไร้รสชาติ
+tease|tiːz|หยอกล้อ / สางผม
+teethe|tiːð|ฟันขึ้น
+telemedicine|ˈtel.iˌmed.ɪ.sɪn|การแพทย์ทางไกล
+temper|ˈtem.pər|ควบคุมอารมณ์ / ทำให้เบาลง
+tend|tend|ดูแล
+terminate|ˈtɜː.mɪ.neɪt|ยุติ
+thermography|θɜːˈmɒɡ.rə.fi|การถ่ายภาพความร้อน
+thicken|ˈθɪk.ən|ทำให้ข้น
+throb|θrɒb|ปวดตุบ ๆ
+thrive|θraɪv|เจริญเติบโตดี
+thrum|θrʌm|สั่นเป็นจังหวะ
+thwart|θwɔːt|ขัดขวาง
+tickle|ˈtɪk.əl|จั๊กจี้
+tighten|ˈtaɪ.tən|รัดแน่น
+tilt|tɪlt|เอียง
+tine|taɪn|ซี่ส้อม / ปลายแหลม
+tingle|ˈtɪŋ.ɡəl|รู้สึกซ่า / เสียวซ่าน
+titer|ˈtaɪ.tər|ความเข้มข้นของแอนติบอดี
+tolerate|ˈtɒl.ə.reɪt|ทนได้
+tonic|ˈtɒn.ɪk|ยาบำรุง
+tonsillectomy|ˈtɒn.sɪlˌek.tə.mi|การตัดต่อมทอนซิล
+top|tɒp|ปิดทับด้านบน
+torment|ˈtɔː.ment|ทรมาน
+toss|tɒs|พลิกตัวไปมา
+tourniquet|ˈtʊə.nɪ.keɪ|สายรัดห้ามเลือด
+toxify|ˈtɒk.sɪ.faɪ|ทำให้เป็นพิษ
+tracheotomy|ˌtreɪ.kiˈɒt.ə.mi|เจาะคอ
+transfuse|trænzˈfjuːz|ถ่ายเลือด
+trauma|ˈtrɔː.mə|บาดเจ็บรุนแรง / บาดแผลทางใจ
+traverse|trəˈvɜːs|ข้ามผ่าน
+tread|tred|ย่ำเดิน
+tremble|ˈtrem.bəl|สั่นเทา
+trepan|trɪˈpæn|เจาะกะโหลก
+triage|ˈtriː.ɑːʒ|คัดแยกผู้ป่วย
+trigger|ˈtrɪɡ.ər|กระตุ้นให้เกิด
+trim|trɪm|ตัดแต่ง
+triple|ˈtrɪp.əl|เพิ่มเป็นสามเท่า
+triumvirate|traɪˈʌm.vɪ.rət|ทีมผู้นำสามคน
+trivialize|ˈtrɪv.i.əl.aɪz|ทำให้ดูเป็นเรื่องเล็ก
+trochlear|ˈtrɒk.li.ər|เกี่ยวกับเส้นประสาทตา / รอกกระดูก
+trot|trɒt|วิ่งเหยาะ ๆ
+troubleshoot|ˈtrʌb.əl.ʃuːt|หาสาเหตุและแก้ปัญหา
+trowel|ˈtraʊəl|เกรียง / ช้อนพรวนดิน
+truncate|ˈtrʌŋ.keɪt|ตัดทอน
+truss|trʌs|ผ้ารัดไส้เลื่อน / มัด
+trust|trʌst|ไว้วางใจ
+tumefy|ˈtjuː.mɪ.faɪ|บวมขึ้น
+tumor|ˈtjuː.mər|เนื้องอก
+tweak|twiːk|ปรับเล็กน้อย
+twitch|twɪtʃ|กระตุก
+ulcerate|ˈʌl.sə.reɪt|เป็นแผลเปื่อย
+ultrasound|ˈʌl.trə.saɪnd|อัลตราซาวด์
+unblock|ʌnˈblɒk|ขจัดสิ่งอุดตัน
+unbrace|ʌnˈbreɪs|ถอดที่พยุง
+uncapsule|ʌnˈkæp.sjuːl|แกะแคปซูล
+undergo|ˌʌn.dəˈɡəʊ|ต้องรับการ (รักษา)
+undermine|ˌʌn.dəˈmaɪn|บั่นทอน
+undress|ʌnˈdres|ถอดเสื้อผ้า
+unfetter|ʌnˈfet.ər|ปลดพันธนาการ
+unify|ˈjuː.nɪ.faɪ|รวมเป็นหนึ่ง
+unlace|ʌnˈleɪs|แก้เชือก
+unlatch|ʌnˈlætʃ|ปลดสลัก
+unplug|ʌnˈplʌɡ|ถอดปลั๊ก
+unravel|ʌnˈræv.əl|คลี่คลาย
+unseam|ʌnˈsiːm|แกะรอยตะเข็บ
+unsettle|ʌnˈset.l̩|ทำให้ไม่สบายใจ
+unwind|ʌnˈwaɪnd|ผ่อนคลาย
+update|ʌpˈdeɪt|อัปเดต
+upgrade|ʌpˈɡreɪd|อัปเกรด
+urinate|ˈjʊə.rɪ.neɪt|ปัสสาวะ
+validate|ˈvæl.ɪ.deɪt|ตรวจสอบความถูกต้อง
+valorize|ˈvæl.ə.raɪz|เพิ่มคุณค่า
+vaporize|ˈveɪ.pər.aɪz|ทำให้กลายเป็นไอ
+ventilate|ˈven.tɪ.leɪt|ระบายอากาศ
+verify|ˈver.ɪ.faɪ|ตรวจยืนยัน`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
+const $=id=>document.getElementById(id),g=$("g");
+function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+voice=v.find(x=>/daniel|oliver|arthur|google uk english male|male/i.test(x.name))||v[0]||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(w){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";if(voice)u.voice=voice;u.pitch=1.15;u.rate=.85;speechSynthesis.speak(u)}
+function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
+function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
+const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
+c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
+c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
+if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
+if(score===RAW.length){clearInterval(timer);$("msg").textContent="🎉 ครบทุกคำ! ใช้เวลา "+$("t").textContent}}};
+g.appendChild(c)})}
+function tabs(){const t=$("tabs");t.innerHTML="";for(let i=0;i<Math.ceil(RAW.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(i*25+25,RAW.length)})`;b.className=i===tab?"on":"";b.onclick=()=>{tab=i;tabs();render()};t.appendChild(b)}}
+function reset(shuffle){clearInterval(timer);timer=null;speechSynthesis.cancel();sec=0;score=0;seen.clear();fmt();$("s").textContent=0;
+data=RAW.slice();if(shuffle)for(let i=data.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[data[i],data[j]]=[data[j],data[i]]}
+$("msg").textContent=shuffle?"เริ่มแล้ว! พลิกการ์ดให้ครบ":"ยกเลิกแล้ว กดเริ่มเล่นเพื่อเล่นใหม่";render()}
+$("rs").onclick=()=>{reset(true);start();$("rs").textContent="↻ เริ่มใหม่"};
+$("cc").onclick=()=>{reset(false);$("rs").textContent="▶ เริ่มเล่น"};
+$("n").textContent=RAW.length;tabs();render();
+</script></body></html>

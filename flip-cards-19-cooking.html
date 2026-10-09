@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flipping Cards – Cooking & Kitchen Actions</title>
+<style>
+:root{--bg:#fdf6e3;--tx:#4a3a22;--f1:#fffdf6;--f2:#faf0d7;--b1:#e6c88f;--b2:#f5e3b8;--sh:rgba(170,135,70,.3);--pill:#fffdf6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;padding:12px}
+h1{font-size:clamp(1.1rem,3.2vw,1.6rem);margin:4px 0 10px;text-align:center}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px}
+.pill{background:var(--pill);padding:8px 14px;border-radius:999px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+button{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;color:#4a3520;background:linear-gradient(135deg,var(--b1),var(--b2));box-shadow:0 4px 10px var(--sh)}
+button.c{background:linear-gradient(135deg,#ff6b6b,#d63a5a);color:#fff}
+button:active{transform:scale(.96)}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{background:var(--pill);color:var(--tx);box-shadow:0 2px 6px var(--sh)}
+.tabs button.on{background:linear-gradient(135deg,var(--b1),var(--b2));color:#4a3520}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,16px);max-width:1000px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:800px;aspect-ratio:4/3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;
+box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6px 10px rgba(200,160,80,.2);background:linear-gradient(160deg,var(--f1),var(--f2))}
+.bk{transform:rotateY(180deg);background:linear-gradient(135deg,var(--b1),var(--b2));color:#4a3520}
+.w{font-weight:800;font-size:clamp(.9rem,2.6vw,1.6rem);word-break:break-word}
+.p{font-size:clamp(.6rem,1.5vw,.85rem);opacity:.7;margin-top:3px}
+.th{font-size:clamp(.95rem,2.6vw,1.5rem);font-weight:700}
+.sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
+.done .fc:not(.bk){outline:2px solid #3ccf8e}
+#msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
+</style></head><body>
+<h1>19. Cooking & Kitchen Actions | การทำอาหาร</h1>
+<div class="bar">
+<span class="pill">⏱ <span id="t">00:00</span></span>
+<span class="pill">⭐ <span id="s">0</span>/<span id="n"></span></span>
+<button id="rs">▶ เริ่มเล่น</button><button id="cc" class="c">✖ ยกเลิก</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="g"></div>
+<div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
+<script>
+const RAW=`bake|beɪk|อบ
+barbecue|ˈbɑː.bɪ.kjuː|ย่างบาร์บีคิว
+beat|biːt|ตี
+blend|blend|ปั่น / ผสมให้เข้ากัน
+boil|bɔɪl|ต้ม
+broil|brɔɪl|ย่างด้วยความร้อนจากด้านบน
+carve|kɑːv|แล่ / แกะสลัก
+chop|tʃɒp|สับ / หั่น
+clarify|ˈklær.ɪ.faɪ|ทำให้ใส / กรองให้ใส
+coat|kəʊt|เคลือบ / คลุก
+combine|kəmˈbaɪn|ผสมรวมกัน
+cook|kʊk|ปรุงอาหาร
+cool|kuːl|ทำให้เย็น
+core|kɔː|เอาไส้ออก
+crush|krʌʃ|ทุบ / บด
+cube|kjuːb|หั่นเต๋า
+cut|kʌt|ตัด
+deglaze|diːˈɡleɪz|ละลายตะกอนก้นกระทะด้วยของเหลว
+dice|daɪs|หั่นเต๋าเล็ก
+dissolve|dɪˈzɒlv|ละลาย
+drain|dreɪn|เทน้ำออก / สะเด็ดน้ำ
+drizzle|ˈdrɪz.əl|ราดเป็นสาย
+dust|dʌst|โรยแป้ง
+ferment|fəˈment|หมัก
+fillet|ˈfɪl.ɪt|แล่เนื้อ / เนื้อชิ้นแล่
+flambé|flɒmˈbeɪ|จุดไฟให้ลุกบนอาหาร
+flip|flɪp|พลิก
+fold|fəʊld|ตะล่อมเบา ๆ
+fry|fraɪ|ทอด
+garnish|ˈɡɑː.nɪʃ|ตกแต่งหน้าอาหาร
+grate|ɡreɪt|ขูดฝอย
+grease|ɡriːs|ทาน้ำมัน / ทาเนย
+grill|ɡrɪl|ย่าง
+grind|ɡraɪnd|บด
+julienne|ˈdʒuː.li.en|หั่นเป็นเส้นยาว
+knead|niːd|นวดแป้ง
+marinate|ˈmær.ɪ.neɪt|หมัก
+measure|ˈmeʒ.ər|ตวง / ชั่ง
+mince|mɪns|สับละเอียด
+mix|mɪks|ผสม
+parboil|ˈpɑː.bɔɪl|ลวกให้สุกครึ่งหนึ่ง
+peel|piːl|ปอกเปลือก
+pinch|pɪntʃ|หยิบเล็กน้อย
+poach|pəʊtʃ|ต้มในน้ำเดือดอ่อน ๆ
+pour|pɔːr|เท
+preheat|priːˈhiːt|อุ่นเตาล่วงหน้า
+prep|prep|เตรียมวัตถุดิบ
+puree|pjʊəˈreɪ|ปั่นให้ละเอียดเป็นซุปข้น
+reduce|rɪˈdjuːs|เคี่ยวให้เข้มข้น
+refrigerate|rɪˈfrɪdʒ.ər.eɪt|แช่เย็น
+render|ˈren.dər|เจียวไขมัน
+roast|rəʊst|อบ / ย่างทั้งชิ้น
+roll|rəʊl|รีดแป้ง / ม้วน
+sauté|ˈsəʊ.teɪ|ผัดน้ำมันน้อย
+scald|skɔːld|ลวกด้วยน้ำร้อน
+scoop|skuːp|ตัก
+score|skɔː|ฝานเป็นรอย
+scrape|skreɪp|ขูด
+season|ˈsiː.zən|ปรุงรส
+sear|sɪər|ย่างด้วยไฟแรงให้ผิวสุก
+shred|ʃred|ฉีกเป็นเส้น
+sifter|ˈsɪf.tər|ที่ร่อนแป้ง
+simmer|ˈsɪm.ər|เคี่ยวไฟอ่อน
+skim|skɪm|ช้อนฟองออก
+slice|slaɪs|หั่นเป็นแผ่น
+smash|smæʃ|ทุบ
+soak|səʊk|แช่
+sprinkle|ˈsprɪŋ.kl̩|โรย
+squeeze|skwiːz|บีบ / คั้น
+steam|stiːm|นึ่ง
+steep|stiːp|แช่ (เช่นชา)
+stew|stjuː|ตุ๋น
+stir|stɜːr|คน
+strain|streɪn|กรอง
+stuff|stʌf|ยัดไส้
+sweat|swet|ผัดให้ผักนิ่มโดยไม่เปลี่ยนสี
+temper|ˈtem.pər|ปรับอุณหภูมิ / เทมเปอร์ช็อกโกแลต
+tenderize|ˈten.də.raɪz|ทำให้เนื้อนุ่ม
+thicken|ˈθɪk.ən|ทำให้ข้น
+toast|təʊst|ปิ้ง
+toss|tɒs|คลุกเคล้า / โยน
+trim|trɪm|ตัดแต่ง
+turn|tɜːn|พลิก
+unmold|ʌnˈməʊld|แกะออกจากพิมพ์
+unpack|ʌnˈpæk|แกะของออก
+vent|vent|ระบายไอ
+warm|wɔːm|อุ่น
+wash|wɒʃ|ล้าง
+weigh|weɪ|ชั่งน้ำหนัก
+whip|wɪp|ตีให้ฟู
+whisk|wɪsk|ตีด้วยตะกร้อ
+wipe|waɪp|เช็ด
+wrap|ræp|ห่อ
+wring|rɪŋ|บิดน้ำออก
+zest|zest|ขูดผิวเปลือกส้ม
+bake-off|ˈbeɪk.ɒf|การแข่งขันอบขนม
+boilover|ˈbɔɪlˌəʊ.vər|น้ำเดือดล้นออก
+deep-fry|ˌdiːpˈfraɪ|ทอดน้ำมันท่วม
+reheat|ˌriːˈhiːt|อุ่นซ้ำ
+stir-fry|ˈstɜː.fraɪ|ผัดไฟแรง`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
+const $=id=>document.getElementById(id),g=$("g");
+function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+voice=v.find(x=>/daniel|oliver|arthur|google uk english male|male/i.test(x.name))||v[0]||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(w){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";if(voice)u.voice=voice;u.pitch=1.15;u.rate=.85;speechSynthesis.speak(u)}
+function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
+function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
+const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
+c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
+c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
+if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
+if(score===RAW.length){clearInterval(timer);$("msg").textContent="🎉 ครบทุกคำ! ใช้เวลา "+$("t").textContent}}};
+g.appendChild(c)})}
+function tabs(){const t=$("tabs");t.innerHTML="";for(let i=0;i<Math.ceil(RAW.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(i*25+25,RAW.length)})`;b.className=i===tab?"on":"";b.onclick=()=>{tab=i;tabs();render()};t.appendChild(b)}}
+function reset(shuffle){clearInterval(timer);timer=null;speechSynthesis.cancel();sec=0;score=0;seen.clear();fmt();$("s").textContent=0;
+data=RAW.slice();if(shuffle)for(let i=data.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[data[i],data[j]]=[data[j],data[i]]}
+$("msg").textContent=shuffle?"เริ่มแล้ว! พลิกการ์ดให้ครบ":"ยกเลิกแล้ว กดเริ่มเล่นเพื่อเล่นใหม่";render()}
+$("rs").onclick=()=>{reset(true);start();$("rs").textContent="↻ เริ่มใหม่"};
+$("cc").onclick=()=>{reset(false);$("rs").textContent="▶ เริ่มเล่น"};
+$("n").textContent=RAW.length;tabs();render();
+</script></body></html>

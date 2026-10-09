@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flipping Cards – Sensory Actions</title>
+<style>
+:root{--bg:#f3e8dc;--tx:#4a3222;--f1:#ffffff;--f2:#f0e3d4;--b1:#9a6a42;--b2:#c19468;--sh:rgba(110,75,45,.35);--pill:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;padding:12px}
+h1{font-size:clamp(1.1rem,3.2vw,1.6rem);margin:4px 0 10px;text-align:center}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px}
+.pill{background:var(--pill);padding:8px 14px;border-radius:999px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+button{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--b1),var(--b2));box-shadow:0 4px 10px var(--sh)}
+button.c{background:linear-gradient(135deg,#ff6b6b,#d63a5a)}
+button:active{transform:scale(.96)}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{background:var(--pill);color:var(--tx);box-shadow:0 2px 6px var(--sh)}
+.tabs button.on{background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,16px);max-width:1000px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:800px;aspect-ratio:4/3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;
+box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6px 10px rgba(150,105,65,.18);background:linear-gradient(160deg,var(--f1),var(--f2))}
+.bk{transform:rotateY(180deg);background:linear-gradient(135deg,var(--b1),var(--b2));color:#fff}
+.w{font-weight:800;font-size:clamp(.9rem,2.6vw,1.6rem);word-break:break-word}
+.p{font-size:clamp(.6rem,1.5vw,.85rem);opacity:.7;margin-top:3px}
+.th{font-size:clamp(.95rem,2.6vw,1.5rem);font-weight:700}
+.sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
+.done .fc:not(.bk){outline:2px solid #3ccf8e}
+#msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
+</style></head><body>
+<h1>12. Sensory Actions | การรับรู้ด้วยประสาทสัมผัส</h1>
+<div class="bar">
+<span class="pill">⏱ <span id="t">00:00</span></span>
+<span class="pill">⭐ <span id="s">0</span>/<span id="n"></span></span>
+<button id="rs">▶ เริ่มเล่น</button><button id="cc" class="c">✖ ยกเลิก</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="g"></div>
+<div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
+<script>
+const RAW=`feel|fiːl|รู้สึก / สัมผัส
+hear|hɪər|ได้ยิน
+listen|ˈlɪs.ən|ตั้งใจฟัง
+look|lʊk|มอง
+notice|ˈnəʊ.tɪs|สังเกตเห็น
+observe|əbˈzɜːv|สังเกตการณ์
+perceive|pəˈsiːv|รับรู้
+recognize|ˈrek.əɡ.naɪz|จำได้ / ยอมรับ
+sample|ˈsɑːm.pəl|ลองชิม / เก็บตัวอย่าง
+scent|sent|ได้กลิ่น / กลิ่นหอม
+see|siː|เห็น
+sensation|senˈseɪ.ʃən|ความรู้สึกสัมผัส
+smell|smel|ได้กลิ่น
+sound|saʊnd|ส่งเสียง / ฟังดูเหมือน
+stare|steər|จ้องมอง
+taste|teɪst|ลิ้มรส
+touch|tʌtʃ|สัมผัส
+view|vjuː|ชม / มองดู
+watch|wɒtʃ|เฝ้าดู
+witness|ˈwɪt.nəs|เป็นพยาน / เห็นเหตุการณ์
+gaze|ɡeɪz|จ้องมองนาน ๆ
+glance|ɡlɑːns|เหลือบมอง
+glimpse|ɡlɪmps|เห็นแวบเดียว
+peer|pɪər|เพ่งมอง
+spot|spɒt|มองเห็น / สังเกตพบ
+sniff|snɪf|สูดดม
+snort|snɔːt|พ่นลมทางจมูก
+hark|hɑːk|ฟังให้ดี
+overhear|ˌəʊ.vəˈhɪər|แอบได้ยิน
+detect|dɪˈtekt|ตรวจพบ
+discern|dɪˈsɜːn|แยกแยะได้
+sip|sɪp|จิบ
+swallow|ˈswɒl.əʊ|กลืน
+suck|sʌk|ดูด
+lick|lɪk|เลีย
+palpate|ˈpæl.peɪt|คลำตรวจ
+handle|ˈhæn.dəl|จับถือ
+gasp|ɡɑːsp|หอบ / สูดลมหายใจ
+sigh|saɪ|ถอนหายใจ
+snore|snɔːr|กรน
+rustle|ˈrʌs.əl|เสียงกรอบแกรบ
+echo|ˈek.əʊ|ก้องสะท้อน
+resound|rɪˈzaʊnd|ก้องกังวาน
+whistle|ˈwɪs.əl|ผิวปาก / เป่านกหวีด
+buzz|bʌz|ส่งเสียงหึ่ง
+hum|hʌm|ฮัมเพลง / หึ่ง
+radiate|ˈreɪ.di.eɪt|แผ่รังสี
+glow|ɡləʊ|เรืองแสง
+flash|flæʃ|แวบ / วาบ
+glare|ɡleər|จ้องเขม็ง / แสงจ้า
+scan|skæn|กวาดตามอง / สแกน
+survey|səˈveɪ|สำรวจ
+inspect|ɪnˈspekt|ตรวจตรา
+examine|ɪɡˈzæm.ɪn|ตรวจสอบอย่างละเอียด
+gawk|ɡɔːk|จ้องอย่างเซ่อ ๆ
+rubberneck|ˈrʌb.ə.nek|ชะเง้อมอง
+ogle|ˈəʊ.ɡəl|มองด้วยสายตาลามก
+eyeball|ˈaɪ.bɔːl|จ้องดู
+scowl|skaʊl|ทำหน้าบึ้ง
+grimace|ˈɡrɪm.əs|ทำหน้าเบะ
+wince|wɪns|ทำหน้าเจ็บ
+squint|skwɪnt|หรี่ตา
+strain|streɪn|เพ่งสุดกำลัง
+catch|kætʃ|จับได้ / ได้ยิน
+reverberate|rɪˈvɜː.bər.eɪt|สะท้อนก้อง
+rattle|ˈræt.əl|เสียงกระทบกัน
+clatter|ˈklæt.ər|เสียงกระทบดัง
+crunch|krʌntʃ|เคี้ยวกร้วม / เสียงกร้วม
+squish|skwɪʃ|เสียงบีบแฉะ
+slurp|slɜːp|ซด
+gulp|ɡʌlp|กลืนอึก
+savor|ˈseɪ.vər|ลิ้มรสอย่างละเมียด
+relish|ˈrel.ɪʃ|เพลิดเพลิน / ชื่นชม
+stroke|strəʊk|ลูบ
+pat|pæt|ตบเบา ๆ
+rub|rʌb|ถู
+scratch|skrætʃ|เกา
+tickle|ˈtɪk.əl|จั๊กจี้
+prickle|ˈprɪk.əl|รู้สึกเหมือนถูกเข็มทิ่ม
+sting|stɪŋ|ต่อย / แสบ
+smart|smɑːt|แสบ / ปวดแปลบ
+scorch|skɔːtʃ|ลวก / ไหม้เกรียม
+chill|tʃɪl|ทำให้เย็นเยือก
+stink|stɪŋk|เหม็น
+reimburse|ˌriː.ɪmˈbɜːs|ชดใช้คืน
+warm|wɔːm|อุ่น
+dazzle|ˈdæz.əl|ทำให้ตาพร่า
+blind|blaɪnd|ทำให้ตาบอด
+scintillate|ˈsɪn.tɪ.leɪt|เปล่งประกาย
+flicker|ˈflɪk.ər|กะพริบ / ริบหรี่
+twinkle|ˈtwɪŋ.kəl|ระยิบระยับ
+glisten|ˈɡlɪs.ən|แวววาว`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
+const $=id=>document.getElementById(id),g=$("g");
+function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+voice=v.find(x=>/daniel|oliver|arthur|google uk english male|male/i.test(x.name))||v[0]||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(w){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";if(voice)u.voice=voice;u.pitch=1.15;u.rate=.85;speechSynthesis.speak(u)}
+function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
+function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
+const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
+c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
+c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
+if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
+if(score===RAW.length){clearInterval(timer);$("msg").textContent="🎉 ครบทุกคำ! ใช้เวลา "+$("t").textContent}}};
+g.appendChild(c)})}
+function tabs(){const t=$("tabs");t.innerHTML="";for(let i=0;i<Math.ceil(RAW.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(i*25+25,RAW.length)})`;b.className=i===tab?"on":"";b.onclick=()=>{tab=i;tabs();render()};t.appendChild(b)}}
+function reset(shuffle){clearInterval(timer);timer=null;speechSynthesis.cancel();sec=0;score=0;seen.clear();fmt();$("s").textContent=0;
+data=RAW.slice();if(shuffle)for(let i=data.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[data[i],data[j]]=[data[j],data[i]]}
+$("msg").textContent=shuffle?"เริ่มแล้ว! พลิกการ์ดให้ครบ":"ยกเลิกแล้ว กดเริ่มเล่นเพื่อเล่นใหม่";render()}
+$("rs").onclick=()=>{reset(true);start();$("rs").textContent="↻ เริ่มใหม่"};
+$("cc").onclick=()=>{reset(false);$("rs").textContent="▶ เริ่มเล่น"};
+$("n").textContent=RAW.length;tabs();render();
+</script></body></html>

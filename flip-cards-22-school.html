@@ -1,0 +1,554 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flipping Cards – School & Learning Actions</title>
+<style>
+:root{--bg:linear-gradient(160deg,#dff7e8,#fff8d9 50%,#dff0ff);--tx:#41405e;--f1:#ffffff;--f2:#f4f4ff;--b1:#a8e3c1;--b2:#d4f5e2;--sh:rgba(150,140,190,.32);--pill:#ffffffd9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;padding:12px}
+h1{font-size:clamp(1.1rem,3.2vw,1.6rem);margin:4px 0 10px;text-align:center}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px}
+.pill{background:var(--pill);padding:8px 14px;border-radius:999px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+button{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;color:#38385a;background:linear-gradient(135deg,var(--b1),var(--b2));box-shadow:0 4px 10px var(--sh)}
+button.c{background:linear-gradient(135deg,#ff6b6b,#d63a5a);color:#fff}
+button:active{transform:scale(.96)}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{background:var(--pill);color:var(--tx);box-shadow:0 2px 6px var(--sh)}
+.tabs button.on{background:linear-gradient(135deg,var(--b1),var(--b2));color:#38385a}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,16px);max-width:1000px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:800px;aspect-ratio:4/3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;
+box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6px 10px rgba(170,150,210,.2);background:linear-gradient(160deg,var(--f1),var(--f2))}
+.bk{transform:rotateY(180deg);background:linear-gradient(135deg,var(--b1),var(--b2));color:#38385a}
+.w{font-weight:800;font-size:clamp(.9rem,2.6vw,1.6rem);word-break:break-word}
+.p{font-size:clamp(.6rem,1.5vw,.85rem);opacity:.7;margin-top:3px}
+.th{font-size:clamp(.95rem,2.6vw,1.5rem);font-weight:700}
+.sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
+.done .fc:not(.bk){outline:2px solid #3ccf8e}
+#msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
+body{min-height:100vh;background-attachment:fixed}.tabs button{padding:6px 11px;font-size:.85rem}.card:nth-child(3n+1) .bk{background:linear-gradient(135deg,#c6f0d6,#e6faee)}.card:nth-child(3n+1) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e6faee)}.card:nth-child(3n+2) .bk{background:linear-gradient(135deg,#fff0a8,#fff9d6)}.card:nth-child(3n+2) .fc:not(.bk){background:linear-gradient(160deg,#fff,#fff9d6)}.card:nth-child(3n+3) .bk{background:linear-gradient(135deg,#bfe0ff,#e2f1ff)}.card:nth-child(3n+3) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e2f1ff)}</style></head><body>
+<h1>22. School & Learning Actions | การเรียนที่โรงเรียน</h1>
+<div class="bar">
+<span class="pill">⏱ <span id="t">00:00</span></span>
+<span class="pill">⭐ <span id="s">0</span>/<span id="n"></span></span>
+<button id="rs">▶ เริ่มเล่น</button><button id="cc" class="c">✖ ยกเลิก</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="g"></div>
+<div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
+<script>
+const RAW=`absorb|əbˈzɔːb|ดูดซับ / ซึมซับ
+analyze|ˈæn.əl.aɪz|วิเคราะห์
+attend|əˈtend|เข้าเรียน / เข้าร่วม
+calculate|ˈkæl.kjʊ.leɪt|คำนวณ
+certify|ˈsɜː.tɪ.faɪ|รับรอง
+cite|saɪt|อ้างอิง
+collaborate|kəˈlæb.ə.reɪt|ทำงานร่วมกัน
+comprehend|ˌkɒm.prɪˈhend|เข้าใจอย่างถ่องแท้
+compute|kəmˈpjuːt|คำนวณ
+concentrate|ˈkɒn.sən.treɪt|ตั้งสมาธิ
+cram|kræm|อ่านหนังสือเร่งด่วน
+critique|krɪˈtiːk|วิจารณ์
+debate|dɪˈbeɪt|โต้วาที
+deduce|dɪˈdjuːs|อนุมาน
+define|dɪˈfaɪn|ให้คำจำกัดความ
+demonstrate|ˈdem.ən.streɪt|สาธิต
+differentiate|ˌdɪf.əˈren.ʃi.eɪt|แยกความแตกต่าง
+discuss|dɪˈskʌs|อภิปราย
+educate|ˈedʒ.u.keɪt|ให้การศึกษา
+enroll|ɪnˈrəʊl|ลงทะเบียนเรียน
+evaluate|ɪˈvæl.ju.eɪt|ประเมินผล
+examine|ɪɡˈzæm.ɪn|สอบ / ตรวจสอบ
+experiment|ɪkˈsper.ɪ.ment|ทดลอง
+explain|ɪkˈspleɪn|อธิบาย
+explore|ɪkˈsplɔːr|สำรวจ
+focus|ˈfəʊ.kəs|มุ่งความสนใจ
+formulate|ˈfɔː.mjʊ.leɪt|กำหนดสูตร / วางหลักการ
+graduate|ˈɡrædʒ.u.eɪt|สำเร็จการศึกษา
+highlight|ˈhaɪ.laɪt|ไฮไลต์
+hypothesize|haɪˈpɒθ.ə.saɪz|ตั้งสมมติฐาน
+illuminate|ɪˈluː.mɪ.neɪt|ทำให้กระจ่าง / ส่องสว่าง
+illustrate|ˈɪl.ə.streɪt|ยกตัวอย่างประกอบ
+imitate|ˈɪm.ɪ.teɪt|เลียนแบบ
+inquire|ɪnˈkwaɪər|สอบถาม
+inspect|ɪnˈspekt|ตรวจตรา
+inspire|ɪnˈspaɪər|สร้างแรงบันดาลใจ
+instruct|ɪnˈstrʌkt|สั่งสอน / ชี้แนะ
+interpret|ɪnˈtɜː.prɪt|ตีความ
+investigate|ɪnˈves.tɪ.ɡeɪt|สืบค้น
+learn|lɜːn|เรียนรู้
+lecture|ˈlek.tʃər|บรรยาย
+memorize|ˈmem.ə.raɪz|ท่องจำ
+motivate|ˈməʊ.tɪ.veɪt|กระตุ้นแรงจูงใจ
+note|nəʊt|จดบันทึก
+observe|əbˈzɜːv|สังเกต
+outline|ˈaʊt.laɪn|ร่างโครงเรื่อง
+paraphrase|ˈpær.ə.freɪz|เรียบเรียงใหม่ด้วยคำพูดตัวเอง
+participate|pɑːˈtɪs.ɪ.peɪt|มีส่วนร่วม
+perceive|pəˈsiːv|รับรู้
+practice|ˈpræk.tɪs|ฝึกฝน
+ponder|ˈpɒn.dər|ไตร่ตรอง
+prepare|prɪˈpeər|เตรียม
+present|prɪˈzent|นำเสนอ
+propose|prəˈpəʊz|เสนอ
+prove|pruːv|พิสูจน์
+question|ˈkwes.tʃən|ตั้งคำถาม
+quote|kwəʊt|อ้างคำพูด
+read|riːd|อ่าน
+recap|ˈriː.kæp|สรุปทวน
+recite|rɪˈsaɪt|ท่อง / สวด
+recognize|ˈrek.əɡ.naɪz|จำได้ / ยอมรับ
+record|rɪˈkɔːd|บันทึก
+reflect|rɪˈflekt|สะท้อนคิด
+rehearse|rɪˈhɜːs|ซ้อม
+reinforce|ˌriː.ɪnˈfɔːs|เสริมแรง
+reiterate|riˈɪt.ə.reɪt|ย้ำอีกครั้ง
+remember|rɪˈmem.bər|จำ
+repeat|rɪˈpiːt|ทำซ้ำ / พูดซ้ำ
+rephrase|riˈfreɪz|เรียบเรียงประโยคใหม่
+research|rɪˈsɜːtʃ|วิจัย
+re-read|ˌriːˈriːd|อ่านซ้ำ
+respond|rɪˈspɒnd|ตอบสนอง
+review|rɪˈvjuː|ทบทวน
+revise|rɪˈvaɪz|ทบทวน / แก้ไข
+riddle|ˈrɪd.əl|ปริศนา / ทายปริศนา
+rote|rəʊt|การท่องจำ
+scaffolding|ˈskæf.əl.dɪŋ|การให้ความช่วยเหลือเป็นขั้น / นั่งร้าน
+scan|skæn|กวาดตาอ่าน / สแกน
+scholarship|ˈskɒl.ə.ʃɪp|ทุนการศึกษา
+school|skuːl|ฝึกสอน / โรงเรียน
+score|skɔːr|ได้คะแนน
+scribble|ˈskrɪb.əl|เขียนยุกยิก
+scrutinize|ˈskruː.tɪ.naɪz|พินิจพิเคราะห์
+search|sɜːtʃ|ค้นหา
+seating|ˈsiː.tɪŋ|การจัดที่นั่ง
+semifinal|ˈsem.iˌfaɪ.nəl|รอบรองชนะเลิศ
+seminar|ˈsem.ɪ.nɑːr|สัมมนา
+share|ʃeər|แบ่งปัน
+sharpen|ˈʃɑː.pən|ลับให้คม / เหลาดินสอ
+skim|skɪm|อ่านผ่าน ๆ
+solve|sɒlv|แก้โจทย์ / แก้ปัญหา
+sort|sɔːt|คัดแยก
+speak|spiːk|พูด
+specialize|ˈspeʃ.əl.aɪz|เชี่ยวชาญเฉพาะด้าน
+spell|spel|สะกดคำ
+study|ˈstʌd.i|เรียน / ศึกษา
+stimulate|ˈstɪm.jə.leɪt|กระตุ้น
+strive|straɪv|พยายามอย่างหนัก
+summarize|ˈsʌm.ə.raɪz|สรุป
+synthesize|ˈsɪn.θə.saɪz|สังเคราะห์
+tabulate|ˈtæb.jʊ.leɪt|ทำตาราง
+take|teɪk|เรียน / สอบ / ถือ
+talk|tɔːk|พูดคุย
+tally|ˈtæl.i|นับคะแนน
+tangle|ˈtæŋ.ɡəl|พันกันยุ่ง
+target|ˈtɑː.ɡɪt|เป้าหมาย
+teach|tiːtʃ|สอน
+tease|tiːz|หยอกล้อ
+tell|tel|บอก / เล่า
+temperate|ˈtem.pər.ət|พอประมาณ / อบอุ่น
+tend|tend|มีแนวโน้ม / ดูแล
+term|tɜːm|ภาคเรียน / เรียกว่า
+test|test|ทดสอบ
+textbook|ˈtekst.bʊk|หนังสือเรียน
+theorize|ˈθɪə.rə.saɪz|สร้างทฤษฎี
+think|θɪŋk|คิด
+thorough|ˈθʌr.ə|ละเอียดถี่ถ้วน
+threaten|ˈθret.ən|ข่มขู่
+thresh|θreʃ|นวดข้าว
+thrive|θraɪv|เจริญงอกงาม
+thrum|θrʌm|ดีดสั่นเป็นจังหวะ
+thrust|θrʌst|ผลักอย่างแรง
+tick|tɪk|ติ๊กถูก
+tighten|ˈtaɪ.tən|รัดแน่น
+tile|taɪl|ปูกระเบื้อง
+tilt|tɪlt|เอียง
+time|taɪm|จับเวลา
+tine|taɪn|ซี่ส้อม
+tingle|ˈtɪŋ.ɡəl|รู้สึกซ่า
+tinkle|ˈtɪŋ.kəl|เสียงกรุ๋งกริ๋ง
+tip|tɪp|เอียง / ให้ทิป
+tire|ˈtaɪər|เหนื่อย / ยาง
+title|ˈtaɪ.təl|ตั้งชื่อเรื่อง / ชื่อเรื่อง
+toil|tɔɪl|ทำงานหนัก
+token|ˈtəʊ.kən|เหรียญ / สัญลักษณ์
+tolerate|ˈtɒl.ə.reɪt|อดทน / ยอมรับได้
+toll|təʊl|ตีระฆัง / ค่าผ่านทาง
+tomtit|ˈtɒm.tɪt|นกกระจิบ
+tone|təʊn|น้ำเสียง
+tongue|tʌŋ|ลิ้น
+tool|tuːl|เครื่องมือ
+tooth|tuːθ|ฟัน
+top|tɒp|ยอด / อยู่บนสุด
+torment|ˈtɔː.ment|ทรมาน
+toss|tɒs|โยน
+total|ˈtəʊ.təl|รวมยอด
+totter|ˈtɒt.ər|เดินโซเซ
+touch|tʌtʃ|สัมผัส
+tour|tʊər|ทัศนศึกษา / ทัวร์
+tow|təʊ|ลากจูง
+toward|təˈwɔːd|ไปทาง
+tower|ˈtaʊ.ər|หอคอย / สูงตระหง่าน
+toy|tɔɪ|ของเล่น
+trace|treɪs|ลอกลาย / ตามรอย
+track|træk|ติดตาม
+trade|treɪd|แลกเปลี่ยน
+tradition|trəˈdɪʃ.ən|ประเพณี
+traffic|ˈtræf.ɪk|การจราจร
+tragedy|ˈtrædʒ.ə.di|โศกนาฏกรรม
+trail|treɪl|ทางเดิน / ลากตาม
+train|treɪn|ฝึกอบรม
+trample|ˈtræm.pəl|เหยียบย่ำ
+tranquilize|ˈtræŋ.kwɪ.laɪz|ทำให้สงบ
+transact|trænˈzækt|ทำธุรกรรม
+transcend|trænˈsend|เหนือกว่า
+transcribe|trænˈskraɪb|ถอดความ
+transfer|trænsˈfɜːr|ย้าย / โอน
+transfigure|trænˈfɪɡ.ər|เปลี่ยนรูปโฉม
+transform|trænˈfɔːm|เปลี่ยนแปลงรูป
+transgress|trænzˈɡres|ละเมิด
+transient|ˈtræn.zi.ənt|ชั่วคราว
+transit|ˈtræn.zɪt|ขนส่ง / การผ่าน
+translate|trænˈsleɪt|แปล
+transmit|trænˈsmɪt|ส่งผ่าน
+mute|mjuːt|ปิดเสียง
+transpire|trænˈspaɪər|เกิดขึ้น / คายน้ำ
+plant|plɑːnt|ปลูก
+transport|ˈtræn.spɔːt|ขนส่ง
+transpose|trænzˈpəʊz|สลับตำแหน่ง
+trap|træp|ดักจับ
+travel|ˈtræv.əl|เดินทาง
+traverse|trəˈvɜːs|ข้ามผ่าน
+tread|tred|ย่ำเดิน
+treason|ˈtriː.zən|กบฏ
+treasure|ˈtreʒ.ər|หวงแหน / สมบัติ
+treat|triːt|ปฏิบัติต่อ / เลี้ยง
+tremble|ˈtrem.bəl|สั่นเทา
+trench|trentʃ|คูร่อง
+trend|trend|เป็นกระแส
+trespass|ˈtres.pəs|บุกรุก
+tribute|ˈtrɪb.juːt|เครื่องบรรณาการ / ยกย่อง
+trick|trɪk|หลอก / กลเม็ด
+trifle|ˈtraɪ.fəl|เรื่องจุกจิก
+trigger|ˈtrɪɡ.ər|กระตุ้นให้เกิด
+trill|trɪl|เปล่งเสียงสั่น
+trine|traɪn|สามเท่า
+triumph|ˈtraɪ.ʌmf|ชัยชนะ
+troll|trəʊl|ยั่วยุ / โทรล
+troop|truːp|เดินเป็นกลุ่ม
+trot|trɒt|วิ่งเหยาะ ๆ
+trouble|ˈtrʌb.əl|รบกวน / ปัญหา
+troubleshoot|ˈtrʌb.əl.ʃuːt|แก้ไขปัญหา
+trowel|ˈtraʊəl|เกรียง
+truant|ˈtruː.ənt|โดดเรียน
+trudge|trʌdʒ|เดินลากเท้า
+truncate|ˈtrʌŋ.keɪt|ตัดทอน
+trunk|trʌŋk|ลำต้น / ท้ายรถ
+truss|trʌs|มัด / โครงค้ำ
+trust|trʌst|ไว้วางใจ
+try|traɪ|ลองทำ
+tub|tʌb|อ่าง / ถัง
+tuck|tʌk|เหน็บ
+tug|tʌɡ|กระชาก
+tumble|ˈtʌm.bəl|ล้มกลิ้ง
+tune|tjuːn|ปรับเสียง / จูน
+tup|tʌp|แกะตัวผู้
+turbid|ˈtɜː.bɪd|ขุ่นข้น
+turbulence|ˈtɜː.bjʊ.ləns|ความปั่นป่วน
+turf|tɜːf|สนามหญ้า
+turn|tɜːn|หมุน / ตาของใคร
+tutor|ˈtjuː.tər|สอนพิเศษ / ติวเตอร์
+twang|twæŋ|เสียงดีดสาย
+tweak|twiːk|ปรับเล็กน้อย
+tweed|twiːd|ผ้าทวีด
+tween|twiːn|วัยทวีน
+tweet|twiːt|ทวีต
+tweeze|twiːz|ใช้แหนบคีบ
+twelfth|twelfθ|ที่สิบสอง
+twiddle|ˈtwɪd.əl|ขยับเล่น
+twig|twɪɡ|กิ่งไม้เล็ก / เข้าใจ
+twilight|ˈtwaɪ.laɪt|ย่ำสนธยา
+twine|twaɪn|เชือกป่าน / พันเกลียว
+twinge|twɪndʒ|ปวดแปลบ
+twinkle|ˈtwɪŋ.kl̩|ระยิบระยับ
+twirl|twɜːl|หมุนตัว
+twist|twɪst|บิด
+twitch|twɪtʃ|กระตุก
+twitter|ˈtwɪt.ər|ส่งเสียงจิ๊บ ๆ
+type|taɪp|พิมพ์ / ชนิด
+typical|ˈtɪp.ɪ.kəl|ทั่วไป / เป็นแบบฉบับ
+typify|ˈtɪp.ɪ.faɪ|เป็นตัวอย่างของ
+tyrannize|ˈtɪr.ə.naɪz|ข่มเหง
+ubiquitous|juːˈbɪk.wɪ.təs|มีอยู่ทุกหนแห่ง
+ulcerate|ˈʌl.sə.reɪt|เป็นแผลเปื่อย
+ultimate|ˈʌl.tɪ.mət|สูงสุด / สุดท้าย
+umbilical|ʌmˈbɪl.ɪ.kəl|เกี่ยวกับสายสะดือ
+umpire|ˈʌm.paɪər|กรรมการตัดสิน
+unabashed|ˌʌn.əˈbæʃt|ไม่เขินอาย
+unbend|ʌnˈbend|ยืดตรง
+unbind|ʌnˈbaɪnd|แก้มัด
+unbolt|ʌnˈbəʊlt|ถอดสลัก
+unceasing|ʌnˈsiː.sɪŋ|ไม่หยุดหย่อน
+unchain|ʌnˈtʃeɪn|ปลดโซ่
+unclasp|ʌnˈklɑːsp|ปลดตะขอ
+uncle|ˈʌŋ.kl̩|ลุง / อา / น้าชาย
+unclip|ʌnˈklɪp|ปลดคลิป
+uncloak|ʌnˈkləʊk|เปิดเผย
+uncork|ʌnˈkɔːk|เปิดจุกขวด
+uncouple|ʌnˈkʌp.əl|แยกออกจากกัน
+uncut|ʌnˈkʌt|ไม่ถูกตัด
+undated|ʌnˈdeɪ.tɪd|ไม่ลงวันที่
+underachieve|ˌʌn.dər.əˈtʃiːv|ทำได้ต่ำกว่าศักยภาพ
+underestimate|ˌʌn.dərˈes.tɪ.meɪt|ประเมินต่ำไป
+undergird|ˌʌn.dəˈɡɜːd|ค้ำจุนจากข้างล่าง
+underline|ˌʌn.dəˈlaɪn|ขีดเส้นใต้
+undermine|ˌʌn.dəˈmaɪn|บั่นทอน
+underpin|ˌʌn.dəˈpɪn|เป็นรากฐานของ
+underscore|ˌʌn.dəˈskɔːr|เน้นย้ำ
+understand|ˌʌn.dəˈstænd|เข้าใจ
+undertake|ˌʌn.dəˈteɪk|รับทำ
+undervalue|ˌʌn.dəˈvæl.juː|ตีค่าต่ำไป
+underwrite|ˌʌn.dəˈraɪt|รับประกัน / สนับสนุนทุน
+undo|ʌnˈduː|แก้ / ยกเลิก
+undress|ʌnˈdres|ถอดเสื้อผ้า
+undulate|ˈʌn.djʊ.leɪt|ลอนเป็นคลื่น
+unearth|ʌnˈɜːθ|ขุดพบ
+uneasiness|ʌnˈiː.zi.nəs|ความไม่สบายใจ
+unfetter|ʌnˈfet.ər|ปลดพันธนาการ
+unfit|ʌnˈfɪt|ไม่เหมาะสม
+unfold|ʌnˈfəʊld|คลี่ออก
+unfreeze|ʌnˈfriːz|ละลาย / ปลดอายัด
+unify|ˈjuː.nɪ.faɪ|รวมเป็นหนึ่ง
+unimpeded|ˌʌn.ɪmˈpiː.dɪd|ไม่ถูกขัดขวาง
+unite|juˈnaɪt|รวมกัน
+universe|ˈjuː.nɪ.vɜːs|จักรวาล
+univocal|juːˈnɪv.ə.kəl|มีความหมายเดียว
+unknot|ʌnˈnɒt|แก้ปม
+unlatch|ʌnˈlætʃ|ปลดสลัก
+unlearn|ʌnˈlɜːn|เลิกยึดสิ่งที่เคยเรียน
+unless|ʌnˈles|เว้นแต่
+unlike|ʌnˈlaɪk|ไม่เหมือน
+unload|ʌnˈləʊd|ขนลง
+unlock|ʌnˈlɒk|ปลดล็อก
+unmask|ʌnˈmɑːsk|เปิดโปง
+unpack|ʌnˈpæk|แกะของออก
+unplug|ʌnˈplʌɡ|ถอดปลั๊ก
+unravel|ʌnˈræv.əl|คลี่คลาย
+unriddle|ʌnˈrɪd.əl|ไขปริศนา
+unscramble|ʌnˈskrʌm.bəl|เรียงตัวอักษรให้ถูก
+unscrew|ʌnˈskruː|ไขสกรูออก
+unseal|ʌnˈsiːl|เปิดผนึก
+unsettle|ʌnˈset.l̩|ทำให้ไม่สบายใจ
+unshackle|ʌnˈʃæk.əl|ปลดโซ่ตรวน
+unsocial|ʌnˈsəʊ.ʃəl|ไม่เข้าสังคม
+unstack|ʌnˈstæk|แยกกองซ้อน
+unstitch|ʌnˈstɪtʃ|แกะตะเข็บ
+unstring|ʌnˈstrɪndʒ|ปลดสาย
+unstuck|ʌnˈstʌk|หลุดจากที่ติด
+untangle|ʌnˈtæŋ.ɡəl|แก้ที่พันกัน
+unthaw|ʌnˈθɔː|ละลายน้ำแข็ง
+unthink|ʌnˈθɪŋk|เลิกคิดถึง
+untie|ʌnˈtaɪ|แก้เชือก
+until|ʌnˈtɪl|จนกระทั่ง
+untouchable|ʌnˈtʌtʃ.ə.bəl|แตะต้องไม่ได้
+unveil|ʌnˈveɪl|เปิดตัว / เปิดเผย
+unwarranted|ʌnˈwɒr.ən.tɪd|ไม่มีเหตุผลรองรับ
+unweave|ʌnˈwiːv|แกะที่ทอ
+unwind|ʌnˈwaɪnd|คลายออก / ผ่อนคลาย
+unwrap|ʌnˈræp|แกะห่อ
+unyoke|ʌnˈjəʊk|ปลดแอก
+upbeat|ˈʌp.biːt|ร่าเริง
+upcast|ˈʌp.kɑːst|เหวี่ยงขึ้น
+upcoming|ˈʌpˌkʌm.ɪŋ|ที่กำลังจะมาถึง
+update|ʌpˈdeɪt|อัปเดต
+upend|ʌpˈend|คว่ำ / พลิกกลับ
+upgrade|ʌpˈɡreɪd|อัปเกรด
+uphold|ʌpˈhəʊld|ยึดมั่น / ยืนยัน
+uplift|ʌpˈlɪft|ยกระดับ
+upload|ʌpˈləʊd|อัปโหลด
+upmost|ˈʌp.məʊst|สูงสุด
+upon|əˈpɒn|บน
+uproot|ʌpˈruːt|ถอนราก
+upscale|ˈʌp.skeɪl|ระดับสูง
+upset|ʌpˈset|ทำให้เสียใจ / พลิกคว่ำ
+upshift|ˈʌp.ʃɪft|เปลี่ยนเกียร์สูงขึ้น
+upstand|ˈʌp.stænd|ตั้งตรง
+upstart|ˈʌp.stɑːt|ผู้เพิ่งผงาด
+upstream|ˈʌp.striːm|ต้นน้ำ
+uptake|ˈʌp.teɪk|การดูดซึม / การรับไว้
+upturn|ˈʌp.tɜːn|ฟื้นตัวขึ้น
+upward|ˈʌp.wəd|ขึ้นข้างบน
+upwind|ˈʌp.wɪnd|ทวนลม
+urbanize|ˈɜː.bən.aɪz|ทำให้เป็นเมือง
+urge|ɜːdʒ|กระตุ้น / เร่ง
+urinate|ˈjʊə.rɪ.neɪt|ปัสสาวะ
+use|juːz|ใช้
+usher|ˈʌʃ.ər|นำทาง
+usual|ˈjuː.ʒu.əl|ตามปกติ
+usurp|juːˈzɜːp|แย่งชิง
+utilize|ˈjuː.tɪ.laɪz|ใช้ประโยชน์
+utter|ˈʌt.ər|เปล่งเสียง
+vacate|vəˈkeɪt|ย้ายออก
+vaccinate|ˈvæk.sɪ.neɪt|ฉีดวัคซีน
+vacillate|ˈvæs.ɪ.leɪt|ลังเล
+vacuum|ˈvæk.juːm|ดูดฝุ่น
+validate|ˈvæl.ɪ.deɪt|ตรวจสอบความถูกต้อง
+valorize|ˈvæl.ə.raɪz|เพิ่มคุณค่า
+valse|væls|เพลงวอลทซ์
+value|ˈvæl.juː|ให้คุณค่า
+vamp|væmp|เล่นด้นสด / ยั่วเสน่ห์
+vanish|ˈvæn.ɪʃ|หายไป
+vanquish|ˈvæŋ.kwɪʃ|พิชิต
+vaporize|ˈveɪ.pər.aɪz|ทำให้เป็นไอ
+variable|ˈveə.ri.ə.bəl|ตัวแปร
+variate|ˈveə.ri.eɪt|ทำให้หลากหลาย
+varnish|ˈvɑː.nɪʃ|เคลือบเงา
+vassal|ˈvæs.əl|ข้าราชบริพาร
+vast|vɑːst|กว้างใหญ่
+vault|vɔːlt|กระโดดข้าม / ห้องนิรภัย
+vaunt|vɔːnt|โอ้อวด
+vector|ˈvek.tər|เวกเตอร์
+veer|vɪər|เบี่ยงทิศ
+vegetate|ˈvedʒ.ɪ.teɪt|ใช้ชีวิตเฉื่อยชา
+velocipede|vəˈlos.ə.piːd|จักรยานรุ่นเก่า
+velocity|vəˈlɒs.ə.ti|ความเร็ว
+vend|vend|ขาย
+venerate|ˈven.ə.reɪt|เคารพบูชา
+venetians|vəˈniː.ʃənz|มู่ลี่
+ventilate|ˈven.tɪ.leɪt|ระบายอากาศ
+venture|ˈven.tʃər|กล้าเสี่ยง
+verbalize|ˈvɜː.bəl.aɪz|แสดงออกเป็นคำพูด
+verge|vɜːdʒ|ใกล้จะ / ขอบ
+verify|ˈver.ɪ.faɪ|ตรวจยืนยัน
+versify|ˈvɜː.sɪ.faɪ|แต่งเป็นกลอน
+version|ˈvɜː.ʃən|เวอร์ชัน
+vertebra|ˈvɜː.tɪ.brə|กระดูกสันหลัง
+vertical|ˈvɜː.tɪ.kəl|แนวตั้ง
+vesper|ˈves.pər|เวลาเย็น / ละหมาดเย็น
+vessel|ˈves.əl|ภาชนะ / เรือ
+vest|vest|เสื้อกั๊ก / มอบสิทธิ์
+vex|veks|ทำให้รำคาญ
+vibrate|vaɪˈbreɪt|สั่นสะเทือน
+vicarious|vɪˈkeə.ri.əs|ที่ร่วมรู้สึกแทน
+vied|vaɪd|แข่งขัน (อดีตของ vie)
+view|vjuː|ชม / มองดู
+vigil|ˈvɪdʒ.əl|การเฝ้าระวัง
+vilify|ˈvɪl.ɪ.faɪ|ใส่ร้าย
+vindicate|ˈvɪn.dɪ.keɪt|พิสูจน์ว่าบริสุทธิ์
+violate|ˈvaɪ.ə.leɪt|ละเมิด
+violence|ˈvaɪə.ləns|ความรุนแรง
+virtual|ˈvɜː.tʃu.əl|เสมือนจริง
+virtuoso|ˌvɜː.tʃuˈəʊ.səʊ|ผู้เชี่ยวชาญเยี่ยมยอด
+visage|ˈvɪz.ɪdʒ|ใบหน้า
+viscous|ˈvɪs.kəs|ข้นเหนียว
+visit|ˈvɪz.ɪt|เยี่ยมชม
+visual|ˈvɪʒ.u.əl|เกี่ยวกับภาพ
+visualize|ˈvɪʒ.u.ə.laɪz|นึกภาพ
+vital|ˈvaɪ.təl|สำคัญยิ่ง
+vitiate|ˈvɪʃ.i.eɪt|ทำให้เสียหาย
+viva|ˈviː.və|สอบปากเปล่า
+vivid|ˈvɪv.ɪd|สดใส / ชัดเจน
+vocalize|ˈvəʊ.kəl.aɪz|เปล่งเสียง
+vocation|vəʊˈkeɪ.ʃən|อาชีพ / ใจรัก
+void|vɔɪd|ว่างเปล่า / ยกเลิก
+volant|ˈvəʊ.lənt|บินได้
+volcano|vɒlˈkeɪ.nəʊ|ภูเขาไฟ
+volley|ˈvɒl.i|ยิงถล่ม / ตีลูกโต้
+volt|vəʊlt|โวลต์
+voluble|ˈvɒl.jʊ.bəl|พูดคล่องแคล่ว
+volume|ˈvɒl.juːm|ปริมาตร / เล่ม
+voluntary|ˈvɒl.ən.tər.i|ด้วยความสมัครใจ
+volunteer|ˌvɒl.ənˈtɪər|อาสาสมัคร
+vomit|ˈvɒm.ɪt|อาเจียน
+voracious|vəˈreɪ.ʃəs|ตะกละ / ใฝ่รู้มาก
+vote|vəʊt|ลงคะแนนเสียง
+vouch|vaʊtʃ|ยืนยันรับรอง
+vow|vaʊ|ปฏิญาณ
+voyage|ˈvɔɪ.ɪdʒ|เดินทางไกล
+vulgarize|ˈvʌl.ɡə.raɪz|ทำให้หยาบคาย
+vulnerable|ˈvʌl.nər.ə.bəl|เปราะบาง
+wade|weɪd|ลุยน้ำ
+wafer|ˈweɪ.fər|เวเฟอร์
+waft|wɒft|ลอยมาเบา ๆ
+wag|wæɡ|กระดิก
+wage|weɪdʒ|ค่าจ้าง / ทำสงคราม
+wail|weɪl|ร้องคร่ำครวญ
+wait|weɪt|รอ
+waive|weɪv|สละสิทธิ์
+wake|weɪk|ตื่น
+walk|wɔːk|เดิน
+wall|wɔːl|กำแพง
+wallow|ˈwɒl.əʊ|นอนกลิ้ง
+waltz|wɔːlts|เต้นวอลทซ์
+wan|wɒn|ซีดเซียว
+wand|wɒnd|ไม้กายสิทธิ์
+wander|ˈwɒn.dər|เดินเตร็ดเตร่
+wane|weɪn|ลดลง / เสื่อมถอย
+want|wɒnt|ต้องการ
+war|wɔːr|สงคราม
+ward|wɔːd|ป้องกัน / หอผู้ป่วย
+warm|wɔːm|อุ่น
+warn|wɔːn|เตือน
+warp|wɔːp|บิดเบี้ยว
+warrant|ˈwɒr.ənt|รับประกัน / หมายศาล
+wash|wɒʃ|ล้าง
+waste|weɪst|สิ้นเปลือง
+watch|wɒtʃ|ดู
+water|ˈwɔː.tər|รดน้ำ
+waver|ˈweɪ.vər|ลังเล
+wax|wæks|ขัดเงา / ขี้ผึ้ง
+waylay|ˈweɪ.leɪ|ดักซุ่ม
+weaken|ˈwiː.kən|ทำให้อ่อนแอ
+wealth|welθ|ความมั่งคั่ง
+wear|weə(r)|สวมใส่
+weather|ˈweð.ər|ผ่านพ้น / สภาพอากาศ
+weave|wiːv|ทอ
+web|web|ใย / เว็บ
+wed|wed|แต่งงาน
+wedge|wedʒ|ลิ่ม / งัดด้วยลิ่ม
+weep|wiːp|ร้องไห้
+weigh|weɪ|ชั่งน้ำหนัก
+weight|weɪt|น้ำหนัก
+welcome|ˈwel.kəm|ต้อนรับ
+weld|weld|เชื่อมโลหะ
+well|wel|ดี / บ่อน้ำ
+welt|welt|รอยเฆี่ยน / รอยแดง
+wench|wentʃ|หญิงสาวชนบท
+wend|wend|เดินทางไป
+wet|wet|เปียก
+whack|wæk|ตีแรง ๆ
+whale|weɪl|วาฬ
+wharf|wɔːf|ท่าเรือ
+wharve|wɔːv|ดุมปั่นด้าย
+wheedle|ˈwiː.dəl|หว่านล้อม
+wheel|wiːl|ล้อ
+wheeze|wiːz|หายใจมีเสียงวี้ด
+whelm|welm|ท่วมท้น
+whelp|welp|ลูกสุนัข / ออกลูก
+whet|wet|ลับให้คม / กระตุ้น`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
+const $=id=>document.getElementById(id),g=$("g");
+function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+voice=v.find(x=>/daniel|oliver|arthur|google uk english male|male/i.test(x.name))||v[0]||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(w){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";if(voice)u.voice=voice;u.pitch=1.15;u.rate=.85;speechSynthesis.speak(u)}
+function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
+function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
+const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
+c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
+c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
+if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
+if(score===RAW.length){clearInterval(timer);$("msg").textContent="🎉 ครบทุกคำ! ใช้เวลา "+$("t").textContent}}};
+g.appendChild(c)})}
+function tabs(){const t=$("tabs");t.innerHTML="";for(let i=0;i<Math.ceil(RAW.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(i*25+25,RAW.length)})`;b.className=i===tab?"on":"";b.onclick=()=>{tab=i;tabs();render()};t.appendChild(b)}}
+function reset(shuffle){clearInterval(timer);timer=null;speechSynthesis.cancel();sec=0;score=0;seen.clear();fmt();$("s").textContent=0;
+data=RAW.slice();if(shuffle)for(let i=data.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[data[i],data[j]]=[data[j],data[i]]}
+$("msg").textContent=shuffle?"เริ่มแล้ว! พลิกการ์ดให้ครบ":"ยกเลิกแล้ว กดเริ่มเล่นเพื่อเล่นใหม่";render()}
+$("rs").onclick=()=>{reset(true);start();$("rs").textContent="↻ เริ่มใหม่"};
+$("cc").onclick=()=>{reset(false);$("rs").textContent="▶ เริ่มเล่น"};
+$("n").textContent=RAW.length;tabs();render();
+</script></body></html>

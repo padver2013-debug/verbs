@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flipping Cards – Fun & Leisure Activities</title>
+<style>
+:root{--bg:#06140a;--tx:#d9ffe0;--f1:#0f2b1a;--f2:#0a1f12;--b1:#1fe84a;--b2:#8cff5a;--sh:rgba(57,255,20,.35);--pill:#0f2b1a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",system-ui,sans-serif;padding:12px}
+h1{font-size:clamp(1.1rem,3.2vw,1.6rem);margin:4px 0 10px;text-align:center}
+.bar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin-bottom:10px}
+.pill{background:var(--pill);padding:8px 14px;border-radius:999px;font-weight:700;box-shadow:0 3px 8px var(--sh)}
+button{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;color:#032a0c;background:linear-gradient(135deg,var(--b1),var(--b2));box-shadow:0 4px 10px var(--sh)}
+button.c{background:linear-gradient(135deg,#ff6b6b,#d63a5a);color:#fff}
+button:active{transform:scale(.96)}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.tabs button{background:var(--pill);color:var(--tx);box-shadow:0 2px 6px var(--sh)}
+.tabs button.on{border-color:#39ff14;background:linear-gradient(135deg,var(--b1),var(--b2));color:#032a0c}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.6vw,16px);max-width:1000px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{perspective:800px;aspect-ratio:4/3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:clamp(14px,2.4vw,24px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;
+box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(120,255,120,.25),inset 0 -6px 10px rgba(57,255,20,.18);background:linear-gradient(160deg,var(--f1),var(--f2))}
+.bk{transform:rotateY(180deg);background:linear-gradient(135deg,var(--b1),var(--b2));color:#032a0c}
+.w{font-weight:800;font-size:clamp(.9rem,2.6vw,1.6rem);word-break:break-word}
+.p{font-size:clamp(.6rem,1.5vw,.85rem);opacity:.7;margin-top:3px}
+.th{font-size:clamp(.95rem,2.6vw,1.5rem);font-weight:700}
+.sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
+.done .fc:not(.bk){outline:2px solid #3ccf8e}
+#msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
+.fc:not(.bk){border:1.5px solid #39ff14;box-shadow:0 0 14px rgba(57,255,20,.55),0 10px 18px var(--sh),inset 0 0 12px rgba(57,255,20,.18)}.bk{box-shadow:0 0 22px rgba(57,255,20,.85),0 10px 18px var(--sh)}.w{color:#eaffea;text-shadow:0 0 8px #39ff14}.pill{border:1px solid #39ff14;box-shadow:0 0 8px rgba(57,255,20,.5);color:#eaffea}.tabs button{color:#d9ffe0;border:1px solid rgba(57,255,20,.5)}h1{color:#7dff5c;text-shadow:0 0 10px #39ff14}</style></head><body>
+<h1>14. Fun & Leisure Activities | กิจกรรมยามว่าง</h1>
+<div class="bar">
+<span class="pill">⏱ <span id="t">00:00</span></span>
+<span class="pill">⭐ <span id="s">0</span>/<span id="n"></span></span>
+<button id="rs">▶ เริ่มเล่น</button><button id="cc" class="c">✖ ยกเลิก</button>
+</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="g"></div>
+<div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
+<script>
+const RAW=`amuse|əˈmjuːz|ทำให้สนุก / ให้ความบันเทิง
+bask|bɑːsk|อาบแดด / เพลิดเพลิน
+binge|bɪndʒ|ดูหรือกินรวดเดียวเพลิน ๆ
+camp|kæmp|ตั้งแคมป์
+celebrate|ˈsel.ɪ.breɪt|เฉลิมฉลอง
+chat|tʃæt|คุยเล่น
+chill|tʃɪl|ผ่อนคลาย / ชิล
+climb|klaɪm|ปีน
+collect|kəˈlekt|สะสม
+compete|kəmˈpiːt|แข่งขัน
+cook|kʊk|ทำอาหาร
+cruise|kruːz|ล่องเรือ / ขับเที่ยว
+dance|dɑːns|เต้นรำ
+explore|ɪkˈsplɔːr|สำรวจ
+fish|fɪʃ|ตกปลา
+gamble|ˈɡæm.bəl|เล่นพนัน
+game|ɡeɪm|เล่นเกม
+garden|ˈɡɑː.dən|ทำสวน
+gawking|ˈɡɔː.kɪŋ|การจ้องมองอย่างเซ่อ ๆ
+gossip|ˈɡɒs.ɪp|เม้าท์ / นินทา
+grill|ɡrɪl|ย่าง
+hike|haɪk|เดินป่า
+jog|dʒɒɡ|วิ่งเหยาะ ๆ
+joke|dʒəʊk|พูดเล่น / ตลก
+kayak|ˈkaɪ.æk|พายเรือคายัค
+knit|nɪt|ถักไหมพรม
+laugh|lɑːf|หัวเราะ
+listen|ˈlɪs.ən|ฟัง
+lounge|laʊndʒ|นั่งนอนเอกเขนก
+meditate|ˈmed.ɪ.teɪt|นั่งสมาธิ
+mingle|ˈmɪŋ.ɡəl|ผสมปนเป / เข้าสังคม
+mosey|ˈməʊ.zi|เดินเอื่อย ๆ
+munch|mʌntʃ|เคี้ยวขนมตุ้ยๆ
+paddle|ˈpæd.əl|พายเรือ
+paint|peɪnt|วาดสี / ทาสี
+party|ˈpɑː.ti|ปาร์ตี้
+picnic|ˈpɪk.nɪk|ปิกนิก
+play|pleɪ|เล่น
+pootle|ˈpuː.təl|เดินเล่นสบาย ๆ
+prowl|praʊl|เดินสอดส่อง
+puzzle|ˈpʌz.əl|ต่อจิ๊กซอว์ / ครุ่นคิดปริศนา
+ramble|ˈræm.bəl|เดินท่องเที่ยวไปเรื่อย
+read|riːd|อ่าน
+relax|rɪˈlæks|ผ่อนคลาย
+roam|rəʊm|เดินเตร็ดเตร่
+sail|seɪl|แล่นเรือใบ
+saunter|ˈsɔːn.tər|เดินชิล ๆ
+scuba|ˈskuː.bə|ดำน้ำลึก
+shop|ʃɒp|ช้อปปิ้ง
+sing|sɪŋ|ร้องเพลง
+hobnob|ˈhɒb.nɒb|สนิทสนมกับคนดัง / คบหา
+laze|leɪz|เกียจคร้านพักผ่อน
+photograph|ˈfəʊ.tə.ɡrɑːf|ถ่ายภาพ
+romp|rɒmp|เล่นซุกซน
+sailing|ˈseɪ.lɪŋ|การแล่นเรือ
+sightsee|ˈsaɪt.siː|เที่ยวชมสถานที่
+skate|skeɪt|เล่นสเก็ต
+ski|skiː|เล่นสกี
+snorkel|ˈsnɔː.kəl|ดำน้ำตื้น
+socialize|ˈsəʊ.ʃəl.aɪz|เข้าสังคม
+stroll|strəʊl|เดินเล่น
+surf|sɜːf|เล่นเซิร์ฟ
+swim|swɪm|ว่ายน้ำ
+travel|ˈtræv.əl|เดินทางท่องเที่ยว
+act|ækt|แสดง
+angle|ˈæŋ.ɡəl|ตกปลา / มุมมอง
+baffle|ˈbæf.əl|ทำให้งงงวย
+beautify|ˈbjuː.tɪ.faɪ|ทำให้สวยงาม
+bike|baɪk|ปั่นจักรยาน / ขี่มอเตอร์ไซค์
+birdwatch|ˈbɜːd.wɒtʃ|ดูนก
+blaze|bleɪz|ลุกโชน / ก่อไฟ
+bowl|bəʊl|เล่นโบว์ลิ่ง
+browse|braʊz|เดินดูของ / เลื่อนดู
+brunch|brʌntʃ|กินมื้อสายควบมื้อเที่ยง
+canter|ˈkæn.tər|ควบม้าช้า ๆ
+carouse|kəˈraʊz|ดื่มกินสนุกสนาน
+carve|kɑːv|แกะสลัก
+catch|kætʃ|จับ / จับได้
+chase|tʃeɪs|ไล่ล่า
+cheer|tʃɪər|เชียร์ / ส่งเสียงให้กำลังใจ
+converse|kənˈvɜːs|สนทนา
+craft|krɑːft|ทำงานฝีมือ
+cuddle|ˈkʌd.əl|กอดอย่างอบอุ่น
+cycle|ˈsaɪ.kl̩|ปั่นจักรยาน
+dabble|ˈdæb.əl|ลองทำเล่น ๆ
+dally|ˈdæl.i|เอ้อระเหย / เล่นสนุก
+decode|diˈkəʊd|ถอดรหัส
+dine|daɪn|รับประทานอาหาร
+divert|daɪˈvɜːt|เบี่ยงเบน / ให้ความบันเทิง
+doze|dəʊz|งีบหลับ
+draft|drɑːft|ร่าง
+dream|driːm|ฝัน
+drift|drɪft|ล่องลอย
+drink|drɪŋk|ดื่ม
+drive-thru|ˈdraɪvˌθruː|ซื้อของแบบไดรฟ์ทรู
+drum|drʌm|ตีกลอง
+dunk|dʌnk|จุ่ม / ยัดห่วง
+dwell|dwel|พำนักอยู่ / จมอยู่กับ
+eat|iːt|กิน
+enjoy|ɪnˈdʒɔɪ|เพลิดเพลิน
+entertain|ˌen.təˈteɪn|ให้ความบันเทิง / รับรอง
+escape|ɪˈskeɪp|หลบหนี / หนีไปพักผ่อน
+exercise|ˈek.sə.saɪz|ออกกำลังกาย
+excursion|ɪkˈskɜː.ʃən|ทัศนศึกษา / ทริปสั้น ๆ
+exert|ɪɡˈzɜːt|ออกแรง
+expedition|ˌek.spəˈdɪʃ.ən|การเดินทางสำรวจ
+experience|ɪkˈspɪə.ri.əns|ประสบการณ์ / สัมผัส
+experiment|ɪkˈsper.ɪ.ment|ทดลอง
+feast|fiːst|จัดงานเลี้ยง / กินอย่างเต็มที่`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
+const $=id=>document.getElementById(id),g=$("g");
+function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+voice=v.find(x=>/daniel|oliver|arthur|google uk english male|male/i.test(x.name))||v[0]||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang))||null}
+if("speechSynthesis"in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(w){if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-GB";if(voice)u.voice=voice;u.pitch=1.15;u.rate=.85;speechSynthesis.speak(u)}
+function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
+function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
+const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
+c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
+c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
+if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
+if(score===RAW.length){clearInterval(timer);$("msg").textContent="🎉 ครบทุกคำ! ใช้เวลา "+$("t").textContent}}};
+g.appendChild(c)})}
+function tabs(){const t=$("tabs");t.innerHTML="";for(let i=0;i<Math.ceil(RAW.length/25);i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*25+1}-${Math.min(i*25+25,RAW.length)})`;b.className=i===tab?"on":"";b.onclick=()=>{tab=i;tabs();render()};t.appendChild(b)}}
+function reset(shuffle){clearInterval(timer);timer=null;speechSynthesis.cancel();sec=0;score=0;seen.clear();fmt();$("s").textContent=0;
+data=RAW.slice();if(shuffle)for(let i=data.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[data[i],data[j]]=[data[j],data[i]]}
+$("msg").textContent=shuffle?"เริ่มแล้ว! พลิกการ์ดให้ครบ":"ยกเลิกแล้ว กดเริ่มเล่นเพื่อเล่นใหม่";render()}
+$("rs").onclick=()=>{reset(true);start();$("rs").textContent="↻ เริ่มใหม่"};
+$("cc").onclick=()=>{reset(false);$("rs").textContent="▶ เริ่มเล่น"};
+$("n").textContent=RAW.length;tabs();render();
+</script></body></html>
