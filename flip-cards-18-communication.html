@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>18. Communication & Media | การสื่อสาร</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,105 +39,105 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`advertise|ˈæd.və.taɪz|โฆษณา
-anchor|ˈæŋ.kər|ดำเนินรายการข่าว / ทอดสมอ
-broadcast|ˈbrɔːd.kɑːst|ออกอากาศ
-chat|tʃæt|แชท / คุยเล่น
-comment|ˈkɒm.ent|แสดงความคิดเห็น
-communicate|kəˈmjuː.nɪ.keɪt|สื่อสาร
-connect|kəˈnekt|เชื่อมต่อ
-contact|ˈkɒn.tækt|ติดต่อ
-correspond|ˌkɒr.ɪˈspɒnd|ติดต่อทางจดหมาย / สอดคล้อง
-debate|dɪˈbeɪt|โต้วาที
-deliver|dɪˈlɪv.ər|ส่งมอบ / กล่าวปาฐกถา
-discuss|dɪˈskʌs|อภิปราย
-disseminate|dɪˈsem.ɪ.neɪt|เผยแพร่
-distribute|dɪˈstrɪb.juːt|แจกจ่าย
-draft|drɑːft|ร่าง
-edit|ˈed.ɪt|แก้ไข / ตัดต่อ
-email|ˈiː.meɪl|ส่งอีเมล
-express|ɪkˈspres|แสดงออก
-hacker|ˈhæk.ər|แฮกเกอร์
-host|həʊst|เป็นพิธีกร / เจ้าภาพ
-inform|ɪnˈfɔːm|แจ้งให้ทราบ
-interact|ˌɪn.təˈrækt|โต้ตอบ
-interview|ˈɪn.tə.vjuː|สัมภาษณ์
-journalism|ˈdʒɜː.nə.lɪ.zəm|วงการข่าว / วารสารศาสตร์
-launch|lɔːntʃ|เปิดตัว
-lecture|ˈlek.tʃər|บรรยาย
-link|lɪŋk|เชื่อมโยง / ลิงก์
-livestream|ˈlaɪv.striːm|ไลฟ์สด
-market|ˈmɑː.kɪt|ทำการตลาด
-message|ˈmes.ɪdʒ|ส่งข้อความ
-moderate|ˈmɒd.ər.eɪt|ควบคุมดูแลการสนทนา
-narrowcast|ˈnær.əʊ.kɑːst|ออกอากาศกลุ่มเฉพาะ
-network|ˈnet.wɜːk|สร้างเครือข่าย
-notify|ˈnəʊ.tɪ.faɪ|แจ้งเตือน
-podcast|ˈpɒd.kɑːst|ทำพอดแคสต์
-post|pəʊst|โพสต์
-print|prɪnt|พิมพ์
-promote|prəˈməʊt|ส่งเสริม / โปรโมต
-propose|prəˈpəʊz|เสนอ
-publish|ˈpʌb.lɪʃ|เผยแพร่ / ตีพิมพ์
-quote|kwəʊt|อ้างอิงคำพูด
-read|riːd|อ่าน
-rebrand|ˌriːˈbrænd|สร้างแบรนด์ใหม่
-record|rɪˈkɔːd|บันทึก
-refer|rɪˈfɜːr|อ้างถึง / ส่งต่อ
-reflate|riːˈfleɪt|กระตุ้นให้ฟื้นตัว
-reply|rɪˈplaɪ|ตอบกลับ
-report|rɪˈpɔːt|รายงาน
-reprint|ˌriːˈprɪnt|พิมพ์ซ้ำ
-respond|rɪˈspɒnd|ตอบสนอง
-restream|ˌriːˈstriːm|สตรีมใหม่
-reveal|rɪˈviːl|เปิดเผย
-review|rɪˈvjuː|รีวิว / ทบทวน
-satellite|ˈsæt.əl.aɪt|ส่งผ่านดาวเทียม / ดาวเทียม
-say|seɪ|พูด / กล่าว
-scold|skəʊld|ดุ
-scribble|ˈskrɪb.əl|เขียนยุกยิก
-script|skrɪpt|เขียนบท
-send|send|ส่ง
-share|ʃeər|แชร์ / แบ่งปัน
-shoot|ʃuːt|ถ่ายทำ / ยิง
-show|ʃəʊ|แสดง / โชว์
-sign|saɪn|ลงนาม / ทำสัญญาณ
-signal|ˈsɪɡ.nəl|ส่งสัญญาณ
-speak|spiːk|พูด
-speechify|ˈspiː.tʃɪ.faɪ|พูดยืดยาวเป็นพิธี
-spell|spel|สะกดคำ
-spill|spɪl|หกเลอะ / เผลอพูดความลับ
-spoke|spəʊk|พูดแล้ว (อดีตของ speak) / ซี่ล้อ
-sponsor|ˈspɒn.sər|สนับสนุน / เป็นผู้ให้ทุน
-spread|spred|แพร่กระจาย
-state|steɪt|แถลง
-stream|striːm|สตรีม
-stress|stres|เน้นย้ำ / ความเครียด
-subdue|səbˈdjuː|ลดทอน / สยบ
-submit|səbˈmɪt|ส่ง / ยื่น
-subscribe|səbˈskraɪb|สมัครสมาชิก
-subtext|ˈsʌb.tekst|ความหมายแฝง
-subtitle|ˈsʌb.taɪ.təl|ใส่คำบรรยาย / ซับไตเติล
-suggest|səˈdʒest|แนะนำ
-summarize|ˈsʌm.ə.raɪz|สรุป
-sympathize|ˈsɪm.pə.θaɪz|เห็นอกเห็นใจ
-syndicate|ˈsɪn.dɪ.keɪt|จำหน่ายเนื้อหาให้หลายสื่อ
-synthesize|ˈsɪn.θə.saɪz|สังเคราะห์
-tabloid|ˈtæb.lɔɪd|หนังสือพิมพ์แท็บลอยด์
-talk|tɔːk|พูดคุย
-tape|teɪp|บันทึกเทป
-televise|ˈtel.ɪ.vaɪz|ถ่ายทอดทางโทรทัศน์
-tell|tel|บอก / เล่า
-testify|ˈtes.tɪ.faɪ|ให้การเป็นพยาน
-text|tekst|ส่งข้อความ
-threaten|ˈθret.ən|ข่มขู่
-tissuing|ˈtɪʃ.uː.ɪŋ|(สะกดตามต้นฉบับ) การออกเอกสาร
-toot|tuːt|บีบแตร
-tout|taʊt|โฆษณาชวนเชื่อ / เร่ขาย
-translate|trænzˈleɪt|แปล
-transmit|trænzˈmɪt|ส่งสัญญาณ / ส่งผ่าน
-trend|trend|เป็นกระแส
-tweet|twiːt|ทวีต`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`advertise|ˈæd.və.taɪz|โฆษณา|📢
+anchor|ˈæŋ.kər|ดำเนินรายการข่าว / ทอดสมอ|🎙️
+broadcast|ˈbrɔːd.kɑːst|ออกอากาศ|📡
+chat|tʃæt|แชท / คุยเล่น|💬
+comment|ˈkɒm.ent|แสดงความคิดเห็น|🗨️
+communicate|kəˈmjuː.nɪ.keɪt|สื่อสาร|🗣️
+connect|kəˈnekt|เชื่อมต่อ|🔗
+contact|ˈkɒn.tækt|ติดต่อ|📞
+correspond|ˌkɒr.ɪˈspɒnd|ติดต่อทางจดหมาย / สอดคล้อง|✉️
+debate|dɪˈbeɪt|โต้วาที|🎤
+deliver|dɪˈlɪv.ər|ส่งมอบ / กล่าวปาฐกถา|📦
+discuss|dɪˈskʌs|อภิปราย|👥
+disseminate|dɪˈsem.ɪ.neɪt|เผยแพร่|🌍
+distribute|dɪˈstrɪb.juːt|แจกจ่าย|📬
+draft|drɑːft|ร่าง|📝
+edit|ˈed.ɪt|แก้ไข / ตัดต่อ|✂️
+email|ˈiː.meɪl|ส่งอีเมล|📧
+express|ɪkˈspres|แสดงออก|😮
+hacker|ˈhæk.ər|แฮกเกอร์|🥷
+host|həʊst|เป็นพิธีกร / เจ้าภาพ|🎬
+inform|ɪnˈfɔːm|แจ้งให้ทราบ|📣
+interact|ˌɪn.təˈrækt|โต้ตอบ|🤝
+interview|ˈɪn.tə.vjuː|สัมภาษณ์|🎙️
+journalism|ˈdʒɜː.nə.lɪ.zəm|วงการข่าว / วารสารศาสตร์|📰
+launch|lɔːntʃ|เปิดตัว|🚀
+lecture|ˈlek.tʃər|บรรยาย|👨‍🏫
+link|lɪŋk|เชื่อมโยง / ลิงก์|🔗
+livestream|ˈlaɪv.striːm|ไลฟ์สด|🔴
+market|ˈmɑː.kɪt|ทำการตลาด|🏷️
+message|ˈmes.ɪdʒ|ส่งข้อความ|💌
+moderate|ˈmɒd.ər.eɪt|ควบคุมดูแลการสนทนา|⚖️
+narrowcast|ˈnær.əʊ.kɑːst|ออกอากาศกลุ่มเฉพาะ|🎯
+network|ˈnet.wɜːk|สร้างเครือข่าย|🕸️
+notify|ˈnəʊ.tɪ.faɪ|แจ้งเตือน|🔔
+podcast|ˈpɒd.kɑːst|ทำพอดแคสต์|🎧
+post|pəʊst|โพสต์|📮
+print|prɪnt|พิมพ์|🖨️
+promote|prəˈməʊt|ส่งเสริม / โปรโมต|📈
+propose|prəˈpəʊz|เสนอ|💡
+publish|ˈpʌb.lɪʃ|เผยแพร่ / ตีพิมพ์|📚
+quote|kwəʊt|อ้างอิงคำพูด|💬
+read|riːd|อ่าน|📖
+rebrand|ˌriːˈbrænd|สร้างแบรนด์ใหม่|🏷️
+record|rɪˈkɔːd|บันทึก|⏺️
+refer|rɪˈfɜːr|อ้างถึง / ส่งต่อ|👉
+reflate|riːˈfleɪt|กระตุ้นให้ฟื้นตัว|🎈
+reply|rɪˈplaɪ|ตอบกลับ|↩️
+report|rɪˈpɔːt|รายงาน|📑
+reprint|ˌriːˈprɪnt|พิมพ์ซ้ำ|🔁
+respond|rɪˈspɒnd|ตอบสนอง|💬
+restream|ˌriːˈstriːm|สตรีมใหม่|📺
+reveal|rɪˈviːl|เปิดเผย|🎭
+review|rɪˈvjuː|รีวิว / ทบทวน|⭐
+satellite|ˈsæt.əl.aɪt|ส่งผ่านดาวเทียม / ดาวเทียม|🛰️
+say|seɪ|พูด / กล่าว|🗣️
+scold|skəʊld|ดุ|😠
+scribble|ˈskrɪb.əl|เขียนยุกยิก|✏️
+script|skrɪpt|เขียนบท|🎬
+send|send|ส่ง|📤
+share|ʃeər|แชร์ / แบ่งปัน|📲
+shoot|ʃuːt|ถ่ายทำ / ยิง|🎥
+show|ʃəʊ|แสดง / โชว์|📽️
+sign|saɪn|ลงนาม / ทำสัญญาณ|✍️
+signal|ˈsɪɡ.nəl|ส่งสัญญาณ|📶
+speak|spiːk|พูด|🎤
+speechify|ˈspiː.tʃɪ.faɪ|พูดยืดยาวเป็นพิธี|🧑‍💼
+spell|spel|สะกดคำ|🔤
+spill|spɪl|หกเลอะ / เผลอพูดความลับ|🫗
+spoke|spəʊk|พูดแล้ว (อดีตของ speak) / ซี่ล้อ|🚲
+sponsor|ˈspɒn.sər|สนับสนุน / เป็นผู้ให้ทุน|💰
+spread|spred|แพร่กระจาย|🦠
+state|steɪt|แถลง|🏛️
+stream|striːm|สตรีม|📺
+stress|stres|เน้นย้ำ / ความเครียด|❗
+subdue|səbˈdjuː|ลดทอน / สยบ|🤫
+submit|səbˈmɪt|ส่ง / ยื่น|📨
+subscribe|səbˈskraɪb|สมัครสมาชิก|🔔
+subtext|ˈsʌb.tekst|ความหมายแฝง|🕵️
+subtitle|ˈsʌb.taɪ.təl|ใส่คำบรรยาย / ซับไตเติล|💬
+suggest|səˈdʒest|แนะนำ|💡
+summarize|ˈsʌm.ə.raɪz|สรุป|📋
+sympathize|ˈsɪm.pə.θaɪz|เห็นอกเห็นใจ|🫂
+syndicate|ˈsɪn.dɪ.keɪt|จำหน่ายเนื้อหาให้หลายสื่อ|📰
+synthesize|ˈsɪn.θə.saɪz|สังเคราะห์|⚗️
+tabloid|ˈtæb.lɔɪd|หนังสือพิมพ์แท็บลอยด์|🗞️
+talk|tɔːk|พูดคุย|🗣️
+tape|teɪp|บันทึกเทป|📼
+televise|ˈtel.ɪ.vaɪz|ถ่ายทอดทางโทรทัศน์|📺
+tell|tel|บอก / เล่า|🗣️
+testify|ˈtes.tɪ.faɪ|ให้การเป็นพยาน|⚖️
+text|tekst|ส่งข้อความ|📱
+threaten|ˈθret.ən|ข่มขู่|😡
+tissuing|ˈtɪʃ.uː.ɪŋ|(สะกดตามต้นฉบับ) การออกเอกสาร|📄
+toot|tuːt|บีบแตร|📯
+tout|taʊt|โฆษณาชวนเชื่อ / เร่ขาย|📣
+translate|trænzˈleɪt|แปล|🌐
+transmit|trænzˈmɪt|ส่งสัญญาณ / ส่งผ่าน|📡
+trend|trend|เป็นกระแส|📈
+tweet|twiːt|ทวีต|🐦`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -148,7 +148,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

@@ -30,7 +30,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>9. Work & Task Actions | การทำงานและหน้าที่</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -41,106 +41,106 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`assemble|əˈsem.bəl|ประกอบ
-assist|əˈsɪst|ช่วยเหลือ
-audit|ˈɔː.dɪt|ตรวจสอบบัญชี
-author|ˈɔː.θər|ประพันธ์
-automate|ˈɔː.tə.meɪt|ทำให้อัตโนมัติ
-build|bɪld|สร้าง
-calculate|ˈkæl.kjə.leɪt|คำนวณ
-catalog|ˈkæt.ə.lɒɡ|จัดทำแคตตาล็อก
-check|tʃek|ตรวจสอบ
-classify|ˈklæs.ɪ.faɪ|จัดประเภท
-code|kəʊd|เขียนโค้ด
-collaborate|kəˈlæb.ə.reɪt|ร่วมมือ
-compile|kəmˈpaɪl|รวบรวม / คอมไพล์
-complete|kəmˈpliːt|ทำให้เสร็จ
-compute|kəmˈpjuːt|ประมวลผล
-configure|kənˈfɪɡ.ər|กำหนดค่า
-construct|kənˈstrʌkt|ก่อสร้าง
-consult|kənˈsʌlt|ปรึกษา
-coordinate|kəʊˈɔː.dɪ.neɪt|ประสานงาน
-copy|ˈkɒp.i|คัดลอก
-create|kriˈeɪt|สร้างสรรค์
-cultivate|ˈkʌl.tɪ.veɪt|เพาะปลูก / บ่มเพาะ
-cut|kʌt|ตัด
-debug|diːˈbʌɡ|แก้บั๊ก
-deliver|dɪˈlɪv.ər|ส่งมอบ
-design|dɪˈzaɪn|ออกแบบ
-develop|dɪˈvel.əp|พัฒนา
-diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัย
-dispatch|dɪˈspætʃ|จัดส่ง
-distribute|dɪˈstrɪb.juːt|แจกจ่าย
-draft|drɑːft|ร่าง
-edit|ˈed.ɪt|แก้ไข
-engineer|ˌen.dʒɪˈnɪər|ออกแบบทางวิศวกรรม
-execute|ˈek.sɪ.kjuːt|ปฏิบัติ / รัน
-fabricate|ˈfæb.rɪ.keɪt|ประดิษฐ์ / ผลิต
-facilitate|fəˈsɪl.ɪ.teɪt|อำนวยความสะดวก
-file|faɪl|จัดเก็บเอกสาร
-finalize|ˈfaɪ.nəl.aɪz|ทำให้เสร็จสมบูรณ์
-fix|fɪk|ซ่อม / แก้ไข
-formulate|ˈfɔː.mjə.leɪt|กำหนดสูตร / วางแผน
-generate|ˈdʒen.ə.reɪt|สร้างขึ้น / ผลิต
-handle|ˈhæn.dəl|จัดการ
-implement|ˈɪm.plɪ.ment|นำไปปฏิบัติ
-inspect|ɪnˈspekt|ตรวจตรา
-install|ɪnˈstɔːl|ติดตั้ง
-investigate|ɪnˈves.tɪ.ɡeɪt|สืบสวน
-launch|lɔːntʃ|เปิดตัว
-maintain|meɪnˈteɪn|บำรุงรักษา
-manage|ˈmæn.ɪdʒ|บริหาร
-manufacture|ˌmæn.jʊˈfæk.tʃər|ผลิต
-market|ˈmɑː.kɪt|ทำการตลาด
-measure|ˈmeʒ.ər|วัด
-monitor|ˈmɒn.ɪ.tər|เฝ้าติดตาม
-operate|ˈɒp.ər.eɪt|ดำเนินการ / ควบคุม
-optimize|ˈɒp.tɪ.maɪz|ปรับให้เหมาะสมที่สุด
-organize|ˈɔː.ɡən.aɪz|จัดระเบียบ
-outsource|ˈaʊt.sɔːs|จ้างภายนอก
-oversee|ˌəʊ.vəˈsiː|ดูแลควบคุม
-package|ˈpæk.ɪdʒ|บรรจุหีบห่อ
-perform|pəˈfɔːm|ปฏิบัติ / แสดง
-plan|plæn|วางแผน
-prepare|prɪˈpeər|เตรียม
-process|ˈprəʊ.ses|ประมวลผล / ดำเนินการ
-produce|prəˈdjuːs|ผลิต
-program|ˈprəʊ.ɡræm|เขียนโปรแกรม
-project|ˈprɒdʒ.ekt|คาดการณ์ / โครงการ
-proofread|ˈpruːf.riːd|พิสูจน์อักษร
-propose|prəˈpəʊz|เสนอ
-publish|ˈpʌb.lɪʃ|เผยแพร่
-query|ˈkwɪə.ri|สอบถาม / ค้นข้อมูล
-queue|kjuː|เข้าคิว / จัดคิว
-raise|reɪz|ยกขึ้น / ระดมทุน
-rebrand|ˌriːˈbrænd|สร้างแบรนด์ใหม่
-rebuild|ˌriːˈbɪld|สร้างใหม่
-recruitment|rɪˈkruːt.mənt|การสรรหาบุคลากร
-redesign|ˌriː.dɪˈzaɪn|ออกแบบใหม่
-refine|rɪˈfaɪn|ปรับปรุงให้ละเอียด
-register|ˈredʒ.ɪ.stər|ลงทะเบียน
-regulate|ˈreɡ.jə.leɪt|กำกับดูแล
-rehabilitate|ˌriː.həˈbɪl.ɪ.teɪt|ฟื้นฟู
-remedy|ˈrem.ə.di|แก้ไข / เยียวยา
-remodel|ˌriːˈmɒd.əl|ปรับปรุงใหม่
-repair|rɪˈpeər|ซ่อมแซม
-replace|rɪˈpleɪs|แทนที่
-report|rɪˈpɔːt|รายงาน
-research|rɪˈsɜːtʃ|วิจัย
-restructure|ˌriːˈstrʌk.tʃər|ปรับโครงสร้าง
-retails|ˈriː.teɪl|ขายปลีก
-retrieve|rɪˈtriːv|เรียกคืน / ดึงข้อมูล
-review|rɪˈvjuː|ทบทวน
-revise|rɪˈvaɪz|แก้ไขปรับปรุง
-schedule|ˈʃed.juːl|กำหนดตารางเวลา
-secure|sɪˈkjʊər|รักษาความปลอดภัย
-segment|ˈseɡ.mənt|แบ่งส่วน
-ship|ʃɪp|จัดส่งสินค้า
-sort|sɔːt|เรียงลำดับ
-streamline|ˈstriːm.laɪn|ทำให้คล่องตัว
-supervise|ˈsuː.pə.vaɪz|ควบคุมดูแล
-synthesize|ˈsɪn.θə.saɪz|สังเคราะห์
-test|test|ทดสอบ`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`assemble|əˈsem.bəl|ประกอบ|🧩
+assist|əˈsɪst|ช่วยเหลือ|🤝
+audit|ˈɔː.dɪt|ตรวจสอบบัญชี|🧾
+author|ˈɔː.θər|ประพันธ์|✍️
+automate|ˈɔː.tə.meɪt|ทำให้อัตโนมัติ|🤖
+build|bɪld|สร้าง|🏗️
+calculate|ˈkæl.kjə.leɪt|คำนวณ|🧮
+catalog|ˈkæt.ə.lɒɡ|จัดทำแคตตาล็อก|📒
+check|tʃek|ตรวจสอบ|✅
+classify|ˈklæs.ɪ.faɪ|จัดประเภท|🗂️
+code|kəʊd|เขียนโค้ด|👨‍💻
+collaborate|kəˈlæb.ə.reɪt|ร่วมมือ|👥
+compile|kəmˈpaɪl|รวบรวม / คอมไพล์|⚙️
+complete|kəmˈpliːt|ทำให้เสร็จ|🏁
+compute|kəmˈpjuːt|ประมวลผล|💻
+configure|kənˈfɪɡ.ər|กำหนดค่า|🎛️
+construct|kənˈstrʌkt|ก่อสร้าง|🏢
+consult|kənˈsʌlt|ปรึกษา|💬
+coordinate|kəʊˈɔː.dɪ.neɪt|ประสานงาน|📋
+copy|ˈkɒp.i|คัดลอก|📄
+create|kriˈeɪt|สร้างสรรค์|🎨
+cultivate|ˈkʌl.tɪ.veɪt|เพาะปลูก / บ่มเพาะ|🌱
+cut|kʌt|ตัด|✂️
+debug|diːˈbʌɡ|แก้บั๊ก|🐛
+deliver|dɪˈlɪv.ər|ส่งมอบ|📦
+design|dɪˈzaɪn|ออกแบบ|📐
+develop|dɪˈvel.əp|พัฒนา|🛠️
+diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัย|🩺
+dispatch|dɪˈspætʃ|จัดส่ง|🚚
+distribute|dɪˈstrɪb.juːt|แจกจ่าย|📬
+draft|drɑːft|ร่าง|📝
+edit|ˈed.ɪt|แก้ไข|✏️
+engineer|ˌen.dʒɪˈnɪər|ออกแบบทางวิศวกรรม|👷
+execute|ˈek.sɪ.kjuːt|ปฏิบัติ / รัน|▶️
+fabricate|ˈfæb.rɪ.keɪt|ประดิษฐ์ / ผลิต|🏭
+facilitate|fəˈsɪl.ɪ.teɪt|อำนวยความสะดวก|🙌
+file|faɪl|จัดเก็บเอกสาร|📁
+finalize|ˈfaɪ.nəl.aɪz|ทำให้เสร็จสมบูรณ์|🔒
+fix|fɪk|ซ่อม / แก้ไข|🔧
+formulate|ˈfɔː.mjə.leɪt|กำหนดสูตร / วางแผน|🧪
+generate|ˈdʒen.ə.reɪt|สร้างขึ้น / ผลิต|⚡
+handle|ˈhæn.dəl|จัดการ|🤲
+implement|ˈɪm.plɪ.ment|นำไปปฏิบัติ|🚀
+inspect|ɪnˈspekt|ตรวจตรา|🔍
+install|ɪnˈstɔːl|ติดตั้ง|💿
+investigate|ɪnˈves.tɪ.ɡeɪt|สืบสวน|🕵️
+launch|lɔːntʃ|เปิดตัว|🚀
+maintain|meɪnˈteɪn|บำรุงรักษา|🛠️
+manage|ˈmæn.ɪdʒ|บริหาร|📊
+manufacture|ˌmæn.jʊˈfæk.tʃər|ผลิต|🏭
+market|ˈmɑː.kɪt|ทำการตลาด|📣
+measure|ˈmeʒ.ər|วัด|📏
+monitor|ˈmɒn.ɪ.tər|เฝ้าติดตาม|🖥️
+operate|ˈɒp.ər.eɪt|ดำเนินการ / ควบคุม|🕹️
+optimize|ˈɒp.tɪ.maɪz|ปรับให้เหมาะสมที่สุด|📈
+organize|ˈɔː.ɡən.aɪz|จัดระเบียบ|🗃️
+outsource|ˈaʊt.sɔːs|จ้างภายนอก|🌐
+oversee|ˌəʊ.vəˈsiː|ดูแลควบคุม|👀
+package|ˈpæk.ɪdʒ|บรรจุหีบห่อ|📦
+perform|pəˈfɔːm|ปฏิบัติ / แสดง|🎭
+plan|plæn|วางแผน|🗺️
+prepare|prɪˈpeər|เตรียม|🎒
+process|ˈprəʊ.ses|ประมวลผล / ดำเนินการ|⚙️
+produce|prəˈdjuːs|ผลิต|🏭
+program|ˈprəʊ.ɡræm|เขียนโปรแกรม|💻
+project|ˈprɒdʒ.ekt|คาดการณ์ / โครงการ|📽️
+proofread|ˈpruːf.riːd|พิสูจน์อักษร|🔎
+propose|prəˈpəʊz|เสนอ|💡
+publish|ˈpʌb.lɪʃ|เผยแพร่|📰
+query|ˈkwɪə.ri|สอบถาม / ค้นข้อมูล|❓
+queue|kjuː|เข้าคิว / จัดคิว|🚶
+raise|reɪz|ยกขึ้น / ระดมทุน|⬆️
+rebrand|ˌriːˈbrænd|สร้างแบรนด์ใหม่|🏷️
+rebuild|ˌriːˈbɪld|สร้างใหม่|🧱
+recruitment|rɪˈkruːt.mənt|การสรรหาบุคลากร|🧑‍💼
+redesign|ˌriː.dɪˈzaɪn|ออกแบบใหม่|🖌️
+refine|rɪˈfaɪn|ปรับปรุงให้ละเอียด|💎
+register|ˈredʒ.ɪ.stər|ลงทะเบียน|📝
+regulate|ˈreɡ.jə.leɪt|กำกับดูแล|⚖️
+rehabilitate|ˌriː.həˈbɪl.ɪ.teɪt|ฟื้นฟู|❤️‍🩹
+remedy|ˈrem.ə.di|แก้ไข / เยียวยา|💊
+remodel|ˌriːˈmɒd.əl|ปรับปรุงใหม่|🏠
+repair|rɪˈpeər|ซ่อมแซม|🔨
+replace|rɪˈpleɪs|แทนที่|🔄
+report|rɪˈpɔːt|รายงาน|📑
+research|rɪˈsɜːtʃ|วิจัย|🔬
+restructure|ˌriːˈstrʌk.tʃər|ปรับโครงสร้าง|🏛️
+retails|ˈriː.teɪl|ขายปลีก|🛍️
+retrieve|rɪˈtriːv|เรียกคืน / ดึงข้อมูล|📥
+review|rɪˈvjuː|ทบทวน|👓
+revise|rɪˈvaɪz|แก้ไขปรับปรุง|📖
+schedule|ˈʃed.juːl|กำหนดตารางเวลา|📅
+secure|sɪˈkjʊər|รักษาความปลอดภัย|🔐
+segment|ˈseɡ.mənt|แบ่งส่วน|🍊
+ship|ʃɪp|จัดส่งสินค้า|🚢
+sort|sɔːt|เรียงลำดับ|🔢
+streamline|ˈstriːm.laɪn|ทำให้คล่องตัว|🌊
+supervise|ˈsuː.pə.vaɪz|ควบคุมดูแล|🧑‍🏫
+synthesize|ˈsɪn.θə.saɪz|สังเคราะห์|⚗️
+test|test|ทดสอบ|🧫`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -151,7 +151,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

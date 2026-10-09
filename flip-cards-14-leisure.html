@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(120,255,120,.25),inset 0 -
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-.fc:not(.bk){border:1.5px solid #39ff14;box-shadow:0 0 14px rgba(57,255,20,.55),0 10px 18px var(--sh),inset 0 0 12px rgba(57,255,20,.18)}.bk{box-shadow:0 0 22px rgba(57,255,20,.85),0 10px 18px var(--sh)}.w{color:#eaffea;text-shadow:0 0 8px #39ff14}.pill{border:1px solid #39ff14;box-shadow:0 0 8px rgba(57,255,20,.5);color:#eaffea}.tabs button{color:#d9ffe0;border:1px solid rgba(57,255,20,.5)}h1{color:#7dff5c;text-shadow:0 0 10px #39ff14}</style></head><body>
+.fc:not(.bk){border:1.5px solid #39ff14;box-shadow:0 0 14px rgba(57,255,20,.55),0 10px 18px var(--sh),inset 0 0 12px rgba(57,255,20,.18)}.bk{box-shadow:0 0 22px rgba(57,255,20,.85),0 10px 18px var(--sh)}.w{color:#eaffea;text-shadow:0 0 8px #39ff14}.pill{border:1px solid #39ff14;box-shadow:0 0 8px rgba(57,255,20,.5);color:#eaffea}.tabs button{color:#d9ffe0;border:1px solid rgba(57,255,20,.5)}h1{color:#7dff5c;text-shadow:0 0 10px #39ff14}.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>14. Fun & Leisure Activities | กิจกรรมยามว่าง</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,115 +39,115 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(120,255,120,.25),inset 0 -
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`amuse|əˈmjuːz|ทำให้สนุก / ให้ความบันเทิง
-bask|bɑːsk|อาบแดด / เพลิดเพลิน
-binge|bɪndʒ|ดูหรือกินรวดเดียวเพลิน ๆ
-camp|kæmp|ตั้งแคมป์
-celebrate|ˈsel.ɪ.breɪt|เฉลิมฉลอง
-chat|tʃæt|คุยเล่น
-chill|tʃɪl|ผ่อนคลาย / ชิล
-climb|klaɪm|ปีน
-collect|kəˈlekt|สะสม
-compete|kəmˈpiːt|แข่งขัน
-cook|kʊk|ทำอาหาร
-cruise|kruːz|ล่องเรือ / ขับเที่ยว
-dance|dɑːns|เต้นรำ
-explore|ɪkˈsplɔːr|สำรวจ
-fish|fɪʃ|ตกปลา
-gamble|ˈɡæm.bəl|เล่นพนัน
-game|ɡeɪm|เล่นเกม
-garden|ˈɡɑː.dən|ทำสวน
-gawking|ˈɡɔː.kɪŋ|การจ้องมองอย่างเซ่อ ๆ
-gossip|ˈɡɒs.ɪp|เม้าท์ / นินทา
-grill|ɡrɪl|ย่าง
-hike|haɪk|เดินป่า
-jog|dʒɒɡ|วิ่งเหยาะ ๆ
-joke|dʒəʊk|พูดเล่น / ตลก
-kayak|ˈkaɪ.æk|พายเรือคายัค
-knit|nɪt|ถักไหมพรม
-laugh|lɑːf|หัวเราะ
-listen|ˈlɪs.ən|ฟัง
-lounge|laʊndʒ|นั่งนอนเอกเขนก
-meditate|ˈmed.ɪ.teɪt|นั่งสมาธิ
-mingle|ˈmɪŋ.ɡəl|ผสมปนเป / เข้าสังคม
-mosey|ˈməʊ.zi|เดินเอื่อย ๆ
-munch|mʌntʃ|เคี้ยวขนมตุ้ยๆ
-paddle|ˈpæd.əl|พายเรือ
-paint|peɪnt|วาดสี / ทาสี
-party|ˈpɑː.ti|ปาร์ตี้
-picnic|ˈpɪk.nɪk|ปิกนิก
-play|pleɪ|เล่น
-pootle|ˈpuː.təl|เดินเล่นสบาย ๆ
-prowl|praʊl|เดินสอดส่อง
-puzzle|ˈpʌz.əl|ต่อจิ๊กซอว์ / ครุ่นคิดปริศนา
-ramble|ˈræm.bəl|เดินท่องเที่ยวไปเรื่อย
-read|riːd|อ่าน
-relax|rɪˈlæks|ผ่อนคลาย
-roam|rəʊm|เดินเตร็ดเตร่
-sail|seɪl|แล่นเรือใบ
-saunter|ˈsɔːn.tər|เดินชิล ๆ
-scuba|ˈskuː.bə|ดำน้ำลึก
-shop|ʃɒp|ช้อปปิ้ง
-sing|sɪŋ|ร้องเพลง
-hobnob|ˈhɒb.nɒb|สนิทสนมกับคนดัง / คบหา
-laze|leɪz|เกียจคร้านพักผ่อน
-photograph|ˈfəʊ.tə.ɡrɑːf|ถ่ายภาพ
-romp|rɒmp|เล่นซุกซน
-sailing|ˈseɪ.lɪŋ|การแล่นเรือ
-sightsee|ˈsaɪt.siː|เที่ยวชมสถานที่
-skate|skeɪt|เล่นสเก็ต
-ski|skiː|เล่นสกี
-snorkel|ˈsnɔː.kəl|ดำน้ำตื้น
-socialize|ˈsəʊ.ʃəl.aɪz|เข้าสังคม
-stroll|strəʊl|เดินเล่น
-surf|sɜːf|เล่นเซิร์ฟ
-swim|swɪm|ว่ายน้ำ
-travel|ˈtræv.əl|เดินทางท่องเที่ยว
-act|ækt|แสดง
-angle|ˈæŋ.ɡəl|ตกปลา / มุมมอง
-baffle|ˈbæf.əl|ทำให้งงงวย
-beautify|ˈbjuː.tɪ.faɪ|ทำให้สวยงาม
-bike|baɪk|ปั่นจักรยาน / ขี่มอเตอร์ไซค์
-birdwatch|ˈbɜːd.wɒtʃ|ดูนก
-blaze|bleɪz|ลุกโชน / ก่อไฟ
-bowl|bəʊl|เล่นโบว์ลิ่ง
-browse|braʊz|เดินดูของ / เลื่อนดู
-brunch|brʌntʃ|กินมื้อสายควบมื้อเที่ยง
-canter|ˈkæn.tər|ควบม้าช้า ๆ
-carouse|kəˈraʊz|ดื่มกินสนุกสนาน
-carve|kɑːv|แกะสลัก
-catch|kætʃ|จับ / จับได้
-chase|tʃeɪs|ไล่ล่า
-cheer|tʃɪər|เชียร์ / ส่งเสียงให้กำลังใจ
-converse|kənˈvɜːs|สนทนา
-craft|krɑːft|ทำงานฝีมือ
-cuddle|ˈkʌd.əl|กอดอย่างอบอุ่น
-cycle|ˈsaɪ.kl̩|ปั่นจักรยาน
-dabble|ˈdæb.əl|ลองทำเล่น ๆ
-dally|ˈdæl.i|เอ้อระเหย / เล่นสนุก
-decode|diˈkəʊd|ถอดรหัส
-dine|daɪn|รับประทานอาหาร
-divert|daɪˈvɜːt|เบี่ยงเบน / ให้ความบันเทิง
-doze|dəʊz|งีบหลับ
-draft|drɑːft|ร่าง
-dream|driːm|ฝัน
-drift|drɪft|ล่องลอย
-drink|drɪŋk|ดื่ม
-drive-thru|ˈdraɪvˌθruː|ซื้อของแบบไดรฟ์ทรู
-drum|drʌm|ตีกลอง
-dunk|dʌnk|จุ่ม / ยัดห่วง
-dwell|dwel|พำนักอยู่ / จมอยู่กับ
-eat|iːt|กิน
-enjoy|ɪnˈdʒɔɪ|เพลิดเพลิน
-entertain|ˌen.təˈteɪn|ให้ความบันเทิง / รับรอง
-escape|ɪˈskeɪp|หลบหนี / หนีไปพักผ่อน
-exercise|ˈek.sə.saɪz|ออกกำลังกาย
-excursion|ɪkˈskɜː.ʃən|ทัศนศึกษา / ทริปสั้น ๆ
-exert|ɪɡˈzɜːt|ออกแรง
-expedition|ˌek.spəˈdɪʃ.ən|การเดินทางสำรวจ
-experience|ɪkˈspɪə.ri.əns|ประสบการณ์ / สัมผัส
-experiment|ɪkˈsper.ɪ.ment|ทดลอง
-feast|fiːst|จัดงานเลี้ยง / กินอย่างเต็มที่`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`amuse|əˈmjuːz|ทำให้สนุก / ให้ความบันเทิง|😄
+bask|bɑːsk|อาบแดด / เพลิดเพลิน|🌞
+binge|bɪndʒ|ดูหรือกินรวดเดียวเพลิน ๆ|📺
+camp|kæmp|ตั้งแคมป์|⛺
+celebrate|ˈsel.ɪ.breɪt|เฉลิมฉลอง|🎉
+chat|tʃæt|คุยเล่น|💬
+chill|tʃɪl|ผ่อนคลาย / ชิล|😎
+climb|klaɪm|ปีน|🧗
+collect|kəˈlekt|สะสม|🧸
+compete|kəmˈpiːt|แข่งขัน|🏆
+cook|kʊk|ทำอาหาร|🍳
+cruise|kruːz|ล่องเรือ / ขับเที่ยว|🚢
+dance|dɑːns|เต้นรำ|💃
+explore|ɪkˈsplɔːr|สำรวจ|🧭
+fish|fɪʃ|ตกปลา|🎣
+gamble|ˈɡæm.bəl|เล่นพนัน|🎰
+game|ɡeɪm|เล่นเกม|🎮
+garden|ˈɡɑː.dən|ทำสวน|🪴
+gawking|ˈɡɔː.kɪŋ|การจ้องมองอย่างเซ่อ ๆ|😮
+gossip|ˈɡɒs.ɪp|เม้าท์ / นินทา|🤭
+grill|ɡrɪl|ย่าง|🍖
+hike|haɪk|เดินป่า|🥾
+jog|dʒɒɡ|วิ่งเหยาะ ๆ|🏃
+joke|dʒəʊk|พูดเล่น / ตลก|🤡
+kayak|ˈkaɪ.æk|พายเรือคายัค|🛶
+knit|nɪt|ถักไหมพรม|🧶
+laugh|lɑːf|หัวเราะ|😂
+listen|ˈlɪs.ən|ฟัง|🎧
+lounge|laʊndʒ|นั่งนอนเอกเขนก|🛋️
+meditate|ˈmed.ɪ.teɪt|นั่งสมาธิ|🧘
+mingle|ˈmɪŋ.ɡəl|ผสมปนเป / เข้าสังคม|🥂
+mosey|ˈməʊ.zi|เดินเอื่อย ๆ|🚶
+munch|mʌntʃ|เคี้ยวขนมตุ้ยๆ|🍿
+paddle|ˈpæd.əl|พายเรือ|🚣
+paint|peɪnt|วาดสี / ทาสี|🎨
+party|ˈpɑː.ti|ปาร์ตี้|🪩
+picnic|ˈpɪk.nɪk|ปิกนิก|🧺
+play|pleɪ|เล่น|⚽
+pootle|ˈpuː.təl|เดินเล่นสบาย ๆ|🚲
+prowl|praʊl|เดินสอดส่อง|🐆
+puzzle|ˈpʌz.əl|ต่อจิ๊กซอว์ / ครุ่นคิดปริศนา|🧩
+ramble|ˈræm.bəl|เดินท่องเที่ยวไปเรื่อย|🌄
+read|riːd|อ่าน|📖
+relax|rɪˈlæks|ผ่อนคลาย|🏖️
+roam|rəʊm|เดินเตร็ดเตร่|🗺️
+sail|seɪl|แล่นเรือใบ|⛵
+saunter|ˈsɔːn.tər|เดินชิล ๆ|🚶‍♀️
+scuba|ˈskuː.bə|ดำน้ำลึก|🤿
+shop|ʃɒp|ช้อปปิ้ง|🛍️
+sing|sɪŋ|ร้องเพลง|🎤
+hobnob|ˈhɒb.nɒb|สนิทสนมกับคนดัง / คบหา|🥂
+laze|leɪz|เกียจคร้านพักผ่อน|😴
+photograph|ˈfəʊ.tə.ɡrɑːf|ถ่ายภาพ|📷
+romp|rɒmp|เล่นซุกซน|🐕
+sailing|ˈseɪ.lɪŋ|การแล่นเรือ|⛵
+sightsee|ˈsaɪt.siː|เที่ยวชมสถานที่|🗼
+skate|skeɪt|เล่นสเก็ต|⛸️
+ski|skiː|เล่นสกี|⛷️
+snorkel|ˈsnɔː.kəl|ดำน้ำตื้น|🤿
+socialize|ˈsəʊ.ʃəl.aɪz|เข้าสังคม|👯
+stroll|strəʊl|เดินเล่น|🌳
+surf|sɜːf|เล่นเซิร์ฟ|🏄
+swim|swɪm|ว่ายน้ำ|🏊
+travel|ˈtræv.əl|เดินทางท่องเที่ยว|✈️
+act|ækt|แสดง|🎭
+angle|ˈæŋ.ɡəl|ตกปลา / มุมมอง|🎣
+baffle|ˈbæf.əl|ทำให้งงงวย|😵‍💫
+beautify|ˈbjuː.tɪ.faɪ|ทำให้สวยงาม|💅
+bike|baɪk|ปั่นจักรยาน / ขี่มอเตอร์ไซค์|🚴
+birdwatch|ˈbɜːd.wɒtʃ|ดูนก|🔭
+blaze|bleɪz|ลุกโชน / ก่อไฟ|🔥
+bowl|bəʊl|เล่นโบว์ลิ่ง|🎳
+browse|braʊz|เดินดูของ / เลื่อนดู|🛒
+brunch|brʌntʃ|กินมื้อสายควบมื้อเที่ยง|🥞
+canter|ˈkæn.tər|ควบม้าช้า ๆ|🐎
+carouse|kəˈraʊz|ดื่มกินสนุกสนาน|🍻
+carve|kɑːv|แกะสลัก|🪵
+catch|kætʃ|จับ / จับได้|⚾
+chase|tʃeɪs|ไล่ล่า|🏃‍♂️
+cheer|tʃɪər|เชียร์ / ส่งเสียงให้กำลังใจ|📣
+converse|kənˈvɜːs|สนทนา|🗣️
+craft|krɑːft|ทำงานฝีมือ|🧵
+cuddle|ˈkʌd.əl|กอดอย่างอบอุ่น|🤗
+cycle|ˈsaɪ.kl̩|ปั่นจักรยาน|🚴‍♀️
+dabble|ˈdæb.əl|ลองทำเล่น ๆ|🖌️
+dally|ˈdæl.i|เอ้อระเหย / เล่นสนุก|🐌
+decode|diˈkəʊd|ถอดรหัส|🔐
+dine|daɪn|รับประทานอาหาร|🍽️
+divert|daɪˈvɜːt|เบี่ยงเบน / ให้ความบันเทิง|🎠
+doze|dəʊz|งีบหลับ|💤
+draft|drɑːft|ร่าง|✏️
+dream|driːm|ฝัน|🌙
+drift|drɪft|ล่องลอย|🍃
+drink|drɪŋk|ดื่ม|🥤
+drive-thru|ˈdraɪvˌθruː|ซื้อของแบบไดรฟ์ทรู|🍔
+drum|drʌm|ตีกลอง|🥁
+dunk|dʌnk|จุ่ม / ยัดห่วง|🏀
+dwell|dwel|พำนักอยู่ / จมอยู่กับ|🏠
+eat|iːt|กิน|🍕
+enjoy|ɪnˈdʒɔɪ|เพลิดเพลิน|😊
+entertain|ˌen.təˈteɪn|ให้ความบันเทิง / รับรอง|🎪
+escape|ɪˈskeɪp|หลบหนี / หนีไปพักผ่อน|🏝️
+exercise|ˈek.sə.saɪz|ออกกำลังกาย|🏋️
+excursion|ɪkˈskɜː.ʃən|ทัศนศึกษา / ทริปสั้น ๆ|🚌
+exert|ɪɡˈzɜːt|ออกแรง|💪
+expedition|ˌek.spəˈdɪʃ.ən|การเดินทางสำรวจ|🏔️
+experience|ɪkˈspɪə.ri.əns|ประสบการณ์ / สัมผัส|🌟
+experiment|ɪkˈsper.ɪ.ment|ทดลอง|🧪
+feast|fiːst|จัดงานเลี้ยง / กินอย่างเต็มที่|🍗`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -158,7 +158,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

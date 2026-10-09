@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>17. Fixing & Handling Things | การซ่อมแซมและดูแลสิ่งของ</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,206 +39,206 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`adjust|əˈdʒʌst|ปรับ
-assemble|əˈsem.bəl|ประกอบ
-bolt|bəʊlt|ยึดด้วยสลักเกลียว
-bore|bɔːr|เจาะรู
-calibrated|ˈkæl.ɪ.breɪ.tɪd|ปรับเทียบแล้ว
-cement|sɪˈment|ยึดด้วยซีเมนต์
-clamp|klæmp|หนีบ / ยึดด้วยแคลมป์
-clean|kliːn|ทำความสะอาด
-clip|klɪp|หนีบ / ตัด
-connect|kəˈnekt|เชื่อมต่อ
-cut|kʌt|ตัด
-diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัยอาการเสีย
-disassemble|ˌdɪs.əˈsem.bəl|ถอดชิ้นส่วน
-disconnect|ˌdɪs.kəˈnekt|ตัดการเชื่อมต่อ
-dismantle|dɪsˈmæn.təl|รื้อถอน
-drill|drɪl|เจาะ
-fasten|ˈfɑː.sən|ยึดให้แน่น
-file|faɪl|ตะไบ
-fill|fɪl|เติม / อุด
-fit|fɪt|ติดตั้งให้พอดี
-fix|fɪk|ซ่อม
-glue|ɡluː|ทากาว
-hammer|ˈhæm.ər|ตอกด้วยค้อน
-handle|ˈhæn.dəl|จัดการ / จับถือ
-hook|hʊk|เกี่ยว
-install|ɪnˈstɔːl|ติดตั้ง
-insulate|ˈɪn.sjə.leɪt|หุ้มฉนวน
-lift|lɪft|ยก
-lubricate|ˈluː.brɪ.keɪt|หล่อลื่น
-maintain|meɪnˈteɪn|บำรุงรักษา
-measure|ˈmeʒ.ər|วัด
-mend|mend|ปะซ่อม
-modify|ˈmɒd.ɪ.faɪ|ดัดแปลง
-mount|maʊnt|ติดตั้งบนฐาน
-nail|neɪl|ตอกตะปู
-oil|ɔɪl|หยอดน้ำมัน
-patch|pætʃ|ปะ
-peel|piːl|ลอก / ปอก
-pin|pɪn|ปักหมุด
-plug|plʌɡ|อุด / เสียบ
-polish|ˈpɒl.ɪʃ|ขัดเงา
-prick|prɪk|ทิ่ม / เจาะเบา ๆ
-proof|pruːf|ทำให้ป้องกันได้
-pump|pʌmp|สูบ
-push|pʊʃ|ผลัก
-rebuild|ˌriːˈbɪld|สร้างใหม่
-reconstruct|ˌriː.kənˈstrʌkt|บูรณะ
-re-cover|ˌriːˈkʌv.ər|หุ้มใหม่
-rectify|ˈrek.tɪ.faɪ|แก้ไขให้ถูกต้อง
-recycle|ˌriːˈsaɪ.kl̩|รีไซเคิล
-redesign|ˌriː.dɪˈzaɪn|ออกแบบใหม่
-redo|ˌriːˈduː|ทำใหม่
-refit|ˌriːˈfɪt|ติดตั้งใหม่
-re-glue|ˌriːˈɡluː|ทากาวใหม่
-re-install|ˌriː.ɪnˈstɔːl|ติดตั้งใหม่
-re-join|ˌriːˈdʒɔɪn|ต่อเข้าด้วยกันใหม่
-remodel|ˌriːˈmɒd.əl|ปรับปรุงรูปแบบใหม่
-remount|ˌriːˈmaʊnt|ติดตั้งกลับ
-renovate|ˈren.ə.veɪt|ปรับปรุงซ่อมแซม
-re-oil|ˌriːˈɔɪl|หยอดน้ำมันใหม่
-repair|rɪˈpeər|ซ่อมแซม
-re-patch|ˌriːˈpætʃ|ปะใหม่
-replace|rɪˈpleɪs|เปลี่ยนแทน
-re-screw|ˌriːˈskruː|ขันสกรูใหม่
-reset|riːˈset|รีเซ็ต
-reshape|riːˈʃeɪp|ปั้นรูปใหม่
-restore|rɪˈstɔːr|ฟื้นฟู / บูรณะ
-restructure|ˌriːˈstrʌk.tʃər|ปรับโครงสร้างใหม่
-resurface|ˌriːˈsɜː.fɪs|ปูผิวใหม่
-retighten|ˌriːˈtaɪ.tən|ขันให้แน่นอีกครั้ง
-re-wire|ˌriːˈwaɪr|เดินสายไฟใหม่
-rinse|rɪns|ล้างน้ำ
-rivet|ˈrɪv.ɪt|ย้ำหมุด
-sand|sænd|ขัดด้วยกระดาษทราย
-sanitize|ˈsæn.ɪ.taɪz|ทำให้ปราศจากเชื้อ
-saw|sɔː|เลื่อย
-scour|ˈskaʊər|ขัดถู
-scrape|skreɪp|ขูด
-scratch|skrætʃ|ขีดข่วน / เกา
-screw|skruː|ขันสกรู
-seal|siːl|ผนึก / ซีล
-secure|sɪˈkjʊər|ยึดให้มั่นคง
-service|ˈsɜː.vɪs|เข้ารับบริการตรวจเช็ก
-sew|səʊ|เย็บ
-sharpen|ˈʃɑː.pən|ลับให้คม
-shift|ʃɪft|เลื่อน / ย้าย
-shine|ʃaɪn|ขัดเงา
-shock|ʃɒk|ทำให้ช็อต / กระแทก
-short|ʃɔːt|ลัดวงจร
-shovel|ˈʃʌv.əl|ตักด้วยพลั่ว
-sift|sɪft|ร่อน
-smooth|smuːð|ทำให้เรียบ
-solder|ˈsɒl.dər|บัดกรี
-sort|sɔːt|คัดแยก
-splice|splaɪs|ต่อเชื่อม
-spray|spreɪ|พ่น
-squeeze|skwiːz|บีบ
-stabilize|ˈsteɪ.bəl.aɪz|ทำให้มั่นคง
-staple|ˈsteɪ.pəl|เย็บด้วยลวดเย็บกระดาษ
-straighten|ˈstreɪ.tən|ดัดให้ตรง
-strengthen|ˈstreŋ.θən|เสริมความแข็งแรง
-stretch|stretʃ|ยืด
-strip|strɪp|ลอก / ถอดออก
-structure|ˈstrʌk.tʃər|จัดโครงสร้าง
-support|səˈpɔːt|ค้ำยัน / สนับสนุน
-swage|sweɪdʒ|ตีขึ้นรูปโลหะ
-sweep|swiːp|กวาด
-switch|swɪtʃ|สลับ / เปลี่ยน
-tack|tæk|ตอกหมุดเล็ก / เย็บเก็บชั่วคราว
-tackle|ˈtæk.əl|จัดการแก้ปัญหา
-tamper|ˈtæm.pər|ไปยุ่งแก้ไขโดยไม่ได้รับอนุญาต
-tape|teɪp|ติดเทป
-target|ˈtɑː.ɡɪt|เล็งเป้าหมาย
-tarmac|ˈtɑː.mæk|ลาดยางมะตอย
-tear|teər|ฉีก
-temper|ˈtem.pər|อบชุบโลหะ / ปรับให้พอเหมาะ
-test|test|ทดสอบ
-thread|θred|ร้อยด้าย / ทำเกลียว
-throttle|ˈθrɒt.əl|ควบคุมคันเร่ง / บีบคอ
-throw|θrəʊ|ขว้าง
-thrust|θrʌst|ผลักอย่างแรง
-tick|tɪk|ทำเครื่องหมายถูก / เสียงติ๊ก
-tight|taɪt|แน่น
-tilt|tɪlt|เอียง
-time|taɪm|จับเวลา / กำหนดเวลา
-tin|tɪn|เคลือบดีบุก
-tip|tɪp|เอียง / ทิ้ง
-tire|ˈtaɪər|เหนื่อย / ยาง
-toggle|ˈtɒɡ.əl|สลับเปิดปิด
-tolerate|ˈtɒl.ə.reɪt|ทนได้ / ยอมรับ
-tongs|tɒŋz|คีม / ที่คีบ
-tool|tuːl|เครื่องมือ
-top|tɒp|ปิดด้านบน / อยู่สูงสุด
-torque|tɔːk|แรงบิด
-toss|tɒs|โยน
-totter|ˈtɒt.ər|เดินโซเซ
-touch|tʌtʃ|สัมผัส
-tow|təʊ|ลากจูง
-trace|treɪs|ลอกลาย / ตามรอย
-track|træk|ติดตาม
-tractor|ˈtræk.tər|รถแทรกเตอร์
-trade|treɪd|แลกเปลี่ยน / ค้าขาย
-trample|ˈtræm.pəl|เหยียบย่ำ
-transfer|trænsˈfɜːr|ย้าย / โอน
-transform|trænsˈfɔːm|เปลี่ยนรูป
-translate|trænzˈleɪt|แปล
-transmit|trænzˈmɪt|ส่งผ่าน
-transport|ˈtræn.spɔːt|ขนส่ง
-trap|træp|ดักจับ
-trash|træʃ|ทิ้งขยะ / ทำลาย
-tread|tred|ย่ำเดิน
-treat|triːt|รักษา / ปฏิบัติต่อ
-trim|trɪm|ตัดแต่ง
-triple|ˈtrɪp.əl|เพิ่มเป็นสามเท่า
-troubleshoot|ˈtrʌb.əl.ʃuːt|แก้ไขปัญหา
-trudge|trʌdʒ|เดินลากเท้าอย่างเหนื่อยล้า
-truncate|ˈtrʌŋ.keɪt|ตัดทอน
-trunk|trʌŋk|ลำต้น / ท้ายรถ
-trust|trʌst|ไว้วางใจ
-try|traɪ|ลองทำ
-tube|tjuːb|ท่อ / หลอด
-tuck|tʌk|เหน็บ / พับซ่อน
-tug|tʌɡ|กระชาก
-tumble|ˈtʌm.bəl|ล้มกลิ้ง
-tune|tjuːn|จูน / ปรับตั้ง
-turn|tɜːn|หมุน
-tweak|twiːk|ปรับเล็กน้อย
-twist|twɪst|บิด
-type|taɪp|พิมพ์ / ชนิด
-unbolt|ʌnˈbəʊlt|ถอดสลักเกลียว
-uncap|ʌnˈkæp|เปิดฝา
-unclamp|ʌnˈklæmp|ปลดแคลมป์
-uncover|ʌnˈkʌv.ər|เปิดออก / เปิดเผย
-undo|ʌnˈduː|แก้ / ยกเลิก
-unfasten|ʌnˈfɑː.sən|แก้ออก
-unfold|ʌnˈfəʊld|คลี่ออก
-unhook|ʌnˈhʊk|ปลดตะขอ
-unlatch|ʌnˈlætʃ|ปลดสลัก
-unlock|ʌnˈlɒk|ปลดล็อก
-unpack|ʌnˈpæk|แกะของออก
-unplug|ʌnˈplʌɡ|ถอดปลั๊ก
-unravel|ʌnˈræv.əl|แก้ปม / คลี่คลาย
-unscrew|ʌnˈskruː|ไขสกรูออก
-unseal|ʌnˈsiːl|เปิดผนึก
-un-secure|ˌʌn.sɪˈkjʊər|ปลดการยึด / ไม่ปลอดภัย
-unstuck|ʌnˈstʌk|หลุดจากที่ติด
-untangle|ʌnˈtæŋ.ɡəl|แก้ที่พันกัน
-unite|juˈnaɪt|รวมเข้าด้วยกัน
-unload|ʌnˈləʊd|ขนของลง
-unlube|ʌnˈluːb|ล้างสารหล่อลื่นออก
-update|ʌpˈdeɪt|อัปเดต
-upgrade|ʌpˈɡreɪd|อัปเกรด
-use|juːz|ใช้
-utilize|ˈjuː.tɪ.laɪz|ใช้ประโยชน์
-vacuum|ˈvæk.juːm|ดูดฝุ่น
-validate|ˈvæl.ɪ.deɪt|ตรวจสอบความถูกต้อง
-valve|vælv|วาล์ว
-vaporize|ˈveɪ.pər.aɪz|ทำให้กลายเป็นไอ
-ventilate|ˈven.tɪ.leɪt|ระบายอากาศ
-verify|ˈver.ɪ.faɪ|ตรวจยืนยัน`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`adjust|əˈdʒʌst|ปรับ|🎚️
+assemble|əˈsem.bəl|ประกอบ|🧩
+bolt|bəʊlt|ยึดด้วยสลักเกลียว|🔩
+bore|bɔːr|เจาะรู|🕳️
+calibrated|ˈkæl.ɪ.breɪ.tɪd|ปรับเทียบแล้ว|📏
+cement|sɪˈment|ยึดด้วยซีเมนต์|🧱
+clamp|klæmp|หนีบ / ยึดด้วยแคลมป์|🗜️
+clean|kliːn|ทำความสะอาด|🧼
+clip|klɪp|หนีบ / ตัด|📎
+connect|kəˈnekt|เชื่อมต่อ|🔌
+cut|kʌt|ตัด|✂️
+diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัยอาการเสีย|🩺
+disassemble|ˌdɪs.əˈsem.bəl|ถอดชิ้นส่วน|🧰
+disconnect|ˌdɪs.kəˈnekt|ตัดการเชื่อมต่อ|🔌
+dismantle|dɪsˈmæn.təl|รื้อถอน|🏚️
+drill|drɪl|เจาะ|🛠️
+fasten|ˈfɑː.sən|ยึดให้แน่น|🔗
+file|faɪl|ตะไบ|🪚
+fill|fɪl|เติม / อุด|🪣
+fit|fɪt|ติดตั้งให้พอดี|👟
+fix|fɪk|ซ่อม|🔧
+glue|ɡluː|ทากาว|🧴
+hammer|ˈhæm.ər|ตอกด้วยค้อน|🔨
+handle|ˈhæn.dəl|จัดการ / จับถือ|🤲
+hook|hʊk|เกี่ยว|🪝
+install|ɪnˈstɔːl|ติดตั้ง|🔧
+insulate|ˈɪn.sjə.leɪt|หุ้มฉนวน|🧤
+lift|lɪft|ยก|🏗️
+lubricate|ˈluː.brɪ.keɪt|หล่อลื่น|🛢️
+maintain|meɪnˈteɪn|บำรุงรักษา|🧰
+measure|ˈmeʒ.ər|วัด|📏
+mend|mend|ปะซ่อม|🧵
+modify|ˈmɒd.ɪ.faɪ|ดัดแปลง|🛠️
+mount|maʊnt|ติดตั้งบนฐาน|🖼️
+nail|neɪl|ตอกตะปู|📌
+oil|ɔɪl|หยอดน้ำมัน|🛢️
+patch|pætʃ|ปะ|🩹
+peel|piːl|ลอก / ปอก|🥔
+pin|pɪn|ปักหมุด|📍
+plug|plʌɡ|อุด / เสียบ|🔌
+polish|ˈpɒl.ɪʃ|ขัดเงา|✨
+prick|prɪk|ทิ่ม / เจาะเบา ๆ|🌵
+proof|pruːf|ทำให้ป้องกันได้|🛡️
+pump|pʌmp|สูบ|⛽
+push|pʊʃ|ผลัก|🚪
+rebuild|ˌriːˈbɪld|สร้างใหม่|🏗️
+reconstruct|ˌriː.kənˈstrʌkt|บูรณะ|🏛️
+re-cover|ˌriːˈkʌv.ər|หุ้มใหม่|🛋️
+rectify|ˈrek.tɪ.faɪ|แก้ไขให้ถูกต้อง|✅
+recycle|ˌriːˈsaɪ.kl̩|รีไซเคิล|♻️
+redesign|ˌriː.dɪˈzaɪn|ออกแบบใหม่|📐
+redo|ˌriːˈduː|ทำใหม่|🔁
+refit|ˌriːˈfɪt|ติดตั้งใหม่|🚪
+re-glue|ˌriːˈɡluː|ทากาวใหม่|🧴
+re-install|ˌriː.ɪnˈstɔːl|ติดตั้งใหม่|💿
+re-join|ˌriːˈdʒɔɪn|ต่อเข้าด้วยกันใหม่|🔗
+remodel|ˌriːˈmɒd.əl|ปรับปรุงรูปแบบใหม่|🏠
+remount|ˌriːˈmaʊnt|ติดตั้งกลับ|🖼️
+renovate|ˈren.ə.veɪt|ปรับปรุงซ่อมแซม|🏡
+re-oil|ˌriːˈɔɪl|หยอดน้ำมันใหม่|🫒
+repair|rɪˈpeər|ซ่อมแซม|🔧
+re-patch|ˌriːˈpætʃ|ปะใหม่|🩹
+replace|rɪˈpleɪs|เปลี่ยนแทน|🔄
+re-screw|ˌriːˈskruː|ขันสกรูใหม่|🪛
+reset|riːˈset|รีเซ็ต|⏪
+reshape|riːˈʃeɪp|ปั้นรูปใหม่|🏺
+restore|rɪˈstɔːr|ฟื้นฟู / บูรณะ|🕰️
+restructure|ˌriːˈstrʌk.tʃər|ปรับโครงสร้างใหม่|🏢
+resurface|ˌriːˈsɜː.fɪs|ปูผิวใหม่|🛣️
+retighten|ˌriːˈtaɪ.tən|ขันให้แน่นอีกครั้ง|🔩
+re-wire|ˌriːˈwaɪr|เดินสายไฟใหม่|🔌
+rinse|rɪns|ล้างน้ำ|🚿
+rivet|ˈrɪv.ɪt|ย้ำหมุด|🔩
+sand|sænd|ขัดด้วยกระดาษทราย|🪵
+sanitize|ˈsæn.ɪ.taɪz|ทำให้ปราศจากเชื้อ|🧴
+saw|sɔː|เลื่อย|🪚
+scour|ˈskaʊər|ขัดถู|🧽
+scrape|skreɪp|ขูด|🪒
+scratch|skrætʃ|ขีดข่วน / เกา|🐱
+screw|skruː|ขันสกรู|🪛
+seal|siːl|ผนึก / ซีล|📬
+secure|sɪˈkjʊər|ยึดให้มั่นคง|🔒
+service|ˈsɜː.vɪs|เข้ารับบริการตรวจเช็ก|🚗
+sew|səʊ|เย็บ|🧵
+sharpen|ˈʃɑː.pən|ลับให้คม|🔪
+shift|ʃɪft|เลื่อน / ย้าย|🔀
+shine|ʃaɪn|ขัดเงา|🌟
+shock|ʃɒk|ทำให้ช็อต / กระแทก|⚡
+short|ʃɔːt|ลัดวงจร|💥
+shovel|ˈʃʌv.əl|ตักด้วยพลั่ว|🪏
+sift|sɪft|ร่อน|🥣
+smooth|smuːð|ทำให้เรียบ|🧈
+solder|ˈsɒl.dər|บัดกรี|🔥
+sort|sɔːt|คัดแยก|🗂️
+splice|splaɪs|ต่อเชื่อม|🎞️
+spray|spreɪ|พ่น|🧴
+squeeze|skwiːz|บีบ|🍋
+stabilize|ˈsteɪ.bəl.aɪz|ทำให้มั่นคง|⚖️
+staple|ˈsteɪ.pəl|เย็บด้วยลวดเย็บกระดาษ|📎
+straighten|ˈstreɪ.tən|ดัดให้ตรง|📐
+strengthen|ˈstreŋ.θən|เสริมความแข็งแรง|💪
+stretch|stretʃ|ยืด|🤸
+strip|strɪp|ลอก / ถอดออก|🧻
+structure|ˈstrʌk.tʃər|จัดโครงสร้าง|🏗️
+support|səˈpɔːt|ค้ำยัน / สนับสนุน|🙌
+swage|sweɪdʒ|ตีขึ้นรูปโลหะ|🔨
+sweep|swiːp|กวาด|🧹
+switch|swɪtʃ|สลับ / เปลี่ยน|🔘
+tack|tæk|ตอกหมุดเล็ก / เย็บเก็บชั่วคราว|📌
+tackle|ˈtæk.əl|จัดการแก้ปัญหา|🏈
+tamper|ˈtæm.pər|ไปยุ่งแก้ไขโดยไม่ได้รับอนุญาต|🕵️
+tape|teɪp|ติดเทป|📼
+target|ˈtɑː.ɡɪt|เล็งเป้าหมาย|🎯
+tarmac|ˈtɑː.mæk|ลาดยางมะตอย|🛬
+tear|teər|ฉีก|📃
+temper|ˈtem.pər|อบชุบโลหะ / ปรับให้พอเหมาะ|⚒️
+test|test|ทดสอบ|🧪
+thread|θred|ร้อยด้าย / ทำเกลียว|🧵
+throttle|ˈθrɒt.əl|ควบคุมคันเร่ง / บีบคอ|🏍️
+throw|θrəʊ|ขว้าง|🥎
+thrust|θrʌst|ผลักอย่างแรง|🚀
+tick|tɪk|ทำเครื่องหมายถูก / เสียงติ๊ก|✔️
+tight|taɪt|แน่น|🤏
+tilt|tɪlt|เอียง|📐
+time|taɪm|จับเวลา / กำหนดเวลา|⏱️
+tin|tɪn|เคลือบดีบุก|🥫
+tip|tɪp|เอียง / ทิ้ง|🫗
+tire|ˈtaɪər|เหนื่อย / ยาง|🛞
+toggle|ˈtɒɡ.əl|สลับเปิดปิด|🎛️
+tolerate|ˈtɒl.ə.reɪt|ทนได้ / ยอมรับ|😌
+tongs|tɒŋz|คีม / ที่คีบ|🥢
+tool|tuːl|เครื่องมือ|🧰
+top|tɒp|ปิดด้านบน / อยู่สูงสุด|🔝
+torque|tɔːk|แรงบิด|🔧
+toss|tɒs|โยน|🪙
+totter|ˈtɒt.ər|เดินโซเซ|🥴
+touch|tʌtʃ|สัมผัส|👆
+tow|təʊ|ลากจูง|🚛
+trace|treɪs|ลอกลาย / ตามรอย|🖊️
+track|træk|ติดตาม|🛤️
+tractor|ˈtræk.tər|รถแทรกเตอร์|🚜
+trade|treɪd|แลกเปลี่ยน / ค้าขาย|🤝
+trample|ˈtræm.pəl|เหยียบย่ำ|👞
+transfer|trænsˈfɜːr|ย้าย / โอน|🔀
+transform|trænsˈfɔːm|เปลี่ยนรูป|🪄
+translate|trænzˈleɪt|แปล|🌐
+transmit|trænzˈmɪt|ส่งผ่าน|📡
+transport|ˈtræn.spɔːt|ขนส่ง|🚚
+trap|træp|ดักจับ|🪤
+trash|træʃ|ทิ้งขยะ / ทำลาย|🗑️
+tread|tred|ย่ำเดิน|👟
+treat|triːt|รักษา / ปฏิบัติต่อ|💊
+trim|trɪm|ตัดแต่ง|✂️
+triple|ˈtrɪp.əl|เพิ่มเป็นสามเท่า|3️⃣
+troubleshoot|ˈtrʌb.əl.ʃuːt|แก้ไขปัญหา|🛠️
+trudge|trʌdʒ|เดินลากเท้าอย่างเหนื่อยล้า|🥾
+truncate|ˈtrʌŋ.keɪt|ตัดทอน|📏
+trunk|trʌŋk|ลำต้น / ท้ายรถ|🚗
+trust|trʌst|ไว้วางใจ|🤝
+try|traɪ|ลองทำ|💪
+tube|tjuːb|ท่อ / หลอด|🧪
+tuck|tʌk|เหน็บ / พับซ่อน|🧣
+tug|tʌɡ|กระชาก|🪢
+tumble|ˈtʌm.bəl|ล้มกลิ้ง|🤸‍♂️
+tune|tjuːn|จูน / ปรับตั้ง|🎻
+turn|tɜːn|หมุน|🔄
+tweak|twiːk|ปรับเล็กน้อย|🎚️
+twist|twɪst|บิด|🌀
+type|taɪp|พิมพ์ / ชนิด|⌨️
+unbolt|ʌnˈbəʊlt|ถอดสลักเกลียว|🔩
+uncap|ʌnˈkæp|เปิดฝา|🍾
+unclamp|ʌnˈklæmp|ปลดแคลมป์|🗜️
+uncover|ʌnˈkʌv.ər|เปิดออก / เปิดเผย|🫣
+undo|ʌnˈduː|แก้ / ยกเลิก|↩️
+unfasten|ʌnˈfɑː.sən|แก้ออก|🔓
+unfold|ʌnˈfəʊld|คลี่ออก|📄
+unhook|ʌnˈhʊk|ปลดตะขอ|🪝
+unlatch|ʌnˈlætʃ|ปลดสลัก|🚪
+unlock|ʌnˈlɒk|ปลดล็อก|🔑
+unpack|ʌnˈpæk|แกะของออก|🧳
+unplug|ʌnˈplʌɡ|ถอดปลั๊ก|🔌
+unravel|ʌnˈræv.əl|แก้ปม / คลี่คลาย|🧶
+unscrew|ʌnˈskruː|ไขสกรูออก|🪛
+unseal|ʌnˈsiːl|เปิดผนึก|📭
+un-secure|ˌʌn.sɪˈkjʊər|ปลดการยึด / ไม่ปลอดภัย|🔓
+unstuck|ʌnˈstʌk|หลุดจากที่ติด|🚗
+untangle|ʌnˈtæŋ.ɡəl|แก้ที่พันกัน|🪢
+unite|juˈnaɪt|รวมเข้าด้วยกัน|🤝
+unload|ʌnˈləʊd|ขนของลง|📦
+unlube|ʌnˈluːb|ล้างสารหล่อลื่นออก|🧽
+update|ʌpˈdeɪt|อัปเดต|🆕
+upgrade|ʌpˈɡreɪd|อัปเกรด|⏫
+use|juːz|ใช้|🛠️
+utilize|ˈjuː.tɪ.laɪz|ใช้ประโยชน์|♻️
+vacuum|ˈvæk.juːm|ดูดฝุ่น|🧹
+validate|ˈvæl.ɪ.deɪt|ตรวจสอบความถูกต้อง|✅
+valve|vælv|วาล์ว|🚰
+vaporize|ˈveɪ.pər.aɪz|ทำให้กลายเป็นไอ|💨
+ventilate|ˈven.tɪ.leɪt|ระบายอากาศ|🌬️
+verify|ˈver.ɪ.faɪ|ตรวจยืนยัน|☑️`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -249,7 +249,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

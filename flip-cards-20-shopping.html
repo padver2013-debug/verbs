@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-body{min-height:100vh;background-attachment:fixed}.card:nth-child(5n+1) .bk{background:linear-gradient(135deg,#ffc9de,#ffe3ee)}.card:nth-child(5n+1) .fc:not(.bk){background:linear-gradient(160deg,#fff,#ffe3ee)}.card:nth-child(5n+2) .bk{background:linear-gradient(135deg,#c9f0dd,#e6faf0)}.card:nth-child(5n+2) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e6faf0)}.card:nth-child(5n+3) .bk{background:linear-gradient(135deg,#d9ccff,#efe9ff)}.card:nth-child(5n+3) .fc:not(.bk){background:linear-gradient(160deg,#fff,#efe9ff)}.card:nth-child(5n+4) .bk{background:linear-gradient(135deg,#ffdcc2,#fff0e3)}.card:nth-child(5n+4) .fc:not(.bk){background:linear-gradient(160deg,#fff,#fff0e3)}.card:nth-child(5n+5) .bk{background:linear-gradient(135deg,#c5e3ff,#e4f2ff)}.card:nth-child(5n+5) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e4f2ff)}</style></head><body>
+body{min-height:100vh;background-attachment:fixed}.card:nth-child(5n+1) .bk{background:linear-gradient(135deg,#ffc9de,#ffe3ee)}.card:nth-child(5n+1) .fc:not(.bk){background:linear-gradient(160deg,#fff,#ffe3ee)}.card:nth-child(5n+2) .bk{background:linear-gradient(135deg,#c9f0dd,#e6faf0)}.card:nth-child(5n+2) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e6faf0)}.card:nth-child(5n+3) .bk{background:linear-gradient(135deg,#d9ccff,#efe9ff)}.card:nth-child(5n+3) .fc:not(.bk){background:linear-gradient(160deg,#fff,#efe9ff)}.card:nth-child(5n+4) .bk{background:linear-gradient(135deg,#ffdcc2,#fff0e3)}.card:nth-child(5n+4) .fc:not(.bk){background:linear-gradient(160deg,#fff,#fff0e3)}.card:nth-child(5n+5) .bk{background:linear-gradient(135deg,#c5e3ff,#e4f2ff)}.card:nth-child(5n+5) .fc:not(.bk){background:linear-gradient(160deg,#fff,#e4f2ff)}.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>20. Shopping Actions | การซื้อของ</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,106 +39,106 @@ body{min-height:100vh;background-attachment:fixed}.card:nth-child(5n+1) .bk{back
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`bargain|ˈbɑːɡən|ต่อรองราคา
-bid|bɪd|ประมูล
-borrow|ˈbɒrəʊ|ยืม
-botch|bɒtʃ|ทำพลาด / ทำเสีย
-browse|braʊz|เดินดูของ
-budget|ˈbʌdʒɪt|ตั้งงบประมาณ
-buy|baɪ|ซื้อ
-cancel|ˈkænsəl|ยกเลิก
-cart|kɑːt|ใส่ตะกร้า / รถเข็น
-cash|kæʃ|แลกเป็นเงินสด
-charge|tʃɑːdʒ|เรียกเก็บเงิน / ชาร์จ
-check|tʃek|ตรวจสอบ / เช็กเอาต์
-choose|tʃuːz|เลือก
-claim|kleɪm|เรียกร้อง / อ้างสิทธิ์
-compare|kəmˈpeə(r)|เปรียบเทียบ
-complain|kəmˈpleɪn|ร้องเรียน / บ่น
-confirm|kənˈfɜːm|ยืนยัน
-consume|kənˈsjuːm|บริโภค
-coupon|ˈkuːpɒn|คูปอง
-credit|ˈkredɪt|เครดิต / ให้เครดิต
-decide|dɪˈsaɪd|ตัดสินใจ
-deliver|dɪˈlɪvə(r)|จัดส่ง
-demand|dɪˈmɑːnd|เรียกร้อง / ความต้องการ
-discount|ˈdɪskaʊnt|ลดราคา
-download|ˌdaʊnˈləʊd|ดาวน์โหลด
-earn|ɜːn|ได้รับ / หาเงิน
-enquire|ɪnˈkwaɪə(r)|สอบถาม
-evaluate|ɪˈvæljueɪt|ประเมินค่า
-exchange|ɪksˈtʃeɪndʒ|แลกเปลี่ยน
-filter|ˈfɪltə(r)|กรอง
-finance|ˈfaɪnæns|จัดหาเงินทุน / ผ่อน
-find|faɪnd|ค้นหา / พบ
-fit|fɪt|พอดี / ลองสวม
-fulfill|fʊlˈfɪl|ทำให้สำเร็จ / จัดส่งตามออเดอร์
-gather|ˈɡæðə(r)|รวบรวม
-gift|ɡɪft|ให้ของขวัญ
-grab|ɡræb|คว้า
-guarantee|ˌɡærənˈtiː|รับประกัน
-haggle|ˈhæɡl|ต่อราคา
-inspect|ɪnˈspekt|ตรวจดู
-invest|ɪnˈvest|ลงทุน
-invoice|ˈɪnvɔɪs|ออกใบแจ้งหนี้
-join|dʒɔɪn|เข้าร่วม / สมัครสมาชิก
-lease|liːs|เช่า
-lend|lend|ให้ยืม
-like|laɪk|ชอบ
-locate|ˈləʊkeɪt|ระบุตำแหน่ง
-look|lʊk|มอง
-lose|luːz|สูญเสีย
-lower|ˈləʊə(r)|ลดลง
-manage|ˈmæn.ɪdʒ|จัดการ
-mark|mɑːk|ทำเครื่องหมาย
-market|ˈmɑː.kɪt|ทำการตลาด / ตลาด
-match|mætʃ|จับคู่ / เข้ากัน
-measure|ˈmeʒ.ər|วัด
-merge|mɜːdʒ|รวมเข้าด้วยกัน
-monopolize|məˈnɒp.əl.aɪz|ผูกขาด
-mortgage|ˈmɔː.ɡɪdʒ|จำนอง
-navigate|ˈnæv.ɪ.ɡeɪt|นำทาง
-negotiate|nɪˈɡəʊ.ʃi.eɪt|เจรจาต่อรอง
-obtain|əbˈteɪn|ได้มา
-offer|ˈɒf.ər|เสนอ
-open|ˈəʊ.pən|เปิด
-order|ˈɔː.dər|สั่งซื้อ
-organize|ˈɔː.ɡən.aɪz|จัดระเบียบ
-outbid|aʊtˈbɪd|ประมูลสูงกว่า
-outsource|ˈaʊt.sɔːs|จ้างภายนอก
-overcharge|ˌəʊ.vəˈtʃɑːdʒ|เก็บเงินเกินราคา
-overpay|ˌəʊ.vəˈpeɪ|จ่ายเกินราคา
-package|ˈpæk.ɪdʒ|บรรจุหีบห่อ
-pack|pæk|แพ็ก
-patronize|ˈpæt.rə.naɪz|อุดหนุน / เป็นลูกค้าประจำ
-pay|peɪ|จ่ายเงิน
-pick|pɪk|เลือก / หยิบ
-pillage|ˈpɪl.ɪdʒ|ปล้นสะดม
-place|pleɪs|วาง / ทำการสั่ง
-pledge|pledʒ|ให้คำมั่น / จำนำ
-pre-order|priːˈɔː.dər|สั่งจองล่วงหน้า
-price|praɪs|ตั้งราคา
-procure|prəˈkjʊər|จัดหา
-promote|prəˈməʊt|โปรโมต / ส่งเสริมการขาย
-propose|prəˈpəʊz|เสนอ
-purchase|ˈpɜː.tʃəs|ซื้อ / จัดซื้อ
-query|ˈkwɪə.ri|สอบถาม
-queue|kjuː|เข้าคิว
-quote|kwəʊt|เสนอราคา
-re-order|ˌriːˈɔː.dər|สั่งซื้อซ้ำ
-rebate|ˈriː.beɪt|ส่วนลดเงินคืน
-receipt|rɪˈsiːt|ใบเสร็จ
-receive|rɪˈsiːv|ได้รับ
-reclaim|rɪˈkleɪm|เรียกคืน
-recommend|ˌrek.əˈmend|แนะนำ
-redeem|rɪˈdiːm|แลกคูปอง / ไถ่ถอน
-reduce|rɪˈdjuːs|ลด
-refund|riːˈfʌnd|คืนเงิน
-register|ˈredʒ.ɪ.stər|ลงทะเบียน / เครื่องคิดเงิน
-reimburse|ˌriː.ɪmˈbɜːs|ชดใช้คืน
-re-stock|ˌriːˈstɒk|เติมสต็อก
-retail|ˈriː.teɪl|ขายปลีก
-return|rɪˈtɜːn|คืนสินค้า`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`bargain|ˈbɑːɡən|ต่อรองราคา|🤝
+bid|bɪd|ประมูล|🔨
+borrow|ˈbɒrəʊ|ยืม|🤲
+botch|bɒtʃ|ทำพลาด / ทำเสีย|🤦
+browse|braʊz|เดินดูของ|🛍️
+budget|ˈbʌdʒɪt|ตั้งงบประมาณ|👛
+buy|baɪ|ซื้อ|🛒
+cancel|ˈkænsəl|ยกเลิก|❌
+cart|kɑːt|ใส่ตะกร้า / รถเข็น|🛒
+cash|kæʃ|แลกเป็นเงินสด|💵
+charge|tʃɑːdʒ|เรียกเก็บเงิน / ชาร์จ|💳
+check|tʃek|ตรวจสอบ / เช็กเอาต์|🧾
+choose|tʃuːz|เลือก|👆
+claim|kleɪm|เรียกร้อง / อ้างสิทธิ์|🙋
+compare|kəmˈpeə(r)|เปรียบเทียบ|⚖️
+complain|kəmˈpleɪn|ร้องเรียน / บ่น|😤
+confirm|kənˈfɜːm|ยืนยัน|✅
+consume|kənˈsjuːm|บริโภค|🍽️
+coupon|ˈkuːpɒn|คูปอง|🎟️
+credit|ˈkredɪt|เครดิต / ให้เครดิต|💳
+decide|dɪˈsaɪd|ตัดสินใจ|🤔
+deliver|dɪˈlɪvə(r)|จัดส่ง|📦
+demand|dɪˈmɑːnd|เรียกร้อง / ความต้องการ|📈
+discount|ˈdɪskaʊnt|ลดราคา|🏷️
+download|ˌdaʊnˈləʊd|ดาวน์โหลด|📲
+earn|ɜːn|ได้รับ / หาเงิน|💰
+enquire|ɪnˈkwaɪə(r)|สอบถาม|❓
+evaluate|ɪˈvæljueɪt|ประเมินค่า|⭐
+exchange|ɪksˈtʃeɪndʒ|แลกเปลี่ยน|🔄
+filter|ˈfɪltə(r)|กรอง|🔽
+finance|ˈfaɪnæns|จัดหาเงินทุน / ผ่อน|🏦
+find|faɪnd|ค้นหา / พบ|🔍
+fit|fɪt|พอดี / ลองสวม|👗
+fulfill|fʊlˈfɪl|ทำให้สำเร็จ / จัดส่งตามออเดอร์|📦
+gather|ˈɡæðə(r)|รวบรวม|🧺
+gift|ɡɪft|ให้ของขวัญ|🎁
+grab|ɡræb|คว้า|🫳
+guarantee|ˌɡærənˈtiː|รับประกัน|🛡️
+haggle|ˈhæɡl|ต่อราคา|🗣️
+inspect|ɪnˈspekt|ตรวจดู|🔎
+invest|ɪnˈvest|ลงทุน|📈
+invoice|ˈɪnvɔɪs|ออกใบแจ้งหนี้|🧾
+join|dʒɔɪn|เข้าร่วม / สมัครสมาชิก|🪪
+lease|liːs|เช่า|🔑
+lend|lend|ให้ยืม|🫴
+like|laɪk|ชอบ|👍
+locate|ˈləʊkeɪt|ระบุตำแหน่ง|📍
+look|lʊk|มอง|👀
+lose|luːz|สูญเสีย|😢
+lower|ˈləʊə(r)|ลดลง|📉
+manage|ˈmæn.ɪdʒ|จัดการ|📊
+mark|mɑːk|ทำเครื่องหมาย|🔖
+market|ˈmɑː.kɪt|ทำการตลาด / ตลาด|🏪
+match|mætʃ|จับคู่ / เข้ากัน|🧩
+measure|ˈmeʒ.ər|วัด|📏
+merge|mɜːdʒ|รวมเข้าด้วยกัน|🔀
+monopolize|məˈnɒp.əl.aɪz|ผูกขาด|🎩
+mortgage|ˈmɔː.ɡɪdʒ|จำนอง|🏠
+navigate|ˈnæv.ɪ.ɡeɪt|นำทาง|🧭
+negotiate|nɪˈɡəʊ.ʃi.eɪt|เจรจาต่อรอง|🤝
+obtain|əbˈteɪn|ได้มา|🎯
+offer|ˈɒf.ər|เสนอ|🏷️
+open|ˈəʊ.pən|เปิด|🔓
+order|ˈɔː.dər|สั่งซื้อ|📝
+organize|ˈɔː.ɡən.aɪz|จัดระเบียบ|🗂️
+outbid|aʊtˈbɪd|ประมูลสูงกว่า|💸
+outsource|ˈaʊt.sɔːs|จ้างภายนอก|🌐
+overcharge|ˌəʊ.vəˈtʃɑːdʒ|เก็บเงินเกินราคา|😠
+overpay|ˌəʊ.vəˈpeɪ|จ่ายเกินราคา|💸
+package|ˈpæk.ɪdʒ|บรรจุหีบห่อ|📦
+pack|pæk|แพ็ก|🎒
+patronize|ˈpæt.rə.naɪz|อุดหนุน / เป็นลูกค้าประจำ|🏬
+pay|peɪ|จ่ายเงิน|💳
+pick|pɪk|เลือก / หยิบ|🍎
+pillage|ˈpɪl.ɪdʒ|ปล้นสะดม|🏴‍☠️
+place|pleɪs|วาง / ทำการสั่ง|📍
+pledge|pledʒ|ให้คำมั่น / จำนำ|🤞
+pre-order|priːˈɔː.dər|สั่งจองล่วงหน้า|📅
+price|praɪs|ตั้งราคา|💲
+procure|prəˈkjʊər|จัดหา|🧾
+promote|prəˈməʊt|โปรโมต / ส่งเสริมการขาย|📣
+propose|prəˈpəʊz|เสนอ|💡
+purchase|ˈpɜː.tʃəs|ซื้อ / จัดซื้อ|🛍️
+query|ˈkwɪə.ri|สอบถาม|🙋‍♂️
+queue|kjuː|เข้าคิว|🚶‍♂️
+quote|kwəʊt|เสนอราคา|💬
+re-order|ˌriːˈɔː.dər|สั่งซื้อซ้ำ|🔁
+rebate|ˈriː.beɪt|ส่วนลดเงินคืน|💸
+receipt|rɪˈsiːt|ใบเสร็จ|🧾
+receive|rɪˈsiːv|ได้รับ|📬
+reclaim|rɪˈkleɪm|เรียกคืน|🔙
+recommend|ˌrek.əˈmend|แนะนำ|👍
+redeem|rɪˈdiːm|แลกคูปอง / ไถ่ถอน|🎟️
+reduce|rɪˈdjuːs|ลด|🔻
+refund|riːˈfʌnd|คืนเงิน|💱
+register|ˈredʒ.ɪ.stər|ลงทะเบียน / เครื่องคิดเงิน|🧮
+reimburse|ˌriː.ɪmˈbɜːs|ชดใช้คืน|💵
+re-stock|ˌriːˈstɒk|เติมสต็อก|📦
+retail|ˈriː.teɪl|ขายปลีก|🏬
+return|rɪˈtɜːn|คืนสินค้า|↩️`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -149,7 +149,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>12. Sensory Actions | การรับรู้ด้วยประสาทสัมผัส</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,98 +39,98 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`feel|fiːl|รู้สึก / สัมผัส
-hear|hɪər|ได้ยิน
-listen|ˈlɪs.ən|ตั้งใจฟัง
-look|lʊk|มอง
-notice|ˈnəʊ.tɪs|สังเกตเห็น
-observe|əbˈzɜːv|สังเกตการณ์
-perceive|pəˈsiːv|รับรู้
-recognize|ˈrek.əɡ.naɪz|จำได้ / ยอมรับ
-sample|ˈsɑːm.pəl|ลองชิม / เก็บตัวอย่าง
-scent|sent|ได้กลิ่น / กลิ่นหอม
-see|siː|เห็น
-sensation|senˈseɪ.ʃən|ความรู้สึกสัมผัส
-smell|smel|ได้กลิ่น
-sound|saʊnd|ส่งเสียง / ฟังดูเหมือน
-stare|steər|จ้องมอง
-taste|teɪst|ลิ้มรส
-touch|tʌtʃ|สัมผัส
-view|vjuː|ชม / มองดู
-watch|wɒtʃ|เฝ้าดู
-witness|ˈwɪt.nəs|เป็นพยาน / เห็นเหตุการณ์
-gaze|ɡeɪz|จ้องมองนาน ๆ
-glance|ɡlɑːns|เหลือบมอง
-glimpse|ɡlɪmps|เห็นแวบเดียว
-peer|pɪər|เพ่งมอง
-spot|spɒt|มองเห็น / สังเกตพบ
-sniff|snɪf|สูดดม
-snort|snɔːt|พ่นลมทางจมูก
-hark|hɑːk|ฟังให้ดี
-overhear|ˌəʊ.vəˈhɪər|แอบได้ยิน
-detect|dɪˈtekt|ตรวจพบ
-discern|dɪˈsɜːn|แยกแยะได้
-sip|sɪp|จิบ
-swallow|ˈswɒl.əʊ|กลืน
-suck|sʌk|ดูด
-lick|lɪk|เลีย
-palpate|ˈpæl.peɪt|คลำตรวจ
-handle|ˈhæn.dəl|จับถือ
-gasp|ɡɑːsp|หอบ / สูดลมหายใจ
-sigh|saɪ|ถอนหายใจ
-snore|snɔːr|กรน
-rustle|ˈrʌs.əl|เสียงกรอบแกรบ
-echo|ˈek.əʊ|ก้องสะท้อน
-resound|rɪˈzaʊnd|ก้องกังวาน
-whistle|ˈwɪs.əl|ผิวปาก / เป่านกหวีด
-buzz|bʌz|ส่งเสียงหึ่ง
-hum|hʌm|ฮัมเพลง / หึ่ง
-radiate|ˈreɪ.di.eɪt|แผ่รังสี
-glow|ɡləʊ|เรืองแสง
-flash|flæʃ|แวบ / วาบ
-glare|ɡleər|จ้องเขม็ง / แสงจ้า
-scan|skæn|กวาดตามอง / สแกน
-survey|səˈveɪ|สำรวจ
-inspect|ɪnˈspekt|ตรวจตรา
-examine|ɪɡˈzæm.ɪn|ตรวจสอบอย่างละเอียด
-gawk|ɡɔːk|จ้องอย่างเซ่อ ๆ
-rubberneck|ˈrʌb.ə.nek|ชะเง้อมอง
-ogle|ˈəʊ.ɡəl|มองด้วยสายตาลามก
-eyeball|ˈaɪ.bɔːl|จ้องดู
-scowl|skaʊl|ทำหน้าบึ้ง
-grimace|ˈɡrɪm.əs|ทำหน้าเบะ
-wince|wɪns|ทำหน้าเจ็บ
-squint|skwɪnt|หรี่ตา
-strain|streɪn|เพ่งสุดกำลัง
-catch|kætʃ|จับได้ / ได้ยิน
-reverberate|rɪˈvɜː.bər.eɪt|สะท้อนก้อง
-rattle|ˈræt.əl|เสียงกระทบกัน
-clatter|ˈklæt.ər|เสียงกระทบดัง
-crunch|krʌntʃ|เคี้ยวกร้วม / เสียงกร้วม
-squish|skwɪʃ|เสียงบีบแฉะ
-slurp|slɜːp|ซด
-gulp|ɡʌlp|กลืนอึก
-savor|ˈseɪ.vər|ลิ้มรสอย่างละเมียด
-relish|ˈrel.ɪʃ|เพลิดเพลิน / ชื่นชม
-stroke|strəʊk|ลูบ
-pat|pæt|ตบเบา ๆ
-rub|rʌb|ถู
-scratch|skrætʃ|เกา
-tickle|ˈtɪk.əl|จั๊กจี้
-prickle|ˈprɪk.əl|รู้สึกเหมือนถูกเข็มทิ่ม
-sting|stɪŋ|ต่อย / แสบ
-smart|smɑːt|แสบ / ปวดแปลบ
-scorch|skɔːtʃ|ลวก / ไหม้เกรียม
-chill|tʃɪl|ทำให้เย็นเยือก
-stink|stɪŋk|เหม็น
-reimburse|ˌriː.ɪmˈbɜːs|ชดใช้คืน
-warm|wɔːm|อุ่น
-dazzle|ˈdæz.əl|ทำให้ตาพร่า
-blind|blaɪnd|ทำให้ตาบอด
-scintillate|ˈsɪn.tɪ.leɪt|เปล่งประกาย
-flicker|ˈflɪk.ər|กะพริบ / ริบหรี่
-twinkle|ˈtwɪŋ.kəl|ระยิบระยับ
-glisten|ˈɡlɪs.ən|แวววาว`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`feel|fiːl|รู้สึก / สัมผัส|🤚
+hear|hɪər|ได้ยิน|👂
+listen|ˈlɪs.ən|ตั้งใจฟัง|🎧
+look|lʊk|มอง|👀
+notice|ˈnəʊ.tɪs|สังเกตเห็น|💡
+observe|əbˈzɜːv|สังเกตการณ์|🔭
+perceive|pəˈsiːv|รับรู้|🧠
+recognize|ˈrek.əɡ.naɪz|จำได้ / ยอมรับ|🙋
+sample|ˈsɑːm.pəl|ลองชิม / เก็บตัวอย่าง|🥄
+scent|sent|ได้กลิ่น / กลิ่นหอม|🌸
+see|siː|เห็น|👁️
+sensation|senˈseɪ.ʃən|ความรู้สึกสัมผัส|🪶
+smell|smel|ได้กลิ่น|👃
+sound|saʊnd|ส่งเสียง / ฟังดูเหมือน|🔊
+stare|steər|จ้องมอง|😐
+taste|teɪst|ลิ้มรส|😋
+touch|tʌtʃ|สัมผัส|🖐️
+view|vjuː|ชม / มองดู|🏞️
+watch|wɒtʃ|เฝ้าดู|📺
+witness|ˈwɪt.nəs|เป็นพยาน / เห็นเหตุการณ์|🧑‍⚖️
+gaze|ɡeɪz|จ้องมองนาน ๆ|🌠
+glance|ɡlɑːns|เหลือบมอง|👁️‍🗨️
+glimpse|ɡlɪmps|เห็นแวบเดียว|⚡
+peer|pɪər|เพ่งมอง|🧐
+spot|spɒt|มองเห็น / สังเกตพบ|📍
+sniff|snɪf|สูดดม|🐽
+snort|snɔːt|พ่นลมทางจมูก|🐷
+hark|hɑːk|ฟังให้ดี|📣
+overhear|ˌəʊ.vəˈhɪər|แอบได้ยิน|🤫
+detect|dɪˈtekt|ตรวจพบ|📡
+discern|dɪˈsɜːn|แยกแยะได้|🔎
+sip|sɪp|จิบ|🍵
+swallow|ˈswɒl.əʊ|กลืน|🥛
+suck|sʌk|ดูด|🥤
+lick|lɪk|เลีย|🍦
+palpate|ˈpæl.peɪt|คลำตรวจ|🩺
+handle|ˈhæn.dəl|จับถือ|🤲
+gasp|ɡɑːsp|หอบ / สูดลมหายใจ|😲
+sigh|saɪ|ถอนหายใจ|😮‍💨
+snore|snɔːr|กรน|😴
+rustle|ˈrʌs.əl|เสียงกรอบแกรบ|🍂
+echo|ˈek.əʊ|ก้องสะท้อน|🏔️
+resound|rɪˈzaʊnd|ก้องกังวาน|🔔
+whistle|ˈwɪs.əl|ผิวปาก / เป่านกหวีด|🎶
+buzz|bʌz|ส่งเสียงหึ่ง|🐝
+hum|hʌm|ฮัมเพลง / หึ่ง|🎵
+radiate|ˈreɪ.di.eɪt|แผ่รังสี|☀️
+glow|ɡləʊ|เรืองแสง|💡
+flash|flæʃ|แวบ / วาบ|📸
+glare|ɡleər|จ้องเขม็ง / แสงจ้า|😠
+scan|skæn|กวาดตามอง / สแกน|📠
+survey|səˈveɪ|สำรวจ|📋
+inspect|ɪnˈspekt|ตรวจตรา|🔍
+examine|ɪɡˈzæm.ɪn|ตรวจสอบอย่างละเอียด|🔬
+gawk|ɡɔːk|จ้องอย่างเซ่อ ๆ|😮
+rubberneck|ˈrʌb.ə.nek|ชะเง้อมอง|🚗
+ogle|ˈəʊ.ɡəl|มองด้วยสายตาลามก|😏
+eyeball|ˈaɪ.bɔːl|จ้องดู|👁️
+scowl|skaʊl|ทำหน้าบึ้ง|😡
+grimace|ˈɡrɪm.əs|ทำหน้าเบะ|😬
+wince|wɪns|ทำหน้าเจ็บ|😣
+squint|skwɪnt|หรี่ตา|😑
+strain|streɪn|เพ่งสุดกำลัง|😖
+catch|kætʃ|จับได้ / ได้ยิน|🪝
+reverberate|rɪˈvɜː.bər.eɪt|สะท้อนก้อง|📢
+rattle|ˈræt.əl|เสียงกระทบกัน|🪇
+clatter|ˈklæt.ər|เสียงกระทบดัง|🍽️
+crunch|krʌntʃ|เคี้ยวกร้วม / เสียงกร้วม|🥨
+squish|skwɪʃ|เสียงบีบแฉะ|🍅
+slurp|slɜːp|ซด|🍜
+gulp|ɡʌlp|กลืนอึก|💧
+savor|ˈseɪ.vər|ลิ้มรสอย่างละเมียด|🍷
+relish|ˈrel.ɪʃ|เพลิดเพลิน / ชื่นชม|😌
+stroke|strəʊk|ลูบ|🐈
+pat|pæt|ตบเบา ๆ|🐕
+rub|rʌb|ถู|🧴
+scratch|skrætʃ|เกา|🐱
+tickle|ˈtɪk.əl|จั๊กจี้|🪶
+prickle|ˈprɪk.əl|รู้สึกเหมือนถูกเข็มทิ่ม|🌵
+sting|stɪŋ|ต่อย / แสบ|🐝
+smart|smɑːt|แสบ / ปวดแปลบ|🤕
+scorch|skɔːtʃ|ลวก / ไหม้เกรียม|🔥
+chill|tʃɪl|ทำให้เย็นเยือก|🥶
+stink|stɪŋk|เหม็น|🦨
+reimburse|ˌriː.ɪmˈbɜːs|ชดใช้คืน|💵
+warm|wɔːm|อุ่น|☕
+dazzle|ˈdæz.əl|ทำให้ตาพร่า|🌟
+blind|blaɪnd|ทำให้ตาบอด|🕶️
+scintillate|ˈsɪn.tɪ.leɪt|เปล่งประกาย|✨
+flicker|ˈflɪk.ər|กะพริบ / ริบหรี่|🕯️
+twinkle|ˈtwɪŋ.kəl|ระยิบระยับ|⭐
+glisten|ˈɡlɪs.ən|แวววาว|💧`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -141,7 +141,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

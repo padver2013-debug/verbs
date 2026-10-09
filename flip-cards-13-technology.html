@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>13. Technology & Digital Actions | การใช้เทคโนโลยี</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,106 +39,106 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`back up|bæk ʌp|สำรองข้อมูล
-browse|braʊz|เรียกดู / ท่องเว็บ
-click|klɪk|คลิก
-compile|kəmˈpaɪl|คอมไพล์ / รวบรวม
-configure|kənˈfɪɡ.ər|กำหนดค่า
-connect|kəˈnekt|เชื่อมต่อ
-copy|ˈkɒp.i|คัดลอก
-crash|kræʃ|ค้าง / ล่ม
-customize|ˈkʌs.tə.maɪz|ปรับแต่งตามต้องการ
-cyberattack|ˈsaɪ.bər.əˌtæk|โจมตีทางไซเบอร์
-debug|diːˈbʌɡ|แก้บั๊ก
-delete|dɪˈliːt|ลบ
-deploy|dɪˈplɔɪ|ติดตั้งใช้งานจริง
-download|ˌdaʊnˈləʊd|ดาวน์โหลด
-drag|dræɡ|ลาก
-edit|ˈed.ɪt|แก้ไข
-encrypt|ɪnˈkrɪpt|เข้ารหัส
-execute|ˈek.sɪ.kjuːt|รันคำสั่ง / ดำเนินการ
-export|ɪkˈspɔːt|ส่งออก
-filter|ˈfɪl.tər|กรอง
-format|ˈfɔː.mæt|จัดรูปแบบ / ฟอร์แมต
-generate|ˈdʒen.ə.reɪt|สร้างขึ้น
-hack|hæk|แฮก / เจาะระบบ
-host|həʊst|เป็นเจ้าภาพ / โฮสต์
-import|ɪmˈpɔːt|นำเข้า
-install|ɪnˈstɔːl|ติดตั้ง
-log|lɒɡ|บันทึกล็อก
-monitor|ˈmɒn.ɪ.tər|เฝ้าติดตาม
-navigate|ˈnæv.ɪ.ɡeɪt|นำทาง / เลื่อนไปมา
-paste|peɪst|วาง
-ping|pɪŋ|ปิง / ส่งสัญญาณทดสอบ
-plug|plʌɡ|เสียบ
-print|prɪnt|พิมพ์
-program|ˈprəʊ.ɡræm|เขียนโปรแกรม
-query|ˈkwɪə.ri|สอบถามข้อมูล
-reboot|ˌriːˈbuːt|รีบูต / เปิดเครื่องใหม่
-refresh|rɪˈfreʃ|รีเฟรช
-reset|riːˈset|รีเซ็ต
-restore|rɪˈstɔːr|กู้คืน
-scan|skæn|สแกน
-scroll|skrəʊl|เลื่อนหน้าจอ
-search|sɜːtʃ|ค้นหา
-select|sɪˈlekt|เลือก
-share|ʃeər|แชร์ / แบ่งปัน
-stream|striːm|สตรีม / ถ่ายทอดสด
-surf|sɜːf|ท่องเน็ต
-sync|sɪŋk|ซิงค์ข้อมูล
-tap|tæp|แตะ
-update|ʌpˈdeɪt|อัปเดต
-upload|ʌpˈləʊd|อัปโหลด
-authenticate|ɔːˈθen.tɪ.keɪt|ยืนยันตัวตน
-automate|ˈɔː.tə.meɪt|ทำให้อัตโนมัติ
-bookmark|ˈbʊk.mɑːk|บุ๊กมาร์ก
-broadcast|ˈbrɔːd.kɑːst|กระจายเสียง / ถ่ายทอด
-buffer|ˈbʌf.ər|บัฟเฟอร์ / พักข้อมูล
-cache|kæʃ|แคช / เก็บข้อมูลชั่วคราว
-cancel|ˈkæn.səl|ยกเลิก
-capture|ˈkæp.tʃər|จับภาพ / บันทึก
-chat|tʃæt|แชท
-collaborate|kəˈlæb.ə.reɪt|ทำงานร่วมกัน
-compress|kəmˈpres|บีบอัด
-convert|kənˈvɜːt|แปลง
-cut|kʌt|ตัด
-deactivate|diːˈæk.tɪ.veɪt|ปิดใช้งาน
-decrypt|dɪˈkrɪpt|ถอดรหัส
-designate|ˈdez.ɪɡ.neɪt|กำหนด / แต่งตั้ง
-detect|dɪˈtekt|ตรวจจับ
-diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัยปัญหา
-dial|daɪl|หมุนโทร
-disable|dɪˈseɪ.bəl|ปิดการใช้งาน
-disconnect|ˌdɪs.kəˈnekt|ตัดการเชื่อมต่อ
-display|dɪˈspleɪ|แสดงผล
-distribute|dɪˈstrɪb.juːt|แจกจ่าย
-document|ˈdɒk.jʊ.ment|บันทึกเป็นเอกสาร
-double-click|ˌdʌb.əl ˈklɪk|ดับเบิลคลิก
-draft|drɑːft|ร่าง
-duplicate|ˈdʒuː.plɪ.keɪt|ทำสำเนา
-emulate|ˈem.jə.leɪt|จำลองการทำงาน
-enable|ɪˈneɪ.bəl|เปิดใช้งาน
-enter|ˈen.tər|ป้อนข้อมูล
-erase|ɪˈreɪz|ลบทิ้ง
-escalate|ˈes.kə.leɪt|ส่งต่อระดับสูงขึ้น
-expand|ɪkˈspænd|ขยาย
-extract|ɪkˈstrækt|แตกไฟล์ / ดึงออก
-feed|fiːd|ป้อนข้อมูล
-fetch|fetʃ|ดึงข้อมูล
-finalize|ˈfaɪ.nəl.aɪz|ทำให้เสร็จสมบูรณ์
-fire|ˈfaɪ.eər|สั่งทำงาน / ยิง
-flash|flæʃ|แฟลชเฟิร์มแวร์ / วาบ
-flow|fləʊ|ไหล
-follow|ˈfɒl.əʊ|ติดตาม
-forward|ˈfɔː.wəd|ส่งต่อ
-freeze|friːz|ค้าง / แช่แข็ง
-function|ˈfʌŋk.ʃən|ทำงาน
-glitch|ɡlɪtʃ|ขัดข้องชั่วคราว
-grade|ɡreɪd|ให้เกรด / จัดระดับ
-highlight|ˈhaɪ.laɪt|ไฮไลต์
-hyperlink|ˈhaɪ.pə.lɪŋk|ลิงก์เชื่อมโยง
-initialize|ɪˈnɪʃ.əl.aɪz|เริ่มต้นระบบ
-input|ˈɪn.pʊt|ป้อนเข้า`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`back up|bæk ʌp|สำรองข้อมูล|💾
+browse|braʊz|เรียกดู / ท่องเว็บ|🌐
+click|klɪk|คลิก|🖱️
+compile|kəmˈpaɪl|คอมไพล์ / รวบรวม|⚙️
+configure|kənˈfɪɡ.ər|กำหนดค่า|🎛️
+connect|kəˈnekt|เชื่อมต่อ|🔗
+copy|ˈkɒp.i|คัดลอก|📄
+crash|kræʃ|ค้าง / ล่ม|💥
+customize|ˈkʌs.tə.maɪz|ปรับแต่งตามต้องการ|🎨
+cyberattack|ˈsaɪ.bər.əˌtæk|โจมตีทางไซเบอร์|🦠
+debug|diːˈbʌɡ|แก้บั๊ก|🐛
+delete|dɪˈliːt|ลบ|🗑️
+deploy|dɪˈplɔɪ|ติดตั้งใช้งานจริง|🚀
+download|ˌdaʊnˈləʊd|ดาวน์โหลด|⬇️
+drag|dræɡ|ลาก|🖱️
+edit|ˈed.ɪt|แก้ไข|✏️
+encrypt|ɪnˈkrɪpt|เข้ารหัส|🔐
+execute|ˈek.sɪ.kjuːt|รันคำสั่ง / ดำเนินการ|▶️
+export|ɪkˈspɔːt|ส่งออก|📤
+filter|ˈfɪl.tər|กรอง|🔽
+format|ˈfɔː.mæt|จัดรูปแบบ / ฟอร์แมต|🧹
+generate|ˈdʒen.ə.reɪt|สร้างขึ้น|⚡
+hack|hæk|แฮก / เจาะระบบ|🥷
+host|həʊst|เป็นเจ้าภาพ / โฮสต์|🖧
+import|ɪmˈpɔːt|นำเข้า|📥
+install|ɪnˈstɔːl|ติดตั้ง|💿
+log|lɒɡ|บันทึกล็อก|📜
+monitor|ˈmɒn.ɪ.tər|เฝ้าติดตาม|🖥️
+navigate|ˈnæv.ɪ.ɡeɪt|นำทาง / เลื่อนไปมา|🧭
+paste|peɪst|วาง|📋
+ping|pɪŋ|ปิง / ส่งสัญญาณทดสอบ|📶
+plug|plʌɡ|เสียบ|🔌
+print|prɪnt|พิมพ์|🖨️
+program|ˈprəʊ.ɡræm|เขียนโปรแกรม|👨‍💻
+query|ˈkwɪə.ri|สอบถามข้อมูล|🔎
+reboot|ˌriːˈbuːt|รีบูต / เปิดเครื่องใหม่|🔄
+refresh|rɪˈfreʃ|รีเฟรช|♻️
+reset|riːˈset|รีเซ็ต|⏪
+restore|rɪˈstɔːr|กู้คืน|🛟
+scan|skæn|สแกน|📠
+scroll|skrəʊl|เลื่อนหน้าจอ|📜
+search|sɜːtʃ|ค้นหา|🔍
+select|sɪˈlekt|เลือก|☑️
+share|ʃeər|แชร์ / แบ่งปัน|📲
+stream|striːm|สตรีม / ถ่ายทอดสด|📺
+surf|sɜːf|ท่องเน็ต|🏄
+sync|sɪŋk|ซิงค์ข้อมูล|🔁
+tap|tæp|แตะ|👆
+update|ʌpˈdeɪt|อัปเดต|🆕
+upload|ʌpˈləʊd|อัปโหลด|⬆️
+authenticate|ɔːˈθen.tɪ.keɪt|ยืนยันตัวตน|🪪
+automate|ˈɔː.tə.meɪt|ทำให้อัตโนมัติ|🤖
+bookmark|ˈbʊk.mɑːk|บุ๊กมาร์ก|🔖
+broadcast|ˈbrɔːd.kɑːst|กระจายเสียง / ถ่ายทอด|📡
+buffer|ˈbʌf.ər|บัฟเฟอร์ / พักข้อมูล|⏳
+cache|kæʃ|แคช / เก็บข้อมูลชั่วคราว|🗃️
+cancel|ˈkæn.səl|ยกเลิก|❌
+capture|ˈkæp.tʃər|จับภาพ / บันทึก|📸
+chat|tʃæt|แชท|💬
+collaborate|kəˈlæb.ə.reɪt|ทำงานร่วมกัน|👥
+compress|kəmˈpres|บีบอัด|🗜️
+convert|kənˈvɜːt|แปลง|🔀
+cut|kʌt|ตัด|✂️
+deactivate|diːˈæk.tɪ.veɪt|ปิดใช้งาน|🔕
+decrypt|dɪˈkrɪpt|ถอดรหัส|🔓
+designate|ˈdez.ɪɡ.neɪt|กำหนด / แต่งตั้ง|📌
+detect|dɪˈtekt|ตรวจจับ|📡
+diagnose|ˌdaɪ.əɡˈnəʊz|วินิจฉัยปัญหา|🩺
+dial|daɪl|หมุนโทร|☎️
+disable|dɪˈseɪ.bəl|ปิดการใช้งาน|🚫
+disconnect|ˌdɪs.kəˈnekt|ตัดการเชื่อมต่อ|🔌
+display|dɪˈspleɪ|แสดงผล|🖼️
+distribute|dɪˈstrɪb.juːt|แจกจ่าย|📬
+document|ˈdɒk.jʊ.ment|บันทึกเป็นเอกสาร|📄
+double-click|ˌdʌb.əl ˈklɪk|ดับเบิลคลิก|🖱️
+draft|drɑːft|ร่าง|📝
+duplicate|ˈdʒuː.plɪ.keɪt|ทำสำเนา|👯
+emulate|ˈem.jə.leɪt|จำลองการทำงาน|🕹️
+enable|ɪˈneɪ.bəl|เปิดใช้งาน|✅
+enter|ˈen.tər|ป้อนข้อมูล|⏎
+erase|ɪˈreɪz|ลบทิ้ง|🧽
+escalate|ˈes.kə.leɪt|ส่งต่อระดับสูงขึ้น|📈
+expand|ɪkˈspænd|ขยาย|↔️
+extract|ɪkˈstrækt|แตกไฟล์ / ดึงออก|🧲
+feed|fiːd|ป้อนข้อมูล|🍼
+fetch|fetʃ|ดึงข้อมูล|🐕
+finalize|ˈfaɪ.nəl.aɪz|ทำให้เสร็จสมบูรณ์|🔒
+fire|ˈfaɪ.eər|สั่งทำงาน / ยิง|🔥
+flash|flæʃ|แฟลชเฟิร์มแวร์ / วาบ|⚡
+flow|fləʊ|ไหล|🌊
+follow|ˈfɒl.əʊ|ติดตาม|👣
+forward|ˈfɔː.wəd|ส่งต่อ|↪️
+freeze|friːz|ค้าง / แช่แข็ง|🥶
+function|ˈfʌŋk.ʃən|ทำงาน|⚙️
+glitch|ɡlɪtʃ|ขัดข้องชั่วคราว|👾
+grade|ɡreɪd|ให้เกรด / จัดระดับ|💯
+highlight|ˈhaɪ.laɪt|ไฮไลต์|🖍️
+hyperlink|ˈhaɪ.pə.lɪŋk|ลิงก์เชื่อมโยง|🔗
+initialize|ɪˈnɪʃ.əl.aɪz|เริ่มต้นระบบ|🏁
+input|ˈɪn.pʊt|ป้อนเข้า|⌨️`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -149,7 +149,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");

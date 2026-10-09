@@ -28,7 +28,7 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 .sp{position:absolute;right:5px;bottom:5px;width:28px;height:28px;padding:0;font-size:.8rem;line-height:28px}
 .done .fc:not(.bk){outline:2px solid #3ccf8e}
 #msg{text-align:center;margin-top:12px;font-weight:700;min-height:1.4em}
-</style></head><body>
+.em{font-size:clamp(1.5rem,5.2vw,2.8rem);line-height:1.1;margin-bottom:2px;font-family:'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}.bk .em{font-size:clamp(1.1rem,3.4vw,1.8rem)}.w{font-size:clamp(.8rem,2.2vw,1.35rem)}</style></head><body>
 <h1>11. Body Actions | การใช้ร่างกาย</h1>
 <div class="bar">
 <span class="pill">⏱ <span id="t">00:00</span></span>
@@ -39,155 +39,155 @@ box-shadow:0 10px 18px var(--sh),inset 0 2px 4px rgba(255,255,255,.6),inset 0 -6
 <div class="grid" id="g"></div>
 <div id="msg">คลิกการ์ดเพื่อฟังเสียงและพลิกดูคำแปล (ได้ 1 คะแนนต่อการ์ดที่เปิดครั้งแรก)</div>
 <script>
-const RAW=`breathe|briːð|หายใจ
-blink|blɪŋk|กะพริบตา
-chew|tʃuː|เคี้ยว
-clap|klæp|ปรบมือ
-clench|klentʃ|กำแน่น / กัดแน่น
-crawl|krɔːl|คลาน
-dance|dɑːns|เต้นรำ
-dig|dɪɡ|ขุด
-dive|daɪv|ดำน้ำ / กระโดดน้ำ
-drag|dræɡ|ลาก
-draw|drɔː|วาด / ชัก
-drink|drɪŋk|ดื่ม
-eat|iːt|กิน
-exercise|ˈek.sə.saɪz|ออกกำลังกาย
-faint|feɪnt|เป็นลม
-flex|fleks|เกร็งกล้ามเนื้อ
-fold|fəʊld|พับ
-gasp|ɡɑːsp|หอบ / อุทานสูดลมหายใจ
-grab|ɡræb|คว้า
-grasp|ɡrɑːsp|จับแน่น
-grin|ɡrɪn|ยิ้มกว้าง
-grip|ɡrɪp|กำ / จับแน่น
-groan|ɡrəʊn|ครวญคราง
-hiccup|ˈhɪk.ʌp|สะอึก
-hop|hɒp|กระโดดขาเดียว
-hug|hʌɡ|กอด
-jump|dʒʌmp|กระโดด
-kick|kɪk|เตะ
-kneel|niːl|คุกเข่า
-lean|liːn|เอน / พิง
-leap|liːp|ก้าวกระโดด
-lick|lɪk|เลีย
-lift|lɪft|ยก
-march|mɑːtʃ|เดินเป็นแถว / เดินขบวน
-masticate|ˈmæs.tɪ.keɪt|เคี้ยวอาหาร
-mumble|ˈmʌm.bəl|พึมพำ
-nod|nɒd|พยักหน้า
-nudge|nʌdʒ|สะกิด / ดันเบา ๆ
-pace|peɪs|เดินวนไปมา
-pant|pænt|หอบหายใจ
-pinch|pɪntʃ|หยิก
-point|pɔɪnt|ชี้
-punch|pʌntʃ|ชก
-push|pʊʃ|ผลัก
-pull|pʊl|ดึง
-reach|riːtʃ|เอื้อม
-relax|rɪˈlæks|ผ่อนคลาย
-run|rʌn|วิ่ง
-scratch|skrætʃ|เกา
-shake|ʃeɪk|เขย่า / สั่น
-shiver|ˈʃɪv.ər|ตัวสั่นเพราะหนาว
-shrug|ʃrʌɡ|ยักไหล่
-sigh|saɪ|ถอนหายใจ
-skip|skɪp|ก้าวกระโดดเบา ๆ
-slap|slæp|ตบ
-sleep|sliːp|นอนหลับ
-slide|slaɪd|ไถล
-snooze|snuːz|งีบหลับ
-snore|snɔːr|กรน
-soak|səʊk|แช่
-sprint|sprɪnt|วิ่งเร็ว
-squat|skwɒt|ย่อตัว
-squeeze|skwiːz|บีบ / รีด
-stagger|ˈstæɡ.ər|เดินโซเซ
-stamp|stæmp|กระทืบเท้า
-stare|steər|จ้องมอง
-step|step|ก้าว
-stomp|stɒmp|ย่ำเท้าหนัก ๆ
-stoop|stuːp|ก้มตัว
-stretch|stretʃ|ยืดเส้น
-stride|straɪd|ก้าวยาว ๆ
-strike|straɪk|ตี / โจมตี
-stroll|strəʊl|เดินเล่น
-struggle|ˈstrʌɡ.əl|ดิ้นรน
-stumble|ˈstʌm.bəl|สะดุด
-stun|stʌn|ทำให้ช็อก
-sweat|swet|เหงื่อออก
-sway|sweɪ|โยกเอน
-sweltering|ˈswel.tər.ɪŋ|ร้อนอบอ้าว
-swim|swɪm|ว่ายน้ำ
-swing|swɪŋ|แกว่ง / ชิงช้า
-swish|swɪʃ|ส่ายฉวัดเฉวียน
-swivel|ˈswɪv.əl|หมุนตัว
-tack|tæk|ติดหมุด / เปลี่ยนทิศทาง
-tap|tæp|แตะเบา ๆ
-taste|teɪst|ชิม / ลิ้มรส
-tear|teər|ฉีก
-tiptoe|ˈtɪp.təʊ|เขย่ง / เดินปลายเท้า
-toddle|ˈtɒd.əl|เดินเตาะแตะ
-toss|tɒs|โยน
-totter|ˈtɒt.ər|เดินโซเซ
-touch|tʌtʃ|สัมผัส
-trample|ˈtræm.pəl|เหยียบย่ำ
-tread|tred|ย่ำเดิน / เหยียบ
-tremble|ˈtrem.bəl|สั่นเทา
-trip|trɪp|สะดุดล้ม
-trot|trɒt|วิ่งเหยาะ ๆ
-trudge|trʌdʒ|เดินลากเท้าอย่างเหนื่อยล้า
-twirl|twɜːl|หมุนตัว
-twist|twɪst|บิด
-unbend|ʌnˈbend|ยืดตรง
-unclench|ʌnˈklentʃ|คลายมือที่กำ
-uncross|ʌnˈkrɒs|แยกที่ไขว้ออก
-undress|ʌnˈdres|ถอดเสื้อผ้า
-unfold|ʌnˈfəʊld|คลี่ออก
-unlacing|ˈʌnˌleɪ.sɪŋ|การแก้เชือกรองเท้า
-unlock|ʌnˈlɒk|ปลดล็อก
-unpack|ʌnˈpæk|แกะของออก
-unroll|ʌnˈrəʊl|คลี่ม้วนออก
-untangle|ʌnˈtæŋ.ɡəl|แก้ที่พันกัน
-untie|ʌnˈtaɪ|แก้เชือก
-unwind|ʌnˈwaɪnd|คลายออก / ผ่อนคลาย
-unwrap|ʌnˈræp|แกะห่อ
-usher|ˈʌʃ.ər|พาเดินนำ
-utter|ˈʌt.ər|เปล่งเสียง
-vacate|vəˈkeɪt|ย้ายออก
-vault|vɔːlt|กระโดดข้าม
-veer|vɪər|เลี้ยวเปลี่ยนทิศ
-vent|vent|ระบายอารมณ์
-venture|ˈven.tʃər|กล้าเสี่ยงไป
-verify|ˈver.ɪ.faɪ|ตรวจยืนยัน
-vibrate|vaɪˈbreɪt|สั่นสะเทือน
-wade|weɪd|ลุยน้ำ
-waft|wɒft|ลอยมาเบา ๆ
-wager|ˈweɪ.dʒər|เดิมพัน
-wail|weɪl|ร้องคร่ำครวญ
-walk|wɔːk|เดิน
-wallow|ˈwɒl.əʊ|นอนกลิ้ง / จมอยู่กับ
-waltz|wɔːls|เต้นวอลทซ์
-wander|ˈwɒn.dər|เดินเตร็ดเตร่
-wangle|ˈwæŋ.ɡəl|ใช้เล่ห์เอาจนได้
-want|wɒnt|ต้องการ
-ward|wɔːd|ป้องกัน / เฝ้า
-warm|wɔːm|อุ่น / ทำให้อุ่น
-warn|wɔːn|เตือน
-warp|wɔːp|บิดเบี้ยว
-warrant|ˈwɒr.ənt|รับประกัน / สมควรได้รับ
-wash|wɒʃ|ล้าง / ซัก
-waste|weɪst|สิ้นเปลือง
-watch|wɒtʃ|ดู / เฝ้าดู
-water|ˈwɔː.tər|รดน้ำ
-waver|ˈweɪ.vər|ลังเล / สั่นไหว
-wave|weɪv|โบกมือ
-wax|wæks|ขัดเงา / ทาแว็กซ์
-waylay|ˈweɪ.leɪ|ดักซุ่มโจมตี
-weaken|ˈwiː.kən|ทำให้อ่อนแอ
-weaponize|ˈwep.ə.naɪz|ทำให้เป็นอาวุธ
-wear|weər|สวมใส่
-weave|wiːv|ทอ / สาน`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,p:"/"+b+"/",t:c}});
+const RAW=`breathe|briːð|หายใจ|😮‍💨
+blink|blɪŋk|กะพริบตา|😉
+chew|tʃuː|เคี้ยว|😋
+clap|klæp|ปรบมือ|👏
+clench|klentʃ|กำแน่น / กัดแน่น|✊
+crawl|krɔːl|คลาน|🐛
+dance|dɑːns|เต้นรำ|💃
+dig|dɪɡ|ขุด|⛏️
+dive|daɪv|ดำน้ำ / กระโดดน้ำ|🤿
+drag|dræɡ|ลาก|🛷
+draw|drɔː|วาด / ชัก|✏️
+drink|drɪŋk|ดื่ม|🥤
+eat|iːt|กิน|🍽️
+exercise|ˈek.sə.saɪz|ออกกำลังกาย|🏋️
+faint|feɪnt|เป็นลม|😵
+flex|fleks|เกร็งกล้ามเนื้อ|💪
+fold|fəʊld|พับ|🧺
+gasp|ɡɑːsp|หอบ / อุทานสูดลมหายใจ|😲
+grab|ɡræb|คว้า|🫳
+grasp|ɡrɑːsp|จับแน่น|✊
+grin|ɡrɪn|ยิ้มกว้าง|😁
+grip|ɡrɪp|กำ / จับแน่น|🤜
+groan|ɡrəʊn|ครวญคราง|😩
+hiccup|ˈhɪk.ʌp|สะอึก|😳
+hop|hɒp|กระโดดขาเดียว|🐇
+hug|hʌɡ|กอด|🤗
+jump|dʒʌmp|กระโดด|🦘
+kick|kɪk|เตะ|🦵
+kneel|niːl|คุกเข่า|🧎
+lean|liːn|เอน / พิง|🧍
+leap|liːp|ก้าวกระโดด|🐸
+lick|lɪk|เลีย|👅
+lift|lɪft|ยก|🏋️‍♀️
+march|mɑːtʃ|เดินเป็นแถว / เดินขบวน|🪖
+masticate|ˈmæs.tɪ.keɪt|เคี้ยวอาหาร|🦷
+mumble|ˈmʌm.bəl|พึมพำ|🤐
+nod|nɒd|พยักหน้า|🙂
+nudge|nʌdʒ|สะกิด / ดันเบา ๆ|👉
+pace|peɪs|เดินวนไปมา|🚶
+pant|pænt|หอบหายใจ|🥵
+pinch|pɪntʃ|หยิก|🤏
+point|pɔɪnt|ชี้|👆
+punch|pʌntʃ|ชก|🥊
+push|pʊʃ|ผลัก|🚪
+pull|pʊl|ดึง|🪢
+reach|riːtʃ|เอื้อม|🙋
+relax|rɪˈlæks|ผ่อนคลาย|🧘
+run|rʌn|วิ่ง|🏃
+scratch|skrætʃ|เกา|🐱
+shake|ʃeɪk|เขย่า / สั่น|🥶
+shiver|ˈʃɪv.ər|ตัวสั่นเพราะหนาว|🥶
+shrug|ʃrʌɡ|ยักไหล่|🤷
+sigh|saɪ|ถอนหายใจ|😮‍💨
+skip|skɪp|ก้าวกระโดดเบา ๆ|🤸
+slap|slæp|ตบ|🖐️
+sleep|sliːp|นอนหลับ|😴
+slide|slaɪd|ไถล|🛝
+snooze|snuːz|งีบหลับ|⏰
+snore|snɔːr|กรน|💤
+soak|səʊk|แช่|🛁
+sprint|sprɪnt|วิ่งเร็ว|🏃‍♂️
+squat|skwɒt|ย่อตัว|🏋️
+squeeze|skwiːz|บีบ / รีด|🍋
+stagger|ˈstæɡ.ər|เดินโซเซ|🥴
+stamp|stæmp|กระทืบเท้า|👣
+stare|steər|จ้องมอง|👀
+step|step|ก้าว|🪜
+stomp|stɒmp|ย่ำเท้าหนัก ๆ|🦶
+stoop|stuːp|ก้มตัว|🙇
+stretch|stretʃ|ยืดเส้น|🤸‍♀️
+stride|straɪd|ก้าวยาว ๆ|🚶‍♂️
+strike|straɪk|ตี / โจมตี|🥊
+stroll|strəʊl|เดินเล่น|🚶‍♀️
+struggle|ˈstrʌɡ.əl|ดิ้นรน|😖
+stumble|ˈstʌm.bəl|สะดุด|🤕
+stun|stʌn|ทำให้ช็อก|😳
+sweat|swet|เหงื่อออก|💦
+sway|sweɪ|โยกเอน|🎐
+sweltering|ˈswel.tər.ɪŋ|ร้อนอบอ้าว|🥵
+swim|swɪm|ว่ายน้ำ|🏊
+swing|swɪŋ|แกว่ง / ชิงช้า|🏌️
+swish|swɪʃ|ส่ายฉวัดเฉวียน|🧹
+swivel|ˈswɪv.əl|หมุนตัว|🪑
+tack|tæk|ติดหมุด / เปลี่ยนทิศทาง|📌
+tap|tæp|แตะเบา ๆ|👆
+taste|teɪst|ชิม / ลิ้มรส|😛
+tear|teər|ฉีก|🩹
+tiptoe|ˈtɪp.təʊ|เขย่ง / เดินปลายเท้า|🩰
+toddle|ˈtɒd.əl|เดินเตาะแตะ|👶
+toss|tɒs|โยน|🤾
+totter|ˈtɒt.ər|เดินโซเซ|🥴
+touch|tʌtʃ|สัมผัส|🖐️
+trample|ˈtræm.pəl|เหยียบย่ำ|🦶
+tread|tred|ย่ำเดิน / เหยียบ|👟
+tremble|ˈtrem.bəl|สั่นเทา|😰
+trip|trɪp|สะดุดล้ม|🤕
+trot|trɒt|วิ่งเหยาะ ๆ|🐎
+trudge|trʌdʒ|เดินลากเท้าอย่างเหนื่อยล้า|🥾
+twirl|twɜːl|หมุนตัว|🌀
+twist|twɪst|บิด|🔄
+unbend|ʌnˈbend|ยืดตรง|📏
+unclench|ʌnˈklentʃ|คลายมือที่กำ|🖐️
+uncross|ʌnˈkrɒs|แยกที่ไขว้ออก|🦵
+undress|ʌnˈdres|ถอดเสื้อผ้า|👕
+unfold|ʌnˈfəʊld|คลี่ออก|📄
+unlacing|ˈʌnˌleɪ.sɪŋ|การแก้เชือกรองเท้า|👟
+unlock|ʌnˈlɒk|ปลดล็อก|🔓
+unpack|ʌnˈpæk|แกะของออก|🧳
+unroll|ʌnˈrəʊl|คลี่ม้วนออก|🗞️
+untangle|ʌnˈtæŋ.ɡəl|แก้ที่พันกัน|🪢
+untie|ʌnˈtaɪ|แก้เชือก|🎀
+unwind|ʌnˈwaɪnd|คลายออก / ผ่อนคลาย|🧘‍♀️
+unwrap|ʌnˈræp|แกะห่อ|🎁
+usher|ˈʌʃ.ər|พาเดินนำ|🚪
+utter|ˈʌt.ər|เปล่งเสียง|🗣️
+vacate|vəˈkeɪt|ย้ายออก|🚪
+vault|vɔːlt|กระโดดข้าม|🤾‍♂️
+veer|vɪər|เลี้ยวเปลี่ยนทิศ|↪️
+vent|vent|ระบายอารมณ์|😤
+venture|ˈven.tʃər|กล้าเสี่ยงไป|🧗
+verify|ˈver.ɪ.faɪ|ตรวจยืนยัน|✅
+vibrate|vaɪˈbreɪt|สั่นสะเทือน|📳
+wade|weɪd|ลุยน้ำ|🌊
+waft|wɒft|ลอยมาเบา ๆ|🍃
+wager|ˈweɪ.dʒər|เดิมพัน|🎰
+wail|weɪl|ร้องคร่ำครวญ|😭
+walk|wɔːk|เดิน|🚶
+wallow|ˈwɒl.əʊ|นอนกลิ้ง / จมอยู่กับ|🐖
+waltz|wɔːls|เต้นวอลทซ์|🕺
+wander|ˈwɒn.dər|เดินเตร็ดเตร่|🧭
+wangle|ˈwæŋ.ɡəl|ใช้เล่ห์เอาจนได้|🧠
+want|wɒnt|ต้องการ|🤲
+ward|wɔːd|ป้องกัน / เฝ้า|🛡️
+warm|wɔːm|อุ่น / ทำให้อุ่น|♨️
+warn|wɔːn|เตือน|⚠️
+warp|wɔːp|บิดเบี้ยว|🌀
+warrant|ˈwɒr.ənt|รับประกัน / สมควรได้รับ|📜
+wash|wɒʃ|ล้าง / ซัก|🧼
+waste|weɪst|สิ้นเปลือง|🗑️
+watch|wɒtʃ|ดู / เฝ้าดู|👁️
+water|ˈwɔː.tər|รดน้ำ|🚿
+waver|ˈweɪ.vər|ลังเล / สั่นไหว|🤔
+wave|weɪv|โบกมือ|👋
+wax|wæks|ขัดเงา / ทาแว็กซ์|🕯️
+waylay|ˈweɪ.leɪ|ดักซุ่มโจมตี|🥷
+weaken|ˈwiː.kən|ทำให้อ่อนแอ|😞
+weaponize|ˈwep.ə.naɪz|ทำให้เป็นอาวุธ|🗡️
+wear|weər|สวมใส่|👕
+weave|wiːv|ทอ / สาน|🧵`.split("\n").map(l=>{const[a,b,c,e]=l.split("|");return{w:a,p:"/"+b+"/",t:c,e:e}});
 let data=RAW.slice(),tab=0,seen=new Set(),score=0,sec=0,timer=null,voice=null;
 const $=id=>document.getElementById(id),g=$("g");
 function pickVoice(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
@@ -198,7 +198,7 @@ function fmt(){$("t").textContent=String(sec/60|0).padStart(2,"0")+":"+String(se
 function start(){clearInterval(timer);timer=setInterval(()=>{sec++;fmt()},1000)}
 function render(){g.innerHTML="";data.slice(tab*25,tab*25+25).forEach(d=>{
 const c=document.createElement("div");c.className="card"+(seen.has(d.w)?" done":"");
-c.innerHTML=`<div class="in"><div class="fc"><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
+c.innerHTML=`<div class="in"><div class="fc"><div class="em">${d.e}</div><div class="w">${d.w}</div><div class="p">${d.p}</div><button class="sp" title="ฟังเสียง">🔊</button></div><div class="fc bk"><div class="em">${d.e}</div><div class="th">${d.t}</div><div class="p">${d.w}</div></div></div>`;
 c.querySelector(".sp").onclick=e=>{e.stopPropagation();say(d.w)};
 c.onclick=()=>{const f=c.classList.toggle("fl");say(d.w);
 if(f&&!seen.has(d.w)){if(!timer)start();seen.add(d.w);score++;$("s").textContent=score;c.classList.add("done");
