@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flip Card Sentences – Imperative (Commands)</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --h:205; --h2:330;
+  --bg:hsl(var(--h) 60% 96%); --ink:#2f3a38; --muted:#6d7a78; --panel:#ffffffcc; --line:hsl(var(--h) 45% 86%);
+  --acc:hsl(var(--h) 65% 84%); --acc-ink:#24403a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:linear-gradient(160deg,var(--bg),hsl(var(--h2) 70% 96%));color:var(--ink);
+  font-family:"Prompt","Noto Sans Thai","Sarabun",system-ui,sans-serif;min-height:100vh;
+  padding:12px clamp(8px,2vw,24px) 28px;transition:background .5s}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-family:"Baloo 2","Prompt",system-ui,sans-serif;font-weight:800;font-size:clamp(20px,3.2vw,32px);margin:4px 0 2px}
+.sub{margin:0 0 10px;color:var(--muted);font-size:clamp(12px,1.6vw,14px)}
+.top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tabs{display:flex;gap:6px}
+.tab{border:2px solid var(--line);background:var(--panel);color:var(--ink);font:500 14px "Prompt",sans-serif;padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--acc);border-color:hsl(var(--h) 55% 70%);color:var(--acc-ink);font-weight:600}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:5px 12px;min-width:84px;text-align:center}
+.stat b{display:block;font:800 clamp(18px,2.6vw,24px) "Baloo 2",sans-serif;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--muted)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.act{font:500 14px "Prompt",sans-serif;border:0;border-radius:12px;padding:9px 16px;cursor:pointer;color:var(--acc-ink);background:var(--acc);box-shadow:0 3px 0 hsl(var(--h) 50% 70%)}
+button.act.ghost{background:var(--panel);box-shadow:none;border:2px solid var(--line);color:var(--ink)}
+button:focus-visible,select:focus-visible,.card:focus-visible{outline:3px solid hsl(var(--h) 65% 45%);outline-offset:2px}
+.voice{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+select{max-width:230px;font:400 13px "Prompt",sans-serif;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+.msg{min-height:22px;font-size:14px;margin:0 0 8px;color:hsl(var(--h) 40% 30%);font-weight:500}
+
+/* board: always 2 cards per row */
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.6vw,18px);max-width:1000px;margin:0 auto}
+.card{position:relative;aspect-ratio:1/1.22;container-type:inline-size;perspective:1000px;cursor:pointer;background:none;border:0;padding:0;-webkit-tap-highlight-color:transparent;font:inherit;color:inherit}
+.inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.7,.2,1)}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:9cqw;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6cqw 6cqw;overflow:hidden;color:#000}
+.front{background:radial-gradient(120% 90% at 25% 8%,#fff 0%,hsl(var(--h) 80% 95%) 45%,hsl(var(--h) 65% 87%) 100%);
+  box-shadow:0 1.6cqw 0 hsl(var(--h) 50% 77%),0 6cqw 9cqw -3cqw hsl(var(--h) 40% 45%/.45),inset 0 1.5cqw 2.5cqw rgba(255,255,255,.95),inset 0 -4cqw 7cqw hsl(var(--h) 65% 80%/.55)}
+.back{transform:rotateY(180deg);background:radial-gradient(120% 90% at 25% 8%,#fff 0%,hsl(var(--h2) 85% 94%) 45%,hsl(var(--h2) 70% 85%) 100%);
+  box-shadow:0 1.6cqw 0 hsl(var(--h2) 50% 76%),0 6cqw 9cqw -3cqw hsl(var(--h2) 40% 45%/.45),inset 0 1.5cqw 2.5cqw rgba(255,255,255,.95),inset 0 -4cqw 7cqw hsl(var(--h2) 65% 78%/.55)}
+.pic{font-size:25cqw;line-height:1;filter:drop-shadow(0 1cqw 1.2cqw rgba(0,0,0,.22));margin-bottom:3cqw}
+.txt{display:flex;flex-direction:column;align-items:center;width:100%}
+.en b{font-weight:700}
+.en{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-weight:400;color:#000;font-size:8.2cqw;line-height:1.25}
+.ipa{font-family:"Times New Roman",Times,"Liberation Serif",serif;font-weight:400;color:#000;font-size:6.3cqw;line-height:1.25;margin-top:2.2cqw}
+.say{margin-top:3.5cqw;font:500 6.2cqw "Prompt",sans-serif;color:#000;background:rgba(255,255,255,.75);border:.5cqw solid rgba(0,0,0,.2);border-radius:99px;padding:1.2cqw 5cqw;cursor:pointer;box-shadow:0 .8cqw 1.5cqw rgba(0,0,0,.18)}
+.th{font-weight:600;font-size:9cqw;line-height:1.35}
+.en-small{font-family:Arial,Helvetica,sans-serif;font-size:6cqw;color:#000;margin-top:3cqw;opacity:.8}
+.num{position:absolute;left:5cqw;top:3.5cqw;font:600 5cqw "Prompt",sans-serif;color:rgba(0,0,0,.4)}
+.card.seen .front::after{content:"✓";position:absolute;right:5cqw;top:2.5cqw;font:700 7cqw sans-serif;color:#1a8a4a}
+.back .pic{font-size:16cqw;margin-bottom:2cqw}
+
+@media (min-width:760px){
+  .card{aspect-ratio:2.35/1}
+  .face{flex-direction:row;padding:3.5cqw 5cqw;text-align:left;justify-content:flex-start;gap:4cqw;border-radius:6cqw}
+  .pic{font-size:20cqw;margin:0;flex:0 0 24cqw;text-align:center}
+  .txt{align-items:flex-start;flex:1}
+  .en{font-size:5.4cqw}
+  .ipa{font-size:4.3cqw;margin-top:1.4cqw}
+  .say{font-size:3.6cqw;margin-top:2cqw;padding:.7cqw 3cqw}
+  .th{font-size:5.6cqw}
+  .en-small{font-size:3.8cqw;margin-top:1.6cqw}
+  .back .pic{font-size:15cqw;flex-basis:24cqw;margin:0}
+  .back .txt{align-items:flex-start}
+  .num{font-size:3.2cqw;left:3.5cqw;top:2cqw}
+  .card.seen .front::after{font-size:4.2cqw;right:3.5cqw;top:1.5cqw}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📣 Flip Card Sentences · Commands</h1>
+  <p class="sub">Imperative sentences (Commands) · ประธาน “You” ถูกละไว้ (Verb + Object/Complement) — อ่านประโยค ฟังเสียง แล้วแตะการ์ดเพื่อดูคำแปล</p>
+  <div class="top">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="stats">
+      <div class="stat"><b id="time">00:00</b><span>เวลา</span></div>
+      <div class="stat"><b id="score">0</b><span>คะแนน</span></div>
+      <div class="stat"><b id="prog">0/50</b><span>เปิดแล้ว</span></div>
+    </div>
+  </div>
+  <div class="bar">
+    <button class="act" id="restart">🔄 เริ่มเล่นใหม่</button>
+    <button class="act ghost" id="cancel">✖ ยกเลิก</button>
+    <div class="voice"><label for="voice">เสียง</label><select id="voice"></select></div>
+  </div>
+  <p class="msg" id="msg" aria-live="polite">แตะการ์ดใบแรกเพื่อเริ่มจับเวลา</p>
+  <div class="board" id="board"></div>
+</div>
+<script>
+const RAW = `[[Open]] the door.|/ˈəʊpən ðə dɔː/|เปิดประตู|🚪
+[[Close]] the window.|/kləʊz ðə ˈwɪndəʊ/|ปิดหน้าต่าง|🪟
+[[Read]] this book.|/riːd ðɪs bʊk/|อ่านหนังสือเล่มนี้|📖
+[[Write]] your name here.|/raɪt jɔː neɪm hɪə/|เขียนชื่อของคุณที่นี่|✍️
+[[Clean]] your room.|/kliːn jɔː ruːm/|ทำความสะอาดห้องของคุณ|🧹
+[[Wash]] your hands.|/wɒʃ jɔː hændz/|ล้างมือของคุณ|🧼
+[[Eat]] your vegetables.|/iːt jɔː ˈvedʒtəblz/|กินผักของคุณซะ|🥦
+[[Drink]] some water.|/drɪŋk sʌm ˈwɔːtə/|ดื่มน้ำหน่อยสิ|💧
+[[Listen]] to the teacher.|/ˈlɪsn tə ðə ˈtiːtʃə/|ฟังคุณครู|👂
+[[Speak]] English, please.|/spiːk ˈɪŋɡlɪʃ pliːz/|กรุณาพูดภาษาอังกฤษ|🗣️
+[[Turn off]] the light.|/tɜːn ɒf ðə laɪt/|ปิดไฟ|💡
+[[Turn on]] the fan.|/tɜːn ɒn ðə fæn/|เปิดพัดลม|🌬️
+[[Bring]] me a glass of water.|/brɪŋ miː ə ɡlɑːs əv ˈwɔːtə/|เอาน้ำให้ฉันแก้วหนึ่ง|🚰
+[[Take]] your medicine.|/teɪk jɔː ˈmedsn/|ทานยาของคุณซะ|💊
+[[Show]] me your passport.|/ʃəʊ miː jɔː ˈpɑːspɔːt/|แสดงหนังสือเดินทางของคุณให้ฉันดูหน่อย|🛂
+[[Give]] her a present.|/ɡɪv hɜː ə ˈpreznt/|ให้ของขวัญแก่เธอ|🎁
+[[Help]] your mother.|/help jɔː ˈmʌðə/|ช่วยแม่ของคุณ|🤝
+[[Answer]] the phone.|/ˈɑːnsə ðə fəʊn/|รับโทรศัพท์|📱
+[[Pay]] attention here.|/peɪ əˈtenʃn hɪə/|ตั้งใจฟังตรงนี้|🧐
+[[Park]] your car outside.|/pɑːk jɔː kɑː ˌaʊtˈsaɪd/|จอดรถของคุณข้างนอก|🅿️
+[[Follow]] the rules.|/ˈfɒləʊ ðə ruːlz/|ทำตามกฎระเบียบ|📜
+[[Check]] your email.|/tʃek jɔː ˈiːmeɪl/|ตรวจสอบอีเมลของคุณ|📧
+[[Fix]] this computer.|/fɪks ðɪs kəmˈpjuːtə/|ซ่อมคอมพิวเตอร์เครื่องนี้|💻
+[[Wear]] a jacket.|/weər ə ˈdʒækɪt/|สวมเสื้อแจ็คเก็ต|🧥
+[[Make]] your bed.|/meɪk jɔː bed/|จัดเตียงนอนให้เรียบร้อย|🛏️
+[[Be]] quiet, please.|/biː ˈkwaɪət pliːz/|กรุณาเงียบด้วย|🤫
+[[Be]] careful on the road.|/biː ˈkeəfl ɒn ðə rəʊd/|ระมัดระวังตัวบนท้องถนน|⚠️
+[[Lock]] the front door.|/lɒk ðə frʌnt dɔː/|ล็อกประตูหน้า|🔒
+[[Clean]] your shoes.|/kliːn jɔː ʃuːz/|ทำความสะอาดรองเท้าของคุณ|👟
+[[Brush]] your teeth.|/brʌʃ jɔː tiːθ/|แปรงฟันของคุณ|🪥
+[[Comb]] your hair.|/kəʊm jɔː heə/|หวีผมของคุณ|💇
+[[Buy]] some milk.|/baɪ sʌm mɪlk/|ซื้อนมมาหน่อย|🥛
+[[Sell]] your old car.|/sel jɔːr əʊld kɑː/|ขายรถเก่าของคุณซะ|🚗
+[[Send]] this letter.|/send ðɪs ˈletə/|ส่งจดหมายฉบับนี้|📮
+[[Receive]] the package.|/rɪˈsiːv ðə ˈpækɪdʒ/|รับพัสดุ|📦
+[[Catch]] that ball.|/kætʃ ðæt bɔːl/|รับลูกบอลลูกนั้น|🧤
+[[Throw]] the trash [[away]].|/θrəʊ ðə træʃ əˈweɪ/|ทิ้งขยะลงถัง|🗑️
+[[Pick up]] the pen.|/pɪk ʌp ðə pen/|เก็บปากกาขึ้นมา|🖊️
+[[Put on]] your shoes.|/pʊt ɒn jɔː ʃuːz/|ใส่รองเท้าของคุณ|👞
+[[Take off]] your coat.|/teɪk ɒf jɔː kəʊt/|ถอดเสื้อโค้ทของคุณออก|🥼
+[[Draw]] a picture.|/drɔː ə ˈpɪktʃə/|วาดรูปภาพ|🖼️
+[[Paint]] the wall white.|/peɪnt ðə wɔːl waɪt/|ทาสีผนังเป็นสีขาว|🎨
+[[Study]] your lessons.|/ˈstʌdi jɔː ˈlesnz/|ทบทวนบทเรียนของคุณ|📚
+[[Practice]] your piano.|/ˈpræktɪs jɔː piˈænəʊ/|ฝึกซ้อมเปียโนของคุณ|🎹
+[[Call]] me tonight.|/kɔːl miː təˈnaɪt/|โทรหาฉันคืนนี้นะ|📞
+[[Text]] your brother.|/tekst jɔː ˈbrʌðə/|ส่งข้อความหาพี่ชาย/น้องชายของคุณ|💬
+[[Find]] your keys.|/faɪnd jɔː kiːz/|หากุญแจของคุณให้เจอ|🔑
+[[Lose]] the bad habits.|/luːz ðə bæd ˈhæbɪts/|ละนิสัยแย่ ๆ ซะ|🚭
+[[Keep]] the secret.|/kiːp ðə ˈsiːkrət/|เก็บเป็นความลับด้วย|🤐
+[[Share]] your toys.|/ʃeə jɔː tɔɪz/|แบ่งปันของเล่นของคุณ|🧸
+[[Save]] your file.|/seɪv jɔː faɪl/|บันทึกไฟล์ของคุณ|💾
+[[Print]] this document.|/prɪnt ðɪs ˈdɒkjʊmənt/|พิมพ์เอกสารฉบับนี้|🖨️
+[[Choose]] your favorite color.|/tʃuːz jɔː ˈfeɪvərɪt ˈkʌlə/|เลือกสีที่คุณชอบ|🌈
+[[Count]] the money.|/kaʊnt ðə ˈmʌni/|นับเงิน|💰
+[[Measure]] the table.|/ˈmeʒə ðə ˈteɪbl/|วัดขนาดโต๊ะ|📏
+[[Cut]] the paper.|/kʌt ðə ˈpeɪpə/|ตัดกระดาษ|✂️
+[[Fold]] the clothes.|/fəʊld ðə kləʊðz/|พับผ้า|👕
+[[Stir]] the soup.|/stɜː ðə suːp/|คนซุป|🥣
+[[Taste]] this food.|/teɪst ðɪs fuːd/|ชิมอาหารนี้|😋
+[[Smell]] the flower.|/smel ðə ˈflaʊə/|ดมดอกไม้|🌸
+[[Touch]] the screen.|/tʌtʃ ðə skriːn/|สัมผัสหน้าจอ|👆
+[[Hear]] my voice.|/hɪə maɪ vɔɪs/|ฟังเสียงของฉัน|🎙️
+[[Watch]] the movie.|/wɒtʃ ðə ˈmuːvi/|ดูภาพยนตร์|🎬
+[[Show]] your ticket.|/ʃəʊ jɔː ˈtɪkɪt/|แสดงตั๋วของคุณ|🎫
+[[Hide]] the present.|/haɪd ðə ˈpreznt/|ซ่อนของขวัญ|🫣
+[[Seek]] professional help.|/siːk prəˈfeʃnəl help/|ขอความช่วยเหลือจากผู้เชี่ยวชาญ|🆘
+[[Build]] a sandcastle.|/bɪld ə ˈsændkɑːsl/|สร้างปราสาททราย|🏰
+[[Design]] a new logo.|/dɪˈzaɪn ə njuː ˈləʊɡəʊ/|ออกแบบโลโก้ใหม่|📐
+[[Plant]] a tree.|/plɑːnt ə triː/|ปลูกต้นไม้|🌳
+[[Water]] the plants.|/ˈwɔːtə ðə plɑːnts/|รดน้ำต้นไม้|💦
+[[Feed]] the cat.|/fiːd ðə kæt/|ให้อาหารแมว|🐈
+[[Walk]] the dog.|/wɔːk ðə dɒɡ/|พาหมาไปเดินเล่น|🐕
+[[Run]] faster.|/rʌn ˈfɑːstə/|วิ่งให้เร็วขึ้น|🏃
+[[Jump]] over the box.|/dʒʌmp ˈəʊvə ðə bɒks/|กระโดดข้ามกล่อง|🦘
+[[Climb]] the mountain.|/klaɪm ðə ˈmaʊntɪn/|ปีนภูเขา|🧗
+[[Cross]] the street.|/krɒs ðə striːt/|ข้ามถนน|🚸
+[[Drive]] carefully.|/draɪv ˈkeəfəli/|ขับรถด้วยความระมัดระวัง|🚙
+[[Stop]] the car.|/stɒp ðə kɑː/|หยุดรถ|🛑
+[[Start]] the engine.|/stɑːt ði ˈendʒɪn/|สตาร์ทเครื่องยนต์|🚦
+[[Join]] our team.|/dʒɔɪn ˈaʊə tiːm/|เข้าร่วมทีมของเรา|👥
+[[Invite]] your friends.|/ɪnˈvaɪt jɔː frendz/|เชิญเพื่อน ๆ ของคุณมา|💌
+[[Welcome]] our guests.|/ˈwelkəm ˈaʊə ɡests/|ต้อนรับแขกของเรา|🤗
+[[Introduce]] yourself.|/ˌɪntrəˈdjuːs jɔːˈself/|แนะนำตัวของคุณ|👋
+[[Express]] your feelings.|/ɪkˈspres jɔː ˈfiːlɪŋz/|แสดงความรู้สึกของคุณออกมา|😊
+[[Accept]] the offer.|/əkˈsept ði ˈɒfə/|ยอมรับข้อเสนอ|✅
+[[Refuse]] bad offers.|/rɪˈfjuːz bæd ˈɒfəz/|ปฏิเสธข้อเสนอที่ไม่ดี|🚫
+[[Trust]] me.|/trʌst miː/|เชื่อใจฉัน|🫶
+[[Doubt]] his story.|/daʊt hɪz ˈstɔːri/|สงสัยเรื่องราวของเขา|🤨
+[[Imagine]] a better world.|/ɪˈmædʒɪn ə ˈbetə wɜːld/|ลองจินตนาการถึงโลกที่ดีกว่า|🌍
+[[Expect]] success.|/ɪkˈspekt səkˈses/|คาดหวังความสำเร็จ|🏆
+[[Prepare]] dinner.|/prɪˈpeə ˈdɪnə/|เตรียมอาหารเย็น|🍳
+[[Arrange]] the meeting.|/əˈreɪndʒ ðə ˈmiːtɪŋ/|จัดการประชุม|📅
+[[Organize]] your desk.|/ˈɔːɡənaɪz jɔː desk/|จัดโต๊ะทำงานของคุณให้เป็นระเบียบ|🗄️
+[[Plan]] your trip.|/plæn jɔː trɪp/|วางแผนการเดินทางของคุณ|🗺️
+[[Solve]] this puzzle.|/sɒlv ðɪs ˈpʌzl/|แก้ปริศนานี้|🧩
+[[Complete]] your homework.|/kəmˈpliːt jɔː ˈhəʊmwɜːk/|ทำการบ้านให้เสร็จ|📝
+[[Submit]] your report.|/səbˈmɪt jɔː rɪˈpɔːt/|ส่งรายงานของคุณ|📤
+[[Protect]] your skin.|/prəˈtekt jɔː skɪn/|ปกป้องผิวของคุณ|🧴
+[[Warn]] your brother.|/wɔːn jɔː ˈbrʌðə/|เตือนพี่ชาย/น้องชายของคุณ|🚨
+[[Enjoy]] your life.|/ɪnˈdʒɔɪ jɔː laɪf/|สนุกกับชีวิตของคุณ|🎉`;
+const ITEMS = RAW.trim().split("\n").map(l=>{const [en,ipa,th,em]=l.split("|");const plain=en.replace(/\[\[|\]\]/g,"");const html=en.replace(/\[\[(.+?)\]\]/g,"<b>$1</b>");return {en:plain,html,ipa,th,em};});
+const PER=50, TABS=Math.ceil(ITEMS.length/PER);
+const HUES=[205,48], HUES2=[330,150];
+const $=id=>document.getElementById(id);
+const board=$("board"), tabsEl=$("tabs");
+let cur=0;
+const S=Array.from({length:TABS},()=>newState());
+function newState(){return {order:null,flipped:new Set(),opened:new Set(),score:0,secs:0,running:false,done:false}}
+function ensureOrder(t){if(!S[t].order)S[t].order=[...Array(Math.min(PER,ITEMS.length-t*PER)).keys()]}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* voice */
+let voices=[],chosen=null;
+const MALE=/daniel|george|ryan|arthur|oliver|thomas|james|google uk english male|male|guy|alex|fred/i;
+function loadVoices(){
+  if(!("speechSynthesis" in window))return;
+  voices=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const sc=v=>(MALE.test(v.name)?4:0)+(/en[-_]GB/i.test(v.lang)?3:0)+(v.localService===false?1:0)+(/natural|neural|online/i.test(v.name)?2:0);
+  voices.sort((a,b)=>sc(b)-sc(a));
+  const sel=$("voice"),prev=sel.value;
+  sel.innerHTML=voices.length?voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join(""):`<option>ไม่พบเสียงในอุปกรณ์</option>`;
+  if(voices.length){sel.value=prev&&voices[prev]?prev:0;chosen=voices[sel.value]}
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+$("voice").addEventListener("change",e=>{chosen=voices[e.target.value];speak("Hello. This is my voice.")});
+function speak(text){
+  if(!("speechSynthesis" in window))return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="en-GB"; if(chosen){u.voice=chosen;u.lang=chosen.lang}
+    u.pitch=1.15; u.rate=0.88;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* render */
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderTabs(){
+  tabsEl.innerHTML="";
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement("button");
+    b.className="tab";b.role="tab";b.setAttribute("aria-selected",t===cur);
+    b.textContent=`หน้า ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,ITEMS.length)})`;
+    b.onclick=()=>{cur=t;render()};
+    tabsEl.appendChild(b);
+  }
+}
+function render(){
+  const r=document.documentElement.style;
+  r.setProperty("--h",HUES[cur%HUES.length]);r.setProperty("--h2",HUES2[cur%HUES2.length]);
+  renderTabs();ensureOrder(cur);
+  const st=S[cur];board.innerHTML="";
+  st.order.forEach(idx=>{
+    const w=ITEMS[cur*PER+idx];
+    const c=document.createElement("div");
+    c.className="card"+(st.flipped.has(idx)?" flipped":"")+(st.opened.has(idx)?" seen":"");
+    c.tabIndex=0;c.setAttribute("role","button");
+    c.setAttribute("aria-label",`${w.en} แตะเพื่อพลิกดูคำแปล`);
+    c.innerHTML=`<div class="inner">
+      <div class="face front"><span class="num">${cur*PER+idx+1}</span>
+        <div class="pic">${w.em}</div>
+        <div class="txt"><div class="en">${w.html}</div><div class="ipa">${w.ipa}</div>
+        <button class="say" aria-label="ฟังประโยค">🔊 ฟังประโยค</button></div></div>
+      <div class="face back"><div class="pic">${w.em}</div>
+        <div class="txt"><div class="th">${w.th}</div><div class="en-small">${w.en}</div></div></div></div>`;
+    c.addEventListener("click",e=>{
+      if(e.target.closest(".say")){e.stopPropagation();speak(w.en);return}
+      flip(idx,c);
+    });
+    c.addEventListener("keydown",e=>{if(e.target===c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();flip(idx,c)}});
+    board.appendChild(c);
+  });
+  updateStats();
+  $("msg").textContent=st.done?`🎉 จบหน้านี้แล้ว! เวลา ${fmt(st.secs)} คะแนน ${st.score}`:
+    st.running?"กำลังเล่น… เปิดให้ครบทุกใบ":(st.opened.size?"หยุดไว้ — แตะการ์ดเพื่อเล่นต่อ":"แตะการ์ดใบแรกเพื่อเริ่มจับเวลา");
+}
+function updateStats(){
+  const st=S[cur];
+  $("time").textContent=fmt(st.secs);$("score").textContent=st.score;
+  $("prog").textContent=`${st.opened.size}/${st.order.length}`;
+}
+function flip(idx,el){
+  const st=S[cur];
+  if(!st.running&&!st.done){st.running=true;$("msg").textContent="กำลังเล่น… เปิดให้ครบทุกใบ"}
+  if(st.flipped.has(idx)){st.flipped.delete(idx);el.classList.remove("flipped")}
+  else{
+    st.flipped.add(idx);el.classList.add("flipped");
+    if(!st.opened.has(idx)){st.opened.add(idx);if(!st.done)st.score+=10;el.classList.add("seen")}
+  }
+  if(!st.done&&st.opened.size===st.order.length){
+    st.done=true;st.running=false;
+    $("msg").textContent=`🎉 เยี่ยม! เปิดครบ ${st.order.length} ใบ ใช้เวลา ${fmt(st.secs)} ได้ ${st.score} คะแนน`;
+  }
+  updateStats();
+}
+$("restart").onclick=()=>{
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  S[cur]=newState();ensureOrder(cur);shuffle(S[cur].order);
+  render();$("msg").textContent="เริ่มใหม่แล้ว — สลับตำแหน่งการ์ดให้ใหม่";
+};
+$("cancel").onclick=()=>{
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  const o=S[cur].order;S[cur]=newState();S[cur].order=o;
+  render();$("msg").textContent="ยกเลิกรอบนี้แล้ว — ล้างเวลาและคะแนนเรียบร้อย";
+};
+setInterval(()=>{const st=S[cur];if(st.running&&!st.done){st.secs++;updateStats()}},1000);
+render();
+</script>
+</body>
+</html>

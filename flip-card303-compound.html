@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flip Card Sentences – Compound (IC + and/but/or + IC)</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --h:178; --h2:265;
+  --bg:hsl(var(--h) 60% 96%); --ink:#2f3a38; --muted:#6d7a78; --panel:#ffffffcc; --line:hsl(var(--h) 45% 86%);
+  --acc:hsl(var(--h) 65% 84%); --acc-ink:#24403a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:linear-gradient(160deg,var(--bg),hsl(var(--h2) 70% 96%));color:var(--ink);
+  font-family:"Prompt","Noto Sans Thai","Sarabun",system-ui,sans-serif;min-height:100vh;
+  padding:12px clamp(8px,2vw,24px) 28px;transition:background .5s}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-family:"Baloo 2","Prompt",system-ui,sans-serif;font-weight:800;font-size:clamp(20px,3.2vw,32px);margin:4px 0 2px}
+.sub{margin:0 0 10px;color:var(--muted);font-size:clamp(12px,1.6vw,14px)}
+.top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tabs{display:flex;gap:6px}
+.tab{border:2px solid var(--line);background:var(--panel);color:var(--ink);font:500 14px "Prompt",sans-serif;padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--acc);border-color:hsl(var(--h) 55% 70%);color:var(--acc-ink);font-weight:600}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:5px 12px;min-width:84px;text-align:center}
+.stat b{display:block;font:800 clamp(18px,2.6vw,24px) "Baloo 2",sans-serif;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--muted)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.act{font:500 14px "Prompt",sans-serif;border:0;border-radius:12px;padding:9px 16px;cursor:pointer;color:var(--acc-ink);background:var(--acc);box-shadow:0 3px 0 hsl(var(--h) 50% 70%)}
+button.act.ghost{background:var(--panel);box-shadow:none;border:2px solid var(--line);color:var(--ink)}
+button:focus-visible,select:focus-visible,.card:focus-visible{outline:3px solid hsl(var(--h) 65% 45%);outline-offset:2px}
+.voice{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+select{max-width:230px;font:400 13px "Prompt",sans-serif;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:var(--panel);color:var(--ink)}
+.msg{min-height:22px;font-size:14px;margin:0 0 8px;color:hsl(var(--h) 40% 30%);font-weight:500}
+
+/* board: always 2 cards per row */
+.board{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(8px,1.6vw,18px);max-width:1000px;margin:0 auto}
+.card{position:relative;aspect-ratio:1/1.42;container-type:inline-size;perspective:1000px;cursor:pointer;background:none;border:0;padding:0;-webkit-tap-highlight-color:transparent;font:inherit;color:inherit}
+.inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.7,.2,1)}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:9cqw;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6cqw 6cqw;overflow:hidden;color:#000}
+.front{background:radial-gradient(120% 90% at 25% 8%,#fff 0%,hsl(var(--h) 80% 95%) 45%,hsl(var(--h) 65% 87%) 100%);
+  box-shadow:0 1.6cqw 0 hsl(var(--h) 50% 77%),0 6cqw 9cqw -3cqw hsl(var(--h) 40% 45%/.45),inset 0 1.5cqw 2.5cqw rgba(255,255,255,.95),inset 0 -4cqw 7cqw hsl(var(--h) 65% 80%/.55)}
+.back{transform:rotateY(180deg);background:radial-gradient(120% 90% at 25% 8%,#fff 0%,hsl(var(--h2) 85% 94%) 45%,hsl(var(--h2) 70% 85%) 100%);
+  box-shadow:0 1.6cqw 0 hsl(var(--h2) 50% 76%),0 6cqw 9cqw -3cqw hsl(var(--h2) 40% 45%/.45),inset 0 1.5cqw 2.5cqw rgba(255,255,255,.95),inset 0 -4cqw 7cqw hsl(var(--h2) 65% 78%/.55)}
+.pic{font-size:25cqw;line-height:1;filter:drop-shadow(0 1cqw 1.2cqw rgba(0,0,0,.22));margin-bottom:3cqw}
+.txt{display:flex;flex-direction:column;align-items:center;width:100%}
+.en b{font-weight:700}
+.en{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-weight:400;color:#000;font-size:6.9cqw;line-height:1.28}
+.ipa{font-family:"Times New Roman",Times,"Liberation Serif",serif;font-weight:400;color:#000;font-size:5.4cqw;line-height:1.25;margin-top:2cqw}
+.say{margin-top:3.5cqw;font:500 5.4cqw "Prompt",sans-serif;color:#000;background:rgba(255,255,255,.75);border:.5cqw solid rgba(0,0,0,.2);border-radius:99px;padding:1.2cqw 5cqw;cursor:pointer;box-shadow:0 .8cqw 1.5cqw rgba(0,0,0,.18)}
+.th{font-weight:600;font-size:8cqw;line-height:1.35}
+.en-small{font-family:Arial,Helvetica,sans-serif;font-size:6cqw;color:#000;margin-top:3cqw;opacity:.8}
+.num{position:absolute;left:5cqw;top:3.5cqw;font:600 5cqw "Prompt",sans-serif;color:rgba(0,0,0,.4)}
+.card.seen .front::after{content:"✓";position:absolute;right:5cqw;top:2.5cqw;font:700 7cqw sans-serif;color:#1a8a4a}
+.back .pic{font-size:16cqw;margin-bottom:2cqw}
+
+@media (min-width:760px){
+  .card{aspect-ratio:2/1}
+  .face{flex-direction:row;padding:3.5cqw 5cqw;text-align:left;justify-content:flex-start;gap:4cqw;border-radius:6cqw}
+  .pic{font-size:20cqw;margin:0;flex:0 0 24cqw;text-align:center}
+  .txt{align-items:flex-start;flex:1}
+  .en{font-size:4.6cqw}
+  .ipa{font-size:3.7cqw;margin-top:1.2cqw}
+  .say{font-size:3.1cqw;margin-top:2cqw;padding:.7cqw 3cqw}
+  .th{font-size:5cqw}
+  .en-small{font-size:3.8cqw;margin-top:1.6cqw}
+  .back .pic{font-size:15cqw;flex-basis:24cqw;margin:0}
+  .back .txt{align-items:flex-start}
+  .num{font-size:3.2cqw;left:3.5cqw;top:2cqw}
+  .card.seen .front::after{font-size:4.2cqw;right:3.5cqw;top:1.5cqw}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🔗 Flip Card Sentences · Compound</h1>
+  <p class="sub">2.1 Compound sentences · IC + and / but / or + IC (เชื่อม 2 ความคิด) — อ่านประโยค ฟังเสียง แล้วแตะการ์ดเพื่อดูคำแปล</p>
+  <div class="top">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="stats">
+      <div class="stat"><b id="time">00:00</b><span>เวลา</span></div>
+      <div class="stat"><b id="score">0</b><span>คะแนน</span></div>
+      <div class="stat"><b id="prog">0/50</b><span>เปิดแล้ว</span></div>
+    </div>
+  </div>
+  <div class="bar">
+    <button class="act" id="restart">🔄 เริ่มเล่นใหม่</button>
+    <button class="act ghost" id="cancel">✖ ยกเลิก</button>
+    <div class="voice"><label for="voice">เสียง</label><select id="voice"></select></div>
+  </div>
+  <p class="msg" id="msg" aria-live="polite">แตะการ์ดใบแรกเพื่อเริ่มจับเวลา</p>
+  <div class="board" id="board"></div>
+</div>
+<script>
+const RAW = `She [[studied]] hard, and she [[passed]] the exam.|/ʃiː ˈstʌdid hɑːd, ænd ʃiː pɑːst ði ɪɡˈzæm/|เธอเรียนอย่างหนัก และเธอสอบผ่าน|📚
+He [[wanted]] to [[buy]] a car, but he [[had]] no money.|/hiː ˈwɒntɪd tə baɪ ə kɑː, bʌt hiː hæd nəʊ ˈmʌni/|เขาต้องการซื้อรถ แต่เขาไม่มีเงิน|🚗
+You can [[drink]] coffee, or you can [[have]] tea.|/juː kæn drɪŋk ˈkɒfi, ɔː juː kæn hæv tiː/|คุณสามารถดื่มกาแฟ หรือคุณจะดื่มชาก็ได้|☕
+The sun [[shines]] brightly, and the birds [[sing]].|/ðə sʌn ʃaɪnz ˈbraɪtli, ænd ðə bɜːdz sɪŋ/|ดวงอาทิตย์ส่องแสงเจิดจ้า และนกก็ร้องเพลง|☀️
+It was [[raining]] heavily, but they [[went]] outside.|/ɪt wɒz ˈreɪnɪŋ ˈhevɪli, bʌt ðeɪ went ˌaʊtˈsaɪd/|ฝนตกหนักมาก แต่พวกเขาออกไปข้างนอก|🌧️
+We must [[hurry up]], or we will [[miss]] the train.|/wiː mʌst ˈhʌri ʌp, ɔː wiː wɪl mɪs ðə treɪn/|เราต้องรีบหน่อย ไม่งั้นเราจะตกรถไฟ|🏃
+She [[cooked]] dinner, and her husband [[washed]] the dishes.|/ʃiː kʊkt ˈdɪnə, ænd hɜː ˈhʌzbənd wɒʃt ðə ˈdɪʃɪz/|เธอทำอาหารเย็น และสามีของเธอก็ล้างจาน|🍳
+He [[tried]] to [[open]] the door, but it was [[locked]].|/hiː traɪd tʊ ˈəʊpən ðə dɔː, bʌt ɪt wɒz lɒkt/|เขาพยายามเปิดประตู แต่มันถูกล็อกไว้|🔒
+You can [[stay]] here, or you can [[come]] with us.|/juː kæn steɪ hɪə, ɔː juː kæn kʌm wɪð ʌs/|คุณจะอยู่ที่นี่ หรือคุณจะมากับพวกเราก็ได้|🏠
+The dog [[barked]] loudly, and the cat [[ran away]].|/ðə dɒɡ bɑːkt ˈlaʊdli, ænd ðə kæt ræn əˈweɪ/|สุนัขเห่าเสียงดัง และแมวก็วิ่งหนีไป|🐕
+She [[likes]] [[reading]] books, but she [[hates]] [[watching]] movies.|/ʃiː laɪks ˈriːdɪŋ bʊks, bʌt ʃiː heɪts ˈwɒtʃɪŋ ˈmuːviz/|เธอชอบอ่านหนังสือ แต่เธอเกลียดการดูหนัง|📖
+[[Complete]] this task now, or [[leave]] the room.|/kəmˈpliːt ðɪs tɑːsk naʊ, ɔː liːv ðə ruːm/|ทำงานนี้ให้เสร็จเดี๋ยวนี้ หรือไม่งั้นก็ออกจากห้องไป|✅
+He [[bought]] a new computer, and he [[installed]] the software.|/hiː bɔːt ə njuː kəmˈpjuːtə, ænd hiː ɪnˈstɔːld ðə ˈsɒftweə/|เขาซื้อคอมพิวเตอร์ใหม่ และเขาติดตั้งซอฟต์แวร์เรียบร้อย|💻
+The food [[looked]] delicious, but it [[tasted]] terrible.|/ðə fuːd lʊkt dɪˈlɪʃəs, bʌt ɪt ˈteɪstɪd ˈterəbl/|อาหารดูน่าอร่อย แต่มันมีรสชาติแย่มาก|🤢
+We can [[watch]] a movie, or we can [[play]] games.|/wiː kæn wɒtʃ ə ˈmuːvi, ɔː wiː kæn pleɪ ɡeɪmz/|พวกเราสามารถดูหนัง หรือพวกเราสามารถเล่นเกมกันก็ได้|🎬
+She [[woke up]] early, and she [[prepared]] breakfast.|/ʃiː wəʊk ʌp ˈɜːli, ænd ʃiː prɪˈpeəd ˈbrekfəst/|เธอตื่นนอนแต่เช้า และเธอเตรียมอาหารเช้า|⏰
+The phone [[rang]] several times, but nobody [[answered]] it.|/ðə fəʊn ræŋ ˈsevrəl taɪmz, bʌt ˈnəʊbədi ˈɑːnsəd ɪt/|โทรศัพท์ดังหลายครั้ง แต่ไม่มีใครรับสายเลย|📞
+You should [[wear]] a jacket, or you will [[catch]] a cold.|/juː ʃʊd weər ə ˈdʒækɪt, ɔː juː wɪl kætʃ ə kəʊld/|คุณควรสวมเสื้อแจ็คเก็ต ไม่งั้นคุณจะเป็นหวัด|🧥
+They [[cleaned]] the house, and they [[decorated]] the living room.|/ðeɪ kliːnd ðə haʊs, ænd ðeɪ ˈdekəreɪtɪd ðə ˈlɪvɪŋ ruːm/|พวกเขาทำความสะอาดบ้าน และพวกเขาตกแต่งห้องนั่งเล่น|🧹
+He [[studied]] French for years, but he still [[speaks]] poorly.|/hiː ˈstʌdid frentʃ fə jɪəz, bʌt hiː stɪl spiːks ˈpɔːli/|เขาเรียนภาษาฝรั่งเศสมาหลายปี แต่เขายังคงพูดได้ไม่ดีนัก|🗣️
+[[Tell]] me the truth, or I will [[get]] angry.|/tel miː ðə truːθ, ɔː aɪ wɪl ɡet ˈæŋɡri/|บอกความจริงฉันมา ไม่งั้นฉันจะโกรธนะ|😠
+The wind [[blew]] strongly, and the lights [[went out]].|/ðə wɪnd bluː ˈstrɒŋli, ænd ðə laɪts went aʊt/|ลมพัดแรงมาก และไฟก็ดับลง|💨
+She [[lost]] her keys, but she [[found]] them later.|/ʃiː lɒst hɜː kiːz, bʌt ʃiː faʊnd ðəm ˈleɪtə/|เธอทำกุญแจหาย แต่เธอหาพบมันเจอในเวลาต่อมา|🔑
+We can [[go]] to the beach, or we can [[visit]] a museum.|/wiː kæn ɡəʊ tə ðə biːtʃ, ɔː wiː kæn ˈvɪzɪt ə mjuˈziːəm/|พวกเราสามารถไปเที่ยวชายหาด หรือพวกเราจะไปเยี่ยมชมพิพิธภัณฑ์ก็ได้|🏖️
+He [[finished]] his work, and he [[went]] home.|/hiː ˈfɪnɪʃt hɪz wɜːk, ænd hiː went həʊm/|เขาทำงานเสร็จเรียบร้อย และเขากลับบ้าน|🏁
+The test [[was]] very difficult, but she [[got]] an A.|/ðə test wɒz ˈveri ˈdɪfɪkəlt, bʌt ʃiː ɡɒt ən eɪ/|การสอบยากมาก แต่เธอได้เกรด A|💯
+She [[wanted]] to [[go]] to the party, but she [[was]] too tired.|/ʃiː ˈwɒntɪd tə ɡəʊ tə ðə ˈpɑːti, bʌt ʃiː wɒz tuː ˈtaɪəd/|เธออยากไปงานปาร์ตี้ แต่เธอเหนื่อยเกินไป|🥳
+He [[saved]] enough money, and he [[bought]] a new house.|/hiː seɪvd ɪˈnʌf ˈmʌni, ænd hiː bɔːt ə njuː haʊs/|เขาเก็บเงินได้พอ และเขาซื้อบ้านหลังใหม่|🐷
+You can [[write]] an essay, or you can [[give]] a presentation.|/juː kæn raɪt ən ˈeseɪ, ɔː juː kæn ɡɪv ə ˌpreznˈteɪʃn/|คุณสามารถเขียนเรียงความ หรือคุณจะนำเสนอหน้าชั้นก็ได้|✍️
+The train [[arrived]] on time, and the passengers [[got off]] quickly.|/ðə treɪn əˈraɪvd ɒn taɪm, ænd ðə ˈpæsɪndʒəz ɡɒt ɒf ˈkwɪkli/|รถไฟมาถึงตรงเวลา และผู้โดยสารก็ลงจากรถอย่างรวดเร็ว|🚆
+She [[practices]] playing the piano daily, but she still [[makes]] mistakes.|/ʃiː ˈpræktɪsɪz ˈpleɪɪŋ ðə piˈænəʊ ˈdeɪli, bʌt ʃiː stɪl meɪks mɪˈsteɪks/|เธอฝึกเล่นเปียโนทุกวัน แต่เธอก็ยังคงทำผิดพลาด|🎹
+[[Open]] the window, or the room will [[become]] stuffy.|/ˈəʊpən ðə ˈwɪndəʊ, ɔː ðə ruːm wɪl bɪˈkʌm ˈstʌfi/|เปิดหน้าต่างซะ ไม่งั้นห้องจะอับทึบ|🪟
+He [[forgot]] his umbrella, and he [[got]] wet in the rain.|/hiː fəˈɡɒt hɪz ʌmˈbrelə, ænd hiː ɡɒt wet ɪn ðə reɪn/|เขาลืมร่ม และเขาตัวเปียกฝน|☔
+The restaurant [[served]] great food, but the service [[was]] very slow.|/ðə ˈrestrɒnt sɜːvd ɡreɪt fuːd, bʌt ðə ˈsɜːvɪs wɒz ˈveri sləʊ/|ร้านอาหารเสิร์ฟอาหารยอดเยี่ยม แต่บริการช้ามาก|🍽️
+You must [[submit]] your report today, or you will [[lose]] points.|/juː mʌst səbˈmɪt jɔː rɪˈpɔːt təˈdeɪ, ɔː juː wɪl luːz pɔɪnts/|คุณต้องส่งรายงานวันนี้ ไม่งั้นคุณจะถูกหักคะแนน|📤
+She [[opened]] her laptop, and she [[started]] [[typing]] an email.|/ʃiː ˈəʊpənd hɜː ˈlæptɒp, ænd ʃiː ˈstɑːtɪd ˈtaɪpɪŋ ən ˈiːmeɪl/|เธอเปิดแล็ปท็อป และเธอเริ่มพิมพ์อีเมล|⌨️
+He [[looked]] everywhere for his wallet, but he could not [[find]] it.|/hiː lʊkt ˈevriweə fə hɪz ˈwɒlɪt, bʌt hiː kʊd nɒt faɪnd ɪt/|เขาหากระเป๋าเงินทุกที่ แต่เขาหาไม่พบ|🔍
+We can [[order]] pizza, or we can [[cook]] pasta at home.|/wiː kæn ˈɔːdə ˈpiːtsə, ɔː wiː kæn kʊk ˈpæstə ət həʊm/|เราสามารถสั่งพิซซ่า หรือเราจะทำพาสตากินเองที่บ้านก็ได้|🍕
+The sun [[went down]], and the stars [[appeared]] in the sky.|/ðə sʌn went daʊn, ænd ðə stɑːz əˈpɪəd ɪn ðə skaɪ/|ดวงอาทิตย์ตกดิน และดวงดาวก็ปรากฏขึ้นบนท้องฟ้า|🌇
+She [[loves]] animals, but she [[has]] a bad allergy to cats.|/ʃiː lʌvz ˈænɪmlz, bʌt ʃiː hæz ə bæd ˈælədʒi tə kæts/|เธอรักสัตว์ แต่เธอกลับแพ้แมวอย่างรุนแรง|🐾
+[[Hurry up]], or we will [[miss]] the flight.|/ˈhʌri ʌp, ɔː wiː wɪl mɪs ðə flaɪt/|รีบหน่อย ไม่งั้นเราจะตกเครื่องบิน|✈️
+He [[checked]] his phone, and he [[smiled]] happily.|/hiː tʃekt hɪz fəʊn, ænd hiː smaɪld ˈhæpɪli/|เขาเช็กโทรศัพท์ และเขาก็ยิ้มอย่างมีความสุข|📱
+The jacket [[looked]] stylish, but it [[felt]] very uncomfortable.|/ðə ˈdʒækɪt lʊkt ˈstaɪlɪʃ, bʌt ɪt felt ˈveri ʌnˈkʌmftəbl/|เสื้อแจ็คเก็ตดูมีสไตล์ แต่สวมใส่แล้วอึดอัดมาก|😖
+You can [[use]] my computer, or you can [[borrow]] the library laptop.|/juː kæn juːz maɪ kəmˈpjuːtə, ɔː juː kæn ˈbɒrəʊ ðə ˈlaɪbrəri ˈlæptɒp/|คุณสามารถใช้คอมพิวเตอร์ของฉัน หรือจะยืมแล็ปท็อปห้องสมุดก็ได้|🖥️
+She [[washed]] the clothes, and she [[hung]] them outside.|/ʃiː wɒʃt ðə kləʊðz, ænd ʃiː hʌŋ ðəm ˌaʊtˈsaɪd/|เธอซักผ้า และเธอนำมันไปตากไว้ข้างนอก|🧺
+They [[planned]] a picnic, but it [[started]] to rain.|/ðeɪ plænd ə ˈpɪknɪk, bʌt ɪt ˈstɑːtɪd tə reɪn/|พวกเขาวางแผนจะไปปิกนิก แต่ฝนดันตกลงมาซะก่อน|🌦️
+[[Follow]] these instructions carefully, or the machine will [[break]].|/ˈfɒləʊ ðiːz ɪnˈstrʌkʃnz ˈkeəfəli, ɔː ðə məˈʃiːn wɪl breɪk/|ทำตามคำแนะนำเหล่านี้อย่างระมัดระวัง ไม่งั้นเครื่องจักรจะพัง|📋
+He [[turned on]] the lights, and he [[entered]] the dark room.|/hiː tɜːnd ɒn ðə laɪts, ænd hiː ˈentəd ðə dɑːk ruːm/|เขาเปิดไฟ และเขาเดินเข้าไปในห้องมืด|💡
+She [[spoke]] very quietly, but everyone [[heard]] her clearly.|/ʃiː spəʊk ˈveri ˈkwaɪətli, bʌt ˈevriwʌn hɜːd hɜː ˈklɪəli/|เธอพูดเสียงเบามาก แต่ทุกคนได้ยินเธออย่างชัดเจน|🤫
+We must [[protect]] nature, or our world will [[suffer]].|/wiː mʌst prəˈtekt ˈneɪtʃə, ɔː ˈaʊə wɜːld wɪl ˈsʌfə/|เราต้องปกป้องธรรมชาติ ไม่งั้นโลกของเราจะแย่ลง|🌍
+She [[baked]] a chocolate cake, and she [[shared]] it with her friends.|/ʃiː beɪkt ə ˈtʃɒklət keɪk, ænd ʃiː ʃeəd ɪt wɪð hɜː frendz/|เธออบเค้กช็อกโกแลต และเธอแบ่งให้เพื่อน ๆ กิน|🎂
+He [[wanted]] to [[sleep]] early, but he [[had]] too much homework.|/hiː ˈwɒntɪd tə sliːp ˈɜːli, bʌt hiː hæd tuː mʌtʃ ˈhəʊmwɜːk/|เขาอยากนอนเร็ว แต่เขามีการบ้านเยอะเกินไป|😴
+You can [[pay]] with cash, or you can [[use]] a credit card.|/juː kæn peɪ wɪð kæʃ, ɔː juː kæn juːz ə ˈkredɪt kɑːd/|คุณสามารถจ่ายด้วยเงินสด หรือคุณจะใช้บัตรเครดิตก็ได้|💳
+The fire [[burned]] brightly, and the room [[became]] warm.|/ðə ˈfaɪə bɜːnd ˈbraɪtli, ænd ðə ruːm bɪˈkeɪm wɔːm/|ไฟลุกโชนสว่างสดใส และห้องก็อุ่นขึ้น|🔥
+She [[practiced]] the song for weeks, but she still [[forgot]] the lyrics.|/ʃiː ˈpræktɪst ðə sɒŋ fə wiːks, bʌt ʃiː stɪl fəˈɡɒt ðə ˈlɪrɪks/|เธอฝึกซ้อมเพลงมาหลายสัปดาห์ แต่เธอก็ยังลืมเนื้อร้อง|🎤
+[[Turn off]] the TV, or [[go]] to your room.|/tɜːn ɒf ðə ˌtiːˈviː, ɔː ɡəʊ tə jɔː ruːm/|ปิดโทรทัศน์ซะ หรือไม่งั้นก็เข้าห้องไปซะ|📺
+He [[wore]] a heavy coat, and he [[faced]] the cold wind.|/hiː wɔː ə ˈhevi kəʊt, ænd hiː feɪst ðə kəʊld wɪnd/|เขาสวมเสื้อโค้ทหนา และเขาก็เผชิญหน้ากับลมหนาว|🥶
+The movie [[started]] on time, but it [[ended]] very late.|/ðə ˈmuːvi ˈstɑːtɪd ɒn taɪm, bʌt ɪt ˈendɪd ˈveri leɪt/|ภาพยนตร์เริ่มตรงเวลา แต่มันจบดึกมาก|🍿
+We must [[book]] the tickets now, or they will [[sell out]].|/wiː mʌst bʊk ðə ˈtɪkɪts naʊ, ɔː ðeɪ wɪl sel aʊt/|เราต้องจองตั๋วตอนนี้ ไม่งั้นตั๋วจะขายหมด|🎫
+She [[cleans]] her desk daily, and her workspace [[looks]] neat.|/ʃiː kliːnz hɜː desk ˈdeɪli, ænd hɜː ˈwɜːkspeɪs lʊks niːt/|เธอทำความสะอาดโต๊ะทำงานทุกวัน และพื้นที่ทำงานของเธอก็ดูเรียบร้อย|🧽
+He [[ran]] as fast as possible, but he [[missed]] the bus.|/hiː ræn æz fɑːst æz ˈpɒsəbl, bʌt hiː mɪst ðə bʌs/|เขาวิ่งให้เร็วที่สุดเท่าที่จะทำได้ แต่เขาก็พลาดรถเมล์|🚌
+You can [[paint]] the wall blue, or you can [[leave]] it white.|/juː kæn peɪnt ðə wɔːl bluː, ɔː juː kæn liːv ɪt waɪt/|คุณสามารถทาสีผนังเป็นสีฟ้า หรือคุณจะปล่อยให้มันเป็นสีขาวก็ได้|🎨
+The wind [[stopped]] blowing, and the sea [[became]] calm.|/ðə wɪnd stɒpt ˈbləʊɪŋ, ænd ðə siː bɪˈkeɪm kɑːm/|ลมหยุดพัด และทะเลก็สงบลง|🌊
+She [[studied]] graphic design, but she [[works]] as a writer.|/ʃiː ˈstʌdid ˈɡræfɪk dɪˈzaɪn, bʌt ʃiː wɜːks əz ə ˈraɪtə/|เธอเรียนออกแบบกราฟิก แต่เธอทำงานเป็นนักเขียน|✏️
+[[Pay]] attention to the road, or you will [[crash]].|/peɪ əˈtenʃn tə ðə rəʊd, ɔː juː wɪl kræʃ/|ตั้งใจดูถนนหนทาง ไม่งั้นคุณจะชนเอาได้|🚧
+He [[unlocked]] the door, and he [[welcomed]] his guests.|/hiː ʌnˈlɒkt ðə dɔː, ænd hiː ˈwelkəmd hɪz ɡests/|เขาไขกุญแจเปิดประตู และเขาต้อนรับแขกของเขา|🔓
+The soup [[smelled]] amazing, but it was too hot to [[eat]].|/ðə suːp smeld əˈmeɪzɪŋ, bʌt ɪt wɒz tuː hɒt tuː iːt/|ซุปส่งกลิ่นหอมน่ากินมาก แต่มันร้อนเกินกว่าจะกินได้|🍲
+You can [[take]] an umbrella, or you can [[wear]] a raincoat.|/juː kæn teɪk ən ʌmˈbrelə, ɔː juː kæn weər ə ˈreɪnkəʊt/|คุณสามารถพกร่มไป หรือคุณจะสวมเสื้อกันฝนก็ได้|☂️
+She [[finished]] her project, and she [[submitted]] it online.|/ʃiː ˈfɪnɪʃt hɜː ˈprɒdʒekt, ænd ʃiː səbˈmɪtɪd ɪt ɒnˈlaɪn/|เธอทำโปรเจกต์เสร็จ และเธอก็ส่งมันทางออนไลน์|🗂️
+He [[tried]] his best, but the challenge [[was]] too tough.|/hiː traɪd hɪz best, bʌt ðə ˈtʃælɪndʒ wɒz tuː tʌf/|เขาพยายามอย่างเต็มที่แล้ว แต่มันยากเกินไป|🏔️
+[[Drink]] plenty of water, or you will [[get]] dehydrated.|/drɪŋk ˈplenti əv ˈwɔːtə, ɔː juː wɪl ɡet ˌdiːhaɪˈdreɪtɪd/|ดื่มน้ำเยอะ ๆ ไม่งั้นคุณจะขาดน้ำ|💧
+The dog [[wagged]] its tail, and it [[greeted]] its owner.|/ðə dɒɡ wæɡd ɪts teɪl, ænd ɪt ˈɡriːtɪd ɪts ˈəʊnə/|สุนัขกระดิกหาง และมันทักทายเจ้าของของมัน|🐶
+She [[bought]] a new phone, but she [[lost]] it immediately.|/ʃiː bɔːt ə njuː fəʊn, bʌt ʃiː lɒst ɪt ɪˈmiːdiətli/|เธอซื้อโทรศัพท์เครื่องใหม่ แต่เธอทำมันหายทันที|📲
+You can [[join]] the club, or you can [[start]] your own group.|/juː kæn dʒɔɪn ðə klʌb, ɔː juː kæn stɑːt jɔːr əʊn ɡruːp/|คุณสามารถเข้าร่วมชมรม หรือคุณจะสร้างกลุ่มของคุณเองก็ได้|👥
+The teacher [[explained]] the rule, and the students [[nodded]].|/ðə ˈtiːtʃə ɪkˈspleɪnd ðə ruːl, ænd ðə ˈstjuːdnts ˈnɒdɪd/|ครูอธิบายกฎระเบียบ และนักเรียนก็พยักหน้ารับ|🧑‍🏫
+He [[wanted]] a quiet place, but the cafe [[was]] very noisy.|/hiː ˈwɒntɪd ə ˈkwaɪət pleɪs, bʌt ðə ˈkæfeɪ wɒz ˈveri ˈnɔɪzi/|เขาอยากได้ที่เงียบ ๆ แต่คาเฟ่นั้นเสียงดังมาก|🔊
+[[Secure]] the windows, or the rain will [[enter]].|/sɪˈkjʊə ðə ˈwɪndəʊz, ɔː ðə reɪn wɪl ˈentə/|ล็อกหน้าต่างให้แน่นหนา ไม่งั้นฝนจะสาดเข้ามา|🔐
+She [[packed]] her bags, and she [[called]] a taxi.|/ʃiː pækt hɜː bæɡz, ænd ʃiː kɔːld ə ˈtæksi/|เธอจัดกระเป๋าเดินทาง และเธอก็เรียกแท็กซี่|🧳
+The ice cream [[looked]] sweet, but it [[tasted]] sour.|/ði aɪs kriːm lʊkt swiːt, bʌt ɪt ˈteɪstɪd ˈsaʊə/|ไอศกรีมดูหวาน แต่รสชาติกลับเปรี้ยว|🍦
+You can [[read]] this magazine, or you can [[browse]] the internet.|/juː kæn riːd ðɪs ˌmæɡəˈziːn, ɔː juː kæn braʊz ði ˈɪntənet/|คุณสามารถอ่านนิตยสารเล่มนี้ หรือคุณจะท่องอินเทอร์เน็ตก็ได้|📰
+He [[set]] his alarm, and he [[went]] to sleep.|/hiː set hɪz əˈlɑːm, ænd hiː went tə sliːp/|เขาตั้งนาฬิกาปลุก และเขาเข้านอน|🛌
+She [[worked]] late at night, but she still [[missed]] the deadline.|/ʃiː wɜːkt leɪt ət naɪt, bʌt ʃiː stɪl mɪst ðə ˈdedlaɪn/|เธอทำงานดึกดื่น แต่เธอก็ยังส่งงานไม่ทันกำหนดอยู่ดี|🌙
+[[Speak]] clearly, or the audience will not [[understand]].|/spiːk ˈklɪəli, ɔː ði ˈɔːdiəns wɪl nɒt ˌʌndəˈstænd/|พูดให้ชัดเจน ไม่งั้นผู้ชมจะไม่เข้าใจ|🎙️
+The mechanic [[fixed]] the engine, and the car [[started]] smoothly.|/ðə məˈkænɪk fɪkst ði ˈendʒɪn, ænd ðə kɑː ˈstɑːtɪd ˈsmuːðli/|ช่างซ่อมเครื่องยนต์ และรถก็สตาร์ทติดได้อย่างราบรื่น|🔧
+He [[loved]] the painting, but he could not [[afford]] it.|/hiː lʌvd ðə ˈpeɪntɪŋ, bʌt hiː kʊd nɒt əˈfɔːd ɪt/|เขาชอบภาพวาดนั้นมาก แต่เขาสู้ราคาไม่ไหว|🖼️
+You can [[wear]] shoes, or you can [[wear]] sandals.|/juː kæn weə ʃuːz, ɔː juː kæn weə ˈsændlz/|คุณสามารถใส่รองเท้า หรือจะใส่รองเท้าแตะก็ได้|👟
+She [[checked]] the map, and she [[found]] the right direction.|/ʃiː tʃekt ðə mæp, ænd ʃiː faʊnd ðə raɪt dəˈrekʃn/|เธอตรวจสอบแผนที่ และเธอพบเส้นทางที่ถูกต้อง|🗺️
+The music [[played]] softly, but it [[annoyed]] him.|/ðə ˈmjuːzɪk pleɪd ˈsɒftli, bʌt ɪt əˈnɔɪd hɪm/|เพลงบรรเลงเบา ๆ แต่มันกลับทำให้เขารำคาญ|🎶
+[[Keep]] [[practicing]] every day, or you will [[lose]] your skill.|/kiːp ˈpræktɪsɪŋ ˈevri deɪ, ɔː juː wɪl luːz jɔː skɪl/|ฝึกซ้อมทุกวันอย่างต่อเนื่อง ไม่งั้นฝีมือของคุณจะตกลง|🎯
+He [[turned]] the key, and the engine [[roared]] to life.|/hiː tɜːnd ðə kiː, ænd ði ˈendʒɪn rɔːd tə laɪf/|เขาบิดกุญแจ และเครื่องยนต์ก็คำรามติดขึ้นมา|🚙
+She [[wanted]] to [[join]] the trip, but she [[had]] no money.|/ʃiː ˈwɒntɪd tə dʒɔɪn ðə trɪp, bʌt ʃiː hæd nəʊ ˈmʌni/|เธออยากร่วมทริปเดินทางด้วย แต่เธอไม่มีเงิน|🎒
+You can [[choose]] red, or you can [[choose]] blue.|/juː kæn tʃuːz red, ɔː juː kæn tʃuːz bluː/|คุณสามารถเลือกสีแดง หรือคุณจะเลือกสีฟ้าก็ได้|👉
+The sun [[rose]] high, and the fog [[disappeared]].|/ðə sʌn rəʊz haɪ, ænd ðə fɒɡ ˌdɪsəˈpɪəd/|ดวงอาทิตย์ขึ้นสูง และหมอกก็จางหายไป|🌅
+He [[studied]] computer science, but he [[likes]] cooking more.|/hiː ˈstʌdid kəmˈpjuːtə ˈsaɪəns, bʌt hiː laɪks ˈkʊkɪŋ mɔː/|เขาเรียนวิทยาการคอมพิวเตอร์ แต่เขาชอบทำอาหารมากกว่า|👨‍🍳
+[[Clean up]] your workspace, or [[leave]] the office.|/kliːn ʌp jɔː ˈwɜːkspeɪs, ɔː liːv ði ˈɒfɪs/|ทำความสะอาดพื้นที่ทำงานซะ หรือไม่งั้นก็ออกจากออฟฟิศไป|🗑️
+She [[wiped]] the table, and she [[placed]] the plates.|/ʃiː waɪpt ðə ˈteɪbl, ænd ʃiː pleɪst ðə pleɪts/|เธอเช็ดโต๊ะ และเธอก็นำจานมาวางไว้|🧻
+The flight [[was]] [[delayed]], but the passengers [[remained]] calm.|/ðə flaɪt wɒz dɪˈleɪd, bʌt ðə ˈpæsɪndʒəz rɪˈmeɪnd kɑːm/|เที่ยวบินดีเลย์ แต่ผู้โดยสารยังคงสงบสติอารมณ์ได้|🛫
+You can [[sleep]] on the bed, or you can [[sleep]] on the sofa.|/juː kæn sliːp ɒn ðə bed, ɔː juː kæn sliːp ɒn ðə ˈsəʊfə/|คุณสามารถนอนบนเตียง หรือจะนอนบนโซฟาก็ได้|🛏️
+He [[tied]] his shoes, and he [[started]] [[running]].|/hiː taɪd hɪz ʃuːz, ænd hiː ˈstɑːtɪd ˈrʌnɪŋ/|เขาผูกเชือกรองเท้า และเขาเริ่มวิ่ง|🏃
+She [[felt]] very tired, but she [[finished]] the task.|/ʃiː felt ˈveri ˈtaɪəd, bʌt ʃiː ˈfɪnɪʃt ðə tɑːsk/|เธอรู้สึกเหนื่อยมาก แต่เธอก็ทำงานนั้นจนเสร็จลุล่วง|😫`;
+const ITEMS = RAW.trim().split("\n").map(l=>{const [en,ipa,th,em]=l.split("|");const plain=en.replace(/\[\[|\]\]/g,"");const html=en.replace(/\[\[(.+?)\]\]/g,"<b>$1</b>");return {en:plain,html,ipa,th,em};});
+const PER=50, TABS=Math.ceil(ITEMS.length/PER);
+const HUES=[178,8], HUES2=[265,100];
+const $=id=>document.getElementById(id);
+const board=$("board"), tabsEl=$("tabs");
+let cur=0;
+const S=Array.from({length:TABS},()=>newState());
+function newState(){return {order:null,flipped:new Set(),opened:new Set(),score:0,secs:0,running:false,done:false}}
+function ensureOrder(t){if(!S[t].order)S[t].order=[...Array(Math.min(PER,ITEMS.length-t*PER)).keys()]}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* voice */
+let voices=[],chosen=null;
+const MALE=/daniel|george|ryan|arthur|oliver|thomas|james|google uk english male|male|guy|alex|fred/i;
+function loadVoices(){
+  if(!("speechSynthesis" in window))return;
+  voices=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const sc=v=>(MALE.test(v.name)?4:0)+(/en[-_]GB/i.test(v.lang)?3:0)+(v.localService===false?1:0)+(/natural|neural|online/i.test(v.name)?2:0);
+  voices.sort((a,b)=>sc(b)-sc(a));
+  const sel=$("voice"),prev=sel.value;
+  sel.innerHTML=voices.length?voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join(""):`<option>ไม่พบเสียงในอุปกรณ์</option>`;
+  if(voices.length){sel.value=prev&&voices[prev]?prev:0;chosen=voices[sel.value]}
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+$("voice").addEventListener("change",e=>{chosen=voices[e.target.value];speak("Hello. This is my voice.")});
+function speak(text){
+  if(!("speechSynthesis" in window))return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="en-GB"; if(chosen){u.voice=chosen;u.lang=chosen.lang}
+    u.pitch=1.15; u.rate=0.88;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* render */
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderTabs(){
+  tabsEl.innerHTML="";
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement("button");
+    b.className="tab";b.role="tab";b.setAttribute("aria-selected",t===cur);
+    b.textContent=`หน้า ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,ITEMS.length)})`;
+    b.onclick=()=>{cur=t;render()};
+    tabsEl.appendChild(b);
+  }
+}
+function render(){
+  const r=document.documentElement.style;
+  r.setProperty("--h",HUES[cur%HUES.length]);r.setProperty("--h2",HUES2[cur%HUES2.length]);
+  renderTabs();ensureOrder(cur);
+  const st=S[cur];board.innerHTML="";
+  st.order.forEach(idx=>{
+    const w=ITEMS[cur*PER+idx];
+    const c=document.createElement("div");
+    c.className="card"+(st.flipped.has(idx)?" flipped":"")+(st.opened.has(idx)?" seen":"");
+    c.tabIndex=0;c.setAttribute("role","button");
+    c.setAttribute("aria-label",`${w.en} แตะเพื่อพลิกดูคำแปล`);
+    c.innerHTML=`<div class="inner">
+      <div class="face front"><span class="num">${cur*PER+idx+1}</span>
+        <div class="pic">${w.em}</div>
+        <div class="txt"><div class="en">${w.html}</div><div class="ipa">${w.ipa}</div>
+        <button class="say" aria-label="ฟังประโยค">🔊 ฟังประโยค</button></div></div>
+      <div class="face back"><div class="pic">${w.em}</div>
+        <div class="txt"><div class="th">${w.th}</div><div class="en-small">${w.en}</div></div></div></div>`;
+    c.addEventListener("click",e=>{
+      if(e.target.closest(".say")){e.stopPropagation();speak(w.en);return}
+      flip(idx,c);
+    });
+    c.addEventListener("keydown",e=>{if(e.target===c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();flip(idx,c)}});
+    board.appendChild(c);
+  });
+  updateStats();
+  $("msg").textContent=st.done?`🎉 จบหน้านี้แล้ว! เวลา ${fmt(st.secs)} คะแนน ${st.score}`:
+    st.running?"กำลังเล่น… เปิดให้ครบทุกใบ":(st.opened.size?"หยุดไว้ — แตะการ์ดเพื่อเล่นต่อ":"แตะการ์ดใบแรกเพื่อเริ่มจับเวลา");
+}
+function updateStats(){
+  const st=S[cur];
+  $("time").textContent=fmt(st.secs);$("score").textContent=st.score;
+  $("prog").textContent=`${st.opened.size}/${st.order.length}`;
+}
+function flip(idx,el){
+  const st=S[cur];
+  if(!st.running&&!st.done){st.running=true;$("msg").textContent="กำลังเล่น… เปิดให้ครบทุกใบ"}
+  if(st.flipped.has(idx)){st.flipped.delete(idx);el.classList.remove("flipped")}
+  else{
+    st.flipped.add(idx);el.classList.add("flipped");
+    if(!st.opened.has(idx)){st.opened.add(idx);if(!st.done)st.score+=10;el.classList.add("seen")}
+  }
+  if(!st.done&&st.opened.size===st.order.length){
+    st.done=true;st.running=false;
+    $("msg").textContent=`🎉 เยี่ยม! เปิดครบ ${st.order.length} ใบ ใช้เวลา ${fmt(st.secs)} ได้ ${st.score} คะแนน`;
+  }
+  updateStats();
+}
+$("restart").onclick=()=>{
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  S[cur]=newState();ensureOrder(cur);shuffle(S[cur].order);
+  render();$("msg").textContent="เริ่มใหม่แล้ว — สลับตำแหน่งการ์ดให้ใหม่";
+};
+$("cancel").onclick=()=>{
+  if("speechSynthesis" in window)speechSynthesis.cancel();
+  const o=S[cur].order;S[cur]=newState();S[cur].order=o;
+  render();$("msg").textContent="ยกเลิกรอบนี้แล้ว — ล้างเวลาและคะแนนเรียบร้อย";
+};
+setInterval(()=>{const st=S[cur];if(st.running&&!st.done){st.secs++;updateStats()}},1000);
+render();
+</script>
+</body>
+</html>

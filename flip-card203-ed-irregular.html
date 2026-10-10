@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flip Card – Verb + ed / Irregular</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&family=Baloo+2:wght@600;800&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --h:200; --h2:20;
+  --bg:hsl(var(--h) 70% 96%); --ink:#3a3340; --muted:#7d7386; --panel:#ffffffcc; --line:hsl(var(--h) 55% 86%);
+  --acc:hsl(var(--h) 75% 85%); --acc-ink:#3b3330;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:linear-gradient(160deg,var(--bg),hsl(var(--h2) 70% 96%)); transition:background .5s; color:var(--ink);
+  font-family:"Prompt","Noto Sans Thai","Sarabun",system-ui,sans-serif;
+  min-height:100vh; padding:12px clamp(8px,2vw,24px) 28px;
+}
+.wrap{max-width:1040px;margin:0 auto}
+h1{
+  font-family:"Baloo 2","Prompt",system-ui,sans-serif; font-weight:800;
+  font-size:clamp(22px,3.4vw,34px); margin:4px 0 2px; letter-spacing:.2px;
+}
+.sub{margin:0 0 10px;color:var(--muted);font-size:clamp(12px,1.6vw,14px)}
+.top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  border:2px solid var(--line); background:var(--panel); color:var(--ink);
+  font:500 14px "Prompt",sans-serif; padding:7px 14px; border-radius:999px; cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--acc);border-color:hsl(var(--h) 60% 72%);color:var(--acc-ink);font-weight:600}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:5px 12px; min-width:84px; text-align:center;
+}
+.stat b{display:block;font:800 clamp(18px,2.6vw,24px) "Baloo 2",sans-serif;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--muted)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.act{
+  font:500 14px "Prompt",sans-serif; border:0; border-radius:12px; padding:9px 16px; cursor:pointer;
+  color:var(--acc-ink); background:var(--acc); box-shadow:0 3px 0 hsl(var(--h) 55% 72%);
+}
+button.act.ghost{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+button:focus-visible,select:focus-visible,.card:focus-visible{outline:3px solid hsl(var(--h) 70% 55%);outline-offset:2px}
+.voice{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+select{
+  max-width:220px; font:400 13px "Prompt",sans-serif; padding:7px 8px; border-radius:10px;
+  border:2px solid var(--line); background:var(--panel); color:var(--ink);
+}
+.msg{min-height:22px;font-size:14px;margin:0 0 8px;color:hsl(var(--h) 40% 38%);font-weight:500}
+
+/* board */
+.board{
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:clamp(8px,1.5vw,16px);
+  width:min(100%, max(520px, calc(100vh - 300px)), 1000px);
+  margin:0 auto;
+}
+.card{
+  position:relative; aspect-ratio:1/1; container-type:inline-size;
+  perspective:900px; cursor:pointer; background:none; border:0; padding:0;
+  -webkit-tap-highlight-color:transparent; font:inherit; color:inherit;
+}
+.inner{
+  position:absolute; inset:0; transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.3,.7,.2,1);
+}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{
+  position:absolute; inset:0; border-radius:18cqw; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  padding:5cqw 4cqw; overflow:hidden;
+}
+.front{
+  color:#3a3340;
+  background:radial-gradient(120% 85% at 28% 10%, #ffffff 0%, hsl(var(--h) 85% 95%) 45%, hsl(var(--h) 70% 87%) 100%);
+  box-shadow:
+    0 2cqw 0 hsl(var(--h) 55% 78%),
+    0 9cqw 12cqw -4cqw hsl(var(--h) 40% 50% / .45),
+    inset 0 2cqw 3cqw rgba(255,255,255,.95),
+    inset 0 -6cqw 9cqw hsl(var(--h) 70% 80% / .6);
+}
+.back{
+  transform:rotateY(180deg); color:#3a3340;
+  background:radial-gradient(120% 85% at 28% 10%, #ffffff 0%, hsl(var(--h2) 85% 94%) 45%, hsl(var(--h2) 70% 85%) 100%);
+  box-shadow:
+    0 2cqw 0 hsl(var(--h2) 55% 76%),
+    0 9cqw 12cqw -4cqw hsl(var(--h2) 40% 45% / .45),
+    inset 0 2cqw 3cqw rgba(255,255,255,.95),
+    inset 0 -6cqw 9cqw hsl(var(--h2) 70% 78% / .6);
+}
+.emoji{font-size:25cqw;line-height:1;filter:drop-shadow(0 1.5cqw 1.5cqw rgba(0,0,0,.22));margin-bottom:1cqw}
+.word{
+  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif; font-weight:400; color:#000; line-height:1.05;
+  font-size:19cqw; letter-spacing:.3px;
+}
+.ipa{
+  font-family:"Times New Roman",Times,"Liberation Serif",serif; font-weight:400;
+  font-size:11cqw; color:#000; margin-top:1.5cqw; line-height:1.2;
+}
+.th{font-weight:600;font-size:17cqw;line-height:1.2;margin:1cqw 0}
+.en-small{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-weight:400;font-size:10.5cqw;color:#000}
+.spk{
+  position:absolute; top:4cqw; right:5cqw; font-size:11cqw; line-height:1;
+  border:0; background:rgba(255,255,255,.6); border-radius:50%; width:17cqw; height:17cqw;
+  display:grid; place-items:center; cursor:pointer; color:#3a3340;
+  box-shadow:0 1cqw 2cqw rgba(0,0,0,.2);
+}
+.num{position:absolute;left:7cqw;top:5cqw;font:600 8cqw "Prompt",sans-serif;color:rgba(58,51,64,.4)}
+.card.seen .front::after{
+  content:"✓"; position:absolute; left:6cqw; bottom:4cqw; font:700 10cqw sans-serif; color:#1a8a4a;
+}
+.card:hover .inner{filter:brightness(1.03)}
+
+@media (max-width:640px){
+  .board{grid-template-columns:repeat(3,1fr);width:100%}
+  .voice{margin-left:0;width:100%}
+  select{max-width:none;flex:1}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+
+.chip{margin-top:2cqw;font:700 8cqw Arial,Helvetica,sans-serif;color:#000;padding:.8cqw 4.5cqw;border-radius:99px;border:.6cqw solid rgba(0,0,0,.18)}
+.chip.t{background:hsl(var(--h) 80% 88%)}
+.chip.d{background:hsl(var(--h2) 80% 88%)}
+.chip.id{background:hsl(48 95% 86%)}
+.chip.dt{background:hsl(var(--h2) 60% 92%)}
+.chip.irr{background:#fff;border-color:#000}
+.tabs{flex:1 1 100%;flex-wrap:nowrap !important;overflow-x:auto;padding-bottom:4px}
+.tab{white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🕰️ Flip Card Verbs + ed / Irregular</h1>
+  <p class="sub">ฝึกออกเสียงท้ายกริยาอดีต -ed / Irregular · แตะการ์ดเพื่อพลิกดูคำแปล · ป้ายใต้ phonetics บอกเสียงท้าย /t/ /d/ /ɪd/ หรือ Irregular</p>
+
+  <div class="top">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="stats" aria-live="off">
+      <div class="stat"><b id="time">00:00</b><span>เวลา</span></div>
+      <div class="stat"><b id="score">0</b><span>คะแนน</span></div>
+      <div class="stat"><b id="prog">0/25</b><span>เปิดแล้ว</span></div>
+    </div>
+  </div>
+
+  <div class="bar">
+    <button class="act" id="restart">🔄 เริ่มเล่นใหม่</button>
+    <button class="act ghost" id="cancel">✖ ยกเลิก</button>
+    <div class="voice">
+      <label for="voice">เสียง</label>
+      <select id="voice"></select>
+    </div>
+  </div>
+
+  <p class="msg" id="msg" aria-live="polite">แตะการ์ดใบแรกเพื่อเริ่มจับเวลา</p>
+  <div class="board" id="board"></div>
+</div>
+
+<script>
+const RAW = `admired|/ədˈmaɪəd/|ชื่นชม|🤩
+agreed|/əˈɡriːd/|เห็นด้วย|🤝
+answered|/ˈɑːnsəd/|ตอบ|💁
+arranged|/əˈreɪndʒd/|จัดเตรียม, จัดระเบียบ|🗂️
+asked|/ɑːskt/|ถาม|🙋
+attended|/əˈtendɪd/|เข้าร่วม|🎫
+baked|/beɪkt/|อบ (ขนม)|🧁
+balanced|/ˈbælənst/|สร้างความสมดุล|⚖️
+bathed|/beɪðd/|อาบน้ำ|🛁
+believed|/bɪˈliːvd/|เชื่อ|🙏
+blinked|/blɪŋkt/|กะพริบตา|😉
+boiled|/bɔɪld/|ต้ม|♨️
+borrowed|/ˈbɒrəʊd/|ยืม|🏛️
+brought|/brɔːt/|นำมา, พามา|🎁
+browsed|/braʊzd/|เรียกดู, ค้นดู|🌐
+brushed|/brʌʃt/|แปรง|🪥
+built|/bɪlt/|สร้าง|🧱
+bought|/bɔːt/|ซื้อ|🛒
+called|/kɔːld/|โทร, เรียก|📞
+carried|/ˈkærid/|แบก, หิ้ว, ถือ|🎒
+caught|/kɔːt/|จับ, รับ|🧤
+celebrated|/ˈselɪbreɪtɪd/|ฉลอง|🎉
+changed|/tʃeɪndʒd/|เปลี่ยน|🔄
+charged|/tʃɑːdʒd/|ชาร์จ|🔋
+checked|/tʃekt/|ตรวจสอบ|✅
+cheered|/tʃɪəd/|เชียร์, ให้กำลังใจ|📣
+chose|/tʃəʊz/|เลือก|☑️
+cleaned|/kliːnd/|ทำความสะอาด|🧽
+climbed|/klaɪmd/|ปีน|🧗
+closed|/kləʊzd/|ปิด|🔒
+collected|/kəˈlektɪd/|สะสม, รวบรวม|🧲
+communicated|/kəˈmjuːnɪkeɪtɪd/|สื่อสาร|📡
+compared|/kəmˈpeəd/|เปรียบเทียบ|🆚
+complained|/kəmˈpleɪnd/|บ่น, ร้องเรียน|😩
+connected|/kəˈnektɪd/|เชื่อมต่อ|🔗
+considered|/kənˈsɪdəd/|พิจารณา|🤔
+cooked|/kʊkt/|ทำอาหาร|🍳
+copied|/ˈkɒpid/|คัดลอก|📋
+counted|/ˈkaʊntɪd/|นับ|🔢
+covered|/ˈkʌvəd/|ปกคลุม, ปิด|☂️
+created|/kriˈeɪtɪd/|สร้างสรรค์|🌟
+cried|/kraɪd/|ร้องไห้|😭
+cut|/kʌt/|ตัด|✂️
+danced|/dɑːnst/|เต้นรำ|💃
+decided|/dɪˈsaɪdɪd/|ตัดสินใจ|🪙
+decorated|/ˈdekəreɪtɪd/|ตกแต่ง|🎄
+delivered|/dɪˈlɪvəd/|ส่ง (ของ)|📦
+designed|/dɪˈzaɪnd/|ออกแบบ|📐
+developed|/dɪˈveləpt/|พัฒนา|📈
+dug|/dʌɡ/|ขุด|⛏️
+discovered|/dɪˈskʌvəd/|ค้นพบ|🔭
+discussed|/dɪˈskʌst/|อภิปราย, สนทนา|💬
+displayed|/dɪˈspleɪd/|จัดแสดง|🖼️
+drew|/druː/|วาดภาพ|✏️
+drank|/dræŋk/|ดื่ม|🥤
+drove|/drəʊv/|ขับรถ|🚗
+ate|/et/|กิน, รับประทาน|🍽️
+edited|/ˈedɪtɪd/|แก้ไข, ตัดต่อ|🎞️
+enjoyed|/ɪnˈdʒɔɪd/|เพลิดเพลิน|😊
+entered|/ˈentəd/|เข้าไป|🚶‍♂️
+exercised|/ˈeksəsaɪzd/|ออกกำลังกาย|🏋️
+explained|/ɪkˈspleɪnd/|อธิบาย|🧑‍🏫
+fed|/fed/|ให้อาหาร|🐶
+filled|/fɪld/|เติมเต็ม, ใส่ให้เต็ม|🥛
+found|/faʊnd/|หา, ค้นพบ|🔍
+fixed|/fɪkst/|ซ่อมแซม|🔧
+folded|/ˈfəʊldɪd/|พับ|🧺
+followed|/ˈfɒləʊd/|ติดตาม|🐾
+gathered|/ˈɡæðəd/|รวบรวม, ชุมนุม|🍂
+greeted|/ˈɡriːtɪd/|ทักทาย|👋
+grew|/ɡruː/|เติบโต, ปลูก|🌱
+hung|/hʌŋ/|แขวน, ห้อย|🧥
+had|/hæd/|มี, รับประทาน|👜
+heated|/ˈhiːtɪd/|ให้ความร้อน|🔥
+helped|/helpt/|ช่วยเหลือ|🆘
+held|/held/|ถือ, จับ|✊
+hurried|/ˈhʌrid/|เร่งรีบ|⏱️
+improved|/ɪmˈpruːvd/|ปรับปรุง|🆙
+introduced|/ˌɪntrəˈdjuːst/|แนะนำ|🤵
+jogged|/dʒɒɡd/|วิ่งเหยาะ ๆ|🏃‍♀️
+joined|/dʒɔɪnd/|เข้าร่วม|👥
+jumped|/dʒʌmpt/|กระโดด|🦘
+kicked|/kɪkt/|เตะ|⚽
+knocked|/nɒkt/|เคาะ|🚪
+laughed|/lɑːft/|หัวเราะ|😂
+learned / learnt|/lɜːnd / lɜːnt/|เรียนรู้|🎓
+left|/left/|ออกจาก, ทิ้งไว้|🚶‍♀️
+listened|/ˈlɪsənd/|ฟัง|🎧
+looked|/lʊkt/|มอง|👀
+looked for|/lʊkt fɔː/|มองหา|🔎
+made|/meɪd/|ทำ, สร้าง|🛠️
+measured|/ˈmeʒəd/|วัด|📏
+met|/met/|พบ, ประชุม|🧑‍🤝‍🧑
+mixed|/mɪkst/|ผสม|🥣
+moved|/muːvd/|เคลื่อนย้าย, ย้าย|🚚
+opened|/ˈəʊpənd/|เปิด|📂
+ordered|/ˈɔːdəd/|สั่ง (ของ/อาหาร)|🧾
+packed|/pækt/|แพ็กของ, จัดกระเป๋า|🧳
+painted|/ˈpeɪntɪd/|ระบายสี, ทาสี|🎨
+paid|/peɪd/|จ่าย|💳
+photographed|/ˈfəʊtəɡrɑːft/|ถ่ายภาพ|📷
+picked|/pɪkt/|หยิบ, เลือก|🍎
+planned|/plænd/|วางแผน|🗓️
+planted|/ˈplɑːntɪd/|ปลูก|🌻
+played|/pleɪd/|เล่น|🎮
+pointed|/ˈpɔɪntɪd/|ชี้|👈
+posted|/ˈpəʊstɪd/|โพสต์|📮
+poured|/pɔːd/|เท|🫗
+practiced|/ˈpræktɪst/|ฝึกฝน|🎯
+prepared|/prɪˈpeəd/|เตรียม|🥗
+printed|/ˈprɪntɪd/|พิมพ์ (เอกสาร)|🖨️
+protected|/prəˈtektɪd/|ปกป้อง|🛡️
+pulled|/pʊld/|ดึง|🫷
+pushed|/pʊʃt/|ผลัก|🫸
+put|/pʊt/|วาง, ใส่|📥
+put on|/pʊt ɒn/|สวมใส่|👕
+rained|/reɪnd/|ฝนตก|🌧️
+read|/red/|อ่าน|📖
+received|/rɪˈsiːvd/|ได้รับ|📬
+recorded|/rɪˈkɔːdɪd/|บันทึก|🎙️
+recycled|/ˌriːˈsaɪkəld/|รีไซเคิล|♻️
+relaxed|/rɪˈlækst/|พักผ่อน|🧘
+repaired|/rɪˈpeəd/|ซ่อมแซม|🧰
+repeated|/rɪˈpiːtɪd/|ทำซ้ำ, พูดซ้ำ|🔁
+replaced|/rɪˈpleɪst/|แทนที่|🔀
+replied|/rɪˈplaɪd/|ตอบกลับ|↩️
+reported|/rɪˈpɔːtɪd/|รายงาน|📄
+researched|/rɪˈsɜːtʃt/|วิจัย, ค้นคว้า|🔬
+rested|/ˈrestɪd/|พักผ่อน|🛋️
+returned|/rɪˈtɜːnd/|กลับ, คืน|🔙
+reviewed|/rɪˈvjuːd/|ตรวจสอบ, ทบทวน|📑
+rode|/rəʊd/|ขี่, นั่ง (รถ/ม้า)|🚴
+rang|/ræŋ/|สั่น, โทร, (กระดิ่ง) ดัง|🔔
+ran|/ræn/|วิ่ง|🏃
+saved|/seɪvd/|ช่วย, ประหยัด, บันทึก|💾
+scanned|/skænd/|สแกน|📠
+searched|/sɜːtʃt/|ค้นหา|🕵️
+sent|/sent/|ส่ง|✉️
+served|/sɜːvd/|เสิร์ฟ, บริการ|🥂
+set up|/set ʌp/|ติดตั้ง, จัดตั้ง|🔌
+shared|/ʃeəd/|แบ่งปัน|🍰
+shopped|/ʃɒpt/|ซื้อของ|🛍️
+shouted|/ˈʃaʊtɪd/|ตะโกน|📢
+showed|/ʃəʊd/|แสดง|🎬
+sang|/sæŋ/|ร้องเพลง|🎤
+sat|/sæt/|นั่ง|🪑
+sketched|/sketʃt/|ร่างภาพ|📝
+skipped|/skɪpt/|กระโดดข้าม|🪢
+slept|/slept/|นอนหลับ|😴
+smiled|/smaɪld/|ยิ้ม|😄
+solved|/sɒlvd/|แก้ปัญหา|🧩
+spoke|/spəʊk/|พูด|🗣️
+spelled / spelt|/speld / spelt/|สะกดคำ|🔤
+spent|/spent/|ใช้จ่าย, ใช้เวลา|💸
+spun|/spʌn/|หมุน|🌀
+stood|/stʊd/|ยืน|🧍
+started|/ˈstɑːtɪd/|เริ่มต้น|🚦
+stayed|/steɪd/|พักอยู่, อาศัย|🏨
+stepped|/stept/|ก้าวเท้า|👣
+stopped|/stɒpt/|หยุด|🛑
+stretched|/stretʃt/|ยืดเส้น, ขยาย|🤸
+studied|/ˈstʌdid/|เรียน|📚
+surfed|/sɜːft/|เล่นเซิร์ฟ, ท่องอินเทอร์เน็ต|🏄
+swept|/swept/|กวาด|🧹
+swam|/swæm/|ว่ายน้ำ|🏊
+swung|/swʌŋ/|แกว่ง|🎠
+took|/tʊk/|เอา, หยิบ, พา|🤲
+talked|/tɔːkt/|พูดคุย|🗨️
+taught|/tɔːt/|สอน|👨‍🏫
+tore|/tɔː/|ฉีก|📃
+told|/təʊld/|บอก|👄
+texted|/ˈtekstɪd/|ส่งข้อความ|📱
+thought|/θɔːt/|คิด|💭
+thought about|/θɔːt əˈbaʊt/|คิดเกี่ยวกับ|🧠
+threw|/θruː/|ขว้าง, ปา|⚾
+touched|/tʌtʃt/|สัมผัส|👆
+trained|/treɪnd/|ฝึกอบรม|🏅
+translated|/trænzˈleɪtɪd/|แปล|🌐
+transported|/trænˈspɔːtɪd/|ขนส่ง|🚛
+travelled|/ˈtrævəld/|ท่องเที่ยว|✈️
+treated|/ˈtriːtɪd/|รักษา, เลี้ยงรับรอง|🍦
+tried|/traɪd/|ลอง, พยายาม|💪
+turned|/tɜːnd/|เลี้ยว, หมุน|↪️
+tweeted|/ˈtwiːtɪd/|ทวีต|🐦
+typed|/taɪpt/|พิมพ์|⌨️
+updated|/ʌpˈdeɪtɪd/|อัปเดต|🔃
+uploaded|/ʌpˈləʊdɪd/|อัปโหลด|⬆️
+used|/juːzd/|ใช้|🖱️
+vacuumed|/ˈvækjuːmd/|ดูดฝุ่น|🌪️
+visited|/ˈvɪzɪtɪd/|เยี่ยมชม, ไปเยือน|🏠
+voted|/ˈvəʊtɪd/|ลงคะแนน|🗳️
+waited|/ˈweɪtɪd/|รอ|⏳
+woke|/wəʊk/|ตื่น|⏰
+walked|/wɔːkt/|เดิน|🚶
+warmed|/wɔːmd/|ทำให้ร้อน, อบอุ่น|☀️
+washed|/wɒʃt/|ซัก, ล้าง|🧼
+watched|/wɒtʃt/|ดู|📺
+watered|/ˈwɔːtəd/|รดน้ำ|💧
+waved|/weɪvd/|โบกมือ|🖐️
+wore|/wɔː/|สวมใส่|👗
+whispered|/ˈwɪspəd/|กระซิบ|🤫
+whistled|/ˈwɪsəld/|ผิวปาก|🎶
+won|/wʌn/|ชนะ|🏆
+wiped|/waɪpt/|เช็ด|🧻
+wondered|/ˈwʌndəd/|สงสัย|🌌
+worked|/wɜːkt/|ทำงาน|💼
+wrapped|/ræpt/|ห่อ|🌯
+wrote|/rəʊt/|เขียน|✍️
+yawned|/jɔːnd/|หาว|🥱
+yelled|/jeld/|ตะโกน|😡
+zoomed|/zuːmd/|ซูม, ขยายภาพ|➕`;
+
+const WORDS = RAW.trim().split("\n").map(l=>{const [en,ipa,th,em]=l.split("|");return {en,ipa,th,em};});
+const PER = 25, TABS = Math.ceil(WORDS.length/PER);
+
+function fsz(t){return Math.min(19,86/(t.length*0.56)).toFixed(1)}
+function thsz(t){const n=t.length;return n<=8?17:n<=14?13:n<=24?10.5:8.5}
+const IRR=new Set("brought built bought caught chose cut dug drew drank drove ate fed found grew hung had held left made met paid put read rode rang ran sent set sang sat slept spoke spent spun stood swept swam swung took taught tore told thought threw woke wore won wrote".split(" "));
+function endSnd(w){const first=w.en.split(" ")[0];if(w.en.includes(" / "))return "d·t";if(IRR.has(first))return "irr";const tok=w.ipa.replace(/\//g,"").split(" ")[0];if(/ɪd$/.test(tok))return "ɪd";if(/t$/.test(tok))return "t";return "d"}
+function endCls(w){const k=endSnd(w);return k==="ɪd"?"id":k==="irr"?"irr":k==="d·t"?"dt":k}
+function endTxt(w){const k=endSnd(w);return k==="irr"?"Irregular":k==="d·t"?"-ed → /d/ · /t/":"-ed → /"+k+"/"}
+const SAY = {"read":"red","used":"youzd","ate":"ate","left":"left","rang":"rang","bathed":"baythd","practiced":"practised"}; // TTS fixes
+const HUES = Array.from({length:TABS},(_,i)=>(i*47+200)%360), HUES2 = HUES.map(h=>(h+150)%360);
+
+const $ = id => document.getElementById(id);
+const board=$("board"), tabsEl=$("tabs");
+let cur = 0;
+const S = Array.from({length:TABS},()=>newState());
+function newState(){return {order:null,flipped:new Set(),opened:new Set(),score:0,secs:0,running:false,done:false}}
+function ensureOrder(t){ if(!S[t].order) S[t].order=[...Array(Math.min(PER,WORDS.length-t*PER)).keys()]; }
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ---------- voice ---------- */
+let voices=[], chosen=null;
+const MALE=/daniel|george|ryan|arthur|oliver|thomas|james|google uk english male|male|guy|alex|fred/i;
+function loadVoices(){
+  if(!("speechSynthesis" in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const sc = v => (MALE.test(v.name)?4:0)+(/en[-_]GB/i.test(v.lang)?3:0)+(v.localService===false?1:0)+(/natural|neural|online/i.test(v.name)?2:0);
+  voices.sort((a,b)=>sc(b)-sc(a));
+  const sel=$("voice"); const prev=sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงในอุปกรณ์</option>`;
+  if(voices.length){ sel.value = prev && voices[prev] ? prev : 0; chosen = voices[sel.value]; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+$("voice").addEventListener("change",e=>{chosen=voices[e.target.value]; speak(WORDS[0].en);});
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  try{
+    speechSynthesis.cancel();
+    const t0=text.split(" / ")[0];const u = new SpeechSynthesisUtterance(SAY[t0] || t0);
+    u.lang = "en-GB"; if(chosen){u.voice=chosen; u.lang=chosen.lang;}
+    u.pitch = 1.15;   // young male tone
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- render ---------- */
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderTabs(){
+  tabsEl.innerHTML = "";
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement("button");
+    b.className="tab"; b.role="tab"; b.setAttribute("aria-selected",t===cur);
+    b.textContent=`ชุด ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,WORDS.length)})`;
+    b.onclick=()=>{cur=t;render()};
+    tabsEl.appendChild(b);
+  }
+}
+function render(){
+  document.documentElement.style.setProperty("--h",HUES[cur%HUES.length]);document.documentElement.style.setProperty("--h2",HUES2[cur%HUES2.length]);
+  renderTabs(); ensureOrder(cur);
+  const st=S[cur]; board.innerHTML="";
+  st.order.forEach((idx,pos)=>{
+    const w=WORDS[cur*PER+idx];
+    const c=document.createElement("div");
+    c.className="card"+(st.flipped.has(idx)?" flipped":"")+(st.opened.has(idx)?" seen":"");
+    c.tabIndex=0; c.setAttribute("role","button");
+    c.setAttribute("aria-label",`${w.en} ${w.ipa}. แตะเพื่อพลิกดูคำแปล`);
+    c.innerHTML=`<div class="inner">
+      <div class="face front"><span class="num">${cur*PER+idx+1}</span>
+        <button class="spk" aria-label="ฟังเสียง ${w.en}" title="ฟังเสียง">🔊</button>
+        <div class="emoji">${w.em}</div><div class="word" style="font-size:${fsz(w.en)}cqw">${w.en}</div><div class="ipa" style="font-size:${Math.max(8.5,fsz(w.en)*0.6).toFixed(1)}cqw">${w.ipa}</div><div class="chip ${endCls(w)}">${endTxt(w)}</div></div>
+      <div class="face back"><div class="emoji" style="font-size:22cqw">${w.em}</div>
+        <div class="th" style="font-size:${thsz(w.th)}cqw">${w.th}</div><div class="en-small">${w.en}</div></div></div>`;
+    c.addEventListener("click",e=>{
+      if(e.target.closest(".spk")){e.stopPropagation();speak(w.en);return;}
+      flip(idx,c,w);
+    });
+    c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip(idx,c,w)}});
+    board.appendChild(c);
+  });
+  updateStats();
+  $("msg").textContent = st.done ? `🎉 จบชุดแล้ว! เวลา ${fmt(st.secs)} คะแนน ${st.score}` :
+    st.running ? "กำลังเล่น… เปิดให้ครบทุกใบ" : (st.opened.size? "หยุดไว้ — แตะการ์ดเพื่อเล่นต่อ" : "แตะการ์ดใบแรกเพื่อเริ่มจับเวลา");
+}
+function updateStats(){
+  const st=S[cur];
+  $("time").textContent=fmt(st.secs); $("score").textContent=st.score;
+  $("prog").textContent=`${st.opened.size}/${st.order.length}`;
+}
+function flip(idx,el,w){
+  const st=S[cur];
+  if(!st.running && !st.done) { st.running=true; $("msg").textContent="กำลังเล่น… เปิดให้ครบทุกใบ"; }
+  const isFlipped = st.flipped.has(idx);
+  if(isFlipped){ st.flipped.delete(idx); el.classList.remove("flipped"); }
+  else {
+    st.flipped.add(idx); el.classList.add("flipped");
+    if(!st.opened.has(idx)){
+      st.opened.add(idx);
+      if(!st.done) st.score+=10;
+      el.classList.add("seen");
+    }
+  }
+  speak(w.en);
+  if(!st.done && st.opened.size===st.order.length){
+    st.done=true; st.running=false;
+    $("msg").textContent=`🎉 เยี่ยม! เปิดครบ ${st.order.length} ใบ ใช้เวลา ${fmt(st.secs)} ได้ ${st.score} คะแนน`;
+  }
+  updateStats();
+}
+
+/* ---------- controls ---------- */
+$("restart").onclick=()=>{
+  speechSynthesis && speechSynthesis.cancel();
+  S[cur]=newState(); ensureOrder(cur); shuffle(S[cur].order);
+  render(); $("msg").textContent="เริ่มใหม่แล้ว — สลับตำแหน่งการ์ดให้ใหม่";
+};
+$("cancel").onclick=()=>{
+  speechSynthesis && speechSynthesis.cancel();
+  const order=S[cur].order; S[cur]=newState(); S[cur].order=order;
+  render(); $("msg").textContent="ยกเลิกรอบนี้แล้ว — ล้างเวลาและคะแนนเรียบร้อย";
+};
+setInterval(()=>{
+  const st=S[cur];
+  if(st.running && !st.done){st.secs++; updateStats();}
+},1000);
+
+render();
+</script>
+</body>
+</html>
