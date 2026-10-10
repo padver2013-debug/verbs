@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flip Card Verbs – Movement &amp; Physical Activity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --h:14; --h2:200;
+  --bg:hsl(var(--h) 70% 96%); --ink:#3a3340; --muted:#7d7386; --panel:#ffffffcc; --line:hsl(var(--h) 55% 86%);
+  --acc:hsl(var(--h) 75% 85%); --acc-ink:#3b3330;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:linear-gradient(160deg,var(--bg),hsl(var(--h2) 70% 96%)); transition:background .5s; color:var(--ink);
+  font-family:"Prompt","Noto Sans Thai","Sarabun",system-ui,sans-serif;
+  min-height:100vh; padding:12px clamp(8px,2vw,24px) 28px;
+}
+.wrap{max-width:1040px;margin:0 auto}
+h1{
+  font-family:"Baloo 2","Prompt",system-ui,sans-serif; font-weight:800;
+  font-size:clamp(22px,3.4vw,34px); margin:4px 0 2px; letter-spacing:.2px;
+}
+.sub{margin:0 0 10px;color:var(--muted);font-size:clamp(12px,1.6vw,14px)}
+.top{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{
+  border:2px solid var(--line); background:var(--panel); color:var(--ink);
+  font:500 14px "Prompt",sans-serif; padding:7px 14px; border-radius:999px; cursor:pointer;
+}
+.tab[aria-selected="true"]{background:var(--acc);border-color:hsl(var(--h) 60% 72%);color:var(--acc-ink);font-weight:600}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:5px 12px; min-width:84px; text-align:center;
+}
+.stat b{display:block;font:800 clamp(18px,2.6vw,24px) "Baloo 2",sans-serif;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--muted)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+button.act{
+  font:500 14px "Prompt",sans-serif; border:0; border-radius:12px; padding:9px 16px; cursor:pointer;
+  color:var(--acc-ink); background:var(--acc); box-shadow:0 3px 0 hsl(var(--h) 55% 72%);
+}
+button.act.ghost{background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+button:focus-visible,select:focus-visible,.card:focus-visible{outline:3px solid hsl(var(--h) 70% 55%);outline-offset:2px}
+.voice{margin-left:auto;display:flex;gap:6px;align-items:center;font-size:12.5px;color:var(--muted)}
+select{
+  max-width:220px; font:400 13px "Prompt",sans-serif; padding:7px 8px; border-radius:10px;
+  border:2px solid var(--line); background:var(--panel); color:var(--ink);
+}
+.msg{min-height:22px;font-size:14px;margin:0 0 8px;color:hsl(var(--h) 40% 38%);font-weight:500}
+
+/* board */
+.board{
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:clamp(8px,1.5vw,16px);
+  width:min(100%, max(520px, calc(100vh - 300px)), 1000px);
+  margin:0 auto;
+}
+.card{
+  position:relative; aspect-ratio:1/1; container-type:inline-size;
+  perspective:900px; cursor:pointer; background:none; border:0; padding:0;
+  -webkit-tap-highlight-color:transparent; font:inherit; color:inherit;
+}
+.inner{
+  position:absolute; inset:0; transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.3,.7,.2,1);
+}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{
+  position:absolute; inset:0; border-radius:18cqw; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  padding:5cqw 4cqw; overflow:hidden;
+}
+.front{
+  color:#3a3340;
+  background:radial-gradient(120% 85% at 28% 10%, #ffffff 0%, hsl(var(--h) 85% 95%) 45%, hsl(var(--h) 70% 87%) 100%);
+  box-shadow:
+    0 2cqw 0 hsl(var(--h) 55% 78%),
+    0 9cqw 12cqw -4cqw hsl(var(--h) 40% 50% / .45),
+    inset 0 2cqw 3cqw rgba(255,255,255,.95),
+    inset 0 -6cqw 9cqw hsl(var(--h) 70% 80% / .6);
+}
+.back{
+  transform:rotateY(180deg); color:#3a3340;
+  background:radial-gradient(120% 85% at 28% 10%, #ffffff 0%, hsl(var(--h2) 85% 94%) 45%, hsl(var(--h2) 70% 85%) 100%);
+  box-shadow:
+    0 2cqw 0 hsl(var(--h2) 55% 76%),
+    0 9cqw 12cqw -4cqw hsl(var(--h2) 40% 45% / .45),
+    inset 0 2cqw 3cqw rgba(255,255,255,.95),
+    inset 0 -6cqw 9cqw hsl(var(--h2) 70% 78% / .6);
+}
+.emoji{font-size:30cqw;line-height:1;filter:drop-shadow(0 1.5cqw 1.5cqw rgba(0,0,0,.22));margin-bottom:1cqw}
+.word{
+  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif; font-weight:400; color:#5b5566; line-height:1.05;
+  font-size:19cqw; letter-spacing:.3px;
+}
+.ipa{
+  font-family:"Times New Roman",Times,"Liberation Serif",serif; font-weight:400;
+  font-size:11cqw; color:#7d7386; margin-top:1.5cqw; line-height:1.2;
+}
+.th{font-weight:600;font-size:17cqw;line-height:1.2;margin:1cqw 0}
+.en-small{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-weight:400;font-size:10.5cqw;color:#7d7386}
+.spk{
+  position:absolute; top:4cqw; right:5cqw; font-size:11cqw; line-height:1;
+  border:0; background:rgba(255,255,255,.6); border-radius:50%; width:17cqw; height:17cqw;
+  display:grid; place-items:center; cursor:pointer; color:#3a3340;
+  box-shadow:0 1cqw 2cqw rgba(0,0,0,.2);
+}
+.num{position:absolute;left:7cqw;top:5cqw;font:600 8cqw "Prompt",sans-serif;color:rgba(58,51,64,.4)}
+.card.seen .front::after{
+  content:"✓"; position:absolute; left:6cqw; bottom:4cqw; font:700 10cqw sans-serif; color:#1a8a4a;
+}
+.card:hover .inner{filter:brightness(1.03)}
+
+@media (max-width:640px){
+  .board{grid-template-columns:repeat(3,1fr);width:100%}
+  .voice{margin-left:0;width:100%}
+  select{max-width:none;flex:1}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🏃 Flip Card Verbs</h1>
+  <p class="sub">4. Movement &amp; Physical Activity | การเคลื่อนไหว — แตะการ์ดเพื่อพลิกดูคำแปลและฟังเสียงอ่าน</p>
+
+  <div class="top">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="stats" aria-live="off">
+      <div class="stat"><b id="time">00:00</b><span>เวลา</span></div>
+      <div class="stat"><b id="score">0</b><span>คะแนน</span></div>
+      <div class="stat"><b id="prog">0/25</b><span>เปิดแล้ว</span></div>
+    </div>
+  </div>
+
+  <div class="bar">
+    <button class="act" id="restart">🔄 เริ่มเล่นใหม่</button>
+    <button class="act ghost" id="cancel">✖ ยกเลิก</button>
+    <div class="voice">
+      <label for="voice">เสียง</label>
+      <select id="voice"></select>
+    </div>
+  </div>
+
+  <p class="msg" id="msg" aria-live="polite">แตะการ์ดใบแรกเพื่อเริ่มจับเวลา</p>
+  <div class="board" id="board"></div>
+</div>
+
+<script>
+const RAW = `walk|/wɔːk/|เดิน|🚶
+run|/rʌn/|วิ่ง|🏃
+jog|/dʒɒɡ/|วิ่งเหยาะ ๆ|🏃‍♀️
+sprint|/sprɪnt/|วิ่งสุดแรง|💨
+jump|/dʒʌmp/|กระโดด|🦘
+hop|/hɒp/|กระโดดขาเดียว|🐇
+skip|/skɪp/|กระโดดสลับเท้า|🪢
+leap|/liːp/|กระโจน|🐸
+climb|/klaɪm/|ปีน|🧗
+crawl|/krɔːl/|คลาน|👶
+bend|/bend/|โค้งงอ|🏹
+stretch|/stretʃ/|ยืดเส้น|🤸
+reach|/riːtʃ/|เอื้อมมือ|🫴
+touch|/tʌtʃ/|สัมผัส|👆
+lift|/lɪft/|ยก|🏋️
+carry|/ˈkæri/|แบก / ถือ|🎒
+push|/pʊʃ/|ผลัก|🫸
+pull|/pʊl/|ดึง|🫷
+drag|/dræɡ/|ลาก|🧳
+throw|/θrəʊ/|ขว้าง|⚾
+catch|/kætʃ/|จับ / รับ|🧤
+kick|/kɪk/|เตะ|⚽
+hit|/hɪt/|ตี|🥎
+punch|/pʌntʃ/|ต่อย|🥊
+throw|/θrəʊ/|โยน|🥏
+roll|/rəʊl/|กลิ้ง|🎳
+slide|/slaɪd/|ไถล|🛝
+swing|/swɪŋ/|แกว่ง|🎠
+dance|/dɑːns/|เต้นรำ|💃
+exercise|/ˈeksəsaɪz/|ออกกำลังกาย|🤾
+train|/treɪn/|ฝึกซ้อม|🏅
+practise|/ˈpræktɪs/|ฝึกฝน|🎯
+compete|/kəmˈpiːt/|แข่งขัน|🏆
+race|/reɪs/|วิ่งแข่ง|🏁
+swim|/swɪm/|ว่ายน้ำ|🏊
+dive|/daɪv/|ดำน้ำ / กระโดดน้ำ|🤿
+float|/fləʊt/|ลอย|🛟
+paddle|/ˈpædəl/|พาย (เรือเล็ก)|🛶
+row|/rəʊ/|พายเรือ|🚣
+cycle|/ˈsaɪkəl/|ปั่นจักรยาน|🚴
+ride|/raɪd/|ขี่|🐎
+skate|/skeɪt/|เล่นสเก็ต|⛸️
+ski|/skiː/|เล่นสกี|⛷️
+hike|/haɪk/|เดินป่า|🥾
+march|/mɑːtʃ/|เดินสวนสนาม|💂
+kneel|/niːl/|คุกเข่า|🧎
+squat|/skwɒt/|นั่งยอง / สควอต|🦵
+stand|/stænd/|ยืน|🧍
+sit|/sɪt/|นั่ง|🪑
+lie down|/laɪ daʊn/|นอนลง|🛌
+move|/muːv/|เคลื่อนไหว|🕺
+step|/step/|ก้าว|👣
+stroll|/strəʊl/|เดินเล่น|🌳
+wander|/ˈwɒndə/|เดินเตร็ดเตร่|🧭
+rush|/rʌʃ/|รีบเร่ง|🚨
+hurry|/ˈhʌri/|รีบ|⏱️
+approach|/əˈprəʊtʃ/|เข้าใกล้|➡️
+avoid|/əˈvɔɪd/|หลีกเลี่ยง|🚧
+follow|/ˈfɒləʊ/|เดินตาม|🐾
+lead|/liːd/|นำทาง|🚩
+enter|/ˈentə/|เข้า|🚪
+exit|/ˈeɡzɪt/|ออก|🔚
+cross|/krɒs/|ข้าม|🚸
+climb|/klaɪm/|ปีนขึ้น|⛰️
+descend|/dɪˈsend/|ลงมา|⬇️
+step up|/step ʌp/|ก้าวขึ้น|🪜
+step down|/step daʊn/|ก้าวลง|🔽
+bend down|/bend daʊn/|ก้มลง|🙇
+straighten|/ˈstreɪtən/|ยืดตัวตรง|📐
+turn|/tɜːn/|หัน / เลี้ยว|↪️
+twist|/twɪst/|บิด|🥨
+rotate|/rəʊˈteɪt/|หมุน|🔄
+shake|/ʃeɪk/|เขย่า|🫨
+nod|/nɒd/|พยักหน้า|🙂
+wave|/weɪv/|โบกมือ|👋
+clap|/klæp/|ตบมือ|👏
+grab|/ɡræb/|คว้า|✋
+pick up|/pɪk ʌp/|หยิบขึ้น|🤲
+drop|/drɒp/|ทำหล่น|💧
+release|/rɪˈliːs/|ปล่อย|🕊️
+kick|/kɪk/|เตะลูกบอล|🦶
+shoot|/ʃuːt/|ยิง / ชู้ต|🏀
+bounce|/baʊns/|เด้ง|🏐
+dribble|/ˈdrɪbəl/|เลี้ยงบอล|⛹️
+pass|/pɑːs/|ส่งบอล|🏈
+dodge|/dɒdʒ/|หลบ|🥷
+block|/blɒk/|บล็อก / กัน|🛡️
+tackle|/ˈtækəl/|เข้าสกัด|🏉
+swing|/swɪŋ/|แกว่ง (ไม้)|🏌️
+serve|/sɜːv/|เสิร์ฟ (ลูก)|🎾
+stretch|/stretʃ/|ยืดกล้ามเนื้อ|🧘
+breathe|/briːð/|หายใจ|🌬️
+inhale|/ɪnˈheɪl/|หายใจเข้า|👃
+exhale|/eksˈheɪl/|หายใจออก|😮‍💨
+balance|/ˈbæləns/|ทรงตัว|🤹
+strengthen|/ˈstreŋθən/|เสริมความแข็งแรง|💪
+lift|/lɪft/|ยกน้ำหนัก|🏗️
+lower|/ˈləʊə/|ลดลง|📉
+press|/pres/|กด / ดัน|🔘
+pull|/pʊl/|ดึง / ชัก|🎣`;
+
+const WORDS = RAW.trim().split("\n").map(l=>{const [en,ipa,th,em]=l.split("|");return {en,ipa,th,em};});
+const PER = 25, TABS = Math.ceil(WORDS.length/PER);
+const SAY = {"lead":"leed","row":"roe","mow":"moe","practise":"practice"}; // TTS fixes
+const HUES = [14,100,190,320], HUES2 = [200,280,45,90];
+
+const $ = id => document.getElementById(id);
+const board=$("board"), tabsEl=$("tabs");
+let cur = 0;
+const S = Array.from({length:TABS},()=>newState());
+function newState(){return {order:null,flipped:new Set(),opened:new Set(),score:0,secs:0,running:false,done:false}}
+function ensureOrder(t){ if(!S[t].order) S[t].order=[...Array(Math.min(PER,WORDS.length-t*PER)).keys()]; }
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ---------- voice ---------- */
+let voices=[], chosen=null;
+const MALE=/daniel|george|ryan|arthur|oliver|thomas|james|google uk english male|male|guy|alex|fred/i;
+function loadVoices(){
+  if(!("speechSynthesis" in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const sc = v => (MALE.test(v.name)?4:0)+(/en[-_]GB/i.test(v.lang)?3:0)+(v.localService===false?1:0)+(/natural|neural|online/i.test(v.name)?2:0);
+  voices.sort((a,b)=>sc(b)-sc(a));
+  const sel=$("voice"); const prev=sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงในอุปกรณ์</option>`;
+  if(voices.length){ sel.value = prev && voices[prev] ? prev : 0; chosen = voices[sel.value]; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+$("voice").addEventListener("change",e=>{chosen=voices[e.target.value]; speak(WORDS[0].en);});
+function speak(text){
+  if(!("speechSynthesis" in window)) return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(SAY[text] || text);
+    u.lang = "en-GB"; if(chosen){u.voice=chosen; u.lang=chosen.lang;}
+    u.pitch = 1.15;   // young male tone
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ---------- render ---------- */
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderTabs(){
+  tabsEl.innerHTML = "";
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement("button");
+    b.className="tab"; b.role="tab"; b.setAttribute("aria-selected",t===cur);
+    b.textContent=`ชุด ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,WORDS.length)})`;
+    b.onclick=()=>{cur=t;render()};
+    tabsEl.appendChild(b);
+  }
+}
+function render(){
+  document.documentElement.style.setProperty("--h",HUES[cur%HUES.length]);document.documentElement.style.setProperty("--h2",HUES2[cur%HUES2.length]);
+  renderTabs(); ensureOrder(cur);
+  const st=S[cur]; board.innerHTML="";
+  st.order.forEach((idx,pos)=>{
+    const w=WORDS[cur*PER+idx];
+    const c=document.createElement("div");
+    c.className="card"+(st.flipped.has(idx)?" flipped":"")+(st.opened.has(idx)?" seen":"");
+    c.tabIndex=0; c.setAttribute("role","button");
+    c.setAttribute("aria-label",`${w.en} ${w.ipa}. แตะเพื่อพลิกดูคำแปล`);
+    c.innerHTML=`<div class="inner">
+      <div class="face front"><span class="num">${cur*PER+idx+1}</span>
+        <button class="spk" aria-label="ฟังเสียง ${w.en}" title="ฟังเสียง">🔊</button>
+        <div class="emoji">${w.em}</div><div class="word" style="font-size:${Math.min(19,86/(w.en.length*0.56)).toFixed(1)}cqw">${w.en}</div><div class="ipa">${w.ipa}</div></div>
+      <div class="face back"><div class="emoji" style="font-size:22cqw">${w.em}</div>
+        <div class="th">${w.th}</div><div class="en-small">${w.en}</div></div></div>`;
+    c.addEventListener("click",e=>{
+      if(e.target.closest(".spk")){e.stopPropagation();speak(w.en);return;}
+      flip(idx,c,w);
+    });
+    c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip(idx,c,w)}});
+    board.appendChild(c);
+  });
+  updateStats();
+  $("msg").textContent = st.done ? `🎉 จบชุดแล้ว! เวลา ${fmt(st.secs)} คะแนน ${st.score}` :
+    st.running ? "กำลังเล่น… เปิดให้ครบทุกใบ" : (st.opened.size? "หยุดไว้ — แตะการ์ดเพื่อเล่นต่อ" : "แตะการ์ดใบแรกเพื่อเริ่มจับเวลา");
+}
+function updateStats(){
+  const st=S[cur];
+  $("time").textContent=fmt(st.secs); $("score").textContent=st.score;
+  $("prog").textContent=`${st.opened.size}/${st.order.length}`;
+}
+function flip(idx,el,w){
+  const st=S[cur];
+  if(!st.running && !st.done) { st.running=true; $("msg").textContent="กำลังเล่น… เปิดให้ครบทุกใบ"; }
+  const isFlipped = st.flipped.has(idx);
+  if(isFlipped){ st.flipped.delete(idx); el.classList.remove("flipped"); }
+  else {
+    st.flipped.add(idx); el.classList.add("flipped");
+    if(!st.opened.has(idx)){
+      st.opened.add(idx);
+      if(!st.done) st.score+=10;
+      el.classList.add("seen");
+    }
+  }
+  speak(w.en);
+  if(!st.done && st.opened.size===st.order.length){
+    st.done=true; st.running=false;
+    $("msg").textContent=`🎉 เยี่ยม! เปิดครบ ${st.order.length} ใบ ใช้เวลา ${fmt(st.secs)} ได้ ${st.score} คะแนน`;
+  }
+  updateStats();
+}
+
+/* ---------- controls ---------- */
+$("restart").onclick=()=>{
+  speechSynthesis && speechSynthesis.cancel();
+  S[cur]=newState(); ensureOrder(cur); shuffle(S[cur].order);
+  render(); $("msg").textContent="เริ่มใหม่แล้ว — สลับตำแหน่งการ์ดให้ใหม่";
+};
+$("cancel").onclick=()=>{
+  speechSynthesis && speechSynthesis.cancel();
+  const order=S[cur].order; S[cur]=newState(); S[cur].order=order;
+  render(); $("msg").textContent="ยกเลิกรอบนี้แล้ว — ล้างเวลาและคะแนนเรียบร้อย";
+};
+setInterval(()=>{
+  const st=S[cur];
+  if(st.running && !st.done){st.secs++; updateStats();}
+},1000);
+
+render();
+</script>
+</body>
+</html>
