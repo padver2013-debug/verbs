@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.3 Modal Verb Could (Remote Possibility) – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700;color:#8b0000}
+.top mark{background:#fde047;color:#000;font-weight:700;border-radius:5px;padding:1px 7px}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>2.3 Modal Verb “Could”: Remote Possibility</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `It [[could]] **snow** later this week, though it's rare.|/ɪt kəd snəʊ ˈleɪtə ðɪs wiːk ðəʊ ɪts reə/|อาจจะมีหิมะตกในสัปดาห์นี้ แม้ว่ามันจะเกิดขึ้นได้ยากก็ตาม|❄️
+He [[could]] **win** the lottery, but the odds are tiny.|/hiː kəd wɪn ðə ˈlɒtəri bət ði ɒdz ɑː ˈtaɪni/|เขาอาจจะถูกล็อตเตอรี่ก็ได้ แต่โอกาสมันน้อยมากๆ|🎰
+Prices [[could]] **drop** next year, but don't count on it.|/ˈpraɪsɪz kəd drɒp nekst jɪə bət dəʊnt kaʊnt ɒn ɪt/|ราคาอาจจะลดลงในปีหน้า แต่ก็อย่าไปหวังพึ่งกับมันมากนัก|📉
+She [[could]] **show up** at the party, though she was uninvited.|/ʃiː kəd ʃəʊ ʌp ət ðə ˈpɑːti ðəʊ ʃiː wəz ˌʌnɪnˈvaɪtɪd/|เธออาจจะโผล่มาที่งานปาร์ตี้ก็ได้ แม้ว่าจะไม่ได้ถูกเชิญก็ตาม|🎉
+Traffic [[could]] **clear up** by evening, but it's unlikely.|/ˈtræfɪk kəd klɪər ʌp baɪ ˈiːvnɪŋ bət ɪts ʌnˈlaɪkli/|การจราจรอาจจะคลี่คลายลงได้ช่วงเย็น แต่ก็ไม่ค่อยน่าจะเป็นไปได้|🚦
+We [[could]] **encounter** an alien someday, theoretically.|/wiː kəd ɪnˈkaʊntər ən ˈeɪliən ˈsʌmdeɪ ˌθɪəˈretɪkli/|เราอาจจะได้พบกับเอเลี่ยนเข้าสักวันในทางทฤษฎี|👽
+The old machine [[could]] **work** if we fix this gear.|/ði əʊld məˈʃiːn kəd wɜːk ɪf wiː fɪks ðɪs gɪə/|เครื่องจักรเก่าอันนั้นอาจจะใช้งานได้นะถ้าเราซ่อมเฟืองนี้|⚙️
+An earthquake [[could]] **happen** at any unpredictable moment.|/ən ˈɜːθkweɪk kəd ˈhæpən ət ˈeni ˌʌnprɪˈdɪktəbl ˈməʊmənt/|แผ่นดินไหวอาจเกิดขึ้นได้ในทุกช่วงเวลาที่คาดเดาไม่ได้|🏚️
+You [[could]] **find** a rare coin in this old chest.|/juː kəd faɪnd ə reə kɔɪn ɪn ðɪs əʊld tʃest/|คุณอาจจะเจอเหรียญหายากในหีบโบราณใบนี้ก็ได้|🪙
+The plan [[could]] **fail** if we rush the process.|/ðə plæn kəd feɪl ɪf wiː rʌʃ ðə ˈprəʊses/|แผนการนี้อาจจะล้มเหลวได้ถ้าเราเร่งรีบทำกระบวนการ|❌
+Technology [[could]] **change** drastically in the next decade.|/tekˈnɒlədʒi kəd tʃeɪndʒ ˈdræstɪkli ɪn ðə nekst ˈdekeɪd/|เทคโนโลยีอาจจะเปลี่ยนแปลงไปอย่างมากในทศวรรษหน้า|🤖
+A miracle [[could]] **happen** to save our project.|/ə ˈmɪrəkl kəd ˈhæpən tə seɪv ˈaʊə ˈprɒdʒekt/|ปาฏิหาริย์อาจจะเกิดขึ้นเพื่อช่วยโปรเจกต์ของเราไว้|✨
+He [[could]] **change** his mind, though he is very stubborn.|/hiː kəd tʃeɪndʒ hɪz maɪnd ðəʊ hiː ɪz ˈveri ˈstʌbən/|เขาอาจจะเปลี่ยนใจก็ได้ ถึงแม้ว่าเขาจะหัวดื้อมากๆ ก็ตาม|🤔
+It [[could]] **rain** later, so take an umbrella just in case.|/ɪt kəd reɪn ˈleɪtə səʊ teɪk ən ʌmˈbrelə dʒʌst ɪn keɪs/|เดี๋ยวอาจจะมีฝนตกทีหลัง พกร่มเผื่อไว้หน่อยก็ดี|☂️
+She [[could]] **pass** the test if she studies all night.|/ʃiː kəd pɑːs ðə test ɪf ʃiː ˈstʌdiz ɔːl naɪt/|เธออาจจะสอบผ่านได้ถ้าเธอนั่งอ่านหนังสือทั้งคืน|📝
+The team [[could]] **win** the championship against all odds.|/ðə tiːm kəd wɪn ðə ˈtʃæmpiənʃɪp əˈgenst ɔːl ɒdz/|ทีมอาจจะชนะการแข่งขันชิงแชมป์ได้แม้โอกาสจะริบหรี่|🏆
+Investors [[could]] **lose** money in this volatile market.|/ɪnˈvestəz kəd luːz ˈmʌni ɪn ðɪs ˈvɒlətaɪl ˈmɑːkɪt/|นักลงทุนอาจจะสูญเสียเงินในตลาดที่ผันผวนนี้ได้|📊
+The missing key [[could]] **turn up** under the sofa.|/ðə ˈmɪsɪŋ kiː kəd tɜːn ʌp ˈʌndə ðə ˈsəʊfə/|กุญแจที่หายไปอาจจะโผล่มาอยู่ใต้โซฟาก็ได้|🔑
+Volcanoes [[could]] **erupt** without much prior warning.|/vɒlˈkeɪnəʊz kəd ɪˈrʌpt wɪðˈaʊt mʌtʃ ˈpraɪə ˈwɔːnɪŋ/|ภูเขาไฟอาจจะปะทุขึ้นได้โดยแทบไม่มีสัญญาณเตือนล่วงหน้า|🌋
+The flight [[could]] **delay** due to sudden fog.|/ðə flaɪt kəd dɪˈleɪ djuː tə ˈsʌdn fɒg/|เที่ยวบินอาจจะดีเลย์ได้เนื่องจากมีหมอกลงกะทันหัน|✈️
+Power outages [[could]] **happen** during the fierce storm.|/ˈpaʊər ˈaʊtɪdʒɪz kəd ˈhæpən ˈdjʊərɪŋ ðə fɪəs stɔːm/|ไฟฟ้าดับอาจจะเกิดขึ้นได้ในช่วงที่มีพายุรุนแรง|⛈️
+A stray cat [[could]] **wander** into our garden tonight.|/ə streɪ kæt kəd ˈwɒndər ˈɪntə ˈaʊə ˈgɑːdn təˈnaɪt/|แมวจรจัดอาจจะเดินเข้ามาในสวนของเราคืนนี้ก็ได้|🐈
+The stock market [[could]] **crash** unexpectedly.|/ðə stɒk ˈmɑːkɪt kəd kræʃ ˌʌnɪkˈspektɪdli/|ตลาดหุ้นอาจจะร่วงหล่นลงมาอย่างไม่คาดคิด|⚠️
+The secret [[could]] **leak** if we talk about it loudly.|/ðə ˈsiːkrət kəd liːk ɪf wiː tɔːk əˈbaʊt ɪt ˈlaʊdli/|ความลับอาจจะรั่วไหลได้ถ้าพวกเราพูดถึงมันเสียงดัง|🤫
+An unexpected guest [[could]] **drop by** this evening.|/ən ˌʌnɪkˈspektɪd gest kəd drɒp baɪ ðɪs ˈiːvnɪŋ/|แขกที่ไม่ได้รับเชิญอาจจะแวะมาหาในเย็นนี้ก็ได้|🚪
+Data [[could]] **corrupt** if the system shuts down improperly.|/ˈdeɪtə kəd kəˈrʌpt ɪf ðə ˈsɪstəm ʃʌts daʊn ɪmˈprɒpəli/|ข้อมูลอาจจะเสียหายได้หากระบบปิดตัวลงไม่ถูกต้อง|💾
+Someone [[could]] **misunderstand** your intentions.|/ˈsʌmwʌn kəd ˌmɪsʌndəˈstænd jɔːr ɪnˈtenʃnz/|ใครบางคนอาจจะเข้าใจเจตนาของคุณผิดไปได้|😕
+The recipe [[could]] **taste** better with a pinch of salt.|/ðə ˈresəpi kəd teɪst ˈbetə wɪð ə pɪntʃ əv sɔːlt/|สูตรอาหารนี้อาจจะมีรสชาติดียิ่งขึ้นถ้าใส่เกลือเพิ่มสักนิด|🧂
+This old painting [[could]] **be** worth a fortune.|/ðɪs əʊld ˈpeɪntɪŋ kəd biː wɜːθ ə ˈfɔːtʃuːn/|ภาพวาดเก่าชิ้นนี้อาจจะมีมูลค่ามหาศาลก็ได้|🖼️
+The solution [[could]] **be** simpler than we think.|/ðə səˈluːʃn kəd biː ˈsɪmplə ðən wiː θɪŋk/|ทางออกอาจจะเรียบง่ายกว่าที่เราคิดเอาไว้|💡
+A minor mistake [[could]] **ruin** the entire design.|/ə ˈmaɪnə mɪˈsteɪk kəd ˈruːɪn ði ɪnˈtaɪə dɪˈzaɪn/|ข้อผิดพลาดเล็กๆ น้อยๆ อาจจะทำลายงานออกแบบทั้งหมดได้|🎨
+He [[could]] **arrive** late due to heavy traffic jams.|/hiː kəd əˈraɪv leɪt djuː tə ˈhevi ˈtræfɪk dʒæmz/|เขาอาจจะมาสายเนื่องจากเจอปัญหารถติดอย่างหนัก|🚗
+The car engine [[could]] **break down** in the middle of nowhere.|/ðə kɑːr ˈendʒɪn kəd breɪk daʊn ɪn ðə ˈmɪdl əv ˈnəʊweə/|เครื่องยนต์รถอาจจะเสียกลางทางที่ไหนก็ไม่รู้ได้|🛠️
+Rumors [[could]] **spread** fast across social media platforms.|/ˈruːməz kəd spred fɑːst əˈkrɒs ˈsəʊʃl ˈmiːdiə ˈplætfɔːmz/|ข่าวลืออาจจะแพร่กระจายอย่างรวดเร็วผ่านแพลตฟอร์มโซเชียลมีเดีย|📱
+Prices [[could]] **rise** sharply if inflation continues.|/ˈpraɪsɪz kəd raɪz ˈʃɑːpli ɪf ɪnˈfleɪʃn kənˈtɪnjuːz/|ราคาสินค้าอาจจะพุ่งสูงขึ้นอย่างรวดเร็วหากภาวะเงินเฟ้อยังคงดำเนินต่อไป|📈
+The package [[could]] **reach** us by tomorrow morning.|/ðə ˈpækɪdʒ kəd riːtʃ ʌs baɪ təˈmɒrəʊ ˈmɔːnɪŋ/|พัสดุอาจจะมาถึงพวกเราได้ภายในพรุ่งนี้เช้า|📦
+A scientific breakthrough [[could]] **cure** this disease.|/ə ˌsaɪənˈtɪfɪk ˈbreɪkθruː kəd kjʊə ðɪs dɪˈziːz/|การค้นพบทางวิทยาศาสตร์ชิ้นใหญ่อาจรักษาโรคนี้ให้หายได้|🔬
+Global cooperation [[could]] **solve** climate issues.|/ˈgləʊbl kəʊˌɒpəˈreɪʃn kəd sɒlv ˈklaɪmət ˈɪʃuːz/|ความร่วมมือระดับโลกอาจช่วยแก้ปัญหาสภาพภูมิอากาศได้|🌎
+Renewable energy [[could]] **replace** fossil fuels eventually.|/rɪˈnjuːəbl ˈenədʒi kəd rɪˈpleɪs ˈfɒsl ˈfjuːəlz ɪˈventʃuəli/|พลังงานหมุนเวียนอาจจะเข้ามาแทนที่เชื้อเพลิงฟอสซิลในท้ายที่สุด|☀️
+An unexpected obstacle [[could]] **delay** our schedule.|/ən ˌʌnɪkˈspektɪd ˈɒbstəkl kəd dɪˈleɪ ˈaʊə ˈʃedjuːl/|อุปสรรคที่ไม่คาดคิดอาจจะทำให้ตารางเวลาของเราต้องล่าช้าออกไป|🚧
+The cat [[could]] **scratch** the sofa if left unattended.|/ðə kæt kəd skrætʃ ðə ˈsəʊfə ɪf left ˌʌnəˈtendɪd/|เจ้าแมวอาจจะข่วนโซฟาเสียหายได้ถ้าปล่อยไว้โดยไม่มีคนดูแล|🐾
+Your phone battery [[could]] **die** during the long trip.|/jɔː fəʊn ˈbætəri kəd daɪ ˈdjʊərɪŋ ðə lɒŋ trɪp/|แบตเตอรี่โทรศัพท์ของคุณอาจจะหมดระหว่างการเดินทางไกลได้|🔋
+The internet connection [[could]] **drop** during the online meeting.|/ði ˈɪntənet kəˈnekʃn kəd drɒp ˈdjʊərɪŋ ði ˈɒnlaɪn ˈmiːtɪŋ/|สัญญาณอินเทอร์เน็ตอาจจะหลุดระหว่างการประชุมออนไลน์ได้|📶
+He [[could]] **forget** his password if he doesn't write it down.|/hiː kəd fəˈget hɪz ˈpɑːswɜːd ɪf hiː ˈdʌznt raɪt ɪt daʊn/|เขาอาจจะลืมรหัสผ่านของตัวเองได้ถ้าไม่จดเอาไว้|🔐
+A stray spark [[could]] **start** a forest fire in dry season.|/ə streɪ spɑːk kəd stɑːt ə ˈfɒrɪst ˈfaɪə ɪn draɪ ˈsiːzn/|สะเก็ดไฟเพียงนิดเดียวอาจทำให้เกิดไฟป่าในฤดูแล้งได้|🔥
+The weather [[could]] **turn** nasty by tomorrow afternoon.|/ðə ˈweðə kəd tɜːn ˈnɑːsti baɪ təˈmɒrəʊ ˌɑːftəˈnuːn/|สภาพอากาศอาจจะแปรปรวนแย่ลงได้ภายในบ่ายวันพรุ่งนี้|🌩️
+We [[could]] **miss** the train if we don't hurry.|/wiː kəd mɪs ðə treɪn ɪf wiː dəʊnt ˈhʌri/|พวกเราอาจจะพลาดรถไฟขบวนนั้นถ้าไม่รีบเร่ง|🚆
+The glass [[could]] **shatter** if you drop it on the tile floor.|/ðə glɑːs kəd ˈʃætə ɪf juː drɒp ɪt ɒn ðə taɪl flɔː/|แก้วอาจจะแตกกระจายได้ถ้าคุณทำมันตกบนพื้นกระเบื้อง|🥂
+She [[could]] **resign** from her job if pressure builds up.|/ʃiː kəd rɪˈzaɪn frəm hɜː dʒɒb ɪf ˈpreʃə bɪldz ʌp/|เธออาจจะลาออกจากงานได้หากมีความกดดันสะสมมากขึ้น|💼
+An unexpected error [[could]] **crash** the software program.|/ən ˌʌnɪkˈspektɪd ˈerə kəd kræʃ ðə ˈsɒftweə ˈprəʊgræm/|ข้อผิดพลาดที่ไม่คาดคิดอาจทำให้โปรแกรมซอฟต์แวร์ล่มได้|🖥️
+The computer [[could]] **overheat** if we run heavy games for hours.|/ðə kəmˈpjuːtə kəd ˌəʊvəˈhiːt ɪf wiː rʌn ˈhevi geɪmz fər ˈaʊəz/|คอมพิวเตอร์อาจจะร้อนจัดได้ถ้าพวกเราเปิดเกมหนักๆ เล่นต่อเนื่องหลายชั่วโมง|🌡️
+A small spark [[could]] **trigger** an explosion in the gas station.|/ə smɔːl spɑːk kəd ˈtrɪgər ən ɪkˈspləʊʒn ɪn ðə gæs ˈsteɪʃn/|ประกายไฟเพียงเล็กน้อยอาจจุดชนวนให้เกิดการระเบิดในปั๊มน้ำมันได้|💥
+He [[could]] **win** the race if the leader makes a mistake.|/hiː kəd wɪn ðə reɪs ɪf ðə ˈliːdə meɪks ə mɪˈsteɪk/|เขาอาจจะชนะการแข่งขันได้หากผู้นำเกิดทำผิดพลาดขึ้นมา|🏁
+The old document [[could]] **disintegrate** if handled carelessly.|/ði əʊld ˈdɒkjumənt kəd dɪsˈɪntɪgreɪt ɪf ˈhændld ˈkeələsli/|เอกสารเก่าฉบับนั้นอาจจะเปื่อยยุ่ยเสียหายได้หากหยิบจับอย่างไม่ระมัดระวัง|📜
+The price of gold [[could]] **fluctuate** heavily this week.|/ðə praɪs əv gəʊld kəd ˈflʌktʃueɪt ˈhevɪli ðɪs wiːk/|ราคาทองคำอาจจะมีความผันผวนอย่างหนักในสัปดาห์นี้|🥇
+She [[could]] **forget** the meeting details if not reminded.|/ʃiː kəd fəˈget ðə ˈmiːtɪŋ ˈdiːteɪlz ɪf nɒt rɪˈmaɪndɪd/|เธออาจจะลืมรายละเอียดการประชุมได้ถ้าไม่มีคนเตือน|🗓️
+A sudden storm [[could]] **disrupt** our outdoor event.|/ə ˈsʌdn stɔːm kəd dɪsˈrʌpt ˈaʊər ˈaʊtdɔːr ɪˈvent/|พายุที่จู่ๆ ก็พัดมาอาจจะทำให้งานกลางแจ้งของเราต้องสะดุดลงได้|🌪️
+The ice cream [[could]] **melt** quickly in this hot weather.|/ði aɪs kriːm kəd melt ˈkwɪkli ɪn ðɪs hɒt ˈweðə/|ไอศกรีมอาจจะละลายอย่างรวดเร็วในสภาพอากาศที่ร้อนอบอ้าวนี้|🍦
+Traffic [[could]] **worsen** during the afternoon rush hour.|/ˈtræfɪk kəd ˈwɜːsn ˈdjʊərɪŋ ði ˌɑːftəˈnuːn rʌʃ ˈaʊə/|สภาพการจราจรอาจจะติดขัดแย่ลงกว่าเดิมในช่วงชั่วโมงเร่งด่วนตอนบ่าย|🚥
+An unexpected visitor [[could]] **show up** unannounced.|/ən ˌʌnɪkˈspektɪd ˈvɪzɪtə kəd ʃəʊ ʌp ˌʌnəˈnaʊnst/|แขกที่ไม่คาดคิดอาจจะโผล่มาโดยไม่มีการแจ้งล่วงหน้า|🔔
+The design [[could]] **look** better with brighter colors.|/ðə dɪˈzaɪn kəd lʊk ˈbetə wɪð ˈbraɪtə ˈkʌləz/|งานออกแบบนี้อาจจะดูดีขึ้นได้หากใช้โทนสีที่สว่างกว่านี้|🌈
+The website [[could]] **experience** downtime due to heavy traffic.|/ðə ˈwebsaɪt kəd ɪkˈspɪəriəns ˈdaʊntaɪm djuː tə ˈhevi ˈtræfɪk/|เว็บไซต์อาจจะล่มหรือใช้งานไม่ได้เนื่องจากมีผู้ใช้งานเข้าชมหนาแน่น|🌐
+The medication [[could]] **cause** mild side effects for some people.|/ðə ˌmedɪˈkeɪʃn kəd kɔːz maɪld saɪd ɪˈfekts fə sʌm ˈpiːpl/|ยานี้อาจจะทำให้เกิดผลข้างเคียงเล็กน้อยสำหรับบางคน|💊
+He [[could]] **accept** the job offer if the salary is higher.|/hiː kəd əkˈsept ðə dʒɒb ˈɒfər ɪf ðə ˈsæləri ɪz ˈhaɪə/|เขาอาจจะตอบรับข้อเสนองานนั้นถ้าหากได้เงินเดือนที่สูงขึ้น|🤝
+The key [[could]] **get** lost if you don't keep it secure.|/ðə kiː kəd get lɒst ɪf juː dəʊnt kiːp ɪt sɪˈkjʊə/|กุญแจอาจจะสูญหายได้ถ้าคุณเก็บรักษามันไว้ไม่ดีพอ|🗝️
+A stray dog [[could]] **block** the pathway.|/ə streɪ dɒg kəd blɒk ðə ˈpɑːθweɪ/|สุนัขจรจัดอาจจะนอนขวางทางเดินอยู่ก็ได้|🐕
+The battery [[could]] **drain** faster in cold temperatures.|/ðə ˈbætəri kəd dreɪn ˈfɑːstər ɪn kəʊld ˈtemprətʃəz/|แบตเตอรี่อาจจะหมดเร็วขึ้นในสภาพอากาศที่หนาวเย็น|🪫
+She [[could]] **change** her career path in the future.|/ʃiː kəd tʃeɪndʒ hɜː kəˈrɪə pɑːθ ɪn ðə ˈfjuːtʃə/|เธออาจจะเปลี่ยนเส้นทางอาชีพของตัวเองในอนาคต|🧭
+The printer [[could]] **run out of** ink midway through the job.|/ðə ˈprɪntə kəd rʌn aʊt əv ɪŋk ˌmɪdˈweɪ θruː ðə dʒɒb/|เครื่องพิมพ์อาจจะหมึกหมดกลางคันระหว่างกำลังพิมพ์งานอยู่|🖨️
+An idea [[could]] **spark** a brilliant business startup.|/ən aɪˈdɪə kəd spɑːk ə ˈbrɪliənt ˈbɪznəs ˈstɑːtʌp/|ไอเดียชิ้นหนึ่งอาจจุดประกายให้เกิดธุรกิจสตาร์ทอัพที่ยอดเยี่ยมได้|🚀
+The plant [[could]] **wither** without enough sunlight.|/ðə plɑːnt kəd ˈwɪðə wɪðˈaʊt ɪˈnʌf ˈsʌnlaɪt/|ต้นไม้อาจจะเหี่ยวเฉาตายได้หากได้รับแสงแดดไม่เพียงพอ|🥀
+A technical glitch [[could]] **delay** the live broadcast.|/ə ˈteknɪkl glɪtʃ kəd dɪˈleɪ ðə laɪv ˈbrɔːdkɑːst/|ความผิดพลาดทางเทคนิคอาจทำให้การถ่ายทอดสดต้องล่าช้าลง|📺
+The recipe [[could]] **fail** if proportions are incorrect.|/ðə ˈresəpi kəd feɪl ɪf prəˈpɔːʃnz ɑːr ˌɪnkəˈrekt/|สูตรอาหารอาจจะออกมาไม่สำเร็จหากตวงสัดส่วนส่วนผสมผิดพลาด|🍳
+He [[could]] **succeed** if he puts more effort into it.|/hiː kəd səkˈsiːd ɪf hiː pʊts mɔːr ˈefət ˈɪntə ɪt/|เขาอาจจะประสบความสำเร็จได้ถ้าทุ่มเทความพยายามลงไปมากกว่านี้|🏅
+The package [[could]] **suffer** damage during transit.|/ðə ˈpækɪdʒ kəd ˈsʌfə ˈdæmɪdʒ ˈdjʊərɪŋ ˈtrænzɪt/|พัสดุอาจจะได้รับความเสียหายระหว่างการขนส่งได้|🚚
+The water pipe [[could]] **burst** during a hard freeze.|/ðə ˈwɔːtə paɪp kəd bɜːst ˈdjʊərɪŋ ə hɑːd friːz/|ท่อน้ำอาจจะแตกได้ในช่วงที่อากาศหนาวจัดจนน้ำแข็งเกาะ|🚰
+A typo [[could]] **mislead** the readers entirely.|/ə ˈtaɪpəʊ kəd ˌmɪsˈliːd ðə ˈriːdəz ɪnˈtaɪəli/|คำพิมพ์ผิดเพียงคำเดียวอาจทำให้ผู้อ่านเข้าใจผิดไปกันใหญ่ได้|📰
+The meeting time [[could]] **shift** depending on the manager.|/ðə ˈmiːtɪŋ taɪm kəd ʃɪft dɪˈpendɪŋ ɒn ðə ˈmænɪdʒə/|เวลานัดประชุมอาจจะมีการเปลี่ยนแปลงขยับออกไปขึ้นอยู่กับผู้จัดการ|⏰
+The lightbulb [[could]] **burn out** any time soon.|/ðə ˈlaɪtbʌlb kəd bɜːn aʊt ˈeni taɪm suːn/|หลอดไฟดวงนี้อาจจะขาดเสียเมื่อไหร่ก็ได้ในเร็วๆ นี้|💡
+The old photo [[could]] **fade** if exposed to direct sun.|/ði əʊld ˈfəʊtəʊ kəd feɪd ɪf ɪkˈspəʊzd tə dəˈrekt sʌn/|รูปถ่ายเก่าๆ อาจจะซีดจางลงได้หากโดนแสงแดดส่องตรงๆ|📷
+An argument [[could]] **arise** from a small misunderstanding.|/ən ˈɑːgjumənt kəd əˈraɪz frəm ə smɔːl ˌmɪsʌndəˈstændɪŋ/|การโต้เถียงกันอาจเกิดขึ้นได้จากความเข้าใจผิดเล็กๆ น้อยๆ|🗯️
+The market [[could]] **recover** by the end of the month.|/ðə ˈmɑːkɪt kəd rɪˈkʌvə baɪ ði end əv ðə mʌnθ/|ตลาดอาจจะฟื้นตัวขึ้นได้ภายในช่วงสิ้นเดือนนี้|📈
+The plan [[could]] **benefit** from some minor adjustments.|/ðə plæn kəd ˈbenɪfɪt frəm sʌm ˈmaɪnər əˈdʒʌstmənts/|แผนงานนี้อาจจะได้รับประโยชน์มากขึ้นจากการปรับปรุงเล็กๆ น้อยๆ|🗂️
+She [[could]] **change** her mind about traveling abroad.|/ʃiː kəd tʃeɪndʒ hɜː maɪnd əˈbaʊt ˈtrævəlɪŋ əˈbrɔːd/|เธออาจจะเปลี่ยนใจเรื่องการเดินทางไปเที่ยวต่างประเทศก็ได้|🧳
+The shirt [[could]] **shrink** if washed in hot water.|/ðə ʃɜːt kəd ʃrɪŋk ɪf wɒʃt ɪn hɒt ˈwɔːtə/|เสื้อเชิ้ตตัวนี้อาจจะหดตัวลงได้หากนำไปซักด้วยน้ำร้อน|👕
+A single rumor [[could]] **damage** a reputation.|/ə ˈsɪŋgl ˈruːmə kəd ˈdæmɪdʒ ə ˌrepjuˈteɪʃn/|ข่าวลือเพียงเรื่องเดียวอาจสร้างความเสียหายต่อชื่อเสียงได้|🗣️
+The glass window [[could]] **crack** under extreme pressure.|/ðə glɑːs ˈwɪndəʊ kəd kræk ˈʌndər ɪkˈstriːm ˈpreʃə/|หน้าต่างกระจกอาจจะแตกร้าวได้ภายใต้แรงกดดันที่สูงมากๆ|🪟
+He [[could]] **lose** his way without a proper GPS map.|/hiː kəd luːz hɪz weɪ wɪðˈaʊt ə ˈprɒpə ˌdʒiː piː ˈes mæp/|เขาอาจจะหลงทางได้หากไม่มีแผนที่ GPS คอยนำทาง|📍
+The soup [[could]] **taste** too salty if you add more sauce.|/ðə suːp kəd teɪst tuː ˈsɔːlti ɪf juː æd mɔː sɔːs/|ซุปอาจจะมีรสเค็มเกินไปถ้าคุณเติมซอสลงไปเพิ่ม|🍲
+The flight [[could]] **encounter** turbulence over the mountains.|/ðə flaɪt kəd ɪnˈkaʊntə ˈtɜːbjələns ˈəʊvə ðə ˈmaʊntɪnz/|เที่ยวบินอาจจะเจอกับภาวะอากาศแปรปรวนหรือตกหลุมอากาศเหนือเขตภูเขา|🛫
+The color [[could]] **bleed** into other clothes during washing.|/ðə ˈkʌlə kəd bliːd ˈɪntu ˈʌðə kləʊðz ˈdjʊərɪŋ ˈwɒʃɪŋ/|สีของผ้าอาจจะตกใส่เสื้อผ้าตัวอื่นระหว่างการซักได้|🧺
+The price [[could]] **drop** during the clearance sale event.|/ðə praɪs kəd drɒp ˈdjʊərɪŋ ðə ˈklɪərəns seɪl ɪˈvent/|ราคาสินค้าอาจจะลดลงในช่วงที่มีงานลดราคาครั้งใหญ่|🏷️
+A change in policy [[could]] **affect** our department.|/ə tʃeɪndʒ ɪn ˈpɒləsi kəd əˈfekt ˈaʊə dɪˈpɑːtmənt/|การเปลี่ยนแปลงนโยบายอาจจะส่งผลกระทบต่อแผนกของเราได้|📋
+The car tire [[could]] **go** flat if you drive over sharp nails.|/ðə kɑː ˈtaɪə kəd gəʊ flæt ɪf juː draɪv ˈəʊvə ʃɑːp neɪlz/|ยางรถยนต์อาจจะแบนได้หากขับทับตะปูแหลมๆ|🛞
+The project timeline [[could]] **extend** by another week.|/ðə ˈprɒdʒekt ˈtaɪmlaɪn kəd ɪkˈstend baɪ əˈnʌðə wiːk/|กรอบเวลาของโปรเจกต์อาจจะต้องขยายออกไปอีกหนึ่งสัปดาห์|📆
+The temperature [[could]] **drop** sharply tonight.|/ðə ˈtemprətʃə kəd drɒp ˈʃɑːpli təˈnaɪt/|อุณหภูมิอาจจะลดต่ำลงอย่างรวดเร็วในคืนนี้|🥶
+He [[could]] **resign** if the work environment doesn't improve.|/hiː kəd rɪˈzaɪn ɪf ðə wɜːk ɪnˈvaɪrənmənt ˈdʌznt ɪmˈpruːv/|เขาอาจจะลาออกถ้าหากสภาพแวดล้อมในการทำงานยังไม่ดีขึ้น|🚪
+The software update [[could]] **fix** the security bugs.|/ðə ˈsɒftweər ˈʌpdeɪt kəd fɪks ðə sɪˈkjʊərəti bʌgz/|การอัปเดตซอฟต์แวร์อาจจะช่วยแก้ไขข้อบกพร่องด้านความปลอดภัยได้|🐛
+A strong wind [[could]] **knock down** power lines.|/ə strɒŋ wɪnd kəd nɒk daʊn ˈpaʊə laɪnz/|ลมกระโชกแรงอาจจะพัดเสาไฟฟ้าโค่นลงมาได้|🌬️
+The ancient ruin [[could]] **hide** undiscovered secrets.|/ði ˈeɪnʃənt ˈruːɪn kəd haɪd ˌʌndɪˈskʌvəd ˈsiːkrəts/|ซากโบราณสถานแห่งนั้นอาจจะซ่อนความลับที่ยังไม่มีใครค้นพบเอาไว้|🏛️`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*|\[\[|\]\]/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\[\[(.+?)\]\]/g,"<mark>$1</mark>").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

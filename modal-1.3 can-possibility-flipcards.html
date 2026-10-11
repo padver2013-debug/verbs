@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.3 Modal Verb Can (Possibility) – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700;color:#8b0000}
+.top mark{background:#fde047;color:#000;font-weight:700;border-radius:5px;padding:1px 7px}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>1.3 Modal Verb “Can”: Possibility</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `It [[can]] **rain** this afternoon.|/ɪt kən reɪn ðɪs ˌɑːftəˈnuːn/|ฝนอาจจะตกในช่วงบ่ายนี้ได้|🌧️
+Accidents [[can]] **happen** anywhere.|/ˈæksɪdənts kən ˈhæpən ˈeniweə/|อุบัติเหตุสามารถเกิดขึ้นได้ทุกที่|⚠️
+Anyone [[can]] **make** mistakes.|/ˈeniwʌn kən meɪk mɪˈsteɪks/|ใครๆ ก็สามารถทำผิดพลาดได้|🤷
+Traffic [[can]] **be** heavy during rush hour.|/ˈtræfɪk kən biː ˈhevi ˈdjʊərɪŋ rʌʃ aʊə/|การจราจรอาจจะติดขัดมากในช่วงเวลาเร่งด่วน|🚗
+Prices [[can]] **change** without notice.|/ˈpraɪsɪz kən tʃeɪndʒ wɪðˈaʊt ˈnəʊtɪs/|ราคาอาจจะเปลี่ยนแปลงได้โดยไม่ต้องแจ้งให้ทราบล่วงหน้า|🏷️
+Stress [[can]] **cause** health problems.|/stres kən kɔːz helθ ˈprɒbləmz/|ความเครียดสามารถทำให้เกิดปัญหาสุขภาพได้|😰
+Technology [[can]] **fail** sometimes.|/tekˈnɒlədʒi kən feɪl ˈsʌmtaɪmz/|เทคโนโลยีสามารถขัดข้องได้ในบางครั้ง|💻
+Plans [[can]] **change** at the last minute.|/plænz kən tʃeɪndʒ ət ðə lɑːst ˈmɪnɪt/|แผนการอาจจะเปลี่ยนแปลงได้ในนาทีสุดท้าย|📅
+Weather [[can]] **be** unpredictable in spring.|/ˈweðə kən biː ˌʌnprɪˈdɪktəbl ɪn sprɪŋ/|สภาพอากาศอาจจะคาดเดาได้ยากในฤดูใบไม้ผลิ|🌦️
+Good friends [[can]] **disagree** sometimes.|/gʊd frendz kən ˌdɪsəˈgriː ˈsʌmtaɪmz/|เพื่อนที่ดีก็อาจจะมีความเห็นไม่ตรงกันได้ในบางครั้ง|🧑‍🤝‍🧑
+Dreams [[can]] **come** true with hard work.|/driːmz kən kʌm truː wɪð hɑːd wɜːk/|ความฝันสามารถเป็นจริงได้ด้วยการทำงานหนัก|🌠
+Smoking [[can]] **lead to** serious diseases.|/ˈsməʊkɪŋ kən liːd tə ˈsɪəriəs dɪˈziːzɪz/|การสูบบุหรี่สามารถนำไปสู่โรคที่ร้ายแรงได้|🚬
+Lack of sleep [[can]] **affect** your mood.|/læk əv sliːp kən əˈfekt jɔː muːd/|การนอนหลับพักผ่อนไม่เพียงพอสามารถส่งผลต่ออารมณ์ของคุณได้|😴
+Hard work [[can]] **bring** success.|/hɑːd wɜːk kən brɪŋ səkˈses/|การทำงานหนักสามารถนำมาซึ่งความสำเร็จได้|💼
+Kindness [[can]] **change** people's hearts.|/ˈkaɪndnəs kən tʃeɪndʒ ˈpiːplz hɑːts/|ความใจดีสามารถเปลี่ยนใจคนได้|💝
+Eating too much sugar [[can]] **cause** diabetes.|/ˈiːtɪŋ tuː mʌtʃ ˈʃʊgə kən kɔːz ˌdaɪəˈbiːtiːz/|การกินน้ำตาลมากเกินไปสามารถทำให้เกิดโรคเบาหวานได้|🍬
+Regular exercise [[can]] **improve** your stamina.|/ˈregjələr ˈeksəsaɪz kən ɪmˈpruːv jɔː ˈstæmɪnə/|การออกกำลังกายสม่ำเสมอสามารถเพิ่มความอึดของคุณได้|🏃
+Drinking water [[can]] **prevent** dehydration.|/ˈdrɪŋkɪŋ ˈwɔːtə kən prɪˈvent ˌdiːhaɪˈdreɪʃn/|การดื่มน้ำสามารถป้องกันภาวะขาดน้ำได้|💧
+Reading books [[can]] **expand** your knowledge.|/ˈriːdɪŋ bʊks kən ɪkˈspænd jɔː ˈnɒlɪdʒ/|การอ่านหนังสือสามารถขยายความรู้ของคุณได้|📚
+Traveling [[can]] **open** your mind.|/ˈtrævəlɪŋ kən ˈəʊpən jɔː maɪnd/|การเดินทางสามารถเปิดมุมมองความคิดของคุณได้|🧳
+Computers [[can]] **store** huge amounts of data.|/kəmˈpjuːtəz kən stɔː hjuːdʒ əˈmaʊnts əv ˈdeɪtə/|คอมพิวเตอร์สามารถจัดเก็บข้อมูลจำนวนมหาศาลได้|🖥️
+Phones [[can]] **connect** people globally.|/fəʊnz kən kəˈnekt ˈpiːpl ˈgləʊbəli/|โทรศัพท์สามารถเชื่อมต่อผู้คนทั่วโลกเข้าด้วยกันได้|📱
+Social media [[can]] **spread** news very fast.|/ˈsəʊʃl ˈmiːdiə kən spred njuːz ˈveri fɑːst/|โซเชียลมีเดียสามารถกระจายข่าวสารได้อย่างรวดเร็วมาก|📢
+Online shopping [[can]] **save** your time.|/ˈɒnlaɪn ˈʃɒpɪŋ kən seɪv jɔː taɪm/|การช้อปปิ้งออนไลน์สามารถช่วยประหยัดเวลาของคุณได้|🛒
+Electric cars [[can]] **reduce** air pollution.|/ɪˈlektrɪk kɑːz kən rɪˈdjuːs eə pəˈluːʃn/|รถยนต์ไฟฟ้าสามารถลดมลพิษทางอากาศได้|🔋
+Solar panels [[can]] **generate** clean electricity.|/ˈsəʊlə ˈpænlz kən ˈdʒenəreɪt kliːn ɪˌlekˈtrɪsəti/|แผงโซลาร์เซลล์สามารถผลิตไฟฟ้าสะอาดได้|☀️
+Plastic bags [[can]] **harm** marine life.|/ˈplæstɪk bægz kən hɑːm məˈriːn laɪf/|ถุงพลาสติกสามารถเป็นอันตรายต่อสิ่งมีชีวิตในทะเลได้|🐢
+Loud noises [[can]] **damage** your hearing.|/laʊd ˈnɔɪzɪz kən ˈdæmɪdʒ jɔː ˈhɪərɪŋ/|เสียงที่ดังเกินไปสามารถทำลายการได้ยินของคุณได้|🔊
+Bright lights [[can]] **strain** your eyes.|/braɪt laɪts kən streɪn jɔːr aɪz/|แสงที่สว่างจ้าเกินไปสามารถทำให้สายตาตึงเครียดได้|👁️
+High temperatures [[can]] **melt** ice quickly.|/haɪ ˈtemprətʃəz kən melt aɪs ˈkwɪkli/|อุณหภูมิที่สูงสามารถทำให้น้ำแข็งละลายได้อย่างรวดเร็ว|🫠
+Strong winds [[can]] **blow down** tree branches.|/strɒŋ wɪndz kən bləʊ daʊn triː ˈbrɑːntʃɪz/|ลมแรงสามารถพัดกิ่งไม้หักโค่นลงมาได้|🌬️
+Heavy rain [[can]] **cause** sudden floods.|/ˈhevi reɪn kən kɔːz ˈsʌdn flʌdz/|ฝนตกหนักสามารถทำให้เกิดน้ำท่วมฉับพลันได้|🌊
+Freezing temperatures [[can]] **freeze** water pipes.|/ˈfriːzɪŋ ˈtemprətʃəz kən friːz ˈwɔːtə paɪps/|อุณหภูมิที่เย็นจัดสามารถทำให้น้ำในท่อแข็งตัวได้|🥶
+Dry seasons [[can]] **spark** forest fires.|/draɪ ˈsiːznz kən spɑːk ˈfɒrɪst ˈfaɪəz/|ฤดูแล้งสามารถก่อให้เกิดไฟป่าได้|🔥
+Earthquakes [[can]] **damage** old buildings.|/ˈɜːθkweɪks kən ˈdæmɪdʒ əʊld ˈbɪldɪŋz/|แผ่นดินไหวสามารถสร้างความเสียหายแก่ตึกเก่าได้|🏚️
+Volcanoes [[can]] **erupt** unexpectedly.|/vɒlˈkeɪnəʊz kən ɪˈrʌpt ˌʌnɪkˈspektɪdli/|ภูเขาไฟสามารถปะทุขึ้นมาได้อย่างไม่คาดคิด|🌋
+Ocean waves [[can]] **erode** coastal lines.|/ˈəʊʃn weɪvz kən ɪˈrəʊd ˈkəʊstl laɪnz/|คลื่นทะเลสามารถกัดเซาะแนวชายฝั่งได้|🏖️
+Fast winds [[can]] **power** wind turbines.|/fɑːst wɪndz kən ˈpaʊə wɪnd ˈtɜːbaɪnz/|ลมพัดเร็วสามารถขับเคลื่อนกังหันลมได้|🌀
+Sunlight [[can]] **fade** colored clothes.|/ˈsʌnlaɪt kən feɪd ˈkʌləd kləʊðz/|แสงแดดสามารถทำให้เสื้อผ้าสีซีดจางลงได้|👕
+Chemical reactions [[can]] **release** heat energy.|/ˈkemɪkl riˈækʃnz kən rɪˈliːs hiːt ˈenədʒi/|ปฏิกิริยาเคมีสามารถปล่อยพลังงานความร้อนออกมาได้|🧪
+Metal objects [[can]] **conduct** electricity well.|/ˈmetl ˈɒbdʒekts kən kənˈdʌkt ɪˌlekˈtrɪsəti wel/|วัตถุที่เป็นโลหะสามารถนำไฟฟ้าได้ดี|🔌
+Rubber materials [[can]] **insulate** electric currents.|/ˈrʌbə məˈtɪəriəlz kən ˈɪnsjuleɪt ɪˈlektrɪk ˈkʌrənts/|วัสดุยางสามารถเป็นฉนวนกันกระแสไฟฟ้าได้|🧤
+Oil and water [[can]] **separate** naturally.|/ɔɪl ənd ˈwɔːtə kən ˈsepəreɪt ˈnætʃrəli/|น้ำมันและน้ำสามารถแยกตัวออกจากกันได้ตามธรรมชาติ|🫗
+Salt and sugar [[can]] **dissolve** in warm water.|/sɔːlt ənd ˈʃʊgə kən dɪˈzɒlv ɪn wɔːm ˈwɔːtə/|เกลือและน้ำตาลสามารถละลายในน้ำอุ่นได้|🧂
+Yeast [[can]] **make** dough rise higher.|/jiːst kən meɪk dəʊ raɪz ˈhaɪə/|ยีสต์สามารถทำให้แป้งโดว์ฟูขึ้นได้|🍞
+Lemon juice [[can]] **prevent** apples from turning brown.|/ˈlemən dʒuːs kən prɪˈvent ˈæplz frəm ˈtɜːnɪŋ braʊn/|น้ำมะนาวสามารถป้องกันไม่ให้แอปเปิลเปลี่ยนเป็นสีน้ำตาลได้|🍋
+Baking soda [[can]] **remove** bad odors.|/ˈbeɪkɪŋ ˈsəʊdə kən rɪˈmuːv bæd ˈəʊdəz/|เบกกิ้งโซดาสามารถขจัดกลิ่นไม่พึงประสงค์ได้|🧽
+Vinegar [[can]] **clean** glass surfaces effectively.|/ˈvɪnɪgə kən kliːn glɑːs ˈsɜːfɪsɪz ɪˈfektɪvli/|น้ำส้มสายชูสามารถทำความสะอาดพื้นผิวกระจกได้อย่างมีประสิทธิภาพ|🪟
+Fresh flowers [[can]] **brighten up** a room.|/freʃ ˈflaʊəz kən ˈbraɪtn ʌp ə ruːm/|ดอกไม้สดสามารถทำให้ห้องดูสดใสขึ้นได้|💐
+Soft music [[can]] **help** you relax.|/sɒft ˈmjuːzɪk kən help juː rɪˈlæks/|เพลงเบาๆ สามารถช่วยให้คุณผ่อนคลายได้|🎶
+Good news [[can]] **make** someone smile.|/gʊd njuːz kən meɪk ˈsʌmwʌn smaɪl/|ข่าวดีสามารถทำให้ใครบางคนยิ้มได้|😊
+Small actions [[can]] **make** a big difference.|/smɔːl ˈækʃnz kən meɪk ə bɪg ˈdɪfrəns/|การกระทำเล็กๆ น้อยๆ สามารถสร้างความเปลี่ยนแปลงครั้งใหญ่ได้|🌱
+Practice [[can]] **lead to** perfection.|/ˈpræktɪs kən liːd tə pəˈfekʃn/|การฝึกฝนสามารถนำไปสู่ความสมบูรณ์แบบได้|🎯
+Patience [[can]] **solve** difficult situations.|/ˈpeɪʃns kən sɒlv ˈdɪfɪkəlt ˌsɪtʃuˈeɪʃnz/|ความอดทนสามารถแก้สถานการณ์ที่ยากลำบากได้|🧘
+Honesty [[can]] **build** strong trust.|/ˈɒnɪsti kən bɪld strɒŋ trʌst/|ความซื่อสัตย์สามารถสร้างความไว้วางใจที่มั่นคงได้|🤝
+Teamwork [[can]] **achieve** greater goals.|/ˈtiːmwɜːk kən əˈtʃiːv ˈgreɪtə gəʊlz/|การทำงานเป็นทีมสามารถบรรลุเป้าหมายที่ยิ่งใหญ่กว่าได้|👥
+Curiosity [[can]] **spark** new discoveries.|/ˌkjʊəriˈɒsəti kən spɑːk njuː dɪˈskʌvəriz/|ความอยากรู้อยากเห็นสามารถจุดประกายการค้นพบใหม่ๆ ได้|🔭
+Imagination [[can]] **create** wonderful art.|/ɪˌmædʒɪˈneɪʃn kən kriˈeɪt ˈwʌndəfl ɑːt/|จินตนาการสามารถสร้างสรรค์ศิลปะที่ยอดเยี่ยมได้|🎨
+Laughter [[can]] **boost** your immune system.|/ˈlɑːftə kən buːst jɔːr ɪˈmjuːn ˈsɪstəm/|เสียงหัวเราะสามารถช่วยกระตุ้นระบบภูมิคุ้มกันของคุณได้|😂
+A warm smile [[can]] **warm** someone's heart.|/ə wɔːm smaɪl kən wɔːm ˈsʌmwʌnz hɑːt/|รอยยิ้มที่อบอุ่นสามารถอุ่นหัวใจของใครบางคนได้|☺️
+A single spark [[can]] **start** a massive wildfire.|/ə ˈsɪŋgl spɑːk kən stɑːt ə ˈmæsɪv ˈwaɪldfaɪə/|ประกายไฟเพียงอันเดียวสามารถเริ่มไฟป่าขนาดใหญ่ได้|🌲
+A small leak [[can]] **sink** a great ship.|/ə smɔːl liːk kən sɪŋk ə greɪt ʃɪp/|รอยรั่วเพียงเล็กน้อยสามารถทำให้เรือลำใหญ่จมได้|🚢
+Gentle words [[can]] **calm** an angry person.|/ˈdʒentl wɜːdz kən kɑːm ən ˈæŋgri ˈpɜːsn/|ถ้อยคำที่อ่อนโยนสามารถทำให้คนโกรธสงบลงได้|🕊️
+Hidden talents [[can]] **surprise** everyone.|/ˈhɪdn ˈtælənts kən səˈpraɪz ˈevriwʌn/|พรสวรรค์ที่ซ่อนอยู่สามารถทำให้ทุกคนประหลาดใจได้|🎁
+Unexpected guests [[can]] **arrive** at any time.|/ˌʌnɪkˈspektɪd gests kən əˈraɪv ət ˈeni taɪm/|แขกที่ไม่คาดคิดสามารถมาถึงได้ตลอดเวลา|🚪
+Old items [[can]] **become** valuable antiques.|/əʊld ˈaɪtəmz kən bɪˈkʌm ˈvæljuəbl ænˈtiːks/|ของเก่าสามารถกลายเป็นของโบราณที่มีค่าได้|🏺
+Broken objects [[can]] **be repaired** carefully.|/ˈbrəʊkən ˈɒbdʒekts kən biː rɪˈpeəd ˈkeəfəli/|สิ่งของที่พังเสียหายสามารถซ่อมแซมได้อย่างระมัดระวัง|🔧
+Cold weather [[can]] **cause** catching a cold.|/kəʊld ˈweðə kən kɔːz ˈkætʃɪŋ ə kəʊld/|สภาพอากาศหนาวเย็นสามารถทำให้เป็นหวัดได้|🤧
+Fresh fruits [[can]] **boost** daily energy.|/freʃ fruːts kən buːst ˈdeɪli ˈenədʒi/|ผลไม้สดสามารถช่วยเพิ่มพลังงานประจำวันได้|🍎
+Green tea [[can]] **improve** mental focus.|/griːn tiː kən ɪmˈpruːv ˈmentl ˈfəʊkəs/|ชาเขียวสามารถช่วยปรับปรุงสมาธิในการทำงานได้|🍵
+Dark chocolate [[can]] **lift** your mood.|/dɑːk ˈtʃɒklət kən lɪft jɔː muːd/|ดาร์กช็อกโกแลตสามารถช่วยให้อารมณ์ดีขึ้นได้|🍫
+Honey [[can]] **soothe** a sore throat.|/ˈhʌni kən suːð ə sɔː θrəʊt/|น้ำผึ้งสามารถบรรเทาอาการเจ็บคอได้|🍯
+Garlic [[can]] **strengthen** the immune system.|/ˈgɑːlɪk kən ˈstreŋθn ði ɪˈmjuːn ˈsɪstəm/|กระเทียมสามารถเสริมสร้างระบบภูมิคุ้มกันได้|🧄
+Ginger tea [[can]] **relieve** stomachaches.|/ˈdʒɪndʒə tiː kən rɪˈliːv ˈstʌməkeɪks/|ชาขิงสามารถบรรเทาอาการปวดท้องได้|🫚
+Regular reading [[can]] **enrich** vocabulary.|/ˈregjələ ˈriːdɪŋ kən ɪnˈrɪtʃ vəˈkæbjələri/|การอ่านหนังสือเป็นประจำสามารถเพิ่มคลังคำศัพท์ได้|📖
+Writing notes [[can]] **enhance** memory retention.|/ˈraɪtɪŋ nəʊts kən ɪnˈhɑːns ˈmeməri rɪˈtenʃn/|การจดบันทึกสามารถช่วยเพิ่มการจดจำได้|📝
+Daily stretching [[can]] **prevent** body stiffness.|/ˈdeɪli ˈstretʃɪŋ kən prɪˈvent ˈbɒdi ˈstɪfnəs/|การยืดเหยียดร่างกายทุกวันสามารถป้องกันอาการตัวแข็งตึงได้|🤸
+Deep breathing [[can]] **lower** blood pressure.|/diːp ˈbriːðɪŋ kən ˈləʊə blʌd ˈpreʃə/|การหายใจเข้าลึกๆ สามารถช่วยลดความดันโลหิตได้|🫁
+Morning sunlight [[can]] **regulate** sleep cycles.|/ˈmɔːnɪŋ ˈsʌnlaɪt kən ˈregjuleɪt sliːp ˈsaɪklz/|แสงแดดยามเช้าสามารถช่วยควบคุมวงจรการนอนหลับได้|🌅
+Clean air [[can]] **promote** better breathing.|/kliːn eə kən prəˈməʊt ˈbetə ˈbriːðɪŋ/|อากาศบริสุทธิ์สามารถช่วยส่งเสริมการหายใจให้ดีขึ้นได้|🍃
+Heavy traffic [[can]] **delay** your arrival.|/ˈhevi ˈtræfɪk kən dɪˈleɪ jɔːr əˈraɪvl/|การจราจรที่หนาแน่นสามารถทำให้คุณไปถึงช้าลงได้|🚦
+Flight delays [[can]] **upset** travel schedules.|/flaɪt dɪˈleɪz kən ʌpˈset ˈtrævl ˈʃedjuːlz/|การล่าช้าของเที่ยวบินสามารถทำให้ตารางเดินทางปั่นป่วนได้|✈️
+Power outages [[can]] **disrupt** online work.|/ˈpaʊər ˈaʊtɪdʒɪz kən dɪsˈrʌpt ˈɒnlaɪn wɜːk/|ไฟฟ้าดับสามารถขัดจังหวะการทำงานออนไลน์ได้|🕯️
+Computer viruses [[can]] **corrupt** important files.|/kəmˈpjuːtə ˈvaɪrəsɪz kən kəˈrʌpt ɪmˈpɔːtnt faɪlz/|ไวรัสคอมพิวเตอร์สามารถสร้างความเสียหายแก่ไฟล์สำคัญได้|🦠
+Weak passwords [[can]] **compromise** online security.|/wiːk ˈpɑːswɜːdz kən ˈkɒmprəmaɪz ˈɒnlaɪn sɪˈkjʊərəti/|รหัสผ่านที่อ่อนแอสามารถทำให้ความปลอดภัยออนไลน์ลดลงได้|🔓
+Fake news [[can]] **mislead** the public.|/feɪk njuːz kən ˌmɪsˈliːd ðə ˈpʌblɪk/|ข่าวปลอมสามารถทำให้ประชาชนเข้าใจผิดได้|📰
+Rumors [[can]] **damage** personal reputations.|/ˈruːməz kən ˈdæmɪdʒ ˈpɜːsənl ˌrepjuˈteɪʃnz/|ข่าวลือสามารถทำลายชื่อเสียงส่วนบุคคลได้|🗣️
+Miscommunication [[can]] **create** unnecessary conflicts.|/ˌmɪskəmjuːnɪˈkeɪʃn kən kriˈeɪt ʌnˈnesəsəri ˈkɒnflɪkts/|การสื่อสารที่คลาดเคลื่อนสามารถสร้างความขัดแย้งที่ไม่จำเป็นได้|💬
+Hasty decisions [[can]] **bring** future regrets.|/ˈheɪsti dɪˈsɪʒnz kən brɪŋ ˈfjuːtʃə rɪˈgrets/|การตัดสินใจที่รีบร้อนสามารถนำมาซึ่งความเสียใจภายหลังได้|😞
+Ignorance [[can]] **lead to** costly mistakes.|/ˈɪgnərəns kən liːd tə ˈkɒstli mɪˈsteɪks/|ความไม่รู้สามารถนำไปสู่ความผิดพลาดที่มีราคาแพงได้|❌
+Proper planning [[can]] **prevent** future failures.|/ˈprɒpə ˈplænɪŋ kən prɪˈvent ˈfjuːtʃə ˈfeɪljəz/|การวางแผนที่เหมาะสมสามารถป้องกันความล้มเหลวในอนาคตได้|🗓️
+Open communication [[can]] **resolve** misunderstandings.|/ˈəʊpən kəˌmjuːnɪˈkeɪʃn kən rɪˈzɒlv ˌmɪsʌndəˈstændɪŋz/|การสื่อสารที่เปิดกว้างสามารถช่วยคลี่คลายความเข้าใจผิดได้|🗨️
+Mutual respect [[can]] **build** lasting friendships.|/ˈmjuːtʃuəl rɪˈspekt kən bɪld ˈlɑːstɪŋ ˈfrendʃɪps/|การให้เกียรติซึ่งกันและกันสามารถสร้างมิตรภาพที่ยั่งยืนได้|🫂
+Consistent effort [[can]] **guarantee** steady progress.|/kənˈsɪstənt ˈefət kən ˌgærənˈtiː ˈstedi ˈprəʊgres/|ความพยายามอย่างสม่ำเสมอสามารถรับประกันความก้าวหน้าที่มั่นคงได้|📈
+Creative ideas [[can]] **transform** industries.|/kriˈeɪtɪv aɪˈdɪəz kən trænsˈfɔːm ˈɪndəstriz/|ไอเดียความคิดสร้างสรรค์สามารถเปลี่ยนแปลงอุตสาหกรรมได้|💡
+Scientific breakthroughs [[can]] **cure** rare diseases.|/ˌsaɪənˈtɪfɪk ˈbreɪkθruːz kən kjʊə reə dɪˈziːzɪz/|การค้นพบทางวิทยาศาสตร์สามารถรักษาโรคหายากได้|🔬
+Renewable energy [[can]] **protect** the environment.|/rɪˈnjuːəbl ˈenədʒi kən prəˈtekt ði ɪnˈvaɪrənmənt/|พลังงานหมุนเวียนสามารถช่วยปกป้องสิ่งแวดล้อมได้|♻️
+Global cooperation [[can]] **solve** worldwide crises.|/ˈgləʊbl kəʊˌɒpəˈreɪʃn kən sɒlv ˈwɜːldwaɪd ˈkraɪsiːz/|ความร่วมมือระดับโลกสามารถช่วยแก้ปัญหาวิกฤตทั่วโลกได้|🌍
+Education [[can]] **change** a person's life.|/ˌedʒuˈkeɪʃn kən tʃeɪndʒ ə ˈpɜːsnz laɪf/|การศึกษาสามารถเปลี่ยนแปลงชีวิตของคนคนหนึ่งได้|🎓
+Hope [[can]] **inspire** people to keep moving.|/həʊp kən ɪnˈspaɪə ˈpiːpl tə kiːp ˈmuːvɪŋ/|ความหวังสามารถสร้างแรงบันดาลใจให้ผู้คนก้าวเดินต่อไปได้|🌟`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*|\[\[|\]\]/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\[\[(.+?)\]\]/g,"<mark>$1</mark>").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

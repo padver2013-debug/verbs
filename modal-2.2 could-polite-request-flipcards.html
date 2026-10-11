@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.2 Modal Verb Could (Polite Request) – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700;color:#8b0000}
+.top mark{background:#fde047;color:#000;font-weight:700;border-radius:5px;padding:1px 7px}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>2.2 Modal Verb “Could”: Polite Request</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `[[Could]] you **help** me with this heavy bag?|/kʊd juː help miː wɪð ðɪs ˈhevi bæg/|คุณช่วยฉันถือกระเป๋าหนักใบนี้หน่อยได้ไหมครับ/คะ|🎒
+[[Could]] you **open** the window, please?|/kʊd juː ˈəʊpən ðə ˈwɪndəʊ pliːz/|คุณช่วยเปิดหน้าต่างให้หน่อยได้ไหม|🪟
+[[Could]] you **pass** me the salt?|/kʊd juː pɑːs miː ðə sɔːlt/|คุณช่วยส่งเกลือให้ฉันหน่อยได้ไหม|🧂
+[[Could]] you **tell** me the way to the station?|/kʊd juː tel miː ðə weɪ tə ðə ˈsteɪʃn/|คุณช่วยบอกทางไปสถานีรถไฟให้ฉันหน่อยได้ไหม|🚉
+[[Could]] you **repeat** that again?|/kʊd juː rɪˈpiːt ðæt əˈgen/|คุณช่วยพูดซ้ำอีกครั้งได้ไหม|🔁
+[[Could]] you **lend** me some money?|/kʊd juː lend miː səm ˈmʌni/|คุณช่วยให้ฉันยืมเงินสักหน่อยได้ไหม|💵
+[[Could]] you **speak** a bit more slowly?|/kʊd juː spiːk ə bɪt mɔː ˈsləʊli/|คุณช่วยพูดช้าลงอีกนิดได้ไหม|🐢
+[[Could]] you **explain** this grammar rule?|/kʊd juː ɪkˈspleɪn ðɪs ˈgræmə ruːl/|คุณช่วยอธิบายกฎไวยากรณ์นี้ให้หน่อยได้ไหม|📘
+[[Could]] you **turn down** the music?|/kʊd juː tɜːn daʊn ðə ˈmjuːzɪk/|คุณช่วยเบาเสียงเพลงลงหน่อยได้ไหม|🔉
+[[Could]] you **wait** for me for a moment?|/kʊd juː weɪt fə miː fər ə ˈməʊmənt/|คุณช่วยรอฉันสักครู่ได้ไหม|⏳
+[[Could]] you **send** me the report via email?|/kʊd juː send miː ðə rɪˈpɔːt ˈvaɪə ˈiːmeɪl/|คุณช่วยส่งรายงานทางอีเมลให้ฉันหน่อยได้ไหม|📧
+[[Could]] you **check** my spelling?|/kʊd juː tʃek maɪ ˈspelɪŋ/|คุณช่วยตรวจสอบการสะกดคำให้ฉันหน่อยได้ไหม|🔤
+[[Could]] you **bring** me a glass of water?|/kʊd juː brɪŋ miː ə glɑːs əv ˈwɔːtə/|คุณช่วยเอาน้ำดื่มมาให้ฉันสักแก้วได้ไหม|🥛
+[[Could]] you **show** me how to use this machine?|/kʊd juː ʃəʊ miː haʊ tə juːz ðɪs məˈʃiːn/|คุณช่วยแสดงวิธีใช้เครื่องนี้ให้ดูหน่อยได้ไหม|⚙️
+[[Could]] you **give** me a ride home?|/kʊd juː gɪv miː ə raɪd həʊm/|คุณช่วยไปส่งฉันที่บ้านหน่อยได้ไหม|🚗
+[[Could]] you **answer** the phone for me?|/kʊd juː ˈɑːnsə ðə fəʊn fə miː/|คุณช่วยรับโทรศัพท์แทนฉันหน่อยได้ไหม|📞
+[[Could]] you **take** a picture of us?|/kʊd juː teɪk ə ˈpɪktʃər əv ʌs/|คุณช่วยถ่ายรูปให้พวกเราหน่อยได้ไหม|📸
+[[Could]] you **lend** me your pen for a minute?|/kʊd juː lend miː jɔː pen fər ə ˈmɪnɪt/|คุณช่วยให้ฉันยืมปากกาของคุณสักครู่ได้ไหม|🖊️
+[[Could]] you **recommend** a good restaurant nearby?|/kʊd juː ˌrekəˈmend ə gʊd ˈrestrɒnt ˈnɪəbaɪ/|คุณช่วยแนะนำร้านอาหารอร่อยๆ ใกล้ๆ นี้หน่อยได้ไหม|🍽️
+[[Could]] you **write down** your phone number?|/kʊd juː raɪt daʊn jɔː fəʊn ˈnʌmbə/|คุณช่วยเขียนเบอร์โทรศัพท์ของคุณให้หน่อยได้ไหม|✍️
+[[Could]] you **clean** the whiteboard after class?|/kʊd juː kliːn ðə ˈwaɪtbɔːd ˈɑːftə klɑːs/|คุณช่วยทำความสะอาดกระดานไวท์บอร์ดหลังเลิกเรียนหน่อยได้ไหม|🧽
+[[Could]] you **hold** this box for a second?|/kʊd juː həʊld ðɪs bɒks fər ə ˈsekənd/|คุณช่วยถือกล่องนี้ไว้สักครู่ได้ไหม|📦
+[[Could]] you **let** me know when you arrive?|/kʊd juː let miː nəʊ wen juː əˈraɪv/|คุณช่วยบอกฉันหน่อยได้ไหมเมื่อคุณไปถึงแล้ว|📲
+[[Could]] you **close** the door quietly?|/kʊd juː kləʊz ðə dɔː ˈkwaɪətli/|คุณช่วยปิดประตูเบาๆ หน่อยได้ไหม|🚪
+[[Could]] you **switch off** the lights?|/kʊd juː swɪtʃ ɒf ðə laɪts/|คุณช่วยปิดไฟให้หน่อยได้ไหม|💡
+[[Could]] you **find** my keys for me?|/kʊd juː faɪnd maɪ kiːz fə miː/|คุณช่วยหากุญแจของฉันให้หน่อยได้ไหม|🔑
+[[Could]] you **prepare** the documents for the meeting?|/kʊd juː prɪˈpeə ðə ˈdɒkjumənts fə ðə ˈmiːtɪŋ/|คุณช่วยเตรียมเอกสารสำหรับการประชุมให้หน่อยได้ไหม|📑
+[[Could]] you **type** this letter for me?|/kʊd juː taɪp ðɪs ˈletə fə miː/|คุณช่วยพิมพ์จดหมายฉบับนี้ให้หน่อยได้ไหม|⌨️
+[[Could]] you **drive** a bit faster, please?|/kʊd juː draɪv ə bɪt ˈfɑːstə pliːz/|คุณช่วยขับรถเร็วขึ้นอีกนิดได้ไหม|🏎️
+[[Could]] you **translate** this sentence into Thai?|/kʊd juː trænzˈleɪt ðɪs ˈsentəns ˈɪntə taɪ/|คุณช่วยแปลประโยคนี้เป็นภาษาไทยให้หน่อยได้ไหม|🌐
+[[Could]] you **wake** me **up** at 6 AM tomorrow?|/kʊd juː weɪk miː ʌp ət sɪks eɪ ˈem təˈmɒrəʊ/|คุณช่วยปลุกฉันตอนหกโมงเช้าพรุ่งนี้ได้ไหม|⏰
+[[Could]] you **book** a table for two?|/kʊd juː bʊk ə ˈteɪbl fə tuː/|คุณช่วยจองโต๊ะสำหรับสองคนให้หน่อยได้ไหม|🍴
+[[Could]] you **order** some food for lunch?|/kʊd juː ˈɔːdə səm fuːd fə lʌntʃ/|คุณช่วยสั่งอาหารสำหรับมื้อเที่ยงให้หน่อยได้ไหม|🍜
+[[Could]] you **print out** this document?|/kʊd juː prɪnt aʊt ðɪs ˈdɒkjumənt/|คุณช่วยปริ้นต์เอกสารฉบับนี้ออกมาให้หน่อยได้ไหม|🖨️
+[[Could]] you **share** your notes with me?|/kʊd juː ʃeə jɔː nəʊts wɪð miː/|คุณช่วยแบ่งปันบันทึกย่อของคุณให้ฉันดูหน่อยได้ไหม|📝
+[[Could]] you **listen to** my presentation idea?|/kʊd juː ˈlɪsn tə maɪ ˌpreznˈteɪʃn aɪˈdɪə/|คุณช่วยรับฟังไอเดียพรีเซนต์ของฉันหน่อยได้ไหม|👂
+[[Could]] you **call** me **back** later?|/kʊd juː kɔːl miː bæk ˈleɪtə/|คุณช่วยโทรกลับหาฉันทีหลังได้ไหม|☎️
+[[Could]] you **fix** my computer problem?|/kʊd juː fɪks maɪ kəmˈpjuːtə ˈprɒbləm/|คุณช่วยแก้ปัญหาคอมพิวเตอร์ให้ฉันหน่อยได้ไหม|💻
+[[Could]] you **leave** the key at the front desk?|/kʊd juː liːv ðə kiː ət ðə frʌnt desk/|คุณช่วยฝากกุญแจไว้ที่เคาน์เตอร์ด้านหน้าได้ไหม|🗝️
+[[Could]] you **participate in** our survey?|/kʊd juː pɑːˈtɪsɪpeɪt ɪn ˈaʊə ˈsɜːveɪ/|คุณช่วยเข้าร่วมทำแบบสำรวจของเราหน่อยได้ไหม|📊
+[[Could]] you **wash** the dishes after dinner?|/kʊd juː wɒʃ ðə ˈdɪʃɪz ˈɑːftə ˈdɪnə/|คุณช่วยล้างจานหลังมื้อเย็นให้หน่อยได้ไหม|🧼
+[[Could]] you **feed** the cat while I am away?|/kʊd juː fiːd ðə kæt waɪl aɪ æm əˈweɪ/|คุณช่วยให้อาหารแมวตอนที่ฉันไม่อยู่ได้ไหม|🐈
+[[Could]] you **water** the plants in the garden?|/kʊd juː ˈwɔːtə ðə plɑːnts ɪn ðə ˈgɑːdn/|คุณช่วยรดน้ำต้นไม้ในสวนให้หน่อยได้ไหม|🪴
+[[Could]] you **suggest** a good movie to watch?|/kʊd juː səˈdʒest ə gʊd ˈmuːvi tə wɒtʃ/|คุณช่วยแนะนำภาพยนตร์น่าดูให้หน่อยได้ไหม|🎬
+[[Could]] you **keep** a secret for me?|/kʊd juː kiːp ə ˈsiːkrət fə miː/|คุณช่วยเก็บความลับให้ฉันหน่อยได้ไหม|🤐
+[[Could]] you **meet** me at the cafe at noon?|/kʊd juː miːt miː ət ðə ˈkæfeɪ ət nuːn/|คุณช่วยมาพบฉันที่คาเฟ่ตอนเที่ยงได้ไหม|☕
+[[Could]] you **pay** for the tickets in advance?|/kʊd juː peɪ fə ðə ˈtɪkɪts ɪn ədˈvɑːns/|คุณช่วยจ่ายเงินค่าตั๋วล่วงหน้าให้หน่อยได้ไหม|🎫
+[[Could]] you **sign** this contract here?|/kʊd juː saɪn ðɪs ˈkɒntrækt hɪə/|คุณช่วยเซ็นสัญญาฉบับนี้ตรงนี้ให้หน่อยได้ไหม|🖋️
+[[Could]] you **send** me the details later?|/kʊd juː send miː ðə ˈdiːteɪlz ˈleɪtə/|คุณช่วยส่งรายละเอียดให้ฉันทีหลังได้ไหม|📤
+[[Could]] you **help** me prepare for the test?|/kʊd juː help miː prɪˈpeə fə ðə test/|คุณช่วยติวเตรียมตัวสอบให้ฉันหน่อยได้ไหม|🎓
+[[Could]] you **explain** that concept once more?|/kʊd juː ɪkˈspleɪn ðæt ˈkɒnsept wʌns mɔː/|คุณช่วยอธิบายแนวคิดนั้นใหม่อีกครั้งได้ไหมครับ/คะ|💭
+[[Could]] you **lend** me your umbrella for today?|/kʊd juː lend miː jɔːr ʌmˈbrelə fə təˈdeɪ/|คุณช่วยให้ฉันยืมร่มสำหรับวันนี้หน่อยได้ไหม|☂️
+[[Could]] you **check** my homework for errors?|/kʊd juː tʃek maɪ ˈhəʊmwɜːk fər ˈerəz/|คุณช่วยตรวจการบ้านหาข้อผิดพลาดให้ฉันหน่อยได้ไหม|✅
+[[Could]] you **speak up** a little bit?|/kʊd juː spiːk ʌp ə ˈlɪtl bɪt/|คุณช่วยพูดเสียงดังขึ้นอีกนิดได้ไหม|📢
+[[Could]] you **turn on** the air conditioner?|/kʊd juː tɜːn ɒn ði eə kənˈdɪʃənə/|คุณช่วยเปิดเครื่องปรับอากาศให้หน่อยได้ไหม|❄️
+[[Could]] you **bring** me extra napkins?|/kʊd juː brɪŋ miː ˈekstrə ˈnæpkɪnz/|คุณช่วยหยิบกระดาษทิชชูเพิ่มมาให้ฉันหน่อยได้ไหม|🧻
+[[Could]] you **tell** me what time it is?|/kʊd juː tel miː wɒt taɪm ɪt ɪz/|คุณช่วยบอกเวลาฉันหน่อยได้ไหม|🕐
+[[Could]] you **hold** the elevator for me?|/kʊd juː həʊld ði ˈelɪveɪtə fə miː/|คุณช่วยกดลิฟต์ค้างไว้ให้ฉันหน่อยได้ไหม|🛗
+[[Could]] you **recommend** a good book to read?|/kʊd juː ˌrekəˈmend ə gʊd bʊk tə riːd/|คุณช่วยแนะนำหนังสือดีๆ สักเล่มให้อ่านหน่อยได้ไหม|📚
+[[Could]] you **show** me your vacation photos?|/kʊd juː ʃəʊ miː jɔː vəˈkeɪʃn ˈfəʊtəʊz/|คุณช่วยเอาภาพถ่ายวันหยุดให้ฉันดูหน่อยได้ไหม|🏖️
+[[Could]] you **give** me some advice on this?|/kʊd juː gɪv miː səm ədˈvaɪs ɒn ðɪs/|คุณช่วยให้คำแนะนำฉันเกี่ยวกับเรื่องนี้หน่อยได้ไหม|💬
+[[Could]] you **share** your contact information?|/kʊd juː ʃeə jɔː ˈkɒntækt ˌɪnfəˈmeɪʃn/|คุณช่วยแบ่งปันข้อมูลติดต่อของคุณให้หน่อยได้ไหม|🪪
+[[Could]] you **write** your address here?|/kʊd juː raɪt jɔːr əˈdres hɪə/|คุณช่วยเขียนที่อยู่ของคุณลงตรงนี้ได้ไหม|🏠
+[[Could]] you **switch** seats with me?|/kʊd juː swɪtʃ siːts wɪð miː/|คุณช่วยสลับที่นั่งกับฉันหน่อยได้ไหม|🔄
+[[Could]] you **help** me clean the room?|/kʊd juː help miː kliːn ðə ruːm/|คุณช่วยมาช่วยฉันทำความสะอาดห้องหน่อยได้ไหม|🧹
+[[Could]] you **pass** me the menu, please?|/kʊd juː pɑːs miː ðə ˈmenjuː pliːz/|คุณช่วยส่งเมนูอาหารให้ฉันหน่อยได้ไหม|📋
+[[Could]] you **take** a message for my boss?|/kʊd juː teɪk ə ˈmesɪdʒ fə maɪ bɒs/|คุณช่วยรับฝากข้อความถึงหัวหน้าของฉันหน่อยได้ไหม|🗒️
+[[Could]] you **send** the file to my email?|/kʊd juː send ðə faɪl tə maɪ ˈiːmeɪl/|คุณช่วยส่งไฟล์เข้าอีเมลของฉันหน่อยได้ไหม|📎
+[[Could]] you **bring** your camera tomorrow?|/kʊd juː brɪŋ jɔː ˈkæmərə təˈmɒrəʊ/|คุณช่วยพกกล้องถ่ายรูปมาด้วยในวันพรุ่งนี้ได้ไหม|📷
+[[Could]] you **open** the door for me?|/kʊd juː ˈəʊpən ðə dɔː fə miː/|คุณช่วยเปิดประตูให้ฉันหน่อยได้ไหม|🔓
+[[Could]] you **look after** my pet for a day?|/kʊd juː lʊk ˈɑːftə maɪ pet fər ə deɪ/|คุณช่วยดูแลสัตว์เลี้ยงให้ฉันสักวันได้ไหม|🐕
+[[Could]] you **check** if the store is open?|/kʊd juː tʃek ɪf ðə stɔː ɪz ˈəʊpən/|คุณช่วยเช็กให้หน่อยได้ไหมว่าร้านค้าเปิดอยู่หรือเปล่า|🏪
+[[Could]] you **repeat** the instructions slowly?|/kʊd juː rɪˈpiːt ði ɪnˈstrʌkʃnz ˈsləʊli/|คุณช่วยพูดคำแนะนำช้าๆ อีกครั้งได้ไหม|📃
+[[Could]] you **provide** more details about this?|/kʊd juː prəˈvaɪd mɔː ˈdiːteɪlz əˈbaʊt ðɪs/|คุณช่วยให้รายละเอียดเพิ่มเติมเกี่ยวกับเรื่องนี้หน่อยได้ไหม|🔎
+[[Could]] you **speak** more clearly, please?|/kʊd juː spiːk mɔː ˈklɪəli pliːz/|คุณช่วยพูดให้ชัดเจนขึ้นอีกนิดได้ไหม|🗣️
+[[Could]] you **bring** me a cup of coffee?|/kʊd juː brɪŋ miː ə kʌp əv ˈkɒfi/|คุณช่วยยกกาแฟมาให้ฉันสักแก้วได้ไหม|🫖
+[[Could]] you **turn off** the television?|/kʊd juː tɜːn ɒf ðə ˈtelɪvɪʒn/|คุณช่วยปิดโทรทัศน์ให้หน่อยได้ไหม|📺
+[[Could]] you **lend** me your bicycle?|/kʊd juː lend miː jɔː ˈbaɪsɪkl/|คุณช่วยให้ฉันยืมจักรยานของคุณหน่อยได้ไหม|🚲
+[[Could]] you **tell** me your name again?|/kʊd juː tel miː jɔː neɪm əˈgen/|คุณช่วยบอกชื่อของคุณใหม่อีกรอบได้ไหม|🏷️
+[[Could]] you **wait** just a minute?|/kʊd juː weɪt dʒʌst ə ˈmɪnɪt/|คุณช่วยรอสักครู่เดียวได้ไหม|⌛
+[[Could]] you **show** me the right direction?|/kʊd juː ʃəʊ miː ðə raɪt dɪˈrekʃn/|คุณช่วยบอกเส้นทางที่ถูกต้องให้ฉันหน่อยได้ไหม|🧭
+[[Could]] you **help** me carry this table?|/kʊd juː help miː ˈkæri ðɪs ˈteɪbl/|คุณช่วยฉันยกโต๊ะตัวนี้หน่อยได้ไหม|🪑
+[[Could]] you **explain** this math problem?|/kʊd juː ɪkˈspleɪn ðɪs mæθ ˈprɒbləm/|คุณช่วยอธิบายโจทย์คณิตศาสตร์ข้อนี้ให้หน่อยได้ไหม|➗
+[[Could]] you **send** me the meeting schedule?|/kʊd juː send miː ðə ˈmiːtɪŋ ˈʃedjuːl/|คุณช่วยส่งตารางการประชุมให้ฉันหน่อยได้ไหม|📅
+[[Could]] you **print** these papers for me?|/kʊd juː prɪnt ðiːz ˈpeɪpəz fə miː/|คุณช่วยปริ้นต์เอกสารเหล่านี้ให้ฉันหน่อยได้ไหม|📄
+[[Could]] you **let** me know the final price?|/kʊd juː let miː nəʊ ðə ˈfaɪnl praɪs/|คุณช่วยแจ้งราคาสุดท้ายให้ฉันทราบหน่อยได้ไหม|💰
+[[Could]] you **leave** the package at the door?|/kʊd juː liːv ðə ˈpækɪdʒ ət ðə dɔː/|คุณช่วยวางพัสดุไว้ตรงหน้าประตูได้ไหม|🚚
+[[Could]] you **bring** an extra chair over?|/kʊd juː brɪŋ ən ˈekstrə tʃeə ˈəʊvə/|คุณช่วยหยิบเก้าอี้เสริมมาให้อีกตัวได้ไหม|💺
+[[Could]] you **share** your presentation slides?|/kʊd juː ʃeə jɔː ˌpreznˈteɪʃn slaɪdz/|คุณช่วยแบ่งปันสไลด์นำเสนอของคุณให้หน่อยได้ไหม|📽️
+[[Could]] you **write** your email address here?|/kʊd juː raɪt jɔːr ˈiːmeɪl əˈdres hɪə/|คุณช่วยเขียนอีเมลของคุณลงตรงนี้ได้ไหม|✉️
+[[Could]] you **check** the door lock?|/kʊd juː tʃek ðə dɔː lɒk/|คุณช่วยตรวจสอบกลอนประตูให้หน่อยได้ไหม|🔐
+[[Could]] you **help** me wrap this gift?|/kʊd juː help miː ræp ðɪs gɪft/|คุณช่วยฉันห่อของขวัญชิ้นนี้หน่อยได้ไหม|🎁
+[[Could]] you **give** me a hand with this?|/kʊd juː gɪv miː ə hænd wɪð ðɪs/|คุณช่วยมาช่วยฉันจัดการเรื่องนี้หน่อยได้ไหม|🤝
+[[Could]] you **speak** a bit more softly?|/kʊd juː spiːk ə bɪt mɔː ˈsɒftli/|คุณช่วยพูดเบาลงอีกนิดได้ไหม|🤫
+[[Could]] you **turn down** the volume?|/kʊd juː tɜːn daʊn ðə ˈvɒljuːm/|คุณช่วยลดระดับเสียงลงหน่อยได้ไหม|🔈
+[[Could]] you **recommend** a good mechanic?|/kʊd juː ˌrekəˈmend ə gʊd məˈkænɪk/|คุณช่วยแนะนำช่างซ่อมรถเก่งๆ ให้หน่อยได้ไหม|🔧
+[[Could]] you **find out** the train schedule?|/kʊd juː faɪnd aʊt ðə treɪn ˈʃedjuːl/|คุณช่วยตรวจสอบตารางเวลาของรถไฟให้หน่อยได้ไหม|🚆
+[[Could]] you **send** me the picture later?|/kʊd juː send miː ðə ˈpɪktʃə ˈleɪtə/|คุณช่วยส่งรูปถ่ายนั้นมาให้ฉันทีหลังได้ไหม|🖼️
+[[Could]] you **lend** me your notes for today?|/kʊd juː lend miː jɔː nəʊts fə təˈdeɪ/|คุณช่วยให้ฉันยืมสมุดจดของวันนี้หน่อยได้ไหม|📓
+[[Could]] you **wake** me **up** early tomorrow?|/kʊd juː weɪk miː ʌp ˈɜːli təˈmɒrəʊ/|คุณช่วยปลุกฉันให้ตื่นแต่เช้าในวันพรุ่งนี้ได้ไหม|🌅`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*|\[\[|\]\]/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\[\[(.+?)\]\]/g,"<mark>$1</mark>").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

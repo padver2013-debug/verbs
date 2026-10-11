@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.1 Modal Verb Can (Ability) – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700;color:#8b0000}
+.top mark{background:#fde047;color:#000;font-weight:700;border-radius:5px;padding:1px 7px}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>1.1 Modal Verb “Can”: Ability</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `I [[can]] **speak** English fluently.|/aɪ kən spiːk ˈɪŋglɪʃ ˈfluːəntli/|ฉันสามารถพูดภาษาอังกฤษได้อย่างคล่องแคล่ว|🗣️
+She [[can]] **swim** very well.|/ʃiː kən swɪm ˈveri wel/|เธอว่ายน้ำเก่งมาก|🏊‍♀️
+He [[can]] **drive** a manual car.|/hiː kən draɪv ə ˈmænjuəl kɑː/|เขาสามารถขับรถเกียร์กระปุกได้|🚗
+They [[can]] **play** the guitar.|/ðeɪ kən pleɪ ðə gɪˈtɑː/|พวกเขาสามารถเล่นกีตาร์ได้|🎸
+We [[can]] **cook** delicious Thai food.|/wiː kən kʊk dɪˈlɪʃəs taɪ fuːd/|พวกเราสามารถทำอาหารไทยอร่อยๆ ได้|🍜
+You [[can]] **solve** this math problem easily.|/juː kən sɒlv ðɪs mæθ ˈprɒbləm ˈiːzɪli/|คุณสามารถแก้โจทย์คณิตศาสตร์ข้อนี้ได้อย่างง่ายดาย|➗
+Birds [[can]] **fly** high in the sky.|/bɜːdz kən flaɪ haɪ ɪn ðə skaɪ/|นกสามารถบินได้สูงบนท้องฟ้า|🐦
+Fish [[can]] **swim** underwater.|/fɪʃ kən swɪm ˌʌndəˈwɔːtə/|ปลาสามารถว่ายน้ำใต้น้ำได้|🐟
+A cheetah [[can]] **run** extremely fast.|/ə ˈtʃiːtə kən rʌn ɪkˈstriːmli fɑːst/|เสือชีตาร์สามารถวิ่งได้เร็วมากๆ|🐆
+Monkeys [[can]] **climb** tall trees.|/ˈmʌŋkiz kən klaɪm tɔːl triːz/|ลิงสามารถปีนต้นไม้สูงๆ ได้|🐒
+My brother [[can]] **fix** broken computers.|/maɪ ˈbrʌðə kən fɪks ˈbrəʊkən kəmˈpjuːtəz/|น้องชายของฉันสามารถซ่อมคอมพิวเตอร์ที่เสียได้|🔧
+My sister [[can]] **draw** beautiful portraits.|/maɪ ˈsɪstə kən drɔː ˈbjuːtɪfl ˈpɔːtrɪts/|พี่สาวของฉันสามารถวาดภาพเหมือนสวยๆ ได้|🎨
+My father [[can]] **lift** heavy boxes.|/maɪ ˈfɑːðə kən lɪft ˈhevi ˈbɒksɪz/|คุณพ่อของฉันสามารถยกกล่องหนักๆ ได้|📦
+My mother [[can]] **bake** tasty cakes.|/maɪ ˈmʌðə kən beɪk ˈteɪsti keɪks/|คุณแม่ของฉันสามารถอบเค้กอร่อยๆ ได้|🎂
+A baby [[can]] **crawl** before walking.|/ə ˈbeɪbi kən krɔːl bɪˈfɔː ˈwɔːkɪŋ/|ทารกสามารถคลานได้ก่อนที่จะเดิน|👶
+Children [[can]] **learn** new languages quickly.|/ˈtʃɪldrən kən lɜːn njuː ˈlæŋgwɪdʒɪz ˈkwɪkli/|เด็กๆ สามารถเรียนรู้ภาษาใหม่ๆ ได้อย่างรวดเร็ว|🧒
+I [[can]] **type** fifty words per minute.|/aɪ kən taɪp ˈfɪfti wɜːdz pɜː ˈmɪnɪt/|ฉันสามารถพิมพ์ได้ห้าสิบคำต่อนาที|⌨️
+She [[can]] **read** Chinese characters.|/ʃiː kən riːd ˌtʃaɪˈniːz ˈkærəktəz/|เธอสามารถอ่านตัวอักษรจีนได้|📖
+He [[can]] **understand** complex instructions.|/hiː kən ˌʌndəˈstænd ˈkɒmpleks ɪnˈstrʌkʃnz/|เขาสามารถเข้าใจคำสั่งที่ซับซ้อนได้|🧠
+We [[can]] **finish** the project on time.|/wiː kən ˈfɪnɪʃ ðə ˈprɒdʒekt ɒn taɪm/|พวกเราสามารถทำงานให้เสร็จทันเวลาได้|🏁
+You [[can]] **hear** the birds singing outside.|/juː kən hɪə ðə bɜːdz ˈsɪŋɪŋ ˌaʊtˈsaɪd/|คุณสามารถได้ยินเสียงนกร้องข้างนอกได้|👂
+I [[can]] **see** the mountains from here.|/aɪ kən siː ðə ˈmaʊntɪnz frəm hɪə/|ฉันสามารถมองเห็นภูเขาได้จากที่นี่|🏔️
+She [[can]] **smell** the flowers in the garden.|/ʃiː kən smel ðə ˈflaʊəz ɪn ðə ˈgɑːdn/|เธอสามารถได้กลิ่นดอกไม้ในสวนได้|👃
+He [[can]] **taste** the spices in the soup.|/hiː kən teɪst ðə ˈspaɪsɪz ɪn ðə suːp/|เขาสามารถรับรสเครื่องเทศในซุปได้|👅
+You [[can]] **touch** the soft fabric.|/juː kən tʌtʃ ðə sɒft ˈfæbrɪk/|คุณสามารถสัมผัสเนื้อผ้าที่นุ่มนวลได้|✋
+I [[can]] **remember** things very well.|/aɪ kən rɪˈmembə θɪŋz ˈveri wel/|ฉันสามารถจดจำสิ่งต่างๆ ได้เป็นอย่างดี|💭
+She [[can]] **think** logically under pressure.|/ʃiː kən θɪŋk ˈlɒdʒɪkli ˈʌndə ˈpreʃə/|เธอสามารถคิดอย่างมีเหตุผลภายใต้ความกดดันได้|🤔
+He [[can]] **make** decisions quickly.|/hiː kən meɪk dɪˈsɪʒnz ˈkwɪkli/|เขาสามารถตัดสินใจได้อย่างรวดเร็ว|⚡
+We [[can]] **adapt** to new environments easily.|/wiː kən əˈdæpt tə njuː ɪnˈvaɪrənmənts ˈiːzɪli/|พวกเราสามารถปรับตัวเข้ากับสภาพแวดล้อมใหม่ๆ ได้ง่าย|🦎
+You [[can]] **handle** this stressful situation.|/juː kən ˈhændl ðɪs ˈstresfl ˌsɪtʃuˈeɪʃn/|คุณสามารถรับมือกับสถานการณ์ที่ตึงเครียดนี้ได้|😌
+I [[can]] **use** Photoshop and Illustrator.|/aɪ kən juːz ˈfəʊtəʊʃɒp ənd ˈɪləstreɪtə/|ฉันสามารถใช้โปรแกรม Photoshop และ Illustrator ได้|🖥️
+She [[can]] **code** in Python and Java.|/ʃiː kən kəʊd ɪn ˈpaɪθɒn ənd ˈdʒɑːvə/|เธอสามารถเขียนโค้ดภาษา Python และ Java ได้|👩‍💻
+He [[can]] **design** modern web pages.|/hiː kən dɪˈzaɪn ˈmɒdn web ˈpeɪdʒɪz/|เขาสามารถออกแบบหน้าเว็บไซต์ทันสมัยได้|🌐
+We [[can]] **edit** professional videos.|/wiː kən ˈedɪt prəˈfeʃənl ˈvɪdiəʊz/|พวกเราสามารถตัดต่อวิดีโอระดับมืออาชีพได้|🎬
+You [[can]] **operate** this heavy machinery.|/juː kən ˈɒpəreɪt ðɪs ˈhevi məˈʃiːnəri/|คุณสามารถใช้งานเครื่องจักรกลหนักนี้ได้|🚜
+I [[can]] **calculate** numbers in my head.|/aɪ kən ˈkælkjuleɪt ˈnʌmbəz ɪn maɪ hed/|ฉันสามารถคำนวณตัวเลขในหัวได้|🧮
+She [[can]] **sing** high notes.|/ʃiː kən sɪŋ haɪ nəʊts/|เธอสามารถร้องโน้ตเสียงสูงได้|🎤
+He [[can]] **play** professional basketball.|/hiː kən pleɪ prəˈfeʃənl ˈbɑːskɪtbɔːl/|เขาสามารถเล่นบาสเกตบอลระดับอาชีพได้|🏀
+We [[can]] **run** a full marathon.|/wiː kən rʌn ə fʊl ˈmærəθn/|พวกเราสามารถวิ่งมาราธอนเต็มระยะได้|🏃
+You [[can]] **jump** very high.|/juː kən dʒʌmp ˈveri haɪ/|คุณสามารถกระโดดได้สูงมาก|🦘
+I [[can]] **hold** my breath underwater for a minute.|/aɪ kən həʊld maɪ breθ ˌʌndəˈwɔːtə fər ə ˈmɪnɪt/|ฉันสามารถกลั้นหายใจใต้น้ำได้หนึ่งนาที|🤿
+She [[can]] **balance** on one foot.|/ʃiː kən ˈbæləns ɒn wʌn fʊt/|เธอสามารถทรงตัวด้วยขาข้างเดียวได้|🧘
+He [[can]] **carry** two heavy suitcases.|/hiː kən ˈkæri tuː ˈhevi ˈsuːtkeɪsɪz/|เขาสามารถถือกระเป๋าเดินทางหนักๆ สองใบได้|🧳
+We [[can]] **build** a wooden bookshelf.|/wiː kən bɪld ə ˈwʊdn ˈbʊkʃelf/|พวกเราสามารถสร้างชั้นวางหนังสือไม้เองได้|🔨
+You [[can]] **sew** your own clothes.|/juː kən səʊ jɔːr əʊn kləʊðz/|คุณสามารถเย็บเสื้อผ้าใส่เองได้|🧵
+I [[can]] **whistle** a tune.|/aɪ kən ˈwɪsl ə tjuːn/|ฉันสามารถเป่าปากเป็นทำนองเพลงได้|😗
+She [[can]] **wink** with both eyes alternately.|/ʃiː kən wɪŋk wɪð bəʊθ aɪz ɔːlˈtɜːnətli/|เธอสามารถขยิบตาข้างซ้ายและขวาสลับกันได้|😉
+He [[can]] **tell** a very funny joke.|/hiː kən tel ə ˈveri ˈfʌni dʒəʊk/|เขาสามารถเล่ามุกตลกที่สนุกมากๆ ได้|🤣
+We [[can]] **spot** mistakes in a text.|/wiː kən spɒt mɪˈsteɪks ɪn ə tekst/|พวกเราสามารถมองเห็นข้อผิดพลาดในข้อความได้|🔍
+You [[can]] **achieve** your goals if you try.|/juː kən əˈtʃiːv jɔː gəʊlz ɪf juː traɪ/|คุณสามารถบรรลุเป้าหมายของตัวเองได้หากมีความพยายาม|🥇
+I [[can]] **change** a flat tire by myself.|/aɪ kən tʃeɪndʒ ə flæt ˈtaɪə baɪ maɪˈself/|ฉันสามารถเปลี่ยนยางรถยนต์ที่แบนด้วยตัวเองได้|🛞
+She [[can]] **manage** her time effectively.|/ʃiː kən ˈmænɪdʒ hɜː taɪm ɪˈfektɪvli/|เธอสามารถบริหารเวลาของเธอได้อย่างมีประสิทธิภาพ|⏱️
+He [[can]] **identify** different types of birds.|/hiː kən aɪˈdentɪfaɪ ˈdɪfrənt taɪps əv bɜːdz/|เขาสามารถจำแนกนกสายพันธุ์ต่างๆ ได้|🦜
+We [[can]] **recognize** famous paintings instantly.|/wiː kən ˈrekəgnaɪz ˈfeɪməs ˈpeɪntɪŋz ˈɪnstəntli/|พวกเราสามารถจำภาพวาดที่มีชื่อเสียงได้ทันที|🖼️
+You [[can]] **distinguish** between genuine and fake leather.|/juː kən dɪˈstɪŋgwɪʃ bɪˈtwiːn ˈdʒenjuɪn ənd feɪk ˈleðə/|คุณสามารถแยกแยะระหว่างหนังแท้และหนังเทียมได้|👜
+I [[can]] **translate** Thai into Japanese.|/aɪ kən trænzˈleɪt taɪ ˈɪntə ˌdʒæpəˈniːz/|ฉันสามารถแปลภาษาไทยเป็นภาษาญี่ปุ่นได้|🌏
+She [[can]] **interpret** spoken dialogue smoothly.|/ʃiː kən ɪnˈtɜːprɪt ˈspəʊkən ˈdaɪəlɒg ˈsmuːðli/|เธอสามารถเป็นล่ามแปลบทสนทนาได้อย่างราบรื่น|🎧
+He [[can]] **negotiate** business deals successfully.|/hiː kən nɪˈgəʊʃieɪt ˈbɪznəs diːlz səkˈsesfəli/|เขาสามารถเจรจาธุรกิจให้ประสบความสำเร็จได้|🤝
+We [[can]] **lead** a large team effectively.|/wiː kən liːd ə lɑːdʒ tiːm ɪˈfektɪvli/|พวกเราสามารถนำทีมขนาดใหญ่ได้อย่างมีประสิทธิภาพ|👥
+You [[can]] **persuade** customers to buy products.|/juː kən pəˈsweɪd ˈkʌstəməz tə baɪ ˈprɒdʌkts/|คุณสามารถโน้มน้าวใจลูกค้าให้ซื้อสินค้าได้|🛍️
+I [[can]] **organize** community events.|/aɪ kən ˈɔːgənaɪz kəˈmjuːnəti ɪˈvents/|ฉันสามารถจัดงานอีเวนต์ของชุมชนได้|📅
+She [[can]] **plan** travel itineraries in detail.|/ʃiː kən plæn ˈtrævl aɪˈtɪnərəriz ɪn ˈdiːteɪl/|เธอสามารถวางแผนกำหนดการเดินทางได้อย่างละเอียด|🗺️
+He [[can]] **budget** money wisely.|/hiː kən ˈbʌdʒɪt ˈmʌni ˈwaɪzli/|เขาสามารถวางแผนบริหารงบประมาณเงินได้อย่างฉลาด|💰
+We [[can]] **forecast** future market trends.|/wiː kən ˈfɔːkɑːst ˈfjuːtʃə ˈmɑːkɪt trendz/|พวกเราสามารถคาดการณ์แนวโน้มตลาดในอนาคตได้|📈
+You [[can]] **analyze** financial reports.|/juː kən ˈænəlaɪz faɪˈnænʃl rɪˈpɔːts/|คุณสามารถวิเคราะห์รายงานทางการเงินได้|📊
+I [[can]] **design** graphic posters.|/aɪ kən dɪˈzaɪn ˈgræfɪk ˈpəʊstəz/|ฉันสามารถออกแบบโปสเตอร์กราฟิกได้|🖌️
+She [[can]] **sketch** cartoons by hand.|/ʃiː kən sketʃ kɑːˈtuːnz baɪ hænd/|เธอสามารถวาดภาพการ์ตูนด้วยมือได้|✏️
+He [[can]] **sculpt** figures from clay.|/hiː kən skʌlpt ˈfɪgəz frəm kleɪ/|เขาสามารถปั้นหุ่นจากดินเหนียวได้|🏺
+We [[can]] **arrange** fresh flowers nicely.|/wiː kən əˈreɪndʒ freʃ ˈflaʊəz ˈnaɪsli/|พวกเราสามารถจัดดอกไม้สดได้อย่างสวยงาม|💐
+You [[can]] **decorate** a living room tastefully.|/juː kən ˈdekəreɪt ə ˈlɪvɪŋ ruːm ˈteɪstfəli/|คุณสามารถตกแต่งห้องนั่งเล่นได้อย่างมีรสนิยม|🛋️
+I [[can]] **repair** leaking water pipes.|/aɪ kən rɪˈpeə ˈliːkɪŋ ˈwɔːtə paɪps/|ฉันสามารถซ่อมแซมท่อน้ำรั่วได้|🚰
+She [[can]] **replace** burnt-out light bulbs.|/ʃiː kən rɪˈpleɪs ˌbɜːnt ˈaʊt laɪt bʌlbz/|เธอสามารถเปลี่ยนหลอดไฟที่ขาดได้|💡
+He [[can]] **install** software programs.|/hiː kən ɪnˈstɔːl ˈsɒftweə ˈprəʊgræmz/|เขาสามารถติดตั้งโปรแกรมซอฟต์แวร์ได้|💿
+We [[can]] **connect** home Wi-Fi networks.|/wiː kən kəˈnekt həʊm ˈwaɪ faɪ ˈnetwɜːks/|พวกเราสามารถเชื่อมต่อเครือข่าย Wi-Fi ภายในบ้านได้|📶
+You [[can]] **troubleshoot** minor printer errors.|/juː kən ˈtrʌblʃuːt ˈmaɪnə ˈprɪntər ˈerəz/|คุณสามารถแก้ไขข้อผิดพลาดเล็กๆ น้อยๆ ของเครื่องพิมพ์ได้|🖨️
+I [[can]] **bake** gluten-free bread.|/aɪ kən beɪk ˈgluːtn friː bred/|ฉันสามารถอบขนมปังปราศจากกลูเตนได้|🍞
+She [[can]] **extract** fresh orange juice.|/ʃiː kən ɪkˈstrækt freʃ ˈɒrɪndʒ dʒuːs/|เธอสามารถคั้นน้ำส้มสดได้|🍊
+He [[can]] **grill** steak to perfection.|/hiː kən grɪl steɪk tə pəˈfekʃn/|เขาสามารถย่างสเต็กให้ออกมาสมบูรณ์แบบได้|🥩
+We [[can]] **ferment** homemade kimchi.|/wiː kən fəˈment ˈhəʊmmeɪd ˈkɪmtʃi/|พวกเราสามารถหมักกิมจิทำเองที่บ้านได้|🥬
+You [[can]] **garnish** dishes like a chef.|/juː kən ˈgɑːnɪʃ ˈdɪʃɪz laɪk ə ʃef/|คุณสามารถตกแต่งจานอาหารให้สวยงามเหมือนเชฟได้|👨‍🍳
+I [[can]] **jog** five kilometers daily.|/aɪ kən dʒɒg faɪv ˈkɪləmiːtəz ˈdeɪli/|ฉันสามารถวิ่งเหยาะๆ ห้ากิโลเมตรได้ทุกวัน|👟
+She [[can]] **practice** yoga poses easily.|/ʃiː kən ˈpræktɪs ˈjəʊgə ˈpəʊzɪz ˈiːzɪli/|เธอสามารถฝึกท่าโยคะได้อย่างง่ายดาย|🧘‍♀️
+He [[can]] **lift** weights at the gym.|/hiː kən lɪft weɪts ət ðə dʒɪm/|เขาสามารถยกน้ำหนักที่ยิมได้|🏋️
+We [[can]] **cycle** up steep hills.|/wiː kən ˈsaɪkl ʌp stiːp hɪlz/|พวกเราสามารถปั่นจักรยานขึ้นเนินชันได้|🚴
+You [[can]] **swim** across the swimming pool.|/juː kən swɪm əˈkrɒs ðə ˈswɪmɪŋ puːl/|คุณสามารถว่ายน้ำข้ามสระว่ายน้ำได้|🏊
+I [[can]] **memorize** poetry lines.|/aɪ kən ˈmeməraɪz ˈpəʊətri laɪnz/|ฉันสามารถท่องจำบทกลอนได้|📜
+She [[can]] **solve** Rubik's cubes quickly.|/ʃiː kən sɒlv ˈruːbɪks kjuːbz ˈkwɪkli/|เธอสามารถแก้รูบิกได้อย่างรวดเร็ว|🧩
+He [[can]] **play** chess strategically.|/hiː kən pleɪ tʃes strəˈtiːdʒɪkli/|เขาสามารถเล่นหมากรุกด้วยกลยุทธ์ได้|♟️
+We [[can]] **win** trivia board games.|/wiː kən wɪn ˈtrɪviə bɔːd geɪmz/|พวกเราสามารถชนะเกมกระดานตอบคำถามได้|🎲
+You [[can]] **guess** riddles correctly.|/juː kən ges ˈrɪdlz kəˈrektli/|คุณสามารถทายปริศนาคำทายได้อย่างถูกต้อง|❓
+I [[can]] **whistle** popular melodies.|/aɪ kən ˈwɪsl ˈpɒpjələ ˈmelədiz/|ฉันสามารถเป่าปากเป็นทำนองเพลงยอดนิยมได้|🎶
+She [[can]] **hum** harmonizing tunes.|/ʃiː kən hʌm ˈhɑːmənaɪzɪŋ tjuːnz/|เธอสามารถฮัมเพลงประสานเสียงได้|🎵
+He [[can]] **beat** drum rhythms steadily.|/hiː kən biːt drʌm ˈrɪðəmz ˈstedɪli/|เขาสามารถตีจังหวะกลองได้อย่างสม่ำเสมอ|🥁
+We [[can]] **sing** chorus parts loudly.|/wiː kən sɪŋ ˈkɔːrəs pɑːts ˈlaʊdli/|พวกเราสามารถร้องท่อนฮุคเสียงดังได้|🎼
+You [[can]] **dance** traditional salsa.|/juː kən dɑːns trəˈdɪʃənl ˈsælsə/|คุณสามารถเต้นซัลซ่าแบบดั้งเดิมได้|💃
+I [[can]] **accept** constructive feedback.|/aɪ kən əkˈsept kənˈstrʌktɪv ˈfiːdbæk/|ฉันสามารถรับฟังคำติชมเพื่อสร้างสรรค์ได้|👍
+She [[can]] **express** her feelings clearly.|/ʃiː kən ɪkˈspres hɜː ˈfiːlɪŋz ˈklɪəli/|เธอสามารถแสดงความรู้สึกของเธอได้อย่างชัดเจน|💗
+He [[can]] **control** his emotions well.|/hiː kən kənˈtrəʊl hɪz ɪˈməʊʃnz wel/|เขาสามารถควบคุมอารมณ์ของตัวเองได้ดี|🎛️
+We [[can]] **stay** calm under pressure.|/wiː kən steɪ kɑːm ˈʌndə ˈpreʃə/|พวกเราสามารถรักษาความสงบภายใต้ความกดดันได้|🧊
+You [[can]] **inspire** people around you.|/juː kən ɪnˈspaɪə ˈpiːpl əˈraʊnd juː/|คุณสามารถสร้างแรงบันดาลใจให้แก่ผู้คนรอบตัวคุณได้|🌟`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*|\[\[|\]\]/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\[\[(.+?)\]\]/g,"<mark>$1</mark>").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>
