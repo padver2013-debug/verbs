@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interrogative Sentences · Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#E9EEF2; --ink:#10181F; --muted:#51606C; --accent:#0E5A66; --accent-ink:#FFFFFF;
+  --panel:#FFFFFF; --pic:#DCE9EC; --back:#0F2A33; --back-ink:#F3F8F9; --line:#C7D2D9;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+}
+:root[data-theme="dark"]{ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 56px}
+header h1{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:16px}
+.formula{display:inline-flex;gap:6px;margin-top:12px;font-family:Arial,sans-serif;font-size:14px}
+.formula span{padding:3px 10px;border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700}
+.formula span.dc{border-style:dashed}
+.bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:22px 0 20px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tab,.pager button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.voicebox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.voicebox select{font:inherit;font-size:14px;max-width:240px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:#10181F}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{perspective:1400px;height:350px;outline:none;cursor:pointer;position:relative}
+.inner{position:absolute;inset:0;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card:focus-visible .face{box-shadow:0 0 0 3px var(--accent)}
+.front{background:#FFFFFF;color:#000000}
+.pic{height:104px;background:var(--pic);display:flex;align-items:center;justify-content:center;gap:14px;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:12px;top:10px;font:600 12px Arial,sans-serif;color:#2C4A52;background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px}
+.text{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(17px,2.1vw,21px);line-height:1.4;color:#000;margin:0}
+.en b{font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.8vw,17.5px);line-height:1.45;color:#000;margin:0}
+.foot{padding:8px 14px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tap{font-size:13px;color:#5B6B75}
+.say{display:inline-flex;align-items:center;gap:7px;font:600 14px "Sarabun",sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.say svg{width:17px;height:17px;fill:currentColor}
+.say.on{outline:3px solid rgba(14,90,102,.35)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);justify-content:space-between;border-color:var(--back)}
+.back .th{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 26px;font-size:clamp(21px,2.6vw,27px);line-height:1.55;font-weight:600}
+.back .foot{color:#9FB9C0}
+.back .tap{color:#9FB9C0}
+.back .say{background:#5FC1CF;color:#06191D}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>6.1 Interrogative Sentence</h1>
+  <p>ประโยคคำถาม (Question) เพื่อถามข้อมูล (Ask questions) — ฝึกอ่านและแปล</p>
+  <div class="formula" aria-label="Structure"><span>Question</span><span>=</span><span>Ask questions</span></div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <label class="voicebox">เสียงอ่าน
+    <select id="voice" aria-label="เลือกเสียงอ่าน"></select>
+  </label>
+</div>
+<p class="hint" id="hint">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม “ฟังเสียง” เพื่อฟังประโยค</p>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+</div>
+
+<script>
+const RAW = `
+Where {do} you {live}?|weə duː juː lɪv|คุณอาศัยอยู่ที่ไหน|🏠📍
+What {is} your favorite color?|wɒt ɪz jɔː ˈfeɪvərɪt ˈkʌlə|สีโปรดของคุณคืออะไร|🎨❤️
+When {does} the train {arrive}?|wen dʌz ðə treɪn əˈraɪv|รถไฟจะมาถึงเมื่อไหร่|🚆⏰
+Why {are} you {crying}?|waɪ ɑː juː ˈkraɪɪŋ|ทำไมคุณถึงกำลังร้องไห้|😢💧
+How {can} I {solve} this problem?|haʊ kæn aɪ sɒlv ðɪs ˈprɒbləm|ฉันจะแก้ปัญหานี้ได้อย่างไร|🧩💡
+Who {broke} the window?|huː brəʊk ðə ˈwɪndəʊ|ใครเป็นคนทำหน้าต่างแตก|🪟💥
+Which book {do} you {prefer}?|wɪtʃ bʊk duː juː prɪˈfɜː|คุณชอบหนังสือเล่มไหนมากกว่ากัน|📚👆
+{Can} you {speak} English?|kæn juː spiːk ˈɪŋɡlɪʃ|คุณสามารถพูดภาษาอังกฤษได้ไหม|🗣️🇬🇧
+{Did} you {enjoy} the movie?|dɪd juː ɪnˈdʒɔɪ ðə ˈmuːvi|คุณสนุกกับภาพยนตร์เรื่องนั้นไหม|🎬😄
+What time {does} the store {open}?|wɒt taɪm dʌz ðə stɔː ˈəʊpən|ร้านค้าเปิดกี่โมง|🏪🕘
+How much {does} this shirt {cost}?|haʊ mʌtʃ dʌz ðɪs ʃɜːt kɒst|เสื้อเชิ้ตตัวนี้ราคาเท่าไหร่|👕💲
+How many languages {do} you {speak}?|haʊ ˈmeni ˈlæŋɡwɪdʒɪz duː juː spiːk|คุณพูดได้กี่ภาษา|🗣️🌐
+Who {is} your best friend?|huː ɪz jɔː best frend|เพื่อนสนิทของคุณคือใคร|🤝😊
+Where {did} you {go} yesterday?|weə dɪd juː ɡəʊ ˈjestədeɪ|เมื่อวานนี้คุณไปไหนมา|🚶📅
+Why {is} the sky blue?|waɪ ɪz ðə skaɪ bluː|ทำไมท้องฟ้าถึงเป็นสีฟ้า|🌤️🔵
+{Will} it {rain} tomorrow?|wɪl ɪt reɪn təˈmɒrəʊ|พรุ่งนี้ฝนจะตกไหม|🌧️📆
+How {was} your exam?|haʊ wɒz jɔː ɪɡˈzæm|การสอบของคุณเป็นอย่างไรบ้าง|📝😅
+What {are} you {doing} now?|wɒt ɑː juː ˈduːɪŋ naʊ|ตอนนี้คุณกำลังทำอะไรอยู่|🛠️⏱️
+{Have} you {visited} Japan before?|hæv juː ˈvɪzɪtɪd dʒəˈpæn bɪˈfɔː|คุณเคยไปเที่ยวประเทศญี่ปุ่นมาก่อนไหม|✈️🇯🇵
+Whose car {is} that outside?|huːz kɑː ɪz ðæt ˌaʊtˈsaɪd|รถยนต์คันที่อยู่ข้างนอกนั้นเป็นของใคร|🚗❓
+How often {do} you {exercise}?|haʊ ˈɒfn duː juː ˈeksəsaɪz|คุณออกกำลังกายบ่อยแค่ไหน|🏋️🔁
+{Would} you {like} some coffee?|wʊd juː laɪk sʌm ˈkɒfi|คุณต้องการรับกาแฟสักหน่อยไหม|☕🙂
+Who {invented} the telephone?|huː ɪnˈventɪd ðə ˈtelɪfəʊn|ใครเป็นผู้ประดิษฐ์โทรศัพท์ขึ้นมา|📞💡
+What {happened} at the meeting?|wɒt ˈhæpənd æt ðə ˈmiːtɪŋ|เกิดอะไรขึ้นในการประชุมบ้าง|👥❓
+{May} I {borrow} your pen?|meɪ aɪ ˈbɒrəʊ jɔː pen|ฉันขอยืมปากกาของคุณหน่อยได้ไหม|🖊️🤲
+How long {does} the trip {take}?|haʊ lɒŋ dʌz ðə trɪp teɪk|การเดินทางครั้งนี้ใช้เวลานานเท่าไหร่|🧳⌛
+Which restaurant {serves} the best sushi?|wɪtʃ ˈrestrɒnt sɜːvz ðə best ˈsuːʃi|ร้านอาหารแห่งไหนเสิร์ฟซูชิที่อร่อยที่สุด|🍣🍽️
+Why {did} you {cancel} the meeting?|waɪ dɪd juː ˈkænsl ðə ˈmiːtɪŋ|ทำไมคุณถึงยกเลิกการประชุมล่ะ|❌📅
+{Are} you ready for the test?|ɑː juː ˈredi fə ðə test|คุณพร้อมสำหรับการสอบแล้วหรือยัง|✅📝
+How far {is} it to the station?|haʊ fɑː ɪz ɪt tə ðə ˈsteɪʃn|ไปถึงสถานีรถไฟระยะทางไกลแค่ไหน|🚉📏
+Who {left} this bag here?|huː left ðɪs bæɡ hɪə|ใครเป็นคนทิ้งกระเป๋าใบนี้ไว้ที่นี่|👜📍
+What {do} you {think} about this plan?|wɒt duː juː θɪŋk əˈbaʊt ðɪs plæn|คุณคิดอย่างไรเกี่ยวกับแผนการนี้|🤔📋
+When {will} the project {finish}?|wen wɪl ðə ˈprɒdʒekt ˈfɪnɪʃ|โครงการนี้จะเสร็จสิ้นเมื่อไหร่|📁🏁
+How {does} this machine {work}?|haʊ dʌz ðɪs məˈʃiːn wɜːk|เครื่องจักรนี้ทำงานอย่างไร|⚙️🔧
+{Can} you {help} me with this box?|kæn juː help mi wɪð ðɪs bɒks|คุณช่วยฉันยกกล่องใบนี้หน่อยได้ไหม|📦🤝
+Whose jacket {is hanging} there?|huːz ˈdʒækɪt ɪz ˈhæŋɪŋ ðeə|เสื้อแจ็คเก็ตที่แขวนอยู่ตรงนั้นเป็นของใคร|🧥🪝
+Where {did} you {buy} that shirt?|weə dɪd juː baɪ ðæt ʃɜːt|คุณซื้อเสื้อเชิ้ตตัวนั้นมาจากที่ไหน|👕🛍️
+Why {is} the traffic so heavy?|waɪ ɪz ðə ˈtræfɪk səʊ ˈhevi|ทำไมการจราจรถึงติดขัดมากขนาดนี้|🚗🚙
+{Did} you {lock} the front door?|dɪd juː lɒk ðə frʌnt dɔː|คุณล็อกประตูหน้าบ้านแล้วหรือยัง|🔒🚪
+How many people {attend} the party?|haʊ ˈmeni ˈpiːpl əˈtend ðə ˈpɑːti|มีคนมาร่วมงานปาร์ตี้กี่คน|🎉👥
+What {are} your plans for tonight?|wɒt ɑː jɔː plænz fə təˈnaɪt|แผนสำหรับคืนนี้ของคุณคืออะไรบ้าง|🌙📅
+Who {wrote} this famous novel?|huː rəʊt ðɪs ˈfeɪməs ˈnɒvl|ใครเป็นคนเขียนนวนิยายที่มีชื่อเสียงเล่มนี้|✍️📖
+{Will} you {join} us for dinner?|wɪl juː dʒɔɪn ʌs fə ˈdɪnə|คุณจะมาร่วมทานอาหารเย็นกับพวกเราไหม|🍽️🙌
+How often {do} you {check} email?|haʊ ˈɒfn duː juː tʃek ˈiːmeɪl|คุณเช็กอีเมลบ่อยแค่ไหน|📧👀
+Which color {do} you {like} more?|wɪtʃ ˈkʌlə duː juː laɪk mɔː|คุณชอบสีไหนมากกว่ากัน|🎨👍
+What time {does} the flight {depart}?|wɒt taɪm dʌz ðə flaɪt dɪˈpɑːt|เที่ยวบินออกเดินทางกี่โมง|✈️🛫
+{Have} you {finished} your homework?|hæv juː ˈfɪnɪʃt jɔː ˈhəʊmwɜːk|คุณทำการบ้านเสร็จเรียบร้อยแล้วหรือยัง|📚✅
+How {was} your weekend trip?|haʊ wɒz jɔː ˌwiːkˈend trɪp|ทริปวันหยุดสุดสัปดาห์ของคุณเป็นอย่างไรบ้าง|🧳🌄
+Why {did} she {refuse} the offer?|waɪ dɪd ʃi rɪˈfjuːz ði ˈɒfə|ทำไมเธอถึงปฏิเสธข้อเสนอนั้น|🙅📨
+{Could} you {repeat} that question?|kʊd juː rɪˈpiːt ðæt ˈkwestʃən|คุณช่วยพูดคำถามนั้นซ้ำอีกครั้งได้ไหม|🔁❓
+Where {did} you {leave} your keys?|weə dɪd juː liːv jɔː kiːz|คุณวางกุญแจไว้ที่ไหน|🔑📍
+What {makes} the plant {grow} fast?|wɒt meɪks ðə plɑːnt ɡrəʊ fɑːst|อะไรทำให้พืชเติบโตเร็ว|🌱📈
+When {will} the package {arrive}?|wen wɪl ðə ˈpækɪdʒ əˈraɪv|พัสดุจะมาถึงเมื่อไหร่|📦🚚
+Why {is} the computer {running} slow?|waɪ ɪz ðə kəmˈpjuːtə ˈrʌnɪŋ sləʊ|ทำไมคอมพิวเตอร์ถึงทำงานช้าจัง|💻🐌
+How {can} we {improve} our skills?|haʊ kæn wi ɪmˈpruːv ˈaʊə skɪlz|เราจะพัฒนาทักษะของเราได้อย่างไร|📈🎯
+Who {baked} this delicious cake?|huː beɪkt ðɪs dɪˈlɪʃəs keɪk|ใครเป็นคนอบเค้กแสนอร่อยนี้|🎂👩‍🍳
+Which subject {do} you {enjoy} most?|wɪtʃ ˈsʌbdʒɪkt duː juː ɪnˈdʒɔɪ məʊst|คุณชอบวิชาไหนมากที่สุด|📚😍
+{Can} you {play} the piano?|kæn juː pleɪ ðə piˈænəʊ|คุณเล่นเปียโนเป็นไหม|🎹🎶
+{Did} you {see} the accident?|dɪd juː siː ði ˈæksɪdənt|คุณเห็นอุบัติเหตุนั้นไหม|👀🚑
+What time {does} the library {close}?|wɒt taɪm dʌz ðə ˈlaɪbrəri kləʊz|ห้องสมุดปิดกี่โมง|🏛️🕔
+How much {does} the ticket {cost}?|haʊ mʌtʃ dʌz ðə ˈtɪkɪt kɒst|ตั๋วราคาเท่าไหร่|🎫💲
+How many countries {have} you {visited}?|haʊ ˈmeni ˈkʌntriz hæv juː ˈvɪzɪtɪd|คุณเคยไปเที่ยวมาแล้วกี่ประเทศ|🗺️✈️
+Who {is managing} this project?|huː ɪz ˈmænɪdʒɪŋ ðɪs ˈprɒdʒekt|ใครเป็นผู้จัดการโครงการนี้|👔📁
+Where {were} you {born}?|weə wɜː juː bɔːn|คุณเกิดที่ไหน|👶📍
+Why {did} the lights {go} out?|waɪ dɪd ðə laɪts ɡəʊ aʊt|ทำไมไฟถึงดับลงล่ะ|💡🌑
+{Will} you {help} me with chores?|wɪl juː help mi wɪð tʃɔːz|คุณจะช่วยฉันทำงานบ้านไหม|🧹🤝
+How {was} the weather today?|haʊ wɒz ðə ˈweðə təˈdeɪ|สภาพอากาศวันนี้เป็นอย่างไรบ้าง|⛅🌡️
+What {are} you {looking} for?|wɒt ɑː juː ˈlʊkɪŋ fɔː|คุณกำลังมองหาอะไรอยู่หรือ|🔍👀
+{Have} you {read} this book before?|hæv juː red ðɪs bʊk bɪˈfɔː|คุณเคยอ่านหนังสือเล่มนี้มาก่อนไหม|📖✔️
+Whose notebook {is} this?|huːz ˈnəʊtbʊk ɪz ðɪs|สมุดบันทึกเล่มนี้เป็นของใคร|📓❓
+How often {do} you {travel} abroad?|haʊ ˈɒfn duː juː ˈtrævl əˈbrɔːd|คุณเดินทางไปต่างประเทศบ่อยแค่ไหน|🌍🧳
+{Would} you {prefer} tea or juice?|wʊd juː prɪˈfɜː tiː ɔː dʒuːs|คุณต้องการชาหรือน้ำผลไม้ดี|🍵🧃
+Who {discovered} gravity?|huː dɪˈskʌvəd ˈɡrævəti|ใครเป็นผู้ค้นพบแรงโน้มถ่วง|🍎🔬
+What {caused} the delay?|wɒt kɔːzd ðə dɪˈleɪ|อะไรเป็นสาเหตุที่ทำให้ล่าช้า|⏳⚠️
+{May} I {use} your phone?|meɪ aɪ juːz jɔː fəʊn|ฉันขอใช้โทรศัพท์ของคุณหน่อยได้ไหม|📱🙏
+How long {does} the movie {last}?|haʊ lɒŋ dʌz ðə ˈmuːvi lɑːst|ภาพยนตร์เรื่องนี้ฉายยาวนานแค่ไหน|🎞️⏱️
+Which team {won} the match?|wɪtʃ tiːm wʌn ðə mætʃ|ทีมไหนชนะการแข่งขัน|⚽🏆
+Why {did} you {choose} this career?|waɪ dɪd juː tʃuːz ðɪs kəˈrɪə|ทำไมคุณถึงเลือกอาชีพนี้|💼👆
+{Are} you {feeling} better now?|ɑː juː ˈfiːlɪŋ ˈbetə naʊ|ตอนนี้คุณรู้สึกดีขึ้นแล้วหรือยัง|🤒🙂
+How far {is} the airport from here?|haʊ fɑː ɪz ði ˈeəpɔːt frəm hɪə|สนามบินอยู่ห่างจากที่นี่ไกลแค่ไหน|✈️📏
+Who {invited} you to the party?|huː ɪnˈvaɪtɪd juː tə ðə ˈpɑːti|ใครเป็นคนเชิญคุณมางานปาร์ตี้|💌🎉
+What {do} you {recommend} for lunch?|wɒt duː juː ˌrekəˈmend fə lʌntʃ|คุณแนะนำเมนูอะไรสำหรับมื้อเที่ยง|🍱👍
+When {will} the shop {reopen}?|wen wɪl ðə ʃɒp ˌriːˈəʊpən|ร้านค้าจะเปิดทำการใหม่อีกครั้งเมื่อไหร่|🏪🔓
+How {does} this camera {operate}?|haʊ dʌz ðɪs ˈkæmərə ˈɒpəreɪt|กล้องตัวนี้ใช้งานอย่างไร|📷🔘
+{Can} you {speak} any other language?|kæn juː spiːk ˈeni ˈʌðə ˈlæŋɡwɪdʒ|คุณพูดภาษาอื่นได้อีกไหม|🗣️🌏
+Whose idea {was} this?|huːz aɪˈdɪə wɒz ðɪs|นี่เป็นความคิดของใคร|💡🙋
+Where {did} you {meet} your mentor?|weə dɪd juː miːt jɔː ˈmentɔː|คุณไปพบกับที่ปรึกษาของคุณที่ไหน|🤝🧑‍🏫
+Why {is} he {laughing}?|waɪ ɪz hi ˈlɑːfɪŋ|ทำไมเขาถึงกำลังหัวเราะอยู่ล่ะ|😂❓
+{Did} you {submit} your report?|dɪd juː səbˈmɪt jɔː rɪˈpɔːt|คุณส่งรายงานของคุณแล้วหรือยัง|📄📤
+How many guests {came} yesterday?|haʊ ˈmeni ɡests keɪm ˈjestədeɪ|เมื่อวานนี้มีแขกมาร่วมงานกี่คน|🚪👥
+What {are} your goals for this year?|wɒt ɑː jɔː ɡəʊlz fə ðɪs jɪə|เป้าหมายในปีนี้ของคุณคืออะไรบ้าง|🎯📆
+Who {painted} the Mona Lisa?|huː ˈpeɪntɪd ðə ˈməʊnə ˈliːzə|ใครเป็นคนวาดภาพโมนาลิซ่า|🎨🖼️
+{Will} you {attend} the seminar?|wɪl juː əˈtend ðə ˈsemɪnɑː|คุณจะเข้าร่วมการสัมมนาไหม|🎓🪑
+How often {do} you {update} apps?|haʊ ˈɒfn duː juː ʌpˈdeɪt æps|คุณอัปเดตแอปพลิเคชันบ่อยแค่ไหน|📲🔄
+Which season {do} you {like} best?|wɪtʃ ˈsiːzn duː juː laɪk best|คุณชอบฤดูกาลไหนมากที่สุด|🍂❄️
+What time {does} the train {leave}?|wɒt taɪm dʌz ðə treɪn liːv|รถไฟจะออกเดินทางกี่โมง|🚆🕒
+{Have} you {locked} the office?|hæv juː lɒkt ði ˈɒfɪs|คุณล็อกออฟฟิศเรียบร้อยแล้วหรือยัง|🏢🔒
+How {was} your presentation?|haʊ wɒz jɔː ˌprezənˈteɪʃn|การนำเสนอของคุณเป็นอย่างไรบ้าง|📊🎤
+Why {did} she {change} her mind?|waɪ dɪd ʃi tʃeɪndʒ hɜː maɪnd|ทำไมเธอถึงเปลี่ยนใจ|💭🔄
+{Could} you {explain} that rule again?|kʊd juː ɪkˈspleɪn ðæt ruːl əˈɡen|คุณช่วยอธิบายกฎข้อนั้นใหม่อีกรอบได้ไหม|📋🗣️
+`.trim().split("\n");
+
+const DATA = RAW.map(line=>{
+  const [en,ipa,th,emo] = line.split("|");
+  const plain = en.replace(/[{}]/g,"");
+  const html = en.replace(/\{([^}]+)\}/g,"<b>$1</b>");
+  const pics = Array.from(emo.trim().matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic}\uFE0F?)*/gu)).map(m=>m[0]);
+  return {plain,html,ipa,th,pics};
+});
+
+const PER_PAGE = 50;
+const PAGES = Math.ceil(DATA.length/PER_PAGE);
+let page = 0;
+
+const grid = document.getElementById("grid");
+const tabs = document.getElementById("tabs");
+const pager = document.getElementById("pager");
+const voiceSel = document.getElementById("voice");
+const hint = document.getElementById("hint");
+
+/* ---------- Speech ---------- */
+let voices = [];
+const MALE_HINTS = ["ryan","google uk english male","daniel","george","arthur","oliver","thomas","james","male"];
+const FEMALE_HINTS = ["female","susan","hazel","libby","sonia","kate","serena","martha","amy","emma","samantha","karen","moira","fiona","victoria"];
+function rankVoice(v){
+  const n = v.name.toLowerCase(); let s = 0;
+  if (/^en[-_]gb/i.test(v.lang)) s += 50; else if (/^en/i.test(v.lang)) s += 10;
+  const mi = MALE_HINTS.findIndex(h=>n.includes(h));
+  if (mi>=0) s += 40 - mi;
+  if (FEMALE_HINTS.some(h=>n.includes(h))) s -= 60;
+  if (/natural|online|neural/.test(n)) s += 15;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>rankVoice(b)-rankVoice(a));
+  voiceSel.innerHTML = "";
+  voices.forEach((v,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; voiceSel.appendChild(o); });
+  if(!voices.length){ hint.textContent="อุปกรณ์นี้ยังไม่มีเสียงภาษาอังกฤษให้เลือก — ลองเปิดด้วย Chrome / Edge / Safari"; }
+  else if(rankVoice(voices[0])<60){ hint.textContent="ไม่พบเสียงผู้ชายอังกฤษ (UK) บนอุปกรณ์นี้ — เลือกเสียงอื่นจากเมนู “เสียงอ่าน” ได้"; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+let activeBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  const same = activeBtn===btn && speechSynthesis.speaking;
+  speechSynthesis.cancel();
+  if(activeBtn){ activeBtn.classList.remove("on"); activeBtn=null; }
+  if(same) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices[+voiceSel.value||0];
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onend = u.onerror = ()=>{ btn.classList.remove("on"); if(activeBtn===btn) activeBtn=null; };
+  btn.classList.add("on"); activeBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Render ---------- */
+const ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function makeCard(item, idx){
+  const card = el("div","card"); card.tabIndex=0; card.setAttribute("role","button");
+  card.setAttribute("aria-label","การ์ดที่ "+(idx+1)+" กดเพื่อพลิก");
+  const inner = el("div","inner");
+
+  const front = el("div","face front");
+  const pic = el("div","pic");
+  pic.appendChild(el("span","num", String(idx+1)));
+  item.pics.slice(0,2).forEach(p=>pic.appendChild(el("span","",p)));
+  const text = el("div","text");
+  text.appendChild(el("p","en",item.html));
+  text.appendChild(el("p","ipa","/"+item.ipa+"/"));
+  const foot = el("div","foot");
+  foot.appendChild(el("span","tap","แตะการ์ดเพื่อดูคำแปล"));
+  const sb = el("button","say",ICON+"ฟังเสียง"); sb.type="button";
+  sb.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb);});
+  foot.appendChild(sb);
+  front.append(pic,text,foot);
+
+  const back = el("div","face back");
+  back.appendChild(el("div","th",item.th));
+  const bfoot = el("div","foot");
+  bfoot.appendChild(el("span","tap","แตะเพื่อกลับไปด้านหน้า"));
+  const sb2 = el("button","say",ICON+"ฟังเสียง"); sb2.type="button";
+  sb2.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb2);});
+  bfoot.appendChild(sb2);
+  back.appendChild(bfoot);
+
+  inner.append(front,back); card.appendChild(inner);
+  const flip = ()=>card.classList.toggle("flipped");
+  card.addEventListener("click",flip);
+  card.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ") && e.target===card){ e.preventDefault(); flip(); }});
+  return card;
+}
+
+function render(){
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  grid.innerHTML="";
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((it,i)=>grid.appendChild(makeCard(it,start+i)));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",i===page));
+  window.scrollTo({top:0,behavior:"auto"});
+}
+function goto(p){ page=p; render(); }
+
+for(let p=0;p<PAGES;p++){
+  const a = p*PER_PAGE+1, b = Math.min((p+1)*PER_PAGE, DATA.length);
+  const t = el("button","tab","หน้า "+(p+1)+" · "+a+"–"+b); t.setAttribute("role","tab");
+  t.addEventListener("click",()=>goto(p)); tabs.appendChild(t);
+  const pb = el("button","","หน้า "+(p+1)); pb.addEventListener("click",()=>goto(p)); pager.appendChild(pb);
+}
+render();
+</script>
+</body>
+</html>

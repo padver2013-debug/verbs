@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compound-Complex Sentences · Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#E9EEF2; --ink:#10181F; --muted:#51606C; --accent:#0E5A66; --accent-ink:#FFFFFF;
+  --panel:#FFFFFF; --pic:#DCE9EC; --back:#0F2A33; --back-ink:#F3F8F9; --line:#C7D2D9;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+}
+:root[data-theme="dark"]{ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 56px}
+header h1{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:16px}
+.formula{display:inline-flex;gap:6px;margin-top:12px;font-family:Arial,sans-serif;font-size:14px}
+.formula span{padding:3px 10px;border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700}
+.formula span.dc{border-style:dashed}
+.bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:22px 0 20px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tab,.pager button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.voicebox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.voicebox select{font:inherit;font-size:14px;max-width:240px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:#10181F}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{perspective:1400px;height:350px;outline:none;cursor:pointer;position:relative}
+.inner{position:absolute;inset:0;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card:focus-visible .face{box-shadow:0 0 0 3px var(--accent)}
+.front{background:#FFFFFF;color:#000000}
+.pic{height:104px;background:var(--pic);display:flex;align-items:center;justify-content:center;gap:14px;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:12px;top:10px;font:600 12px Arial,sans-serif;color:#2C4A52;background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px}
+.text{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(17px,2.1vw,21px);line-height:1.4;color:#000;margin:0}
+.en b{font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.8vw,17.5px);line-height:1.45;color:#000;margin:0}
+.foot{padding:8px 14px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tap{font-size:13px;color:#5B6B75}
+.say{display:inline-flex;align-items:center;gap:7px;font:600 14px "Sarabun",sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.say svg{width:17px;height:17px;fill:currentColor}
+.say.on{outline:3px solid rgba(14,90,102,.35)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);justify-content:space-between;border-color:var(--back)}
+.back .th{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 26px;font-size:clamp(21px,2.6vw,27px);line-height:1.55;font-weight:600}
+.back .foot{color:#9FB9C0}
+.back .tap{color:#9FB9C0}
+.back .say{background:#5FC1CF;color:#06191D}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>4.1 Compound-Complex Sentence</h1>
+  <p>ประโยคที่มีหลายอนุประโยค (Multiple clauses) — ฝึกอ่านและแปล</p>
+  <div class="formula" aria-label="Structure"><span>IC</span><span>+</span><span>IC</span><span>+</span><span class="dc">DC</span></div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <label class="voicebox">เสียงอ่าน
+    <select id="voice" aria-label="เลือกเสียงอ่าน"></select>
+  </label>
+</div>
+<p class="hint" id="hint">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม “ฟังเสียง” เพื่อฟังประโยค</p>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+</div>
+
+<script>
+const RAW = `
+She {studied} hard, and she {passed} the exam because she {wanted} a scholarship.|ʃi ˈstʌdid hɑːd, ənd ʃi pɑːst ði ɪɡˈzæm bɪˈkɒz ʃi ˈwɒntɪd ə ˈskɒləʃɪp|เธอเรียนหนักและสอบผ่าน เพราะเธออยากได้ทุนการศึกษา|📚🎓
+He {wanted} to {buy} a new car, but he {had} no money if he {did} not {save}.|hi ˈwɒntɪd tə baɪ ə njuː kɑː, bʌt hi hæd nəʊ ˈmʌni ɪf hi dɪd nɒt seɪv|เขาอยากซื้อรถใหม่ แต่เขาไม่มีเงิน ถ้าเขาไม่เก็บออม|🚗💰
+You {can drink} coffee, or you {can have} tea when you {arrive} here.|juː kæn drɪŋk ˈkɒfi, ɔː juː kæn hæv tiː wen juː əˈraɪv hɪə|คุณดื่มกาแฟได้ หรือจะดื่มชาก็ได้ เมื่อมาถึงที่นี่|☕🍵
+The sun {shone} brightly, and the birds {sang} because morning {came}.|ðə sʌn ʃɒn ˈbraɪtli, ənd ðə bɜːdz sæŋ bɪˈkɒz ˈmɔːnɪŋ keɪm|ดวงอาทิตย์ส่องแสงจ้า และนกก็ร้องเพลง เพราะเช้ามาถึงแล้ว|☀️🐦
+It {was raining} heavily, but they {went} outside when the match {started}.|ɪt wɒz ˈreɪnɪŋ ˈhevɪli, bʌt ðeɪ went ˌaʊtˈsaɪd wen ðə mætʃ ˈstɑːtɪd|ฝนตกหนัก แต่พวกเขาก็ออกไปข้างนอก เมื่อการแข่งขันเริ่มขึ้น|🌧️⚽
+We {must hurry} up, or we {will miss} the train if traffic {gets} bad.|wi mʌst ˈhʌri ʌp, ɔː wi wɪl mɪs ðə treɪn ɪf ˈtræfɪk ɡets bæd|เราต้องรีบ ไม่เช่นนั้นจะพลาดรถไฟ ถ้ารถติดหนัก|🏃🚆
+She {cooked} dinner, and her husband {washed} the dishes while she {rested}.|ʃi kʊkt ˈdɪnə, ənd hɜː ˈhʌzbənd wɒʃt ðə ˈdɪʃɪz waɪl ʃi ˈrestɪd|เธอทำอาหารเย็น และสามีล้างจาน ขณะที่เธอพักผ่อน|🍳🍽️
+He {tried} to {open} the door, but it {was} locked because nobody {was} inside.|hi traɪd tu ˈəʊpən ðə dɔː, bʌt ɪt wɒz lɒkt bɪˈkɒz ˈnəʊbədi wɒz ɪnˈsaɪd|เขาพยายามเปิดประตู แต่ประตูล็อกอยู่ เพราะไม่มีใครอยู่ข้างใน|🚪🔒
+You {can stay} here, or you {can come} with us if you {prefer}.|juː kæn steɪ hɪə, ɔː juː kæn kʌm wɪð ʌs ɪf juː prɪˈfɜː|คุณอยู่ที่นี่ได้ หรือจะมากับเราก็ได้ ถ้าคุณต้องการ|🏠🚶
+The dog {barked} loudly, and the cat {ran} away when a stranger {approached}.|ðə dɒɡ bɑːkt ˈlaʊdli, ənd ðə kæt ræn əˈweɪ wen ə ˈstreɪndʒə əˈprəʊtʃt|สุนัขเห่าเสียงดัง และแมววิ่งหนี เมื่อคนแปลกหน้าเข้ามาใกล้|🐕🐈
+She {likes} {reading} books, but she {hates} {watching} movies because they {are} boring.|ʃi laɪks ˈriːdɪŋ bʊks, bʌt ʃi heɪts ˈwɒtʃɪŋ ˈmuːviz bɪˈkɒz ðeɪ ɑː ˈbɔːrɪŋ|เธอชอบอ่านหนังสือ แต่เกลียดการดูหนัง เพราะมันน่าเบื่อ|📖🎬
+{Complete} this task now, or you {will face} trouble if you {fail}.|kəmˈpliːt ðɪs tɑːsk naʊ, ɔː juː wɪl feɪs ˈtrʌbl ɪf juː feɪl|ทำงานนี้ให้เสร็จเดี๋ยวนี้ ไม่เช่นนั้นคุณจะเจอปัญหา ถ้าคุณล้มเหลว|✅⚠️
+He {bought} a new computer, and he {installed} software that he {needed}.|hi bɔːt ə njuː kəmˈpjuːtə, ənd hi ɪnˈstɔːld ˈsɒftweə ðæt hi ˈniːdɪd|เขาซื้อคอมพิวเตอร์เครื่องใหม่ และติดตั้งซอฟต์แวร์ที่เขาต้องการ|💻🛒
+The food {looked} delicious, but it {tasted} terrible because salt {was} missing.|ðə fuːd lʊkt dɪˈlɪʃəs, bʌt ɪt ˈteɪstɪd ˈterəbl bɪˈkɒz sɒlt wɒz ˈmɪsɪŋ|อาหารดูน่ากิน แต่รสชาติแย่มาก เพราะขาดเกลือ|🍲🧂
+We {can watch} a movie, or we {can play} games if everyone {agrees}.|wi kæn wɒtʃ ə ˈmuːvi, ɔː wi kæn pleɪ ɡeɪmz ɪf ˈevriwʌn əˈɡriːz|เราดูหนังได้ หรือเล่นเกมก็ได้ ถ้าทุกคนเห็นด้วย|🎬🎮
+She {woke} up early, and she {prepared} breakfast before her children {woke} up.|ʃi wəʊk ʌp ˈɜːli, ənd ʃi prɪˈpeəd ˈbrekfəst bɪˈfɔː hɜː ˈtʃɪldrən wəʊk ʌp|เธอตื่นแต่เช้า และเตรียมอาหารเช้า ก่อนที่ลูก ๆ จะตื่น|⏰🥞
+The phone {rang} several times, but nobody {answered} it because everyone {was} asleep.|ðə fəʊn ræŋ ˈsevrəl taɪmz, bʌt ˈnəʊbədi ˈɑːnsəd ɪt bɪˈkɒz ˈevriwʌn wɒz əˈsliːp|โทรศัพท์ดังหลายครั้ง แต่ไม่มีใครรับ เพราะทุกคนหลับอยู่|📞😴
+You {should wear} a jacket, or you {will catch} a cold if wind {blows} hard.|juː ʃʊd weər ə ˈdʒækɪt, ɔː juː wɪl kætʃ ə kəʊld ɪf wɪnd bləʊz hɑːd|คุณควรใส่แจ็กเก็ต ไม่เช่นนั้นจะเป็นหวัด ถ้าลมพัดแรง|🧥🤧
+They {cleaned} the house, and they {decorated} the room because guests {were coming}.|ðeɪ kliːnd ðə haʊs, ənd ðeɪ ˈdekəreɪtɪd ðə ruːm bɪˈkɒz ɡests wɜː ˈkʌmɪŋ|พวกเขาทำความสะอาดบ้าน และตกแต่งห้อง เพราะแขกกำลังจะมา|🧹🎈
+He {studied} French for years, but he still {speaks} poorly although he {tried}.|hi ˈstʌdid frentʃ fə jɪəz, bʌt hi stɪl spiːks ˈpɔːli ɔːlˈðəʊ hi traɪd|เขาเรียนภาษาฝรั่งเศสมาหลายปี แต่ก็ยังพูดได้ไม่ดี แม้ว่าเขาจะพยายามแล้ว|🇫🇷🗣️
+{Tell} me the truth, or I {will get} angry if you {lie} to me.|tel mi ðə truːθ, ɔːr aɪ wɪl ɡet ˈæŋɡri ɪf juː laɪ tə mi|บอกความจริงฉันมา ไม่เช่นนั้นฉันจะโกรธ ถ้าคุณโกหกฉัน|🗣️😠
+The wind {blew} strongly, and the lights {went} out when the storm {struck}.|ðə wɪnd bluː ˈstrɒŋli, ənd ðə laɪts went aʊt wen ðə stɔːm strʌk|ลมพัดแรง และไฟก็ดับ เมื่อพายุเข้า|🌬️💡
+She {lost} her keys, but she {found} them later because her friend {helped}.|ʃi lɒst hɜː kiːz, bʌt ʃi faʊnd ðem ˈleɪtə bɪˈkɒz hɜː frend helpt|เธอทำกุญแจหาย แต่ภายหลังก็หาเจอ เพราะเพื่อนช่วย|🔑🔍
+We {can go} to the beach, or we {can visit} a museum if weather {turns} bad.|wi kæn ɡəʊ tə ðə biːtʃ, ɔː wi kæn ˈvɪzɪt ə mjuˈziːəm ɪf ˈweðə tɜːnz bæd|เราไปชายหาดได้ หรือไปพิพิธภัณฑ์ก็ได้ ถ้าอากาศแย่|🏖️🏛️
+He {finished} his work, and he {went} home after boss {approved} it.|hi ˈfɪnɪʃt hɪz wɜːk, ənd hi went həʊm ˈɑːftə bɒs əˈpruːvd ɪt|เขาทำงานเสร็จ และกลับบ้าน หลังจากที่เจ้านายอนุมัติ|💼🏠
+The test {was} very difficult, but she {got} an A because she {studied} smart.|ðə test wɒz ˈveri ˈdɪfɪkəlt, bʌt ʃi ɡɒt ən eɪ bɪˈkɒz ʃi ˈstʌdid smɑːt|ข้อสอบยากมาก แต่เธอได้เกรด A เพราะเธอเรียนอย่างฉลาด|📝🅰️
+She {wanted} to {join} the trip, but she {had} no money because she {lost} her job.|ʃi ˈwɒntɪd tə dʒɔɪn ðə trɪp, bʌt ʃi hæd nəʊ ˈmʌni bɪˈkɒz ʃi lɒst hɜː dʒɒb|เธออยากร่วมทริป แต่ไม่มีเงิน เพราะตกงาน|🧳💸
+He {saved} enough cash, and he {bought} a house when prices {dropped}.|hi seɪvd ɪˈnʌf kæʃ, ənd hi bɔːt ə haʊs wen ˈpraɪsɪz drɒpt|เขาเก็บเงินสดได้พอ และซื้อบ้าน เมื่อราคาลดลง|🏡💵
+You {can write} an essay, or you {can present} if you {feel} ready.|juː kæn raɪt ən ˈeseɪ, ɔː juː kæn prɪˈzent ɪf juː fiːl ˈredi|คุณเขียนเรียงความได้ หรือจะนำเสนอก็ได้ ถ้าคุณรู้สึกพร้อม|✍️🎤
+The train {arrived} on time, and passengers {got} off as soon as it {stopped}.|ðə treɪn əˈraɪvd ɒn taɪm, ənd ˈpæsɪndʒəz ɡɒt ɒf æz suːn æz ɪt stɒpt|รถไฟมาถึงตรงเวลา และผู้โดยสารลงทันทีที่รถหยุด|🚉🚶
+She {practiced} daily, but she still {made} mistakes because pieces {were} hard.|ʃi ˈpræktɪst ˈdeɪli, bʌt ʃi stɪl meɪd mɪˈsteɪks bɪˈkɒz ˈpiːsɪz wɜː hɑːd|เธอฝึกซ้อมทุกวัน แต่ก็ยังทำผิดพลาด เพราะบทเพลงยาก|🎹❌
+{Open} the window, or room {will get} stuffy if air {does} not {flow}.|ˈəʊpən ðə ˈwɪndəʊ, ɔː ruːm wɪl ɡet ˈstʌfi ɪf eə dʌz nɒt fləʊ|เปิดหน้าต่างเถอะ ไม่เช่นนั้นห้องจะอบอ้าว ถ้าอากาศไม่ถ่ายเท|🪟💨
+He {forgot} his umbrella, and he {got} soaked while he {walked} home.|hi fəˈɡɒt hɪz ʌmˈbrelə, ənd hi ɡɒt səʊkt waɪl hi wɔːkt həʊm|เขาลืมร่ม และเปียกโชก ขณะเดินกลับบ้าน|☂️🚶
+The restaurant {served} good food, but service {was} slow because chefs {were} busy.|ðə ˈrestrɒnt sɜːvd ɡʊd fuːd, bʌt ˈsɜːvɪs wɒz sləʊ bɪˈkɒz ʃefs wɜː ˈbɪzi|ร้านอาหารเสิร์ฟอาหารอร่อย แต่บริการช้า เพราะพ่อครัวยุ่ง|🍽️⏳
+You {must submit} reports, or you {will lose} points if you {delay}.|juː mʌst səbˈmɪt rɪˈpɔːts, ɔː juː wɪl luːz pɔɪnts ɪf juː dɪˈleɪ|คุณต้องส่งรายงาน ไม่เช่นนั้นจะเสียคะแนน ถ้าคุณล่าช้า|📄📤
+She {opened} her laptop, and she {started} {typing} when notification {sounded}.|ʃi ˈəʊpənd hɜː ˈlæptɒp, ənd ʃi ˈstɑːtɪd ˈtaɪpɪŋ wen ˌnəʊtɪfɪˈkeɪʃn ˈsaʊndɪd|เธอเปิดแล็ปท็อป และเริ่มพิมพ์ เมื่อมีเสียงแจ้งเตือน|💻⌨️
+He {searched} everywhere, but he {could} not {find} it because it {was} hidden.|hi sɜːtʃt ˈevriweə, bʌt hi kʊd nɒt faɪnd ɪt bɪˈkɒz ɪt wɒz ˈhɪdn|เขาค้นหาทุกที่ แต่หาไม่เจอ เพราะมันถูกซ่อนอยู่|🔎🤷
+We {can order} pizza, or we {can cook} pasta if ingredients {exist}.|wi kæn ˈɔːdə ˈpiːtsə, ɔː wi kæn kʊk ˈpæstə ɪf ɪnˈɡriːdiənts ɪɡˈzɪst|เราสั่งพิซซ่าได้ หรือทำพาสต้าก็ได้ ถ้ามีวัตถุดิบ|🍕🍝
+The sun {went} down, and stars {appeared} as evening {approached}.|ðə sʌn went daʊn, ənd stɑːz əˈpɪəd æz ˈiːvnɪŋ əˈprəʊtʃt|ดวงอาทิตย์ตกดิน และดวงดาวปรากฏขึ้น เมื่อค่ำใกล้เข้ามา|🌇⭐
+She {loved} animals, but she {had} allergies because cats {shed} fur.|ʃi lʌvd ˈænɪmlz, bʌt ʃi hæd ˈælədʒiz bɪˈkɒz kæts ʃed fɜː|เธอรักสัตว์ แต่เป็นภูมิแพ้ เพราะแมวผลัดขน|🐱🤧
+{Hurry} up, or we {will miss} flight if traffic {slows} down.|ˈhʌri ʌp, ɔː wi wɪl mɪs flaɪt ɪf ˈtræfɪk sləʊz daʊn|เร็วเข้า ไม่เช่นนั้นเราจะตกเครื่อง ถ้ารถติด|✈️🏃
+He {checked} his phone, and he {smiled} when message {popped} up.|hi tʃekt hɪz fəʊn, ənd hi smaɪld wen ˈmesɪdʒ pɒpt ʌp|เขาเช็กโทรศัพท์ และยิ้ม เมื่อข้อความเด้งขึ้นมา|📱😊
+The jacket {looked} stylish, but it {felt} tight because size {was} small.|ðə ˈdʒækɪt lʊkt ˈstaɪlɪʃ, bʌt ɪt felt taɪt bɪˈkɒz saɪz wɒz smɔːl|แจ็กเก็ตดูโก้ แต่ใส่แล้วคับ เพราะไซซ์เล็ก|🧥📏
+You {can use} my PC, or you {can borrow} laptop if mine {fails}.|juː kæn juːz maɪ ˌpiːˈsiː, ɔː juː kæn ˈbɒrəʊ ˈlæptɒp ɪf maɪn feɪlz|คุณใช้พีซีของฉันได้ หรือยืมแล็ปท็อปก็ได้ ถ้าของฉันเสีย|🖥️🤝
+She {washed} clothes, and she {hung} them after rain {stopped}.|ʃi wɒʃt kləʊðz, ənd ʃi hʌŋ ðem ˈɑːftə reɪn stɒpt|เธอซักผ้า และตากผ้า หลังฝนหยุด|👕🧺
+They {planned} a picnic, but they {canceled} it because weather {turned} bad.|ðeɪ plænd ə ˈpɪknɪk, bʌt ðeɪ ˈkænsld ɪt bɪˈkɒz ˈweðə tɜːnd bæd|พวกเขาวางแผนไปปิกนิก แต่ยกเลิก เพราะอากาศแย่|🧺⛈️
+{Follow} rules closely, or machine {will break} if misuse {happens}.|ˈfɒləʊ ruːlz ˈkləʊsli, ɔː məˈʃiːn wɪl breɪk ɪf ˌmɪsˈjuːs ˈhæpənz|ทำตามกฎอย่างเคร่งครัด ไม่เช่นนั้นเครื่องจะพัง ถ้าใช้ผิดวิธี|📋⚙️
+He {turned} on lights, and he {entered} room when door {opened}.|hi tɜːnd ɒn laɪts, ənd hi ˈentəd ruːm wen dɔː ˈəʊpənd|เขาเปิดไฟ และเข้าไปในห้อง เมื่อประตูเปิด|💡🚪
+She {spoke} quietly, but everyone {heard} her because room {remained} quiet.|ʃi spəʊk ˈkwaɪətli, bʌt ˈevriwʌn hɜːd hɜː bɪˈkɒz ruːm rɪˈmeɪnd ˈkwaɪət|เธอพูดเบา ๆ แต่ทุกคนก็ได้ยิน เพราะห้องเงียบ|🤫👂
+We {must protect} nature, or world {will suffer} if damage {grows}.|wi mʌst prəˈtekt ˈneɪtʃə, ɔː wɜːld wɪl ˈsʌfə ɪf ˈdæmɪdʒ ɡrəʊz|เราต้องปกป้องธรรมชาติ ไม่เช่นนั้นโลกจะเดือดร้อน ถ้าความเสียหายเพิ่มขึ้น|🌳🌍
+She {baked} a cake, and she {shared} it because friends {visited}.|ʃi beɪkt ə keɪk, ənd ʃi ʃeəd ɪt bɪˈkɒz frendz ˈvɪzɪtɪd|เธออบเค้ก และแบ่งให้ทุกคน เพราะเพื่อน ๆ มาเยี่ยม|🎂🤝
+He {wanted} to {sleep}, but he {had} homework because exams {approached}.|hi ˈwɒntɪd tə sliːp, bʌt hi hæd ˈhəʊmwɜːk bɪˈkɒz ɪɡˈzæmz əˈprəʊtʃt|เขาอยากนอน แต่มีการบ้าน เพราะใกล้สอบ|😴📚
+You {can pay} cash, or you {can use} cards if systems {work}.|juː kæn peɪ kæʃ, ɔː juː kæn juːz kɑːdz ɪf ˈsɪstəmz wɜːk|คุณจ่ายเงินสดได้ หรือใช้บัตรก็ได้ ถ้าระบบใช้งานได้|💵💳
+The fire {burned} brightly, and room {grew} warm as logs {burned}.|ðə ˈfaɪə bɜːnd ˈbraɪtli, ənd ruːm ɡruː wɔːm æz lɒɡz bɜːnd|ไฟลุกโชน และห้องก็อุ่นขึ้น ขณะที่ฟืนไหม้|🔥🪵
+She {practiced} for weeks, but she {forgot} lines when stage {darkened}.|ʃi ˈpræktɪst fə wiːks, bʌt ʃi fəˈɡɒt laɪnz wen steɪdʒ ˈdɑːkənd|เธอซ้อมหลายสัปดาห์ แต่ลืมบทพูด เมื่อเวทีมืดลง|🎭😰
+{Turn} off TV, or {go} to room if you {want} quiet.|tɜːn ɒf ˌtiːˈviː, ɔː ɡəʊ tə ruːm ɪf juː wɒnt ˈkwaɪət|ปิดทีวี หรือไปที่ห้อง ถ้าคุณต้องการความเงียบ|📺🔇
+He {wore} a coat, and he {faced} wind while storm {raged}.|hi wɔː ə kəʊt, ənd hi feɪst wɪnd waɪl stɔːm reɪdʒd|เขาสวมโค้ต และเผชิญลม ขณะที่พายุโหมกระหน่ำ|🧥🌪️
+The movie {started} on time, but it {ended} late because previews {ran} long.|ðə ˈmuːvi ˈstɑːtɪd ɒn taɪm, bʌt ɪt ˈendɪd leɪt bɪˈkɒz ˈpriːvjuːz ræn lɒŋ|หนังเริ่มตรงเวลา แต่จบช้า เพราะตัวอย่างหนังยาว|🎞️🍿
+We {must book} tickets, or they {will sell} out if demand {rises}.|wi mʌst bʊk ˈtɪkɪts, ɔː ðeɪ wɪl sel aʊt ɪf dɪˈmɑːnd ˈraɪzɪz|เราต้องจองตั๋ว ไม่เช่นนั้นจะขายหมด ถ้าความต้องการสูงขึ้น|🎫📅
+She {cleans} her desk daily, and workspace {looks} neat because she {organizes}.|ʃi kliːnz hɜː desk ˈdeɪli, ənd ˈwɜːkspeɪs lʊks niːt bɪˈkɒz ʃi ˈɔːɡənaɪzɪz|เธอเช็ดโต๊ะทุกวัน และพื้นที่ทำงานดูเรียบร้อย เพราะเธอจัดระเบียบ|🧽🗂️
+He {ran} fast, but he {missed} bus because alarm {failed}.|hi ræn fɑːst, bʌt hi mɪst bʌs bɪˈkɒz əˈlɑːm feɪld|เขาวิ่งเร็ว แต่พลาดรถบัส เพราะนาฬิกาปลุกไม่ทำงาน|🏃🚌
+You {can paint} wall blue, or {keep} it white if you {prefer} bright.|juː kæn peɪnt wɔːl bluː, ɔː kiːp ɪt waɪt ɪf juː prɪˈfɜː braɪt|คุณทาผนังสีฟ้าได้ หรือคงสีขาวไว้ ถ้าชอบความสว่าง|🎨🖌️
+The wind {stopped}, and sea {became} calm when storm {passed}.|ðə wɪnd stɒpt, ənd siː bɪˈkeɪm kɑːm wen stɔːm pɑːst|ลมหยุดพัด และทะเลสงบลง เมื่อพายุผ่านไป|🌊😌
+She {studied} art, but she {works} as writer because skills {shifted}.|ʃi ˈstʌdid ɑːt, bʌt ʃi wɜːks æz ˈraɪtə bɪˈkɒz skɪlz ˈʃɪftɪd|เธอเรียนศิลปะ แต่ทำงานเป็นนักเขียน เพราะทักษะเปลี่ยนไป|🖼️✒️
+{Pay} attention, or you {will crash} if road {curves}.|peɪ əˈtenʃn, ɔː juː wɪl kræʃ ɪf rəʊd kɜːvz|ตั้งใจหน่อย ไม่เช่นนั้นคุณจะชน ถ้าถนนโค้ง|🚗💥
+He {unlocked} the door, and he {welcomed} guests as they {arrived}.|hi ʌnˈlɒkt ðə dɔː, ənd hi ˈwelkəmd ɡests æz ðeɪ əˈraɪvd|เขาไขประตู และต้อนรับแขก เมื่อพวกเขามาถึง|🔓👋
+The soup {smelled} good, but it {was} hot because it {boiled}.|ðə suːp smeld ɡʊd, bʌt ɪt wɒz hɒt bɪˈkɒz ɪt bɔɪld|ซุปหอมน่ากิน แต่ร้อนมาก เพราะเพิ่งเดือด|🍜♨️
+You {can take} umbrella, or {wear} raincoat if rain {starts}.|juː kæn teɪk ʌmˈbrelə, ɔː weə ˈreɪnkəʊt ɪf reɪn stɑːts|คุณพกร่มได้ หรือสวมเสื้อกันฝน ถ้าฝนเริ่มตก|☂️🧥
+She {finished} project, and she {submitted} it before deadline {passed}.|ʃi ˈfɪnɪʃt ˈprɒdʒekt, ənd ʃi səbˈmɪtɪd ɪt bɪˈfɔː ˈdedlaɪn pɑːst|เธอทำโปรเจกต์เสร็จ และส่งก่อนเลยกำหนด|📁⏰
+He {tried} hard, but challenge {was} tough because rules {changed}.|hi traɪd hɑːd, bʌt ˈtʃælɪndʒ wɒz tʌf bɪˈkɒz ruːlz tʃeɪndʒd|เขาพยายามอย่างหนัก แต่ความท้าทายยาก เพราะกฎเปลี่ยน|💪🧗
+{Drink} water, or you {will dry} out if sun {shines} hot.|drɪŋk ˈwɔːtə, ɔː juː wɪl draɪ aʊt ɪf sʌn ʃaɪnz hɒt|ดื่มน้ำ ไม่เช่นนั้นคุณจะขาดน้ำ ถ้าแดดร้อนจัด|💧🥵
+The dog {wagged} tail, and it {greeted} owner when car {pulled} in.|ðə dɒɡ wæɡd teɪl, ənd ɪt ˈɡriːtɪd ˈəʊnə wen kɑː pʊld ɪn|สุนัขกระดิกหาง และทักทายเจ้าของ เมื่อรถเข้าจอด|🐕🚗
+She {bought} a phone, but she {lost} it because pocket {had} holes.|ʃi bɔːt ə fəʊn, bʌt ʃi lɒst ɪt bɪˈkɒz ˈpɒkɪt hæd həʊlz|เธอซื้อโทรศัพท์ แต่ทำหาย เพราะกระเป๋ามีรู|📱🕳️
+You {can join} club, or {start} group if vision {differs}.|juː kæn dʒɔɪn klʌb, ɔː stɑːt ɡruːp ɪf ˈvɪʒn ˈdɪfəz|คุณเข้าร่วมชมรมได้ หรือตั้งกลุ่มเอง ถ้ามุมมองต่างกัน|👥🚩
+Teacher {explained} rule, and students {nodded} once they {understood}.|ˈtiːtʃə ɪkˈspleɪnd ruːl, ənd ˈstjuːdnts ˈnɒdɪd wʌns ðeɪ ˌʌndəˈstʊd|ครูอธิบายกฎ และนักเรียนพยักหน้า เมื่อเข้าใจ|👩‍🏫🙂
+He {wanted} quiet, but cafe {was} noisy because people {talked} loudly.|hi ˈwɒntɪd ˈkwaɪət, bʌt ˈkæfeɪ wɒz ˈnɔɪzi bɪˈkɒz ˈpiːpl tɔːkt ˈlaʊdli|เขาอยากได้ความเงียบ แต่คาเฟ่เสียงดัง เพราะคนพูดเสียงดัง|☕🔊
+{Secure} windows, or rain {will enter} if wind {blows} hard.|sɪˈkjʊə ˈwɪndəʊz, ɔː reɪn wɪl ˈentə ɪf wɪnd bləʊz hɑːd|ปิดหน้าต่างให้แน่น ไม่เช่นนั้นฝนจะเข้า ถ้าลมพัดแรง|🪟🌧️
+She {packed} bags, and she {called} taxi when time {came}.|ʃi pækt bæɡz, ənd ʃi kɔːld ˈtæksi wen taɪm keɪm|เธอจัดกระเป๋า และเรียกแท็กซี่ เมื่อถึงเวลา|🧳🚕
+Ice cream {looked} sweet, but it {tasted} sour because it {spoiled}.|aɪs kriːm lʊkt swiːt, bʌt ɪt ˈteɪstɪd ˈsaʊə bɪˈkɒz ɪt spɔɪld|ไอศกรีมดูหวาน แต่รสเปรี้ยว เพราะมันเสีย|🍦🤢
+You {can read} magazine, or {browse} internet if you {are} bored.|juː kæn riːd ˌmæɡəˈziːn, ɔː braʊz ˈɪntənet ɪf juː ɑː bɔːd|คุณอ่านนิตยสารได้ หรือท่องอินเทอร์เน็ต ถ้าคุณเบื่อ|📰🌐
+He {set} alarm, and he {went} to sleep after work {finished}.|hi set əˈlɑːm, ənd hi went tə sliːp ˈɑːftə wɜːk ˈfɪnɪʃt|เขาตั้งนาฬิกาปลุก และเข้านอน หลังงานเสร็จ|⏰🛌
+She {worked} late, but she {missed} deadline because tasks {were} vast.|ʃi wɜːkt leɪt, bʌt ʃi mɪst ˈdedlaɪn bɪˈkɒz tɑːsks wɜː vɑːst|เธอทำงานดึก แต่พลาดเดดไลน์ เพราะงานมีมหาศาล|🌙📆
+{Speak} clearly, or audience {will fail} if voice {drops} low.|spiːk ˈklɪəli, ɔː ˈɔːdiəns wɪl feɪl ɪf vɔɪs drɒps ləʊ|พูดให้ชัดเจน ไม่เช่นนั้นผู้ฟังจะตามไม่ทัน ถ้าเสียงเบาลง|🎤👥
+Mechanic {fixed} engine, and car {started} once parts {fit}.|məˈkænɪk fɪkst ˈendʒɪn, ənd kɑː ˈstɑːtɪd wʌns pɑːts fɪt|ช่างซ่อมเครื่องยนต์ และรถก็สตาร์ตติด เมื่อชิ้นส่วนพอดี|🔧🚗
+He {loved} painting, but he {could} not {buy} it because price {was} high.|hi lʌvd ˈpeɪntɪŋ, bʌt hi kʊd nɒt baɪ ɪt bɪˈkɒz praɪs wɒz haɪ|เขารักภาพวาด แต่ซื้อไม่ได้ เพราะราคาสูง|🖼️💰
+You {can wear} shoes, or {wear} sandals if feet {hurt}.|juː kæn weə ʃuːz, ɔː weə ˈsændlz ɪf fiːt hɜːt|คุณใส่รองเท้าได้ หรือใส่รองเท้าแตะ ถ้าเท้าเจ็บ|👟🩴
+She {checked} map, and she {found} route when signs {showed}.|ʃi tʃekt mæp, ənd ʃi faʊnd ruːt wen saɪnz ʃəʊd|เธอดูแผนที่ และเจอเส้นทาง เมื่อป้ายบอกทาง|🗺️🧭
+Music {played} softly, but it {annoyed} him because rhythm {repeated}.|ˈmjuːzɪk pleɪd ˈsɒftli, bʌt ɪt əˈnɔɪd hɪm bɪˈkɒz ˈrɪðm rɪˈpiːtɪd|เพลงเล่นเบา ๆ แต่ทำให้เขารำคาญ เพราะจังหวะซ้ำ ๆ|🎵😒
+{Practice} daily, or you {will lose} skill if habits {stop}.|ˈpræktɪs ˈdeɪli, ɔː juː wɪl luːz skɪl ɪf ˈhæbɪts stɒp|ฝึกฝนทุกวัน ไม่เช่นนั้นทักษะจะหายไป ถ้าเลิกทำเป็นนิสัย|🏋️🎯
+He {turned} key, and engine {roared} as spark {ignited}.|hi tɜːnd kiː, ənd ˈendʒɪn rɔːd æz spɑːk ɪɡˈnaɪtɪd|เขาหมุนกุญแจ และเครื่องยนต์คำราม เมื่อประกายไฟจุดติด|🔑🏎️
+She {wanted} to {join}, but she {lacked} funds because savings {emptied}.|ʃi ˈwɒntɪd tə dʒɔɪn, bʌt ʃi lækt fʌndz bɪˈkɒz ˈseɪvɪŋz ˈemptid|เธออยากเข้าร่วม แต่ขาดเงินทุน เพราะเงินออมหมด|🙋💸
+{Choose} red, or {choose} blue if you {like} bright.|tʃuːz red, ɔː tʃuːz bluː ɪf juː laɪk braɪt|เลือกสีแดง หรือเลือกสีน้ำเงิน ถ้าคุณชอบสีสว่าง|🔴🔵
+Sun {rose} high, and fog {vanished} when heat {increased}.|sʌn rəʊz haɪ, ənd fɒɡ ˈvænɪʃt wen hiːt ɪnˈkriːst|ดวงอาทิตย์ขึ้นสูง และหมอกก็หายไป เมื่อความร้อนเพิ่มขึ้น|🌅🌫️
+He {studied} tech, but he {likes} {cooking} more because passion {lies} there.|hi ˈstʌdid tek, bʌt hi laɪks ˈkʊkɪŋ mɔː bɪˈkɒz ˈpæʃn laɪz ðeə|เขาเรียนเทคโนโลยี แต่ชอบทำอาหารมากกว่า เพราะความหลงใหลอยู่ตรงนั้น|💻👨‍🍳
+{Clean} workspace, or {leave} office if rules {feel} strict.|kliːn ˈwɜːkspeɪs, ɔː liːv ˈɒfɪs ɪf ruːlz fiːl strɪkt|ทำความสะอาดที่ทำงาน หรือออกจากออฟฟิศ ถ้ากฎดูเข้มงวด|🧼🏢
+She {wiped} table, and she {placed} plates after dinner {ended}.|ʃi waɪpt ˈteɪbl, ənd ʃi pleɪst pleɪts ˈɑːftə ˈdɪnə ˈendɪd|เธอเช็ดโต๊ะ และวางจาน หลังอาหารเย็นจบ|🧽🍽️
+Flight {was delayed}, but passengers {stayed} calm because staff {explained}.|flaɪt wɒz dɪˈleɪd, bʌt ˈpæsɪndʒəz steɪd kɑːm bɪˈkɒz stɑːf ɪkˈspleɪnd|เที่ยวบินล่าช้า แต่ผู้โดยสารยังสงบ เพราะเจ้าหน้าที่อธิบาย|✈️🧘
+{Sleep} on bed, or {sleep} on sofa if room {gets} crowded.|sliːp ɒn bed, ɔː sliːp ɒn ˈsəʊfə ɪf ruːm ɡets ˈkraʊdɪd|นอนบนเตียง หรือนอนบนโซฟา ถ้าห้องแออัด|🛏️🛋️
+He {tied} shoes, and he {started} {running} when whistle {blew}.|hi taɪd ʃuːz, ənd hi ˈstɑːtɪd ˈrʌnɪŋ wen ˈwɪsl bluː|เขาผูกเชือกรองเท้า และเริ่มวิ่ง เมื่อเสียงนกหวีดดัง|👟🏁
+She {felt} tired, but she {finished} task because goal {inspired} her.|ʃi felt ˈtaɪəd, bʌt ʃi ˈfɪnɪʃt tɑːsk bɪˈkɒz ɡəʊl ɪnˈspaɪəd hɜː|เธอรู้สึกเหนื่อย แต่ทำงานเสร็จ เพราะเป้าหมายสร้างแรงบันดาลใจ|😩🏆
+`.trim().split("\n");
+
+const DATA = RAW.map(line=>{
+  const [en,ipa,th,emo] = line.split("|");
+  const plain = en.replace(/[{}]/g,"");
+  const html = en.replace(/\{([^}]+)\}/g,"<b>$1</b>");
+  const pics = Array.from(emo.trim().matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic}\uFE0F?)*/gu)).map(m=>m[0]);
+  return {plain,html,ipa,th,pics};
+});
+
+const PER_PAGE = 50;
+const PAGES = Math.ceil(DATA.length/PER_PAGE);
+let page = 0;
+
+const grid = document.getElementById("grid");
+const tabs = document.getElementById("tabs");
+const pager = document.getElementById("pager");
+const voiceSel = document.getElementById("voice");
+const hint = document.getElementById("hint");
+
+/* ---------- Speech ---------- */
+let voices = [];
+const MALE_HINTS = ["ryan","google uk english male","daniel","george","arthur","oliver","thomas","james","male"];
+const FEMALE_HINTS = ["female","susan","hazel","libby","sonia","kate","serena","martha","amy","emma","samantha","karen","moira","fiona","victoria"];
+function rankVoice(v){
+  const n = v.name.toLowerCase(); let s = 0;
+  if (/^en[-_]gb/i.test(v.lang)) s += 50; else if (/^en/i.test(v.lang)) s += 10;
+  const mi = MALE_HINTS.findIndex(h=>n.includes(h));
+  if (mi>=0) s += 40 - mi;
+  if (FEMALE_HINTS.some(h=>n.includes(h))) s -= 60;
+  if (/natural|online|neural/.test(n)) s += 15;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>rankVoice(b)-rankVoice(a));
+  voiceSel.innerHTML = "";
+  voices.forEach((v,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; voiceSel.appendChild(o); });
+  if(!voices.length){ hint.textContent="อุปกรณ์นี้ยังไม่มีเสียงภาษาอังกฤษให้เลือก — ลองเปิดด้วย Chrome / Edge / Safari"; }
+  else if(rankVoice(voices[0])<60){ hint.textContent="ไม่พบเสียงผู้ชายอังกฤษ (UK) บนอุปกรณ์นี้ — เลือกเสียงอื่นจากเมนู “เสียงอ่าน” ได้"; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+let activeBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  const same = activeBtn===btn && speechSynthesis.speaking;
+  speechSynthesis.cancel();
+  if(activeBtn){ activeBtn.classList.remove("on"); activeBtn=null; }
+  if(same) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices[+voiceSel.value||0];
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onend = u.onerror = ()=>{ btn.classList.remove("on"); if(activeBtn===btn) activeBtn=null; };
+  btn.classList.add("on"); activeBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Render ---------- */
+const ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function makeCard(item, idx){
+  const card = el("div","card"); card.tabIndex=0; card.setAttribute("role","button");
+  card.setAttribute("aria-label","การ์ดที่ "+(idx+1)+" กดเพื่อพลิก");
+  const inner = el("div","inner");
+
+  const front = el("div","face front");
+  const pic = el("div","pic");
+  pic.appendChild(el("span","num", String(idx+1)));
+  item.pics.slice(0,2).forEach(p=>pic.appendChild(el("span","",p)));
+  const text = el("div","text");
+  text.appendChild(el("p","en",item.html));
+  text.appendChild(el("p","ipa","/"+item.ipa+"/"));
+  const foot = el("div","foot");
+  foot.appendChild(el("span","tap","แตะการ์ดเพื่อดูคำแปล"));
+  const sb = el("button","say",ICON+"ฟังเสียง"); sb.type="button";
+  sb.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb);});
+  foot.appendChild(sb);
+  front.append(pic,text,foot);
+
+  const back = el("div","face back");
+  back.appendChild(el("div","th",item.th));
+  const bfoot = el("div","foot");
+  bfoot.appendChild(el("span","tap","แตะเพื่อกลับไปด้านหน้า"));
+  const sb2 = el("button","say",ICON+"ฟังเสียง"); sb2.type="button";
+  sb2.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb2);});
+  bfoot.appendChild(sb2);
+  back.appendChild(bfoot);
+
+  inner.append(front,back); card.appendChild(inner);
+  const flip = ()=>card.classList.toggle("flipped");
+  card.addEventListener("click",flip);
+  card.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ") && e.target===card){ e.preventDefault(); flip(); }});
+  return card;
+}
+
+function render(){
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  grid.innerHTML="";
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((it,i)=>grid.appendChild(makeCard(it,start+i)));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",i===page));
+  window.scrollTo({top:0,behavior:"auto"});
+}
+function goto(p){ page=p; render(); }
+
+for(let p=0;p<PAGES;p++){
+  const a = p*PER_PAGE+1, b = Math.min((p+1)*PER_PAGE, DATA.length);
+  const t = el("button","tab","หน้า "+(p+1)+" · "+a+"–"+b); t.setAttribute("role","tab");
+  t.addEventListener("click",()=>goto(p)); tabs.appendChild(t);
+  const pb = el("button","","หน้า "+(p+1)); pb.addEventListener("click",()=>goto(p)); pager.appendChild(pb);
+}
+render();
+</script>
+</body>
+</html>

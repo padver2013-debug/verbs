@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>9.1 Passive Sentences – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700;background:#fde047;border-radius:5px;padding:1px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>9.1 Passive Sentences: Be + Past Participle</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `The window **was broken** by the boy.|/ðə ˈwɪndəʊ wəz ˈbrəʊkən baɪ ðə bɔɪ/|หน้าต่างถูกทำให้แตกโดยเด็กผู้ชายคนนั้น|🪟
+English **is spoken** all over the world.|/ˈɪŋglɪʃ ɪz ˈspəʊkən ɔːl ˈəʊvə ðə wɜːld/|ภาษาอังกฤษถูกพูดไปทั่วโลก|🌍
+The letter **was written** by Mary.|/ðə ˈletə wəz ˈrɪtn baɪ ˈmeəri/|จดหมายฉบับนี้ถูกเขียนโดยแมรี่|✉️
+The car **is repaired** by the mechanic.|/ðə kɑː ɪz rɪˈpeəd baɪ ðə məˈkænɪk/|รถยนต์ถูกซ่อมโดยช่างซ่อมรถ|🔧
+The cake **was baked** by my mother.|/ðə keɪk wəz beɪkt baɪ maɪ ˈmʌðə/|เค้กถูกอบโดยแม่ของฉัน|🎂
+The house **is painted** every year.|/ðə haʊs ɪz ˈpeɪntɪd ˈevri jɪə/|บ้านหลังนี้ถูกทาสีทุกๆ ปี|🖌️
+The book **was read** by millions.|/ðə bʊk wəz red baɪ ˈmɪljənz/|หนังสือเล่มนี้ถูกอ่านโดยผู้คนนับล้าน|📚
+Coffee **is grown** in warm climates.|/ˈkɒfi ɪz grəʊn ɪn wɔːm ˈklaɪməts/|กาแฟถูกปลูกในเขตภูมิอากาศอบอุ่น|☕
+The thieves **were caught** by police.|/ðə θiːvz wə kɔːt baɪ pəˈliːs/|โจรพวกนั้นถูกจับกุมโดยตำรวจ|🚓
+The bridge **was built** last year.|/ðə brɪdʒ wəz bɪlt lɑːst jɪə/|สะพานถูกสร้างขึ้นเมื่อปีที่แล้ว|🌉
+Rice **is exported** to many countries.|/raɪs ɪz ɪkˈspɔːtɪd tə ˈmeni ˈkʌntriz/|ข้าวถูกส่งออกไปยังหลายประเทศ|🚢
+The match **was won** by our team.|/ðə mætʃ wəz wʌn baɪ ˈaʊə tiːm/|การแข่งขันถูกชนะโดยทีมของเรา|🏆
+The door **is locked** at night.|/ðə dɔː ɪz lɒkt ət naɪt/|ประตูถูกล็อกไว้ในเวลากลางคืน|🔒
+The song **was composed** by Mozart.|/ðə sɒŋ wəz kəmˈpəʊzd baɪ ˈməʊtsɑːt/|บทเพลงนี้ถูกประพันธ์โดยโมสาร์ต|🎼
+The lesson **is explained** clearly.|/ðə ˈlesn ɪz ɪkˈspleɪnd ˈklɪəli/|บทเรียนถูกอธิบายไว้อย่างชัดเจน|👩‍🏫
+The package **was delivered** today.|/ðə ˈpækɪdʒ wəz dɪˈlɪvəd təˈdeɪ/|พัสดุถูกจัดส่งมาถึงในวันนี้|📦
+Photos **are taken** by tourists.|/ˈfəʊtəʊz ɑː ˈteɪkən baɪ ˈtʊərɪsts/|ภาพถ่ายถูกถ่ายโดยเหล่านักท่องเที่ยว|📸
+The problem **was solved** quickly.|/ðə ˈprɒbləm wəz sɒlvd ˈkwɪkli/|ปัญหานี้ถูกแก้ไขอย่างรวดเร็ว|🧩
+Spanish **is taught** at this school.|/ˈspænɪʃ ɪz tɔːt ət ðɪs skuːl/|ภาษาสเปนถูกสอนอยู่ที่โรงเรียนแห่งนี้|🏫
+The email **was sent** this morning.|/ði ˈiːmeɪl wəz sent ðɪs ˈmɔːnɪŋ/|อีเมลถูกส่งไปเมื่อเช้านี้|📧
+Dinner **is served** at six PM.|/ˈdɪnə ɪz sɜːvd ət sɪks ˌpiː ˈem/|อาหารมื้อเย็นถูกเสิร์ฟตอนหกโมงเย็น|🍽️
+The computer **was fixed** yesterday.|/ðə kəmˈpjuːtə wəz fɪkst ˈjestədeɪ/|คอมพิวเตอร์ถูกซ่อมแซมเรียบร้อยเมื่อวานนี้|💻
+Mistakes **are made** by everyone.|/mɪˈsteɪks ɑː meɪd baɪ ˈevriwʌn/|ความผิดพลาดถูกทำขึ้นโดยทุกคน (ทุกคนทำผิดพลาดได้)|🤷
+The test **was passed** by students.|/ðə test wəz pɑːst baɪ ˈstjuːdnts/|การสอบถูกผ่านโดยเหล่านักเรียน|✅
+The floor **is cleaned** daily.|/ðə flɔː ɪz kliːnd ˈdeɪli/|พื้นห้องถูกทำความสะอาดเป็นประจำทุกวัน|🧹
+The wallet **was found** in the park.|/ðə ˈwɒlɪt wəz faʊnd ɪn ðə pɑːk/|กระเป๋าเงินถูกพบในสวนสาธารณะ|👛
+The museum **was visited** by thousands.|/ðə mjuˈziːəm wəz ˈvɪzɪtɪd baɪ ˈθaʊzndz/|พิพิธภัณฑ์ถูกเยี่ยมชมโดยผู้คนนับพัน|🏛️
+Cheese **is made** from milk.|/tʃiːz ɪz meɪd frəm mɪlk/|ชีสถูกทำมาจากนม|🧀
+The room **was decorated** for the party.|/ðə ruːm wəz ˈdekəreɪtɪd fə ðə ˈpɑːti/|ห้องถูกตกแต่งสำหรับการจัดงานปาร์ตี้|🎈
+Shoes **are sold** in this store.|/ʃuːz ɑː səʊld ɪn ðɪs stɔː/|รองเท้าถูกวางขายอยู่ในร้านค้านี้|👟
+The film **was directed** by Steven Spielberg.|/ðə fɪlm wəz dəˈrektɪd baɪ ˈstiːvn ˈspiːlbɜːg/|ภาพยนตร์เรื่องนี้ถูกกำกับโดยสตีเวน สปีลเบิร์ก|🎬
+Tea **is imported** from China.|/tiː ɪz ɪmˈpɔːtɪd frəm ˈtʃaɪnə/|ชาถูกนำเข้าจากประเทศจีน|🍵
+The report **was submitted** on time.|/ðə rɪˈpɔːt wəz səbˈmɪtɪd ɒn taɪm/|รายงานถูกส่งตรงเวลา|📄
+Rules **are followed** by staff members.|/ruːlz ɑː ˈfɒləʊd baɪ stɑːf ˈmembəz/|กฎระเบียบถูกปฏิบัติตามโดยบรรดาพนักงาน|📋
+The tree **was cut** down yesterday.|/ðə triː wəz kʌt daʊn ˈjestədeɪ/|ต้นไม้ถูกโค่นลงเมื่อวานนี้|🪓
+Apples **are harvested** in autumn.|/ˈæplz ɑː ˈhɑːvɪstɪd ɪn ˈɔːtəm/|แอปเปิ้ลถูกเก็บเกี่ยวในฤดูใบไม้ร่วง|🍎
+The game **was played** outside.|/ðə geɪm wəz pleɪd ˌaʊtˈsaɪd/|เกมการแข่งขันถูกเล่นกันที่กลางแจ้ง|⚽
+French **is spoken** in Canada.|/frentʃ ɪz ˈspəʊkən ɪn ˈkænədə/|ภาษาฝรั่งเศสถูกพูดในประเทศแคนาดา|🇨🇦
+The phone **was invented** by Alexander Bell.|/ðə fəʊn wəz ɪnˈventɪd baɪ ˌælɪgˈzɑːndə bel/|โทรศัพท์ถูกประดิษฐ์ขึ้นโดยอเล็กซานเดอร์ เบลล์|☎️
+Cars **are manufactured** in factories.|/kɑːz ɑː ˌmænjuˈfæktʃəd ɪn ˈfæktriz/|รถยนต์ถูกผลิตขึ้นในโรงงานอุตสาหกรรม|🏭
+The fire **was extinguished** quickly.|/ðə ˈfaɪə wəz ɪkˈstɪŋgwɪʃt ˈkwɪkli/|เปลวไฟถูกดับลงอย่างรวดเร็ว|🧯
+Homework **is assigned** every day.|/ˈhəʊmwɜːk ɪz əˈsaɪnd ˈevri deɪ/|การบ้านถูกมอบหมายให้ทำทุกวัน|📝
+The song **was recorded** in a studio.|/ðə sɒŋ wəz rɪˈkɔːdɪd ɪn ə ˈstjuːdiəʊ/|บทเพลงถูกบันทึกเสียงในห้องสตูดิโอ|🎙️
+Trash **is collected** on Mondays.|/træʃ ɪz kəˈlektɪd ɒn ˈmʌndeɪz/|ขยะถูกเก็บรวบรวมในวันจันทร์|🚛
+The secret **was revealed** today.|/ðə ˈsiːkrət wəz rɪˈviːld təˈdeɪ/|ความลับถูกเปิดเผยออกมาในวันนี้|🤫
+Vegetables **are washed** before cooking.|/ˈvedʒtəblz ɑː wɒʃt bɪˈfɔː ˈkʊkɪŋ/|ผักถูกล้างทำความสะอาดก่อนนำไปประกอบอาหาร|🥬
+The prize **was awarded** to her.|/ðə praɪz wəz əˈwɔːdɪd tə hɜː/|รางวัลถูกมอบให้กับเธอ|🏅
+Coins **are made** of metal.|/kɔɪnz ɑː meɪd əv ˈmetl/|เหรียญกษาปณ์ถูกทำมาจากโลหะ|🪙
+The picture **was painted** by a master.|/ðə ˈpɪktʃə wəz ˈpeɪntɪd baɪ ə ˈmɑːstə/|รูปภาพถูกวาดโดยศิลปินเอก|🖼️
+Houses **are built** with bricks.|/ˈhaʊzɪz ɑː bɪlt wɪð brɪks/|บ้านเรือนถูกสร้างขึ้นด้วยอิฐ|🧱
+The lightbulb **was invented** by Edison.|/ðə ˈlaɪtbʌlb wəz ɪnˈventɪd baɪ ˈedɪsn/|หลอดไฟถูกประดิษฐ์ขึ้นโดยเอดิสัน|💡
+Rice **is cooked** in boiling water.|/raɪs ɪz kʊkt ɪn ˈbɔɪlɪŋ ˈwɔːtə/|ข้าวถูกหุงในน้ำเดือด|🍚
+The thief **was arrested** last night.|/ðə θiːf wəz əˈrestɪd lɑːst naɪt/|โจรถูกจับกุมตัวเมื่อคืนนี้|👮
+Letters **are delivered** by postmen.|/ˈletəz ɑː dɪˈlɪvəd baɪ ˈpəʊstmən/|จดหมายถูกจัดส่งโดยบุรุษไปรษณีย์|📮
+The question **was answered** correctly.|/ðə ˈkwestʃən wəz ˈɑːnsəd kəˈrektli/|คำถามถูกตอบไว้อย่างถูกต้อง|🙋
+Books **are borrowed** from libraries.|/bʊks ɑː ˈbɒrəʊd frəm ˈlaɪbrəriz/|หนังสือถูกยืมมาจากห้องสมุด|📖
+The road **was paved** recently.|/ðə rəʊd wəz peɪvd ˈriːsntli/|ถนนถูกราดยางมะตอยใหม่เมื่อเร็วๆ นี้|🛣️
+Windows **are cleaned** regularly.|/ˈwɪndəʊz ɑː kliːnd ˈregjələli/|หน้าต่างถูกทำความสะอาดอย่างสม่ำเสมอ|🧽
+The wallet **was stolen** yesterday.|/ðə ˈwɒlɪt wəz ˈstəʊlən ˈjestədeɪ/|กระเป๋าเงินถูกขโมยไปเมื่อวานนี้|🦹
+Tables **are arranged** in rows.|/ˈteɪblz ɑːr əˈreɪndʒd ɪn rəʊz/|โต๊ะถูกจัดเรียงเป็นแถวระเบียบ|🪑
+The baby **was named** John.|/ðə ˈbeɪbi wəz neɪmd dʒɒn/|ทารกถูกตั้งชื่อว่าจอห์น|👶
+Shoes **are worn** on feet.|/ʃuːz ɑː wɔːn ɒn fiːt/|รองเท้าถูกสวมใส่ที่เท้า|🦶
+The song **was sung** loudly.|/ðə sɒŋ wəz sʌŋ ˈlaʊdli/|เพลงถูกร้องออกมาเสียงดัง|🎤
+Flowers **are watered** every morning.|/ˈflaʊəz ɑː ˈwɔːtəd ˈevri ˈmɔːnɪŋ/|ดอกไม้ถูกรดน้ำทุกๆ เช้า|🌷
+The match **was postponed** due to rain.|/ðə mætʃ wəz pəˈspəʊnd djuː tə reɪn/|การแข่งขันถูกเลื่อนออกไปเนื่องจากฝนตก|🌧️
+Doors **are opened** with keys.|/dɔːz ɑːr ˈəʊpənd wɪð kiːz/|ประตูถูกเปิดออกด้วยกุญแจ|🔑
+The test **was graded** by teachers.|/ðə test wəz ˈgreɪdɪd baɪ ˈtiːtʃəz/|ข้อสอบถูกตรวจให้คะแนนโดยคุณครู|💯
+Butter **is spread** on toast.|/ˈbʌtə ɪz spred ɒn təʊst/|เนยถูกทาลงบนขนมปังปิ้ง|🧈
+The package **was wrapped** securely.|/ðə ˈpækɪdʒ wəz ræpt sɪˈkjʊəli/|พัสดุถูกห่อหุ้มไว้อย่างแน่นหนาปลอดภัย|🎁
+Animals **are fed** twice a day.|/ˈænɪmlz ɑː fed twaɪs ə deɪ/|สัตว์ต่างๆ ถูกให้อาหารวันละสองครั้ง|🐄
+The castle **was destroyed** in war.|/ðə ˈkɑːsl wəz dɪˈstrɔɪd ɪn wɔː/|ปราสาทถูกทำลายลงในสงคราม|🏰
+Uniforms **are required** at school.|/ˈjuːnɪfɔːmz ɑː rɪˈkwaɪəd ət skuːl/|ชุดเครื่องแบบถูกกำหนดให้ต้องสวมใส่ที่โรงเรียน|👔
+The mistake **was corrected** quickly.|/ðə mɪˈsteɪk wəz kəˈrektɪd ˈkwɪkli/|ข้อผิดพลาดถูกแก้ไขอย่างรวดเร็ว|✏️
+Clothes **are washed** in machines.|/kləʊðz ɑː wɒʃt ɪn məˈʃiːnz/|เสื้อผ้าถูกซักในเครื่องซักผ้า|🧺
+The door **was painted** blue.|/ðə dɔː wəz ˈpeɪntɪd bluː/|ประตูถูกทาสีฟ้า|🚪
+Beds **are made** every morning.|/bedz ɑː meɪd ˈevri ˈmɔːnɪŋ/|เตียงนอนถูกจัดให้เรียบร้อยทุกเช้า|🛏️
+The dinner **was prepared** by chef.|/ðə ˈdɪnə wəz prɪˈpeəd baɪ ʃef/|มื้อค่ำถูกเตรียมโดยเชฟ|👨‍🍳
+Fish **are caught** in nets.|/fɪʃ ɑː kɔːt ɪn nets/|ปลาถูกจับด้วยตาข่าย|🎣
+The cat **was rescued** safely.|/ðə kæt wəz ˈreskjuːd ˈseɪfli/|แมวถูกช่วยเหลือไว้อย่างปลอดภัย|🐈
+Shirts **are ironed** smooth.|/ʃɜːts ɑːr ˈaɪənd smuːð/|เสื้อเชิ้ตถูกรีดจนเรียบ|👕
+The movie **was released** globally.|/ðə ˈmuːvi wəz rɪˈliːst ˈgləʊbəli/|ภาพยนตร์ถูกปล่อยฉายทั่วโลก|🍿
+Coffee **is served** hot.|/ˈkɒfi ɪz sɜːvd hɒt/|กาแฟถูกเสิร์ฟแบบร้อน|🫖
+The plan **was approved** officially.|/ðə plæn wəz əˈpruːvd əˈfɪʃəli/|แผนงานถูกอนุมัติอย่างเป็นทางการ|✔️
+Languages **are learned** through practice.|/ˈlæŋgwɪdʒɪz ɑː lɜːnd θruː ˈpræktɪs/|ภาษาต่างๆ ถูกเรียนรู้ผ่านการฝึกฝน|🗣️
+The error **was fixed** cleanly.|/ði ˈerə wəz fɪkst ˈkliːnli/|ข้อผิดพลาดถูกแก้ไขอย่างหมดจด|🛠️
+Data **is stored** digitally.|/ˈdeɪtə ɪz stɔːd ˈdɪdʒɪtəli/|ข้อมูลถูกจัดเก็บในรูปแบบดิจิทัล|💾
+The alarm **was triggered** loudly.|/ði əˈlɑːm wəz ˈtrɪgəd ˈlaʊdli/|สัญญาณเตือนภัยถูกกระตุ้นดังลั่น|🚨
+Rules **are set** strictly.|/ruːlz ɑː set ˈstrɪktli/|กฎระเบียบถูกตั้งไว้อย่างเข้มงวด|📏
+The fire **was started** accidentally.|/ðə ˈfaɪə wəz ˈstɑːtɪd ˌæksɪˈdentəli/|เปลวไฟถูกจุดขึ้นโดยอุบัติเหตุ|🔥
+Photos **are clicked** daily.|/ˈfəʊtəʊz ɑː klɪkt ˈdeɪli/|ภาพถ่ายถูกกดถ่ายเป็นประจำทุกวัน|📷
+The book **was translated** into Thai.|/ðə bʊk wəz trænzˈleɪtɪd ˈɪntə taɪ/|หนังสือถูกแปลเป็นภาษาไทย|🌐
+Fruits **are eaten** fresh.|/fruːts ɑːr ˈiːtn freʃ/|ผลไม้ถูกรับประทานแบบสดๆ|🍓
+The computer **was updated** online.|/ðə kəmˈpjuːtə wəz ʌpˈdeɪtɪd ɒnˈlaɪn/|คอมพิวเตอร์ถูกอัปเดตผ่านทางออนไลน์|🔄
+Songs **are heard** everywhere.|/sɒŋz ɑː hɜːd ˈevriweə/|บทเพลงถูกได้ยินไปทั่วทุกหนทุกแห่ง|🎧
+The ticket **was checked** thoroughly.|/ðə ˈtɪkɪt wəz tʃekt ˈθʌrəli/|ตั๋วโดยสารถูกตรวจสอบอย่างละเอียดถี่ถ้วน|🎫
+Walls **are painted** white.|/wɔːlz ɑː ˈpeɪntɪd waɪt/|ผนังถูกทาสีขาว|🎨
+The problem **was discussed** openly.|/ðə ˈprɒbləm wəz dɪˈskʌst ˈəʊpənli/|ปัญหาถูกหยิบยกขึ้นมาพูดคุยอภิปรายอย่างเปิดเผย|💬
+Bills **are paid** monthly.|/bɪlz ɑː peɪd ˈmʌnθli/|บิลค่าใช้จ่ายถูกชำระเป็นรายเดือน|💳
+The letter **was signed** personally.|/ðə ˈletə wəz saɪnd ˈpɜːsənəli/|จดหมายถูกเซ็นชื่อกำกับด้วยตัวเอง|🖊️
+Goals **are achieved** through hard work.|/gəʊlz ɑːr əˈtʃiːvd θruː hɑːd wɜːk/|เป้าหมายถูกทำให้สำเร็จลุล่วงได้ผ่านการทำงานอย่างหนัก|🥅`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

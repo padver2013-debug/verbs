@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yes/No &amp; Wh- Questions · Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#E9EEF2; --ink:#10181F; --muted:#51606C; --accent:#0E5A66; --accent-ink:#FFFFFF;
+  --panel:#FFFFFF; --pic:#DCE9EC; --back:#0F2A33; --back-ink:#F3F8F9; --line:#C7D2D9;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+}
+:root[data-theme="dark"]{ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 56px}
+header h1{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:16px}
+.formula{display:inline-flex;gap:6px;margin-top:12px;font-family:Arial,sans-serif;font-size:14px}
+.formula span{padding:3px 10px;border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700}
+.formula span.dc{border-style:dashed}
+.bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:22px 0 20px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tab,.pager button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.voicebox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.voicebox select{font:inherit;font-size:14px;max-width:240px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:#10181F}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{perspective:1400px;height:350px;outline:none;cursor:pointer;position:relative}
+.inner{position:absolute;inset:0;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card:focus-visible .face{box-shadow:0 0 0 3px var(--accent)}
+.front{background:#FFFFFF;color:#000000}
+.pic{height:104px;background:var(--pic);display:flex;align-items:center;justify-content:center;gap:14px;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:12px;top:10px;font:600 12px Arial,sans-serif;color:#2C4A52;background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px}
+.text{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(17px,2.1vw,21px);line-height:1.4;color:#000;margin:0}
+.en b{font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.8vw,17.5px);line-height:1.45;color:#000;margin:0}
+.foot{padding:8px 14px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tap{font-size:13px;color:#5B6B75}
+.say{display:inline-flex;align-items:center;gap:7px;font:600 14px "Sarabun",sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.say svg{width:17px;height:17px;fill:currentColor}
+.say.on{outline:3px solid rgba(14,90,102,.35)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);justify-content:space-between;border-color:var(--back)}
+.back .th{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 26px;font-size:clamp(21px,2.6vw,27px);line-height:1.55;font-weight:600}
+.back .foot{color:#9FB9C0}
+.back .tap{color:#9FB9C0}
+.back .say{background:#5FC1CF;color:#06191D}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Yes/No &amp; Wh- Questions</h1>
+  <p>โครงสร้างประโยคคำถาม — ฝึกอ่านและแปล — ฝึกอ่านและแปล</p>
+  <div class="formula" aria-label="Yes/No"><span>Yes/No</span><span>Aux / Modal</span><span>+</span><span>Subject</span><span>+</span><span>Main Verb</span><span>+</span><span>?</span></div><br><div class="formula" aria-label="Wh"><span>Wh-</span><span>Wh-word</span><span>+</span><span>Aux / Modal</span><span>+</span><span>Subject</span><span>+</span><span>Main Verb</span><span>+</span><span>?</span></div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <label class="voicebox">เสียงอ่าน
+    <select id="voice" aria-label="เลือกเสียงอ่าน"></select>
+  </label>
+</div>
+<p class="hint" id="hint">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม “ฟังเสียง” เพื่อฟังประโยค</p>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+</div>
+
+<script>
+const RAW = `
+{Do} you {know} the way to the station?|duː juː nəʊ ðə weɪ tə ðə ˈsteɪʃn|คุณรู้ทางไปสถานีไหม|🧭🚉
+{Can} you {help} me with this heavy bag?|kæn juː help mi wɪð ðɪs ˈhevi bæɡ|คุณช่วยฉันถือกระเป๋าหนักใบนี้หน่อยได้ไหม|🎒🤝
+Where {did} you {put} my car keys?|weə dɪd juː pʊt maɪ kɑː kiːz|คุณเก็บกุญแจรถของฉันไว้ที่ไหน|🔑📍
+What time {does} the supermarket {close}?|wɒt taɪm dʌz ðə ˈsuːpəmɑːkɪt kləʊz|ซูเปอร์มาร์เก็ตปิดกี่โมง|🛒🔒
+How much {does} this jacket {cost}?|haʊ mʌtʃ dʌz ðɪs ˈdʒækɪt kɒst|เสื้อแจ็คเก็ตตัวนี้ราคาเท่าไหร่|🧥💲
+{Are} you {feeling} better today?|ɑː juː ˈfiːlɪŋ ˈbetə təˈdeɪ|วันนี้คุณรู้สึกดีขึ้นไหม|🤒🙂
+Why {are} you {standing} outside in the rain?|waɪ ɑː juː ˈstændɪŋ ˌaʊtˈsaɪd ɪn ðə reɪn|ทำไมคุณถึงยืนตากฝนอยู่ข้างนอกล่ะ|🧍🌧️
+{Have} you {finished} your lunch yet?|hæv juː ˈfɪnɪʃt jɔː lʌntʃ jet|คุณกินข้าวเที่ยงเสร็จหรือยัง|🍱✅
+Who {left} the front door open?|huː left ðə frʌnt dɔːr ˈəʊpən|ใครเปิดประตูหน้าบ้านทิ้งไว้|🚪👀
+{Will} you {be} home for dinner tonight?|wɪl juː biː həʊm fə ˈdɪnə təˈnaɪt|คืนนี้คุณจะกลับมาทานมื้อเย็นที่บ้านไหม|🏠🍽️
+{Could} you {speak} a bit more slowly, please?|kʊd juː spiːk ə bɪt mɔː ˈsləʊli, pliːz|กรุณาพูดช้าลงอีกนิดได้ไหม|🗣️🐢
+What {are} you {planning} to {do} this weekend?|wɒt ɑː juː ˈplænɪŋ tə duː ðɪs ˌwiːkˈend|คุณมีแผนจะทำอะไรสุดสัปดาห์นี้|📅🎒
+{Is} there a pharmacy near here?|ɪz ðeər ə ˈfɑːməsi nɪə hɪə|แถวนี้มีร้านขายยาไหม|💊🏥
+How long {does} it {take} to {get} to the airport?|haʊ lɒŋ dʌz ɪt teɪk tə ɡet tu ði ˈeəpɔːt|เดินทางไปสนามบินใช้เวลาเท่าไหร่|⏱️✈️
+{Did} you {lock} the front door?|dɪd juː lɒk ðə frʌnt dɔː|คุณล็อกประตูหน้าบ้านหรือยัง|🔒🚪
+Which bus {goes} to the city center?|wɪtʃ bʌs ɡəʊz tə ðə ˈsɪti ˈsentə|รถประจำทางสายไหนไปใจกลางเมือง|🚌🏙️
+{May} I {use} your phone for a moment?|meɪ aɪ juːz jɔː fəʊn fər ə ˈməʊmənt|ฉันขอยืมโทรศัพท์ของคุณสักครู่ได้ไหม|📱🙏
+Why {did} you {miss} the morning meeting?|waɪ dɪd juː mɪs ðə ˈmɔːnɪŋ ˈmiːtɪŋ|ทำไมคุณถึงพลาดการประชุมตอนเช้า|⏰👥
+{Do} you {prefer} coffee or tea?|duː juː prɪˈfɜː ˈkɒfi ɔː tiː|คุณชอบกาแฟหรือชามากกว่ากัน|☕🍵
+Whose notebook {is} this on the table?|huːz ˈnəʊtbʊk ɪz ðɪs ɒn ðə ˈteɪbl|สมุดบันทึกบนโต๊ะนี้เป็นของใคร|📓❓
+{Are} you ready to {order} food?|ɑː juː ˈredi tu ˈɔːdə fuːd|คุณพร้อมจะสั่งอาหารหรือยัง|🍽️🙋
+What {do} you {think} about this idea?|wɒt duː juː θɪŋk əˈbaʊt ðɪs aɪˈdɪə|คุณคิดอย่างไรกับความคิดนี้|🤔💡
+{Can} I {pay} by credit card?|kæn aɪ peɪ baɪ ˈkredɪt kɑːd|ฉันจ่ายด้วยบัตรเครดิตได้ไหม|💳🧾
+Where {can} I {find} a good restaurant?|weə kæn aɪ faɪnd ə ɡʊd ˈrestrɒnt|ฉันจะหาร้านอาหารอร่อยๆ ได้ที่ไหน|🔍🍴
+{Did} you {sleep} well last night?|dɪd juː sliːp wel lɑːst naɪt|เมื่อคืนคุณนอนหลับสบายดีไหม|😴🌙
+How {is} the weather outside?|haʊ ɪz ðə ˈweðər ˌaʊtˈsaɪd|สภาพอากาศข้างนอกเป็นอย่างไรบ้าง|⛅🌡️
+{Should} we {turn} left at the traffic light?|ʃʊd wi tɜːn left ət ðə ˈtræfɪk laɪt|เราควรเลี้ยวซ้ายตรงไฟจราจรนี้ใช่ไหม|↩️🚦
+What {happened} to your hand?|wɒt ˈhæpənd tə jɔː hænd|มือของคุณไปโดนอะไรมา|✋🩹
+{Are} you sure about this decision?|ɑː juː ʃɔːr əˈbaʊt ðɪs dɪˈsɪʒn|คุณแน่ใจเกี่ยวกับการตัดสินใจนี้แล้วนะ|✅🤔
+Who {told} you that news?|huː təʊld juː ðæt njuːz|ใครเป็นคนบอกข่าวนี้กับคุณ|📰🗣️
+{Would} you {like} some more water?|wʊd juː laɪk sʌm mɔː ˈwɔːtə|คุณรับน้ำเพิ่มอีกหน่อยไหม|💧🥛
+When {does} the train {arrive}?|wen dʌz ðə treɪn əˈraɪv|รถไฟจะมาถึงกี่โมง|🚆⏰
+{Do} you {need} any help with cooking?|duː juː niːd ˈeni help wɪð ˈkʊkɪŋ|คุณต้องการความช่วยเหลือในการทำอาหารไหม|👩‍🍳🤝
+Why {are} you {laughing}?|waɪ ɑː juː ˈlɑːfɪŋ|ทำไมคุณถึงหัวเราะล่ะ|😂❓
+{Has} the package {arrived} yet?|hæz ðə ˈpækɪdʒ əˈraɪvd jet|พัสดุมาถึงหรือยัง|📦🚚
+How {do} you {spell} your name?|haʊ duː juː spel jɔː neɪm|คุณสะกดชื่ออย่างไร|🔤✍️
+{Is} anyone {sitting} in this seat?|ɪz ˈeniwʌn ˈsɪtɪŋ ɪn ðɪs siːt|มีใครนั่งตรงที่นั่งนี้ไหม|💺🧍
+What {did} you {buy} at the market?|wɒt dɪd juː baɪ æt ðə ˈmɑːkɪt|คุณซื้ออะไรมาจากตลาดบ้าง|🛍️🥬
+{Can} you {remind} me tomorrow?|kæn juː rɪˈmaɪnd mi təˈmɒrəʊ|พรุ่งนี้คุณช่วยเตือนฉันหน่อยได้ไหม|⏰🗒️
+Where {did} you {park} the car?|weə dɪd juː pɑːk ðə kɑː|คุณจอดรถไว้ที่ไหน|🅿️🚗
+{Do} you {understand} what I {mean}?|duː juː ˌʌndəˈstænd wɒt aɪ miːn|คุณเข้าใจในสิ่งที่ฉันพูดไหม|💡🙂
+How many people {are coming} to the party?|haʊ ˈmeni ˈpiːpl ɑː ˈkʌmɪŋ tə ðə ˈpɑːti|มีคนมาร่วมงานปาร์ตี้กี่คน|🎉👥
+{Will} you {be} free this afternoon?|wɪl juː biː friː ðɪs ˌɑːftəˈnuːn|บ่ายนี้คุณว่างไหม|🗓️☀️
+Why {is} the computer not {working}?|waɪ ɪz ðə kəmˈpjuːtə nɒt ˈwɜːkɪŋ|ทำไมคอมพิวเตอร์ถึงไม่ทำงาน|💻⚠️
+{Have} you ever {been} to Japan?|hæv juː ˈevə biːn tə dʒəˈpæn|คุณเคยไปญี่ปุ่นหรือยัง|🗾✈️
+What {is} your phone number?|wɒt ɪz jɔː fəʊn ˈnʌmbə|เบอร์โทรศัพท์ของคุณคืออะไร|📞🔢
+{Could} you {turn} down the music?|kʊd juː tɜːn daʊn ðə ˈmjuːzɪk|คุณช่วยเบาเสียงเพลงลงหน่อยได้ไหม|🔉🎵
+Who {is} your favorite actor?|huː ɪz jɔː ˈfeɪvərɪt ˈæktə|นักแสดงคนโปรดของคุณคือใคร|🎭⭐
+{Did} you {turn} off the lights?|dɪd juː tɜːn ɒf ðə laɪts|คุณปิดไฟหรือยัง|💡🔌
+How {was} your day at work today?|haʊ wɒz jɔː deɪ ət wɜːk təˈdeɪ|วันนี้การทำงานของคุณเป็นอย่างไรบ้าง|💼🌤️
+{Shall} we {go} out for dinner tonight?|ʃæl wi ɡəʊ aʊt fə ˈdɪnə təˈnaɪt|คืนนี้พวกเราไปกินข้าวข้างนอกกันไหม|🍷🚶
+What time {do} we {need} to {leave}?|wɒt taɪm duː wi niːd tə liːv|พวกเราต้องออกเดินทางกี่โมง|🕒🚪
+Where {can} I {wash} my hands?|weə kæn aɪ wɒʃ maɪ hændz|ฉันจะล้างมือได้ที่ไหน|🧼🚰
+{Do} you {mind} if I {open} the window?|duː juː maɪnd ɪf aɪ ˈəʊpən ðə ˈwɪndəʊ|คุณจะรังเกียจไหมถ้าฉันจะเปิดหน้าต่าง|🪟🙏
+How much {do} I {owe} you?|haʊ mʌtʃ duː aɪ əʊ juː|ฉันต้องจ่ายเงินคุณเท่าไหร่|💵🧾
+{Are} you {waiting} for someone?|ɑː juː ˈweɪtɪŋ fə ˈsʌmwʌn|คุณกำลังรอใครอยู่หรือเปล่า|⏳🧍
+Why {didn't} you {answer} my call?|waɪ ˈdɪdnt juː ˈɑːnsə maɪ kɔːl|ทำไมคุณถึงไม่รับสายฉัน|📞🔕
+What {does} this word {mean}?|wɒt dʌz ðɪs wɜːd miːn|คำนี้แปลว่าอะไร|📖❓
+{Can} I {try} on this shirt?|kæn aɪ traɪ ɒn ðɪs ʃɜːt|ฉันขอลองเสื้อตัวนี้ได้ไหม|👕🪞
+Who {won} the football match yesterday?|huː wʌn ðə ˈfʊtbɔːl mætʃ ˈjestədeɪ|เมื่อวานการแข่งขันฟุตบอลใครชนะ|⚽🏆
+{Will} you {help} me with my homework?|wɪl juː help mi wɪð maɪ ˈhəʊmwɜːk|ช่วยทำการบ้านให้ฉันหน่อยได้ไหม|📚🤝
+Where {should} we {meet} tomorrow?|weə ʃʊd wi miːt təˈmɒrəʊ|พรุ่งนี้เราควรจะเจอกันที่ไหน|🤝📍
+{Is} everything okay with you?|ɪz ˈevriθɪŋ ˌəʊˈkeɪ wɪð juː|ทุกอย่างเรียบร้อยดีไหม|👌🙂
+How often {do} you {exercise}?|haʊ ˈɒfn duː juː ˈeksəsaɪz|คุณออกกำลังกายบ่อยแค่ไหน|🏃🔁
+{Did} you {hear} that strange noise?|dɪd juː hɪə ðæt streɪndʒ nɔɪz|คุณได้ยินเสียงแปลกๆ นั่นไหม|👂🔊
+What {are} you {looking} for?|wɒt ɑː juː ˈlʊkɪŋ fɔː|คุณกำลังหาอะไรอยู่|🔍👀
+{Would} you {prefer} tea or coffee?|wʊd juː prɪˈfɜː tiː ɔː ˈkɒfi|คุณอยากดื่มชาหรือกาแฟมากกว่ากัน|🍵☕
+Why {is} the shop {closed} today?|waɪ ɪz ðə ʃɒp kləʊzd təˈdeɪ|ทำไมวันนี้ร้านค้าถึงปิด|🏪🔒
+{Can} you {recommend} a good movie?|kæn juː ˌrekəˈmend ə ɡʊd ˈmuːvi|คุณช่วยแนะนำหนังสนุกๆ ให้หน่อยได้ไหม|🎬👍
+Who {cleaned} the kitchen?|huː kliːnd ðə ˈkɪtʃɪn|ใครทำความสะอาดห้องครัว|🧽🍳
+{Are} you afraid of heights?|ɑː juː əˈfreɪd əv haɪts|คุณกลัวความสูงไหม|😨🏔️
+How {did} you {solve} this problem?|haʊ dɪd juː sɒlv ðɪs ˈprɒbləm|คุณแก้ปัญหานี้อย่างไร|🧩💡
+{Is} there any milk left in the fridge?|ɪz ðeər ˈeni mɪlk left ɪn ðə frɪdʒ|ในตู้เย็นยังมีนมเหลืออยู่ไหม|🥛🧊
+What time {does} the movie {start}?|wɒt taɪm dʌz ðə ˈmuːvi stɑːt|ภาพยนตร์เริ่มฉายกี่โมง|🎞️🕗
+{Have} you {packed} your suitcase yet?|hæv juː pækt jɔː ˈsuːtkeɪs jet|คุณจัดกระเป๋าเดินทางเสร็จหรือยัง|🧳✅
+Where {do} your parents {live}?|weə duː jɔː ˈpeərənts lɪv|พ่อแม่ของคุณอาศัยอยู่ที่ไหน|👨‍👩‍👧🏡
+{May} I {borrow} your pen?|meɪ aɪ ˈbɒrəʊ jɔː pen|ฉันขอยืมปากกาหน่อยได้ไหม|🖊️🤲
+Why {did} you {change} your mind?|waɪ dɪd juː tʃeɪndʒ jɔː maɪnd|ทำไมคุณถึงเปลี่ยนใจ|💭🔄
+{Do} you {happen} to {know} the time?|duː juː ˈhæpən tə nəʊ ðə taɪm|พอจะรู้เวลาตอนนี้ไหม|🕐🤷
+Whose bag {is} this on the floor?|huːz bæɡ ɪz ðɪs ɒn ðə flɔː|กระเป๋าบนพื้นนี้เป็นของใคร|👜⬇️
+{Are} you free this weekend?|ɑː juː friː ðɪs ˌwiːkˈend|สุดสัปดาห์นี้คุณว่างไหม|📆🙂
+What {are} your plans for tomorrow?|wɒt ɑː jɔː plænz fə təˈmɒrəʊ|แผนสำหรับวันพรุ่งนี้ของคุณคืออะไร|🗓️🌅
+{Can} you {explain} this rule to me?|kæn juː ɪkˈspleɪn ðɪs ruːl tə mi|คุณช่วยอธิบายกฎนี้ให้ฉันฟังหน่อยได้ไหม|📋🗣️
+Where {is} the nearest gas station?|weə ɪz ðə ˈnɪərɪst ɡæs ˈsteɪʃn|ปั๊มน้ำมันที่ใกล้ที่สุดอยู่ไหน|⛽📍
+{Did} you {enjoy} the party last night?|dɪd juː ɪnˈdʒɔɪ ðə ˈpɑːti lɑːst naɪt|คุณสนุกกับงานปาร์ตี้เมื่อคืนไหม|🎉😄
+How {do} you {feel} about moving?|haʊ duː juː fiːl əˈbaʊt ˈmuːvɪŋ|คุณรู้สึกอย่างไรกับการย้ายบ้าน|📦🏠
+{Should} I {bring} an umbrella?|ʃʊd aɪ brɪŋ ən ʌmˈbrelə|ฉันควรพกร่มไปด้วยไหม|☂️🎒
+What {made} you {decide} that?|wɒt meɪd juː dɪˈsaɪd ðæt|อะไรทำให้คุณตัดสินใจแบบนั้น|🤔👉
+{Are} you hungry right now?|ɑː juː ˈhʌŋɡri raɪt naʊ|ตอนนี้คุณหิวข้าวหรือยัง|🍽️😋
+Who {invited} you to the event?|huː ɪnˈvaɪtɪd juː tə ði ɪˈvent|ใครชวนคุณมางานนี้|💌🎟️
+{Would} you {mind} {helping} me?|wʊd juː maɪnd ˈhelpɪŋ mi|คุณจะรังเกียจไหมถ้าจะช่วยฉัน|🙏🤝
+When {will} the repair {be} {finished}?|wen wɪl ðə rɪˈpeə biː ˈfɪnɪʃt|การซ่อมแซมจะเสร็จเมื่อไหร่|🔧🏁
+{Do} you {have} a reservation?|duː juː hæv ə ˌrezəˈveɪʃn|คุณได้จองโต๊ะไว้ล่วงหน้าไหม|📒🍽️
+Why {is} everyone {laughing}?|waɪ ɪz ˈevriwʌn ˈlɑːfɪŋ|ทำไมทุกคนถึงกำลังหัวเราะกันอยู่|😆👥
+{Has} the mail {arrived} yet?|hæz ðə meɪl əˈraɪvd jet|จดหมายหรือพัสดุมาส่งหรือยัง|✉️🚚
+How {can} I {improve} my English?|haʊ kæn aɪ ɪmˈpruːv maɪ ˈɪŋɡlɪʃ|ฉันจะพัฒนาภาษาอังกฤษของฉันได้อย่างไร|📈🇬🇧
+{Is} anyone {using} this computer?|ɪz ˈeniwʌn ˈjuːzɪŋ ðɪs kəmˈpjuːtə|มีใครใช้คอมพิวเตอร์เครื่องนี้อยู่ไหม|💻🙋
+What {did} you {dream} about last night?|wɒt dɪd juː driːm əˈbaʊt lɑːst naɪt|เมื่อคืนคุณฝันถึงอะไร|💤🌙
+{Can} you {turn} on the lights?|kæn juː tɜːn ɒn ðə laɪts|ช่วยเปิดไฟให้หน่อยได้ไหม|💡👆
+How {was} your trip to the beach?|haʊ wɒz jɔː trɪp tə ðə biːtʃ|ทริปไปเที่ยวทะเลของคุณเป็นอย่างไรบ้าง|🏖️🧳
+`.trim().split("\n");
+
+const DATA = RAW.map(line=>{
+  const [en,ipa,th,emo] = line.split("|");
+  const plain = en.replace(/[{}]/g,"");
+  const html = en.replace(/\{([^}]+)\}/g,"<b>$1</b>");
+  const pics = Array.from(emo.trim().matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic}\uFE0F?)*/gu)).map(m=>m[0]);
+  return {plain,html,ipa,th,pics};
+});
+
+const PER_PAGE = 50;
+const PAGES = Math.ceil(DATA.length/PER_PAGE);
+let page = 0;
+
+const grid = document.getElementById("grid");
+const tabs = document.getElementById("tabs");
+const pager = document.getElementById("pager");
+const voiceSel = document.getElementById("voice");
+const hint = document.getElementById("hint");
+
+/* ---------- Speech ---------- */
+let voices = [];
+const MALE_HINTS = ["ryan","google uk english male","daniel","george","arthur","oliver","thomas","james","male"];
+const FEMALE_HINTS = ["female","susan","hazel","libby","sonia","kate","serena","martha","amy","emma","samantha","karen","moira","fiona","victoria"];
+function rankVoice(v){
+  const n = v.name.toLowerCase(); let s = 0;
+  if (/^en[-_]gb/i.test(v.lang)) s += 50; else if (/^en/i.test(v.lang)) s += 10;
+  const mi = MALE_HINTS.findIndex(h=>n.includes(h));
+  if (mi>=0) s += 40 - mi;
+  if (FEMALE_HINTS.some(h=>n.includes(h))) s -= 60;
+  if (/natural|online|neural/.test(n)) s += 15;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>rankVoice(b)-rankVoice(a));
+  voiceSel.innerHTML = "";
+  voices.forEach((v,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; voiceSel.appendChild(o); });
+  if(!voices.length){ hint.textContent="อุปกรณ์นี้ยังไม่มีเสียงภาษาอังกฤษให้เลือก — ลองเปิดด้วย Chrome / Edge / Safari"; }
+  else if(rankVoice(voices[0])<60){ hint.textContent="ไม่พบเสียงผู้ชายอังกฤษ (UK) บนอุปกรณ์นี้ — เลือกเสียงอื่นจากเมนู “เสียงอ่าน” ได้"; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+let activeBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  const same = activeBtn===btn && speechSynthesis.speaking;
+  speechSynthesis.cancel();
+  if(activeBtn){ activeBtn.classList.remove("on"); activeBtn=null; }
+  if(same) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices[+voiceSel.value||0];
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onend = u.onerror = ()=>{ btn.classList.remove("on"); if(activeBtn===btn) activeBtn=null; };
+  btn.classList.add("on"); activeBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Render ---------- */
+const ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function makeCard(item, idx){
+  const card = el("div","card"); card.tabIndex=0; card.setAttribute("role","button");
+  card.setAttribute("aria-label","การ์ดที่ "+(idx+1)+" กดเพื่อพลิก");
+  const inner = el("div","inner");
+
+  const front = el("div","face front");
+  const pic = el("div","pic");
+  pic.appendChild(el("span","num", String(idx+1)));
+  item.pics.slice(0,2).forEach(p=>pic.appendChild(el("span","",p)));
+  const text = el("div","text");
+  text.appendChild(el("p","en",item.html));
+  text.appendChild(el("p","ipa","/"+item.ipa+"/"));
+  const foot = el("div","foot");
+  foot.appendChild(el("span","tap","แตะการ์ดเพื่อดูคำแปล"));
+  const sb = el("button","say",ICON+"ฟังเสียง"); sb.type="button";
+  sb.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb);});
+  foot.appendChild(sb);
+  front.append(pic,text,foot);
+
+  const back = el("div","face back");
+  back.appendChild(el("div","th",item.th));
+  const bfoot = el("div","foot");
+  bfoot.appendChild(el("span","tap","แตะเพื่อกลับไปด้านหน้า"));
+  const sb2 = el("button","say",ICON+"ฟังเสียง"); sb2.type="button";
+  sb2.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb2);});
+  bfoot.appendChild(sb2);
+  back.appendChild(bfoot);
+
+  inner.append(front,back); card.appendChild(inner);
+  const flip = ()=>card.classList.toggle("flipped");
+  card.addEventListener("click",flip);
+  card.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ") && e.target===card){ e.preventDefault(); flip(); }});
+  return card;
+}
+
+function render(){
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  grid.innerHTML="";
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((it,i)=>grid.appendChild(makeCard(it,start+i)));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",i===page));
+  window.scrollTo({top:0,behavior:"auto"});
+}
+function goto(p){ page=p; render(); }
+
+for(let p=0;p<PAGES;p++){
+  const a = p*PER_PAGE+1, b = Math.min((p+1)*PER_PAGE, DATA.length);
+  const t = el("button","tab","หน้า "+(p+1)+" · "+a+"–"+b); t.setAttribute("role","tab");
+  t.addEventListener("click",()=>goto(p)); tabs.appendChild(t);
+  const pb = el("button","","หน้า "+(p+1)); pb.addEventListener("click",()=>goto(p)); pager.appendChild(pb);
+}
+render();
+</script>
+</body>
+</html>

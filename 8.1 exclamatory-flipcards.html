@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8.1 Exclamatory Sentences – Flipcards</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#111;--muted:#555;--line:#d4d4d8;--accent:#2563eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}}
+:root[data-theme="dark"]{--bg:#18181b;--card:#27272a;--ink:#f4f4f5;--muted:#a1a1aa;--line:#3f3f46;--accent:#60a5fa}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun",Arial,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+.bar{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+select,button.pg{font:inherit;font-size:14px;padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+button.pg.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{max-width:220px}
+main{max-width:1100px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:320px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.back{transform:rotateY(180deg);align-items:center;justify-content:center;text-align:center;padding:24px;background:var(--card)}
+.top{background:#dbeafe;color:#000;border-bottom:1px solid #bfdbfe;padding:14px 16px;text-align:center;font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:21px;line-height:1.35;min-height:72px;display:flex;align-items:center;justify-content:center}
+.top b{font-weight:700}
+.pic{flex:1;display:flex;align-items:center;justify-content:center;font-size:86px;position:relative;line-height:1}
+.ipa{background:#eff6ff;color:#000 !important;padding:11px 14px;text-align:center;font-family:"Times New Roman",Times,serif;font-size:19px;border-top:1px solid var(--line);min-height:46px;color:var(--ink)}
+.speak{position:absolute;right:12px;bottom:10px;width:44px;height:44px;border-radius:50%;border:none;background:var(--accent);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.speak.playing{animation:pulse .8s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.th{font-size:26px;line-height:1.5;font-weight:500}
+.sm{margin-top:14px;font-family:Arial,sans-serif;font-size:14px;color:var(--muted);font-weight:300}
+.num{position:absolute;left:10px;bottom:8px;font:12px Arial;color:var(--muted)}
+.pager{display:flex;gap:8px;justify-content:center;margin:22px 0 8px}
+@media (max-width:560px){.grid{gap:10px}.flip{height:290px}.top{font-size:16px;padding:10px 8px;min-height:64px}.ipa{font-size:14px;padding:8px 6px}.pic{font-size:60px}.th{font-size:19px}.speak{width:38px;height:38px;font-size:17px}main{padding:10px}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>8.1 Exclamatory Sentences: What/How + Adj + N + S</h1>
+<div class="ctrl">
+<span>เสียง:</span><select id="voice"></select>
+<span>ความเร็ว:</span><select id="rate"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<span id="pbtns"></span>
+</div></div></header>
+<main>
+<div class="grid" id="grid"></div>
+<div class="pager" id="pager"></div>
+</main>
+<script>
+const RAW = `What a beautiful day it **is**!|/wɒt ə ˈbjuːtɪfl deɪ ɪt ɪz/|ช่างเป็นวันที่สวยงามอะไรเช่นนี้!|🌞
+How fast she **runs**!|/haʊ fɑːst ʃiː rʌnz/|เธอวิ่งได้เร็วอะไรขนาดนั้น!|🏃‍♀️
+What an amazing movie we **watched**!|/wɒt ən əˈmeɪzɪŋ ˈmuːvi wiː wɒtʃt/|ช่างเป็นภาพยนตร์ที่ยอดเยี่ยมอะไรเช่นนี้ที่เราดูกันไป!|🎬
+How clever that boy **is**!|/haʊ ˈklevə ðæt bɔɪ ɪz/|เด็กผู้ชายคนนั้นช่างฉลาดเสียจริง!|🧠
+What a delicious meal they **cooked**!|/wɒt ə dɪˈlɪʃəs miːl ðeɪ kʊkt/|ช่างเป็นมื้ออาหารที่แสนอร่อยอะไรเช่นนี้ที่พวกเขาทำ!|🍲
+How cold the weather **is** today!|/haʊ kəʊld ðə ˈweðər ɪz təˈdeɪ/|สภาพอากาศวันนี้ช่างหนาวเหน็บอะไรเช่นนี้!|🥶
+What a brilliant idea he **had**!|/wɒt ə ˈbrɪliənt aɪˈdɪə hiː hæd/|ช่างเป็นความคิดที่ชาญฉลาดอะไรเช่นนี้ที่เขาคิดขึ้นได้!|💡
+How brightly the sun **shines**!|/haʊ ˈbraɪtli ðə sʌn ʃaɪnz/|ดวงอาทิตย์ส่องแสงเจิดจ้าอะไรเช่นนี้!|☀️
+What a huge house they **bought**!|/wɒt ə hjuːdʒ haʊs ðeɪ bɔːt/|ช่างเป็นบ้านหลังใหญ่โตอะไรเช่นนี้ที่พวกเขาซื้อ!|🏠
+How gracefully she **dances**!|/haʊ ˈgreɪsfəli ʃiː ˈdɑːnsɪz/|เธอเต้นรำได้อย่างงดงามอ่อนช้อยอะไรเช่นนี้!|💃
+What a sweet voice the singer **has**!|/wɒt ə swiːt vɔɪs ðə ˈsɪŋə hæz/|นักร้องคนนั้นช่างมีเสียงที่ไพเราะหวานละมุนอะไรเช่นนี้!|🎤
+How loudly the dog **barked**!|/haʊ ˈlaʊdli ðə dɒg bɑːkt/|สุนัขเห่าเสียงดังลั่นอะไรเช่นนี้!|🐕
+What an interesting book you **recommended**!|/wɒt ən ˈɪntrəstɪŋ bʊk juː ˌrekəˈmendɪd/|ช่างเป็นหนังสือที่น่าสนใจอะไรเช่นนี้ที่คุณแนะนำมา!|📖
+How heavily it **rains** outside!|/haʊ ˈhevɪli ɪt reɪnz ˌaʊtˈsaɪd/|ฝนตกหนักข้างนอกอะไรขนาดนั้น!|🌧️
+What a terrible mistake I **made**!|/wɒt ə ˈterəbl mɪˈsteɪk aɪ meɪd/|ช่างเป็นความผิดพลาดที่แย่มากอะไรเช่นนี้ที่ฉันทำลงไป!|😣
+How quickly time **flies**!|/haʊ ˈkwɪkli taɪm flaɪz/|เวลาช่างบินผ่านไปอย่างรวดเร็วอะไรเช่นนี้!|⏰
+What a lovely dress she **wore**!|/wɒt ə ˈlʌvli dres ʃiː wɔː/|ชุดเดรสที่เธอสวมช่างน่ารักอะไรเช่นนี้!|👗
+How deeply he **slept**!|/haʊ ˈdiːpli hiː slept/|เขานอนหลับลึกอะไรขนาดนั้น!|😴
+What a wonderful surprise they **prepared**!|/wɒt ə ˈwʌndəfl səˈpraɪz ðeɪ prɪˈpeəd/|ช่างเป็นเซอร์ไพรส์ที่ยอดเยี่ยมอะไรเช่นนี้ที่พวกเขาเตรียมไว้!|🎁
+How loudly the baby **cried**!|/haʊ ˈlaʊdli ðə ˈbeɪbi kraɪd/|ทารกร้องไห้เสียงดังลั่นอะไรเช่นนี้!|👶
+What a difficult test we **took**!|/wɒt ə ˈdɪfɪkəlt test wiː tʊk/|ช่างเป็นการสอบที่ยากอะไรเช่นนี้ที่พวกเราทำกันไป!|📝
+How softly the music **played**!|/haʊ ˈsɒftli ðə ˈmjuːzɪk pleɪd/|เสียงดนตรีบรรเลงแผ่วเบานุ่มนวลอะไรเช่นนี้!|🎵
+What a charming smile she **showed**!|/wɒt ə ˈtʃɑːmɪŋ smaɪl ʃiː ʃəʊd/|รอยยิ้มที่มีเสน่ห์อะไรเช่นนี้ที่เธอแสดงออกมา!|😊
+How brightly the stars **glowed**!|/haʊ ˈbraɪtli ðə stɑːz gləʊd/|ดวงดาวเปล่งแสงประกายเจิดจ้าอะไรเช่นนี้!|✨
+What a rich history this city **holds**!|/wɒt ə rɪtʃ ˈhɪstri ðɪs ˈsɪti həʊldz/|เมืองนี้ช่างมีประวัติศาสตร์ที่ยาวนานร่ำรวยเรื่องราวอะไรเช่นนี้!|🏛️
+How fiercely the wind **blew**!|/haʊ ˈfɪəsli ðə wɪnd bluː/|สายลมพัดโหมกระหน่ำอย่างรุนแรงอะไรเช่นนี้!|🌬️
+What a brilliant performance they **gave**!|/wɒt ə ˈbrɪliənt pəˈfɔːməns ðeɪ geɪv/|พวกเขาแสดงการแสดงที่ยอดเยี่ยมอะไรเช่นนี้!|🎭
+How brightly the sun **shines** today!|/haʊ ˈbraɪtli ðə sʌn ʃaɪnz təˈdeɪ/|ดวงอาทิตย์วันนี้ส่องแสงเจิดจ้าอะไรเช่นนี้!|🌤️
+What a delicious cake she **baked**!|/wɒt ə dɪˈlɪʃəs keɪk ʃiː beɪkt/|เธออบเค้กที่อร่อยอะไรเช่นนี้!|🎂
+How heavy this suitcase **feels**!|/haʊ ˈhevi ðɪs ˈsuːtkeɪs fiːlz/|กระเป๋าเดินทางใบนี้ช่างรู้สึกหนักอึ้งอะไรเช่นนี้!|🧳
+What an exciting match we **watched**!|/wɒt ən ɪkˈsaɪtɪŋ mætʃ wiː wɒtʃt/|พวกเราชมการแข่งขันที่น่าตื่นเต้นอะไรเช่นนี้!|⚽
+How clever that little boy **is**!|/haʊ ˈklevə ðæt ˈlɪtl bɔɪ ɪz/|เด็กผู้ชายตัวเล็กคนนั้นช่างฉลาดอะไรเช่นนี้!|🧒
+What a peaceful village they **found**!|/wɒt ə ˈpiːsfl ˈvɪlɪdʒ ðeɪ faʊnd/|พวกเขาพบหมู่บ้านที่สงบสุขอะไรเช่นนี้!|🏘️
+How softly the music **played**!|/haʊ ˈsɒftli ðə ˈmjuːzɪk pleɪd/|เสียงดนตรีบรรเลงแผ่วเบานุ่มนวลอะไรเช่นนี้!|🎶
+What a dangerous road we **crossed**!|/wɒt ə ˈdeɪndʒərəs rəʊd wiː krɒst/|พวกเราข้ามถนนที่อันตรายอะไรเช่นนี้!|⚠️
+How gracefully the bird **flew**!|/haʊ ˈgreɪsfəli ðə bɜːd fluː/|นกตัวนั้นบินได้อย่างงดงามพลิ้วไหวอะไรเช่นนี้!|🕊️
+What a generous donation he **made**!|/wɒt ə ˈdʒenərəs dəʊˈneɪʃn hiː meɪd/|เขาบริจาคเงินช่วยเหลือที่ใจบุญอะไรเช่นนี้!|🤲
+How sweet those mangoes **tasted**!|/haʊ swiːt ðəʊz ˈmæŋgəʊz ˈteɪstɪd/|มะม่วงเหล่านั้นมีรสชาติหวานอะไรเช่นนี้!|🥭
+What a rare painting she **bought**!|/wɒt ə reə ˈpeɪntɪŋ ʃiː bɔːt/|เธอซื้อภาพวาดที่หายากอะไรเช่นนี้!|🖼️
+How fast the horse **ran**!|/haʊ fɑːst ðə hɔːs ræn/|ม้าตัวนั้นวิ่งเร็วอะไรเช่นนี้!|🐎
+What a cozy room they **decorated**!|/wɒt ə ˈkəʊzi ruːm ðeɪ ˈdekəreɪtɪd/|พวกเขาตกแต่งห้องได้น่านั่งอบอุ่นอะไรเช่นนี้!|🛋️
+How clearly the teacher **explained**!|/haʊ ˈklɪəli ðə ˈtiːtʃər ɪkˈspleɪnd/|คุณครูอธิบายได้ชัดเจนอะไรเช่นนี้!|👩‍🏫
+What a loud noise the engine **made**!|/wɒt ə laʊd nɔɪz ði ˈendʒɪn meɪd/|เครื่องยนต์ส่งเสียงดังสนั่นอะไรเช่นนี้!|🔊
+How dark the night sky **became**!|/haʊ dɑːk ðə naɪt skaɪ bɪˈkeɪm/|ท้องฟ้ายามค่ำคืนมืดมิดลงอะไรเช่นนี้!|🌌
+What a creative idea she **proposed**!|/wɒt ə kriˈeɪtɪv aɪˈdɪə ʃiː prəˈpəʊzd/|เธอนำเสนอความคิดที่สร้างสรรค์อะไรเช่นนี้!|🙋‍♀️
+How tall that skyscraper **stands**!|/haʊ tɔːl ðæt ˈskaɪskreɪpə stændz/|ตึกระฟ้าหลังนั้นตั้งตระหง่านสูงอะไรเช่นนี้!|🏙️
+What a lovely song they **sang**!|/wɒt ə ˈlʌvli sɒŋ ðeɪ sæŋ/|พวกเขาร้องเพลงที่ไพเราะอะไรเช่นนี้!|🎼
+How hard the rain **fell**!|/haʊ hɑːd ðə reɪn fel/|ฝนตกลงมาหนักอะไรเช่นนี้!|⛈️
+What an interesting book you **recommended**!|/wɒt ən ˈɪntrəstɪŋ bʊk juː ˌrekəˈmendɪd/|คุณแนะนำหนังสือที่น่าสนใจอะไรเช่นนี้!|📚
+How slowly the traffic **moved**!|/haʊ ˈsləʊli ðə ˈtræfɪk muːvd/|การจราจรเคลื่อนตัวช้าอะไรเช่นนี้!|🚗
+What a bright star we **saw**!|/wɒt ə braɪt stɑː wiː sɔː/|พวกเราเห็นดวงดาวที่สว่างสดใสอะไรเช่นนี้!|⭐
+How delicious the soup **smelled**!|/haʊ dɪˈlɪʃəs ðə suːp smeld/|ซุปส่งกลิ่นหอมน่ารับประทานอะไรเช่นนี้!|🍜
+What a grand palace they **visited**!|/wɒt ə grænd ˈpælɪs ðeɪ ˈvɪzɪtɪd/|พวกเขาไปเที่ยวชมพระราชวังโอ่อ่าอะไรเช่นนี้!|🏰
+How brave the firefighter **acted**!|/haʊ breɪv ðə ˈfaɪəˌfaɪtər ˈæktɪd/|นักดับเพลิงกระทำตัวกล้าหาญอะไรเช่นนี้!|🚒
+What a funny joke he **told**!|/wɒt ə ˈfʌni dʒəʊk hiː təʊld/|เขาเล่าเรื่องตลกขบขันอะไรเช่นนี้!|🤣
+How fierce the lion **roared**!|/haʊ fɪəs ðə ˈlaɪən rɔːd/|สิงโตคำรามดุร้ายอะไรเช่นนี้!|🦁
+What a deep well they **dug**!|/wɒt ə diːp wel ðeɪ dʌg/|พวกเขาขุดบ่อน้ำลึกอะไรเช่นนี้!|⛏️
+How wide the river **flowed**!|/haʊ waɪd ðə ˈrɪvə fləʊd/|แม่น้ำไหลกว้างใหญ่แผ่กว้างอะไรเช่นนี้!|🏞️
+What a colorful painting she **created**!|/wɒt ə ˈkʌləfl ˈpeɪntɪŋ ʃiː kriˈeɪtɪd/|เธอสร้างสรรค์ภาพวาดที่มีสีสันสดใสอะไรเช่นนี้!|🎨
+How smooth the ice **felt**!|/haʊ smuːð ði aɪs felt/|ผิวน้ำแข็งให้สัมผัสเรียบเนียนอะไรเช่นนี้!|🧊
+What a terrible accident **occurred**!|/wɒt ə ˈterəbl ˈæksɪdənt əˈkɜːd/|เกิดอุบัติเหตุที่น่ากลัวอะไรเช่นนี้!|🚑
+How quiet the library **remained**!|/haʊ ˈkwaɪət ðə ˈlaɪbrəri rɪˈmeɪnd/|ห้องสมุดยังคงเงียบสงบอะไรเช่นนี้!|🤫
+What a great honor they **received**!|/wɒt ə greɪt ˈɒnə ðeɪ rɪˈsiːvd/|พวกเขาได้รับเกียรติอันยิ่งใหญ่อะไรเช่นนี้!|🏅
+How sharp the knife **cut**!|/haʊ ʃɑːp ðə naɪf kʌt/|มีดเล่มนี้ตัดได้คมกริบอะไรเช่นนี้!|🔪
+What a sweet voice she **possessed**!|/wɒt ə swiːt vɔɪs ʃiː pəˈzest/|เธอมีน้ำเสียงที่หวานละมุนอะไรเช่นนี้!|🎙️
+How sudden the storm **arrived**!|/haʊ ˈsʌdn ðə stɔːm əˈraɪvd/|พายุพัดมาถึงอย่างกะทันหันอะไรเช่นนี้!|🌪️
+What a rich flavor the dish **contained**!|/wɒt ə rɪtʃ ˈfleɪvə ðə dɪʃ kənˈteɪnd/|อาหารจานนี้มีรสชาติเข้มข้นอะไรเช่นนี้!|🍛
+How kind the stranger **proved**!|/haʊ kaɪnd ðə ˈstreɪndʒə pruːvd/|คนแปลกหน้าผู้นั้นแสดงความใจดีอะไรเช่นนี้!|🤝
+What a strange creature they **discovered**!|/wɒt ə streɪndʒ ˈkriːtʃə ðeɪ dɪˈskʌvəd/|พวกเขาค้นพบสิ่งมีชีวิตประหลาดอะไรเช่นนี้!|🦎
+How bright the neon lights **glowed**!|/haʊ braɪt ðə ˈniːɒn laɪts gləʊd/|ไฟนีออนเปล่งแสงสว่างเจิดจ้าอะไรเช่นนี้!|🌃
+What a modern design he **drafted**!|/wɒt ə ˈmɒdn dɪˈzaɪn hiː ˈdrɑːftɪd/|เขาออกแบบร่างผลงานที่ทันสมัยอะไรเช่นนี้!|📐
+How bitter the medicine **tasted**!|/haʊ ˈbɪtə ðə ˈmedsn ˈteɪstɪd/|ยามีรสชาติขมปี๋อะไรเช่นนี้!|💊
+What a vast desert they **crossed**!|/wɒt ə vɑːst ˈdezət ðeɪ krɒst/|พวกเขาข้ามทะเลทรายกว้างใหญ่ไพศาลอะไรเช่นนี้!|🏜️
+How soft the pillow **felt**!|/haʊ sɒft ðə ˈpɪləʊ felt/|หมอนใบนี้ให้สัมผัสนุ่มนิ่มอะไรเช่นนี้!|🛏️
+What a tragic story she **narrated**!|/wɒt ə ˈtrædʒɪk ˈstɔːri ʃiː nəˈreɪtɪd/|เธอเล่าเรื่องราวโศกนาฏกรรมเศร้าสลดอะไรเช่นนี้!|📜
+How clear the lake water **looked**!|/haʊ klɪə ðə leɪk ˈwɔːtə lʊkt/|น้ำในทะเลสาบดูใสสะอาดอะไรเช่นนี้!|💧
+What a valuable lesson we **learned**!|/wɒt ə ˈvæljuəbl ˈlesn wiː lɜːnd/|พวกเราได้เรียนรู้บทเรียนอันมีค่าอะไรเช่นนี้!|🎓
+How heavy the snow **piled**!|/haʊ ˈhevi ðə snəʊ paɪld/|หิมะทับถมกันหนาหนักอะไรเช่นนี้!|❄️
+What an awesome party they **threw**!|/wɒt ən ˈɔːsəm ˈpɑːti ðeɪ θruː/|พวกเขาจัดงานปาร์ตี้ที่สุดยอดอะไรเช่นนี้!|🎉
+How rich the soil **seemed**!|/haʊ rɪtʃ ðə sɔɪl siːmd/|ดินดูมีความอุดมสมบูรณ์อะไรเช่นนี้!|🌾
+What a magical world Walt Disney **created**!|/wɒt ə ˈmædʒɪkl wɜːld wɔːlt ˈdɪzni kriˈeɪtɪd/|วอลต์ ดิสนีย์ สร้างสรรค์โลกมหัศจรรย์อะไรเช่นนี้!|🪄
+How fierce the battle **raged**!|/haʊ fɪəs ðə ˈbætl reɪdʒd/|การสู้รบดำเนินไปอย่างดุเดือดรุนแรงอะไรเช่นนี้!|⚔️
+What a peaceful night we **enjoyed**!|/wɒt ə ˈpiːsfl naɪt wiː ɪnˈdʒɔɪd/|พวกเรามีความสุขกับค่ำคืนอันเงียบสงบอะไรเช่นนี้!|🌙
+How wide the ocean **stretched**!|/haʊ waɪd ði ˈəʊʃn stretʃt/|มหาสมุทรทอดยาวกว้างใหญ่ไพศาลอะไรเช่นนี้!|🌊
+What a rare gem he **found**!|/wɒt ə reə dʒem hiː faʊnd/|เขาพบอัญมณีล้ำค่าหายากอะไรเช่นนี้!|💎
+How loud the thunder **crashed**!|/haʊ laʊd ðə ˈθʌndə kræʃt/|ฟ้าผ่าส่งเสียงคำรามดังสนั่นอะไรเช่นนี้!|⚡
+What a pleasant breeze **blew** past!|/wɒt ə ˈpleznt briːz bluː pɑːst/|สายลมอ่อนๆ พัดผ่านชื่นใจอะไรเช่นนี้!|🍃
+How pale her face **turned**!|/haʊ peɪl hɜː feɪs tɜːnd/|ใบหน้าของเธอซีดเผือดลงอะไรเช่นนี้!|😨
+What a brilliant solution they **implemented**!|/wɒt ə ˈbrɪliənt səˈluːʃn ðeɪ ˈɪmplɪmentɪd/|พวกเขานำวิธีแก้ปัญหาที่ชาญฉลาดมาใช้จริงอะไรเช่นนี้!|🧩
+How strong the bridge **stood**!|/haʊ strɒŋ ðə brɪdʒ stʊd/|สะพานมีความมั่นคงแข็งแรงอะไรเช่นนี้!|🌉
+What a charming town they **visited**!|/wɒt ə ˈtʃɑːmɪŋ taʊn ðeɪ ˈvɪzɪtɪd/|พวกเขาไปเที่ยวชมเมืองที่มีเสน่ห์น่ารักอะไรเช่นนี้!|🏡
+How fast the river current **flowed**!|/haʊ fɑːst ðə ˈrɪvə ˈkʌrənt fləʊd/|กระแสน้ำในแม่น้ำไหลเชี่ยวกรากอะไรเช่นนี้!|🛶
+What an incredible view we **admired**!|/wɒt ən ɪnˈkredəbl vjuː wiː ədˈmaɪəd/|พวกเราชื่นชมทิวทัศน์ที่เหลือเชื่ออะไรเช่นนี้!|🏔️
+How bright the moon **glowed** tonight!|/haʊ braɪt ðə muːn gləʊd təˈnaɪt/|คืนนี้ดวงจันทร์เปล่งแสงสว่างนวลอะไรเช่นนี้!|🌕
+What a delightful surprise they **planned**!|/wɒt ə dɪˈlaɪtfl səˈpraɪz ðeɪ plænd/|พวกเขาแพลนเซอร์ไพรส์ที่น่าประทับใจอะไรเช่นนี้!|🎈
+How deep the forest **extended**!|/haʊ diːp ðə ˈfɒrɪst ɪkˈstendɪd/|ผืนป่าทอดยาวลึกเข้าไปอะไรเช่นนี้!|🌲
+What a famous landmark they **photographed**!|/wɒt ə ˈfeɪməs ˈlændmɑːk ðeɪ ˈfəʊtəgrɑːft/|พวกเขาถ่ายภาพแลนด์มาร์กชื่อดังอะไรเช่นนี้!|📸
+How sweet the baby **smiled**!|/haʊ swiːt ðə ˈbeɪbi smaɪld/|ทารกยิ้มหวานน่ารักอะไรเช่นนี้!|🥰
+What a noble deed he **performed**!|/wɒt ə ˈnəʊbl diːd hiː pəˈfɔːmd/|เขาทำความดีงามอันทรงเกียรติอะไรเช่นนี้!|🦸
+How wonderfully everything **turned out**!|/haʊ ˈwʌndəfəli ˈevriθɪŋ tɜːnd aʊt/|ทุกสิ่งทุกอย่างลงเอยได้อย่างยอดเยี่ยมอะไรเช่นนี้!|🌈`;
+const DATA = RAW.split("\n").map(l=>{const [s,ipa,th,em]=l.split("|");return {s,ipa,th,em,plain:s.replace(/\*\*/g,"")}});
+const PER = 50, pages = Math.ceil(DATA.length/PER);
+let page = 0, voices = [], current = null;
+
+const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const bold = t => esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+
+function render(){
+  const g = document.getElementById("grid");
+  g.innerHTML = DATA.slice(page*PER,(page+1)*PER).map((d,i)=>`
+  <div class="flip" data-i="${page*PER+i}">
+    <div class="inner">
+      <div class="face front">
+        <div class="top"><span>${bold(d.s)}</span></div>
+        <div class="pic"><span>${d.em}</span><span class="num">${page*PER+i+1}</span>
+          <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button></div>
+        <div class="ipa">${esc(d.ipa)}</div>
+      </div>
+      <div class="face back">
+        <div class="th">${esc(d.th)}</div>
+        <div class="sm">${esc(d.plain)}</div>
+        <button class="speak" data-speak="${page*PER+i}" aria-label="อ่านประโยค">🔊</button>
+      </div>
+    </div>
+  </div>`).join("");
+  const pb = document.getElementById("pbtns"); pb.innerHTML="";
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const mk = () => {const b=document.createElement("button");b.className="pg"+(p===page?" on":"");b.textContent=`หน้า ${p+1} (${p*PER+1}–${Math.min((p+1)*PER,DATA.length)})`;b.onclick=()=>{page=p;render();window.scrollTo({top:0,behavior:"smooth"})};return b};
+    pb.appendChild(mk()); pg.appendChild(mk());
+  }
+}
+
+document.getElementById("grid").addEventListener("click",e=>{
+  const sp = e.target.closest("[data-speak]");
+  if(sp){e.stopPropagation();speak(+sp.dataset.speak,sp);return}
+  const f = e.target.closest(".flip"); if(f) f.classList.toggle("flipped");
+});
+
+/* ---- Voice: prefer a British male voice ---- */
+const MALE = /(google uk english male|daniel|arthur|oliver|george|ryan|thomas|james|male)/i;
+const FEMALE = /(female|kate|serena|martha|hazel|susan|libby|sonia|maisie|stephanie|fiona|samantha)/i;
+function score(v){
+  let s=0; const n=v.name, l=v.lang.replace("_","-");
+  if(l==="en-GB") s+=50; else if(l.startsWith("en")) s+=10; else return -1;
+  if(MALE.test(n)) s+=30; if(FEMALE.test(n)) s-=40;
+  if(/natural|neural|online|premium|enhanced/i.test(n)) s+=20;
+  if(/google/i.test(n)) s+=5;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+  const sel = document.getElementById("voice"), keep = sel.value;
+  sel.innerHTML = voices.length ? voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join("") : `<option>ไม่พบเสียงภาษาอังกฤษ</option>`;
+  if(keep && voices[keep]) sel.value = keep;
+}
+if("speechSynthesis" in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function speak(i,btn){
+  if(!("speechSynthesis" in window)){alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง");return}
+  speechSynthesis.cancel();
+  document.querySelectorAll(".speak.playing").forEach(b=>b.classList.remove("playing"));
+  const u = new SpeechSynthesisUtterance(DATA[i].plain);
+  const v = voices[+document.getElementById("voice").value]; if(v){u.voice=v;u.lang=v.lang}else u.lang="en-GB";
+  u.rate = +document.getElementById("rate").value; u.pitch = 0.9;
+  btn.classList.add("playing");
+  u.onend=u.onerror=()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

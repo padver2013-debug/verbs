@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Imperative Sentences · Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#E9EEF2; --ink:#10181F; --muted:#51606C; --accent:#0E5A66; --accent-ink:#FFFFFF;
+  --panel:#FFFFFF; --pic:#DCE9EC; --back:#0F2A33; --back-ink:#F3F8F9; --line:#C7D2D9;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+}
+:root[data-theme="dark"]{ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 56px}
+header h1{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:16px}
+.formula{display:inline-flex;gap:6px;margin-top:12px;font-family:Arial,sans-serif;font-size:14px}
+.formula span{padding:3px 10px;border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700}
+.formula span.dc{border-style:dashed}
+.bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:22px 0 20px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tab,.pager button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.voicebox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.voicebox select{font:inherit;font-size:14px;max-width:240px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:#10181F}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{perspective:1400px;height:350px;outline:none;cursor:pointer;position:relative}
+.inner{position:absolute;inset:0;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card:focus-visible .face{box-shadow:0 0 0 3px var(--accent)}
+.front{background:#FFFFFF;color:#000000}
+.pic{height:104px;background:var(--pic);display:flex;align-items:center;justify-content:center;gap:14px;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:12px;top:10px;font:600 12px Arial,sans-serif;color:#2C4A52;background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px}
+.text{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(17px,2.1vw,21px);line-height:1.4;color:#000;margin:0}
+.en b{font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.8vw,17.5px);line-height:1.45;color:#000;margin:0}
+.foot{padding:8px 14px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tap{font-size:13px;color:#5B6B75}
+.say{display:inline-flex;align-items:center;gap:7px;font:600 14px "Sarabun",sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.say svg{width:17px;height:17px;fill:currentColor}
+.say.on{outline:3px solid rgba(14,90,102,.35)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);justify-content:space-between;border-color:var(--back)}
+.back .th{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 26px;font-size:clamp(21px,2.6vw,27px);line-height:1.55;font-weight:600}
+.back .foot{color:#9FB9C0}
+.back .tap{color:#9FB9C0}
+.back .say{background:#5FC1CF;color:#06191D}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>7.1 Imperative Sentence in Daily Life</h1>
+  <p>ประโยคคำสั่ง/ขอร้อง (Commands / requests) — ฝึกอ่านและแปล — ฝึกอ่านและแปล</p>
+  <div class="formula" aria-label="Structure"><span>(You)</span><span>+</span><span>Verb</span><span>=</span><span>Commands / requests</span></div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <label class="voicebox">เสียงอ่าน
+    <select id="voice" aria-label="เลือกเสียงอ่าน"></select>
+  </label>
+</div>
+<p class="hint" id="hint">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม “ฟังเสียง” เพื่อฟังประโยค</p>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+</div>
+
+<script>
+const RAW = `
+{Open} the window, please.|ˈəʊpən ðə ˈwɪndəʊ, pliːz|กรุณาเปิดหน้าต่างด้วย|🪟🙏
+{Close} the door quietly.|kləʊz ðə dɔː ˈkwaɪətli|ปิดประตูเบาๆ|🚪🤫
+{Listen} to the instructions carefully.|ˈlɪsn tə ði ɪnˈstrʌkʃnz ˈkeəfli|ฟังคำแนะนำอย่างตั้งใจ|👂📋
+{Wait} for me outside.|weɪt fə mi ˌaʊtˈsaɪd|รอฉันอยู่ข้างนอกนะ|⏳🧍
+{Help} your friend with the box.|help jɔː frend wɪð ðə bɒks|ช่วยเพื่อนของคุณยกกล่องหน่อย|📦🤝
+{Turn off} the lights.|tɜːn ɒf ðə laɪts|ปิดไฟซะ|💡🔌
+{Clean} your desk right now.|kliːn jɔː desk raɪt naʊ|ทำความสะอาดโต๊ะทำงานเดี๋ยวนี้เลย|🧹🗄️
+{Read} this chapter before class.|riːd ðɪs ˈtʃæptə bɪˈfɔː klɑːs|อ่านบทนี้ก่อนเข้าชั้นเรียน|📖🏫
+{Write} your answers on paper.|raɪt jɔːr ˈɑːnsəz ɒn ˈpeɪpə|เขียนคำตอบของคุณลงบนกระดาษ|✍️📄
+{Speak} louder, please.|spiːk ˈlaʊdə, pliːz|กรุณาพูดให้เสียงดังขึ้นหน่อย|🗣️🔊
+{Drink} a glass of water.|drɪŋk ə ɡlɑːs əv ˈwɔːtə|ดื่มน้ำสักแก้วนะ|🥛💧
+{Eat} your vegetables.|iːt jɔː ˈvedʒtəblz|กินผักของคุณซะ|🥦🥕
+{Wash} your hands thoroughly.|wɒʃ jɔː hændz ˈθʌrəli|ล้างมือให้สะอาดทั่วถึง|🧼🙌
+{Brush} your teeth before bed.|brʌʃ jɔː tiːθ bɪˈfɔː bed|แปรงฟันก่อนนอนด้วย|🪥🦷
+{Take} your umbrella outside.|teɪk jɔːr ʌmˈbrelə ˌaʊtˈsaɪd|พกร่มออกไปด้วยนะ|☂️🚶
+{Bring} me the report folder.|brɪŋ mi ðə rɪˈpɔːt ˈfəʊldə|เอาแฟ้มรายงานมาให้ฉันหน่อย|📁🤲
+{Show} me your passport.|ʃəʊ mi jɔː ˈpɑːspɔːt|แสดงหนังสือเดินทางของคุณให้ฉันดู|🛂👀
+{Give} her a sweet smile.|ɡɪv hɜːr ə swiːt smaɪl|ส่งยิ้มหวานๆ ให้เธอหน่อย|😊🎁
+{Answer} the phone quickly.|ˈɑːnsə ðə fəʊn ˈkwɪkli|รับโทรศัพท์เร็วเข้า|📞⚡
+{Pay} close attention here.|peɪ kləʊs əˈtenʃn hɪə|ตั้งใจดูตรงนี้ให้ดี|👀🎯
+{Park} your car in the back.|pɑːk jɔː kɑː ɪn ðə bæk|จอดรถของคุณไว้ข้างหลังนะ|🅿️🚗
+{Follow} the safety rules.|ˈfɒləʊ ðə ˈseɪfti ruːlz|ปฏิบัติตามกฎความปลอดภัย|🦺📋
+{Check} your spelling mistakes.|tʃek jɔː ˈspelɪŋ mɪˈsteɪks|ตรวจสอบคำที่สะกดผิดด้วย|🔤🔍
+{Fix} this broken chair.|fɪks ðɪs ˈbrəʊkən tʃeə|ซ่อมเก้าอี้ที่พังตัวนี้หน่อย|🪑🔧
+{Wear} a heavy jacket.|weər ə ˈhevi ˈdʒækɪt|สวมเสื้อแจ็คเก็ตหนาๆ ซะ|🧥❄️
+{Make} your bed neatly.|meɪk jɔː bed ˈniːtli|จัดเตียงนอนให้เรียบร้อย|🛏️✨
+{Lock} the back door securely.|lɒk ðə bæk dɔː sɪˈkjʊəli|ล็อกประตูหลังบ้านให้แน่นหนา|🔒🚪
+{Buy} some fresh fruit today.|baɪ sʌm freʃ fruːt təˈdeɪ|ซื้อผลไม้สดมาบ้างนะวันนี้|🍎🛒
+{Send} this package tomorrow.|send ðɪs ˈpækɪdʒ təˈmɒrəʊ|ส่งพัสดุชิ้นนี้ในวันพรุ่งนี้|📦📤
+{Catch} that falling ball.|kætʃ ðæt ˈfɔːlɪŋ bɔːl|รับลูกบอลที่กำลังตกลงมาลูกนั้น|⚾🧤
+{Throw} the old trash away.|θrəʊ ði əʊld træʃ əˈweɪ|ทิ้งขยะเก่าๆ ลงถังไปซะ|🗑️🚮
+{Pick up} your dropped pen.|pɪk ʌp jɔː drɒpt pen|เก็บปากกาที่ทำตกขึ้นมา|🖊️⬆️
+{Put on} your winter coat.|pʊt ɒn jɔː ˈwɪntə kəʊt|ใส่เสื้อโค้ทกันหนาวของคุณซะ|🧥🧣
+{Take off} your muddy shoes.|teɪk ɒf jɔː ˈmʌdi ʃuːz|ถอดรองเท้าที่เปื้อนโคลนของคุณออก|👞🟤
+{Draw} a landscape picture.|drɔː ə ˈlændskeɪp ˈpɪktʃə|วาดรูปทิวทัศน์ธรรมชาติ|✏️🏞️
+{Paint} the fence white.|peɪnt ðə fens waɪt|ทาสีรั้วให้เป็นสีขาว|🖌️⬜
+{Study} your vocabulary words.|ˈstʌdi jɔː vəˈkæbjʊləri wɜːdz|ทบทวนคำศัพท์ของคุณ|📚🔤
+{Practice} guitar chords daily.|ˈpræktɪs ɡɪˈtɑː kɔːdz ˈdeɪli|ฝึกซ้อมคอร์ดกีตาร์ทุกวัน|🎸🔁
+{Call} me this evening.|kɔːl mi ðɪs ˈiːvnɪŋ|โทรหาฉันเย็นนี้นะ|📞🌆
+{Text} your team leader.|tekst jɔː tiːm ˈliːdə|ส่งข้อความหาหัวหน้าทีมของคุณ|💬👤
+{Find} the missing documents.|faɪnd ðə ˈmɪsɪŋ ˈdɒkjʊmənts|หาเอกสารที่หายไปให้เจอ|🔍📄
+{Keep} this secret safe.|kiːp ðɪs ˈsiːkrɪt seɪf|เก็บเรื่องนี้ไว้เป็นความลับด้วย|🤐🔐
+{Share} your snacks politely.|ʃeə jɔː snæks pəˈlaɪtli|แบ่งขนมให้เพื่อนๆ อย่างสุภาพ|🍪🤝
+{Save} your digital files.|seɪv jɔː ˈdɪdʒɪtl faɪlz|บันทึกไฟล์งานดิจิทัลของคุณ|💾💻
+{Print} this contract copy.|prɪnt ðɪs ˈkɒntrækt ˈkɒpi|พิมพ์สำเนาสัญญาฉบับนี้ออกมา|🖨️📃
+{Choose} your preferred seat.|tʃuːz jɔː prɪˈfɜːd siːt|เลือกที่นั่งที่คุณชื่นชอบ|💺👆
+{Count} the total money.|kaʊnt ðə ˈtəʊtl ˈmʌni|นับจำนวนเงินทั้งหมด|💵🔢
+{Measure} the room dimensions.|ˈmeʒə ðə ruːm daɪˈmenʃnz|วัดขนาดพื้นที่ห้อง|📏🏠
+{Cut} the wrapping paper.|kʌt ðə ˈræpɪŋ ˈpeɪpə|ตัดกระดาษห่อของขวัญ|✂️🎁
+{Fold} your laundry neatly.|fəʊld jɔː ˈlɔːndri ˈniːtli|พับผ้าที่ซักแล้วให้เรียบร้อย|👕🧺
+{Stir} the soup gently.|stɜː ðə suːp ˈdʒentli|คนน้ำซุปเบาๆ|🥣🥄
+{Taste} the sweet dessert.|teɪst ðə swiːt dɪˈzɜːt|ชิมขนมหวานจานนี้ดู|🍰😋
+{Smell} the blooming flowers.|smel ðə ˈbluːmɪŋ ˈflaʊəz|ดมกลิ่นดอกไม้ที่กำลังผลิบาน|👃🌸
+{Touch} the smooth screen.|tʌtʃ ðə smuːð skriːn|สัมผัสหน้าจอที่เรียบเนียน|👆📱
+{Watch} the evening news.|wɒtʃ ði ˈiːvnɪŋ njuːz|ดูข่าวภาคค่ำด้วย|📺📰
+{Hide} the surprise gift.|haɪd ðə səˈpraɪz ɡɪft|ซ่อนของขวัญเซอร์ไพรส์ไว้ก่อน|🎁🙈
+{Build} a wooden birdhouse.|bɪld ə ˈwʊdn ˈbɜːdhaʊs|สร้างบ้านนกทำจากไม้|🔨🐦
+{Water} the indoor plants.|ˈwɔːtə ði ˈɪndɔː plɑːnts|รดน้ำต้นไม้ภายในบ้าน|🪴💦
+{Feed} the hungry cat.|fiːd ðə ˈhʌŋɡri kæt|ให้อาหารแมวที่กำลังหิวโซ|🐈🥣
+{Walk} the puppy outside.|wɔːk ðə ˈpʌpi ˌaʊtˈsaɪd|พาเจ้าลูกสุนัขไปเดินเล่นข้างนอก|🐶🚶
+{Run} across the finish line.|rʌn əˈkrɒs ðə ˈfɪnɪʃ laɪn|วิ่งข้ามเส้นชัยไปเลย|🏃🏁
+{Jump} over the hurdle.|dʒʌmp ˈəʊvə ðə ˈhɜːdl|กระโดดข้ามรั้วสิ่งกีดขวางนั้น|🦘🚧
+{Climb} the steep hill carefully.|klaɪm ðə stiːp hɪl ˈkeəfəli|ปีนเนินเขาสูงชันอย่างระมัดระวัง|🧗⛰️
+{Cross} the street at the crosswalk.|krɒs ðə striːt æt ðə ˈkrɒswɔːk|ข้ามถนนตรงทางม้าลาย|🚸🚶
+{Drive} slower in the rain.|draɪv ˈsləʊə ɪn ðə reɪn|ขับรถให้ช้าลงตอนฝนตก|🚗🌧️
+{Stop} the vehicle immediately.|stɒp ðə ˈviːəkl ɪˈmiːdiətli|หยุดรถทันที|🛑🚙
+{Start} the car engine.|stɑːt ðə kɑː ˈendʒɪn|สตาร์ทเครื่องยนต์รถ|🔑🚗
+{Join} our team event.|dʒɔɪn ˈaʊə tiːm ɪˈvent|เข้าร่วมกิจกรรมของทีมเรานะ|👥🙌
+{Invite} your close friends.|ɪnˈvaɪt jɔː kləʊs frendz|เชิญเพื่อนสนิทของคุณมาด้วย|💌👫
+{Welcome} our special guests.|ˈwelkəm ˈaʊə ˈspeʃl ɡests|ยินดีต้อนรับแขกคนสำคัญของเรา|👋🎉
+{Introduce} yourself to everyone.|ˌɪntrəˈdjuːs jɔːˈself tu ˈevriwʌn|แนะนำตัวให้ทุกคนรู้จักหน่อย|🙋🤝
+{Express} your feelings openly.|ɪkˈspres jɔː ˈfiːlɪŋz ˈəʊpənli|แสดงความรู้สึกของคุณออกมาอย่างเปิดเผย|💬❤️
+{Accept} this sincere apology.|əkˈsept ðɪs sɪnˈsɪə əˈpɒlədʒi|ยอมรับคำขอโทษที่จริงใจนี้เถอะ|🙏🤝
+{Refuse} bad temptations.|rɪˈfjuːz bæd tempˈteɪʃnz|ปฏิเสธสิ่งล่อตาล่อใจที่ไม่ดี|🙅🍩
+{Trust} your own instincts.|trʌst jɔːr əʊn ˈɪnstɪŋkts|เชื่อมั่นในสัญชาตญาณของตัวเอง|🧠✨
+{Imagine} a better future.|ɪˈmædʒɪn ə ˈbetə ˈfjuːtʃə|ลองจินตนาการถึงอนาคตที่ดีกว่า|💭🌈
+{Expect} great results soon.|ɪkˈspekt ɡreɪt rɪˈzʌlts suːn|คาดหวังผลลัพธ์ที่ยอดเยี่ยมในเร็วๆ นี้|📈🌟
+{Prepare} dinner for tonight.|prɪˈpeə ˈdɪnə fə təˈnaɪt|เตรียมอาหารเย็นสำหรับค่ำนี้|🍳🍽️
+{Arrange} the meeting schedule.|əˈreɪndʒ ðə ˈmiːtɪŋ ˈʃedjuːl|จัดตารางเวลากำหนดการประชุม|📅🗂️
+{Organize} your bookshelf.|ˈɔːɡənaɪz jɔː ˈbʊkʃelf|จัดระเบียบชั้นวางหนังสือของคุณ|📚🗄️
+{Plan} your vacation route.|plæn jɔː vəˈkeɪʃn ruːt|วางแผนเส้นทางวันหยุดพักผ่อน|🗺️🧳
+{Solve} this math puzzle.|sɒlv ðɪs mæθ ˈpʌzl|แก้ปริศนาโจทย์คณิตศาสตร์ข้อนี้|🧩➗
+{Complete} your assignment today.|kəmˈpliːt jɔːr əˈsaɪnmənt təˈdeɪ|ทำงานที่ได้รับมอบหมายให้เสร็จวันนี้|✅📝
+{Submit} the report online.|səbˈmɪt ðə rɪˈpɔːt ˌɒnˈlaɪn|ส่งรายงานทางออนไลน์|📤💻
+{Protect} your sensitive skin.|prəˈtekt jɔː ˈsensətɪv skɪn|ปกป้องผิวที่บอบบางของคุณ|🧴🛡️
+{Warn} your younger brother.|wɔːn jɔː ˈjʌŋɡə ˈbrʌðə|เตือนน้องชายของคุณด้วย|⚠️👦
+{Enjoy} your weekend trip.|ɪnˈdʒɔɪ jɔː ˌwiːkˈend trɪp|สนุกกับทริปวันหยุดสุดสัปดาห์นะ|😄🏖️
+{Smile} for the camera.|smaɪl fə ðə ˈkæmərə|ยิ้มให้กล้องหน่อย|😁📸
+{Breathe} deeply and {relax}.|briːð ˈdiːpli ənd rɪˈlæks|หายใจเข้าลึกๆ แล้วผ่อนคลาย|🌬️🧘
+{Think} before you {speak}.|θɪŋk bɪˈfɔː juː spiːk|คิดก่อนที่จะพูดออกไป|🤔🗣️
+{Look} at the board.|lʊk æt ðə bɔːd|มองมาที่กระดานดำ|👀📋
+{Touch} the fabric gently.|tʌtʃ ðə ˈfæbrɪk ˈdʒentli|สัมผัสเนื้อผ้าเบาๆ|🧵🤚
+{Clean} your muddy boots.|kliːn jɔː ˈmʌdi buːts|ทำความสะอาดรองเท้าบูทที่เปื้อนโคลน|🥾🧽
+{Wash} the dirty dishes.|wɒʃ ðə ˈdɜːti ˈdɪʃɪz|ล้างจานที่สกปรกซะ|🍽️🧼
+{Brush} your pet's fur.|brʌʃ jɔː pets fɜː|แปรงขนให้กับสัตว์เลี้ยงของคุณ|🐕✨
+{Iron} your formal shirt.|ˈaɪən jɔː ˈfɔːml ʃɜːt|รีดเสื้อเชิ้ตทางการของคุณ|👔♨️
+{Pack} your suitcase neatly.|pæk jɔː ˈsuːtkeɪs ˈniːtli|จัดกระเป๋าเดินทางให้เป็นระเบียบเรียบร้อย|🧳📦
+{Clear} the dining table.|klɪə ðə ˈdaɪnɪŋ ˈteɪbl|เคลียร์โต๊ะอาหารให้ว่างเปล่า|🍽️🧹
+{Water} the green lawn.|ˈwɔːtə ðə ɡriːn lɔːn|รดน้ำสนามหญ้าสีเขียว|🌿💦
+{Rest} your tired eyes.|rest jɔː ˈtaɪəd aɪz|พักผ่อนดวงตาที่เหนื่อยล้าของคุณซะ|😌👁️
+`.trim().split("\n");
+
+const DATA = RAW.map(line=>{
+  const [en,ipa,th,emo] = line.split("|");
+  const plain = en.replace(/[{}]/g,"");
+  const html = en.replace(/\{([^}]+)\}/g,"<b>$1</b>");
+  const pics = Array.from(emo.trim().matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic}\uFE0F?)*/gu)).map(m=>m[0]);
+  return {plain,html,ipa,th,pics};
+});
+
+const PER_PAGE = 50;
+const PAGES = Math.ceil(DATA.length/PER_PAGE);
+let page = 0;
+
+const grid = document.getElementById("grid");
+const tabs = document.getElementById("tabs");
+const pager = document.getElementById("pager");
+const voiceSel = document.getElementById("voice");
+const hint = document.getElementById("hint");
+
+/* ---------- Speech ---------- */
+let voices = [];
+const MALE_HINTS = ["ryan","google uk english male","daniel","george","arthur","oliver","thomas","james","male"];
+const FEMALE_HINTS = ["female","susan","hazel","libby","sonia","kate","serena","martha","amy","emma","samantha","karen","moira","fiona","victoria"];
+function rankVoice(v){
+  const n = v.name.toLowerCase(); let s = 0;
+  if (/^en[-_]gb/i.test(v.lang)) s += 50; else if (/^en/i.test(v.lang)) s += 10;
+  const mi = MALE_HINTS.findIndex(h=>n.includes(h));
+  if (mi>=0) s += 40 - mi;
+  if (FEMALE_HINTS.some(h=>n.includes(h))) s -= 60;
+  if (/natural|online|neural/.test(n)) s += 15;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>rankVoice(b)-rankVoice(a));
+  voiceSel.innerHTML = "";
+  voices.forEach((v,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; voiceSel.appendChild(o); });
+  if(!voices.length){ hint.textContent="อุปกรณ์นี้ยังไม่มีเสียงภาษาอังกฤษให้เลือก — ลองเปิดด้วย Chrome / Edge / Safari"; }
+  else if(rankVoice(voices[0])<60){ hint.textContent="ไม่พบเสียงผู้ชายอังกฤษ (UK) บนอุปกรณ์นี้ — เลือกเสียงอื่นจากเมนู “เสียงอ่าน” ได้"; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+let activeBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  const same = activeBtn===btn && speechSynthesis.speaking;
+  speechSynthesis.cancel();
+  if(activeBtn){ activeBtn.classList.remove("on"); activeBtn=null; }
+  if(same) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices[+voiceSel.value||0];
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onend = u.onerror = ()=>{ btn.classList.remove("on"); if(activeBtn===btn) activeBtn=null; };
+  btn.classList.add("on"); activeBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Render ---------- */
+const ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function makeCard(item, idx){
+  const card = el("div","card"); card.tabIndex=0; card.setAttribute("role","button");
+  card.setAttribute("aria-label","การ์ดที่ "+(idx+1)+" กดเพื่อพลิก");
+  const inner = el("div","inner");
+
+  const front = el("div","face front");
+  const pic = el("div","pic");
+  pic.appendChild(el("span","num", String(idx+1)));
+  item.pics.slice(0,2).forEach(p=>pic.appendChild(el("span","",p)));
+  const text = el("div","text");
+  text.appendChild(el("p","en",item.html));
+  text.appendChild(el("p","ipa","/"+item.ipa+"/"));
+  const foot = el("div","foot");
+  foot.appendChild(el("span","tap","แตะการ์ดเพื่อดูคำแปล"));
+  const sb = el("button","say",ICON+"ฟังเสียง"); sb.type="button";
+  sb.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb);});
+  foot.appendChild(sb);
+  front.append(pic,text,foot);
+
+  const back = el("div","face back");
+  back.appendChild(el("div","th",item.th));
+  const bfoot = el("div","foot");
+  bfoot.appendChild(el("span","tap","แตะเพื่อกลับไปด้านหน้า"));
+  const sb2 = el("button","say",ICON+"ฟังเสียง"); sb2.type="button";
+  sb2.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb2);});
+  bfoot.appendChild(sb2);
+  back.appendChild(bfoot);
+
+  inner.append(front,back); card.appendChild(inner);
+  const flip = ()=>card.classList.toggle("flipped");
+  card.addEventListener("click",flip);
+  card.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ") && e.target===card){ e.preventDefault(); flip(); }});
+  return card;
+}
+
+function render(){
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  grid.innerHTML="";
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((it,i)=>grid.appendChild(makeCard(it,start+i)));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",i===page));
+  window.scrollTo({top:0,behavior:"auto"});
+}
+function goto(p){ page=p; render(); }
+
+for(let p=0;p<PAGES;p++){
+  const a = p*PER_PAGE+1, b = Math.min((p+1)*PER_PAGE, DATA.length);
+  const t = el("button","tab","หน้า "+(p+1)+" · "+a+"–"+b); t.setAttribute("role","tab");
+  t.addEventListener("click",()=>goto(p)); tabs.appendChild(t);
+  const pb = el("button","","หน้า "+(p+1)); pb.addEventListener("click",()=>goto(p)); pager.appendChild(pb);
+}
+render();
+</script>
+</body>
+</html>

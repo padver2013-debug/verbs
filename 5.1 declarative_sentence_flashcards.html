@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Declarative Sentences · Flashcards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#E9EEF2; --ink:#10181F; --muted:#51606C; --accent:#0E5A66; --accent-ink:#FFFFFF;
+  --panel:#FFFFFF; --pic:#DCE9EC; --back:#0F2A33; --back-ink:#F3F8F9; --line:#C7D2D9;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+}
+:root[data-theme="dark"]{ --page:#0C1317; --ink:#E8EEF1; --muted:#9AA9B4; --line:#2B3A44; --accent:#5FC1CF; --accent-ink:#06191D; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:"Sarabun",system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 56px}
+header h1{font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:clamp(22px,3.4vw,32px);margin:0 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:16px}
+.formula{display:inline-flex;gap:6px;margin-top:12px;font-family:Arial,sans-serif;font-size:14px}
+.formula span{padding:3px 10px;border:1.5px solid var(--accent);border-radius:6px;color:var(--accent);font-weight:700}
+.formula span.dc{border-style:dashed}
+.bar{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:space-between;margin:22px 0 20px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:8px}
+.tab,.pager button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.voicebox{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.voicebox select{font:inherit;font-size:14px;max-width:240px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:#10181F}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:640px){.grid{grid-template-columns:1fr}}
+.card{perspective:1400px;height:350px;outline:none;cursor:pointer;position:relative}
+.inner{position:absolute;inset:0;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:16px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;border:1px solid var(--line)}
+.card:focus-visible .face{box-shadow:0 0 0 3px var(--accent)}
+.front{background:#FFFFFF;color:#000000}
+.pic{height:104px;background:var(--pic);display:flex;align-items:center;justify-content:center;gap:14px;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:12px;top:10px;font:600 12px Arial,sans-serif;color:#2C4A52;background:rgba(255,255,255,.7);border-radius:999px;padding:2px 9px}
+.text{flex:1;padding:16px 20px 8px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:clamp(17px,2.1vw,21px);line-height:1.4;color:#000;margin:0}
+.en b{font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.8vw,17.5px);line-height:1.45;color:#000;margin:0}
+.foot{padding:8px 14px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tap{font-size:13px;color:#5B6B75}
+.say{display:inline-flex;align-items:center;gap:7px;font:600 14px "Sarabun",sans-serif;padding:9px 16px;border-radius:999px;border:0;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.say svg{width:17px;height:17px;fill:currentColor}
+.say.on{outline:3px solid rgba(14,90,102,.35)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);justify-content:space-between;border-color:var(--back)}
+.back .th{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 26px;font-size:clamp(21px,2.6vw,27px);line-height:1.55;font-weight:600}
+.back .foot{color:#9FB9C0}
+.back .tap{color:#9FB9C0}
+.back .say{background:#5FC1CF;color:#06191D}
+.pager{display:flex;justify-content:center;gap:10px;margin-top:28px}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>5.1 Declarative Sentence</h1>
+  <p>ประโยคบอกเล่า (Statement) เพื่อให้ข้อมูล (Provide information) — ฝึกอ่านและแปล</p>
+  <div class="formula" aria-label="Structure"><span>Statement</span><span>=</span><span>Provide information</span></div>
+</header>
+
+<div class="bar">
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <label class="voicebox">เสียงอ่าน
+    <select id="voice" aria-label="เลือกเสียงอ่าน"></select>
+  </label>
+</div>
+<p class="hint" id="hint">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม “ฟังเสียง” เพื่อฟังประโยค</p>
+
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+</div>
+
+<script>
+const RAW = `
+Water {boils} at one hundred degrees Celsius.|ˈwɔːtə bɔɪlz ət wʌn ˈhʌndrəd dɪˈɡriːz ˈselsiəs|น้ำเดือดที่อุณหภูมิหนึ่งร้อยองศาเซลเซียส|💧🔥
+The Earth {revolves} around the Sun.|ði ɜːθ rɪˈvɒlvz əˈraʊnd ðə sʌn|โลกโคจรรอบดวงอาทิตย์|🌍☀️
+Bangkok {is} the capital city of Thailand.|ˈbæŋkɒk ɪz ðə ˈkæpɪtl ˈsɪti əv ˈtaɪlænd|กรุงเทพมหานครเป็นเมืองหลวงของประเทศไทย|🏙️🇹🇭
+Plants {absorb} carbon dioxide from the air.|plɑːnts əbˈzɔːb ˈkɑːbən daɪˈɒksaɪd frəm ði eə|พืชดูดซับก๊าซคาร์บอนไดออกไซด์จากอากาศ|🌱💨
+Light {travels} faster than sound.|laɪt ˈtrævlz ˈfɑːstə ðæn saʊnd|แสงเดินทางเร็วกว่าเสียง|💡⚡
+Humans {need} oxygen to survive.|ˈhjuːmənz niːd ˈɒksɪdʒən tə səˈvaɪv|มนุษย์ต้องการออกซิเจนเพื่อการอยู่รอด|🧑💨
+The human body {contains} two hundred six bones.|ðə ˈhjuːmən ˈbɒdi kənˈteɪnz tuː ˈhʌndrəd sɪks bəʊnz|ร่างกายมนุษย์ประกอบด้วยกระดูกสองร้อยหกชิ้น|🦴🧍
+Mount Everest {stands} as the highest mountain on Earth.|maʊnt ˈevərɪst stændz æz ðə ˈhaɪɪst ˈmaʊntɪn ɒn ɜːθ|ภูเขาเอเวอเรสต์ตั้งตระหง่านเป็นภูเขาที่สูงที่สุดบนโลก|🏔️🧗
+Honey {does} not {spoil} easily over time.|ˈhʌni dʌz nɒt spɔɪl ˈiːzɪli ˈəʊvə taɪm|น้ำผึ้งไม่บูดเสียหรือเน่าเปื่อยง่ายตามกาลเวลา|🍯⏳
+Penguins {live} primarily in the Southern Hemisphere.|ˈpeŋɡwɪnz lɪv praɪˈmerɪli ɪn ðə ˈsʌðən ˈhemɪsfɪə|เพนกวินอาศัยอยู่เป็นหลักในซีกโลกใต้|🐧🧊
+The Pacific Ocean {covers} a vast area of the globe.|ðə pəˈsɪfɪk ˈəʊʃn ˈkʌvəz ə vɑːst ˈeəriə əv ðə ɡləʊb|มหาสมุทรแปซิฟิกครอบคลุมพื้นที่ส่วนใหญ่ของโลก|🌊🌐
+Dolphins {communicate} through clicks and whistles.|ˈdɒlfɪnz kəˈmjuːnɪkeɪt θruː klɪks ənd ˈwɪslz|ปลาโลมาสื่อสารกันผ่านเสียงคลิกและเสียงหวีด|🐬💬
+Trees {produce} oxygen during the daytime.|triːz prəˈdjuːs ˈɒksɪdʒən ˈdjʊərɪŋ ðə ˈdeɪtaɪm|ต้นไม้ผลิตออกซิเจนในเวลากลางวัน|🌳☀️
+Diamonds {consist} entirely of pure carbon.|ˈdaɪəməndz kənˈsɪst ɪnˈtaɪəli əv pjʊə ˈkɑːbən|เพชรประกอบด้วยคาร์บอนบริสุทธิ์ทั้งหมด|💎⚫
+The moon {reflects} light from the sun.|ðə muːn rɪˈflekts laɪt frəm ðə sʌn|ดวงจันทร์สะท้อนแสงมาจากดวงอาทิตย์|🌙✨
+Computers {process} digital data very quickly.|kəmˈpjuːtəz ˈprəʊsesɪz ˈdɪdʒɪtl ˈdeɪtə ˈveri ˈkwɪkli|คอมพิวเตอร์ประมวลผลข้อมูลดิจิทัลอย่างรวดเร็วมาก|💻⚙️
+Sound {requires} a medium to travel through.|saʊnd rɪˈkwaɪəz ə ˈmiːdiəm tə ˈtrævl θruː|เสียงต้องอาศัยตัวกลางในการเดินทางผ่าน|🔊📡
+Electricity {flows} through conductive materials.|ɪˌlekˈtrɪsəti fləʊz θruː kənˈdʌktɪv məˈtɪəriəlz|กระแสไฟฟ้าไหลผ่านวัสดุตัวนำไฟฟ้า|⚡🔌
+The Sahara {serves} as the largest hot desert.|ðə səˈhɑːrə sɜːvz æz ðə ˈlɑːdʒɪst hɒt ˈdezət|ทะเลทรายสะฮาราทำหน้าที่เป็นทะเลทรายร้อนที่ใหญ่ที่สุด|🏜️🐪
+Blood {carries} oxygen throughout the body.|blʌd ˈkæriz ˈɒksɪdʒən θruːˈaʊt ðə ˈbɒdi|เลือดทำหน้าที่ลำเลียงออกซิเจนไปทั่วร่างกาย|🩸❤️
+The Amazon River {discharges} immense water volume.|ði ˈæməzən ˈrɪvə dɪsˈtʃɑːdʒɪz ɪˈmens ˈwɔːtə ˈvɒljuːm|แม่น้ำแอมตอนระบายปริมาณน้ำมหาศาล|🌊🌴
+Glass {originates} from heated silica sand.|ɡlɑːs əˈrɪdʒɪneɪts frəm ˈhiːtɪd ˈsɪlɪkə sænd|แก้วมีต้นกำเนิดมาจากทรายซิลิกาที่ถูกความร้อน|🥛🏖️
+Salt {dissolves} easily in warm water.|sɔːlt dɪˈzɒlvz ˈiːzɪli ɪn wɔːm ˈwɔːtə|เกลือละลายได้ง่ายในน้ำอุ่น|🧂💧
+The skeleton {protects} internal organs.|ðə ˈskelɪtn prəˈtekts ɪnˈtɜːnl ˈɔːɡənz|โครงกระดูกทำหน้าที่ปกป้องอวัยวะภายใน|💀🛡️
+Stars {emit} natural light and heat.|stɑːz ɪˈmɪt ˈnætʃrəl laɪt ənd hiːt|ดวงดาวเปล่งแสงสว่างและความร้อนตามธรรมชาติออกมา|⭐🔥
+Regular exercise {improves} cardiovascular health.|ˈreɡjʊlə ˈeksəsaɪz ɪmˈpruːvz ˌkɑːdiəʊˈvæskjʊlə helθ|การออกกำลังกายเป็นประจำช่วยปรับปรุงสุขภาพระบบหัวใจและหลอดเลือด|🏃❤️
+The cheetah {runs} as the fastest land animal.|ðə ˈtʃiːtə rʌnz æz ðə ˈfɑːstɪst lænd ˈænɪml|เสือชีตาห์วิ่งเป็นสัตว์บกที่เร็วที่สุด|🐆💨
+Lightning {occurs} during intense thunderstorms.|ˈlaɪtnɪŋ əˈkɜːz ˈdjʊərɪŋ ɪnˈtens ˈθʌndəstɔːmz|ฟ้าผ่าเกิดขึ้นระหว่างพายุฝนฟ้าคะนองรุนแรง|⚡⛈️
+The blue whale {reaches} the largest animal size.|ðə bluː weɪl ˈriːtʃɪz ðə ˈlɑːdʒɪst ˈænɪml saɪz|วาฬสีน้ำเงินมีขนาดตัวใหญ่ที่สุดในบรรดาสัตว์ทั้งหมด|🐋📏
+Magnets {attract} metals like iron and nickel.|ˈmæɡnɪts əˈtrækt ˈmetlz laɪk ˈaɪən ənd ˈnɪkl|แม่เหล็กดึงดูดโลหะเช่นเหล็กและนิกเกิล|🧲🔩
+The liver {filters} toxins from human blood.|ðə ˈlɪvə ˈfɪltəz ˈtɒksɪnz frəm ˈhjuːmən blʌd|ตับทำหน้าที่กรองสารพิษออกจากเลือดมนุษย์|🧪🩸
+Paper {comes} from processed wood pulp.|ˈpeɪpə kʌmz frəm ˈprəʊsest wʊd pʌlp|กระดาษได้มาจากเยื่อไม้แปรรูป|📄🪵
+Volcanoes {release} molten magma and gases.|vɒlˈkeɪnəʊz rɪˈliːs ˈməʊltən ˈmæɡmə ənd ˈɡæsɪz|ภูเขาไฟปล่อยลาวาหลอมเหลวและก๊าซออกมา|🌋🔥
+The capital of Japan {is} Tokyo.|ðə ˈkæpɪtl əv dʒəˈpæn ɪz ˈtəʊkiəʊ|เมืองหลวงของประเทศญี่ปุ่นคือโตเกียว|🗼🇯🇵
+Antarctica {experiences} extremely cold temperatures.|ænˈtɑːktɪkə ɪkˈspɪəriənsɪz ɪkˈstriːmli kəʊld ˈtemprətʃəz|ทวีปแอนตาร์กติกาประสบกับอุณหภูมิที่หนาวจัดสุดขั้ว|🧊🥶
+Vitamins {support} proper body development.|ˈvɪtəmɪnz səˈpɔːt ˈprɒpə ˈbɒdi dɪˈveləpmənt|วิตามินช่วยสนับสนุนการพัฒนาการของร่างกายที่เหมาะสม|💊🍊
+The eye {focuses} light onto the retina.|ði aɪ ˈfəʊkəsɪz laɪt ˈɒntuː ðə ˈretɪnə|ดวงตาโฟกัสแสงตกลงบนจอประสาทตา|👁️💡
+Gravity {pulls} objects toward the ground.|ˈɡrævəti pʊlz ˈɒbdʒekts təˈwɔːd ðə ɡraʊnd|แรงโน้มถ่วงดึงดูดวัตถุเข้าหาพื้นโลก|🍎⬇️
+Owls {hunt} prey during the night.|aʊlz hʌnt preɪ ˈdjʊərɪŋ ðə naɪt|นกเค้าแมวออกล่าเหยื่อในเวลากลางคืน|🦉🌙
+The heart {pumps} blood throughout the body.|ðə hɑːt pʌmps blʌd θruːˈaʊt ðə ˈbɒdi|หัวใจสูบฉีดเลือดไปทั่วร่างกาย|❤️🩸
+Plastic {takes} centuries to decompose fully.|ˈplæstɪk teɪks ˈsentʃəriz tə ˌdiːkəmˈpəʊz ˈfʊli|พลาสติกใช้เวลาหลายศตวรรษกว่าจะย่อยสลายได้หมด|🥤⌛
+Sound waves {travel} through the atmosphere.|saʊnd weɪvz ˈtrævl θruː ði ˈætməsfɪə|คลื่นเสียงเดินทางผ่านชั้นบรรยากาศ|🔊🌬️
+The Great Wall of China {spans} thousands of miles.|ðə ɡreɪt wɔːl əv ˈtʃaɪnə spænz ˈθaʊzndz əv maɪlz|กำแพงเมืองจีนทอดยาวเป็นระยะทางหลายพันไมล์|🧱🇨🇳
+Solar panels {convert} sunlight into electricity.|ˈsəʊlə ˈpænlz kənˈvɜːt ˈsʌnlaɪt ˈɪntuː ɪˌlekˈtrɪsəti|แผงโซลาร์เซลล์แปลงแสงอาทิตย์ให้เป็นกระแสไฟฟ้า|☀️🔋
+The kidneys {produce} liquid waste fluid.|ðə ˈkɪdniz prəˈdjuːs ˈlɪkwɪd weɪst ˈfluːɪd|ไตผลิตของเสียที่เป็นของเหลวออกมา|💧🧪
+Mount Fuji {stands} as a famous volcano.|maʊnt ˈfuːdʒi stændz æz ə ˈfeɪməs vɒlˈkeɪnəʊ|ภูเขาไฟฟูจิยืนหยัดเป็นภูเขาไฟที่มีชื่อเสียง|🗻🌸
+Clouds {consist} of tiny water droplets.|klaʊdz kənˈsɪst əv ˈtaɪni ˈwɔːtə ˈdrɒplɪts|ก้อนเมฆประกอบด้วยหยดน้ำขนาดจิ๋วจำนวนมาก|☁️💧
+The Nile {flows} as a very long river.|ðə naɪl fləʊz æz ə ˈveri lɒŋ ˈrɪvə|แม่น้ำไนล์ไหลเป็นแม่น้ำที่มีความยาวมาก|🏞️🐊
+Iron {rusts} when {exposed} to moisture.|ˈaɪən rʌsts wen ɪkˈspəʊzd tə ˈmɔɪstʃə|เหล็กเกิดสนิมเมื่อสัมผัสกับความชื้น|🔩🟤
+The brain {controls} all body actions.|ðə breɪn kənˈtrəʊlz ɔːl ˈbɒdi ˈækʃnz|สมองควบคุมการทำงานทุกอย่างของร่างกาย|🧠🕹️
+The chameleon {changes} its skin color for camouflage.|ðə kəˈmiːliən ˈtʃeɪndʒɪz ɪts skɪn ˈkʌlə fə ˈkæməflɑːʒ|กิ้งก่าคาเมเลออนเปลี่ยนสีผิวของมันเพื่อการพรางตัว|🦎🎨
+Sound {travels} slower than light through air.|saʊnd ˈtrævlz ˈsləʊə ðæn laɪt θruː eə|เสียงเดินทางช้ากว่าแสงผ่านอากาศ|🔊🐢
+The moon {causes} ocean tides through gravity.|ðə muːn ˈkɔːzɪz ˈəʊʃn taɪdz θruː ˈɡrævəti|ดวงจันทร์ทำให้เกิดน้ำขึ้นน้ำลงในมหาสมุทรผ่านแรงโน้มถ่วง|🌕🌊
+Kangaroos {carry} their babies in a pouch.|ˌkæŋɡəˈruːz ˈkæri ðeə ˈbeɪbiz ɪn ə paʊtʃ|จิงโจ้แบกอุ้มลูกๆ ของมันไว้ในกระเป๋าหน้าท้อง|🦘👶
+The desert {receives} very little annual rainfall.|ðə ˈdezət rɪˈsiːvz ˈveri ˈlɪtl ˈænjuəl ˈreɪnfɔːl|ทะเลทรายได้รับปริมาณน้ำฝนรายปีน้อยมาก|🏜️🌧️
+Bees {produce} sweet honey from flower nectar.|biːz prəˈdjuːs swiːt ˈhʌni frəm ˈflaʊə ˈnektə|ผึ้งผลิตน้ำผึ้งหวานจากน้ำหวานของดอกไม้|🐝🍯
+The human ear {detects} different sound frequencies.|ðə ˈhjuːmən ɪə dɪˈtekts ˈdɪfrənt saʊnd ˈfriːkwənsiz|หูของมนุษย์ตรวจจับความถี่ของเสียงที่แตกต่างกันได้|👂🎶
+Oxygen {supports} fire combustion processes.|ˈɒksɪdʒən səˈpɔːts ˈfaɪə kəmˈbʌstʃən ˈprəʊsesɪz|ออกซิเจนช่วยสนับสนุนกระบวนการเผาไหม้ของไฟ|🔥💨
+The spider {weaves} intricate webs to catch insects.|ðə ˈspaɪdə wiːvz ˈɪntrɪkət webz tə kætʃ ˈɪnsekts|แมงมุมถักทอใยที่ซับซ้อนเพื่อจับแมลง|🕷️🕸️
+Forests {provide} habitats for diverse wildlife species.|ˈfɒrɪsts prəˈvaɪd ˈhæbɪtæts fə daɪˈvɜːs ˈwaɪldlaɪf ˈspiːʃiːz|ผืนป่าเป็นที่อยู่อาศัยให้กับสัตว์ป่าหลากหลายสายพันธุ์|🌲🦌
+The planet Mars {appears} red due to iron oxide.|ðə ˈplænɪt mɑːz əˈpɪəz red djuː tu ˈaɪən ˈɒksaɪd|ดาวเคราะห์ดาวอังคารมีสีแดงเนื่องจากมีเหล็กออกซิเดชัน|🔴🪐
+Water {freezes} at zero degrees Celsius.|ˈwɔːtə ˈfriːzɪz ət ˈzɪərəʊ dɪˈɡriːz ˈselsiəs|น้ำกลายเป็นน้ำแข็งที่อุณหภูมิศูนย์องศาเซลเซียส|💧🧊
+The stomach {digests} food using strong acids.|ðə ˈstʌmək daɪˈdʒests fuːd ˈjuːzɪŋ strɒŋ ˈæsɪdz|กระเพาะอาหารย่อยอาหารโดยใช้กรดที่มีฤทธิ์แรง|🍽️🧪
+Volcanoes {shape} the surface of the earth.|vɒlˈkeɪnəʊz ʃeɪp ðə ˈsɜːfɪs əv ði ɜːθ|ภูเขาไฟหล่อหลอมและสร้างพื้นผิวของโลก|🌋🌏
+The sun {rises} in the eastern sky daily.|ðə sʌn ˈraɪzɪz ɪn ði ˈiːstən skaɪ ˈdeɪli|ดวงอาทิตย์ขึ้นทางท้องฟ้าทิศตะวันออกทุกวัน|🌅⬆️
+Birds {migrate} during changing seasonal weather.|bɜːdz maɪˈɡreɪt ˈdjʊərɪŋ ˈtʃeɪndʒɪŋ ˈsiːzənl ˈweðə|นกอพยพย้ายถิ่นฐานในช่วงที่สภาพอากาศตามฤดูกาลเปลี่ยนแปลงไป|🐦🍂
+The equator {divides} the earth into two hemispheres.|ði ɪˈkweɪtə dɪˈvaɪdz ði ɜːθ ˈɪntuː tuː ˈhemɪsfɪəz|เส้นศูนย์สูตรแบ่งโลกออกเป็นสองซีกโลก|🌐➗
+Steel {combines} iron and carbon elements.|stiːl kəmˈbaɪnz ˈaɪən ənd ˈkɑːbən ˈelɪmənts|เหล็กกล้าเป็นการผสมผสานระหว่างธาตุเหล็กและคาร์บอน|⚙️🔗
+The tongue {identifies} various distinct taste profiles.|ðə tʌŋ aɪˈdentɪfaɪz ˈveəriəs dɪˈstɪŋkt teɪst ˈprəʊfaɪlz|ลิ้นทำหน้าที่จำแนกแยกแยะรสชาติต่างๆ ที่แตกต่างกัน|👅🍋
+Electricity {powers} modern technological household devices.|ɪˌlekˈtrɪsəti ˈpaʊəz ˈmɒdn ˌteknəˈlɒdʒɪkl ˈhaʊshəʊld dɪˈvaɪsɪz|กระแสไฟฟ้าให้พลังงานแก่เครื่องใช้ไฟฟ้าเทคโนโลยีสมัยใหม่ในบ้าน|⚡📺
+The skeleton {provides} structural support to bodies.|ðə ˈskelɪtn prəˈvaɪdz ˈstrʌktʃərəl səˈpɔːt tə ˈbɒdiz|โครงกระดูกให้การสนับสนุนทางโครงสร้างแก่ร่างกาย|🦴🏗️
+Clouds {float} high in the atmospheric layers.|klaʊdz fləʊt haɪ ɪn ði ˌætməsˈferɪk ˈleɪəz|ก้อนเมฆลอยล่องอยู่สูงในชั้นบรรยากาศ|☁️🎈
+The polar bear {survives} freezing arctic conditions.|ðə ˈpəʊlə beə səˈvaɪvz ˈfriːzɪŋ ˈɑːktɪk kənˈdɪʃnz|หมีขั้วโลกเอาชีวิตรอดจากสภาพอากาศอาร์กติกที่หนาวเหน็บ|🐻‍❄️🥶
+Rubber {stretches} and {bounces} back easily.|ˈrʌbə ˈstretʃɪz ənd ˈbaʊnsɪz bæk ˈiːzɪli|ยางมีความยืดหยุ่นยืดขยายและเด้งกลับได้ง่าย|🎾🔁
+The lungs {exchange} carbon dioxide for fresh oxygen.|ðə lʌŋz ɪksˈtʃeɪndʒ ˈkɑːbən daɪˈɒksaɪd fə freʃ ˈɒksɪdʒən|ปอดแลกเปลี่ยนก๊าซคาร์บอนไดออกไซด์เป็นออกซิเจนบริสุทธิ์|🌬️🔄
+The moon {completes} an orbit around the earth.|ðə muːn kəmˈpliːts ən ˈɔːbɪt əˈraʊnd ði ɜːθ|ดวงจันทร์โคจรรอบโลกครบรอบหนึ่งวงโคจร|🌙🔄
+Oil {floats} when {mixed} with water.|ɔɪl fləʊts wen mɪkst wɪð ˈwɔːtə|น้ำมันลอยตัวขึ้นเมื่อผสมเข้ากับน้ำ|🛢️💧
+The backbone {protects} the central spinal cord.|ðə ˈbækbəʊn prəˈtekts ðə ˈsentrəl ˈspaɪnl kɔːd|กระดูกสันหลังทำหน้าที่ปกป้องไขสันหลังส่วนกลาง|🧍🛡️
+Steam {rises} when water {reaches} boiling temperatures.|stiːm ˈraɪzɪz wen ˈwɔːtə ˈriːtʃɪz ˈbɔɪlɪŋ ˈtemprətʃəz|ไอความร้อนพวยพุ่งขึ้นเมื่อน้ำถึงจุดเดือด|♨️⬆️
+The giraffe {possesses} a remarkably long neck.|ðə dʒɪˈrɑːf pəˈzesɪz ə rɪˈmɑːkəbli lɒŋ nek|ยีราฟมีคอยาวโดดเด่นสะดุดตามาก|🦒📏
+Diamonds {scratch} almost all other natural materials.|ˈdaɪəməndz skrætʃ ˈɔːlməʊst ɔːl ˈʌðə ˈnætʃrəl məˈtɪəriəlz|เพชรสามารถขีดข่วนวัสดุธรรมชาติอื่นๆ เกือบทั้งหมดได้|💎🪨
+The wind {blows} due to atmospheric pressure differences.|ðə wɪnd bləʊz djuː tʊ ˌætməsˈferɪk ˈpreʃə ˈdɪfrənsɪz|ลมพัดเกิดขึ้นเนื่องจากความแตกต่างของความกดอากาศ|🌬️🌀
+The koala {eats} eucalyptus leaves for sustenance.|ðə kəʊˈɑːlə iːts ˌjuːkəˈlɪptəs liːvz fə ˈsʌstɪnəns|โคอาลีทานใบยูคาลิปตัสเป็นอาหารเพื่อการดำรงชีพ|🐨🍃
+Silver {conducts} electricity better than copper.|ˈsɪlvə kənˈdʌkts ɪˌlekˈtrɪsəti ˈbetə ðæn ˈkɒpə|เงินนำไฟฟ้าได้ดีกว่าทองแดง|🥈⚡
+The human heart {beats} continuously throughout life.|ðə ˈhjuːmən hɑːt biːts kənˈtɪnjuəsli θruːˈaʊt laɪf|หัวใจมนุษย์เต้นอย่างต่อเนื่องตลอดช่วงชีวิต|❤️💓
+Saltwater {freezes} at a lower temperature.|ˈsɔːltˌwɔːtə ˈfriːzɪz ət ə ˈləʊə ˈtemprətʃə|น้ำเค็มกลายเป็นน้ำแข็งที่อุณหภูมิต่ำกว่าปกติ|🌊🧊
+The turtle {carries} a protective shell on its back.|ðə ˈtɜːtl ˈkæriz ə prəˈtektɪv ʃel ɒn ɪts bæk|เต่าแบกกระดองป้องกันตัวไว้บนหลังของมัน|🐢🛡️
+Friction {generates} heat between {rubbing} surfaces.|ˈfrɪkʃn ˈdʒenəreɪts hiːt bɪˈtwiːn ˈrʌbɪŋ ˈsɜːfɪsɪz|แรงเสียดทานสร้างความร้อนระหว่างพื้นผิวที่เสียดสีกัน|🤲🔥
+The sun {provides} essential energy for life.|ðə sʌn prəˈvaɪdz ɪˈsenʃl ˈenədʒi fə laɪf|ดวงอาทิตย์ให้พลังงานที่จำเป็นต่อสิ่งมีชีวิต|☀️🌱
+The tiger {features} distinct stripes on its fur.|ðə ˈtaɪɡə ˈfiːtʃəz dɪˈstɪŋkt straɪps ɒn ɪts fɜː|เสือโคร่งมีลวดลายทางที่เด่นชัดบนขนของมัน|🐯🖤
+Magnetism {operates} across invisible force fields.|ˈmæɡnətɪzəm ˈɒpəreɪts əˈkrɒs ɪnˈvɪzəbl fɔːs fiːldz|แม่เหล็กทำงานผ่านสนามแรงที่มองไม่เห็น|🧲👻
+The river {empties} into a larger sea or ocean.|ðə ˈrɪvə ˈemptiz ˈɪntuː ə ˈlɑːdʒə siː ɔːr ˈəʊʃn|แม่น้ำไหลลงสู่ทะเลหรือมหาสมุทรที่ใหญ่กว่า|🏞️🌊
+Exercise {strengthens} human muscle endurance.|ˈeksəsaɪz ˈstreŋθnz ˈhjuːmən ˈmʌsl ɪnˈdjʊərəns|การออกกำลังกายเสริมสร้างความทนทานของกล้ามเนื้อมนุษย์|🏋️💪
+The atmosphere {blocks} harmful ultraviolet cosmic rays.|ði ˈætməsfɪə blɒks ˈhɑːmfl ˌʌltrəˈvaɪələt ˈkɒzmɪk reɪz|ชั้นบรรยากาศช่วยบล็อกรังสีคอสมิกอัลตราไวโอเลตที่เป็นอันตราย|🌍🛡️
+The spider {possesses} eight legs instead of six.|ðə ˈspaɪdə pəˈzesɪz eɪt leɡz ɪnˈsted əv sɪks|แมงมุมมีขาแปดขาแทนที่จะเป็นหกขา|🕷️🦵
+Snow {consists} of frozen atmospheric water crystals.|snəʊ kənˈsɪsts əv ˈfrəʊzn ˌætməsˈferɪk ˈwɔːtə ˈkrɪstlz|หิมะประกอบด้วยผลึกน้ำในชั้นบรรยากาศที่แข็งตัว|❄️⛄
+The ocean {contains} vast undiscovered marine ecosystems.|ði ˈəʊʃn kənˈteɪnz vɑːst ˌʌndɪˈskʌvəd məˈriːn ˈiːkəʊˌsɪstəmz|มหาสมุทรมีระบบนิเวศทางทะเลที่ยังไม่ถูกค้นพบอยู่อีกมากมาย|🌊🐠
+The nose {processes} thousands of distinct scents.|ðə nəʊz ˈprəʊsesɪz ˈθaʊzndz əv dɪˈstɪŋkt sents|จมูกประมวลผลกลิ่นที่แตกต่างกันนับพันกลิ่น|👃🌸
+Gravity {keeps} planets in stable cosmic orbits.|ˈɡrævəti kiːps ˈplænɪts ɪn ˈsteɪbl ˈkɒzmɪk ˈɔːbɪts|แรงโน้มถ่วงช่วยรักษาดาวเคราะห์ให้อยู่ในวงโคจรจักรวาลที่มั่นคง|🪐🔄
+Knowledge {expands} continuously through constant {learning}.|ˈnɒlɪdʒ ɪkˈspændz kənˈtɪnjuəsli θruː ˈkɒnstənt ˈlɜːnɪŋ|ความรู้ขยายตัวเพิ่มขึ้นอย่างต่อเนื่องผ่านการเรียนรู้อยู่เสมอ|🧠📚
+`.trim().split("\n");
+
+const DATA = RAW.map(line=>{
+  const [en,ipa,th,emo] = line.split("|");
+  const plain = en.replace(/[{}]/g,"");
+  const html = en.replace(/\{([^}]+)\}/g,"<b>$1</b>");
+  const pics = Array.from(emo.trim().matchAll(/\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic}\uFE0F?)*/gu)).map(m=>m[0]);
+  return {plain,html,ipa,th,pics};
+});
+
+const PER_PAGE = 50;
+const PAGES = Math.ceil(DATA.length/PER_PAGE);
+let page = 0;
+
+const grid = document.getElementById("grid");
+const tabs = document.getElementById("tabs");
+const pager = document.getElementById("pager");
+const voiceSel = document.getElementById("voice");
+const hint = document.getElementById("hint");
+
+/* ---------- Speech ---------- */
+let voices = [];
+const MALE_HINTS = ["ryan","google uk english male","daniel","george","arthur","oliver","thomas","james","male"];
+const FEMALE_HINTS = ["female","susan","hazel","libby","sonia","kate","serena","martha","amy","emma","samantha","karen","moira","fiona","victoria"];
+function rankVoice(v){
+  const n = v.name.toLowerCase(); let s = 0;
+  if (/^en[-_]gb/i.test(v.lang)) s += 50; else if (/^en/i.test(v.lang)) s += 10;
+  const mi = MALE_HINTS.findIndex(h=>n.includes(h));
+  if (mi>=0) s += 40 - mi;
+  if (FEMALE_HINTS.some(h=>n.includes(h))) s -= 60;
+  if (/natural|online|neural/.test(n)) s += 15;
+  return s;
+}
+function loadVoices(){
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>rankVoice(b)-rankVoice(a));
+  voiceSel.innerHTML = "";
+  voices.forEach((v,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=v.name+" ("+v.lang+")"; voiceSel.appendChild(o); });
+  if(!voices.length){ hint.textContent="อุปกรณ์นี้ยังไม่มีเสียงภาษาอังกฤษให้เลือก — ลองเปิดด้วย Chrome / Edge / Safari"; }
+  else if(rankVoice(voices[0])<60){ hint.textContent="ไม่พบเสียงผู้ชายอังกฤษ (UK) บนอุปกรณ์นี้ — เลือกเสียงอื่นจากเมนู “เสียงอ่าน” ได้"; }
+}
+if("speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+let activeBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  const same = activeBtn===btn && speechSynthesis.speaking;
+  speechSynthesis.cancel();
+  if(activeBtn){ activeBtn.classList.remove("on"); activeBtn=null; }
+  if(same) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const v = voices[+voiceSel.value||0];
+  if(v){ u.voice=v; u.lang=v.lang; } else u.lang="en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onend = u.onerror = ()=>{ btn.classList.remove("on"); if(activeBtn===btn) activeBtn=null; };
+  btn.classList.add("on"); activeBtn = btn;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- Render ---------- */
+const ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls) e.className=cls; if(html!==undefined) e.innerHTML=html; return e; }
+
+function makeCard(item, idx){
+  const card = el("div","card"); card.tabIndex=0; card.setAttribute("role","button");
+  card.setAttribute("aria-label","การ์ดที่ "+(idx+1)+" กดเพื่อพลิก");
+  const inner = el("div","inner");
+
+  const front = el("div","face front");
+  const pic = el("div","pic");
+  pic.appendChild(el("span","num", String(idx+1)));
+  item.pics.slice(0,2).forEach(p=>pic.appendChild(el("span","",p)));
+  const text = el("div","text");
+  text.appendChild(el("p","en",item.html));
+  text.appendChild(el("p","ipa","/"+item.ipa+"/"));
+  const foot = el("div","foot");
+  foot.appendChild(el("span","tap","แตะการ์ดเพื่อดูคำแปล"));
+  const sb = el("button","say",ICON+"ฟังเสียง"); sb.type="button";
+  sb.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb);});
+  foot.appendChild(sb);
+  front.append(pic,text,foot);
+
+  const back = el("div","face back");
+  back.appendChild(el("div","th",item.th));
+  const bfoot = el("div","foot");
+  bfoot.appendChild(el("span","tap","แตะเพื่อกลับไปด้านหน้า"));
+  const sb2 = el("button","say",ICON+"ฟังเสียง"); sb2.type="button";
+  sb2.addEventListener("click",e=>{e.stopPropagation(); speak(item.plain,sb2);});
+  bfoot.appendChild(sb2);
+  back.appendChild(bfoot);
+
+  inner.append(front,back); card.appendChild(inner);
+  const flip = ()=>card.classList.toggle("flipped");
+  card.addEventListener("click",flip);
+  card.addEventListener("keydown",e=>{ if((e.key==="Enter"||e.key===" ") && e.target===card){ e.preventDefault(); flip(); }});
+  return card;
+}
+
+function render(){
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+  grid.innerHTML="";
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((it,i)=>grid.appendChild(makeCard(it,start+i)));
+  [...tabs.children].forEach((b,i)=>b.setAttribute("aria-selected",i===page));
+  window.scrollTo({top:0,behavior:"auto"});
+}
+function goto(p){ page=p; render(); }
+
+for(let p=0;p<PAGES;p++){
+  const a = p*PER_PAGE+1, b = Math.min((p+1)*PER_PAGE, DATA.length);
+  const t = el("button","tab","หน้า "+(p+1)+" · "+a+"–"+b); t.setAttribute("role","tab");
+  t.addEventListener("click",()=>goto(p)); tabs.appendChild(t);
+  const pb = el("button","","หน้า "+(p+1)); pb.addEventListener("click",()=>goto(p)); pager.appendChild(pb);
+}
+render();
+</script>
+</body>
+</html>
