@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Must — Certainty Flip Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+ --bg:#eef1f5;--card:#fff;--ink:#000;--muted:#5b6472;--line:#d5dae2;--accent:#1f3a5f;--verb:#8b0000;--mark:#ffe14d;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14181f;--muted:#a3adbb;--line:#2b3340;--accent:#9db8de;}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar select,.bar button{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#000;cursor:pointer}
+.bar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{max-width:1100px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;cursor:pointer;min-height:300px;outline:none}
+.flip:focus-visible .inner{box-shadow:0 0 0 3px var(--accent)}
+.inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;border-radius:14px}
+.flip.turned .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg);background:#f3f7ff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{background:#e8effa}}
+.no{position:absolute;top:8px;left:12px;font-size:12px;color:#6b7280}
+.pic{font-size:clamp(48px,9vw,84px);line-height:1;margin:6px 0 10px}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;color:#000;font-size:clamp(15px,2.3vw,22px);line-height:1.35;margin:0 0 8px}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--mark);color:#000;font-weight:700;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;color:#222;font-size:clamp(13px,2vw,18px);line-height:1.4;margin:0 0 10px}
+.th{font-size:clamp(17px,2.6vw,24px);line-height:1.6;color:#000;margin:0 0 10px}
+.enSmall{font-family:Arial,sans-serif;font-weight:300;font-size:14px;color:#444}
+.enSmall b{font-weight:700;color:var(--verb)}
+.say{position:absolute;right:10px;top:8px;border:1px solid #c2c9d4;background:#fff;color:#000;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.say:hover{background:#eef3fb}
+.say.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hint{font-size:11px;color:#6b7280;margin-top:auto}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>5.2 Modal verb “Must” — Certainty</h1>
+  <p class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย (UK)</p>
+  <div class="bar">
+    <div class="pager" id="pager"></div>
+    <select id="voiceSel" aria-label="Voice"></select>
+    <select id="rate" aria-label="Speed">
+      <option value="0.7">ช้า 0.7×</option><option value="0.85" selected>ปกติ 0.85×</option><option value="1">เร็ว 1×</option>
+    </select>
+    <button id="flipAll">พลิกทั้งหน้า</button>
+  </div>
+</header>
+<main class="grid" id="grid"></main>
+
+<script>
+// [English, main verb (highlighted), IPA (UK), picture, Thai]
+const D=[["He must be tired after working all night.", "be", "/hiː mʌst biː ˈtaɪəd ˈɑːftə ˈwɜːkɪŋ ɔːl naɪt/", "😴", "เขาคงจะเหนื่อยมากแน่ๆ หลังจากทำงานมาทั้งคืน"],
+["She must know the truth about this situation.", "know", "/ʃiː mʌst nəʊ ðə truːθ əˈbaʊt ðɪs ˌsɪtʃuˈeɪʃən/", "🧠", "เธอคงจะรู้ความจริงเกี่ยวกับสถานการณ์นี้อย่างแน่นอน"],
+["It must rain outside; everyone is carrying an umbrella.", "rain", "/ɪt mʌst reɪn ˌaʊtˈsaɪd ˈevriwʌn ɪz ˈkæriɪŋ ən ʌmˈbrelə/", "🌧️", "ข้างนอกฝนคงจะตกแน่ๆ ทุกคนพกร่มกันหมดเลย"],
+["They must be rich to drive such an expensive car.", "be", "/ðeɪ mʌst biː rɪtʃ tə draɪv sʌtʃ ən ɪkˈspensɪv kɑː/", "💰", "พวกเขาคงจะร่ำรวยมากแน่ๆ ถึงขับรถราคาแพงขนาดนั้น"],
+["You must be joking when you said that!", "be joking", "/juː mʌst biː ˈdʒəʊkɪŋ wen juː sed ðæt/", "😂", "คุณต้องล้อเล่นอยู่แน่ๆ เลยตอนที่พูดแบบนั้นออกมา!"],
+["He must have left his keys on the kitchen table.", "have left", "/hiː mʌst əv left hɪz kiːz ɒn ðə ˈkɪtʃɪn ˈteɪbəl/", "🔑", "เขาคงจะลืมกุญแจไว้บนโต๊ะในครัวแน่ๆ เลย"],
+["She must love reading; she has hundreds of books.", "love", "/ʃiː mʌst lʌv ˈriːdɪŋ ʃiː hæz ˈhʌndrədz əv bʊks/", "❤️", "เธอคงจะรักการอ่านหนังสือมากๆ แน่ๆ มีหนังสือเป็นร้อยๆ เล่มเลย"],
+["The food must taste delicious because the restaurant is packed.", "taste", "/ðə fuːd mʌst teɪst dɪˈlɪʃəs bɪˈkɒz ðə ˈrestrɒnt ɪz pækt/", "😋", "อาหารคงจะอร่อยมากแน่ๆ เพราะร้านคนแน่นขนัดเลย"],
+["He must feel proud of his son's great achievement.", "feel", "/hiː mʌst fiːl praʊd əv hɪz sʌnz ɡreɪt əˈtʃiːvmənt/", "🥹", "เขาคงจะรู้สึกภูมิใจในความสำเร็จครั้งใหญ่ของลูกชายมากแน่ๆ"],
+["That test must have been difficult; everyone failed.", "have been", "/ðæt test mʌst əv biːn ˈdɪfɪkəlt ˈevriwʌn feɪld/", "📝", "ข้อสอบนั้นคงจะยากมากๆ แน่ๆ สอบตกกันหมดเลย"],
+["She must be fluent in French after living in Paris.", "be", "/ʃiː mʌst biː ˈfluːənt ɪn frentʃ ˈɑːftə ˈlɪvɪŋ ɪn ˈpærɪs/", "🇫🇷", "เธอคงจะพูดภาษาฝรั่งเศสได้อย่างคล่องแคล่วหลังไปใช้ชีวิตในปารีส"],
+["You must remember me; we went to school together.", "remember", "/juː mʌst rɪˈmembə miː wiː went tə skuːl təˈɡeðə/", "🤔", "คุณต้องจำฉันได้แน่ๆ เลย เราเคยเรียนโรงเรียนเดียวกันนะ"],
+["He must understand the instructions since he read them.", "understand", "/hiː mʌst ˌʌndəˈstænd ði ɪnˈstrʌkʃənz sɪns hiː red ðem/", "💡", "เขาคงจะเข้าใจคำแนะนำแล้วล่ะเพราะเขาอ่านมันเรียบร้อยแล้ว"],
+["The light is on, so someone must be home.", "be", "/ðə laɪt ɪz ɒn səʊ ˈsʌmwʌn mʌst biː həʊm/", "🏠", "ไฟเปิดอยู่ ดังนั้นต้องมีใครอยู่บ้านแน่ๆ เลย"],
+["She must practice a lot to play the piano so well.", "practice", "/ʃiː mʌst ˈpræktɪs ə lɒt tə pleɪ ðə piˈænəʊ səʊ wel/", "🎹", "เธอคงจะซ้อมหนักมากแน่ๆ ถึงเล่นเปียโนได้เก่งขนาดนี้"],
+["They must have missed their flight due to traffic.", "have missed", "/ðeɪ mʌst əv mɪst ðeə flaɪt djuː tə ˈtræfɪk/", "✈️", "พวกเขาคงจะพลาดเที่ยวบินเพราะรถติดแน่ๆ เลย"],
+["He must be the new manager everyone talks about.", "be", "/hiː mʌst biː ðə njuː ˈmænɪdʒər ˈevriwʌn tɔːks əˈbaʊt/", "👔", "เขาคงจะเป็นผู้จัดการใหม่ที่ทุกคนพูดถึงกันแน่ๆ"],
+["You must be hungry after hiking all afternoon.", "be", "/juː mʌst biː ˈhʌŋɡri ˈɑːftə ˈhaɪkɪŋ ɔːl ˌɑːftəˈnuːn/", "🍽️", "คุณคงจะหิวมากแน่ๆ หลังจากเดินป่ามาทั้งบ่าย"],
+["She must have spent a fortune on that designer bag.", "have spent", "/ʃiː mʌst əv spent ə ˈfɔːtʃuːn ɒn ðæt dɪˈzaɪnə bæɡ/", "👜", "เธอคงจะเสียเงินไปเยอะมากๆ แน่ๆ กับกระเป๋าแบรนด์เนมใบนั้น"],
+["The baby must be asleep; the house is very quiet.", "be", "/ðə ˈbeɪbi mʌst biː əˈsliːp ðə haʊs ɪz ˈveri ˈkwaɪət/", "👶", "เด็กแบเบาะคงจะหลับอยู่แน่ๆ บ้านถึงเงียบสงบขนาดนี้"],
+["He must know all the answers because he is a genius.", "know", "/hiː mʌst nəʊ ɔːl ði ˈɑːnsəz bɪˈkɒz hiː ɪz ə ˈdʒiːniəs/", "🧠", "เขาคงจะรู้คำตอบทุกข้อแน่ๆ เพราะเขาเป็นอัจฉริยะ"],
+["They must have taken the wrong turn at the corner.", "have taken", "/ðeɪ mʌst əv ˈteɪkən ðə rɒŋ tɜːn ət ðə ˈkɔːnə/", "↪️", "พวกเขาคงจะเลี้ยวผิดทางตรงหัวมุมถนนแน่ๆ เลย"],
+["She must be excited about her upcoming trip to Japan.", "be", "/ʃiː mʌst biː ɪkˈsaɪtɪd əˈbaʊt hɜːr ˈʌpkʌmɪŋ trɪp tə dʒəˈpæn/", "🗾", "เธอคงจะตื่นเต้นมากแน่ๆ กับทริปเที่ยวญี่ปุ่นที่จะถึงนี้"],
+["You must recognize this song; it was a huge hit.", "recognize", "/juː mʌst ˈrekəɡnaɪz ðɪs sɒŋ ɪt wɒz ə hjuːdʒ hɪt/", "🎵", "คุณต้องจำเพลงนี้ได้แน่ๆ มันเคยฮิตมากๆ เลยนะ"],
+["He must have worked hard to get a promotion.", "have worked", "/hiː mʌst əv wɜːkt hɑːd tə ɡet ə prəˈməʊʃən/", "💼", "เขาคงจะทำงานหนักมากแน่ๆ ถึงได้เลื่อนตำแหน่ง"],
+["The plant must need water; its leaves are drooping.", "need", "/ðə plɑːnt mʌst niːd ˈwɔːtə ɪts liːvz ɑː ˈdruːpɪŋ/", "🪴", "ต้นไม้คงจะต้องการน้ำแน่ๆ ใบของมันเริ่มเหี่ยวเฉาแล้ว"],
+["She must be happy with her exam results.", "be", "/ʃiː mʌst biː ˈhæpi wɪð hɜːr ɪɡˈzæm rɪˈzʌlts/", "😊", "เธอคงจะมีความสุขกับผลสอบของเธอแน่ๆ เลย"],
+["They must be relatives; they look so much alike.", "be", "/ðeɪ mʌst biː ˈrelətɪvz ðeɪ lʊk səʊ mʌtʃ əˈlaɪk/", "👨‍👩‍👧", "พวกเขาคงจะเป็นญาติกันแน่ๆ หน้าตาคล้ายกันมากๆ"],
+["He must have forgotten his phone at home.", "have forgotten", "/hiː mʌst əv fəˈɡɒtən hɪz fəʊn ət həʊm/", "📱", "เขาคงจะลืมโทรศัพท์มือถือไว้ที่บ้านแน่ๆ เลย"],
+["You must find this movie hilarious.", "find", "/juː mʌst faɪnd ðɪs ˈmuːvi hɪˈleəriəs/", "🎬", "คุณคงจะคิดว่าภาพยนตร์เรื่องนี้ตลกขบขันมากๆ แน่ๆ"],
+["She must have studied medicine for many years.", "have studied", "/ʃiː mʌst əv ˈstʌdid ˈmedsɪn fə ˈmeni jɪəz/", "🩺", "เธอคงจะเรียนแพทย์มาหลายปีแน่ๆ"],
+["The car must cost a fortune to maintain.", "cost", "/ðə kɑː mʌst kɒst ə ˈfɔːtʃuːn tə meɪnˈteɪn/", "🚘", "รถคันนั้นคงจะมีค่าใช้จ่ายในการดูแลรักษาแพงหูฉี่แน่ๆ"],
+["He must be the person in charge of this project.", "be", "/hiː mʌst biː ðə ˈpɜːsən ɪn tʃɑːdʒ əv ðɪs ˈprɒdʒekt/", "🧑‍💼", "เขาคงจะเป็นผู้รับผิดชอบโครงการนี้แน่ๆ เลย"],
+["They must have enjoyed the concert last night.", "have enjoyed", "/ðeɪ mʌst əv ɪnˈdʒɔɪd ðə ˈkɒnsət lɑːst naɪt/", "🎤", "พวกเขาคงจะสนุกสนานเพลิดเพลินกับคอนเสิร์ตเมื่อคืนนี้แน่ๆ"],
+["She must know how to fix this computer issue.", "know", "/ʃiː mʌst nəʊ haʊ tə fɪks ðɪs kəmˈpjuːtər ˈɪʃuː/", "💻", "เธอคงจะรู้วิธีแก้ปัญหาคอมพิวเตอร์เครื่องนี้แน่ๆ"],
+["You must feel relieved now that exams are over.", "feel", "/juː mʌst fiːl rɪˈliːvd naʊ ðət ɪɡˈzæmz ɑːr ˈəʊvə/", "😌", "คุณคงจะรู้สึกโล่งอกแล้วสินะหลังจากสอบเสร็จ"],
+["He must have slept through his alarm clock.", "have slept", "/hiː mʌst əv slept θruː hɪz əˈlɑːm klɒk/", "⏰", "เขาคงจะนอนเพลินจนไม่ได้ยินเสียงนาฬิกาปลุกแน่ๆ"],
+["The museum must contain ancient historical artifacts.", "contain", "/ðə mjuˈziːəm mʌst kənˈteɪn ˈeɪnʃənt hɪˈstɒrɪkəl ˈɑːtɪfækts/", "🏺", "พิพิธภัณฑ์แห่งนี้คงจะเก็บรักษาโบราณวัตถุทางประวัติศาสตร์ไว้แน่ๆ"],
+["She must be a professional chef given her skills.", "be", "/ʃiː mʌst biː ə prəˈfeʃənəl ʃef ˈɡɪvən hɜː skɪlz/", "👩‍🍳", "เธอคงจะเป็นเชฟมืออาชีพแน่ๆ ดูจากฝีมือการทำอาหารแล้ว"],
+["They must have walked miles to reach this spot.", "have walked", "/ðeɪ mʌst əv wɔːkt maɪlz tə riːtʃ ðɪs spɒt/", "🥾", "พวกเขาคงจะเดินเท้ามาไกลหลายไมล์แน่ๆ กว่าจะถึงจุดนี้"],
+["He must realize how important this deadline is.", "realize", "/hiː mʌst ˈrɪəlaɪz haʊ ɪmˈpɔːtənt ðɪs ˈdedlaɪn ɪz/", "💭", "เขาคงจะตระหนักดีแล้วว่ากำหนดส่งงานนี้สำคัญขนาดไหน"],
+["You must remember locking the front door.", "remember", "/juː mʌst rɪˈmembə ˈlɒkɪŋ ðə frʌnt dɔː/", "🔒", "คุณคงจะจำได้สินะว่าล็อกประตูหน้าบ้านแล้ว"],
+["She must have practiced dancing for months.", "have practiced", "/ʃiː mʌst əv ˈpræktɪst ˈdɑːnsɪŋ fə mʌnθs/", "💃", "เธอคงจะฝึกซ้อมเต้นมานานหลายเดือนแน่ๆ"],
+["The dog must be barking at a stranger outside.", "be barking", "/ðə dɒɡ mʌst biː ˈbɑːkɪŋ ət ə ˈstreɪndʒər ˌaʊtˈsaɪd/", "🐕", "เจ้าสุนัขคงจะกำลังเห่าคนแปลกหน้าที่อยู่ข้างนอกแน่ๆ"],
+["He must be proud of his academic achievements.", "be", "/hiː mʌst biː praʊd əv hɪz ˌækəˈdemɪk əˈtʃiːvmənts/", "🏅", "เขาคงจะภูมิใจในผลสัมฤทธิ์ทางการเรียนของเขาแน่ๆ"],
+["They must have spent hours preparing this presentation.", "have spent", "/ðeɪ mʌst əv spent ˈaʊəz prɪˈpeərɪŋ ðɪs ˌprezənˈteɪʃən/", "📊", "พวกเขาคงจะใช้เวลาหลายชั่วโมงแน่ๆ ในการเตรียมการนำเสนอนี้"],
+["She must have left her umbrella in the office.", "have left", "/ʃiː mʌst əv left hɜːr ʌmˈbrelə ɪn ði ˈɒfɪs/", "☂️", "เธอคงจะลืมร่มไว้ที่สำนักงานแน่ๆ เลย"],
+["You must be exhausted after such a long journey.", "be", "/juː mʌst biː ɪɡˈzɔːstɪd ˈɑːftə sʌtʃ ə lɒŋ ˈdʒɜːni/", "🥱", "คุณคงจะหมดแรงและเหนื่อยล้ามากๆ หลังจากเดินทางไกลมาขนาดนั้น"],
+["He must know the neighborhood very well.", "know", "/hiː mʌst nəʊ ðə ˈneɪbəhʊd ˈveri wel/", "🏘️", "เขาคงจะรู้จักละแวกย่านนี้เป็นอย่างดีแน่ๆ"],
+["The children must be playing games in the backyard.", "be playing", "/ðə ˈtʃɪldrən mʌst biː ˈpleɪɪŋ ɡeɪmz ɪn ðə ˌbækˈjɑːd/", "🎮", "เด็กๆ คงจะกำลังเล่นสนุกกันอยู่ที่สวนหลังบ้านแน่ๆ"],
+["He must have taken the wrong train by mistake.", "have taken", "/hiː mʌst əv ˈteɪkən ðə rɒŋ treɪn baɪ mɪˈsteɪk/", "🚆", "เขาคงจะเผลอขึ้นรถไฟผิดขบวนโดยไม่ตั้งใจแน่ๆ"],
+["She must be thrilled with her new promotion.", "be", "/ʃiː mʌst biː θrɪld wɪð hɜː njuː prəˈməʊʃən/", "🎉", "เธอคงจะตื่นเต้นและดีใจสุดๆ กับการเลื่อนตำแหน่งใหม่แน่ๆ"],
+["They must have arrived safely; they just called.", "have arrived", "/ðeɪ mʌst əv əˈraɪvd ˈseɪfli ðeɪ dʒʌst kɔːld/", "📞", "พวกเขาคงจะเดินทางไปถึงอย่างปลอดภัยแล้วล่ะ เพิ่งจะโทรมาหาเมื่อกี้เอง"],
+["You must be proud of your daughter's success.", "be", "/juː mʌst biː praʊd əv jɔː ˈdɔːtəz səkˈses/", "👨‍👧", "คุณคงจะภูมิใจในความสำเร็จของลูกสาวมากๆ แน่ๆ"],
+["He must have misunderstood my instructions.", "have misunderstood", "/hiː mʌst əv ˌmɪsʌndəˈstʊd maɪ ɪnˈstrʌkʃənz/", "🤷", "เขาคงจะเข้าใจคำสั่งของฉันคลาดเคลื่อนไปแน่ๆ"],
+["The restaurant must serve the best steak in town.", "serve", "/ðə ˈrestrɒnt mʌst sɜːv ðə best steɪk ɪn taʊn/", "🥩", "ร้านนี้น่าจะเสิร์ฟสเต็กที่อร่อยที่สุดในเมืองแน่ๆ"],
+["She must know all about computer programming.", "know", "/ʃiː mʌst nəʊ ɔːl əˈbaʊt kəmˈpjuːtə ˈprəʊɡræmɪŋ/", "👩‍💻", "เธอคงจะรู้เรื่องเกี่ยวกับการเขียนโปรแกรมคอมพิวเตอร์เป็นอย่างดีแน่ๆ"],
+["You must feel relieved now that the crisis is over.", "feel", "/juː mʌst fiːl rɪˈliːvd naʊ ðət ðə ˈkraɪsɪs ɪz ˈəʊvə/", "😮‍💨", "คุณคงจะรู้สึกโล่งอกแล้วสินะหลังจากวิกฤตการณ์มันผ่านพ้นไป"],
+["He must have worked on this painting for months.", "have worked", "/hiː mʌst əv wɜːkt ɒn ðɪs ˈpeɪntɪŋ fə mʌnθs/", "🖼️", "เขาคงจะใช้เวลาวาดภาพนี้มานานเป็นเดือนๆ แน่ๆ"],
+["They must be planning a surprise party for her.", "be planning", "/ðeɪ mʌst biː ˈplænɪŋ ə səˈpraɪz ˈpɑːti fə hɜː/", "🎈", "พวกเขาคงจะกำลังวางแผนจัดงานปาร์ตี้เซอร์ไพรส์ให้เธอแน่ๆ"],
+["She must have practiced painting for years.", "have practiced", "/ʃiː mʌst əv ˈpræktɪst ˈpeɪntɪŋ fə jɪəz/", "🎨", "เธอคงจะฝึกฝนวาดภาพมาหลายปีแน่ๆ"],
+["The problem must have a simple mathematical solution.", "have", "/ðə ˈprɒbləm mʌst hæv ə ˈsɪmpəl ˌmæθəˈmætɪkəl səˈluːʃən/", "➗", "ปัญหาข้อนี้คงจะมีวิธีแก้ทางคณิตศาสตร์ที่เรียบง่ายแน่ๆ"],
+["He must be an expert in ancient history.", "be", "/hiː mʌst biː ən ˈekspɜːt ɪn ˈeɪnʃənt ˈhɪstəri/", "🏛️", "เขาคงจะเป็นผู้เชี่ยวชาญด้านประวัติศาสตร์โบราณแน่ๆ"],
+["You must have noticed her new hairstyle.", "have noticed", "/juː mʌst əv ˈnəʊtɪst hɜː njuː ˈheəstaɪl/", "💇", "คุณคงจะสังเกตเห็นทรงผมใหม่ของเธอแน่ๆ เลย"],
+["She must spend hours reading in the library.", "spend", "/ʃiː mʌst spend ˈaʊəz ˈriːdɪŋ ɪn ðə ˈlaɪbrəri/", "📚", "เธอคงจะใช้เวลาอ่านหนังสืออยู่ในห้องสมุดวันละหลายชั่วโมงแน่ๆ"],
+["They must have heard the loud noise outside.", "have heard", "/ðeɪ mʌst əv hɜːd ðə laʊd nɔɪz ˌaʊtˈsaɪd/", "👂", "พวกเขาคงจะได้ยินเสียงดังโครมครามข้างนอกนั้นแน่ๆ"],
+["He must be glad to finish his heavy workload.", "be", "/hiː mʌst biː ɡlæd tə ˈfɪnɪʃ hɪz ˈhevi ˈwɜːkləʊd/", "😅", "เขาคงจะดีใจมากที่สะสางภาระงานหนักๆ เสร็จสิ้นเสียที"],
+["The package must contain fragile glass items.", "contain", "/ðə ˈpækɪdʒ mʌst kənˈteɪn ˈfrædʒaɪl ɡlɑːs ˈaɪtəmz/", "📦", "กล่องพัสดุนี้คงจะบรรจุสิ่งของที่เป็นแก้วเปราะบางแตกง่ายแน่ๆ"],
+["She must recognize the value of this antique vase.", "recognize", "/ʃiː mʌst ˈrekəɡnaɪz ðə ˈvæljuː əv ðɪs ænˈtiːk vɑːz/", "🏺", "เธอคงจะตระหนักถึงมูลค่าอันล้ำค่าของแจกันโบราณใบนี้แน่ๆ"],
+["You must be freezing in this cold weather.", "be freezing", "/juː mʌst biː ˈfriːzɪŋ ɪn ðɪs kəʊld ˈweðə/", "🥶", "คุณคงจะหนาวสั่นสะท้านในสภาพอากาศที่หนาวจัดนี้แน่ๆ"],
+["He must have studied abroad to speak so fluently.", "have studied", "/hiː mʌst əv ˈstʌdid əˈbrɔːd tə spiːk səʊ ˈfluːəntli/", "🌍", "เขาคงจะเคยไปเรียนต่อต่างประเทศแน่ๆ ถึงพูดได้คล่องขนาดนี้"],
+["They must be celebrating a major victory.", "be celebrating", "/ðeɪ mʌst biː ˈselɪbreɪtɪŋ ə ˈmeɪdʒə ˈvɪktəri/", "🥳", "พวกเขาคงจะกำลังเฉลิมฉลองชัยชนะครั้งสำคัญกันอยู่แน่ๆ"],
+["She must have lost her way in the dark.", "have lost", "/ʃiː mʌst əv lɒst hɜː weɪ ɪn ðə dɑːk/", "🌑", "เธอคงจะหลงทางท่ามกลางความมืดแน่ๆ เลย"],
+["The company must be expanding its operations rapidly.", "be expanding", "/ðə ˈkʌmpəni mʌst biː ɪkˈspændɪŋ ɪts ˌɒpəˈreɪʃənz ˈræpɪdli/", "📈", "บริษัทคงจะกำลังขยายกิจการและการดำเนินงานอย่างรวดเร็วแน่ๆ"],
+["He must know the shortcut through the woods.", "know", "/hiː mʌst nəʊ ðə ˈʃɔːtkʌt θruː ðə wʊdz/", "🌲", "เขาคงจะรู้เส้นทางลัดที่ทะลุผ่านผืนป่าแห่งนั้นแน่ๆ"],
+["You must have enjoyed the wonderful vacation.", "have enjoyed", "/juː mʌst əv ɪnˈdʒɔɪd ðə ˈwʌndəfəl vəˈkeɪʃən/", "🏝️", "คุณคงจะเพลิดเพลินกับวันหยุดพักผ่อนอันแสนวิเศษแน่ๆ"],
+["She must be the most talented pianist here.", "be", "/ʃiː mʌst biː ðə məʊst ˈtæləntɪd ˈpiːənɪst hɪə/", "🎼", "เธอคงจะเป็นนักเปียโนที่มีพรสวรรค์มากที่สุดในที่นี้แน่ๆ"],
+["They must have spent all day cleaning the house.", "have spent", "/ðeɪ mʌst əv spent ɔːl deɪ ˈkliːnɪŋ ðə haʊs/", "🧹", "พวกเขาคงจะใช้เวลาทำความสะอาดบ้านกันทั้งวันแน่ๆ"],
+["He must be the person responsible for this design.", "be", "/hiː mʌst biː ðə ˈpɜːsən rɪˈspɒnsəbəl fə ðɪs dɪˈzaɪn/", "📐", "เขาคงจะเป็นผู้อยู่เบื้องหลังการออกแบบชิ้นนี้แน่ๆ"],
+["The soup must contain a lot of spicy herbs.", "contain", "/ðə suːp mʌst kənˈteɪn ə lɒt əv ˈspaɪsi hɜːbz/", "🌶️", "ซุปถ้วยนี้คงจะใส่สมุนไพรเผ็ดร้อนลงไปเยอะมากแน่ๆ"],
+["She must feel proud of her entrepreneurial success.", "feel", "/ʃiː mʌst fiːl praʊd əv hɜːr ˌɒntrəprəˈnɜːriəl səkˈses/", "🏆", "เธอคงจะรู้สึกภูมิใจในความสำเร็จด้านธุรกิจของเธอแน่ๆ"],
+["You must have heard about the upcoming promotion.", "have heard", "/juː mʌst əv hɜːd əˈbaʊt ði ˈʌpkʌmɪŋ prəˈməʊʃən/", "📣", "คุณคงจะได้ยินข่าวเกี่ยวกับแคมเปญโปรโมชันที่จะมาถึงนี้แล้วแน่ๆ"],
+["He must be an experienced mechanic to fix this fast.", "be", "/hiː mʌst biː ən ɪkˈspɪəriənst mɪˈkænɪk tə fɪks ðɪs fɑːst/", "🔧", "เขาคงจะเป็นช่างเครื่องยนต์ที่มีประสบการณ์สูงแน่ๆ ถึงซ่อมเสร็จได้เร็วขนาดนี้"],
+["They must have encountered heavy traffic on the bridge.", "have encountered", "/ðeɪ mʌst əv ɪnˈkaʊntəd ˈhevi ˈtræfɪk ɒn ðə brɪdʒ/", "🌉", "พวกเขาคงจะเจอกับปัญหารถติดอย่างหนักบนสะพานแน่ๆ"],
+["She must be fond of collecting vintage postcards.", "be", "/ʃiː mʌst biː fɒnd əv kəˈlektɪŋ ˈvɪntɪdʒ ˈpəʊstkɑːdz/", "💌", "เธอคงจะชื่นชอบการสะสมโปสการ์ดแนววินเทจแน่ๆ"],
+["You must remember locking the safe box.", "remember", "/juː mʌst rɪˈmembə ˈlɒkɪŋ ðə seɪf bɒks/", "🔐", "คุณคงจะจำได้แม่นยำสินะว่าล็อกตู้เซฟแล้ว"],
+["He must have spent a fortune on that sports car.", "have spent", "/hiː mʌst əv spent ə ˈfɔːtʃuːn ɒn ðæt spɔːts kɑː/", "🏎️", "เขาคงจะทุ่มเงินซื้อรถสปอร์ตคันนั้นไปมหาศาลแน่ๆ"],
+["The solution must lie in the final chapter of the book.", "lie", "/ðə səˈluːʃən mʌst laɪ ɪn ðə ˈfaɪnəl ˈtʃæptər əv ðə bʊk/", "📖", "ทางออกของปัญหาคงจะอยู่ในบทสุดท้ายของหนังสือเล่มนี้แน่ๆ"],
+["She must have worked day and night to finish it.", "have worked", "/ʃiː mʌst əv wɜːkt deɪ ənd naɪt tə ˈfɪnɪʃ ɪt/", "🌙", "เธอคงจะทำงานหามรุ่งหามค่ำเพื่อให้งานชิ้นนี้เสร็จแน่ๆ"],
+["They must be delighted with the positive feedback.", "be", "/ðeɪ mʌst biː dɪˈlaɪtɪd wɪð ðə ˈpɒzətɪv ˈfiːdbæk/", "👍", "พวกเขาคงจะปลื้มใจกับเสียงตอบรับในเชิงบวกแน่ๆ"],
+["He must realize the consequences of his actions.", "realize", "/hiː mʌst ˈrɪəlaɪz ðə ˈkɒnsɪkwənsɪz əv hɪz ˈækʃənz/", "⚠️", "เขาคงจะตระหนักรู้ถึงผลพวงจากการกระทำของตัวเองแน่ๆ"],
+["You must be thrilled about winning the grand prize.", "be", "/juː mʌst biː θrɪld əˈbaʊt ˈwɪnɪŋ ðə ɡrænd praɪz/", "🥇", "คุณคงจะตื่นเต้นและดีใจสุดขีดที่คว้ารางวัลใหญ่มาได้แน่ๆ"],
+["She must have left her keys on the office desk.", "have left", "/ʃiː mʌst əv left hɜː kiːz ɒn ði ˈɒfɪs desk/", "🗝️", "เธอคงจะลืมกุญแจไว้บนโต๊ะทำงานที่ออฟฟิศแน่ๆ"],
+["The museum must display rare historical paintings.", "display", "/ðə mjuˈziːəm mʌst dɪˈspleɪ reə hɪˈstɒrɪkəl ˈpeɪntɪŋz/", "🖼️", "พิพิธภัณฑ์แห่งนี้คงจะจัดแสดงภาพวาดทางประวัติศาสตร์หายากแน่ๆ"],
+["He must know the director of this organization.", "know", "/hiː mʌst nəʊ ðə dɪˈrektər əv ðɪs ˌɔːɡənaɪˈzeɪʃən/", "🤝", "เขาคงจะรู้จักกับผู้อำนวยการขององค์กรนี้เป็นอย่างดีแน่ๆ"],
+["They must have missed their connecting flight.", "have missed", "/ðeɪ mʌst əv mɪst ðeə kəˈnektɪŋ flaɪt/", "🛬", "พวกเขาคงจะพลาดเที่ยวบินต่อเครื่องบินแน่ๆ"],
+["She must be exhausted after running the marathon.", "be", "/ʃiː mʌst biː ɪɡˈzɔːstɪd ˈɑːftə ˈrʌnɪŋ ðə ˈmærəθən/", "🏃‍♀️", "เธอคงจะเหนื่อยล้าหมดแรงหลังวิ่งมาราธอนเสร็จแน่ๆ"],
+["You must have noticed the sudden drop in temperature.", "have noticed", "/juː mʌst əv ˈnəʊtɪst ðə ˈsʌdən drɒp ɪn ˈtemprətʃə/", "🌡️", "คุณคงจะสังเกตเห็นอุณหภูมิที่ลดฮวบลงอย่างกะทันหันได้แน่ๆ"],
+["He must be a genius to solve this puzzle.", "be", "/hiː mʌst biː ə ˈdʒiːniəs tə sɒlv ðɪs ˈpʌzəl/", "🧩", "เขาคงจะเป็นอัจฉริยะแน่ๆ ถึงไขปริศนานี้ออกได้"],
+["The project must bring significant benefits to the company.", "bring", "/ðə ˈprɒdʒekt mʌst brɪŋ sɪɡˈnɪfɪkənt ˈbenɪfɪts tə ðə ˈkʌmpəni/", "🚀", "โครงการนี้คงจะสร้างผลประโยชน์ครั้งใหญ่ให้กับบริษัทอย่างแน่นอน"]
+];
+
+const PER=50, pages=Math.ceil(D.length/PER);
+let page=0, voices=[], chosen=null;
+const grid=document.getElementById('grid'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function html(en,verb){
+  const i=en.indexOf(' must '), pre=esc(en.slice(0,i)), rest=en.slice(i+6);
+  const body=rest.startsWith(verb)?'<b>'+esc(verb)+'</b>'+esc(rest.slice(verb.length)):esc(rest);
+  return {front:pre+' <mark>must</mark> '+body, back:pre+' <b>must</b> '+body};
+}
+function render(){
+  grid.innerHTML='';
+  const start=page*PER, items=D.slice(start,start+PER);
+  items.forEach((r,i)=>{
+    const [en,verb,ipa,pic,th]=r, h=html(en,verb);
+    const el=document.createElement('div');
+    el.className='flip'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Flip card '+(start+i+1));
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="no">${start+i+1}</span>
+        <button class="say" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+        <div class="pic" aria-hidden="true">${pic}</div>
+        <p class="en">${h.front}</p>
+        <p class="ipa">${esc(ipa)}</p>
+        <span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      <div class="face back"><span class="no">${start+i+1}</span>
+        <p class="th">${esc(th)}</p>
+        <p class="enSmall">${h.back}</p>
+        <span class="hint">คลิกเพื่อกลับด้านหน้า</span></div></div>`;
+    const btn=el.querySelector('.say');
+    btn.addEventListener('click',e=>{e.stopPropagation();speak(en,btn);});
+    el.addEventListener('click',()=>el.classList.toggle('turned'));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('turned');}});
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const b=document.createElement('button');
+    const a=p*PER+1,z=Math.min((p+1)*PER,D.length);
+    b.textContent=`หน้า ${p+1} (${a}–${z})`; if(p===page)b.className='on';
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0});};
+    pager.appendChild(b);
+  }
+}
+
+/* ---------- Voice: prefer UK male ---------- */
+const FEMALE=/female|woman|susan|hazel|kate|serena|libby|sonia|maisie|fiona|moira|karen|samantha|victoria|zira|helen|catherine|amy|emma|joanna|olivia/i;
+const MALE_PREF=['Google UK English Male','Daniel','Microsoft George','Microsoft Ryan','Ryan','George','Oliver','Arthur','Thomas','Rishi','Microsoft Thomas'];
+function score(v){
+  let s=0;
+  if(/^en[-_]GB/i.test(v.lang))s+=50; else if(/^en/i.test(v.lang))s+=10;
+  const i=MALE_PREF.findIndex(n=>v.name.includes(n)); if(i>=0)s+=40-i;
+  if(/male/i.test(v.name)&&!/female/i.test(v.name))s+=30;
+  if(/natural|neural|online/i.test(v.name))s+=8;
+  if(FEMALE.test(v.name))s-=60;
+  return s;
+}
+function loadVoices(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voiceSel'); sel.innerHTML='';
+  if(!voices.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในอุปกรณ์</option>';return;}
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o);});
+  chosen=voices[0];
+}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+document.getElementById('voiceSel').onchange=e=>{chosen=voices[+e.target.value];};
+
+let playing=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return;}
+  speechSynthesis.cancel();
+  if(playing)playing.classList.remove('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  if(chosen){u.voice=chosen;u.lang=chosen.lang;}else u.lang='en-GB';
+  u.rate=parseFloat(document.getElementById('rate').value);
+  u.pitch=0.9;
+  btn.classList.add('playing');playing=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('playing');
+  speechSynthesis.speak(u);
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cards=[...document.querySelectorAll('.flip')];
+  const anyFront=cards.some(c=>!c.classList.contains('turned'));
+  cards.forEach(c=>c.classList.toggle('turned',anyFront));
+};
+render();
+</script>
+</body>
+</html>

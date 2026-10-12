@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Must — Strong Obligation Flip Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+ --bg:#eef1f5;--card:#fff;--ink:#000;--muted:#5b6472;--line:#d5dae2;--accent:#1f3a5f;--verb:#8b0000;--mark:#ffe14d;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14181f;--muted:#a3adbb;--line:#2b3340;--accent:#9db8de;}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar select,.bar button{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#000;cursor:pointer}
+.bar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{max-width:1100px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;cursor:pointer;min-height:300px;outline:none}
+.flip:focus-visible .inner{box-shadow:0 0 0 3px var(--accent)}
+.inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;border-radius:14px}
+.flip.turned .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg);background:#f3f7ff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{background:#e8effa}}
+.no{position:absolute;top:8px;left:12px;font-size:12px;color:#6b7280}
+.pic{font-size:clamp(48px,9vw,84px);line-height:1;margin:6px 0 10px}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;color:#000;font-size:clamp(15px,2.3vw,22px);line-height:1.35;margin:0 0 8px}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--mark);color:#000;font-weight:700;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;color:#222;font-size:clamp(13px,2vw,18px);line-height:1.4;margin:0 0 10px}
+.th{font-size:clamp(17px,2.6vw,24px);line-height:1.6;color:#000;margin:0 0 10px}
+.enSmall{font-family:Arial,sans-serif;font-weight:300;font-size:14px;color:#444}
+.enSmall b{font-weight:700;color:var(--verb)}
+.say{position:absolute;right:10px;top:8px;border:1px solid #c2c9d4;background:#fff;color:#000;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.say:hover{background:#eef3fb}
+.say.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hint{font-size:11px;color:#6b7280;margin-top:auto}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>5.1 Modal verb “Must” — Strong Obligation</h1>
+  <p class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย (UK)</p>
+  <div class="bar">
+    <div class="pager" id="pager"></div>
+    <select id="voiceSel" aria-label="Voice"></select>
+    <select id="rate" aria-label="Speed">
+      <option value="0.7">ช้า 0.7×</option><option value="0.85" selected>ปกติ 0.85×</option><option value="1">เร็ว 1×</option>
+    </select>
+    <button id="flipAll">พลิกทั้งหน้า</button>
+  </div>
+</header>
+<main class="grid" id="grid"></main>
+
+<script>
+// [English, main verb (highlighted), IPA (UK), picture, Thai]
+const D=[["You must wear a seatbelt while driving.", "wear", "/juː mʌst weər ə ˈsiːtbelt waɪl ˈdraɪvɪŋ/", "🚗", "คุณต้องคาดเข็มขัดนิรภัยขณะขับรถทุกครั้ง"],
+["Students must submit their assignments on time.", "submit", "/ˈstjuːdənts mʌst səbˈmɪt ðeər əˈsaɪnmənts ɒn taɪm/", "📤", "นักเรียนต้องส่งงานที่ได้รับมอบหมายให้ตรงเวลา"],
+["Visitors must show their ID cards at the security gate.", "show", "/ˈvɪzɪtəz mʌst ʃəʊ ðeər ˌaɪˈdiː kɑːdz ət ðə sɪˈkjʊərəti ɡeɪt/", "🪪", "ผู้มาติดต่อต้องแสดงบัตรประจำตัวประชาชนที่ด่านรักษาความปลอดภัย"],
+["You must follow all safety instructions in the lab.", "follow", "/juː mʌst ˈfɒləʊ ɔːl ˈseɪfti ɪnˈstrʌkʃənz ɪn ðə læb/", "🥼", "คุณต้องปฏิบัติตามคำแนะนำด้านความปลอดภัยในห้องปฏิบัติการอย่างเคร่งครัด"],
+["Employees must attend the mandatory safety briefing.", "attend", "/ɪmˈplɔɪiːz mʌst əˈtend ðə ˈmændətəri ˈseɪfti ˈbriːfɪŋ/", "🦺", "พนักงานทุกคนต้องเข้าร่วมการอบรมด้านความปลอดภัยที่จัดขึ้นเป็นภาคบังคับ"],
+["You must obey the traffic laws at all times.", "obey", "/juː mʌst əˈbeɪ ðə ˈtræfɪk lɔːz ət ɔːl taɪmz/", "🚦", "คุณต้องเคารพกฎจราจรอยู่เสมอทุกเวลา"],
+["All passengers must fasten their seatbelts during takeoff.", "fasten", "/ɔːl ˈpæsɪndʒəz mʌst ˈfɑːsən ðeə ˈsiːtbelts ˈdjʊərɪŋ ˈteɪkɒf/", "✈️", "ผู้โดยสารทุกคนต้องรัดเข็มขัดนิรภัยในระหว่างเครื่องบินขึ้น"],
+["You must protect confidential company data.", "protect", "/juː mʌst prəˈtekt ˌkɒnfɪˈdenʃəl ˈkʌmpəni ˈdeɪtə/", "🔒", "คุณต้องปกป้องข้อมูลที่เป็นความลับของบริษัท"],
+["Drivers must stop at the red traffic light.", "stop", "/ˈdraɪvəz mʌst stɒp ət ðə red ˈtræfɪk laɪt/", "🛑", "ผู้ขับขี่รถยนต์ต้องหยุดรถเมื่อเจอสัญญาณไฟจราจรสีแดง"],
+["You must complete this form before entering.", "complete", "/juː mʌst kəmˈpliːt ðɪs fɔːm bɪˈfɔːr ˈentərɪŋ/", "📝", "คุณต้องกรอกแบบฟอร์มนี้ให้เรียบร้อยก่อนเข้าไปข้างใน"],
+["We must finish this project by tomorrow morning.", "finish", "/wiː mʌst ˈfɪnɪʃ ðɪs ˈprɒdʒekt baɪ təˈmɒrəʊ ˈmɔːnɪŋ/", "✅", "พวกเราต้องสะสางโปรเจกต์นี้ให้เสร็จสิ้นภายในพรุ่งนี้เช้า"],
+["You must report any system failures immediately.", "report", "/juː mʌst rɪˈpɔːt ˈeni ˈsɪstəm ˈfeɪljəz ɪˈmiːdiətli/", "🚨", "คุณต้องรายงานข้อขัดข้องของระบบทุกครั้งในทันที"],
+["Candidates must bring valid identification to the exam.", "bring", "/ˈkændɪdeɪts mʌst brɪŋ ˈvælɪd aɪˌdentɪfɪˈkeɪʃən tə ði ɪɡˈzæm/", "🎒", "ผู้เข้าสอบต้องนำบัตรประจำตัวที่ถูกต้องมาแสดงในการสอบ"],
+["You must pay your taxes before the deadline.", "pay", "/juː mʌst peɪ jɔː ˈtæksɪz bɪˈfɔː ðə ˈdedlaɪn/", "💵", "คุณต้องชำระภาษีก่อนที่จะถึงกำหนดเส้นตาย"],
+["Staff members must wear their uniforms on duty.", "wear", "/stɑːf ˈmembəz mʌst weə ðeər ˈjuːnɪfɔːmz ɒn ˈdjuːti/", "👔", "พนักงานทุกคนต้องสวมใส่เครื่องแบบขณะปฏิบัติหน้าที่"],
+["You must keep this password secure at all times.", "keep", "/juː mʌst kiːp ðɪs ˈpɑːswɜːd sɪˈkjʊər ət ɔːl taɪmz/", "🔐", "คุณต้องเก็บรักษารหัสผ่านนี้ให้ปลอดภัยอยู่เสมอ"],
+["Cyclists must wear a helmet on public roads.", "wear", "/ˈsaɪklɪsts mʌst weər ə ˈhelmɪt ɒn ˈpʌblɪk rəʊdz/", "🚴", "ผู้ขับขี่จักรยานต้องสวมหมวกกันน็อกเมื่อขับขี่บนถนนสาธารณะ"],
+["You must adhere to the company ethics policy.", "adhere", "/juː mʌst ədˈhɪə tə ðə ˈkʌmpəni ˈeθɪks ˈpɒləsi/", "⚖️", "คุณต้องยึดมั่นและปฏิบัติตามนโยบายจริยธรรมของบริษัท"],
+["Visitors must sign in at the front desk.", "sign in", "/ˈvɪzɪtəz mʌst saɪn ɪn ət ðə frʌnt desk/", "✍️", "ผู้มาเยือนต้องลงชื่อเข้าใช้ที่เคาน์เตอร์ด้านหน้า"],
+["You must return the library books by Friday.", "return", "/juː mʌst rɪˈtɜːn ðə ˈlaɪbrəri bʊks baɪ ˈfraɪdeɪ/", "📚", "คุณต้องคืนหนังสือห้องสมุดภายในวันศุกร์นี้"],
+["All applicants must meet the minimum qualification criteria.", "meet", "/ɔːl ˈæplɪkənts mʌst miːt ðə ˈmɪnɪməm ˌkwɒlɪfɪˈkeɪʃən kraɪˈtɪəriə/", "🎯", "ผู้สมัครทุกคนต้องผ่านเกณฑ์คุณสมบัติขั้นต่ำที่กำหนด"],
+["You must inform us of any address changes.", "inform", "/juː mʌst ɪnˈfɔːm ʌs əv ˈeni əˈdres ˈtʃeɪndʒɪz/", "📢", "คุณต้องแจ้งให้เราทราบหากมีการเปลี่ยนแปลงที่อยู่"],
+["Owners must vaccinate their pets against rabies.", "vaccinate", "/ˈəʊnəz mʌst ˈvæksɪneɪt ðeə pets əˈɡenst ˈreɪbiːz/", "💉", "เจ้าของสัตว์เลี้ยงต้องนำสัตว์เลี้ยงไปฉีดวัคซีนป้องกันโรคพิษสุนัขบ้า"],
+["You must sanitize your hands before entering the ward.", "sanitize", "/juː mʌst ˈsænɪtaɪz jɔː hændz bɪˈfɔːr ˈentərɪŋ ðə wɔːd/", "🧴", "คุณต้องทำความสะอาดมือด้วยเจลแอลกอฮอล์ก่อนเข้าหอผู้ป่วย"],
+["Contractors must follow strict construction standards.", "follow", "/kənˈtræktəz mʌst ˈfɒləʊ strɪkt kənˈstrʌkʃən ˈstændədz/", "🏗️", "ผู้รับเหมาต้องปฏิบัติตามมาตรฐานการก่อสร้างที่เข้มงวด"],
+["You must submit medical certificates for sick leave.", "submit", "/juː mʌst səbˈmɪt ˈmedɪkəl səˈtɪfɪkəts fə sɪk liːv/", "🩺", "คุณต้องยื่นใบรับรองแพทย์สำหรับการลาป่วยทุกครั้ง"],
+["Pedestrians must use the crosswalk to cross the street.", "use", "/pəˈdestriənz mʌst juːz ðə ˈkrɒswɔːk tə krɒs ðə striːt/", "🚶", "คนเดินถนนต้องใช้ทางม้าลายเพื่อข้ามถนน"],
+["You must verify all financial transactions daily.", "verify", "/juː mʌst ˈverɪfaɪ ɔːl faɪˈnænʃəl trænˈzækʃənz ˈdeɪli/", "💳", "คุณต้องตรวจสอบความถูกต้องของธุรกรรมทางการเงินทุกวัน"],
+["Food handlers must wear hairnets in the kitchen.", "wear", "/fuːd ˈhændləz mʌst weə ˈheənets ɪn ðə ˈkɪtʃɪn/", "👩‍🍳", "ผู้สัมผัสอาหารต้องสวมหมวกคลุมผมขณะอยู่ในห้องครัว"],
+["You must respect the quiet hours in the dormitory.", "respect", "/juː mʌst rɪˈspekt ðə ˈkwaɪət ˈaʊəz ɪn ðə ˈdɔːmɪtri/", "🤫", "คุณต้องเคารพช่วงเวลาห้ามส่งเสียงดังภายในหอพัก"],
+["All vehicles must pass an annual emission test.", "pass", "/ɔːl ˈviːɪkəlz mʌst pɑːs ən ˈænjuəl ɪˈmɪʃən test/", "🚙", "ยานพาหนะทุกคันต้องผ่านการตรวจวัดค่าไอเสียประจำปี"],
+["You must disclose any potential conflicts of interest.", "disclose", "/juː mʌst dɪsˈkləʊz ˈeni pəˈtenʃəl ˈkɒnflɪkts əv ˈɪntrəst/", "🗣️", "คุณต้องเปิดเผยข้อมูลผลประโยชน์ทับซ้อนที่อาจเกิดขึ้น"],
+["Researchers must obtain ethical approval beforehand.", "obtain", "/rɪˈsɜːtʃəz mʌst əbˈteɪn ˈeθɪkəl əˈpruːvəl bɪˈfɔːhænd/", "🔬", "นักวิจัยต้องได้รับการรับรองทางจริยธรรมล่วงหน้า"],
+["You must turn off your phone during the show.", "turn off", "/juː mʌst tɜːn ɒf jɔː fəʊn ˈdjʊərɪŋ ðə ʃəʊ/", "📵", "คุณต้องปิดโทรศัพท์มือถือระหว่างการแสดง"],
+["Retailers must display clear product pricing.", "display", "/ˈriːteɪləz mʌst dɪˈspleɪ klɪə ˈprɒdʌkt ˈpraɪsɪŋ/", "🏷️", "ผู้ประกอบการร้านค้าปลีกต้องแสดงป้ายราคาผลิตภัณฑ์ให้ชัดเจน"],
+["You must clear your browser cache after updating.", "clear", "/juː mʌst klɪə jɔː ˈbraʊzə kæʃ ˈɑːftər ʌpˈdeɪtɪŋ/", "🧹", "คุณต้องล้างแคชของเบราว์เซอร์หลังจากการอัปเดต"],
+["Building occupants must evacuate during a fire alarm.", "evacuate", "/ˈbɪldɪŋ ˈɒkjʊpənts mʌst ɪˈvækjueɪt ˈdjʊərɪŋ ə faɪər əˈlɑːm/", "🔥", "ผู้อยู่อาศัยในอาคารต้องอพยพออกทันทีเมื่อมีสัญญาณเตือนไฟไหม้"],
+["You must maintain a minimum GPA to keep your scholarship.", "maintain", "/juː mʌst meɪnˈteɪn ə ˈmɪnɪməm ˌdʒiː piː ˈeɪ tə kiːp jɔː ˈskɒləʃɪp/", "🎓", "คุณต้องรักษาเกรดเฉลี่ยขั้นต่ำไว้เพื่อคงสถานะทุนการศึกษา"],
+["Manufacturers must label allergen ingredients clearly.", "label", "/ˌmænjʊˈfæktʃərəz mʌst ˈleɪbəl ˈælədʒən ɪnˈɡriːdiənts ˈklɪəli/", "🥜", "ผู้ผลิตสินค้าต้องติดฉลากระบุส่วนผสมที่อาจก่อให้เกิดอาการแพ้ให้ชัดเจน"],
+["You must provide receipts for corporate expense claims.", "provide", "/juː mʌst prəˈvaɪd rɪˈsiːts fə ˈkɔːpərət ɪkˈspens kleɪmz/", "🧾", "คุณต้องแนบใบเสร็จรับเงินสำหรับการเบิกจ่ายค่าใช้จ่ายบริษัท"],
+["Trainees must complete all modules to graduate.", "complete", "/ˌtreɪˈniːz mʌst kəmˈpliːt ɔːl ˈmɒdjuːlz tə ˈɡrædʒueɪt/", "🏁", "ผู้เข้ารับการอบรมต้องเรียนบทเรียนทั้งหมดให้ครบถ้วนจึงจะจบหลักสูตร"],
+["You must lock the laboratory doors upon leaving.", "lock", "/juː mʌst lɒk ðə ləˈbɒrətri dɔːz əˈpɒn ˈliːvɪŋ/", "🔑", "คุณต้องล็อกประตูห้องปฏิบัติการให้เรียบร้อยเมื่อเดินออกจากห้อง"],
+["Air travelers must comply with luggage weight restrictions.", "comply", "/eə ˈtrævələz mʌst kəmˈplaɪ wɪð ˈlʌɡɪdʒ weɪt rɪˈstrɪkʃənz/", "🧳", "ผู้โดยสารเครื่องบินต้องปฏิบัติตามข้อจำกัดเรื่องน้ำหนักกระเป๋าเดินทาง"],
+["You must update your antivirus software regularly.", "update", "/juː mʌst ʌpˈdeɪt jɔːr ˈæntiˌvaɪrəs ˈsɒftweə ˈreɡjʊləli/", "🔄", "คุณต้องอัปเดตโปรแกรมป้องกันไวรัสอย่างสม่ำเสมอ"],
+["Pharmacists must verify prescriptions before dispensing drugs.", "verify", "/ˈfɑːməsɪsts mʌst ˈverɪfaɪ prɪˈskrɪpʃənz bɪˈfɔː dɪˈspensɪŋ drʌɡz/", "💊", "เภสัชกรต้องตรวจสอบใบสั่งยาให้รอบคอบก่อนจ่ายยา"],
+["You must wear protective eyewear in this workshop zone.", "wear", "/juː mʌst weə prəˈtektɪv ˈaɪweə ɪn ðɪs ˈwɜːkʃɒp zəʊn/", "🥽", "คุณต้องสวมใส่อุปกรณ์ป้องกันดวงตาในเขตพื้นที่ปฏิบัติงานนี้"],
+["Swimmers must shower before entering the public pool.", "shower", "/ˈswɪməz mʌst ˈʃaʊə bɪˈfɔːr ˈentərɪŋ ðə ˈpʌblɪk puːl/", "🚿", "ผู้ใช้บริการสระว่ายน้ำต้องอาบน้ำชำระร่างกายก่อนลงสระ"],
+["You must respect intellectual property rights.", "respect", "/juː mʌst rɪˈspekt ˌɪntəˈlektʃuəl ˈprɒpəti raɪts/", "🤝", "คุณต้องเคารพสิทธิ์ในทรัพย์สินทางปัญญาของผู้อื่น"],
+["Participants must register online prior to the event date.", "register", "/pɑːˈtɪsɪpənts mʌst ˈredʒɪstər ˈɒnlaɪn ˈpraɪə tə ði ɪˈvent deɪt/", "🖥️", "ผู้เข้าร่วมงานต้องลงทะเบียนล่วงหน้าทางออนไลน์ก่อนถึงวันจัดงาน"],
+["You must notify HR of any personal status changes.", "notify", "/juː mʌst ˈnəʊtɪfaɪ ˌeɪtʃ ˈɑːr əv ˈeni ˈpɜːsənəl ˈsteɪtəs ˈtʃeɪndʒɪz/", "📣", "คุณต้องแจ้งฝ่ายทรัพยากรบุคคลให้ทราบหากมีการเปลี่ยนแปลงข้อมูลส่วนตัว"],
+["All visitors must wear a visitor badge at all times.", "wear", "/ɔːl ˈvɪzɪtəz mʌst weər ə ˈvɪzɪtə bædʒ ət ɔːl taɪmz/", "📛", "ผู้มาเยี่ยมชมทุกคนต้องติดป้ายผู้มาติดต่อไว้ตลอดเวลา"],
+["You must submit your tax returns before April.", "submit", "/juː mʌst səbˈmɪt jɔː tæks rɪˈtɜːnz bɪˈfɔːr ˈeɪprəl/", "📑", "คุณต้องยื่นแบบแสดงรายการภาษีก่อนเดือนเมษายน"],
+["Drivers must yield to pedestrians at crosswalks.", "yield", "/ˈdraɪvəz mʌst jiːld tə pəˈdestriənz ət ˈkrɒswɔːks/", "⚠️", "ผู้ขับขี่รถยนต์ต้องให้ทางแก่คนเดินเท้าตรงทางม้าลาย"],
+["You must use a secure connection for banking.", "use", "/juː mʌst juːz ə sɪˈkjʊə kəˈnekʃən fə ˈbæŋkɪŋ/", "🏦", "คุณต้องใช้การเชื่อมต่อที่มีความปลอดภัยสำหรับการทำธุรกรรมธนาคาร"],
+["Employees must clock in upon arriving at work.", "clock in", "/ɪmˈplɔɪiːz mʌst klɒk ɪn əˈpɒn əˈraɪvɪŋ ət wɜːk/", "⏰", "พนักงานทุกคนต้องสแกนบัตรหรือลงเวลาเข้างานทันทีที่มาถึงที่ทำงาน"],
+["You must keep food items sealed in the shared fridge.", "keep", "/juː mʌst kiːp fuːd ˈaɪtəmz siːld ɪn ðə ʃeəd frɪdʒ/", "🧊", "คุณต้องปิดผนึกห่ออาหารให้มิดชิดเมื่อเก็บไว้ในตู้เย็นส่วนรวม"],
+["Pet owners must clean up after their animals.", "clean up", "/pet ˈəʊnəz mʌst kliːn ʌp ˈɑːftə ðeər ˈænɪməlz/", "🐕", "เจ้าของสัตว์เลี้ยงต้องเก็บทำความสะอาดสิ่งปฏิกูลของสัตว์เลี้ยงตนเอง"],
+["You must abide by the terms of the rental agreement.", "abide", "/juː mʌst əˈbaɪd baɪ ðə tɜːmz əv ðə ˈrentəl əˈɡriːmənt/", "📜", "คุณต้องปฏิบัติตามเงื่อนไขข้อตกลงในสัญญาเช่าอย่างเคร่งครัด"],
+["Students must maintain academic integrity on exams.", "maintain", "/ˈstjuːdənts mʌst meɪnˈteɪn ˌækəˈdemɪk ɪnˈteɡrəti ɒn ɪɡˈzæmz/", "🎓", "นักเรียนต้องรักษาความซื่อสัตย์ทางวิชาการในการสอบ"],
+["You must report lost access cards immediately.", "report", "/juː mʌst rɪˈpɔːt lɒst ˈækses kɑːdz ɪˈmiːdiətli/", "🪪", "คุณต้องแจ้งเรื่องบัตรผ่านประตูที่สูญหายให้ทราบทันที"],
+["All participants must sign a confidentiality waiver.", "sign", "/ɔːl pɑːˈtɪsɪpənts mʌst saɪn ə ˌkɒnfɪdenʃiˈæləti ˈweɪvə/", "🖊️", "ผู้เข้าร่วมโครงการทุกคนต้องลงนามในใบยินยอมรักษาความลับ"],
+["You must wear a hard hat on the construction floor.", "wear", "/juː mʌst weər ə hɑːd hæt ɒn ðə kənˈstrʌkʃən flɔː/", "👷", "คุณต้องสวมหมวกนิรภัยเมื่ออยู่บริเวณพื้นที่ก่อสร้าง"],
+["Businesses must comply with environmental protection laws.", "comply", "/ˈbɪznɪsɪz mʌst kəmˈplaɪ wɪð ɪnˌvaɪrənˈmentəl prəˈtekʃən lɔːz/", "🌿", "ภาคธุรกิจต้องปฏิบัติตามกฎหมายคุ้มครองสิ่งแวดล้อม"],
+["You must display your parking permit on the dashboard.", "display", "/juː mʌst dɪˈspleɪ jɔː ˈpɑːkɪŋ ˈpɜːmɪt ɒn ðə ˈdæʃbɔːd/", "🅿️", "คุณต้องวางบัตรอนุญาตจอดรถไว้ที่แผงหน้ารถให้มองเห็นชัดเจน"],
+["Operators must inspect machinery before starting shifts.", "inspect", "/ˈɒpəreɪtəz mʌst ɪnˈspekt məˈʃiːnəri bɪˈfɔː ˈstɑːtɪŋ ʃɪfts/", "🔍", "ผู้ควบคุมเครื่องจักรต้องตรวจสอบสภาพเครื่องจักรก่อนเริ่มกะงาน"],
+["You must back up your important computer files.", "back up", "/juː mʌst bæk ʌp jɔːr ɪmˈpɔːtənt kəmˈpjuːtə faɪlz/", "💾", "คุณต้องสำรองข้อมูลไฟล์คอมพิวเตอร์ที่สำคัญเก็บไว้เสมอ"],
+["Healthcare workers must follow hygiene protocols.", "follow", "/ˈhelθkeə ˈwɜːkəz mʌst ˈfɒləʊ ˈhaɪdʒiːn ˈprəʊtəkɒlz/", "🧼", "บุคลากรทางการแพทย์ต้องปฏิบัติตามระเบียบปฏิบัติด้านสุขอนามัย"],
+["You must verify your identity via two-factor authentication.", "verify", "/juː mʌst ˈverɪfaɪ jɔːr aɪˈdentəti ˈvaɪə tuː ˈfæktər ɔːˌθentɪˈkeɪʃən/", "📱", "คุณต้องยืนยันตัวตนผ่านระบบตรวจสอบสิทธิ์แบบสองขั้นตอน"],
+["Tour groups must stay with their designated guide.", "stay", "/tʊə ɡruːps mʌst steɪ wɪð ðeə ˈdezɪɡneɪtɪd ɡaɪd/", "🧭", "คณะนักท่องเที่ยวต้องอยู่ร่วมกับไกด์นำเที่ยวที่ได้รับมอบหมาย"],
+["You must furnish all requested documents on time.", "furnish", "/juː mʌst ˈfɜːnɪʃ ɔːl rɪˈkwestɪd ˈdɒkjʊmənts ɒn taɪm/", "📄", "คุณต้องจัดส่งเอกสารทั้งหมดตามที่มีการร้องขอให้ทันเวลา"],
+["Property owners must maintain sidewalk clearance.", "maintain", "/ˈprɒpəti ˈəʊnəz mʌst meɪnˈteɪn ˈsaɪdwɔːk ˈklɪərəns/", "🚧", "เจ้าของอาคารหรือที่ดินต้องดูแลรักษาพื้นที่ทางเท้าให้โล่งเตียน"],
+["You must observe speed limits in residential zones.", "observe", "/juː mʌst əbˈzɜːv spiːd ˈlɪmɪts ɪn ˌrezɪˈdenʃəl zəʊnz/", "🚸", "คุณต้องขับขี่ด้วยความเร็วตามที่กำหนดในเขตชุมชนที่อยู่อาศัย"],
+["Authorities must investigate safety violations thoroughly.", "investigate", "/ɔːˈθɒrɪtiz mʌst ɪnˈvestɪɡeɪt ˈseɪfti ˌvaɪəˈleɪʃənz ˈθʌrəli/", "🕵️", "เจ้าหน้าที่ผู้มีอำนาจต้องทำการสืบสวนสอบสวนการละเมิดความปลอดภัยอย่างละเอียด"],
+["You must submit expense reports before month-end.", "submit", "/juː mʌst səbˈmɪt ɪkˈspens rɪˈpɔːts bɪˈfɔː mʌnθ end/", "📊", "คุณต้องส่งรายงานค่าใช้จ่ายก่อนสิ้นเดือน"],
+["Researchers must protect participant privacy rights.", "protect", "/rɪˈsɜːtʃəz mʌst prəˈtekt pɑːˈtɪsɪpənt ˈprɪvəsi raɪts/", "🛡️", "นักวิจัยต้องปกป้องสิทธิ์ความเป็นส่วนตัวของผู้เข้าร่วมการศึกษา"],
+["You must follow the prescribed dosage instructions.", "follow", "/juː mʌst ˈfɒləʊ ðə prɪˈskraɪbd ˈdəʊsɪdʒ ɪnˈstrʌkʃənz/", "💊", "คุณต้องปฏิบัติตามคำแนะนำปริมาณยาที่กำหนดไว้อย่างเคร่งครัด"],
+["Citizens must renew their identification cards periodically.", "renew", "/ˈsɪtɪzənz mʌst rɪˈnjuː ðeər aɪˌdentɪfɪˈkeɪʃən kɑːdz ˌpɪəriˈɒdɪkli/", "🪪", "ประชาชนต้องต่ออายุบัตรประจำตัวประชาชนตามรอบกำหนดเวลา"],
+["You must keep emergency exits unblocked always.", "keep", "/juː mʌst kiːp ɪˈmɜːdʒənsi ˈeksɪts ʌnˈblɒkt ˈɔːlweɪz/", "🚪", "คุณต้องดูแลทางออกฉุกเฉินให้โล่งไม่มีสิ่งกีดขวางอยู่เสมอ"],
+["Board members must attend the annual general meeting.", "attend", "/bɔːd ˈmembəz mʌst əˈtend ði ˈænjuəl ˈdʒenərəl ˈmiːtɪŋ/", "🏢", "กรรมการบริษัททุกคนต้องเข้าร่วมการประชุมสามัญประจำปี"],
+["You must secure sensitive data on encrypted drives.", "secure", "/juː mʌst sɪˈkjʊə ˈsensɪtɪv ˈdeɪtə ɒn ɪnˈkrɪptɪd draɪvz/", "🗄️", "คุณต้องจัดเก็บข้อมูลสำคัญไว้ในไดรฟ์ที่มีการเข้ารหัสความปลอดภัย"],
+["Food service staff must wash hands frequently.", "wash", "/fuːd ˈsɜːvɪs stɑːf mʌst wɒʃ hændz ˈfriːkwəntli/", "🙌", "พนักงานบริการอาหารต้องล้างมือให้สะอาดอยู่เป็นประจำ"],
+["You must meet the project milestone deadlines.", "meet", "/juː mʌst miːt ðə ˈprɒdʒekt ˈmaɪlstəʊn ˈdedlaɪnz/", "🎯", "คุณต้องทำให้สำเร็จตามกำหนดเวลาเป้าหมายของโครงการแต่ละระยะ"],
+["Pilots must perform pre-flight check procedures.", "perform", "/ˈpaɪləts mʌst pəˈfɔːm priː flaɪt tʃek prəˈsiːdʒəz/", "🛫", "นักบินต้องปฏิบัติงานตรวจสอบความพร้อมก่อนบินทุกครั้ง"],
+["You must provide a valid reason for absence.", "provide", "/juː mʌst prəˈvaɪd ə ˈvælɪd ˈriːzən fər ˈæbsəns/", "🗒️", "คุณต้องชี้แจงเหตุผลที่สมเหตุสมผลสำหรับการลาหยุด"],
+["Contractors must wear safety harnesses when working high up.", "wear", "/kənˈtræktəz mʌst weə ˈseɪfti ˈhɑːnɪsɪz wen ˈwɜːkɪŋ haɪ ʌp/", "🧗", "ผู้รับเหมาต้องสวมสายรัดนิรภัยเมื่อทำงานบนที่สูง"],
+["You must return company equipment upon resignation.", "return", "/juː mʌst rɪˈtɜːn ˈkʌmpəni ɪˈkwɪpmənt əˈpɒn ˌrezɪɡˈneɪʃən/", "💼", "คุณต้องส่งคืนอุปกรณ์ของบริษัทเมื่อแจ้งลาออก"],
+["Retail staff must verify customer payment methods.", "verify", "/ˈriːteɪl stɑːf mʌst ˈverɪfaɪ ˈkʌstəmə ˈpeɪmənt ˈmeθədz/", "🛒", "พนักงานขายปลีกต้องตรวจสอบวิธีการชำระเงินของลูกค้า"],
+["You must protect your login credentials from others.", "protect", "/juː mʌst prəˈtekt jɔː ˈlɒɡɪn krɪˈdenʃəlz frəm ˈʌðəz/", "🔑", "คุณต้องรักษาข้อมูลชื่อผู้ใช้และรหัสผ่านไม่ให้ผู้อื่นล่วงรู้"],
+["Laboratory personnel must dispose of hazardous waste properly.", "dispose", "/ləˈbɒrətri ˌpɜːsəˈnel mʌst dɪˈspəʊz əv ˈhæzədəs weɪst ˈprɒpəli/", "☣️", "บุคลากรในห้องปฏิบัติการต้องกำจัดขยะอันตรายอย่างถูกวิธี"],
+["You must complete safety training before operating tools.", "complete", "/juː mʌst kəmˈpliːt ˈseɪfti ˈtreɪnɪŋ bɪˈfɔːr ˈɒpəreɪtɪŋ tuːlz/", "🛠️", "คุณต้องผ่านการอบรมด้านความปลอดภัยก่อนใช้งานเครื่องมือ"],
+["All applicants must pass background verification checks.", "pass", "/ɔːl ˈæplɪkənts mʌst pɑːs ˈbækɡraʊnd ˌverɪfɪˈkeɪʃən tʃeks/", "✔️", "ผู้สมัครงานทุกคนต้องผ่านการตรวจสอบประวัติความเป็นมา"],
+["You must report workplace injuries to management.", "report", "/juː mʌst rɪˈpɔːt ˈwɜːkpleɪs ˈɪndʒəriz tə ˈmænɪdʒmənt/", "🩹", "คุณต้องรายงานอุบัติเหตุที่เกิดขึ้นในที่ทำงานให้ฝ่ายบริหารทราบ"],
+["Drivers must maintain safe following distances on roads.", "maintain", "/ˈdraɪvəz mʌst meɪnˈteɪn seɪf ˈfɒləʊɪŋ ˈdɪstənsɪz ɒn rəʊdz/", "🚘", "ผู้ขับขี่ต้องรักษาระยะห่างที่ปลอดภัยจากรถคันหน้าบนท้องถนน"],
+["You must submit original receipts for reimbursement.", "submit", "/juː mʌst səbˈmɪt əˈrɪdʒɪnəl rɪˈsiːts fə ˌriːɪmˈbɜːsmənt/", "🧾", "คุณต้องส่งใบเสร็จรับเงินต้นฉบับสำหรับการเบิกเงินคืน"],
+["Students must follow library borrowing rules strictly.", "follow", "/ˈstjuːdənts mʌst ˈfɒləʊ ˈlaɪbrəri ˈbɒrəʊɪŋ ruːlz ˈstrɪktli/", "📖", "นักเรียนต้องปฏิบัติตามระเบียบการยืมหนังสือของห้องสมุดอย่างเคร่งครัด"],
+["You must keep your workspace clean and tidy.", "keep", "/juː mʌst kiːp jɔː ˈwɜːkspeɪs kliːn ənd ˈtaɪdi/", "🧽", "คุณต้องดูแลพื้นที่ทำงานของตนเองให้สะอาดและเป็นระเบียบอยู่เสมอ"],
+["Employees must respect anti-harassment policies.", "respect", "/ɪmˈplɔɪiːz mʌst rɪˈspekt ˌænti ˈhærəsmənt ˈpɒləsiz/", "🙅", "พนักงานทุกคนต้องเคารพและปฏิบัติตามนโยบายต่อต้านการคุกคามในที่ทำงาน"],
+["You must update your contact details if they change.", "update", "/juː mʌst ʌpˈdeɪt jɔː ˈkɒntækt ˈdiːteɪlz ɪf ðeɪ tʃeɪndʒ/", "📇", "คุณต้องอัปเดตข้อมูลการติดต่อให้เป็นปัจจุบันหากมีการเปลี่ยนแปลง"],
+["Technicians must wear insulated gloves around high voltage.", "wear", "/tekˈnɪʃənz mʌst weər ˈɪnsjʊleɪtɪd ɡlʌvz əˈraʊnd haɪ ˈvəʊltɪdʒ/", "⚡", "ช่างเทคนิคต้องสวมถุงมือกันไฟฟ้าเมื่อปฏิบัติงานใกล้กระแสไฟฟ้าแรงสูง"],
+["You must obey all instructions given by the flight crew.", "obey", "/juː mʌst əˈbeɪ ɔːl ɪnˈstrʌkʃənz ˈɡɪvən baɪ ðə flaɪt kruː/", "👩‍✈️", "คุณต้องเชื่อฟังและปฏิบัติตามคำแนะนำของลูกเรือทุกประการ"]
+];
+
+const PER=50, pages=Math.ceil(D.length/PER);
+let page=0, voices=[], chosen=null;
+const grid=document.getElementById('grid'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function html(en,verb){
+  const i=en.indexOf(' must '), pre=esc(en.slice(0,i)), rest=en.slice(i+6);
+  const body=rest.startsWith(verb)?'<b>'+esc(verb)+'</b>'+esc(rest.slice(verb.length)):esc(rest);
+  return {front:pre+' <mark>must</mark> '+body, back:pre+' <b>must</b> '+body};
+}
+function render(){
+  grid.innerHTML='';
+  const start=page*PER, items=D.slice(start,start+PER);
+  items.forEach((r,i)=>{
+    const [en,verb,ipa,pic,th]=r, h=html(en,verb);
+    const el=document.createElement('div');
+    el.className='flip'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Flip card '+(start+i+1));
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="no">${start+i+1}</span>
+        <button class="say" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+        <div class="pic" aria-hidden="true">${pic}</div>
+        <p class="en">${h.front}</p>
+        <p class="ipa">${esc(ipa)}</p>
+        <span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      <div class="face back"><span class="no">${start+i+1}</span>
+        <p class="th">${esc(th)}</p>
+        <p class="enSmall">${h.back}</p>
+        <span class="hint">คลิกเพื่อกลับด้านหน้า</span></div></div>`;
+    const btn=el.querySelector('.say');
+    btn.addEventListener('click',e=>{e.stopPropagation();speak(en,btn);});
+    el.addEventListener('click',()=>el.classList.toggle('turned'));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('turned');}});
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const b=document.createElement('button');
+    const a=p*PER+1,z=Math.min((p+1)*PER,D.length);
+    b.textContent=`หน้า ${p+1} (${a}–${z})`; if(p===page)b.className='on';
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0});};
+    pager.appendChild(b);
+  }
+}
+
+/* ---------- Voice: prefer UK male ---------- */
+const FEMALE=/female|woman|susan|hazel|kate|serena|libby|sonia|maisie|fiona|moira|karen|samantha|victoria|zira|helen|catherine|amy|emma|joanna|olivia/i;
+const MALE_PREF=['Google UK English Male','Daniel','Microsoft George','Microsoft Ryan','Ryan','George','Oliver','Arthur','Thomas','Rishi','Microsoft Thomas'];
+function score(v){
+  let s=0;
+  if(/^en[-_]GB/i.test(v.lang))s+=50; else if(/^en/i.test(v.lang))s+=10;
+  const i=MALE_PREF.findIndex(n=>v.name.includes(n)); if(i>=0)s+=40-i;
+  if(/male/i.test(v.name)&&!/female/i.test(v.name))s+=30;
+  if(/natural|neural|online/i.test(v.name))s+=8;
+  if(FEMALE.test(v.name))s-=60;
+  return s;
+}
+function loadVoices(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voiceSel'); sel.innerHTML='';
+  if(!voices.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในอุปกรณ์</option>';return;}
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o);});
+  chosen=voices[0];
+}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+document.getElementById('voiceSel').onchange=e=>{chosen=voices[+e.target.value];};
+
+let playing=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return;}
+  speechSynthesis.cancel();
+  if(playing)playing.classList.remove('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  if(chosen){u.voice=chosen;u.lang=chosen.lang;}else u.lang='en-GB';
+  u.rate=parseFloat(document.getElementById('rate').value);
+  u.pitch=0.9;
+  btn.classList.add('playing');playing=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('playing');
+  speechSynthesis.speak(u);
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cards=[...document.querySelectorAll('.flip')];
+  const anyFront=cards.some(c=>!c.classList.contains('turned'));
+  cards.forEach(c=>c.classList.toggle('turned',anyFront));
+};
+render();
+</script>
+</body>
+</html>

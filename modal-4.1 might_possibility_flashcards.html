@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Might — Possibility Flip Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+ --bg:#eef1f5;--card:#fff;--ink:#000;--muted:#5b6472;--line:#d5dae2;--accent:#1f3a5f;--verb:#8b0000;--mark:#ffe14d;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14181f;--muted:#a3adbb;--line:#2b3340;--accent:#9db8de;}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar select,.bar button{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#000;cursor:pointer}
+.bar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{max-width:1100px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;cursor:pointer;min-height:300px;outline:none}
+.flip:focus-visible .inner{box-shadow:0 0 0 3px var(--accent)}
+.inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;border-radius:14px}
+.flip.turned .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg);background:#f3f7ff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{background:#e8effa}}
+.no{position:absolute;top:8px;left:12px;font-size:12px;color:#6b7280}
+.pic{font-size:clamp(48px,9vw,84px);line-height:1;margin:6px 0 10px}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;color:#000;font-size:clamp(15px,2.3vw,22px);line-height:1.35;margin:0 0 8px}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--mark);color:#000;font-weight:700;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;color:#222;font-size:clamp(13px,2vw,18px);line-height:1.4;margin:0 0 10px}
+.th{font-size:clamp(17px,2.6vw,24px);line-height:1.6;color:#000;margin:0 0 10px}
+.enSmall{font-family:Arial,sans-serif;font-weight:300;font-size:14px;color:#444}
+.enSmall b{font-weight:700;color:var(--verb)}
+.say{position:absolute;right:10px;top:8px;border:1px solid #c2c9d4;background:#fff;color:#000;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.say:hover{background:#eef3fb}
+.say.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hint{font-size:11px;color:#6b7280;margin-top:auto}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>4.1 Modal verb “Might” — Possibility</h1>
+  <p class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย (UK)</p>
+  <div class="bar">
+    <div class="pager" id="pager"></div>
+    <select id="voiceSel" aria-label="Voice"></select>
+    <select id="rate" aria-label="Speed">
+      <option value="0.7">ช้า 0.7×</option><option value="0.85" selected>ปกติ 0.85×</option><option value="1">เร็ว 1×</option>
+    </select>
+    <button id="flipAll">พลิกทั้งหน้า</button>
+  </div>
+</header>
+<main class="grid" id="grid"></main>
+
+<script>
+// [English, main verb (highlighted), IPA (UK), picture, Thai]
+const D=[["It might rain later this afternoon, so take an umbrella.", "rain", "/ɪt maɪt reɪn ˈleɪtə ðɪs ˌɑːftəˈnuːn səʊ teɪk ən ʌmˈbrelə/", "🌧️", "เดี๋ยวช่วงบ่ายนี้ฝนอาจจะตก พกร่มไปด้วยนะ"],
+["She might come to the party if she finishes work early.", "come", "/ʃiː maɪt kʌm tə ðə ˈpɑːti ɪf ʃiː ˈfɪnɪʃɪz wɜːk ˈɜːli/", "🎉", "เธออาจจะมางานปาร์ตี้ถ้าเลิกงานเร็ว"],
+["He might forget his keys if he is in a hurry.", "forget", "/hiː maɪt fəˈɡet hɪz kiːz ɪf hiː ɪz ɪn ə ˈhʌri/", "🔑", "เขาอาจจะลืมกุญแจไว้ถ้าเขากำลังรีบ"],
+["They might buy a new car next month.", "buy", "/ðeɪ maɪt baɪ ə njuː kɑː nekst mʌnθ/", "🚗", "พวกเขาอาจจะซื้อรถคันใหม่ในเดือนหน้า"],
+["I might travel abroad during the summer break.", "travel", "/aɪ maɪt ˈtrævəl əˈbrɔːd ˈdjʊərɪŋ ðə ˈsʌmə breɪk/", "✈️", "ฉันอาจจะเดินทางไปเที่ยวต่างประเทศช่วงวันหยุดฤดูร้อน"],
+["The price of gas might increase tomorrow.", "increase", "/ðə praɪs əv ɡæs maɪt ɪnˈkriːs təˈmɒrəʊ/", "⛽", "ราคาน้ำมันอาจจะปรับตัวสูงขึ้นในวันพรุ่งนี้"],
+["We might visit our grandparents this weekend.", "visit", "/wiː maɪt ˈvɪzɪt ˈaʊə ˈɡrænpeərənts ðɪs ˌwiːkˈend/", "👵", "พวกเราอาจจะไปเยี่ยมคุณปู่คุณย่าในสุดสัปดาห์นี้"],
+["You might like this book if you enjoy mystery stories.", "like", "/juː maɪt laɪk ðɪs bʊk ɪf juː ɪnˈdʒɔɪ ˈmɪstəri ˈstɔːriz/", "📖", "คุณอาจจะชอบหนังสือเล่มนี้ถ้าคุณชอบเรื่องราวแนวลึกลับ"],
+["The train might arrive a few minutes late.", "arrive", "/ðə treɪn maɪt əˈraɪv ə fjuː ˈmɪnɪts leɪt/", "🚆", "รถไฟอาจจะมาถึงล่าช้ากว่ากำหนดสักเล็กน้อย"],
+["She might change her mind about the project.", "change", "/ʃiː maɪt tʃeɪndʒ hɜː maɪnd əˈbaʊt ðə ˈprɒdʒekt/", "🔄", "เธออาจจะเปลี่ยนใจเกี่ยวกับโปรเจกต์นั้น"],
+["He might know the answer to this difficult question.", "know", "/hiː maɪt nəʊ ði ˈɑːnsə tə ðɪs ˈdɪfɪkəlt ˈkwestʃən/", "💭", "เขาอาจจะรู้คำตอบสำหรับคำถามที่ยากข้อนี้"],
+["The restaurant might be crowded on Friday night.", "be", "/ðə ˈrestrɒnt maɪt biː ˈkraʊdɪd ɒn ˈfraɪdeɪ naɪt/", "🍽️", "ร้านอาหารอาจจะคนแน่นขนัดในคืนวันศุกร์"],
+["I might order pizza for dinner tonight.", "order", "/aɪ maɪt ˈɔːdə ˈpiːtsə fə ˈdɪnə təˈnaɪt/", "🍕", "คืนนี้ฉันอาจจะสั่งพิซซ่ามากินเป็นมื้อเย็น"],
+["They might cancel the outdoor event due to wind.", "cancel", "/ðeɪ maɪt ˈkænsəl ði ˈaʊtdɔː ɪˈvent djuː tə wɪnd/", "🚫", "พวกเขาอาจจะยกเลิกงานกลางแจ้งเนื่องจากลมแรง"],
+["Traffic might be heavy on the highway right now.", "be", "/ˈtræfɪk maɪt biː ˈhevi ɒn ðə ˈhaɪweɪ raɪt naʊ/", "🚦", "สภาพการจราจรบนไฮเวย์ตอนนี้อาจจะติดขัดหนาแน่น"],
+["She might need some help with her homework.", "need", "/ʃiː maɪt niːd sʌm help wɪð hɜː ˈhəʊmwɜːk/", "🆘", "เธออาจจะต้องการความช่วยเหลือเรื่องการบ้าน"],
+["He might win the competition if he practices hard.", "win", "/hiː maɪt wɪn ðə ˌkɒmpəˈtɪʃən ɪf hiː ˈpræktɪsɪz hɑːd/", "🏆", "เขาอาจจะชนะการแข่งขันถ้าตั้งใจฝึกซ้อมอย่างหนัก"],
+["We might finish the report before the deadline.", "finish", "/wiː maɪt ˈfɪnɪʃ ðə rɪˈpɔːt bɪˈfɔː ðə ˈdedlaɪn/", "✅", "พวกเราอาจจะทำรายงานเสร็จก่อนกำหนดเวลา"],
+["The package might deliver tomorrow morning.", "deliver", "/ðə ˈpækɪdʒ maɪt dɪˈlɪvə təˈmɒrəʊ ˈmɔːnɪŋ/", "📦", "พัสดุอาจจะมาส่งในวันพรุ่งนี้ช่วงเช้า"],
+["I might join the fitness club next month.", "join", "/aɪ maɪt dʒɔɪn ðə ˈfɪtnəs klʌb nekst mʌnθ/", "🏋️", "เดือนหน้าฉันอาจจะสมัครสมาชิกฟิตเนสคลับ"],
+["You might see some celebrities at the festival.", "see", "/juː maɪt siː sʌm səˈlebrɪtiz ət ðə ˈfestɪvəl/", "👀", "คุณอาจจะได้เจอเหล่าคนดังในงานเทศกาลนั้น"],
+["The weather might improve by tomorrow afternoon.", "improve", "/ðə ˈweðə maɪt ɪmˈpruːv baɪ təˈmɒrəʊ ˌɑːftəˈnuːn/", "🌤️", "สภาพอากาศอาจจะดีขึ้นภายในช่วงบ่ายวันพรุ่งนี้"],
+["He might take a few days off work next week.", "take", "/hiː maɪt teɪk ə fjuː deɪz ɒf wɜːk nekst wiːk/", "🏖️", "สัปดาห์หน้าเขาอาจจะลาหยุดงานสักสองสามวัน"],
+["She might wear her blue dress to the gala.", "wear", "/ʃiː maɪt weə hɜː bluː dres tə ðə ˈɡɑːlə/", "👗", "เธออาจจะใส่ชุดเดรสสีฟ้าไปงานกาล่า"],
+["They might lose their way without a map.", "lose", "/ðeɪ maɪt luːz ðeə weɪ wɪðˈaʊt ə mæp/", "🧭", "พวกเขาอาจจะหลงทางได้ถ้าไม่มีแผนที่"],
+["I might buy a new laptop if my old one breaks.", "buy", "/aɪ maɪt baɪ ə njuː ˈlæptɒp ɪf maɪ əʊld wʌn breɪks/", "💻", "ฉันอาจจะซื้อแล็ปท็อปเครื่องใหม่ถ้าเครื่องเก่าพัง"],
+["The cat might sleep on the sofa all day long.", "sleep", "/ðə kæt maɪt sliːp ɒn ðə ˈsəʊfə ɔːl deɪ lɒŋ/", "😴", "เจ้าแมวอาจจะนอนอยู่บนโซฟาตลอดทั้งวันเลยก็ได้"],
+["He might accept the job offer from the company.", "accept", "/hiː maɪt əkˈsept ðə dʒɒb ˈɒfə frəm ðə ˈkʌmpəni/", "🤝", "เขาอาจจะตอบรับข้อเสนองานจากบริษัทนั้น"],
+["We might experience some technical issues today.", "experience", "/wiː maɪt ɪkˈspɪəriəns sʌm ˈteknɪkəl ˈɪʃuːz təˈdeɪ/", "🛠️", "วันนี้พวกเราอาจจะประสบกับปัญหาทางเทคนิคบางอย่าง"],
+["She might prefer tea instead of coffee.", "prefer", "/ʃiː maɪt prɪˈfɜː tiː ɪnˈsted əv ˈkɒfi/", "🍵", "เธออาจจะชอบชามากกว่ากาแฟ"],
+["The meeting might start a bit later than scheduled.", "start", "/ðə ˈmiːtɪŋ maɪt stɑːt ə bɪt ˈleɪtə ðən ˈʃedjuːld/", "🕐", "การประชุมอาจจะเริ่มช้ากว่ากำหนดการเดิมเล็กน้อย"],
+["I might forget to call you back this evening.", "forget", "/aɪ maɪt fəˈɡet tə kɔːl juː bæk ðɪs ˈiːvnɪŋ/", "📞", "เย็นนี้ฉันอาจจะลืมโทรกลับหาคุณ"],
+["They might sell their house and move to the countryside.", "sell", "/ðeɪ maɪt sel ðeə haʊs ənd muːv tə ðə ˈkʌntrisaɪd/", "🏡", "พวกเขาอาจจะขายบ้านแล้วย้ายไปอยู่ต่างจังหวัด"],
+["He might bring his dog to the park later.", "bring", "/hiː maɪt brɪŋ hɪz dɒɡ tə ðə pɑːk ˈleɪtə/", "🐕", "เดี๋ยวเขาอาจจะพาเจ้าสุนัขไปเดินเล่นที่สวนสาธารณะ"],
+["She might pass the exam if she reviews her notes.", "pass", "/ʃiː maɪt pɑːs ði ɪɡˈzæm ɪf ʃiː rɪˈvjuːz hɜː nəʊts/", "📝", "เธออาจจะสอบผ่านถ้าทบทวนบันทึกย่อของเธอ"],
+["The concert might sell out by tonight.", "sell out", "/ðə ˈkɒnsət maɪt sel aʊt baɪ təˈnaɪt/", "🎫", "บัตรคอนเสิร์ตอาจจะขายหมดเกลี้ยงภายในคืนนี้"],
+["I might try a new recipe for dinner.", "try", "/aɪ maɪt traɪ ə njuː ˈresəpi fə ˈdɪnə/", "👨‍🍳", "มื้อเย็นนี้ฉันอาจจะลองทำสูตรอาหารเมนูใหม่ดู"],
+["You might catch a cold if you don't wear a jacket.", "catch", "/juː maɪt kætʃ ə kəʊld ɪf juː dəʊnt weər ə ˈdʒækɪt/", "🤧", "คุณอาจจะติดหวัดได้ถ้าไม่ใส่เสื้อแจ็คเก็ต"],
+["He might lend you his camera if you ask nicely.", "lend", "/hiː maɪt lend juː hɪz ˈkæmərə ɪf juː ɑːsk ˈnaɪsli/", "📷", "เขาอาจจะให้คุณยืมกล้องถ้าคุณลองขอดีๆ"],
+["The project might require additional funding.", "require", "/ðə ˈprɒdʒekt maɪt rɪˈkwaɪər əˈdɪʃənəl ˈfʌndɪŋ/", "💰", "โครงการนี้อาจจะต้องใช้งบประมาณสนับสนุนเพิ่มเติม"],
+["She might know someone who can fix your computer.", "know", "/ʃiː maɪt nəʊ ˈsʌmwʌn huː kæn fɪks jɔː kəmˈpjuːtə/", "🧑‍💻", "เธออาจจะรู้จักใครสักคนที่ช่วยซ่อมคอมพิวเตอร์ของคุณได้"],
+["We might go camping if the weather stays nice.", "go", "/wiː maɪt ɡəʊ ˈkæmpɪŋ ɪf ðə ˈweðə steɪz naɪs/", "⛺", "พวกเราอาจจะไปตั้งแคมป์กันถ้าสภาพอากาศยังดีอยู่แบบนี้"],
+["The price of tickets might drop next week.", "drop", "/ðə praɪs əv ˈtɪkɪts maɪt drɒp nekst wiːk/", "📉", "ราคาตั๋วอาจจะปรับลดลงในสัปดาห์หน้า"],
+["He might finish his assignment before midnight.", "finish", "/hiː maɪt ˈfɪnɪʃ hɪz əˈsaɪnmənt bɪˈfɔː ˈmɪdnaɪt/", "✍️", "เขาอาจจะทำการบ้านเสร็จก่อนเที่ยงคืน"],
+["They might arrive home later than expected.", "arrive", "/ðeɪ maɪt əˈraɪv həʊm ˈleɪtə ðən ɪkˈspektɪd/", "🏠", "พวกเขาอาจจะกลับถึงบ้านช้ากว่าที่คาดไว้"],
+["I might bake a chocolate cake tomorrow.", "bake", "/aɪ maɪt beɪk ə ˈtʃɒklət keɪk təˈmɒrəʊ/", "🎂", "พรุ่งนี้ฉันอาจจะลองอบเค้กช็อกโกแลตดู"],
+["She might find her lost keys in the car.", "find", "/ʃiː maɪt faɪnd hɜː lɒst kiːz ɪn ðə kɑː/", "🔍", "เธออาจจะหากุญแจที่หายไปเจอในรถก็ได้"],
+["The website might undergo maintenance tonight.", "undergo", "/ðə ˈwebsaɪt maɪt ˌʌndəˈɡəʊ ˈmeɪntənəns təˈnaɪt/", "🌐", "เว็บไซต์อาจจะมีการปิดปรับปรุงระบบในคืนนี้"],
+["He might wear a suit to the formal dinner.", "wear", "/hiː maɪt weər ə suːt tə ðə ˈfɔːməl ˈdɪnə/", "🤵", "เขาอาจจะใส่สูทไปงานเลี้ยงอาหารค่ำที่เป็นทางการ"],
+["We might hear back from the manager tomorrow.", "hear back", "/wiː maɪt hɪə bæk frəm ðə ˈmænɪdʒə təˈmɒrəʊ/", "👂", "พวกเราอาจจะได้รับข่าวคราวติดต่อกลับจากผู้จัดการในวันพรุ่งนี้"],
+["She might join us for coffee after work.", "join", "/ʃiː maɪt dʒɔɪn ʌs fə ˈkɒfi ˈɑːftə wɜːk/", "☕", "เธออาจจะมาร่วมดื่มกาแฟกับพวกเราหลังเลิกงาน"],
+["He might leave early if he finishes his tasks.", "leave", "/hiː maɪt liːv ˈɜːli ɪf hiː ˈfɪnɪʃɪz hɪz tɑːsks/", "🚶", "เขาอาจจะกลับบ้านก่อนเวลาถ้าทำงานเสร็จแล้ว"],
+["The flight might experience turbulence over the ocean.", "experience", "/ðə flaɪt maɪt ɪkˈspɪəriəns ˈtɜːbjʊləns ˈəʊvər ði ˈəʊʃən/", "🛫", "เที่ยวบินอาจจะต้องเผชิญกับสภาพอากาศแปรปรวนเหนือมหาสมุทร"],
+["I might buy some fresh fruit at the market.", "buy", "/aɪ maɪt baɪ sʌm freʃ fruːt ət ðə ˈmɑːkɪt/", "🍎", "ฉันอาจจะแวะซื้อผลไม้สดที่ตลาด"],
+["They might postpone the meeting until next week.", "postpone", "/ðeɪ maɪt pəˈspəʊn ðə ˈmiːtɪŋ ənˈtɪl nekst wiːk/", "📅", "พวกเขาอาจจะเลื่อนการประชุมออกไปเป็นสัปดาห์หน้า"],
+["She might learn how to play the guitar.", "learn", "/ʃiː maɪt lɜːn haʊ tə pleɪ ðə ɡɪˈtɑː/", "🎸", "เธออาจจะลองหัดเล่นกีตาร์ดู"],
+["He might forget his password if he rarely logs in.", "forget", "/hiː maɪt fəˈɡet hɪz ˈpɑːswɜːd ɪf hiː ˈreəli lɒɡz ɪn/", "🔐", "เขาอาจจะลืมรหัสผ่านถ้าแทบไม่ได้เข้าสู่ระบบเลย"],
+["We might rent a cottage by the lake this summer.", "rent", "/wiː maɪt rent ə ˈkɒtɪdʒ baɪ ðə leɪk ðɪs ˈsʌmə/", "🏞️", "ฤดูร้อนนี้พวกเราอาจจะเช่าบ้านพักริมทะเลสาบ"],
+["The soup might taste better with more herbs.", "taste", "/ðə suːp maɪt teɪst ˈbetə wɪð mɔː hɜːbz/", "🍲", "ซุปอาจจะมีรสชาติดีขึ้นถ้าใส่สมุนไพรเพิ่มลงไป"],
+["I might take a photography class this autumn.", "take", "/aɪ maɪt teɪk ə fəˈtɒɡrəfi klɑːs ðɪs ˈɔːtəm/", "📸", "ฤดูใบไม้ร่วงนี้ฉันอาจจะลงเรียนคลาสถ่ายภาพ"],
+["They might invite us to their anniversary dinner.", "invite", "/ðeɪ maɪt ɪnˈvaɪt ʌs tə ðeər ˌænɪˈvɜːsəri ˈdɪnə/", "💌", "พวกเขาอาจจะชวนพวกเราไปร่วมงานเลี้ยงครบรอบแต่งงาน"],
+["He might fix your broken bicycle chain.", "fix", "/hiː maɪt fɪks jɔː ˈbrəʊkən ˈbaɪsɪkəl tʃeɪn/", "🔧", "เขาอาจจะช่วยซ่อมโซ่จักรยานที่พังให้คุณได้"],
+["She might win the art contest with this painting.", "win", "/ʃiː maɪt wɪn ði ɑːt ˈkɒntest wɪð ðɪs ˈpeɪntɪŋ/", "🎨", "เธออาจจะชนะการประกวดวาดภาพด้วยผลงานชิ้นนี้"],
+["The package might arrive later than expected.", "arrive", "/ðə ˈpækɪdʒ maɪt əˈraɪv ˈleɪtə ðən ɪkˈspektɪd/", "📬", "พัสดุอาจจะมาถึงช้ากว่าที่คาดการณ์ไว้"],
+["I might switch to a different smartphone brand.", "switch", "/aɪ maɪt swɪtʃ tʊ ə ˈdɪfrənt ˈsmɑːtfəʊn brænd/", "📱", "ฉันอาจจะเปลี่ยนไปใช้สมาร์ทโฟนยี่ห้ออื่นดูบ้าง"],
+["We might celebrate our success this weekend.", "celebrate", "/wiː maɪt ˈselɪbreɪt ˈaʊə səkˈses ðɪs ˌwiːkˈend/", "🥂", "สุดสัปดาห์นี้พวกเราอาจจะฉลองความสำเร็จกัน"],
+["He might choose the blue shirt over the white one.", "choose", "/hiː maɪt tʃuːz ðə bluː ʃɜːt ˈəʊvə ðə waɪt wʌn/", "👕", "เขาอาจจะเลือกเสื้อสีฟ้ามากกว่าตัวสีขาว"],
+["She might read two books during her vacation.", "read", "/ʃiː maɪt riːd tuː bʊks ˈdjʊərɪŋ hɜː vəˈkeɪʃən/", "📚", "ช่วงวันหยุดเธออาจจะอ่านหนังสือสักสองเล่ม"],
+["They might remodel their kitchen next year.", "remodel", "/ðeɪ maɪt ˌriːˈmɒdəl ðeə ˈkɪtʃɪn nekst jɪə/", "🍳", "ปีหน้าพวกเขาอาจจะปรับปรุงห้องครัวใหม่"],
+["I might need your advice on this matter.", "need", "/aɪ maɪt niːd jɔːr ədˈvaɪs ɒn ðɪs ˈmætə/", "🙋", "ฉันอาจจะต้องการคำปรึกษาจากคุณในเรื่องนี้"],
+["The museum might offer free admission on Tuesday.", "offer", "/ðə mjuˈziːəm maɪt ˈɒfər friː ədˈmɪʃən ɒn ˈtjuːzdeɪ/", "🏛️", "พิพิธภัณฑ์อาจจะเปิดให้เข้าชมฟรีในวันอังคาร"],
+["He might grow a beard for the winter.", "grow", "/hiː maɪt ɡrəʊ ə bɪəd fə ðə ˈwɪntə/", "🧔", "ช่วงหน้าหนาวเขาอาจจะไว้เคราดู"],
+["She might write a blog about her travels.", "write", "/ʃiː maɪt raɪt ə blɒɡ əˈbaʊt hɜː ˈtrævəlz/", "⌨️", "เธออาจจะเขียนบล็อกเล่าเรื่องราวการเดินทางของเธอ"],
+["We might discover a new hiking trail.", "discover", "/wiː maɪt dɪˈskʌvər ə njuː ˈhaɪkɪŋ treɪl/", "🥾", "พวกเราอาจจะค้นพบเส้นทางเดินป่าแห่งใหม่"],
+["The traffic might ease up after 7 PM.", "ease up", "/ðə ˈtræfɪk maɪt iːz ʌp ˈɑːftə ˈsevən piː em/", "🚗", "สภาพการจราจรอาจจะเบาบางลงหลังทุ่มตรง"],
+["I might order a salad instead of pasta.", "order", "/aɪ maɪt ˈɔːdər ə ˈsæləd ɪnˈsted əv ˈpæstə/", "🥗", "ฉันอาจจะสั่งสลัดแทนเมนูพาสต้า"],
+["They might adopt a puppy from the shelter.", "adopt", "/ðeɪ maɪt əˈdɒpt ə ˈpʌpi frəm ðə ˈʃeltə/", "🐶", "พวกเขาอาจจะรับเลี้ยงลูกสุนัขมาจากศูนย์พักพิง"],
+["He might forget his umbrella in the office.", "forget", "/hiː maɪt fəˈɡet hɪz ʌmˈbrelə ɪn ði ˈɒfɪs/", "☂️", "เขาอาจจะลืมร่มไว้ที่ออฟฟิศ"],
+["She might teach us some new cooking techniques.", "teach", "/ʃiː maɪt tiːtʃ ʌs sʌm njuː ˈkʊkɪŋ tekˈniːks/", "🧑‍🏫", "เธออาจจะสอนเทคนิคการทำอาหารใหม่ๆ ให้พวกเรา"],
+["We might hear from the client by tomorrow.", "hear", "/wiː maɪt hɪə frəm ðə ˈklaɪənt baɪ təˈmɒrəʊ/", "📧", "พวกเราอาจจะได้รับการติดต่อจากลูกค้าภายในวันพรุ่งนี้"],
+["The sky might clear up by sunset.", "clear up", "/ðə skaɪ maɪt klɪər ʌp baɪ ˈsʌnset/", "🌇", "ท้องฟ้าอาจจะปลอดโปร่งขึ้นทันเวลาก่อนพระอาทิตย์ตกดิน"],
+["I might listen to an audiobook during my commute.", "listen", "/aɪ maɪt ˈlɪsən tu ən ˈɔːdiəʊbʊk ˈdjʊərɪŋ maɪ kəˈmjuːt/", "🎧", "ระหว่างเดินทางไปทำงานฉันอาจจะเปิดหนังสือเสียงฟัง"],
+["He might apply for a promotion at work.", "apply", "/hiː maɪt əˈplaɪ fər ə prəˈməʊʃən ət wɜːk/", "📈", "เขาอาจจะสมัครขอเลื่อนตำแหน่งงานในที่ทำงาน"],
+["She might paint her bedroom a pastel pink color.", "paint", "/ʃiː maɪt peɪnt hɜː ˈbedruːm ə ˈpæstəl pɪŋk ˈkʌlə/", "🖌️", "เธออาจจะทาสีห้องนอนใหม่ด้วยโทนสีชมพูพาสเทล"],
+["They might organize a charity event this winter.", "organize", "/ðeɪ maɪt ˈɔːɡənaɪz ə ˈtʃærəti ɪˈvent ðɪs ˈwɪntə/", "🎗️", "ฤดูหนาวนี้พวกเขาอาจจะจัดงานการกุศลขึ้น"],
+["I might plant some tomatoes in the backyard.", "plant", "/aɪ maɪt plɑːnt sʌm təˈmɑːtəʊz ɪn ðə ˌbækˈjɑːd/", "🍅", "ฉันอาจจะปลูกต้นมะเขือเทศไว้ที่สวนหลังบ้าน"],
+["The store might close earlier due to the holiday.", "close", "/ðə stɔː maɪt kləʊz ˈɜːliə djuː tə ðə ˈhɒlədeɪ/", "🏪", "ร้านค้าอาจจะปิดเร็วกว่าปกติเนื่องจากเป็นวันหยุด"],
+["He might borrow his brother's car tonight.", "borrow", "/hiː maɪt ˈbɒrəʊ hɪz ˈbrʌðəz kɑː təˈnaɪt/", "🚙", "คืนนี้เขาอาจจะขอยืมรถยนต์ของพี่ชายไปใช้"],
+["She might bring her famous lasagna to the potluck.", "bring", "/ʃiː maɪt brɪŋ hɜː ˈfeɪməs ləˈzænjə tə ðə ˈpɒtlʌk/", "🍝", "เธออาจจะทำลาซานญ่าสูตรเด็ดมางานเลี้ยงแบบ potluck"],
+["We might travel by train instead of flying.", "travel", "/wiː maɪt ˈtrævəl baɪ treɪn ɪnˈsted əv ˈflaɪɪŋ/", "🚂", "พวกเราอาจจะเลือกเดินทางด้วยรถไฟแทนการขึ้นเครื่องบิน"],
+["The performance might start slightly ahead of time.", "start", "/ðə pəˈfɔːməns maɪt stɑːt ˈslaɪtli əˈhed əv taɪm/", "🎭", "การแสดงอาจจะเริ่มก่อนเวลาเล็กน้อย"],
+["I might clean the garage this weekend.", "clean", "/aɪ maɪt kliːn ðə ˈɡærɑːʒ ðɪs ˌwiːkˈend/", "🧹", "สุดสัปดาห์นี้ฉันอาจจะเคลียร์ทำความสะอาดโรงรถ"],
+["They might win the championship if they play well.", "win", "/ðeɪ maɪt wɪn ðə ˈtʃæmpiənʃɪp ɪf ðeɪ pleɪ wel/", "🥇", "พวกเขาอาจจะชนะการแข่งขันชิงแชมป์ถ้าโชว์ฟอร์มได้ดี"],
+["He might lose his wallet if he isn't careful.", "lose", "/hiː maɪt luːz hɪz ˈwɒlɪt ɪf hiː ˈɪzənt ˈkeəfəl/", "👛", "เขาอาจจะทำกระเป๋าสตางค์หายถ้าไม่ระมัดระวังให้ดี"],
+["She might speak Spanish during her trip to Spain.", "speak", "/ʃiː maɪt spiːk ˈspænɪʃ ˈdjʊərɪŋ hɜː trɪp tə speɪn/", "🗣️", "ตอนเดินทางไปเที่ยวสเปนเธออาจจะได้ลองพูดภาษาสเปน"],
+["We might spend the holiday at the beach.", "spend", "/wiː maɪt spend ðə ˈhɒlədeɪ ət ðə biːtʃ/", "🏖️", "พวกเราอาจจะไปใช้เวลาช่วงวันหยุดพักผ่อนที่ชายหาด"],
+["The price of gold might fluctuate next week.", "fluctuate", "/ðə praɪs əv ɡəʊld maɪt ˈflʌktʃueɪt nekst wiːk/", "🪙", "ราคาทองคำอาจจะมีความผันผวนในสัปดาห์หน้า"],
+["I might buy tickets online to save time.", "buy", "/aɪ maɪt baɪ ˈtɪkɪts ˈɒnlaɪn tə seɪv taɪm/", "🎟️", "เพื่อประหยัดเวลาฉันอาจจะซื้อตั๋วออนไลน์"],
+["He might forget his jacket if it gets warm.", "forget", "/hiː maɪt fəˈɡet hɪz ˈdʒækɪt ɪf ɪt ɡets wɔːm/", "🧥", "ถ้าอากาศเริ่มอุ่นขึ้นเขาอาจจะลืมหยิบเสื้อแจ็คเก็ตติดตัวมา"],
+["They might expand their business into new regions.", "expand", "/ðeɪ maɪt ɪkˈspænd ðeə ˈbɪznɪs ˈɪntə njuː ˈriːdʒənz/", "🌍", "พวกเขาอาจจะขยายธุรกิจไปสู่ภูมิภาคใหม่ๆ"]
+];
+
+const PER=50, pages=Math.ceil(D.length/PER);
+let page=0, voices=[], chosen=null;
+const grid=document.getElementById('grid'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function html(en,verb){
+  const i=en.indexOf(' might '), pre=esc(en.slice(0,i)), rest=en.slice(i+7);
+  const body=rest.startsWith(verb)?'<b>'+esc(verb)+'</b>'+esc(rest.slice(verb.length)):esc(rest);
+  return {front:pre+' <mark>might</mark> '+body, back:pre+' <b>might</b> '+body};
+}
+function render(){
+  grid.innerHTML='';
+  const start=page*PER, items=D.slice(start,start+PER);
+  items.forEach((r,i)=>{
+    const [en,verb,ipa,pic,th]=r, h=html(en,verb);
+    const el=document.createElement('div');
+    el.className='flip'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Flip card '+(start+i+1));
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="no">${start+i+1}</span>
+        <button class="say" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+        <div class="pic" aria-hidden="true">${pic}</div>
+        <p class="en">${h.front}</p>
+        <p class="ipa">${esc(ipa)}</p>
+        <span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      <div class="face back"><span class="no">${start+i+1}</span>
+        <p class="th">${esc(th)}</p>
+        <p class="enSmall">${h.back}</p>
+        <span class="hint">คลิกเพื่อกลับด้านหน้า</span></div></div>`;
+    const btn=el.querySelector('.say');
+    btn.addEventListener('click',e=>{e.stopPropagation();speak(en,btn);});
+    el.addEventListener('click',()=>el.classList.toggle('turned'));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('turned');}});
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const b=document.createElement('button');
+    const a=p*PER+1,z=Math.min((p+1)*PER,D.length);
+    b.textContent=`หน้า ${p+1} (${a}–${z})`; if(p===page)b.className='on';
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0});};
+    pager.appendChild(b);
+  }
+}
+
+/* ---------- Voice: prefer UK male ---------- */
+const FEMALE=/female|woman|susan|hazel|kate|serena|libby|sonia|maisie|fiona|moira|karen|samantha|victoria|zira|helen|catherine|amy|emma|joanna|olivia/i;
+const MALE_PREF=['Google UK English Male','Daniel','Microsoft George','Microsoft Ryan','Ryan','George','Oliver','Arthur','Thomas','Rishi','Microsoft Thomas'];
+function score(v){
+  let s=0;
+  if(/^en[-_]GB/i.test(v.lang))s+=50; else if(/^en/i.test(v.lang))s+=10;
+  const i=MALE_PREF.findIndex(n=>v.name.includes(n)); if(i>=0)s+=40-i;
+  if(/male/i.test(v.name)&&!/female/i.test(v.name))s+=30;
+  if(/natural|neural|online/i.test(v.name))s+=8;
+  if(FEMALE.test(v.name))s-=60;
+  return s;
+}
+function loadVoices(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voiceSel'); sel.innerHTML='';
+  if(!voices.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในอุปกรณ์</option>';return;}
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o);});
+  chosen=voices[0];
+}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+document.getElementById('voiceSel').onchange=e=>{chosen=voices[+e.target.value];};
+
+let playing=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return;}
+  speechSynthesis.cancel();
+  if(playing)playing.classList.remove('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  if(chosen){u.voice=chosen;u.lang=chosen.lang;}else u.lang='en-GB';
+  u.rate=parseFloat(document.getElementById('rate').value);
+  u.pitch=0.9;
+  btn.classList.add('playing');playing=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('playing');
+  speechSynthesis.speak(u);
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cards=[...document.querySelectorAll('.flip')];
+  const anyFront=cards.some(c=>!c.classList.contains('turned'));
+  cards.forEach(c=>c.classList.toggle('turned',anyFront));
+};
+render();
+</script>
+</body>
+</html>
