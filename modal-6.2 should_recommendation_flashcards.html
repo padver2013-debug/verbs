@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Should — Recommendation Flip Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+ --bg:#eef1f5;--card:#fff;--ink:#000;--muted:#5b6472;--line:#d5dae2;--accent:#1f3a5f;--verb:#8b0000;--mark:#ffe14d;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14181f;--muted:#a3adbb;--line:#2b3340;--accent:#9db8de;}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar select,.bar button{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#000;cursor:pointer}
+.bar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{max-width:1100px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;cursor:pointer;min-height:300px;outline:none}
+.flip:focus-visible .inner{box-shadow:0 0 0 3px var(--accent)}
+.inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;border-radius:14px}
+.flip.turned .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg);background:#f3f7ff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{background:#e8effa}}
+.no{position:absolute;top:8px;left:12px;font-size:12px;color:#6b7280}
+.pic{font-size:clamp(48px,9vw,84px);line-height:1;margin:6px 0 10px}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;color:#000;font-size:clamp(15px,2.3vw,22px);line-height:1.35;margin:0 0 8px}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--mark);color:#000;font-weight:700;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;color:#222;font-size:clamp(13px,2vw,18px);line-height:1.4;margin:0 0 10px}
+.th{font-size:clamp(17px,2.6vw,24px);line-height:1.6;color:#000;margin:0 0 10px}
+.enSmall{font-family:Arial,sans-serif;font-weight:300;font-size:14px;color:#444}
+.enSmall b{font-weight:700;color:var(--verb)}
+.say{position:absolute;right:10px;top:8px;border:1px solid #c2c9d4;background:#fff;color:#000;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.say:hover{background:#eef3fb}
+.say.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hint{font-size:11px;color:#6b7280;margin-top:auto}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>6.2 Modal verb “Should” — Recommendation</h1>
+  <p class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย (UK)</p>
+  <div class="bar">
+    <div class="pager" id="pager"></div>
+    <select id="voiceSel" aria-label="Voice"></select>
+    <select id="rate" aria-label="Speed">
+      <option value="0.7">ช้า 0.7×</option><option value="0.85" selected>ปกติ 0.85×</option><option value="1">เร็ว 1×</option>
+    </select>
+    <button id="flipAll">พลิกทั้งหน้า</button>
+  </div>
+</header>
+<main class="grid" id="grid"></main>
+
+<script>
+// [English, main verb (highlighted), IPA (UK), picture, Thai]
+const D=[["It should be noted that safety protocols must be followed.", "be noted", "/ɪt ʃʊd biː ˈnəʊtɪd ðət ˈseɪfti ˈprəʊtəkɒlz mʌst biː ˈfɒləʊd/", "📌", "เป็นที่น่าสังเกตว่าควรปฏิบัติตามระเบียบข้อบังคับด้านความปลอดภัย"],
+["The proposal should include a detailed budget breakdown.", "include", "/ðə prəˈpəʊzəl ʃʊd ɪnˈkluːd ə ˈdiːteɪld ˈbʌdʒɪt ˈbreɪkdaʊn/", "📑", "ข้อเสนอโครงการควรระบุแจกแจงรายละเอียดงบประมาณให้ชัดเจน"],
+["Applicants should possess a bachelor's degree in related fields.", "possess", "/ˈæplɪkənts ʃʊd pəˈzes ə ˈbætʃələz dɪˈɡriː ɪn rɪˈleɪtɪd fiːldz/", "🎓", "ผู้สมัครควรมีวุฒิการศึกษาระดับปริญญาตรีในสาขาที่เกี่ยวข้อง"],
+["All software updates should be tested in a staging environment.", "be tested", "/ɔːl ˈsɒftweər ˈʌpdeɪts ʃʊd biː ˈtestɪd ɪn ə ˈsteɪdʒɪŋ ɪnˈvaɪrənmənt/", "🧪", "การอัปเดตซอฟต์แวร์ทั้งหมดควรผ่านการทดสอบในสภาพแวดล้อมจำลองก่อน"],
+["The management should consider feedback from all department heads.", "consider", "/ðə ˈmænɪdʒmənt ʃʊd kənˈsɪdə ˈfiːdbæk frəm ɔːl dɪˈpɑːtmənt hedz/", "🤔", "ฝ่ายบริหารควรพิจารณาความคิดเห็นจากหัวหน้าแผนกทุกฝ่าย"],
+["Patients should complete the full course of prescribed medication.", "complete", "/ˈpeɪʃənts ʃʊd kəmˈpliːt ðə fʊl kɔːs əv prɪˈskraɪbd ˌmedɪˈkeɪʃən/", "💊", "ผู้ป่วยควรรับประทานยาตามที่แพทย์สั่งให้ครบตามกำหนด"],
+["Employees should report any maintenance issues immediately.", "report", "/ɪmˈplɔɪiːz ʃʊd rɪˈpɔːt ˈeni ˈmeɪntənəns ˈɪʃuːz ɪˈmiːdiətli/", "🛠️", "พนักงานควรรายงานปัญหาการซ่อมบำรุงให้ทราบในทันที"],
+["The report should provide empirical evidence to support its claims.", "provide", "/ðə rɪˈpɔːt ʃʊd prəˈvaɪd emˈpɪrɪkəl ˈevɪdəns tə səˈpɔːt ɪts kleɪmz/", "📊", "รายงานฉบับนี้ควรมีหลักฐานเชิงประจักษ์มารองรับข้อกล่าวอ้าง"],
+["Visitors should display their identification badges at all times.", "display", "/ˈvɪzɪtəz ʃʊd dɪˈspleɪ ðeər aɪˌdentɪfɪˈkeɪʃən ˈbædʒɪz ət ɔːl taɪmz/", "🪪", "ผู้มาเยือนควรแสดงบัตรประจำตัวผู้ติดต่อไว้ตลอดเวลา"],
+["The device should be stored in a cool and dry location.", "be stored", "/ðə dɪˈvaɪs ʃʊd biː stɔːd ɪn ə kuːl ənd draɪ ləʊˈkeɪʃən/", "📦", "อุปกรณ์ชิ้นนี้ควรถูกจัดเก็บไว้ในที่แห้งและเย็น"],
+["Students should consult their academic advisors before changing majors.", "consult", "/ˈstjuːdənts ʃʊd kənˈsʌlt ðeər ˌækəˈdemɪk ədˈvaɪzəz bɪˈfɔː ˈtʃeɪndʒɪŋ ˈmeɪdʒəz/", "🧑‍🏫", "นักศึกษาควรปรึกษาอาจารย์ที่ปรึกษาวิชาการก่อนทำการเปลี่ยนสาขาวิชา"],
+["The company should implement robust cybersecurity measures.", "implement", "/ðə ˈkʌmpəni ʃʊd ˈɪmplɪment rəʊˈbʌst ˈsaɪbəsɪˌkjʊərəti ˈmeʒəz/", "🛡️", "บริษัทควรนำมาตรการรักษาความปลอดภัยทางไซเบอร์ที่รัดกุมมาใช้"],
+["Contractors should adhere to environmental protection standards.", "adhere", "/kənˈtræktəz ʃʊd ədˈhɪə tʊ ɪnˌvaɪrənˈmentəl prəˈtekʃən ˈstændədz/", "🌿", "ผู้รับเหมาควรยึดมั่นและปฏิบัติตามมาตรฐานการปกป้องสิ่งแวดล้อม"],
+["The document should be signed by an authorized signatory.", "be signed", "/ðə ˈdɒkjʊmənt ʃʊd biː saɪnd baɪ ən ˈɔːθəraɪzd ˈsɪɡnətəri/", "✍️", "เอกสารฉบับนี้ควรได้รับการลงนามโดยผู้มีอำนาจลงนามที่ถูกต้อง"],
+["Financial portfolios should be diversified to minimize risks.", "be diversified", "/faɪˈnænʃəl pɔːtˈfəʊliəʊz ʃʊd biː daɪˈvɜːsɪfaɪd tə ˈmɪnɪmaɪz rɪsks/", "📈", "พอร์ตการลงทุนควรมีการกระจายความเสี่ยงเพื่อลดโอกาสขาดทุน"],
+["The committee should review the guidelines on an annual basis.", "review", "/ðə kəˈmɪti ʃʊd rɪˈvjuː ðə ˈɡaɪdlaɪnz ɒn ən ˈænjuəl ˈbeɪsɪs/", "🔎", "คณะกรรมการควรทบทวนแนวปฏิบัติเหล่านี้เป็นประจำทุกปี"],
+["New products should undergo rigorous quality assurance testing.", "undergo", "/njuː ˈprɒdʌkts ʃʊd ˌʌndəˈɡəʊ ˈrɪɡərəs ˈkwɒləti əˈʃɔːrəns ˈtestɪŋ/", "✅", "ผลิตภัณฑ์ใหม่ควรผ่านการทดสอบการประกันคุณภาพอย่างเข้มงวด"],
+["The system should automatically back up data every midnight.", "automatically back up", "/ðə ˈsɪstəm ʃʊd ˌɔːtəˈmætɪkli bæk ʌp ˈdeɪtə ˈevri ˈmɪdnaɪt/", "💾", "ระบบควรสำรองข้อมูลโดยอัตโนมัติทุกๆ เที่ยงคืน"],
+["Researchers should cite their primary data sources accurately.", "cite", "/rɪˈsɜːtʃəz ʃʊd saɪt ðeə ˈpraɪməri ˈdeɪtə ˈsɔːsɪz ˈækjʊrətli/", "📚", "นักวิจัยควรระบุอ้างอิงแหล่งที่มาของข้อมูลปฐมภูมิอย่างแม่นยำ"],
+["The policy should promote transparency and accountability.", "promote", "/ðə ˈpɒləsi ʃʊd prəˈməʊt trænsˈpærənsi ənd əˌkaʊntəˈbɪləti/", "🔍", "นโยบายดังกล่าวควรส่งเสริมความโปร่งใสและความรับผิดชอบที่ตรวจสอบได้"],
+["Participants should receive a confirmation email upon registration.", "receive", "/pɑːˈtɪsɪpənts ʃʊd rɪˈsiːv ə ˌkɒnfəˈmeɪʃən ˈiːmeɪl əˈpɒn ˌredʒɪˈstreɪʃən/", "📧", "ผู้เข้าร่วมงานควรได้รับอีเมลยืนยันทันทีเมื่อลงทะเบียนเสร็จสิ้น"],
+["The website layout should be optimized for mobile devices.", "be optimized", "/ðə ˈwebsaɪt ˈleɪaʊt ʃʊd biː ˈɒptɪmaɪzd fə ˈməʊbaɪl dɪˈvaɪsɪz/", "📱", "รูปแบบหน้าตาเว็บไซต์ควรได้รับการปรับแต่งให้รองรับอุปกรณ์มือถือ"],
+["Management should provide regular training sessions for staff.", "provide", "/ˈmænɪdʒmənt ʃʊd prəˈvaɪd ˈreɡjʊlə ˈtreɪnɪŋ ˈseʃənz fə stɑːf/", "🧑‍🏫", "ฝ่ายบริหารควรจัดอบรมเสริมทักษะให้แก่พนักงานอย่างสม่ำเสมอ"],
+["The product label should list all potential allergen ingredients.", "list", "/ðə ˈprɒdʌkt ˈleɪbəl ʃʊd lɪst ɔːl pəˈtenʃəl ˈælədʒən ɪnˈɡriːdiənts/", "🏷️", "ฉลากผลิตภัณฑ์ควรระบุส่วนผสมที่อาจก่อให้เกิดอาการแพ้ทั้งหมด"],
+["The organization should maintain open communication channels.", "maintain", "/ði ˌɔːɡənaɪˈzeɪʃən ʃʊd meɪnˈteɪn ˈəʊpən kəˌmjuːnɪˈkeɪʃən ˈtʃænəlz/", "📢", "องค์กรควรเปิดช่องทางการสื่อสารให้เปิดกว้างและเข้าถึงได้"],
+["Technical specifications should meet international standards.", "meet", "/ˈteknɪkəl ˌspesɪfɪˈkeɪʃənz ʃʊd miːt ˌɪntəˈnæʃənəl ˈstændədz/", "📐", "ข้อกำหนดทางเทคนิคควรผ่านเกณฑ์มาตรฐานสากล"],
+["Stakeholders should be notified of schedule adjustments early.", "be notified", "/ˈsteɪkhəʊldəz ʃʊd biː ˈnəʊtɪfaɪd əv ˈʃedjuːl əˈdʒʌstmənts ˈɜːli/", "🔔", "ผู้มีส่วนได้ส่วนเสียควรได้รับการแจ้งเตือนเรื่องการปรับกำหนดการล่วงหน้า"],
+["The building design should incorporate energy-saving technologies.", "incorporate", "/ðə ˈbɪldɪŋ dɪˈzaɪn ʃʊd ɪnˈkɔːpəreɪt ˈenədʒi ˈseɪvɪŋ tekˈnɒlədʒiz/", "🏢", "การออกแบบอาคารควรผสานรวมเทคโนโลยีประหยัดพลังงานเข้าไปด้วย"],
+["Insurance claims should be filed within thirty days.", "be filed", "/ɪnˈʃɔːrəns kleɪmz ʃʊd biː faɪld wɪˈðɪn ˈθɜːti deɪz/", "🗃️", "การยื่นเรื่องเคลมประกันควรดำเนินการภายในสามสิบวัน"],
+["The curriculum should reflect modern industry requirements.", "reflect", "/ðə kəˈrɪkjʊləm ʃʊd rɪˈflekt ˈmɒdən ˈɪndəstri rɪˈkwaɪəmənts/", "🪞", "หลักสูตรการเรียนการสอนควรสะท้อนความต้องการของอุตสาหกรรมยุคใหม่"],
+["Staff members should participate in annual compliance audits.", "participate", "/stɑːf ˈmembəz ʃʊd pɑːˈtɪsɪpeɪt ɪn ˈænjuəl kəmˈplaɪəns ˈɔːdɪts/", "🙋", "พนักงานทุกคนควรเข้าร่วมกระบวนการตรวจสอบการปฏิบัติตามกฎระเบียบประจำปี"],
+["The invoice should include a clear breakdown of taxes.", "include", "/ði ˈɪnvɔɪs ʃʊd ɪnˈkluːd ə klɪə ˈbreɪkdaʊn əv ˈtæksɪz/", "🧾", "ใบแจ้งหนี้ควรแสดงรายการภาษีแยกย่อยไว้อย่างชัดเจน"],
+["User passwords should consist of mixed alphanumeric characters.", "consist", "/ˈjuːzə ˈpɑːswɜːdz ʃʊd kənˈsɪst əv mɪkst ˌælfənjuːˈmerɪk ˈkærɪktəz/", "🔐", "รหัสผ่านของผู้ใช้งานควรประกอบด้วยตัวอักษรและตัวเลขผสมกัน"],
+["The marketing campaign should target specific demographic groups.", "target", "/ðə ˈmɑːkɪtɪŋ kæmˈpeɪn ʃʊd ˈtɑːɡɪt spəˈsɪfɪk ˌdeməˈɡræfɪk ɡruːps/", "🎯", "แคมเปญการตลาดควรเจาะกลุ่มเป้าหมายประชากรเฉพาะกลุ่ม"],
+["Environmental impact assessments should precede construction.", "precede", "/ɪnˌvaɪrənˈmentəl ˈɪmpækt əˈsesmənts ʃʊd prɪˈsiːd kənˈstrʌkʃən/", "🌍", "การประเมินผลกระทบสิ่งแวดล้อมควรดำเนินการก่อนเริ่มงานก่อสร้าง"],
+["The software interface should remain intuitive for all users.", "remain", "/ðə ˈsɒftweər ˈɪntəfeɪs ʃʊd rɪˈmeɪn ɪnˈtjuːɪtɪv fər ɔːl ˈjuːzəz/", "🖥️", "หน้าตาการใช้งานซอฟต์แวร์ควรมีความใช้งานง่ายและเป็นมิตรกับผู้ใช้"],
+["Public transit systems should ensure accessibility for everyone.", "ensure", "/ˈpʌblɪk ˈtrænzɪt ˈsɪstəmz ʃʊd ɪnˈʃɔːr æksesəˈbɪləti fər ˈevriwʌn/", "🚌", "ระบบขนส่งสาธารณะควรคำนึงถึงความสะดวกในการเข้าถึงสำหรับทุกคน"],
+["The laboratory should maintain strict sterilization protocols.", "maintain", "/ðə ləˈbɒrətri ʃʊd meɪnˈteɪn strɪkt ˌsterəlaɪˈzeɪʃən ˈprəʊtəkɒlz/", "🔬", "ห้องปฏิบัติการควรรักษาระเบียบวิธีปลอดเชื้ออย่างเคร่งครัด"],
+["Financial statements should be audited by independent accountants.", "be audited", "/faɪˈnænʃəl ˈsteɪtmənts ʃʊd biː ˈɔːdɪtɪd baɪ ˌɪndɪˈpendənt əˈkaʊntənts/", "🧮", "งบการเงินควรได้รับการตรวจสอบบัญชีโดยผู้ตรวจสอบบัญชีอิสระ"],
+["The research methodology should be clearly explained.", "be clearly explained", "/ðə rɪˈsɜːtʃ ˌmeθəˈdɒlədʒi ʃʊd biː ˈklɪəli ɪkˈspleɪnd/", "💬", "ระเบียบวิธีวิจัยควรได้รับการอธิบายรายละเอียดไว้อย่างชัดเจน"],
+["Customer service representatives should respond politely.", "respond", "/ˈkʌstəmə ˈsɜːvɪs ˌreprɪˈzentətɪvz ʃʊd rɪˈspɒnd pəˈlaɪtli/", "☎️", "เจ้าหน้าที่ฝ่ายบริการลูกค้าควรตอบกลับด้วยความสุภาพเรียบร้อย"],
+["The training manual should include practical troubleshooting steps.", "include", "/ðə ˈtreɪnɪŋ ˈmænjuəl ʃʊd ɪnˈkluːd ˈpræktɪkəl ˈtrʌbəlˌʃuːtɪŋ steps/", "📘", "คู่มือการฝึกอบรมควรมีขั้นตอนการแก้ไขปัญหาเบื้องต้นภาคปฏิบัติ"],
+["The legal department should clear partnership agreements first.", "clear", "/ðə ˈliːɡəl dɪˈpɑːtmənt ʃʊd klɪə ˈpɑːtnəʃɪp əˈɡriːmənts fɜːst/", "⚖️", "ฝ่ายกฎหมายควรตรวจสอบอนุมัติข้อตกลงความเป็นหุ้นส่วนเสียก่อน"],
+["Emergency exits should remain unobstructed at all times.", "remain", "/ɪˈmɜːdʒənsi ˈeksɪts ʃʊd rɪˈmeɪn ˌʌnəbˈstrʌktɪd ət ɔːl taɪmz/", "🚪", "ทางออกฉุกเฉินควรปล่อยให้โล่งไม่มีสิ่งกีดขวางอยู่ตลอดเวลา"],
+["The pricing strategy should reflect current market competitiveness.", "reflect", "/ðə ˈpraɪsɪŋ ˈstrætədʒi ʃʊd rɪˈflekt ˈkʌrənt ˈmɑːkɪt kəmˈpetɪtɪvnəs/", "💲", "กลยุทธ์การตั้งราคาควรสะท้อนถึงความสามารถในการแข่งขันของตลาดปัจจุบัน"],
+["Data privacy policies should comply with regional regulations.", "comply", "/ˈdeɪtə ˈprɪvəsi ˈpɒləsiz ʃʊd kəmˈplaɪ wɪð ˈriːdʒənəl ˌreɡjʊˈleɪʃənz/", "📜", "นโยบายความเป็นส่วนตัวของข้อมูลควรสอดคล้องกับข้อบังคับในแต่ละภูมิภาค"],
+["The event schedule should allow buffer time between sessions.", "allow", "/ði ɪˈvent ˈʃedjuːl ʃʊd əˈlaʊ ˈbʌfə taɪm bɪˈtwiːn ˈseʃənz/", "⏱️", "กำหนดการจัดงานควรเผื่อเวลาระหว่างช่วงกิจกรรมเอาไว้ด้วย"],
+["The historical archive should preserve original manuscripts.", "preserve", "/ðə hɪˈstɒrɪkəl ˈɑːkaɪv ʃʊd prɪˈzɜːv əˈrɪdʒɪnəl ˈmænjʊskrɪpts/", "🏛️", "หอจดหมายเหตุประวัติศาสตร์ควรอนุรักษ์ต้นฉบับเอกสารเอาไว้"],
+["The investment plan should balance long-term growth and stability.", "balance", "/ði ɪnˈvestmənt plæn ʃʊd ˈbæləns lɒŋ tɜːm ɡrəʊθ ənd stəˈbɪləti/", "⚖️", "แผนการลงทุนควรสร้างความสมดุลระหว่างการเติบโตและเสถียรภาพในระยะยาว"],
+["Healthcare providers should prioritize patient safety above all.", "prioritize", "/ˈhelθkeə prəˈvaɪdəz ʃʊd praɪˈɒrɪtaɪz ˈpeɪʃənt ˈseɪfti əˈbʌv ɔːl/", "🏥", "ผู้ให้บริการด้านการดูแลสุขภาพควรให้ความสำคัญสูงสุดกับความปลอดภัยของผู้ป่วย"],
+["The management team should evaluate employee performance quarterly.", "evaluate", "/ðə ˈmænɪdʒmənt tiːm ʃʊd ɪˈvæljueɪt ɪmˈplɔɪiː pəˈfɔːməns ˈkwɔːtəli/", "📋", "ทีมผู้บริหารควรประเมินผลการปฏิบัติงานของพนักงานเป็นรายไตรมาส"],
+["All financial transactions should be recorded in the ledger.", "be recorded", "/ɔːl faɪˈnænʃəl trænˈzækʃənz ʃʊd biː rɪˈkɔːdɪd ɪn ðə ˈledʒə/", "📒", "ธุรกรรมทางการเงินทั้งหมดควรถูกบันทึกไว้ในบัญชีแยกประเภท"],
+["The software should detect security vulnerabilities automatically.", "detect", "/ðə ˈsɒftweə ʃʊd dɪˈtekt sɪˈkjʊərəti ˌvʌlnərəˈbɪlɪtiz ˌɔːtəˈmætɪkli/", "🕵️", "ซอฟต์แวร์ควรตรวจจับช่องโหว่ด้านความปลอดภัยโดยอัตโนมัติ"],
+["Medical personnel should sterilize equipment before surgeries.", "sterilize", "/ˈmedɪkəl ˌpɜːsəˈnel ʃʊd ˈsterəlaɪz ɪˈkwɪpmənt bɪˈfɔː ˈsɜːdʒəriz/", "🧼", "บุคลากรทางการแพทย์ควรฆ่าเชื้ออุปกรณ์ก่อนการผ่าตัด"],
+["The marketing team should analyze consumer behavior trends.", "analyze", "/ðə ˈmɑːkɪtɪŋ tiːm ʃʊd ˈænəlaɪz kənˈsjuːmə bɪˈheɪvjə trendz/", "📊", "ทีมการตลาดควรวิเคราะห์แนวโน้มพฤติกรรมของผู้บริโภค"],
+["The building should comply with fire safety codes.", "comply", "/ðə ˈbɪldɪŋ ʃʊd kəmˈplaɪ wɪð ˈfaɪə ˈseɪfti kəʊdz/", "🔥", "อาคารควรปฏิบัติตามกฎข้อบังคับด้านความปลอดภัยจากอัคคีภัย"],
+["Researchers should publish their findings in peer-reviewed journals.", "publish", "/rɪˈsɜːtʃəz ʃʊd ˈpʌblɪʃ ðeə ˈfaɪndɪŋz ɪn pɪə rɪˈvjuːd ˈdʒɜːnəlz/", "📰", "นักวิจัยควรตีพิมพ์ผลการศึกษาในวารสารที่มีการ peer-review"],
+["The company should offer flexible working hours.", "offer", "/ðə ˈkʌmpəni ʃʊd ˈɒfə ˈfleksəbəl ˈwɜːkɪŋ ˈaʊəz/", "🕐", "บริษัทควรเปิดโอกาสให้มีเวลาทำงานที่ยืดหยุ่น"],
+["The project manager should monitor progress milestones weekly.", "monitor", "/ðə ˈprɒdʒekt ˈmænɪdʒə ʃʊd ˈmɒnɪtə ˈprəʊɡres ˈmaɪlstəʊnz ˈwiːkli/", "🖥️", "ผู้จัดการโครงการควรติดตามความคืบหน้าตามเป้าหมายเป็นรายสัปดาห์"],
+["The design should prioritize user experience and accessibility.", "prioritize", "/ðə dɪˈzaɪn ʃʊd praɪˈɒrɪtaɪz ˈjuːzər ɪkˈspɪəriəns ənd əkˌsesəˈbɪləti/", "🎨", "การออกแบบควรให้ความสำคัญกับประสบการณ์ผู้ใช้และการเข้าถึง"],
+["All new hires should complete an orientation program.", "complete", "/ɔːl njuː ˈhaɪəz ʃʊd kəmˈpliːt ən ˌɔːriənˈteɪʃən ˈprəʊɡræm/", "🎒", "พนักงานใหม่ทุกคนควรเข้าร่วมโปรแกรมปฐมนิเทศให้ครบถ้วน"],
+["The website should load within three seconds.", "load", "/ðə ˈwebsaɪt ʃʊd ləʊd wɪˈðɪn θriː ˈsekəndz/", "⚡", "เว็บไซต์ควรโหลดเสร็จสิ้นภายในสามวินาที"],
+["The committee should approve the budget before implementation.", "approve", "/ðə kəˈmɪti ʃʊd əˈpruːv ðə ˈbʌdʒɪt bɪˈfɔːr ˌɪmplɪmenˈteɪʃən/", "✅", "คณะกรรมการควรอนุมัติงบประมาณก่อนนำไปปฏิบัติจริง"],
+["The curriculum should incorporate practical hands-on training.", "incorporate", "/ðə kəˈrɪkjʊləm ʃʊd ɪnˈkɔːpəreɪt ˈpræktɪkəl ˈhændz ɒn ˈtreɪnɪŋ/", "🛠️", "หลักสูตรควรผสมผสานการฝึกอบรมภาคปฏิบัติจริงลงไปด้วย"],
+["The system should prevent unauthorized access attempts.", "prevent", "/ðə ˈsɪstəm ʃʊd prɪˈvent ˌʌnˈɔːθəraɪzd ˈækses əˈtempts/", "🔒", "ระบบควรป้องกันความพยายามในการเข้าถึงโดยไม่ได้รับอนุญาต"],
+["The administration should update facility records regularly.", "update", "/ði ədˌmɪnɪˈstreɪʃən ʃʊd ʌpˈdeɪt fəˈsɪləti ˈrekɔːdz ˈreɡjʊləli/", "🔄", "ฝ่ายบริหารควรปรับปรุงข้อมูลบันทึกสิ่งอำนวยความสะดวกอย่างสม่ำเสมอ"],
+["The policy should protect whistleblower confidentiality.", "protect", "/ðə ˈpɒləsi ʃʊd prəˈtekt ˈwɪsəlˌbləʊə ˌkɒnfɪdenʃiˈæləti/", "🤫", "นโยบายดังกล่าวควรปกป้องข้อมูลความลับของผู้แจ้งเบาะแส"],
+["The agency should publish annual sustainability reports.", "publish", "/ði ˈeɪdʒənsi ʃʊd ˈpʌblɪʃ ˈænjuəl səˌsteɪnəˈbɪləti rɪˈpɔːts/", "🌱", "หน่วยงานควรเผยแพร่รายงานความยั่งยืนประจำปี"],
+["The product should undergo durability testing before launch.", "undergo", "/ðə ˈprɒdʌkt ʃʊd ˌʌndəˈɡəʊ ˌdjʊərəˈbɪləti ˈtestɪŋ bɪˈfɔː lɔːntʃ/", "🔨", "ผลิตภัณฑ์ควรผ่านการทดสอบความทนทานก่อนเปิดตัววางจำหน่าย"],
+["The team should maintain clear documentation of code.", "maintain", "/ðə tiːm ʃʊd meɪnˈteɪn klɪə ˌdɒkjʊmenˈteɪʃən əv kəʊd/", "💻", "ทีมงานควรจัดทำเอกสารคู่มือโค้ดโปรแกรมให้อ่านเข้าใจง่าย"],
+["The laboratory should restrict entry to authorized personnel.", "restrict", "/ðə ləˈbɒrətri ʃʊd rɪˈstrɪkt ˈentri tu ˈɔːθəraɪzd ˌpɜːsəˈnel/", "🚫", "ห้องปฏิบัติการควรจำกัดการเข้าถึงเฉพาะบุคลากรที่ได้รับอนุญาต"],
+["The contract should specify deliverables and timeframes.", "specify", "/ðə ˈkɒntrækt ʃʊd ˈspesɪfaɪ dɪˈlɪvərəbəlz ənd ˈtaɪmfreɪmz/", "📜", "สัญญาควรระบุผลงานที่ต้องส่งมอบและกรอบเวลาให้ชัดเจน"],
+["The organization should encourage professional networking.", "encourage", "/ði ˌɔːɡənaɪˈzeɪʃən ʃʊd ɪnˈkʌrɪdʒ prəˈfeʃənəl ˈnetwɜːkɪŋ/", "🤝", "องค์กรควรสนับสนุนให้เกิดการสร้างเครือข่ายทางวิชาชีพ"],
+["The presentation should include visual data charts.", "include", "/ðə ˌprezənˈteɪʃən ʃʊd ɪnˈkluːd ˈvɪʒuəl ˈdeɪtə tʃɑːts/", "📈", "การนำเสนอควรมีแผนภูมิข้อมูลภาพประกอบ"],
+["The database should encrypt sensitive user information.", "encrypt", "/ðə ˈdeɪtəbeɪs ʃʊd ɪnˈkrɪpt ˈsensɪtɪv ˈjuːzər ˌɪnfəˈmeɪʃən/", "🗝️", "ฐานข้อมูลควรทำการเข้ารหัสข้อมูลส่วนตัวที่มีความอ่อนไหวของผู้ใช้"],
+["The supervisor should provide constructive feedback.", "provide", "/ðə ˈsuːpəvaɪzə ʃʊd prəˈvaɪd kənˈstrʌktɪv ˈfiːdbæk/", "👍", "หัวหน้างานควรให้ข้อเสนอแนะเชิงสร้างสรรค์"],
+["The guidelines should address potential ethical dilemmas.", "address", "/ðə ˈɡaɪdlaɪnz ʃʊd əˈdres pəˈtenʃəl ˈeθɪkəl dɪˈleməz/", "🧭", "แนวทางปฏิบัติควรครอบคลุมถึงประเด็นปัญหาเชิงจริยธรรมที่อาจเกิดขึ้น"],
+["The facility should provide wheelchair ramps for access.", "provide", "/ðə fəˈsɪləti ʃʊd prəˈvaɪd ˈwiːltʃeə ræmps fər ˈækses/", "♿", "สถานที่ดังกล่าวควรจัดให้มีทางลาดสำหรับรถเข็นวีลแชร์"],
+["The company should sponsor employee wellness programs.", "sponsor", "/ðə ˈkʌmpəni ʃʊd ˈspɒnsə ɪmˈplɔɪiː ˈwelnəs ˈprəʊɡræmz/", "🏃", "บริษัทควรสนับสนุนงบประมาณสำหรับโปรแกรมส่งเสริมสุขภาพพนักงาน"],
+["The report should summarize key findings on the first page.", "summarize", "/ðə rɪˈpɔːt ʃʊd ˈsʌməraɪz kiː ˈfaɪndɪŋz ɒn ðə fɜːst peɪdʒ/", "📄", "รายงานควรสรุปผลการศึกษาหลักไว้ในหน้าแรก"],
+["The application should validate user input format instantly.", "validate", "/ði ˌæplɪˈkeɪʃən ʃʊd ˈvælɪdeɪt ˈjuːzər ˈɪnpʊt ˈfɔːmæt ˈɪnstəntli/", "✔️", "แอปพลิเคชันควรตรวจสอบความถูกต้องรูปแบบข้อมูลที่ผู้ใช้ป้อนทันที"],
+["The department should organize monthly team-building events.", "organize", "/ðə dɪˈpɑːtmənt ʃʊd ˈɔːɡənaɪz ˈmʌnθli tiːm ˈbɪldɪŋ ɪˈvents/", "🎉", "แผนกควรจัดกิจกรรมสร้างความสัมพันธ์ในทีมทุกๆ เดือน"],
+["The policy should outline clear conflict resolution steps.", "outline", "/ðə ˈpɒləsi ʃʊd ˈaʊtlaɪn klɪə ˈkɒnflɪkt ˌrezəˈluːʃən steps/", "🗒️", "นโยบายควรระบุขั้นตอนการระงับข้อพิพาทไว้อย่างชัดเจน"],
+["The equipment should display calibration warning labels.", "display", "/ði ɪˈkwɪpmənt ʃʊd dɪˈspleɪ ˌkælɪˈbreɪʃən ˈwɔːnɪŋ ˈleɪbəlz/", "⚠️", "อุปกรณ์ควรติดป้ายเตือนการสอบเทียบเครื่องมือ"],
+["The university should expand its digital library resources.", "expand", "/ðə ˌjuːnɪˈvɜːsəti ʃʊd ɪkˈspænd ɪts ˈdɪdʒɪtəl ˈlaɪbrəri rɪˈzɔːsɪz/", "📚", "มหาวิทยาลัยควรขยายทรัพยากรห้องสมุดดิจิทัลให้กว้างขวางขึ้น"],
+["The manufacturer should provide a comprehensive user manual.", "provide", "/ðə ˌmænjʊˈfæktʃərə ʃʊd prəˈvaɪd ə ˌkɒmprɪˈhensɪv ˈjuːzə ˈmænjuəl/", "📖", "ผู้ผลิตควรจัดเตรียมคู่มือการใช้งานที่ครอบคลุมละเอียด"],
+["The strategy should focus on sustainable market growth.", "focus", "/ðə ˈstrætədʒi ʃʊd ˈfəʊkəs ɒn səˈsteɪnəbəl ˈmɑːkɪt ɡrəʊθ/", "🎯", "กลยุทธ์ควรเน้นไปที่การเติบโตของตลาดอย่างยั่งยืน"],
+["The authorities should conduct regular safety inspections.", "conduct", "/ði ɔːˈθɒrɪtiz ʃʊd kənˈdʌkt ˈreɡjʊlə ˈseɪfti ɪnˈspekʃənz/", "👮", "เจ้าหน้าที่ผู้มีอำนาจควรทำการตรวจสอบความปลอดภัยเป็นประจำ"],
+["The staff should receive training on data privacy laws.", "receive", "/ðə stɑːf ʃʊd rɪˈsiːv ˈtreɪnɪŋ ɒn ˈdeɪtə ˈprɪvəsi lɔːz/", "🎓", "พนักงานควรได้รับการอบรมเกี่ยวกับกฎหมายความเป็นส่วนตัวของข้อมูล"],
+["The schedule should accommodate different time zones.", "accommodate", "/ðə ˈʃedjuːl ʃʊd əˈkɒmədeɪt ˈdɪfrənt taɪm zəʊnz/", "🌐", "กำหนดการควรเอื้อต่อผู้เข้าร่วมจากเขตเวลาที่แตกต่างกัน"],
+["The building should incorporate renewable energy sources.", "incorporate", "/ðə ˈbɪldɪŋ ʃʊd ɪnˈkɔːpəreɪt rɪˈnjuːəbəl ˈenədʒi ˈsɔːsɪz/", "☀️", "อาคารควรนำแหล่งพลังงานหมุนเวียนมาใช้งานร่วมด้วย"],
+["The proposal should highlight potential return on investment.", "highlight", "/ðə prəˈpəʊzəl ʃʊd ˈhaɪlaɪt pəˈtenʃəl rɪˈtɜːn ɒn ɪnˈvestmənt/", "🖍️", "ข้อเสนอโครงการควรเน้นย้ำถึงผลตอบแทนจากการลงทุนที่อาจได้รับ"],
+["The system should allow users to recover forgotten passwords.", "allow", "/ðə ˈsɪstəm ʃʊd əˈlaʊ ˈjuːzəz tə rɪˈkʌvə fəˈɡɒtən ˈpɑːswɜːdz/", "🔑", "ระบบควรเปิดโอกาสให้ผู้ใช้งานสามารถกู้คืนรหัสผ่านที่ลืมได้"],
+["The institution should promote academic freedom and integrity.", "promote", "/ði ˌɪnstɪˈtjuːʃən ʃʊd prəˈməʊt ˌækəˈdemɪk ˈfriːdəm ənd ɪnˈteɡrəti/", "🎓", "สถาบันการศึกษาควรส่งเสริมเสรีภาพทางวิชาการและความซื่อสัตย์"],
+["The design should maintain consistency across all platforms.", "maintain", "/ðə dɪˈzaɪn ʃʊd meɪnˈteɪn kənˈsɪstənsi əˈkrɒs ɔːl ˈplætfɔːmz/", "🧩", "รูปแบบการออกแบบควรรักษารูปแบบความสม่ำเสมอในทุกแพลตฟอร์ม"],
+["The event organizers should provide clear directional signage.", "provide", "/ði ɪˈvent ˈɔːɡənaɪzəz ʃʊd prəˈvaɪd klɪə dəˈrekʃənəl ˈsaɪnɪdʒ/", "🪧", "ผู้จัดงานควรจัดเตรียมป้ายบอกทางให้ชัดเจน"],
+["The team should conduct a post-project review meeting.", "conduct", "/ðə tiːm ʃʊd kənˈdʌkt ə pəʊst ˈprɒdʒekt rɪˈvjuː ˈmiːtɪŋ/", "👥", "ทีมงานควรจัดประชุมสรุปผลการดำเนินงานหลังเสร็จสิ้นโครงการ"],
+["The document should include a comprehensive index section.", "include", "/ðə ˈdɒkjʊmənt ʃʊd ɪnˈkluːd ə ˌkɒmprɪˈhensɪv ˈɪndeks ˈsekʃən/", "📑", "เอกสารฉบับนี้ควรมีส่วนดัชนีคำค้นหาเนื้อหาที่ครบถ้วน"],
+["The management should foster an inclusive company culture.", "foster", "/ðə ˈmænɪdʒmənt ʃʊd ˈfɒstər ən ɪnˈkluːsɪv ˈkʌmpəni ˈkʌltʃə/", "🌈", "ฝ่ายบริหารควรสร้างเสริมวัฒนธรรมองค์กรที่มีความเท่าเทียมและเปิดรับความหลากหลาย"],
+["The policy should adapt to changing technological landscapes.", "adapt", "/ðə ˈpɒləsi ʃʊd əˈdæpt tə ˈtʃeɪndʒɪŋ ˌteknəˈlɒdʒɪkəl ˈlændskeɪps/", "🔄", "นโยบายดังกล่าวควรปรับตัวให้สอดคล้องกับภูมิทัศน์เทคโนโลยีที่เปลี่ยนแปลงไป"]
+];
+
+const PER=50, pages=Math.ceil(D.length/PER);
+let page=0, voices=[], chosen=null;
+const grid=document.getElementById('grid'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function html(en,verb){
+  const i=en.indexOf(' should '), pre=esc(en.slice(0,i)), rest=en.slice(i+8);
+  const body=rest.startsWith(verb)?'<b>'+esc(verb)+'</b>'+esc(rest.slice(verb.length)):esc(rest);
+  return {front:pre+' <mark>should</mark> '+body, back:pre+' <b>should</b> '+body};
+}
+function render(){
+  grid.innerHTML='';
+  const start=page*PER, items=D.slice(start,start+PER);
+  items.forEach((r,i)=>{
+    const [en,verb,ipa,pic,th]=r, h=html(en,verb);
+    const el=document.createElement('div');
+    el.className='flip'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Flip card '+(start+i+1));
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="no">${start+i+1}</span>
+        <button class="say" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+        <div class="pic" aria-hidden="true">${pic}</div>
+        <p class="en">${h.front}</p>
+        <p class="ipa">${esc(ipa)}</p>
+        <span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      <div class="face back"><span class="no">${start+i+1}</span>
+        <p class="th">${esc(th)}</p>
+        <p class="enSmall">${h.back}</p>
+        <span class="hint">คลิกเพื่อกลับด้านหน้า</span></div></div>`;
+    const btn=el.querySelector('.say');
+    btn.addEventListener('click',e=>{e.stopPropagation();speak(en,btn);});
+    el.addEventListener('click',()=>el.classList.toggle('turned'));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('turned');}});
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const b=document.createElement('button');
+    const a=p*PER+1,z=Math.min((p+1)*PER,D.length);
+    b.textContent=`หน้า ${p+1} (${a}–${z})`; if(p===page)b.className='on';
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0});};
+    pager.appendChild(b);
+  }
+}
+
+/* ---------- Voice: prefer UK male ---------- */
+const FEMALE=/female|woman|susan|hazel|kate|serena|libby|sonia|maisie|fiona|moira|karen|samantha|victoria|zira|helen|catherine|amy|emma|joanna|olivia/i;
+const MALE_PREF=['Google UK English Male','Daniel','Microsoft George','Microsoft Ryan','Ryan','George','Oliver','Arthur','Thomas','Rishi','Microsoft Thomas'];
+function score(v){
+  let s=0;
+  if(/^en[-_]GB/i.test(v.lang))s+=50; else if(/^en/i.test(v.lang))s+=10;
+  const i=MALE_PREF.findIndex(n=>v.name.includes(n)); if(i>=0)s+=40-i;
+  if(/male/i.test(v.name)&&!/female/i.test(v.name))s+=30;
+  if(/natural|neural|online/i.test(v.name))s+=8;
+  if(FEMALE.test(v.name))s-=60;
+  return s;
+}
+function loadVoices(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voiceSel'); sel.innerHTML='';
+  if(!voices.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในอุปกรณ์</option>';return;}
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o);});
+  chosen=voices[0];
+}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+document.getElementById('voiceSel').onchange=e=>{chosen=voices[+e.target.value];};
+
+let playing=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return;}
+  speechSynthesis.cancel();
+  if(playing)playing.classList.remove('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  if(chosen){u.voice=chosen;u.lang=chosen.lang;}else u.lang='en-GB';
+  u.rate=parseFloat(document.getElementById('rate').value);
+  u.pitch=0.9;
+  btn.classList.add('playing');playing=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('playing');
+  speechSynthesis.speak(u);
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cards=[...document.querySelectorAll('.flip')];
+  const anyFront=cards.some(c=>!c.classList.contains('turned'));
+  cards.forEach(c=>c.classList.toggle('turned',anyFront));
+};
+render();
+</script>
+</body>
+</html>

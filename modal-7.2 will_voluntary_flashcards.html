@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Will — Voluntary Decisions Flip Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+ --bg:#eef1f5;--card:#fff;--ink:#000;--muted:#5b6472;--line:#d5dae2;--accent:#1f3a5f;--verb:#8b0000;--mark:#ffe14d;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14181f;--muted:#a3adbb;--line:#2b3340;--accent:#9db8de;}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 12px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.bar select,.bar button{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#000;cursor:pointer}
+.bar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pager{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.grid{max-width:1100px;margin:0 auto;padding:12px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;cursor:pointer;min-height:300px;outline:none}
+.flip:focus-visible .inner{box-shadow:0 0 0 3px var(--accent)}
+.inner{position:relative;width:100%;height:100%;min-height:300px;transition:transform .55s;transform-style:preserve-3d;border-radius:14px}
+.flip.turned .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg);background:#f3f7ff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back{background:#e8effa}}
+.no{position:absolute;top:8px;left:12px;font-size:12px;color:#6b7280}
+.pic{font-size:clamp(48px,9vw,84px);line-height:1;margin:6px 0 10px}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;color:#000;font-size:clamp(15px,2.3vw,22px);line-height:1.35;margin:0 0 8px}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--mark);color:#000;font-weight:700;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;color:#222;font-size:clamp(13px,2vw,18px);line-height:1.4;margin:0 0 10px}
+.th{font-size:clamp(17px,2.6vw,24px);line-height:1.6;color:#000;margin:0 0 10px}
+.enSmall{font-family:Arial,sans-serif;font-weight:300;font-size:14px;color:#444}
+.enSmall b{font-weight:700;color:var(--verb)}
+.say{position:absolute;right:10px;top:8px;border:1px solid #c2c9d4;background:#fff;color:#000;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.say:hover{background:#eef3fb}
+.say.playing{background:var(--accent);color:#fff;border-color:var(--accent)}
+.hint{font-size:11px;color:#6b7280;margin-top:auto}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>7.2 Modal verb “Will” — Voluntary Decisions</h1>
+  <p class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย (UK)</p>
+  <div class="bar">
+    <div class="pager" id="pager"></div>
+    <select id="voiceSel" aria-label="Voice"></select>
+    <select id="rate" aria-label="Speed">
+      <option value="0.7">ช้า 0.7×</option><option value="0.85" selected>ปกติ 0.85×</option><option value="1">เร็ว 1×</option>
+    </select>
+    <button id="flipAll">พลิกทั้งหน้า</button>
+  </div>
+</header>
+<main class="grid" id="grid"></main>
+
+<script>
+// [English, main verb (highlighted), IPA (UK), picture, Thai]
+const D=[["I will answer that phone call for you.", "answer", "/aɪ wɪl ˈɑːnsə ðæt fəʊn kɔːl fə juː/", "📞", "เดี๋ยวฉันรับสายโทรศัพท์นั้นให้คุณเอง"],
+["I will carry your heavy luggage upstairs.", "carry", "/aɪ wɪl ˈkæri jɔː ˈhevi ˈlʌɡɪdʒ ˌʌpˈsteəz/", "🧳", "เดี๋ยวฉันช่วยยกกระเป๋าเดินทางหนักๆ ขึ้นไปข้างบนให้เอง"],
+["Don't worry, I will help you with this difficult task.", "help", "/dəʊnt ˈwʌri aɪ wɪl help juː wɪð ðɪs ˈdɪfɪkəlt tɑːsk/", "🤝", "อย่ากังวลไปเลย เดี๋ยวฉันช่วยคุณทำงานยากชิ้นนี้เอง"],
+["I will open the window to let some fresh air in.", "open", "/aɪ wɪl ˈəʊpən ðə ˈwɪndəʊ tə let sʌm freʃ eər ɪn/", "🪟", "เดี๋ยวฉันเปิดหน้าต่างรับอากาศบริสุทธิ์เข้ามาหน่อยนะ"],
+["I will pay the bill for this meal.", "pay", "/aɪ wɪl peɪ ðə bɪl fə ðɪs miːl/", "💳", "มื้อนี้เดี๋ยวฉันเป็นคนจ่ายเงินเอง"],
+["I will drive you to the hospital right now.", "drive", "/aɪ wɪl draɪv juː tə ðə ˈhɒspɪtəl raɪt naʊ/", "🚗", "เดี๋ยวฉันขับรถพาคุณไปโรงพยาบาลเดี๋ยวนี้เลย"],
+["I will make a cup of hot coffee for you.", "make", "/aɪ wɪl meɪk ə kʌp əv hɒt ˈkɒfi fə juː/", "☕", "เดี๋ยวฉันชงกาแฟร้อนๆ ให้คุณสักแก้วนะ"],
+["I will clean up the spilled milk on the floor.", "clean up", "/aɪ wɪl kliːn ʌp ðə spɪld mɪlk ɒn ðə flɔː/", "🥛", "เดี๋ยวฉันจัดการทำความสะอาดนมที่หกบนพื้นให้เอง"],
+["I will show you how to use this new software.", "show", "/aɪ wɪl ʃəʊ juː haʊ tə juːz ðɪs njuː ˈsɒftweə/", "💻", "เดี๋ยวฉันสาธิตวิธีใช้งานซอฟต์แวร์ใหม่นี้ให้ดูเอง"],
+["I will cook dinner tonight so you can rest.", "cook", "/aɪ wɪl kʊk ˈdɪnə təˈnaɪt səʊ juː kæn rest/", "🍳", "คืนนี้เดี๋ยวฉันทำมื้อเย็นให้กินเอง คุณจะได้พักผ่อน"],
+["I will check the front door to see who is there.", "check", "/aɪ wɪl tʃek ðə frʌnt dɔː tə siː huː ɪz ðeə/", "🚪", "เดี๋ยวฉันเดินไปดูประตูหน้าบ้านให้เองว่าใครมา"],
+["I will lend you my umbrella since it's raining.", "lend", "/aɪ wɪl lend juː maɪ ʌmˈbrelə sɪns ɪts ˈreɪnɪŋ/", "☂️", "ฝนตกอยู่ เดี๋ยวฉันให้คุณยืมร่มของฉันไปก่อนแล้วกัน"],
+["I will wait for you outside the station.", "wait", "/aɪ wɪl weɪt fə juː ˌaʊtˈsaɪd ðə ˈsteɪʃən/", "⏳", "เดี๋ยวฉันยืนรอคุณอยู่ตรงด้านนอกสถานีนะ"],
+["I will send the document to the manager immediately.", "send", "/aɪ wɪl send ðə ˈdɒkjʊmənt tə ðə ˈmænɪdʒər ɪˈmiːdiətli/", "📤", "เดี๋ยวฉันจัดส่งเอกสารให้ผู้จัดการเดี๋ยวนี้เลย"],
+["I will fix your computer issue right now.", "fix", "/aɪ wɪl fɪks jɔː kəmˈpjuːtər ˈɪʃuː raɪt naʊ/", "🔧", "เดี๋ยวฉันช่วยแก้ปัญหาคอมพิวเตอร์ให้เดี๋ยวนี้เลย"],
+["I will order a taxi for your trip home.", "order", "/aɪ wɪl ˈɔːdər ə ˈtæksi fə jɔː trɪp həʊm/", "🚕", "เดี๋ยวฉันกดเรียกแท็กซี่ให้คุณนั่งกลับบ้านเอง"],
+["I will translate this sentence for you.", "translate", "/aɪ wɪl trænzˈleɪt ðɪs ˈsentəns fə juː/", "🔤", "เดี๋ยวฉันช่วยแปลประโยคนี้ให้คุณฟังเอง"],
+["I will print those copies for your meeting.", "print", "/aɪ wɪl prɪnt ðəʊz ˈkɒpiz fə jɔː ˈmiːtɪŋ/", "🖨️", "เดี๋ยวฉันปริ้นท์เอกสารชุดนั้นเตรียมไว้ใช้ประชุมให้เอง"],
+["I will lock up the office before leaving.", "lock up", "/aɪ wɪl lɒk ʌp ði ˈɒfɪs bɪˈfɔː ˈliːvɪŋ/", "🔒", "เดี๋ยวฉันช่วยล็อกสำนักงานให้เรียบร้อยก่อนกลับเอง"],
+["I will find that contact number for you.", "find", "/aɪ wɪl faɪnd ðæt ˈkɒntækt ˈnʌmbə fə juː/", "🔍", "เดี๋ยวฉันช่วยค้นหาเบอร์ติดต่อเบอร์นั้นให้คุณนะ"],
+["I will take the garbage out to the bin.", "take", "/aɪ wɪl teɪk ðə ˈɡɑːbɪdʒ aʊt tə ðə bɪn/", "🗑️", "เดี๋ยวฉันหยิบถุงขยะไปทิ้งลงถังให้เอง"],
+["I will water the plants in the garden.", "water", "/aɪ wɪl ˈwɔːtə ðə plɑːnts ɪn ðə ˈɡɑːdən/", "🪴", "เดี๋ยวฉันออกไปรดน้ำต้นไม้ในสวนให้จ้า"],
+["I will turn off all the lights downstairs.", "turn off", "/aɪ wɪl tɜːn ɒf ɔːl ðə laɪts ˌdaʊnˈsteəz/", "💡", "เดี๋ยวฉันเดินไปปิดไฟชั้นล่างให้หมดเอง"],
+["I will feed the stray cat outside.", "feed", "/aɪ wɪl fiːd ðə streɪ kæt ˌaʊtˈsaɪd/", "🐈", "เดี๋ยวฉันหาอาหารให้เจ้าแมวจรจัดข้างนอกกินเอง"],
+["I will park your car in the garage.", "park", "/aɪ wɪl pɑːk jɔː kɑː ɪn ðə ˈɡærɑːʒ/", "🅿️", "เดี๋ยวฉันช่วยขับรถของคุณไปจอดเก็บในโรงรถให้"],
+["I will share my notes with you later.", "share", "/aɪ wɪl ʃeə maɪ nəʊts wɪð juː ˈleɪtə/", "📝", "เดี๋ยวเอาไว้ฉันแบ่งปันสมุดจดเลคเชอร์ให้คุณดูนะ"],
+["I will reserve a table at that restaurant.", "reserve", "/aɪ wɪl rɪˈzɜːv ə ˈteɪbəl ət ðæt ˈrestrɒnt/", "🍽️", "เดี๋ยวฉันช่วยโทรจองโต๊ะที่ร้านอาหารนั้นให้"],
+["I will post this letter for you on my way.", "post", "/aɪ wɪl pəʊst ðɪs ˈletə fə juː ɒn maɪ weɪ/", "📮", "เดี๋ยวระหว่างทางฉันแวะหย่อนจดหมายนี้ลงตู้ไปรษณีย์ให้เอง"],
+["I will explain the lesson again if you missed it.", "explain", "/aɪ wɪl ɪkˈspleɪn ðə ˈlesən əˈɡeɪn ɪf juː mɪst ɪt/", "🧑‍🏫", "ถ้าคุณตามไม่ทัน เดี๋ยวฉันช่วยอธิบายบทเรียนใหม่อีกรอบนะ"],
+["I will wash the dishes after dinner.", "wash", "/aɪ wɪl wɒʃ ðə ˈdɪʃɪz ˈɑːftə ˈdɪnə/", "🍽️", "เดี๋ยวทานมื้อเย็นเสร็จแล้วฉันอาสาเป็นคนล้างจานชามเอง"],
+["I will give you a wake-up call tomorrow morning.", "give", "/aɪ wɪl ɡɪv juː ə ˈweɪk ʌp kɔːl təˈmɒrəʊ ˈmɔːnɪŋ/", "⏰", "เดี๋ยวพรุ่งนี้เช้าฉันโทรปลุกคุณเอง"],
+["I will clear the table for you now.", "clear", "/aɪ wɪl klɪə ðə ˈteɪbəl fə juː naʊ/", "🧹", "เดี๋ยวฉันช่วยเก็บเคลียร์โต๊ะอาหารให้ตอนนี้เลยนะ"],
+["I will guide you through the museum galleries.", "guide", "/aɪ wɪl ɡaɪd juː θruː ðə mjuˈziːəm ˈɡæləriz/", "🏛️", "เดี๋ยวฉันช่วยพาเดินชมพิพิธภัณฑ์รอบๆ นี้ให้เอง"],
+["I will pick up your dry cleaning on my way.", "pick up", "/aɪ wɪl pɪk ʌp jɔː draɪ ˈkliːnɪŋ ɒn maɪ weɪ/", "👔", "เดี๋ยวขากลับฉันแวะรับเสื้อผ้าที่ซักแห้งให้คุณเอง"],
+["I will recommend a good movie to watch tonight.", "recommend", "/aɪ wɪl ˌrekəˈmend ə ɡʊd ˈmuːvi tə wɒtʃ təˈnaɪt/", "🎬", "เดี๋ยวฉันแนะนำภาพยนตร์สนุกๆ ไว้ดูคืนนี้ให้เรื่องหนึ่งนะ"],
+["I will lend you my jacket if you are cold.", "lend", "/aɪ wɪl lend juː maɪ ˈdʒækɪt ɪf juː ɑː kəʊld/", "🧥", "ถ้าคุณหนาว เดี๋ยวฉันถอดเสื้อแจ็คเก็ตให้ยืมใส่ก่อน"],
+["I will organize your messy desk files.", "organize", "/aɪ wɪl ˈɔːɡənaɪz jɔː ˈmesi desk faɪlz/", "🗂️", "เดี๋ยวฉันช่วยจัดระเบียบแฟ้มเอกสารบนโต๊ะรกๆ ให้เข้าที่เอง"],
+["I will search for the missing keys in the room.", "search", "/aɪ wɪl sɜːtʃ fə ðə ˈmɪsɪŋ kiːz ɪn ðə ruːm/", "🔑", "เดี๋ยวฉันช่วยเดินหากุญแจที่หายไปทั่วห้องให้"],
+["I will hold your bag while you tie your shoes.", "hold", "/aɪ wɪl həʊld jɔː bæɡ waɪl juː taɪ jɔː ʃuːz/", "👜", "ระหว่างที่คุณผูกเชือกรองเท้า เดี๋ยวฉันช่วยถือกระเป๋าให้เอง"],
+["I will make some fresh juice for everyone.", "make", "/aɪ wɪl meɪk sʌm freʃ dʒuːs fər ˈevriwʌn/", "🍹", "เดี๋ยวฉันคั้นน้ำผลไม้สดๆ มาเสิร์ฟให้ทุกคนดื่มกันนะ"],
+["I will proofread your essay before submission.", "proofread", "/aɪ wɪl ˈpruːfriːd jɔːr ˈeseɪ bɪˈfɔː səbˈmɪʃən/", "📖", "เดี๋ยวช่วยตรวจทานความถูกต้องบทความเรียงความให้ก่อนส่งนะ"],
+["I will track your package delivery online.", "track", "/aɪ wɪl træk jɔː ˈpækɪdʒ dɪˈlɪvəri ˈɒnlaɪn/", "📦", "เดี๋ยวฉันช่วยเช็คสถานะการจัดส่งพัสดุออนไลน์ให้อีกแรง"],
+["I will check the oven so the cake doesn't burn.", "check", "/aɪ wɪl tʃek ði ˈʌvən səʊ ðə keɪk ˈdʌznt bɜːn/", "🎂", "เดี๋ยวฉันช่วยดูเตาอบให้อย่าให้เค้กไหม้เชียวล่ะ"],
+["I will set up the projector for your slide show.", "set up", "/aɪ wɪl set ʌp ðə prəˈdʒektə fə jɔː slaɪd ʃəʊ/", "📽️", "เดี๋ยวฉันช่วยติดตั้งเครื่องโปรเจคเตอร์สำหรับการฉายสไลด์ให้"],
+["I will save a seat for you in the auditorium.", "save", "/aɪ wɪl seɪv ə siːt fə juː ɪn ði ˌɔːdɪˈtɔːriəm/", "💺", "เดี๋ยวฉันช่วยจองเก้าอี้เผื่อคุณไว้ในหอประชุมนะ"],
+["I will translate this foreign website for you.", "translate", "/aɪ wɪl trænzˈleɪt ðɪs ˈfɒrən ˈwebsaɪt fə juː/", "🌐", "เดี๋ยวฉันช่วยแปลเว็บไซต์ภาษาต่างประเทศนี้ให้อ่านง่ายขึ้น"],
+["I will remind you about the meeting time tomorrow.", "remind", "/aɪ wɪl rɪˈmaɪnd juː əˈbaʊt ðə ˈmiːtɪŋ taɪm təˈmɒrəʊ/", "🔔", "เดี๋ยวพรุ่งนี้ฉันช่วยเตือนความจำเรื่องเวลานัดประชุมให้เอง"],
+["I will greet the clients when they arrive.", "greet", "/aɪ wɪl ɡriːt ðə ˈklaɪənts wen ðeɪ əˈraɪv/", "👋", "เดี๋ยวตอนที่ลูกค้ามาถึง ฉันออกไปต้อนรับพวกเขาเอง"],
+["I will substitute for you during your break time.", "substitute", "/aɪ wɪl ˈsʌbstɪtjuːt fə juː ˈdjʊərɪŋ jɔː breɪk taɪm/", "🔁", "ช่วงที่คุณไปพักผ่อน เดี๋ยวฉันช่วยอยู่ประจำหน้างานแทนให้ก่อน"],
+["I will double-check the calculations for accuracy.", "double-check", "/aɪ wɪl ˌdʌbəl ˈtʃek ðə ˌkælkjʊˈleɪʃənz fər ˈækjʊrəsi/", "🧮", "เดี๋ยวฉันช่วยตรวจสอบการคำนวณซ้ำอีกรอบเพื่อความถูกต้องแน่นอน"],
+["I will help you wash the dishes right now.", "help", "/aɪ wɪl help juː wɒʃ ðə ˈdɪʃɪz raɪt naʊ/", "🧽", "เดี๋ยวฉันช่วยคุณล้างจานตอนนี้เลย"],
+["I will answer the door for the delivery person.", "answer", "/aɪ wɪl ˈɑːnsə ðə dɔː fə ðə dɪˈlɪvəri ˈpɜːsən/", "🚚", "เดี๋ยวฉันเดินไปเปิดประตูรับพัสดุให้เอง"],
+["I will carry those heavy grocery bags for you.", "carry", "/aɪ wɪl ˈkæri ðəʊz ˈhevi ˈɡrəʊsəri bæɡz fə juː/", "🛍️", "เดี๋ยวฉันช่วยถือถุงใส่ของชำหนักๆ พวกนั้นให้คุณเอง"],
+["I will make some fresh tea for everyone.", "make", "/aɪ wɪl meɪk sʌm freʃ tiː fər ˈevriwʌn/", "🍵", "เดี๋ยวฉันชงชาร้อนๆ มาให้ทุกคนดื่มกันนะ"],
+["I will fix your printer problem in a minute.", "fix", "/aɪ wɪl fɪks jɔː ˈprɪntə ˈprɒbləm ɪn ə ˈmɪnɪt/", "🖨️", "เดี๋ยวฉันช่วยดูและแก้ปัญหาเครื่องพิมพ์ให้ในอีกสักครู่"],
+["I will drive you to the station if you miss the bus.", "drive", "/aɪ wɪl draɪv juː tə ðə ˈsteɪʃən ɪf juː mɪs ðə bʌs/", "🚌", "ถ้าคุณตกรถประจำทาง เดี๋ยวฉันขับรถไปส่งคุณที่สถานีเอง"],
+["I will send you the file link right away.", "send", "/aɪ wɪl send juː ðə faɪl lɪŋk raɪt əˈweɪ/", "🔗", "เดี๋ยวฉันส่งลิงก์ไฟล์งานให้คุณทันทีเลยตอนนี้"],
+["I will clean up the kitchen counter for you.", "clean up", "/aɪ wɪl kliːn ʌp ðə ˈkɪtʃɪn ˈkaʊntə fə juː/", "🧼", "เดี๋ยวฉันช่วยเช็ดทำความสะอาดเคาน์เตอร์ครัวให้"],
+["I will turn on the heater so it gets warm.", "turn on", "/aɪ wɪl tɜːn ɒn ðə ˈhiːtə səʊ ɪt ɡets wɔːm/", "🔥", "เดี๋ยวฉันเปิดเครื่องทำความร้อนให้อากาศในห้องอุ่นขึ้นนะ"],
+["I will lend you my jacket if you're freezing.", "lend", "/aɪ wɪl lend juː maɪ ˈdʒækɪt ɪf jɔː ˈfriːzɪŋ/", "🥶", "ถ้าคุณหนาวสั่น เดี๋ยวฉันให้ยืมเสื้อแจ็คเก็ตใส่ก่อน"],
+["I will order extra pizza for the party.", "order", "/aɪ wɪl ˈɔːdər ˈekstrə ˈpiːtsə fə ðə ˈpɑːti/", "🍕", "เดี๋ยวฉันสั่งพิซซ่าเพิ่มเผื่อไว้สำหรับงานปาร์ตี้เอง"],
+["I will check the front gate before locking up.", "check", "/aɪ wɪl tʃek ðə frʌnt ɡeɪt bɪˈfɔː ˈlɒkɪŋ ʌp/", "🚧", "เดี๋ยวฉันออกไปตรวจดูประตูรั้วหน้าบ้านก่อนล็อกนะ"],
+["I will take your heavy coat to the bedroom.", "take", "/aɪ wɪl teɪk jɔː ˈhevi kəʊt tə ðə ˈbedruːm/", "🧥", "เดี๋ยวฉันถือเสื้อโค้ทหนาของคุณไปเก็บไว้ในห้องนอนให้"],
+["I will show you the shortcut through the park.", "show", "/aɪ wɪl ʃəʊ juː ðə ˈʃɔːtkʌt θruː ðə pɑːk/", "🌳", "เดี๋ยวฉันพาเดินลัดเลาะผ่านสวนสาธารณะให้เอง"],
+["I will pay for the parking ticket.", "pay", "/aɪ wɪl peɪ fə ðə ˈpɑːkɪŋ ˈtɪkɪt/", "🎫", "ค่าจอดรถใบนี้ เดี๋ยวฉันจัดการจ่ายเงินให้เอง"],
+["I will translate this email message into Thai.", "translate", "/aɪ wɪl trænzˈleɪt ðɪs ˈiːmeɪl ˈmesɪdʒ ˈɪntə taɪ/", "📧", "เดี๋ยวข้อความอีเมลนี้ ฉันช่วยแปลเป็นภาษาไทยให้ฟัง"],
+["I will hold the ladder while you paint the wall.", "hold", "/aɪ wɪl həʊld ðə ˈlædə waɪl juː peɪnt ðə wɔːl/", "🪜", "ระหว่างที่คุณทาสีผนัง เดี๋ยวฉันช่วยจับบันไดให้อย่างแน่นหนา"],
+["I will print those extra handouts for your students.", "print", "/aɪ wɪl prɪnt ðəʊz ˈekstrə ˈhændaʊts fə jɔː ˈstjuːdənts/", "📄", "เดี๋ยวฉันปริ้นท์ชีทเอกสารแจกเพิ่มเติมให้เหล่านักเรียนของคุณเอง"],
+["I will make a reservation at that restaurant.", "make", "/aɪ wɪl meɪk ə ˌrezəˈveɪʃən ət ðæt ˈrestrɒnt/", "📅", "เดี๋ยวฉันจัดการโทรจองโต๊ะที่ร้านอาหารนั้นให้เรียบร้อย"],
+["I will gather all the signatures on this form.", "gather", "/aɪ wɪl ˈɡæðər ɔːl ðə ˈsɪɡnətʃəz ɒn ðɪs fɔːm/", "✍️", "เดี๋ยวฉันช่วยรวบรวมลายเซ็นในแบบฟอร์มนี้ให้ครบเอง"],
+["I will search for your missing sunglasses.", "search", "/aɪ wɪl sɜːtʃ fə jɔː ˈmɪsɪŋ ˈsʌnɡlɑːsɪz/", "🕶️", "เดี๋ยวฉันช่วยเดินตามหาแว่นกันแดดที่หายไปของคุณให้"],
+["I will explain the project steps to the new intern.", "explain", "/aɪ wɪl ɪkˈspleɪn ðə ˈprɒdʒekt steps tə ðə njuː ˈɪntɜːn/", "🧑‍💼", "เดี๋ยวฉันอธิบายขั้นตอนโปรเจกต์ให้เด็กฝึกงานคนใหม่ฟังเอง"],
+["I will clear your schedule for tomorrow afternoon.", "clear", "/aɪ wɪl klɪə jɔː ˈʃedjuːl fə təˈmɒrəʊ ˌɑːftəˈnuːn/", "🗓️", "เดี๋ยวฉันช่วยเคลียร์ตารางงานช่วงบ่ายวันพรุ่งให้ว่างลง"],
+["I will bring extra chairs from the conference room.", "bring", "/aɪ wɪl brɪŋ ˈekstrə tʃeəz frəm ðə ˈkɒnfərəns ruːm/", "🪑", "เดี๋ยวฉันเดินไปยกเก้าอี้เสริมจากห้องประชุมมาให้"],
+["I will rearrange these chairs in a circle.", "rearrange", "/aɪ wɪl ˌriːəˈreɪndʒ ðiːz tʃeəz ɪn ə ˈsɜːkəl/", "⭕", "เดี๋ยวฉันจัดเรียงเก้าอี้เหล่านี้ให้เป็นวงกลมเอง"],
+["I will book the conference room for our discussion.", "book", "/aɪ wɪl bʊk ðə ˈkɒnfərəns ruːm fər ˈaʊə dɪˈskʌʃən/", "🏢", "เดี๋ยวฉันจองห้องประชุมไว้ใช้สำหรับพวกเราคุยงานกัน"],
+["I will test the microphone before the event starts.", "test", "/aɪ wɪl test ðə ˈmaɪkrəfəʊn bɪˈfɔː ði ɪˈvent stɑːts/", "🎤", "เดี๋ยวฉันทดสอบระบบไมโครโฟนให้ก่อนงานจะเริ่ม"],
+["I will post this announcement on the bulletin board.", "post", "/aɪ wɪl pəʊst ðɪs əˈnaʊnsmənt ɒn ðə ˈbʊlətɪn bɔːd/", "📌", "เดี๋ยวฉันนำประกาศแผ่นนี้ไปติดไว้ที่บอร์ดประชาสัมพันธ์ให้"],
+["I will organize the storage room shelves today.", "organize", "/aɪ wɪl ˈɔːɡənaɪz ðə ˈstɔːrɪdʒ ruːm ʃelvz təˈdeɪ/", "📚", "เดี๋ยววันนี้ฉันช่วยจัดชั้นวางของในห้องเก็บของให้เป็นระเบียบ"],
+["I will water your office plants while you're away.", "water", "/aɪ wɪl ˈwɔːtə jɔːr ˈɒfɪs plɑːnts waɪl jɔːr əˈweɪ/", "🌿", "ช่วงที่คุณไม่อยู่ เดี๋ยวฉันช่วยรดน้ำต้นไม้ในออฟฟิศให้เอง"],
+["I will feed your goldfish every morning.", "feed", "/aɪ wɪl fiːd jɔː ˈɡəʊldfɪʃ ˈevri ˈmɔːnɪŋ/", "🐠", "เดี๋ยวทุกเช้าฉันช่วยให้อาหารปลาทองของคุณให้"],
+["I will lock the back doors before going to bed.", "lock", "/aɪ wɪl lɒk ðə bæk dɔːz bɪˈfɔː ˈɡəʊɪŋ tə bed/", "🔐", "เดี๋ยวเข้านอนแล้วฉันเดินไปล็อกประตูหลังบ้านให้เรียบร้อย"],
+["I will turn down the music volume for you.", "turn down", "/aɪ wɪl tɜːn daʊn ðə ˈmjuːzɪk ˈvɒljuːm fə juː/", "🔉", "เดี๋ยวฉันลดเสียงเพลงลงเบาๆ ให้คุณนะ"],
+["I will give you a ride home after work.", "give", "/aɪ wɪl ɡɪv juː ə raɪd həʊm ˈɑːftə wɜːk/", "🚙", "เดี๋ยวเลิกงานแล้วฉันขับรถแวะไปส่งคุณที่บ้านเอง"],
+["I will switch places with you for this shift.", "switch", "/aɪ wɪl swɪtʃ ˈpleɪsɪz wɪð juː fə ðɪs ʃɪft/", "🔄", "สำหรับกะนี้ เดี๋ยวฉันสลับเปลี่ยนหน้าที่มาทำงานแทนคุณก่อน"],
+["I will check the mail box for your package.", "check", "/aɪ wɪl tʃek ðə meɪl bɒks fə jɔː ˈpækɪdʒ/", "📬", "เดี๋ยวฉันเดินไปเช็คตู้จดหมายดูพัสดุของคุณให้"],
+["I will wipe down the kitchen table now.", "wipe down", "/aɪ wɪl waɪp daʊn ðə ˈkɪtʃɪn ˈteɪbəl naʊ/", "🧻", "เดี๋ยวฉันช่วยเช็ดทำความสะอาดโต๊ะอาหารให้ตอนนี้เลย"],
+["I will reset your router to fix the connection.", "reset", "/aɪ wɪl ˌriːˈset jɔː ˈruːtə tə fɪks ðə kəˈnekʃən/", "📶", "เดี๋ยวฉันช่วยรีเซ็ตเราเตอร์ให้เพื่อแก้ปัญหาเน็ตหลุด"],
+["I will pack the remaining items in a box.", "pack", "/aɪ wɪl pæk ðə rɪˈmeɪnɪŋ ˈaɪtəmz ɪn ə bɒks/", "📦", "เดี๋ยวสิ่งของที่เหลือพวกนี้ฉันช่วยเก็บใส่กล่องให้เอง"],
+["I will draft the meeting minutes for our team.", "draft", "/aɪ wɪl drɑːft ðə ˈmiːtɪŋ ˈmɪnɪts fər ˈaʊə tiːm/", "🗒️", "เดี๋ยวฉันอาสาเป็นคนร่างบันทึกรายงานการประชุมให้ทีมเราเอง"],
+["I will verify the guest list for the party.", "verify", "/aɪ wɪl ˈverɪfaɪ ðə ɡest lɪst fə ðə ˈpɑːti/", "📋", "เดี๋ยวฉันช่วยตรวจเช็ครายชื่อแขกผู้ร่วมงานปาร์ตี้ให้แน่ชัด"],
+["I will fetch a glass of water for you.", "fetch", "/aɪ wɪl fetʃ ə ɡlɑːs əv ˈwɔːtə fə juː/", "🥤", "เดี๋ยวฉันเดินไปหยิบน้ำดื่มมาให้คุณแก้วหนึ่งนะ"],
+["I will collect the stray papers from the floor.", "collect", "/aɪ wɪl kəˈlekt ðə streɪ ˈpeɪpəz frəm ðə flɔː/", "📃", "เดี๋ยวฉันช่วยเก็บกระดาษที่ปลิวตกกระจายอยู่บนพื้นให้"],
+["I will help you practice your presentation speech.", "help", "/aɪ wɪl help juː ˈpræktɪs jɔː ˌprezənˈteɪʃən spiːtʃ/", "🗣️", "เดี๋ยวฉันช่วยเป็นคู่ซ้อมฟังคุณพูดพรีเซนต์งานให้"],
+["I will waterproof these outdoor wooden chairs.", "waterproof", "/aɪ wɪl ˈwɔːtəpruːf ðiːz ˈaʊtdɔː ˈwʊdən tʃeəz/", "☔", "เดี๋ยวฉันทาน้ำยากันซึมเคลือบเก้าอี้ไม้กลางแจ้งพวกนี้ให้เอง"],
+["I will provide extra napkins for the table.", "provide", "/aɪ wɪl prəˈvaɪd ˈekstrə ˈnæpkɪnz fə ðə ˈteɪbəl/", "🧻", "เดี๋ยวฉันหยิบกระดาษทิชชูสำรองมาวางเพิ่มบนโต๊ะให้"],
+["I will guide our guests to their seats.", "guide", "/aɪ wɪl ɡaɪd ˈaʊə ɡests tə ðeə siːts/", "🎟️", "เดี๋ยวฉันช่วยพาแขกผู้มีเกียรติเดินไปนั่งที่นั่งของพวกเขาเอง"],
+["I will inspect the bicycle brakes for safety.", "inspect", "/aɪ wɪl ɪnˈspekt ðə ˈbaɪsɪkəl breɪks fə ˈseɪfti/", "🚲", "เดี๋ยวฉันช่วยตรวจเช็คระบบเบรกจักรยานเพื่อความปลอดภัยให้"],
+["I will share my umbrella with you in the rain.", "share", "/aɪ wɪl ʃeə maɪ ʌmˈbrelə wɪð juː ɪn ðə reɪn/", "🌂", "ฝนตกอยู่ เดี๋ยวเรากางร่มเดินแบ่งกันใช้คันเดียวกันนะ"],
+["I will take care of everything while you are away.", "take care of", "/aɪ wɪl teɪk keər əv ˈevriθɪŋ waɪl juː ɑːr əˈweɪ/", "🫶", "ช่วงที่คุณไม่อยู่ เดี๋ยวฉันดูแลจัดการทุกอย่างให้เรียบร้อยเอง"]
+];
+
+const PER=50, pages=Math.ceil(D.length/PER);
+let page=0, voices=[], chosen=null;
+const grid=document.getElementById('grid'), pager=document.getElementById('pager');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function html(en,verb){
+  const i=en.indexOf(' will '), pre=esc(en.slice(0,i)), rest=en.slice(i+6);
+  const body=rest.startsWith(verb)?'<b>'+esc(verb)+'</b>'+esc(rest.slice(verb.length)):esc(rest);
+  return {front:pre+' <mark>will</mark> '+body, back:pre+' <b>will</b> '+body};
+}
+function render(){
+  grid.innerHTML='';
+  const start=page*PER, items=D.slice(start,start+PER);
+  items.forEach((r,i)=>{
+    const [en,verb,ipa,pic,th]=r, h=html(en,verb);
+    const el=document.createElement('div');
+    el.className='flip'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Flip card '+(start+i+1));
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="no">${start+i+1}</span>
+        <button class="say" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+        <div class="pic" aria-hidden="true">${pic}</div>
+        <p class="en">${h.front}</p>
+        <p class="ipa">${esc(ipa)}</p>
+        <span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      <div class="face back"><span class="no">${start+i+1}</span>
+        <p class="th">${esc(th)}</p>
+        <p class="enSmall">${h.back}</p>
+        <span class="hint">คลิกเพื่อกลับด้านหน้า</span></div></div>`;
+    const btn=el.querySelector('.say');
+    btn.addEventListener('click',e=>{e.stopPropagation();speak(en,btn);});
+    el.addEventListener('click',()=>el.classList.toggle('turned'));
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.classList.toggle('turned');}});
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const b=document.createElement('button');
+    const a=p*PER+1,z=Math.min((p+1)*PER,D.length);
+    b.textContent=`หน้า ${p+1} (${a}–${z})`; if(p===page)b.className='on';
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0});};
+    pager.appendChild(b);
+  }
+}
+
+/* ---------- Voice: prefer UK male ---------- */
+const FEMALE=/female|woman|susan|hazel|kate|serena|libby|sonia|maisie|fiona|moira|karen|samantha|victoria|zira|helen|catherine|amy|emma|joanna|olivia/i;
+const MALE_PREF=['Google UK English Male','Daniel','Microsoft George','Microsoft Ryan','Ryan','George','Oliver','Arthur','Thomas','Rishi','Microsoft Thomas'];
+function score(v){
+  let s=0;
+  if(/^en[-_]GB/i.test(v.lang))s+=50; else if(/^en/i.test(v.lang))s+=10;
+  const i=MALE_PREF.findIndex(n=>v.name.includes(n)); if(i>=0)s+=40-i;
+  if(/male/i.test(v.name)&&!/female/i.test(v.name))s+=30;
+  if(/natural|neural|online/i.test(v.name))s+=8;
+  if(FEMALE.test(v.name))s-=60;
+  return s;
+}
+function loadVoices(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voiceSel'); sel.innerHTML='';
+  if(!voices.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในอุปกรณ์</option>';return;}
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${v.name} (${v.lang})`;sel.appendChild(o);});
+  chosen=voices[0];
+}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+document.getElementById('voiceSel').onchange=e=>{chosen=voices[+e.target.value];};
+
+let playing=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง');return;}
+  speechSynthesis.cancel();
+  if(playing)playing.classList.remove('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  if(chosen){u.voice=chosen;u.lang=chosen.lang;}else u.lang='en-GB';
+  u.rate=parseFloat(document.getElementById('rate').value);
+  u.pitch=0.9;
+  btn.classList.add('playing');playing=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('playing');
+  speechSynthesis.speak(u);
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cards=[...document.querySelectorAll('.flip')];
+  const anyFront=cards.some(c=>!c.classList.contains('turned'));
+  cards.forEach(c=>c.classList.toggle('turned',anyFront));
+};
+render();
+</script>
+</body>
+</html>
