@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8.2 Modal verb "would" – Past Habits Flashcards</title>
+<style>
+:root{
+  --bg:#eef1f5; --ink:#15181d; --muted:#5a6270; --line:#d3d9e2;
+  --card:#ffffff; --verb:#8b0000; --would:#ffe066; --accent:#1f4e79; --back:#1f4e79; --backink:#ffffff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+}
+:root[data-theme="dark"]{ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,Arial,sans-serif}
+header{max-width:1120px;margin:0 auto;padding:22px 16px 10px}
+h1{margin:0 0 4px;font-size:clamp(20px,3.2vw,28px);font-weight:700}
+.sub{margin:0;color:var(--muted);font-size:15px}
+.legend{margin-top:10px;font-size:15px;color:var(--muted)}
+.legend .w{background:var(--would);color:#000;padding:1px 6px;border-radius:3px;font-family:Arial,sans-serif}
+.legend .v{color:#c23b3b;font-weight:700;font-family:Arial,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tab,.ghost{font:inherit;font-size:15px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1119}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1119}}
+.ghost{margin-left:auto}
+.tab:focus-visible,.ghost:focus-visible,.spk:focus-visible,.card:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+main{max-width:1120px;margin:0 auto;padding:16px 16px 48px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+
+.card{perspective:1200px;height:300px;cursor:pointer;border-radius:16px}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+@media (prefers-reduced-motion: reduce){.inner{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;padding:16px 18px 14px;overflow:hidden}
+.front{background:var(--card);border:1px solid #cfd6e0;box-shadow:0 1px 2px rgba(20,30,50,.08)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center}
+.num{position:absolute;top:10px;left:14px;font:12px Arial,sans-serif;color:#7a8494}
+.pic{flex:0 0 auto;text-align:center;font-size:64px;line-height:1.1;padding-top:8px;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.txt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:4px 2px}
+.en{margin:0;color:#000;font-family:"Arial Nova Light","Helvetica Neue",Arial,sans-serif;font-weight:300;font-size:clamp(16px,1.7vw,19px);line-height:1.45}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--would);color:#000;font-weight:400;padding:0 3px;border-radius:3px}
+.ipa{margin:0;color:#000;font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.5vw,17px);line-height:1.4}
+.spk{position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;border:1px solid #c5cdd9;background:#f4f6fa;color:#1f4e79;font-size:20px;cursor:pointer;display:grid;place-items:center}
+.spk:hover{background:#e6ecf5}
+.spk.on{background:#1f4e79;color:#fff}
+.hint{position:absolute;bottom:8px;right:14px;font-size:12px;color:#8b95a5}
+.th{font-size:clamp(18px,2vw,22px);line-height:1.6;margin:0;padding:0 8px}
+.th-small{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px;color:#b9cbe0}
+.note{color:var(--muted);font-size:13px;margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>8.2 Modal verb "would" — Past Habits</h1>
+  <p class="sub">ฝึกอ่านและแปลประโยค · 100 ประโยค · หน้าละ 50 ประโยค (แถวละ 2 การ์ด)</p>
+  <p class="legend"><span class="w">would</span> = ไฮไลต์ &nbsp; <span class="v">verb</span> = กริยาหลัก (ตัวหนา สีแดงเข้ม) &nbsp;|&nbsp; กดการ์ดเพื่อดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย</p>
+</header>
+<div class="bar"><div class="bar-in" role="tablist" aria-label="เลือกหน้า">
+  <button class="tab" role="tab" id="t0" aria-selected="true">หน้า 1 · ประโยค 1–50</button>
+  <button class="tab" role="tab" id="t1" aria-selected="false">หน้า 2 · ประโยค 51–100</button>
+  <button class="ghost" id="reset">พลิกกลับทั้งหมด</button>
+</div></div>
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="note" id="voiceNote"></p>
+</main>
+
+<script>
+const DATA = [{"en": "When I was a child, my grandfather would tell us amazing stories before bed.", "th": "สมัยที่ฉันยังเป็นเด็ก คุณปู่มักจะเล่านิทานสนุกๆ ให้พวกเราฟังก่อนนอนเสมอ", "e": "📖", "ipa": "/wˌɛn aɪ wʌzɐ tʃˈaɪld maɪ grˈandfɑːðə wʊd tˈɛl ˌʌs ɐmˈeɪzɪŋ stˈɔːriz bɪfˌɔː bˈɛd/"}, {"en": "Every summer, we would travel to the countryside to visit our relatives.", "th": "ทุกๆ ฤดูร้อน พวกเรามักจะเดินทางไปต่างจังหวัดเพื่อเยี่ยมญาติผู้ใหญ่", "e": "🧳", "ipa": "/ˈɛvrɪ sˈʌmə wiː wʊd trˈavəl tə ðə kˈʌntrɪsˌaɪd tə vˈɪzɪt ˌaʊə rˈɛlətˌɪvz/"}, {"en": "On weekends, my father would wake up early to cook breakfast for everyone.", "th": "ในวันหยุดสุดสัปดาห์ คุณพ่อมักจะตื่นแต่เช้ามาทำอาหารเช้าให้ทุกคนทาน", "e": "⏰", "ipa": "/ˌɒn wiːkˈɛndz maɪ fˈɑːðə wʊd wˈeɪk ˌʌp ˈɜːlɪ tə kˈʊk brˈɛkfəst fɔːr ˈɛvrɪwˌɒn/"}, {"en": "After school, we would play football in the backyard until sunset.", "th": "พอเลิกเรียน พวกเรามักจะไปเตะฟุตบอลกันที่สนามหลังบ้านจนกระทั่งพระอาทิตย์ตกดิน", "e": "⚽", "ipa": "/ˈaftə skˈuːl wiː wʊd plˈeɪ fˈʊtbɔːl ɪnðə bˈakjɑːd ʌntˈɪl sˈʌnsɛt/"}, {"en": "During winter evenings, we would sit around the fireplace and drink hot cocoa.", "th": "ในช่วงค่ำคืนฤดูหนาว พวกเรามักจะมานั่งล้อมวงรอบเตาผิงและดื่มโกโก้ร้อนๆ", "e": "🔥", "ipa": "/djˈʊərɪŋ wˈɪntər ˈiːvnɪŋz wiː wʊd sˈɪt ɐrˈaʊnd ðə fˈaɪəpleɪs and drˈɪŋk hˈɒt kˈəʊkəʊ/"}, {"en": "Whenever it rained, my mother would bake delicious chocolate chip cookies.", "th": "ทุกครั้งที่ฝนตก คุณแม่มักจะอบคุกกี้ช็อกโกแลตชิปแสนอร่อยให้กิน", "e": "🍪", "ipa": "/wɛnˌɛvər ɪt rˈeɪnd maɪ mˈʌðə wʊd bˈeɪk dɪlˈɪʃəs tʃˈɒklət tʃˈɪp kˈʊkiz/"}, {"en": "In the old days, people would write handwritten letters to communicate.", "th": "ในอดีตผู้คนมักจะเขียนจดหมายด้วยลายมือเพื่อติดต่อสื่อสารกัน", "e": "✉️", "ipa": "/ɪnðɪ ˈəʊld dˈeɪz pˈiːpəl wʊd rˈaɪt hˈandrɪtən lˈɛtəz tə kəmjˈuːnɪkˌeɪt/"}, {"en": "As a teenager, she would spend hours talking on the phone with friends.", "th": "สมัยเป็นวัยรุ่น เธอมักจะใช้เวลาคุยโทรศัพท์กับเพื่อนๆ นานหลายชั่วโมง", "e": "📞", "ipa": "/az ɐ tˈiːneɪdʒə ʃiː wʊd spˈɛnd ˈaʊəz tˈɔːkɪŋ ɒnðə fˈəʊn wɪð frˈɛndz/"}, {"en": "Every Sunday morning, my dog would wait by the front door for our walk.", "th": "ทุกเช้าวันอาทิตย์ เจ้าสุนัขของฉันมักจะไปนั่งรอที่ประตูหน้าบ้านเพื่อรอไปเดินเล่น", "e": "🐕", "ipa": "/ˈɛvrɪ sˈʌndeɪ mˈɔːnɪŋ maɪ dˈɒg wʊd wˈeɪt baɪ ðə frˈʌnt dˈɔː fɔːr ˌaʊə wˈɔːk/"}, {"en": "My grandmother would sing traditional lullabies until I fell asleep.", "th": "คุณยายมักจะร้องเพลงกล่อมเด็กโบราณจนกระทั่งฉันหลับไป", "e": "🎤", "ipa": "/maɪ grˈandmʌðə wʊd sˈɪŋ trɐdˈɪʃənəl lˈʌləbˌaɪz ʌntˈɪl aɪ fˈɛl ɐslˈiːp/"}, {"en": "Years ago, we would gather at this café every single Friday.", "th": "หลายปีก่อน พวกเรามักจะมารวมตัวกันที่คาเฟ่แห่งนี้ทุกๆ วันศุกร์ไม่เคยขาด", "e": "☕", "ipa": "/jˈiəz ɐgˈəʊ wiː wʊd gˈaðər at ðɪs kafˈeɪ ˈɛvrɪ sˈɪŋgəl frˈaɪdeɪ/"}, {"en": "Whenever I visited my aunt, she would prepare a huge feast.", "th": "ทุกครั้งที่ฉันไปเยี่ยมคุณป้า ท่านมักจะเตรียมอาหารเลี้ยงชุดใหญ่อย่างอลังการ", "e": "🍽️", "ipa": "/wɛnˌɛvər aɪ vˈɪzɪtɪd maɪ ˈant ʃiː wʊd prɪpˈeər ɐ hjˈuːdʒ fˈiːst/"}, {"en": "Back then, my friends and I would ride our bicycles all over town.", "th": "ยุคนั้น เพื่อนๆ และฉันมักจะขี่จักรยานเที่ยวเล่นไปทั่วเมืองเลย", "e": "🚲", "ipa": "/bˈak ðˈɛn maɪ frˈɛndz and aɪ wʊd rˈaɪd ˌaʊə bˈaɪsɪkəlz ˈɔːl ˌəʊvə tˈaʊn/"}, {"en": "During school breaks, he would read comic books for hours.", "th": "ในช่วงเวลาพักที่โรงเรียน เขามักจะนั่งอ่านหนังสือการ์ตูนติดต่อกันเป็นชั่วโมง", "e": "📚", "ipa": "/djˈʊərɪŋ skˈuːl brˈeɪks hiː wʊd rˈiːd kˈɒmɪk bˈʊks fɔːr ˈaʊəz/"}, {"en": "My cat would sleep on my keyboard whenever I tried to type.", "th": "แมวของฉันมักจะมานอนขดบนคีย์บอร์ดทุกครั้งที่ฉันพยายามพิมพ์งาน", "e": "🐈", "ipa": "/maɪ kˈat wʊd slˈiːp ˌɒn maɪ kˈiːbɔːd wɛnˌɛvər aɪ trˈaɪd tə tˈaɪp/"}, {"en": "In those days, my brother would practice playing the guitar until late.", "th": "ในสมัยนั้น พี่ชายของฉันมักจะฝึกซ้อมเล่นกีตาร์จนดึกดื่น", "e": "🎸", "ipa": "/ɪn ðəʊz dˈeɪz maɪ brˈʌðə wʊd prˈaktɪs plˈeɪɪŋ ðə gɪtˈɑːr ʌntˈɪl lˈeɪt/"}, {"en": "Every evening, we would take a long walk around the neighborhood.", "th": "ทุกๆ เย็น พวกเรามักจะเดินเล่นผ่อนคลายรอบๆ ละแวกบ้านเป็นระยะทางไกล", "e": "🚶", "ipa": "/ˈɛvrɪ ˈiːvnɪŋ wiː wʊd tˈeɪk ɐ lˈɒŋ wˈɔːk ɐrˈaʊnd ðə nˈeɪbəhˌʊd/"}, {"en": "When we went camping, my father would build a large campfire.", "th": "เวลาที่เราไปตั้งแคมป์ คุณพ่อมักจะก่อกองไฟขนาดใหญ่ไว้ให้เสมอ", "e": "🏕️", "ipa": "/wˌɛn wiː wɛnt kˈampɪŋ maɪ fˈɑːðə wʊd bˈɪld ɐ lˈɑːdʒ kˈampfaɪə/"}, {"en": "She would always forget where she left her house keys.", "th": "เธอมักจะหลงลืมและวางกุญแจบ้านทิ้งไว้ผิดที่ผิดทางอยู่เป็นประจำ", "e": "🔑", "ipa": "/ʃiː wʊd ˈɔːlweɪz fəgˈɛt wˌeə ʃiː lˈɛft hɜː hˈaʊs kˈiːz/"}, {"en": "On rainy afternoons, we would build forts out of couch cushions.", "th": "ในยามบ่ายที่ฝนตก พวกเรามักจะเอาหมอนอิงโซฟามาต่อสร้างเป็นบ้านจำลอง", "e": "🛋️", "ipa": "/ˌɒn rˈeɪni ˌaftənˈuːnz wiː wʊd bˈɪld fˈɔːts ˌaʊtəv kˈaʊtʃ kˈʊʃənz/"}, {"en": "My uncle would bring us fresh fruit from his orchard every week.", "th": "คุณลุงมักจะหิ้วผลไม้สดๆ จากสวนของท่านมาฝากพวกเราทุกสัปดาห์", "e": "🍎", "ipa": "/maɪ ˈʌŋkəl wʊd brˈɪŋ ˌʌs frˈɛʃ frˈuːt frɒm hɪz ˈɔːtʃəd ˈɛvrɪ wˈiːk/"}, {"en": "Back in college, we would stay up all night studying before exams.", "th": "สมัยเรียนมหาวิทยาลัย พวกเรามักจะโต้รุ่งอ่านหนังสือเตรียมสอบกันข้ามคืน", "e": "🌙", "ipa": "/bˈak ɪn kˈɒlɪdʒ wiː wʊd stˈeɪ ˌʌp ˈɔːl nˈaɪt stˈʌdiɪŋ bɪfˌɔːr ɛgzˈamz/"}, {"en": "Whenever I felt sad, my mother would hug me tightly.", "th": "ทุกครั้งที่ฉันรู้สึกเศร้า คุณแม่มักจะสวมกอดปลอบโยนฉันแน่นๆ", "e": "🤗", "ipa": "/wɛnˌɛvər aɪ fˈɛlt sˈad maɪ mˈʌðə wʊd hˈʌg mˌiː tˈaɪtli/"}, {"en": "In the summer months, we would swim in the river near our house.", "th": "ในช่วงเดือนฤดูร้อน พวกเรามักจะลงไปว่ายน้ำเล่นในแม่น้ำใกล้บ้าน", "e": "🏊", "ipa": "/ɪnðə sˈʌmə mˈʌnθs wiː wʊd swˈɪm ɪnðə rˈɪvə nˌiər ˌaʊə hˈaʊs/"}, {"en": "My teacher would give us stickers for getting good grades.", "th": "คุณครูมักจะแจกสติ๊กเกอร์เป็นรางวัลให้กับคนที่ทำคะแนนสอบได้ดี", "e": "⭐", "ipa": "/maɪ tˈiːtʃə wʊd gˈɪv ˌʌs stˈɪkəz fɔː gˌɛtɪŋ gˈʊd grˈeɪdz/"}, {"en": "Every Saturday morning, my dad would wash his vintage car.", "th": "ทุกเช้าวันเสาร์ คุณพ่อมักจะออกมาล้างรถยนต์คลาสสิกของท่านเอง", "e": "🚗", "ipa": "/ˈɛvrɪ sˈatədˌeɪ mˈɔːnɪŋ maɪ dˈad wʊd wˈɒʃ hɪz vˈɪntɪdʒ kˈɑː/"}, {"en": "When we were kids, we would climb the big mango tree in the yard.", "th": "สมัยเด็กๆ พวกเรามักจะปีนป่ายขึ้นไปบนต้นมะม่วงใหญ่ในสวนหลังบ้าน", "e": "🌳", "ipa": "/wˌɛn wiː wɜː kˈɪdz wiː wʊd klˈaɪm ðə bˈɪg mˈaŋgəʊ trˈiː ɪnðə jˈɑːd/"}, {"en": "My sister would always borrow my clothes without asking.", "th": "พี่สาวของฉันมักจะชอบหยิบยืมเสื้อผ้าของฉันไปใส่โดยไม่บอกกล่าวอยู่เรื่อย", "e": "👗", "ipa": "/maɪ sˈɪstə wʊd ˈɔːlweɪz bˈɒrəʊ maɪ klˈəʊðz wɪðˌaʊt ˈaskɪŋ/"}, {"en": "During lunch breaks, we would share our lunch boxes together.", "th": "ในช่วงพักเที่ยง พวกเรามักจะนำอาหารกล่องมาแบ่งปันกันรับประทานเสมอ", "e": "🍱", "ipa": "/djˈʊərɪŋ lˈʌntʃ brˈeɪks wiː wʊd ʃˈeər ˌaʊə lˈʌntʃ bˈɒksɪz təgˈɛðə/"}, {"en": "In the past, people would gather around the radio to listen to news.", "th": "ในอดีตผู้คนมักจะมารวมตัวกันหน้าวิทยุเพื่อตั้งใจฟังข่าวสาร", "e": "📻", "ipa": "/ɪnðə pˈast pˈiːpəl wʊd gˈaðər ɐrˈaʊnd ðə rˈeɪdɪˌəʊ tə lˈɪsən tə njˈuːz/"}, {"en": "Whenever I visited my grandparents, they would spoil me with treats.", "th": "ทุกครั้งที่ฉันไปเยี่ยมปู่ย่า ท่านมักจะตามใจและหาขนมอร่อยๆ มาให้กินตลอด", "e": "🍬", "ipa": "/wɛnˌɛvər aɪ vˈɪzɪtɪd maɪ grˈandpeərənts ðeɪ wʊd spˈɔɪl mˌiː wɪð trˈiːts/"}, {"en": "My friends and I would collect colorful stamps as a hobby.", "th": "เพื่อนๆ และฉันมักจะสะสมแสตมป์หลากสีสันเป็นงานอดิเรกในอดีต", "e": "📮", "ipa": "/maɪ frˈɛndz and aɪ wʊd kəlˈɛkt kˈʌləfəl stˈamps az ɐ hˈɒbi/"}, {"en": "Every spring, my father would plant beautiful flowers in the garden.", "th": "ทุกๆ ฤดูใบไม้ผลิ คุณพ่อมักจะปลูกดอกไม้สวยงามไว้ประดับสวน", "e": "🌷", "ipa": "/ˈɛvrɪ sprˈɪŋ maɪ fˈɑːðə wʊd plˈant bjˈuːtifəl flˈaʊəz ɪnðə gˈɑːdən/"}, {"en": "Back then, we would watch cartoons on television every Saturday morning.", "th": "สมัยก่อนพวกเรามักจะนั่งดูการ์ตูนทางโทรทัศน์ทุกเช้าวันเสาร์", "e": "📺", "ipa": "/bˈak ðˈɛn wiː wʊd wˈɒtʃ kɑːtˈuːnz ˌɒn tˈɛlɪvˌɪʒən ˈɛvrɪ sˈatədˌeɪ mˈɔːnɪŋ/"}, {"en": "My mother would make hot soup whenever I had a cold.", "th": "คุณแม่มักจะต้มซุปก้อนร้อนๆ ให้ทานทุกครั้งที่ฉันเป็นหวัดไม่สบาย", "e": "🍲", "ipa": "/maɪ mˈʌðə wʊd mˌeɪk hˈɒt sˈuːp wɛnˌɛvər aɪ had ɐ kˈəʊld/"}, {"en": "During our school trips, we would sing songs on the bus.", "th": "ระหว่างเดินทางไปทัศนศึกษา พวกเรามักจะร้องเพลงเสียงดังลั่นรถบัส", "e": "🚌", "ipa": "/djˈʊərɪŋ ˌaʊə skˈuːl trˈɪps wiː wʊd sˈɪŋ sˈɒŋz ɒnðə bˈʌs/"}, {"en": "My grandfather would wear a classic hat whenever he went out.", "th": "คุณปู่มักจะสวมหมวกทรงคลาสสิกทุกครั้งที่ท่านออกไปข้างนอกบ้าน", "e": "🎩", "ipa": "/maɪ grˈandfɑːðə wʊd wˈeər ɐ klˈasɪk hˈat wɛnˌɛvə hiː wɛnt ˈaʊt/"}, {"en": "When we lived near the beach, we would collect seashells.", "th": "ตอนที่เราอาศัยอยู่ใกล้ชายหาด พวกเรามักจะเดินเก็บเปลือกหอยสวยๆ", "e": "🐚", "ipa": "/wˌɛn wiː lˈɪvd nˌiə ðə bˈiːtʃ wiː wʊd kəlˈɛkt sˈiːʃɛlz/"}, {"en": "Every evening, my brother would practice drawing sketch art.", "th": "ทุกๆ เย็น พี่ชายของฉันมักจะนั่งฝึกฝนวาดภาพสเกตช์ศิลปะ", "e": "🎨", "ipa": "/ˈɛvrɪ ˈiːvnɪŋ maɪ brˈʌðə wʊd prˈaktɪs drˈɔːɪŋ skˈɛtʃ ˈɑːt/"}, {"en": "In those days, we would walk to school together rain or shine.", "th": "ในสมัยนั้น พวกเรามักจะเดินเท้าไปโรงเรียนด้วยกันไม่ว่าฝนจะตกหรือแดดจะออก", "e": "🎒", "ipa": "/ɪn ðəʊz dˈeɪz wiː wʊd wˈɔːk tə skˈuːl təgˌɛðə rˈeɪn ɔː ʃˈaɪn/"}, {"en": "My cat would sit by the window and watch birds all day.", "th": "แมวของฉันมักจะนั่งเหม่อมองนกตรงขอบหน้าต่างอยู่ทั้งวัน", "e": "🐦", "ipa": "/maɪ kˈat wʊd sˈɪt baɪ ðə wˈɪndəʊ and wˈɒtʃ bˈɜːdz ˈɔːl dˈeɪ/"}, {"en": "Whenever it snowed, we would build big snowmen outside.", "th": "ทุกครั้งที่หิมะตก พวกเรามักจะออกไปปั้นตุ๊กตาหิมะตัวใหญ่ที่ลานหน้าบ้าน", "e": "⛄", "ipa": "/wɛnˌɛvər ɪt snˈəʊd wiː wʊd bˈɪld bˈɪg snˈəʊmɛn aʊtsˈaɪd/"}, {"en": "My father would tell jokes to make us laugh during dinner.", "th": "คุณพ่อมักจะเล่าเรื่องตลกขบขันให้พวกเราหัวเราะกันในระหว่างมื้อเย็น", "e": "😂", "ipa": "/maɪ fˈɑːðə wʊd tˈɛl dʒˈəʊks tə mˌeɪk ˌʌs lˈaf djˈʊərɪŋ dˈɪnə/"}, {"en": "Back then, students would use encyclopedias for school projects.", "th": "ยุคนั้น นักเรียนมักจะเปิดค้นคว้าหาข้อมูลทำรายงานจากหนังสือสารานุกรม", "e": "📕", "ipa": "/bˈak ðˈɛn stjˈuːdənts wʊd jˈuːz ɛnsˌaɪkləʊpˈiːdiəz fɔː skˈuːl prˈɒdʒɛkts/"}, {"en": "On quiet nights, my mother would knit sweaters for winter.", "th": "ในยามค่ำคืนที่เงียบสงบ คุณแม่มักจะถักเสื้อกันหนาวไหมพรมเตรียมไว้ใส่หน้าหนาว", "e": "🧶", "ipa": "/ˌɒn kwˈaɪət nˈaɪts maɪ mˈʌðə wʊd nˈɪt swˈɛtəz fɔː wˈɪntə/"}, {"en": "We would spend hours playing board games on weekends.", "th": "พวกเรามักจะใช้เวลาหลายชั่วโมงเล่นบอร์ดเกมด้วยกันในวันหยุดสุดสัปดาห์", "e": "🎲", "ipa": "/wiː wʊd spˈɛnd ˈaʊəz plˈeɪɪŋ bˈɔːd gˈeɪmz ˌɒn wiːkˈɛndz/"}, {"en": "My grandmother would bake fresh bread every single morning.", "th": "คุณยายมักจะอบขนมปังสดใหม่ส่งกลิ่นหอมกรุ่นทุกๆ เช้า", "e": "🍞", "ipa": "/maɪ grˈandmʌðə wʊd bˈeɪk frˈɛʃ brˈɛd ˈɛvrɪ sˈɪŋgəl mˈɔːnɪŋ/"}, {"en": "When we were young, we would hide in treehouses to play games.", "th": "สมัยที่พวกเรายังเด็ก มักจะพากันไปหลบซ่อนเล่นสนุกในบ้านบนต้นไม้", "e": "🛖", "ipa": "/wˌɛn wiː wɜː jˈʌŋ wiː wʊd hˈaɪd ɪn trˈiːhaʊzɪz tə plˈeɪ gˈeɪmz/"}, {"en": "My uncle would drive us to the amusement park every summer.", "th": "คุณลุงมักจะขับรถพาพวกเราไปเที่ยวสวนสนุกทุกๆ ฤดูร้อน", "e": "🎢", "ipa": "/maɪ ˈʌŋkəl wʊd drˈaɪv ˌʌs tə ðɪ ɐmjˈuːzmənt pˈɑːk ˈɛvrɪ sˈʌmə/"}, {"en": "In the evenings, we would listen to old vinyl records together.", "th": "ในช่วงเวลาค่ำคืน พวกเรามักจะมาร่วมนั่งฟังเพลงจากแผ่นเสียงโบราณด้วยกัน", "e": "🎧", "ipa": "/ɪnðɪ ˈiːvnɪŋz wiː wʊd lˈɪsən tʊ ˈəʊld vˈaɪnəl rˈɛkɔːdz təgˈɛðə/"}, {"en": "When I was in high school, I would participate in the debate club.", "th": "สมัยที่ฉันเรียนอยู่มัธยมปลาย ฉันมักจะเข้าร่วมชมรมโต้วาทีเป็นประจำ", "e": "🙋", "ipa": "/wˌɛn aɪ wɒz ɪn hˈaɪ skˈuːl aɪ wʊd pɑːtˈɪsɪpˌeɪt ɪnðə dɪbˈeɪt klˈʌb/"}, {"en": "Every Friday night, my friends and I would watch horror movies.", "th": "ทุกคืนวันศุกร์ เพื่อนๆ และฉันมักจะรวมตัวกันดูภาพยนตร์สยองขวัญ", "e": "🎬", "ipa": "/ˈɛvrɪ frˈaɪdeɪ nˈaɪt maɪ frˈɛndz and aɪ wʊd wˈɒtʃ hˈɒrə mˈuːvɪz/"}, {"en": "My grandfather would share wise advice with us over dinner.", "th": "คุณปู่มักจะแบ่งปันคำสอนและข้อคิดดีๆ ให้พวกเราฟังในระหว่างมื้อเย็น", "e": "👴", "ipa": "/maɪ grˈandfɑːðə wʊd ʃˈeə wˈaɪz ɐdvˈaɪs wɪð ˌʌs ˌəʊvə dˈɪnə/"}, {"en": "Whenever we visited the farm, we would feed the animals.", "th": "ทุกครั้งที่เราไปเยี่ยมฟาร์ม พวกเรามักจะช่วยกันให้อาหารสัตว์ต่างๆ", "e": "🐄", "ipa": "/wɛnˌɛvə wiː vˈɪzɪtɪd ðə fˈɑːm wiː wʊd fˈiːd ðɪ ˈanɪməlz/"}, {"en": "Back in the days, my sister would collect colorful stickers.", "th": "ยุคสมัยก่อน พี่สาวของฉันมักจะสะสมสติ๊กเกอร์ลวดลายสีสันสวยงาม", "e": "🌈", "ipa": "/bˈak ɪnðə dˈeɪz maɪ sˈɪstə wʊd kəlˈɛkt kˈʌləfəl stˈɪkəz/"}, {"en": "During summer camp, we would sit around the bonfire and sing.", "th": "ในช่วงค่ายฤดูร้อน พวกเรามักจะนั่งรอบกองไฟและร่วมกันร้องเพลง", "e": "🎶", "ipa": "/djˈʊərɪŋ sˈʌmə kˈamp wiː wʊd sˈɪt ɐrˈaʊnd ðə bˈɒnfaɪə and sˈɪŋ/"}, {"en": "My father would read the newspaper every single morning.", "th": "คุณพ่อมักจะนั่งอ่านหนังสือพิมพ์เล่มโปรดทุกๆ เช้าไม่เคยพลาด", "e": "📰", "ipa": "/maɪ fˈɑːðə wʊd rˈiːd ðə njˈuːzpeɪpər ˈɛvrɪ sˈɪŋgəl mˈɔːnɪŋ/"}, {"en": "On snowy days, we would drink hot chocolate with marshmallows.", "th": "ในวันที่มีหิมะตก พวกเรามักจะดื่มช็อกโกแลตร้อนใส่เยลลี่มาร์ชเมลโล่", "e": "🍫", "ipa": "/ˌɒn snˈəʊi dˈeɪz wiː wʊd drˈɪŋk hˈɒt tʃˈɒklət wɪð mˈɑːʃmɐlˌəʊz/"}, {"en": "When I was little, my mother would pack cute notes in my lunchbox.", "th": "สมัยที่ฉันยังตัวเล็กๆ คุณแม่มักจะแอบใส่โน้ตข้อความน่ารักๆ ในกล่องข้าว", "e": "📝", "ipa": "/wˌɛn aɪ wɒz lˈɪtəl maɪ mˈʌðə wʊd pˈak kjˈuːt nˈəʊts ɪn maɪ lˈʌntʃbɒks/"}, {"en": "My cat would chase laser dots across the living room.", "th": "แมวของฉันมักจะวิ่งไล่ตะครุบแสงเลเซอร์ไปทั่วห้องนั่งเล่น", "e": "🔴", "ipa": "/maɪ kˈat wʊd tʃˈeɪs lˈeɪzə dˈɒts əkrˌɒs ðə lˈɪvɪŋ rˈuːm/"}, {"en": "Years ago, we would travel by train to visit our hometown.", "th": "หลายปีก่อน พวกเรามักจะเดินทางกลับบ้านเกิดด้วยรถไฟเสมอ", "e": "🚆", "ipa": "/jˈiəz ɐgˈəʊ wiː wʊd trˈavəl baɪ trˈeɪn tə vˈɪzɪt ˌaʊə hˈəʊmtaʊn/"}, {"en": "In the evenings, my brother would practice magic tricks.", "th": "ในช่วงหัวค่ำ พี่ชายของฉันมักจะฝึกซ้อมเล่นกลมายากลต่างๆ", "e": "🪄", "ipa": "/ɪnðɪ ˈiːvnɪŋz maɪ brˈʌðə wʊd prˈaktɪs mˈadʒɪk trˈɪks/"}, {"en": "Whenever I visited my aunt, she would serve homemade pie.", "th": "ทุกครั้งที่ฉันไปเยี่ยมคุณป้า ท่านมักจะจัดเตรียมพายโฮมเมดมาเสิร์ฟต้อนรับ", "e": "🥧", "ipa": "/wɛnˌɛvər aɪ vˈɪzɪtɪd maɪ ˈant ʃiː wʊd sˈɜːv hˈəʊmmeɪd pˈaɪ/"}, {"en": "Back then, people would rent movies on VHS tapes.", "th": "สมัยก่อนผู้คนมักจะเดินทางไปเช่าม้วนวิดีโอเทปหนังมาดูกัน", "e": "📼", "ipa": "/bˈak ðˈɛn pˈiːpəl wʊd rˈɛnt mˈuːvɪz ˌɒn vˌiːˌeɪtʃˈɛs tˈeɪps/"}, {"en": "My uncle would tell funny jokes during family gatherings.", "th": "คุณลุงมักจะเล่าเรื่องตลกสร้างเสียงหัวเราะในงานรวมญาติครอบครัว", "e": "🤣", "ipa": "/maɪ ˈʌŋkəl wʊd tˈɛl fˈʌni dʒˈəʊks djˈʊərɪŋ fˈamɪli gˈaðərɪŋz/"}, {"en": "On Sundays, we would visit local museums and art galleries.", "th": "ในวันอาทิตย์ พวกเรามักจะพากันไปเที่ยวชมพิพิธภัณฑ์และหอศิลป์ท้องถิ่น", "e": "🏛️", "ipa": "/ˌɒn sˈʌndeɪz wiː wʊd vˈɪzɪt lˈəʊkəl mjuːzˈiəmz and ˈɑːt gˈaləriz/"}, {"en": "My grandmother would sew beautiful dresses for our dolls.", "th": "คุณยายมักจะช่วยเย็บชุดสวยๆ สำหรับตุ๊กตาของพวกเรา", "e": "🧵", "ipa": "/maɪ grˈandmʌðə wʊd sˈəʊ bjˈuːtifəl drˈɛsɪz fɔːr ˌaʊə dˈɒlz/"}, {"en": "When we were teenagers, we would skate at the park.", "th": "สมัยที่พวกเราเป็นวัยรุ่น มักจะไปเล่นสเก็ตบอร์ดกันที่สวนสาธารณะ", "e": "🛹", "ipa": "/wˌɛn wiː wɜː tˈiːneɪdʒəz wiː wʊd skˈeɪt at ðə pˈɑːk/"}, {"en": "Every summer, my dad would build a wooden treehouse.", "th": "ทุกๆ ฤดูร้อน คุณพ่อมักจะลงมือสร้างบ้านต้นไม้ทำจากไม้ให้", "e": "🔨", "ipa": "/ˈɛvrɪ sˈʌmə maɪ dˈad wʊd bˈɪld ɐ wˈʊdən trˈiːhaʊs/"}, {"en": "In those days, we would play hide and seek outside.", "th": "ในสมัยนั้น พวกเรามักจะวิ่งเล่นซ่อนหาบริเวณกลางแจ้งข้างนอกบ้าน", "e": "🙈", "ipa": "/ɪn ðəʊz dˈeɪz wiː wʊd plˈeɪ hˈaɪd and sˈiːk aʊtsˈaɪd/"}, {"en": "My dog would bark happily whenever the mailman arrived.", "th": "สุนัขของฉันมักจะส่งเสียงเห่าดีใจทุกครั้งที่บุรุษไปรษณีย์เดินทางมาถึง", "e": "🐶", "ipa": "/maɪ dˈɒg wʊd bˈɑːk hˈapɪli wɛnˌɛvə ðə mˈeɪlmən ɐrˈaɪvd/"}, {"en": "During autumn, we would rake piles of fallen leaves.", "th": "ในช่วงฤดูใบไม้ร่วง พวกเรามักจะช่วยกันกวาดกองใบไม้แห้งมารวมกัน", "e": "🍂", "ipa": "/djˈʊərɪŋ ˈɔːtʌm wiː wʊd rˈeɪk pˈaɪlz ɒv fˈɔːlən lˈiːvz/"}, {"en": "My friends would come over to my house after school.", "th": "เพื่อนๆ ของฉันมักจะแวะมาเที่ยวเล่นที่บ้านหลังเลิกเรียนเสมอ", "e": "🏠", "ipa": "/maɪ frˈɛndz wʊd kˈʌm ˌəʊvə tə maɪ hˈaʊs ˈaftə skˈuːl/"}, {"en": "Whenever it stormed, my dog would hide under the bed.", "th": "ทุกครั้งที่มีพายุฝนฟ้าคะนอง สุนัขของฉันมักจะวิ่งไปหลบซ่อนใต้เตียง", "e": "⛈️", "ipa": "/wɛnˌɛvər ɪt stˈɔːmd maɪ dˈɒg wʊd hˈaɪd ˌʌndə ðə bˈɛd/"}, {"en": "My mother would sing softly while cooking dinner.", "th": "คุณแม่มักจะฮัมเพลงเบาๆ อย่างเพลิดเพลินในระหว่างทำอาหารเย็น", "e": "👩‍🍳", "ipa": "/maɪ mˈʌðə wʊd sˈɪŋ sˈɒftli wˌaɪl kˈʊkɪŋ dˈɪnə/"}, {"en": "Back then, we would write postcards to our friends.", "th": "สมัยก่อนพวกเรามักจะเขียนโปสการ์ดส่งความคิดถึงหาเพื่อนฝูง", "e": "🏞️", "ipa": "/bˈak ðˈɛn wiː wʊd rˈaɪt pˈəʊstkɑːdz tʊ ˌaʊə frˈɛndz/"}, {"en": "On clear nights, my father would show us stars.", "th": "ในคืนที่ท้องฟ้าโปร่งใส คุณพ่อมักจะพาพวกเราส่องดูดวงดาว", "e": "🔭", "ipa": "/ˌɒn klˈiə nˈaɪts maɪ fˈɑːðə wʊd ʃˈəʊ ˌʌs stˈɑːz/"}, {"en": "Every morning, the birds would chirp outside my window.", "th": "ทุกๆ เช้าฝูงนกน้อยมักจะส่งเสียงร้องเจื้อยแจ้วอยู่ตรงนอกหน้าต่าง", "e": "🐤", "ipa": "/ˈɛvrɪ mˈɔːnɪŋ ðə bˈɜːdz wʊd tʃˈɜːp aʊtsˈaɪd maɪ wˈɪndəʊ/"}, {"en": "When I lived abroad, my family would call me weekly.", "th": "ตอนที่ฉันไปใช้ชีวิตอยู่ต่างประเทศ ครอบครัวมักจะโทรหาเป็นประจำทุกสัปดาห์", "e": "📱", "ipa": "/wˌɛn aɪ lˈɪvd ɐbrˈɔːd maɪ fˈamɪli wʊd kˈɔːl mˌiː wˈiːkli/"}, {"en": "My grandfather would carve wooden toys for us.", "th": "คุณปู่มักจะใช้มีดแกะสลักของเล่นทำจากไม้ให้พวกเราเล่น", "e": "🪵", "ipa": "/maɪ grˈandfɑːðə wʊd kˈɑːv wˈʊdən tˈɔɪz fɔːr ˌʌs/"}, {"en": "During recess, we would jump rope in the courtyard.", "th": "ช่วงเวลาพักกลางวัน พวกเรามักจะออกไปกระโดดเชือกกันที่ลานกลางแจ้ง", "e": "🤸", "ipa": "/djˈʊərɪŋ rˈiːsɛs wiː wʊd dʒˈʌmp rˈəʊp ɪnðə kˈɔːtjɑːd/"}, {"en": "My sister would always organize tea parties for dolls.", "th": "พี่สาวของฉันมักจะชอบจัดปาร์ตี้จิบน้ำชายามบ่ายให้กับตุ๊กตาเสมอ", "e": "🫖", "ipa": "/maɪ sˈɪstə wʊd ˈɔːlweɪz ˈɔːgənˌaɪz tˈiː pˈɑːtiz fɔː dˈɒlz/"}, {"en": "Years ago, we would fish at the lake on weekends.", "th": "หลายปีก่อน พวกเรามักจะไปนั่งตกปลากันที่ริมทะเลสาบในวันหยุด", "e": "🎣", "ipa": "/jˈiəz ɐgˈəʊ wiː wʊd fˈɪʃ at ðə lˈeɪk ˌɒn wiːkˈɛndz/"}, {"en": "My teacher would tell fascinating historical myths.", "th": "คุณครูมักจะเล่าเรื่องราวตำนานประวัติศาสตร์ที่น่าตื่นตาตื่นใจให้ฟัง", "e": "🏺", "ipa": "/maɪ tˈiːtʃə wʊd tˈɛl fˈasɪnˌeɪtɪŋ hɪstˈɒrɪkəl mˈɪθs/"}, {"en": "In winter, we would wear thick woolen sweaters.", "th": "ในช่วงฤดูหนาว พวกเรามักจะสวมเสื้อกันหนาวไหมพรมเนื้อหนาเตอะ", "e": "🧥", "ipa": "/ɪn wˈɪntə wiː wʊd wˈeə θˈɪk wˈʊlən swˈɛtəz/"}, {"en": "My brother would build complex puzzles for hours.", "th": "พี่ชายของฉันมักจะนั่งต่อตัวต่อจิ๊กซอว์ยากๆ ติดต่อกันหลายชั่วโมง", "e": "🧩", "ipa": "/maɪ brˈʌðə wʊd bˈɪld kˈɒmplɛks pˈʌzəlz fɔːr ˈaʊəz/"}, {"en": "On long car trips, we would play alphabet games.", "th": "เวลาเดินทางด้วยรถยนต์ทางไกล พวกเรามักจะเล่นเกมต่อคำศัพท์สนุกๆ", "e": "🔤", "ipa": "/ˌɒn lˈɒŋ kˈɑː trˈɪps wiː wʊd plˈeɪ ˈalfəbˌɛt gˈeɪmz/"}, {"en": "My aunt would bake fruit tarts for every birthday.", "th": "คุณป้าของฉันมักจะอบทาร์ตผลไม้สดสำหรับงานวันเกิดทุกๆ ปี", "e": "🎂", "ipa": "/maɪ ˈant wʊd bˈeɪk frˈuːt tˈɑːts fɔːr ˈɛvrɪ bˈɜːθdeɪ/"}, {"en": "When I was sad, my friend would cheer me up.", "th": "ยามที่ฉันเศร้าหมอง เพื่อนสนิทมักจะคอยพูดจาปลอบใจให้ฉันยิ้มได้", "e": "😊", "ipa": "/wˌɛn aɪ wɒz sˈad maɪ frˈɛnd wʊd tʃˈiə mˌiː ˈʌp/"}, {"en": "Every evening, we would check the locks before sleep.", "th": "ทุกๆ ค่ำคืน พวกเรามักจะตรวจตราเช็คกลอนประตูก่อนเข้านอนเสมอ", "e": "🔒", "ipa": "/ˈɛvrɪ ˈiːvnɪŋ wiː wʊd tʃˈɛk ðə lˈɒks bɪfˌɔː slˈiːp/"}, {"en": "Back then, students would carry heavy backpacks.", "th": "สมัยก่อนเด็กนักเรียนมักจะสะพายเป้ใส่หนังสือเรียนใบใหญ่หนักอึ้ง", "e": "🎒", "ipa": "/bˈak ðˈɛn stjˈuːdənts wʊd kˈari hˈɛvi bˈakpaks/"}, {"en": "My cat would sleep on my lap while I studied.", "th": "แมวของฉันมักจะมานอนขดซุกบนตักเวลาที่ฉันกำลังนั่งอ่านหนังสือ", "e": "😴", "ipa": "/maɪ kˈat wʊd slˈiːp ˌɒn maɪ lˈap wˌaɪl aɪ stˈʌdid/"}, {"en": "In the past, people would use maps for driving.", "th": "ในอดีตผู้คนมักจะต้องกางแผนที่กระดาษเพื่อนำทางขับรถเดินทาง", "e": "🗺️", "ipa": "/ɪnðə pˈast pˈiːpəl wʊd jˈuːz mˈaps fɔː drˈaɪvɪŋ/"}, {"en": "On weekends, my father would garden outdoors.", "th": "ในวันหยุดสุดสัปดาห์ คุณพ่อมักจะออกไปทำสวนปลูกต้นไม้กลางแจ้ง", "e": "🌱", "ipa": "/ˌɒn wiːkˈɛndz maɪ fˈɑːðə wʊd gˈɑːdən aʊtdˈɔːz/"}, {"en": "My grandmother would tell stories of her youth.", "th": "คุณยายมักจะเล่าเรื่องราวความทรงจำในวัยสาวให้พวกเราฟัง", "e": "👵", "ipa": "/maɪ grˈandmʌðə wʊd tˈɛl stˈɔːriz ɒv hɜː jˈuːθ/"}, {"en": "During lunch, we would discuss interesting books.", "th": "ระหว่างมื้อเที่ยง พวกเรามักจะหยิบหนังสือเล่มโปรดมาพูดคุยแลกเปลี่ยนกัน", "e": "💬", "ipa": "/djˈʊərɪŋ lˈʌntʃ wiː wʊd dɪskˈʌs ˈɪntrɛstɪŋ bˈʊks/"}, {"en": "Every spring, we would clean the house thoroughly.", "th": "ทุกๆ ฤดูใบไม้ผลิ พวกเรามักจะช่วยกันทำความสะอาดบ้านครั้งใหญ่", "e": "🧹", "ipa": "/ˈɛvrɪ sprˈɪŋ wiː wʊd klˈiːn ðə hˈaʊs θˈʌrəli/"}, {"en": "My friends would visit my house on holidays.", "th": "เพื่อนๆ ของฉันมักจะเดินทางมาเยี่ยมเยียนที่บ้านในวันหยุดยาว", "e": "👋", "ipa": "/maɪ frˈɛndz wʊd vˈɪzɪt maɪ hˈaʊs ˌɒn hˈɒlɪdˌeɪz/"}, {"en": "My uncle would bring souvenirs from his trips.", "th": "คุณลุงมักจะมีของฝากของที่ระลึกติดไม้ติดมือกลับมาจากทริปเดินทางเสมอ", "e": "🎁", "ipa": "/maɪ ˈʌŋkəl wʊd brˈɪŋ sˌuːvənˈiəz frɒm hɪz trˈɪps/"}, {"en": "In those days, we would stargaze all night long.", "th": "ในสมัยนั้น พวกเรามักจะพากันนอนแหงนมองดูหมู่ดาวประกายพรึกกันข้ามคืน", "e": "🌌", "ipa": "/ɪn ðəʊz dˈeɪz wiː wʊd stˈɑːgeɪz ˈɔːl nˈaɪt lˈɒŋ/"}];
+const PER = 50;
+let page = 0;
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// Highlight "would" and the main verb that follows it (skipping "always")
+function markup(sentence){
+  const parts = sentence.split(" ");
+  const wi = parts.findIndex(p => /^would$/i.test(p.replace(/[^A-Za-z']/g,"")));
+  if(wi < 0) return esc(sentence);
+  let vi = wi + 1;
+  if(parts[vi] && /^always$/i.test(parts[vi])) vi++;
+  return parts.map((p,i)=>{
+    if(i===wi) return "<mark>"+esc(p)+"</mark>";
+    if(i===vi) {
+      const m = p.match(/^([A-Za-z']+)(.*)$/);
+      return m ? "<b>"+esc(m[1])+"</b>"+esc(m[2]) : esc(p);
+    }
+    return esc(p);
+  }).join(" ");
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const start = page*PER;
+  grid.innerHTML = DATA.slice(start, start+PER).map((d,i)=>`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${start+i+1} กดเพื่อพลิก">
+      <div class="inner">
+        <div class="face front">
+          <span class="num">${start+i+1}</span>
+          <button class="spk" data-i="${start+i}" aria-label="อ่านออกเสียงประโยค" title="ฟังเสียง">🔊</button>
+          <div class="pic" aria-hidden="true">${d.e}</div>
+          <div class="txt">
+            <p class="en">${markup(d.en)}</p>
+            <p class="ipa">${esc(d.ipa)}</p>
+          </div>
+          <span class="hint">กดเพื่อดูคำแปล</span>
+        </div>
+        <div class="face back">
+          <p class="th">${esc(d.th)}</p>
+          <span class="th-small">กดเพื่อกลับ</span>
+        </div>
+      </div>
+    </div>`).join("");
+  document.getElementById("t0").setAttribute("aria-selected", page===0);
+  document.getElementById("t1").setAttribute("aria-selected", page===1);
+  window.scrollTo({top:0});
+}
+
+// ---------- Speech: prefer a British male voice ----------
+let voice = null;
+const MALE_HINTS = ["google uk english male","daniel","microsoft ryan","microsoft george","microsoft thomas","oliver","arthur","male"];
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  const gb = vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const en = vs.filter(v=>/^en/i.test(v.lang));
+  const lower = v => v.name.toLowerCase();
+  for(const h of MALE_HINTS){
+    const hit = gb.find(v=>lower(v).includes(h)) || en.find(v=>lower(v).includes(h) && /en[-_]GB/i.test(v.lang));
+    if(hit){voice=hit;break;}
+  }
+  if(!voice) voice = gb[0] || en.find(v=>/male|david|mark|james|guy|alex/i.test(v.name)) || en[0] || null;
+  const n = document.getElementById("voiceNote");
+  n.textContent = voice ? "เสียงที่ใช้: " + voice.name + " (" + voice.lang + ") — คุณภาพขึ้นกับเสียงที่มีในอุปกรณ์ของคุณ" : "ไม่พบเสียงภาษาอังกฤษในอุปกรณ์นี้";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  document.querySelectorAll(".spk.on").forEach(b=>b.classList.remove("on"));
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice){u.voice = voice; u.lang = voice.lang;} else u.lang = "en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onstart = ()=>btn.classList.add("on");
+  u.onend = u.onerror = ()=>btn.classList.remove("on");
+  speechSynthesis.speak(u);
+}
+
+// ---------- Events ----------
+document.getElementById("grid").addEventListener("click", e=>{
+  const spk = e.target.closest(".spk");
+  if(spk){ e.stopPropagation(); speak(DATA[+spk.dataset.i].en, spk); return; }
+  const card = e.target.closest(".card");
+  if(card) card.classList.toggle("flipped");
+});
+document.getElementById("grid").addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("card")){
+    e.preventDefault(); e.target.classList.toggle("flipped");
+  }
+});
+document.getElementById("t0").onclick = ()=>{page=0;render();};
+document.getElementById("t1").onclick = ()=>{page=1;render();};
+document.getElementById("reset").onclick = ()=>document.querySelectorAll(".card.flipped").forEach(c=>c.classList.remove("flipped"));
+render();
+</script>
+</body>
+</html>
