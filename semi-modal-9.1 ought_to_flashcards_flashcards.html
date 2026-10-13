@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>9.1 Semi-modal "ought to" – Moral Obligation Flashcards</title>
+<style>
+:root{
+  --bg:#eef1f5; --ink:#15181d; --muted:#5a6270; --line:#d3d9e2;
+  --card:#ffffff; --verb:#8b0000; --would:#ffe066; --accent:#1f4e79; --back:#1f4e79; --backink:#ffffff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+}
+:root[data-theme="dark"]{ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,Arial,sans-serif}
+header{max-width:1120px;margin:0 auto;padding:22px 16px 10px}
+h1{margin:0 0 4px;font-size:clamp(20px,3.2vw,28px);font-weight:700}
+.sub{margin:0;color:var(--muted);font-size:15px}
+.legend{margin-top:10px;font-size:15px;color:var(--muted)}
+.legend .w{background:var(--would);color:#000;padding:1px 6px;border-radius:3px;font-family:Arial,sans-serif}
+.legend .v{color:#c23b3b;font-weight:700;font-family:Arial,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tab,.ghost{font:inherit;font-size:15px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1119}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1119}}
+.ghost{margin-left:auto}
+.tab:focus-visible,.ghost:focus-visible,.spk:focus-visible,.card:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+main{max-width:1120px;margin:0 auto;padding:16px 16px 48px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+
+.card{perspective:1200px;height:300px;cursor:pointer;border-radius:16px}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+@media (prefers-reduced-motion: reduce){.inner{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;padding:16px 18px 14px;overflow:hidden}
+.front{background:var(--card);border:1px solid #cfd6e0;box-shadow:0 1px 2px rgba(20,30,50,.08)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center}
+.num{position:absolute;top:10px;left:14px;font:12px Arial,sans-serif;color:#7a8494}
+.pic{flex:0 0 auto;text-align:center;font-size:64px;line-height:1.1;padding-top:8px;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.txt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:4px 2px}
+.en{margin:0;color:#000;font-family:"Arial Nova Light","Helvetica Neue",Arial,sans-serif;font-weight:300;font-size:clamp(16px,1.7vw,19px);line-height:1.45}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--would);color:#000;font-weight:400;padding:0 3px;border-radius:3px}
+.ipa{margin:0;color:#000;font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.5vw,17px);line-height:1.4}
+.spk{position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;border:1px solid #c5cdd9;background:#f4f6fa;color:#1f4e79;font-size:20px;cursor:pointer;display:grid;place-items:center}
+.spk:hover{background:#e6ecf5}
+.spk.on{background:#1f4e79;color:#fff}
+.hint{position:absolute;bottom:8px;right:14px;font-size:12px;color:#8b95a5}
+.th{font-size:clamp(18px,2vw,22px);line-height:1.6;margin:0;padding:0 8px}
+.th-small{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px;color:#b9cbe0}
+.note{color:var(--muted);font-size:13px;margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>9.1 Semi-modal "ought to" — Moral Obligation</h1>
+  <p class="sub">ฝึกอ่านและแปลประโยค · 100 ประโยค · หน้าละ 50 ประโยค (แถวละ 2 การ์ด)</p>
+  <p class="legend"><span class="w">ought to</span> = ไฮไลต์ &nbsp; <span class="v">verb</span> = กริยาหลัก (ตัวหนา สีแดงเข้ม) &nbsp;|&nbsp; กดการ์ดเพื่อดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย</p>
+</header>
+<div class="bar"><div class="bar-in" role="tablist" aria-label="เลือกหน้า">
+  <button class="tab" role="tab" id="t0" aria-selected="true">หน้า 1 · ประโยค 1–50</button>
+  <button class="tab" role="tab" id="t1" aria-selected="false">หน้า 2 · ประโยค 51–100</button>
+  <button class="ghost" id="reset">พลิกกลับทั้งหมด</button>
+</div></div>
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="note" id="voiceNote"></p>
+</main>
+
+<script>
+const DATA = [{"en": "You ought to respect your elders.", "th": "คุณควรเคารพผู้ใหญ่", "e": "🙏", "ipa": "/juː ˈɔːt tə rɪspˈɛkt jɔːr ˈɛldəz/"}, {"en": "Children ought to listen to their parents.", "th": "เด็กๆ ควรเชื่อฟังพ่อแม่ของพวกเขา", "e": "👂", "ipa": "/tʃˈɪldrən ˈɔːt tə lˈɪsən tə ðeə pˈeərənts/"}, {"en": "We ought to help the homeless people in our city.", "th": "เราควรช่วยเหลือคนไร้บ้านในเมืองของเรา", "e": "🤲", "ipa": "/wiː ˈɔːt tə hˈɛlp ðə hˈəʊmləs pˈiːpəl ɪn ˌaʊə sˈɪti/"}, {"en": "Citizens ought to obey the law.", "th": "พลเมืองควรปฏิบัติตามกฎหมาย", "e": "⚖️", "ipa": "/sˈɪtɪzənz ˈɔːt tʊ əʊbˈeɪ ðə lˈɔː/"}, {"en": "She ought to apologize for her rude behavior.", "th": "เธอควรกล่าวคำขอโทษสำหรับพฤติกรรมหยาบคายของเธอ", "e": "🙇‍♀️", "ipa": "/ʃiː ˈɔːt tʊ ɐpˈɒlədʒˌaɪz fɔː hɜː rˈuːd bɪhˈeɪvjə/"}, {"en": "He ought to return the wallet he found to its owner.", "th": "เขาควรคืนกระเป๋าเงินที่เขาเก็บได้ให้กับเจ้าของ", "e": "👛", "ipa": "/hiː ˈɔːt tə rɪtˈɜːn ðə wˈɒlɪt hiː fˈaʊnd tʊ ɪts ˈəʊnə/"}, {"en": "Students ought to tell the truth to their teachers.", "th": "นักเรียนควรพูดความจริงกับคุณครู", "e": "🗣️", "ipa": "/stjˈuːdənts ˈɔːt tə tˈɛl ðə trˈuːθ tə ðeə tˈiːtʃəz/"}, {"en": "We ought to protect the environment for future generations.", "th": "เราควรปกป้องสิ่งแวดล้อมสำหรับคนรุ่นหลัง", "e": "🌿", "ipa": "/wiː ˈɔːt tə prətˈɛkt ðɪ ɛnvˈaɪrənmənt fɔː fjˈuːtʃə dʒˌɛnərˈeɪʃənz/"}, {"en": "Drivers ought to yield to pedestrians at crosswalks.", "th": "ผู้ขับขี่ควรให้ทางคนเดินถนนตรงทางม้าลาย", "e": "🚸", "ipa": "/drˈaɪvəz ˈɔːt tə jˈiːld tə pədˈɛstriənz at krˈɒswɔːks/"}, {"en": "You ought to keep your promises.", "th": "คุณควรทำตามสัญญาของคุณ", "e": "🤞", "ipa": "/juː ˈɔːt tə kˈiːp jɔː prˈɒmɪsɪz/"}, {"en": "We ought to take care of our aging parents.", "th": "เราควรดูแลพ่อแม่ที่แก่ชราของเรา", "e": "👴", "ipa": "/wiː ˈɔːt tə tˈeɪk kˈeər ɒv ˌaʊər ˈeɪdʒɪŋ pˈeərənts/"}, {"en": "Society ought to support underprivileged children.", "th": "สังคมควรสนับสนุนเด็กที่ด้อยโอกาส", "e": "🧒", "ipa": "/səsˈaɪəti ˈɔːt tə səpˈɔːt ˌʌndəprˈɪvɪlɪdʒd tʃˈɪldrən/"}, {"en": "Rich countries ought to aid poorer nations.", "th": "ประเทศที่ร่ำรวยควรช่วยเหลือประเทศที่ยากจนกว่า", "e": "🌐", "ipa": "/rˈɪtʃ kˈʌntriz ˈɔːt tʊ ˈeɪd pˈʊərə nˈeɪʃənz/"}, {"en": "You ought to support local businesses.", "th": "คุณควรสนับสนุนธุรกิจท้องถิ่น", "e": "🏪", "ipa": "/juː ˈɔːt tə səpˈɔːt lˈəʊkəl bˈɪznəsɪz/"}, {"en": "Doctors ought to treat all patients equally.", "th": "แพทย์ควรดูแลรักษาผู้ป่วยทุกคนอย่างเท่าเทียมกัน", "e": "🩺", "ipa": "/dˈɒktəz ˈɔːt tə trˈiːt ˈɔːl pˈeɪʃənts ˈiːkwəli/"}, {"en": "Animal lovers ought to protect stray animals.", "th": "คนรักสัตว์ควรปกป้องสัตว์จรจัด", "e": "🐕", "ipa": "/ˈanɪməl lˈʌvəz ˈɔːt tə prətˈɛkt strˈeɪ ˈanɪməlz/"}, {"en": "We ought to conserve water during a drought.", "th": "เราควรประหยัดน้ำในช่วงหน้าแล้ง", "e": "💧", "ipa": "/wiː ˈɔːt tə kənsˈɜːv wˈɔːtə djˈʊərɪŋ ɐ drˈaʊt/"}, {"en": "Everyone ought to reduce their carbon footprint.", "th": "ทุกคนควรลดการปล่อยก๊าซคาร์บอนไดออกไซด์ของตนเอง", "e": "👣", "ipa": "/ˈɛvrɪwˌɒn ˈɔːt tə rɪdjˈuːs ðeə kˈɑːbən fˈʊtprɪnt/"}, {"en": "Companies ought to pay fair wages to their workers.", "th": "บริษัทต่างๆ ควรจ่ายค่าจ้างที่เป็นธรรมให้กับคนงาน", "e": "💵", "ipa": "/kˈʌmpəniz ˈɔːt tə pˈeɪ fˈeə wˈeɪdʒɪz tə ðeə wˈɜːkəz/"}, {"en": "Friends ought to stand by each other in difficult times.", "th": "เพื่อนควรยืนหยัดเคียงข้างกันในยามยากลำบาก", "e": "🤝", "ipa": "/frˈɛndz ˈɔːt tə stˈand baɪ ˈiːtʃ ˈʌðər ɪn dˈɪfɪkəlt tˈaɪmz/"}, {"en": "Leaders ought to act with honesty and integrity.", "th": "ผู้นำควรปฏิบัติหน้าที่ด้วยความซื่อสัตย์และสุจริต", "e": "🧑‍💼", "ipa": "/lˈiːdəz ˈɔːt tʊ ˈakt wɪð ˈɒnɪsti and ɪntˈɛgrɪti/"}, {"en": "We ought to show gratitude to those who help us.", "th": "เราควรแสดงความกตัญญูต่อผู้ที่ช่วยเหลือเรา", "e": "💐", "ipa": "/wiː ˈɔːt tə ʃˈəʊ grˈatɪtjˌuːd tə ðəʊz hˌuː hˈɛlp ˌʌs/"}, {"en": "Neighbors ought to look out for one another.", "th": "เพื่อนบ้านควรดูแลเอาใจใส่ซึ่งกันและกัน", "e": "🏘️", "ipa": "/nˈeɪbəz ˈɔːt tə lˈʊk ˈaʊt fɔː wˈɒn ɐnˈʌðə/"}, {"en": "You ought to admit your mistakes when you are wrong.", "th": "คุณควรยอมรับความผิดพลาดเมื่อคุณทำผิด", "e": "✋", "ipa": "/juː ˈɔːt tʊ ɐdmˈɪt jɔː mɪstˈeɪks wɛn juː ɑː rˈɒŋ/"}, {"en": "Governments ought to provide education for all children.", "th": "รัฐบาลควรจัดการศึกษาให้เด็กทุกคน", "e": "🏫", "ipa": "/gˈʌvənmənts ˈɔːt tə prəvˈaɪd ˌɛdʒuːkˈeɪʃən fɔːr ˈɔːl tʃˈɪldrən/"}, {"en": "We ought to respect other people's religious beliefs.", "th": "เราควรเคารพความเชื่อทางศาสนาของผู้อื่น", "e": "🕊️", "ipa": "/wiː ˈɔːt tə rɪspˈɛkt ˈʌðə pˈiːpəlz rɪlˈɪdʒəs bɪlˈiːfs/"}, {"en": "You ought to share your knowledge with others.", "th": "คุณควรแบ่งปันความรู้ของคุณให้แก่ผู้อื่น", "e": "💡", "ipa": "/juː ˈɔːt tə ʃˈeə jɔː nˈɒlɪdʒ wɪð ˈʌðəz/"}, {"en": "Businesses ought to be honest in their advertising.", "th": "ธุรกิจต่างๆ ควรมีความซื่อสัตย์ในการโฆษณา", "e": "📢", "ipa": "/bˈɪznəsɪz ˈɔːt təbi ˈɒnɪst ɪn ðeər ˈadvətˌaɪzɪŋ/"}, {"en": "We ought to save a portion of our income for emergencies.", "th": "เราควรเก็บออมรายได้ส่วนหนึ่งไว้สำหรับยามฉุกเฉิน", "e": "🐷", "ipa": "/wiː ˈɔːt tə sˈeɪv ɐ pˈɔːʃən ɒv ˌaʊər ˈɪŋkʌm fɔːr ɪmˈɜːdʒənsiz/"}, {"en": "Voters ought to research candidates before elections.", "th": "ผู้มีสิทธิเลือกตั้งควรหาข้อมูลเกี่ยวกับผู้สมัครก่อนการเลือกตั้ง", "e": "🔍", "ipa": "/vˈəʊtəz ˈɔːt tə rɪsˈɜːtʃ kˈandɪdˌeɪts bɪfˌɔːr ɪlˈɛkʃənz/"}, {"en": "You ought to defend the rights of the weak.", "th": "คุณควรปกป้องสิทธิของผู้ที่อ่อนแอ", "e": "🛡️", "ipa": "/juː ˈɔːt tə dɪfˈɛnd ðə rˈaɪts ɒvðə wˈiːk/"}, {"en": "Teachers ought to inspire their students.", "th": "คุณครูควรสร้างแรงบันดาลใจให้กับนักเรียน", "e": "🌟", "ipa": "/tˈiːtʃəz ˈɔːt tʊ ɪnspˈaɪə ðeə stjˈuːdənts/"}, {"en": "We ought to clean up our community parks.", "th": "เราควรช่วยกันทำความสะอาดสวนสาธารณะในชุมชนของเรา", "e": "🧹", "ipa": "/wiː ˈɔːt tə klˈiːn ˌʌp ˌaʊə kəmjˈuːnɪti pˈɑːks/"}, {"en": "Tourists ought to respect local cultures when traveling.", "th": "นักท่องเที่ยวควรเคารพวัฒนธรรมท้องถิ่นเมื่อเดินทางท่องเที่ยว", "e": "🧳", "ipa": "/tˈʊərɪsts ˈɔːt tə rɪspˈɛkt lˈəʊkəl kˈʌltʃəz wɛn trˈavəlɪŋ/"}, {"en": "You ought to report crimes to the police.", "th": "คุณควรแจ้งเหตุอาชญากรรมให้ตำรวจทราบ", "e": "👮", "ipa": "/juː ˈɔːt tə rɪpˈɔːt krˈaɪmz tə ðə pəlˈiːs/"}, {"en": "We ought to honor our veterans and soldiers.", "th": "เราควรให้เกียรติทหารผ่านศึกและทหารของเรา", "e": "🎖️", "ipa": "/wiː ˈɔːt tʊ ˈɒnər ˌaʊə vˈɛtərənz and sˈəʊldʒəz/"}, {"en": "People ought to recycle plastic and paper waste.", "th": "ผู้คนควรนำขยะพลาสติกและกระดาษกลับมาใช้ใหม่", "e": "♻️", "ipa": "/pˈiːpəl ˈɔːt tə rɪsˈaɪkəl plˈastɪk and pˈeɪpə wˈeɪst/"}, {"en": "You ought to listen attentively when someone is speaking.", "th": "คุณควรตั้งใจฟังเวลาที่มีคนกำลังพูด", "e": "🎧", "ipa": "/juː ˈɔːt tə lˈɪsən ɐtˈɛntɪvli wɛn sˈʌmwɒn ɪz spˈiːkɪŋ/"}, {"en": "Society ought to forgive those who have genuinely reformed.", "th": "สังคมควรอภัยให้กับผู้ที่กลับตัวกลับใจอย่างแท้จริง", "e": "💞", "ipa": "/səsˈaɪəti ˈɔːt tə fəgˈɪv ðəʊz hˌuː hav dʒˈɛnjuːɪnli rɪfˈɔːmd/"}, {"en": "We ought to promote peace and harmony.", "th": "เราควรส่งเสริมสันติภาพและความสามัคคี", "e": "☮️", "ipa": "/wiː ˈɔːt tə prəmˈəʊt pˈiːs and hˈɑːməni/"}, {"en": "Parents ought to guide their children with love.", "th": "พ่อแม่ควรชี้นำลูกๆ ด้วยความรัก", "e": "👨‍👩‍👧", "ipa": "/pˈeərənts ˈɔːt tə gˈaɪd ðeə tʃˈɪldrən wɪð lˈʌv/"}, {"en": "You ought to pay for the damage you caused.", "th": "คุณควรชดใช้ค่าเสียหายที่คุณเป็นคนก่อขึ้น", "e": "💳", "ipa": "/juː ˈɔːt tə pˈeɪ fəðə dˈamɪdʒ juː kˈɔːzd/"}, {"en": "We ought to preserve historical landmarks.", "th": "เราควรอนุรักษ์โบราณสถานทางประวัติศาสตร์", "e": "🏛️", "ipa": "/wiː ˈɔːt tə prɪzˈɜːv hɪstˈɒrɪkəl lˈandmɑːks/"}, {"en": "Employees ought to be loyal to their employers.", "th": "พนักงานควรมีความซื่อสัตย์ภักดีต่อองค์กรของตน", "e": "🏢", "ipa": "/ɛmplˈɔɪiːz ˈɔːt təbi lˈɔɪəl tə ðeər ɛmplˈɔɪəz/"}, {"en": "You ought to keep private information confidential.", "th": "คุณควรเก็บข้อมูลส่วนตัวไว้เป็นความลับ", "e": "🔒", "ipa": "/juː ˈɔːt tə kˈiːp prˈaɪvət ˌɪnfəmˈeɪʃən kˌɒnfɪdˈɛnʃəl/"}, {"en": "We ought to welcome refugees fleeing from war.", "th": "เราควรต้อนรับผู้ลี้ภัยที่หนีภัยสงครามมา", "e": "🫶", "ipa": "/wiː ˈɔːt tə wˈɛlkʌm rˈɛfjuːdʒˌiːz flˈiːɪŋ frɒm wˈɔː/"}, {"en": "You ought to be fair in your judgments.", "th": "คุณควรมีความยุติธรรมในการตัดสินสิ่งต่างๆ", "e": "⚖️", "ipa": "/juː ˈɔːt təbi fˈeər ɪn jɔː dʒˈʌdʒmənts/"}, {"en": "Media outlets ought to report unbiased news.", "th": "สื่อมวลชนควรรายงานข่าวที่เป็นกลาง", "e": "📰", "ipa": "/mˈiːdiːər ˈaʊtlɛts ˈɔːt tə rɪpˈɔːt ʌnbˈaɪəst njˈuːz/"}, {"en": "We ought to stop bullying in schools.", "th": "เราควรหยุดการกลั่นแกล้งกันในโรงเรียน", "e": "🛑", "ipa": "/wiː ˈɔːt tə stˈɒp bˈʊlɪɪŋ ɪn skˈuːlz/"}, {"en": "You ought to take responsibility for your actions.", "th": "คุณควรรับผิดชอบต่อการกระทำของตนเอง", "e": "💪", "ipa": "/juː ˈɔːt tə tˈeɪk rɪspˌɒnsəbˈɪlɪti fɔː jɔːr ˈakʃənz/"}, {"en": "We ought to nurture kindness in the younger generation.", "th": "เราควรปลูกฝังความเมตตาให้กับคนรุ่นใหม่", "e": "🌱", "ipa": "/wiː ˈɔːt tə nˈɜːtʃə kˈaɪndnəs ɪnðə jˈʌŋgə dʒˌɛnərˈeɪʃən/"}, {"en": "Citizens ought to vote in every election.", "th": "พลเมืองควรใช้สิทธิเลือกตั้งในทุกการเลือกตั้ง", "e": "🗳️", "ipa": "/sˈɪtɪzənz ˈɔːt tə vˈəʊt ɪn ˈɛvrɪ ɪlˈɛkʃən/"}, {"en": "You ought to consider other people's feelings.", "th": "คุณควรคำนึงถึงความรู้สึกของผู้อื่น", "e": "🤔", "ipa": "/juː ˈɔːt tə kənsˈɪdər ˈʌðə pˈiːpəlz fˈiːlɪŋz/"}, {"en": "We ought to defend human rights.", "th": "เราควรปกป้องสิทธิมนุษยชน", "e": "✊", "ipa": "/wiː ˈɔːt tə dɪfˈɛnd hjˈuːmən rˈaɪts/"}, {"en": "Wealthy individuals ought to donate to charity.", "th": "บุคคลที่ร่ำรวยควรบริจาคเงินให้กับองค์กรการกุศล", "e": "🎁", "ipa": "/wˈɛlθi ˌɪndɪvˈɪdʒuːəlz ˈɔːt tə dəʊnˈeɪt tə tʃˈarɪti/"}, {"en": "You ought to keep public places clean.", "th": "คุณควรดูแลรักษาสถานที่สาธารณะให้สะอาด", "e": "🚮", "ipa": "/juː ˈɔːt tə kˈiːp pˈʌblɪk plˈeɪsɪz klˈiːn/"}, {"en": "Friends ought to trust one another.", "th": "เพื่อนควรมีความไว้วางใจซึ่งกันและกัน", "e": "🫂", "ipa": "/frˈɛndz ˈɔːt tə trˈʌst wˈɒn ɐnˈʌðə/"}, {"en": "We ought to stand up against injustice.", "th": "เราควรลุกขึ้นต่อสู้กับความอยุติธรรม", "e": "📣", "ipa": "/wiː ˈɔːt tə stˈand ˌʌp ɐgˈɛnst ɪndʒˈʌstɪs/"}, {"en": "Society ought to protect vulnerable groups.", "th": "สังคมควรปกป้องกลุ่มเปราะบาง", "e": "☂️", "ipa": "/səsˈaɪəti ˈɔːt tə prətˈɛkt vˈʌlnərəbəl grˈuːps/"}, {"en": "You ought to return borrowed items promptly.", "th": "คุณควรคืนของที่ยืมมาโดยเร็ว", "e": "📦", "ipa": "/juː ˈɔːt tə rɪtˈɜːn bˈɒrəʊd ˈaɪtəmz prˈɒmptli/"}, {"en": "Animal owners ought to vaccinate their pets.", "th": "เจ้าของสัตว์เลี้ยงควรพาสัตว์เลี้ยงไปฉีดวัคซีน", "e": "💉", "ipa": "/ˈanɪməl ˈəʊnəz ˈɔːt tə vˈaksɪnˌeɪt ðeə pˈɛts/"}, {"en": "We ought to reduce food waste.", "th": "เราควรลดขยะอาหาร", "e": "🍎", "ipa": "/wiː ˈɔːt tə rɪdjˈuːs fˈuːd wˈeɪst/"}, {"en": "Students ought to avoid plagiarism in academic work.", "th": "นักเรียนควรหลีกเลี่ยงการคัดลอกผลงานทางวิชาการ", "e": "📝", "ipa": "/stjˈuːdənts ˈɔːt tʊ ɐvˈɔɪd plˈeɪdʒərˌɪzəm ɪn ˌakədˈɛmɪk wˈɜːk/"}, {"en": "You ought to show compassion to animals.", "th": "คุณควรแสดงความเมตตาต่อสัตว์", "e": "🐰", "ipa": "/juː ˈɔːt tə ʃˈəʊ kəmpˈaʃən tʊ ˈanɪməlz/"}, {"en": "Governments ought to protect national heritage sites.", "th": "รัฐบาลควรปกป้องแหล่งมรดกของชาติ", "e": "🏯", "ipa": "/gˈʌvənmənts ˈɔːt tə prətˈɛkt nˈaʃənəl hˈɛrɪtɪdʒ sˈaɪts/"}, {"en": "We ought to support fair trade practices.", "th": "เราควรสนับสนุนแนวทางการค้าที่เป็นธรรม", "e": "🛒", "ipa": "/wiː ˈɔːt tə səpˈɔːt fˈeə trˈeɪd prˈaktɪsɪz/"}, {"en": "You ought to keep your neighborhood safe.", "th": "คุณควรช่วยกันดูแลละแวกบ้านให้ปลอดภัย", "e": "🏡", "ipa": "/juː ˈɔːt tə kˈiːp jɔː nˈeɪbəhˌʊd sˈeɪf/"}, {"en": "Children ought to learn basic manners.", "th": "เด็กๆ ควรเรียนรู้มารยาทพื้นฐาน", "e": "🎓", "ipa": "/tʃˈɪldrən ˈɔːt tə lˈɜːn bˈeɪsɪk mˈanəz/"}, {"en": "We ought to value honesty in relationships.", "th": "เราควรให้คุณค่ากับความซื่อสัตย์ในความสัมพันธ์", "e": "💑", "ipa": "/wiː ˈɔːt tə vˈaljuː ˈɒnɪsti ɪn rɪlˈeɪʃənʃˌɪps/"}, {"en": "You ought to help those who are struggling.", "th": "คุณควรช่วยเหลือผู้ที่กำลังดิ้นรนหรือยากลำบาก", "e": "🧗", "ipa": "/juː ˈɔːt tə hˈɛlp ðəʊz hˌuː ɑː strˈʌglɪŋ/"}, {"en": "Society ought to provide equal opportunities.", "th": "สังคมควรจัดหาโอกาสที่เท่าเทียมกัน", "e": "🟰", "ipa": "/səsˈaɪəti ˈɔːt tə prəvˈaɪd ˈiːkwəl ɒpətjˈuːnɪtiz/"}, {"en": "You ought to conserve electricity.", "th": "คุณควรประหยัดไฟฟ้า", "e": "💡", "ipa": "/juː ˈɔːt tə kənsˈɜːv ɪlɛktrˈɪsɪti/"}, {"en": "Leaders ought to listen to public feedback.", "th": "ผู้นำควรรับฟังความคิดเห็นจากประชาชน", "e": "🎙️", "ipa": "/lˈiːdəz ˈɔːt tə lˈɪsən tə pˈʌblɪk fˈiːdbak/"}, {"en": "We ought to respect personal boundaries.", "th": "เราควรเคารพขอบเขตส่วนบุคคล", "e": "🚧", "ipa": "/wiː ˈɔːt tə rɪspˈɛkt pˈɜːsənəl bˈaʊndəriz/"}, {"en": "You ought to tell the truth even when it's hard.", "th": "คุณควรพูดความจริงแม้ว่ามันจะยากก็ตาม", "e": "💬", "ipa": "/juː ˈɔːt tə tˈɛl ðə trˈuːθ ˈiːvən wɛn ɪts hˈɑːd/"}, {"en": "Companies ought to ensure workplace safety.", "th": "บริษัทต่างๆ ควรรับรองความปลอดภัยในสถานที่ทำงาน", "e": "🦺", "ipa": "/kˈʌmpəniz ˈɔːt tʊ ɛnʃˈʊə wˈɜːkpleɪs sˈeɪfti/"}, {"en": "We ought to promote equality for all.", "th": "เราควรส่งเสริมความเท่าเทียมสำหรับทุกคน", "e": "🌈", "ipa": "/wiː ˈɔːt tə prəmˈəʊt iːkwˈɒlɪti fɔːr ˈɔːl/"}, {"en": "You ought to cheer up friends in despair.", "th": "คุณควรให้กำลังใจเพื่อนที่กำลังสิ้นหวัง", "e": "😊", "ipa": "/juː ˈɔːt tə tʃˈiər ˌʌp frˈɛndz ɪn dɪspˈeə/"}, {"en": "Citizens ought to pay taxes honestly.", "th": "พลเมืองควรจ่ายภาษีอย่างซื่อสัตย์", "e": "🧾", "ipa": "/sˈɪtɪzənz ˈɔːt tə pˈeɪ tˈaksɪz ˈɒnɪstli/"}, {"en": "We ought to protect natural habitats.", "th": "เราควรปกป้องถิ่นที่อยู่อาศัยตามธรรมชาติ", "e": "🌳", "ipa": "/wiː ˈɔːt tə prətˈɛkt nˈatʃərəl hˈabɪtˌats/"}, {"en": "You ought to be polite to service workers.", "th": "คุณควรสุภาพกับพนักงานบริการ", "e": "🙂", "ipa": "/juː ˈɔːt təbi pəlˈaɪt tə sˈɜːvɪs wˈɜːkəz/"}, {"en": "Schools ought to foster critical thinking.", "th": "โรงเรียนควรส่งเสริมการคิดเชิงวิเคราะห์", "e": "🧠", "ipa": "/skˈuːlz ˈɔːt tə fˈɒstə krˈɪtɪkəl θˈɪŋkɪŋ/"}, {"en": "We ought to honor commitments.", "th": "เราควรทำตามข้อผูกพันที่ให้ไว้", "e": "📜", "ipa": "/wiː ˈɔːt tʊ ˈɒnə kəmˈɪtmənts/"}, {"en": "You ought to spread positivity.", "th": "คุณควรส่งต่อพลังบวก", "e": "✨", "ipa": "/juː ˈɔːt tə sprˈɛd pˌɒzɪtˈɪvɪti/"}, {"en": "Media ought to protect children from harmful content.", "th": "สื่อควรปกป้องเด็กๆ จากเนื้อหาที่เป็นอันตราย", "e": "📺", "ipa": "/mˈiːdiːər ˈɔːt tə prətˈɛkt tʃˈɪldrən frɒm hˈɑːmfəl kˈɒntɛnt/"}, {"en": "We ought to fight against corruption.", "th": "เราควรต่อสู้กับการทุจริตคอร์รัปชัน", "e": "🥊", "ipa": "/wiː ˈɔːt tə fˈaɪt ɐgˈɛnst kərˈʌpʃən/"}, {"en": "You ought to acknowledge your faults.", "th": "คุณควรยอมรับข้อบกพร่องของตนเอง", "e": "🙋", "ipa": "/juː ˈɔːt tʊ ɐknˈɒlɪdʒ jɔː fˈɒlts/"}, {"en": "Society ought to help the elderly adapt to technology.", "th": "สังคมควรช่วยเหลือผู้สูงอายุในการปรับตัวเข้ากับเทคโนโลยี", "e": "📱", "ipa": "/səsˈaɪəti ˈɔːt tə hˈɛlp ðɪ ˈɛldəli ɐdˈapt tə tɛknˈɒlədʒi/"}, {"en": "We ought to minimize single-use plastic.", "th": "เราควรลดการใช้พลาสติกแบบใช้ครั้งเดียวทิ้ง", "e": "🥤", "ipa": "/wiː ˈɔːt tə mˈɪnɪmˌaɪz sˈɪŋgəljˈuːs plˈastɪk/"}, {"en": "You ought to respect cultural differences.", "th": "คุณควรเคารพความแตกต่างทางวัฒนธรรม", "e": "🎎", "ipa": "/juː ˈɔːt tə rɪspˈɛkt kˈʌltʃərəl dˈɪfrənsɪz/"}, {"en": "Parents ought to encourage creativity in kids.", "th": "พ่อแม่ควรส่งเสริมความคิดสร้างสรรค์ในตัวเด็กๆ", "e": "🎨", "ipa": "/pˈeərənts ˈɔːt tʊ ɛŋkˈʌrɪdʒ kriːˌeɪtˈɪvɪti ɪn kˈɪdz/"}, {"en": "We ought to protect endangered species.", "th": "เราควรปกป้องสัตว์ใกล้สูญพันธุ์", "e": "🐼", "ipa": "/wiː ˈɔːt tə prətˈɛkt ɛndˈeɪndʒəd spˈiːsiːz/"}, {"en": "You ought to apologize when you hurt someone.", "th": "คุณควรกล่าวคำขอโทษเมื่อคุณทำร้ายจิตใจใครสักคน", "e": "😔", "ipa": "/juː ˈɔːt tʊ ɐpˈɒlədʒˌaɪz wɛn juː hˈɜːt sˈʌmwɒn/"}, {"en": "Communities ought to look after neighborhood safety.", "th": "ชุมชนควรดูแลความปลอดภัยในละแวกบ้าน", "e": "🔦", "ipa": "/kəmjˈuːnɪtiz ˈɔːt tə lˈʊk ˈaftə nˈeɪbəhˌʊd sˈeɪfti/"}, {"en": "We ought to share resources fairly.", "th": "เราควรแบ่งปันทรัพยากรกันอย่างยุติธรรม", "e": "🍰", "ipa": "/wiː ˈɔːt tə ʃˈeə rɪzˈɔːsɪz fˈeəli/"}, {"en": "You ought to keep your word.", "th": "คุณควรรักษาสัจจะหรือรักษาวาจา", "e": "🤝", "ipa": "/juː ˈɔːt tə kˈiːp jɔː wˈɜːd/"}, {"en": "Leaders ought to serve the public interest.", "th": "ผู้นำควรรับใช้ผลประโยชน์ส่วนรวม", "e": "🏛️", "ipa": "/lˈiːdəz ˈɔːt tə sˈɜːv ðə pˈʌblɪk ˈɪntrɛst/"}, {"en": "We ought to embrace diversity.", "th": "เราควรยอมรับความหลากหลาย", "e": "🌍", "ipa": "/wiː ˈɔːt tʊ ɛmbrˈeɪs daɪvˈɜːsɪti/"}, {"en": "You ought to be mindful of your environmental impact.", "th": "คุณควรตระหนักถึงผลกระทบที่มีต่อสิ่งแวดล้อมของคุณ", "e": "🌎", "ipa": "/juː ˈɔːt təbi mˈaɪndfəl ɒv jɔːr ɛnvˌaɪrənmˈɛntəl ˈɪmpakt/"}, {"en": "We ought to strive for a better world.", "th": "เราควรพยายามอย่างเต็มที่เพื่อโลกที่ดีขึ้น", "e": "🚀", "ipa": "/wiː ˈɔːt tə strˈaɪv fərə bˈɛtə wˈɜːld/"}];
+const PER = 50;
+let page = 0;
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// Highlight "would" and the main verb that follows it (skipping "always")
+function markup(sentence){
+  const parts = sentence.split(" ");
+  const wi = parts.findIndex((p,i)=> /^ought$/i.test(p) && /^to$/i.test(parts[i+1]||""));
+  if(wi < 0) return esc(sentence);
+  const vi = wi + 2;
+  const out = [];
+  for(let i=0;i<parts.length;i++){
+    if(i===wi){ out.push("<mark>"+esc(parts[i])+" "+esc(parts[i+1])+"</mark>"); i++; continue; }
+    if(i===vi){
+      const m = parts[i].match(/^([A-Za-z'-]+)(.*)$/);
+      out.push(m ? "<b>"+esc(m[1])+"</b>"+esc(m[2]) : esc(parts[i]));
+      continue;
+    }
+    out.push(esc(parts[i]));
+  }
+  return out.join(" ");
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const start = page*PER;
+  grid.innerHTML = DATA.slice(start, start+PER).map((d,i)=>`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${start+i+1} กดเพื่อพลิก">
+      <div class="inner">
+        <div class="face front">
+          <span class="num">${start+i+1}</span>
+          <button class="spk" data-i="${start+i}" aria-label="อ่านออกเสียงประโยค" title="ฟังเสียง">🔊</button>
+          <div class="pic" aria-hidden="true">${d.e}</div>
+          <div class="txt">
+            <p class="en">${markup(d.en)}</p>
+            <p class="ipa">${esc(d.ipa)}</p>
+          </div>
+          <span class="hint">กดเพื่อดูคำแปล</span>
+        </div>
+        <div class="face back">
+          <p class="th">${esc(d.th)}</p>
+          <span class="th-small">กดเพื่อกลับ</span>
+        </div>
+      </div>
+    </div>`).join("");
+  document.getElementById("t0").setAttribute("aria-selected", page===0);
+  document.getElementById("t1").setAttribute("aria-selected", page===1);
+  window.scrollTo({top:0});
+}
+
+// ---------- Speech: prefer a British male voice ----------
+let voice = null;
+const MALE_HINTS = ["google uk english male","daniel","microsoft ryan","microsoft george","microsoft thomas","oliver","arthur","male"];
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  const gb = vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const en = vs.filter(v=>/^en/i.test(v.lang));
+  const lower = v => v.name.toLowerCase();
+  for(const h of MALE_HINTS){
+    const hit = gb.find(v=>lower(v).includes(h)) || en.find(v=>lower(v).includes(h) && /en[-_]GB/i.test(v.lang));
+    if(hit){voice=hit;break;}
+  }
+  if(!voice) voice = gb[0] || en.find(v=>/male|david|mark|james|guy|alex/i.test(v.name)) || en[0] || null;
+  const n = document.getElementById("voiceNote");
+  n.textContent = voice ? "เสียงที่ใช้: " + voice.name + " (" + voice.lang + ") — คุณภาพขึ้นกับเสียงที่มีในอุปกรณ์ของคุณ" : "ไม่พบเสียงภาษาอังกฤษในอุปกรณ์นี้";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  document.querySelectorAll(".spk.on").forEach(b=>b.classList.remove("on"));
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice){u.voice = voice; u.lang = voice.lang;} else u.lang = "en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onstart = ()=>btn.classList.add("on");
+  u.onend = u.onerror = ()=>btn.classList.remove("on");
+  speechSynthesis.speak(u);
+}
+
+// ---------- Events ----------
+document.getElementById("grid").addEventListener("click", e=>{
+  const spk = e.target.closest(".spk");
+  if(spk){ e.stopPropagation(); speak(DATA[+spk.dataset.i].en, spk); return; }
+  const card = e.target.closest(".card");
+  if(card) card.classList.toggle("flipped");
+});
+document.getElementById("grid").addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("card")){
+    e.preventDefault(); e.target.classList.toggle("flipped");
+  }
+});
+document.getElementById("t0").onclick = ()=>{page=0;render();};
+document.getElementById("t1").onclick = ()=>{page=1;render();};
+document.getElementById("reset").onclick = ()=>document.querySelectorAll(".card.flipped").forEach(c=>c.classList.remove("flipped"));
+render();
+</script>
+</body>
+</html>

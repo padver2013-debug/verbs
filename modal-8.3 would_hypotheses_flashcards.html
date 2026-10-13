@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>8.3 Modal verb "would" – Hypotheses Flashcards</title>
+<style>
+:root{
+  --bg:#eef1f5; --ink:#15181d; --muted:#5a6270; --line:#d3d9e2;
+  --card:#ffffff; --verb:#8b0000; --would:#ffe066; --accent:#1f4e79; --back:#1f4e79; --backink:#ffffff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+}
+:root[data-theme="dark"]{ --bg:#12161c; --ink:#e8ecf2; --muted:#9aa4b2; --line:#2b3340; --accent:#7fb2e5; --back:#243a52; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Sarabun","Noto Sans Thai",Tahoma,Arial,sans-serif}
+header{max-width:1120px;margin:0 auto;padding:22px 16px 10px}
+h1{margin:0 0 4px;font-size:clamp(20px,3.2vw,28px);font-weight:700}
+.sub{margin:0;color:var(--muted);font-size:15px}
+.legend{margin-top:10px;font-size:15px;color:var(--muted)}
+.legend .w{background:var(--would);color:#000;padding:1px 6px;border-radius:3px;font-family:Arial,sans-serif}
+.legend .v{color:#c23b3b;font-weight:700;font-family:Arial,sans-serif}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1120px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tab,.ghost{font:inherit;font-size:15px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;border-radius:8px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1119}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1119}}
+.ghost{margin-left:auto}
+.tab:focus-visible,.ghost:focus-visible,.spk:focus-visible,.card:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+main{max-width:1120px;margin:0 auto;padding:16px 16px 48px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}}
+
+.card{perspective:1200px;height:300px;cursor:pointer;border-radius:16px}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+@media (prefers-reduced-motion: reduce){.inner{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;padding:16px 18px 14px;overflow:hidden}
+.front{background:var(--card);border:1px solid #cfd6e0;box-shadow:0 1px 2px rgba(20,30,50,.08)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center}
+.num{position:absolute;top:10px;left:14px;font:12px Arial,sans-serif;color:#7a8494}
+.pic{flex:0 0 auto;text-align:center;font-size:64px;line-height:1.1;padding-top:8px;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.txt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:4px 2px}
+.en{margin:0;color:#000;font-family:"Arial Nova Light","Helvetica Neue",Arial,sans-serif;font-weight:300;font-size:clamp(16px,1.7vw,19px);line-height:1.45}
+.en b{font-weight:700;color:var(--verb)}
+.en mark{background:var(--would);color:#000;font-weight:400;padding:0 3px;border-radius:3px}
+.ipa{margin:0;color:#000;font-family:"Times New Roman",Times,serif;font-size:clamp(15px,1.5vw,17px);line-height:1.4}
+.spk{position:absolute;right:10px;top:10px;width:42px;height:42px;border-radius:50%;border:1px solid #c5cdd9;background:#f4f6fa;color:#1f4e79;font-size:20px;cursor:pointer;display:grid;place-items:center}
+.spk:hover{background:#e6ecf5}
+.spk.on{background:#1f4e79;color:#fff}
+.hint{position:absolute;bottom:8px;right:14px;font-size:12px;color:#8b95a5}
+.th{font-size:clamp(18px,2vw,22px);line-height:1.6;margin:0;padding:0 8px}
+.th-small{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px;color:#b9cbe0}
+.note{color:var(--muted);font-size:13px;margin-top:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>8.3 Modal verb "would" — Hypotheses</h1>
+  <p class="sub">ฝึกอ่านและแปลประโยค · 100 ประโยค · หน้าละ 50 ประโยค (แถวละ 2 การ์ด)</p>
+  <p class="legend"><span class="w">would</span> = ไฮไลต์ &nbsp; <span class="v">verb</span> = กริยาหลัก (ตัวหนา สีแดงเข้ม) &nbsp;|&nbsp; กดการ์ดเพื่อดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียงผู้ชาย</p>
+</header>
+<div class="bar"><div class="bar-in" role="tablist" aria-label="เลือกหน้า">
+  <button class="tab" role="tab" id="t0" aria-selected="true">หน้า 1 · ประโยค 1–50</button>
+  <button class="tab" role="tab" id="t1" aria-selected="false">หน้า 2 · ประโยค 51–100</button>
+  <button class="ghost" id="reset">พลิกกลับทั้งหมด</button>
+</div></div>
+<main>
+  <div class="grid" id="grid"></div>
+  <p class="note" id="voiceNote"></p>
+</main>
+
+<script>
+const DATA = [{"en": "If I won the lottery, I would travel around the world.", "th": "ถ้าฉันถูกรางวัลล็อตเตอรี่ ฉันจะเดินทางท่องเที่ยวรอบโลก", "e": "🌍", "ipa": "/ɪf aɪ wˈʌn ðə lˈɒtəri aɪ wʊd trˈavəl ɐrˈaʊnd ðə wˈɜːld/"}, {"en": "If she had more time, she would learn a new language.", "th": "ถ้าเธอมีเวลามากกว่านี้ เธอก็จะเรียนภาษาใหม่ๆ", "e": "🗣️", "ipa": "/ɪf ʃiː had mˈɔː tˈaɪm ʃiː wʊd lˈɜːn ɐ njˈuː lˈaŋgwɪdʒ/"}, {"en": "What would you do if you were in my position?", "th": "คุณจะทำอย่างไรถ้าคุณตกอยู่ในตำแหน่งเดียวกับฉัน", "e": "🤔", "ipa": "/wˌɒt wʊd juː dˈuː ɪf juː wɜːr ɪn maɪ pəzˈɪʃən/"}, {"en": "If I knew his phone number, I would call him right now.", "th": "ถ้าฉันรู้เบอร์โทรศัพท์ของเขา ฉันคงจะโทรหาเขาไปแล้วตอนนี้", "e": "📞", "ipa": "/ɪf aɪ njˈuː hɪz fˈəʊn nˈʌmbə aɪ wʊd kˈɔːl hˌɪm rˈaɪt nˈaʊ/"}, {"en": "He would buy a luxurious house if he had enough money.", "th": "เขาคงจะซื้อบ้านหรูสักหลังถ้าเขามีเงินมากพอ", "e": "🏡", "ipa": "/hiː wʊd bˈaɪ ɐ lʌgʒˈʊəriəs hˈaʊs ɪf hiː had ɪnˈʌf mˈʌni/"}, {"en": "If it rained heavily, we would cancel the outdoor picnic.", "th": "ถ้าเกิดฝนตกหนักลงมา พวกเราก็จะยกเลิกงานปิกนิกกลางแจ้ง", "e": "🌧️", "ipa": "/ɪf ɪt rˈeɪnd hˈɛvili wiː wʊd kˈansəl ðɪ aʊtdˈɔː pˈɪknɪk/"}, {"en": "I would accept the job offer if the salary were higher.", "th": "ฉันคงจะตอบรับข้อเสนองานนั้นนะถ้าเงินเดือนสูงกว่านี้", "e": "🤝", "ipa": "/aɪ wʊd ɐksˈɛpt ðə dʒˈɒb ˈɒfə ɪf ðə sˈaləri wɜː hˈaɪə/"}, {"en": "If she studied harder, she would pass the difficult exam.", "th": "ถ้าเธอตั้งใจเรียนให้หนักขึ้น เธอก็น่าจะสอบผ่านข้อสอบยากๆ นั้นได้", "e": "📝", "ipa": "/ɪf ʃiː stˈʌdid hˈɑːdə ʃiː wʊd pˈas ðə dˈɪfɪkəlt ɛgzˈam/"}, {"en": "What would you say if someone offered you that role?", "th": "คุณจะตอบว่าอย่างไรถ้ามีคนยื่นบทบาทหน้าที่นั้นให้คุณ", "e": "💬", "ipa": "/wˌɒt wʊd juː sˈeɪ ɪf sˈʌmwɒn ˈɒfəd juː ðat rˈəʊl/"}, {"en": "If I were a bird, I would fly across the ocean.", "th": "ถ้าฉันเป็นนก ฉันคงบินข้ามมหาสมุทรไปแล้ว", "e": "🕊️", "ipa": "/ɪf aɪ wɜːr ɐ bˈɜːd aɪ wʊd flˈaɪ əkrˌɒs ðɪ ˈəʊʃən/"}, {"en": "They would come to the party if they received an invitation.", "th": "พวกเขาคงจะมาร่วมงานปาร์ตี้ถ้าหากได้รับบัตรเชิญ", "e": "🎉", "ipa": "/ðeɪ wʊd kˈʌm tə ðə pˈɑːti ɪf ðeɪ rɪsˈiːvd ɐn ɪnvɪtˈeɪʃən/"}, {"en": "If I had a magic wand, I would solve all world problems.", "th": "ถ้าฉันมีไม้กายสิทธิ์ ฉันคงจะแก้ไขปัญหาต่างๆ บนโลกใบนี้ให้หมดไป", "e": "🪄", "ipa": "/ɪf aɪ had ɐ mˈadʒɪk wˈɒnd aɪ wʊd sˈɒlv ˈɔːl wˈɜːld prˈɒbləmz/"}, {"en": "She would be happier if she lived in the countryside.", "th": "เธอน่าจะมีความสุขมากกว่านี้ถ้าได้ใช้ชีวิตอยู่ในชนบท", "e": "😊", "ipa": "/ʃiː wʊd biː hˈapɪə ɪf ʃiː lˈɪvd ɪnðə kˈʌntrɪsˌaɪd/"}, {"en": "If you asked him politely, he would help you out.", "th": "ถ้าคุณลองเอ่ยปากขอร้องเขาดีๆ เขาก็น่าจะยอมช่วยเหลือคุณนะ", "e": "🙏", "ipa": "/ɪf juː ˈaskt hˌɪm pəlˈaɪtli hiː wʊd hˈɛlp juː ˈaʊt/"}, {"en": "I would never do such a thing if I were you.", "th": "ถ้าฉันเป็นคุณ ฉันไม่มีวันทำเรื่องแบบนั้นเด็ดขาด", "e": "🚫", "ipa": "/aɪ wʊd nˈɛvə dˈuː sˈʌtʃ ɐ θˈɪŋ ɪf aɪ wɜː juː/"}, {"en": "If the weather were nice, we would go hiking.", "th": "ถ้าสภาพอากาศดี พวกเราคงจะชวนกันไปเดินป่าปีนเขา", "e": "🥾", "ipa": "/ɪf ðə wˈɛðə wɜː nˈaɪs wiː wʊd gˌəʊ hˈaɪkɪŋ/"}, {"en": "Who would you invite if you hosted a grand banquet?", "th": "คุณจะเชิญใครบ้างถ้าคุณเป็นเจ้าภาพจัดงานเลี้ยงรับรองสุดยิ่งใหญ่", "e": "💌", "ipa": "/hˌuː wʊd juː ɪnvˈaɪt ɪf juː hˈəʊstɪd ɐ grˈand bˈaŋkwɪt/"}, {"en": "If I spoke fluent French, I would work in Paris.", "th": "ถ้าฉันพูดภาษาฝรั่งเศสได้อย่างคล่องแคล่ว ฉันคงไปทำงานอยู่ที่ปารีสแล้ว", "e": "🗼", "ipa": "/ɪf aɪ spˈəʊk flˈuːənt frˈɛntʃ aɪ wʊd wˈɜːk ɪn pˈarɪs/"}, {"en": "He would enjoy the movie if he liked science fiction.", "th": "เขาคงจะสนุกกับภาพยนตร์เรื่องนี้นะถ้าเขาชอบแนววิทยาศาสตร์ไซไฟ", "e": "🎬", "ipa": "/hiː wʊd ɛndʒˈɔɪ ðə mˈuːvi ɪf hiː lˈaɪkt sˈaɪəns fˈɪkʃən/"}, {"en": "If we left right now, we would catch the train.", "th": "ถ้าพวกเราออกเดินทางกันตอนนี้ เราก็น่าจะทันขึ้นรถไฟ", "e": "🚆", "ipa": "/ɪf wiː lˈɛft rˈaɪt nˈaʊ wiː wʊd kˈatʃ ðə trˈeɪn/"}, {"en": "I would buy that sports car if I had spare cash.", "th": "ฉันคงจะซื้อรถสปอร์ตคันนั้นถ้ามีเงินสดเหลือเก็บ", "e": "🏎️", "ipa": "/aɪ wʊd bˈaɪ ðat spˈɔːts kˈɑː ɪf aɪ had spˈeə kˈaʃ/"}, {"en": "If she had a car, she would drive to work every day.", "th": "ถ้าเธอมีรถยนต์สักคัน เธอก็คงจะขับรถไปทำงานทุกวัน", "e": "🚗", "ipa": "/ɪf ʃiː had ɐ kˈɑː ʃiː wʊd drˈaɪv tə wˈɜːk ˈɛvrɪ dˈeɪ/"}, {"en": "What would happen if the electricity went out?", "th": "จะเกิดอะไรขึ้นถ้าเกิดไฟฟ้าดับกะทันหันขึ้นมา", "e": "💡", "ipa": "/wˌɒt wʊd hˈapən ɪf ðɪ ɪlɛktrˈɪsɪti wɛnt ˈaʊt/"}, {"en": "If I were the manager, I would change the company policy.", "th": "ถ้าฉันเป็นผู้จัดการ ฉันจะทำการเปลี่ยนแปลงนโยบายบริษัทใหม่", "e": "👔", "ipa": "/ɪf aɪ wɜː ðə mˈanɪdʒə aɪ wʊd tʃˈeɪndʒ ðə kˈʌmpəni pˈɒlɪsi/"}, {"en": "They would win the game if they practiced more.", "th": "พวกเขาน่าจะเป็นฝ่ายชนะเกมการแข่งขันถ้าขยันฝึกซ้อมให้มากกว่านี้", "e": "🏆", "ipa": "/ðeɪ wʊd wˈɪn ðə gˈeɪm ɪf ðeɪ prˈaktɪst mˈɔː/"}, {"en": "If I had your skills, I would start my own business.", "th": "ถ้าฉันมีทักษะความสามารถแบบคุณ ฉันคงเปิดกิจธุรกิจเป็นของตัวเองไปแล้ว", "e": "🏪", "ipa": "/ɪf aɪ had jɔː skˈɪlz aɪ wʊd stˈɑːt maɪ ˈəʊn bˈɪznəs/"}, {"en": "She would not make such a careless mistake.", "th": "เธอน่าจะไม่ทำความผิดพลาดสะดุดขาตัวเองแบบนั้นหรอก", "e": "❌", "ipa": "/ʃiː wʊd nˌɒt mˌeɪk sˈʌtʃ ɐ kˈeələs mɪstˈeɪk/"}, {"en": "If he were here, he would know what to do.", "th": "ถ้าเขายืนอยู่ตรงนี้ เขาก็คงจะรู้ว่าควรต้องจัดการแก้ปัญหาอย่างไร", "e": "💡", "ipa": "/ɪf hiː wɜː hˈiə hiː wʊd nˈəʊ wɒt tə dˈuː/"}, {"en": "I would travel to space if given the chance.", "th": "ฉันคงจะเดินทางออกไปท่องอวกาศถ้าหากได้รับโอกาสนั้น", "e": "🚀", "ipa": "/aɪ wʊd trˈavəl tə spˈeɪs ɪf gˈɪvən ðə tʃˈans/"}, {"en": "If the restaurant were cheaper, we would eat there.", "th": "ถ้าร้านอาหารนั้นราคาถูกกว่านี้หน่อย พวกเราคงแวะไปทานกันแล้ว", "e": "🍜", "ipa": "/ɪf ðə rˈɛstrɒnt wɜː tʃˈiːpə wiː wʊd ˈiːt ðˈeə/"}, {"en": "Where would you live if you could choose anywhere?", "th": "คุณอยากจะย้ายไปอาศัยอยู่ที่ไหนถ้าคุณสามารถเลือกที่ไหนก็ได้บนโลก", "e": "📍", "ipa": "/wˌeə wʊd juː lˈɪv ɪf juː kʊd tʃˈuːz ˈɛnɪwˌeə/"}, {"en": "If I found a wallet on the street, I would return it.", "th": "ถ้าฉันบังเอิญเก็บบัตรกระเป๋าเงินตกพื้นได้ ฉันคงจะนำส่งคืนเจ้าของ", "e": "👛", "ipa": "/ɪf aɪ fˈaʊnd ɐ wˈɒlɪt ɒnðə strˈiːt aɪ wʊd rɪtˈɜːn ɪt/"}, {"en": "He would look great in a tailored suit.", "th": "เขาคงจะดูหล่อเท่มากแน่ๆ ถ้าได้สวมชุดสูทตัดเย็บพอดีตัว", "e": "🕴️", "ipa": "/hiː wʊd lˈʊk grˈeɪt ɪn ɐ tˈeɪləd sˈuːt/"}, {"en": "If she practiced daily, she would play the piano brilliantly.", "th": "ถ้าเธอมือขยันฝึกซ้อมเปียโนทุกวัน เธอก็คงจะเล่นเก่งกาจยอดเยี่ยม", "e": "🎹", "ipa": "/ɪf ʃiː prˈaktɪst dˈeɪli ʃiː wʊd plˈeɪ ðə piˈanəʊ brˈɪliəntli/"}, {"en": "I would prefer to stay home on a rainy day.", "th": "ฉันคงจะขอเลือกนอนพักผ่อนอยู่บ้านในวันฝนพรำแบบนี้ดีกว่า", "e": "🛋️", "ipa": "/aɪ wʊd prɪfˈɜː tə stˈeɪ hˈəʊm ˌɒn ɐ rˈeɪni dˈeɪ/"}, {"en": "If we had a bigger budget, we would expand production.", "th": "ถ้าเรามีงบประมาณก้อนใหญ่กว่านี้ พวกเราคงจะขยายกำลังการผลิต", "e": "🏭", "ipa": "/ɪf wiː had ɐ bˈɪgə bˈʌdʒɪt wiː wʊd ɛkspˈand prədˈʌkʃən/"}, {"en": "What would you buy if you inherited a fortune?", "th": "คุณจะซื้ออะไรบ้างถ้าคุณได้รับมรดกทรัพย์สินก้อนโตสืบทอดมา", "e": "🛍️", "ipa": "/wˌɒt wʊd juː bˈaɪ ɪf juː ɪnhˈɛrɪtɪd ɐ fˈɔːtʃuːn/"}, {"en": "If I were you, I would apologize to her immediately.", "th": "ถ้าฉันเป็นคุณนะ ฉันจะรีบกล่าวคำขอโทษเธอเดี๋ยวนี้เลย", "e": "😔", "ipa": "/ɪf aɪ wɜː jˈuː aɪ wʊd ɐpˈɒlədʒˌaɪz tə hɜːr ɪmˈiːdɪətli/"}, {"en": "They would help us if they knew we were in trouble.", "th": "พวกเขาก็คงจะรีบมาช่วยเหลือพวกเราถ้าพวกเขารู้ว่าเรากำลังเดือดร้อน", "e": "🆘", "ipa": "/ðeɪ wʊd hˈɛlp ˌʌs ɪf ðeɪ njˈuː wiː wɜːr ɪn trˈʌbəl/"}, {"en": "If technology advanced further, cars would fly.", "th": "หากเทคโนโลยีก้าวล้ำหน้าไปมากกว่านี้ รถยนต์ก็คงบินได้จริง", "e": "🛸", "ipa": "/ɪf tɛknˈɒlədʒi ɐdvˈanst fˈɜːðə kˈɑːz wʊd flˈaɪ/"}, {"en": "I would tell you the truth if I knew it.", "th": "ฉันคงจะยอมบอกความจริงทั้งหมดให้คุณฟังแล้วถ้าฉันรู้เรื่องนั้น", "e": "🗨️", "ipa": "/aɪ wʊd tˈɛl juː ðə trˈuːθ ɪf aɪ njˈuː ɪt/"}, {"en": "If she took the medicine, she would feel better.", "th": "ถ้าเธอยอมทานยาเข้าไปเสียหน่อย เธอก็น่าจะรู้สึกดีขึ้นจากอาการป่วย", "e": "💊", "ipa": "/ɪf ʃiː tˈʊk ðə mˈɛdsən ʃiː wʊd fˈiːl bˈɛtə/"}, {"en": "He would survive easily in the wild forest.", "th": "เขาน่าจะเอาชีวิตรอดใช้ชีวิตในผืนป่าธรรมชาติได้อย่างสบายๆ", "e": "🌲", "ipa": "/hiː wʊd səvˈaɪv ˈiːzili ɪnðə wˈaɪld fˈɒrɪst/"}, {"en": "If I had a better camera, I would take professional photos.", "th": "ถ้าฉันมีกล้องถ่ายรูปสเปกดีกว่านี้ ฉันคงถ่ายภาพสวยระดับมืออาชีพได้", "e": "📷", "ipa": "/ɪf aɪ had ɐ bˈɛtə kˈamrə aɪ wʊd tˈeɪk prəfˈɛʃənəl fˈəʊtəʊz/"}, {"en": "What would you do if your flight were delayed?", "th": "คุณจะวางแผนทำอย่างไรถ้าเที่ยวบินเครื่องบินเกิดดีเลย์ล่าช้า", "e": "✈️", "ipa": "/wˌɒt wʊd juː dˈuː ɪf jɔː flˈaɪt wɜː dɪlˈeɪd/"}, {"en": "If we lived closer, we would meet more often.", "th": "ถ้าบ้านของเราอยู่ใกล้กันมากกว่านี้ เราคงได้แวะมาพบกันบ่อยขึ้น", "e": "🤝", "ipa": "/ɪf wiː lˈɪvd klˈəʊsə wiː wʊd mˈiːt mˈɔːr ˈɒfən/"}, {"en": "I would not mind staying up late to finish this.", "th": "ฉันไม่รู้สึกรังเกียจเลยสักนิดที่จะยอมอดนอนดึกเพื่อเคลียร์งานนี้ให้จบ", "e": "🌙", "ipa": "/aɪ wʊd nˌɒt mˈaɪnd stˈeɪɪŋ ˌʌp lˈeɪt tə fˈɪnɪʃ ðˈɪs/"}, {"en": "If he were brave enough, he would confess his feelings.", "th": "ถ้าเขามีความกล้ามากพอ เขาก็คงจะสารภาพความในใจออกไปแล้ว", "e": "💗", "ipa": "/ɪf hiː wɜː brˈeɪv ɪnˈʌf hiː wʊd kənfˈɛs hɪz fˈiːlɪŋz/"}, {"en": "She would love to visit historical museums.", "th": "เธอน่าจะชื่นชอบและมีความสุขมากแน่ๆ ถ้าได้ไปเยี่ยมชมพิพิธภัณฑ์ประวัติศาสตร์", "e": "🏛️", "ipa": "/ʃiː wʊd lˈʌv tə vˈɪzɪt hɪstˈɒrɪkəl mjuːzˈiəmz/"}, {"en": "If I had a reliable car, I would drive cross-country.", "th": "ถ้าฉันมีรถยนต์สภาพใช้งานมั่นใจได้ ฉันคงขับรถเที่ยวข้ามประเทศไปแล้ว", "e": "🛣️", "ipa": "/ɪf aɪ had ɐ rɪlˈaɪəbəl kˈɑː aɪ wʊd drˈaɪv krˈɒskˈʌntri/"}, {"en": "If I had more capital, I would invest in tech startups.", "th": "ถ้าฉันมีเงินทุนหมุนเวียนมากกว่านี้ ฉันคงจะเลือกลงทุนในบริษัทสตาร์ทอัพด้านเทคโนโลยี", "e": "📈", "ipa": "/ɪf aɪ had mˈɔː kˈapɪtəl aɪ wʊd ɪnvˈɛst ɪn tˈɛk stˈɑːtʌps/"}, {"en": "If she lived closer to the office, she would walk to work.", "th": "ถ้าบ้านของเธอตั้งอยู่ใกล้สำนักงานมากกว่านี้ เธอก็คงจะเดินมาทำงาน", "e": "🚶‍♀️", "ipa": "/ɪf ʃiː lˈɪvd klˈəʊsə tə ðɪ ˈɒfɪs ʃiː wʊd wˈɔːk tə wˈɜːk/"}, {"en": "What would you choose if you had only one option?", "th": "คุณจะตัดสินใจเลือกอะไรถ้าคุณเหลือทางเลือกอยู่เพียงแค่ทางเดียว", "e": "☝️", "ipa": "/wˌɒt wʊd juː tʃˈuːz ɪf juː had ˈəʊnli wˈɒn ˈɒpʃən/"}, {"en": "If he understood the instructions, he would complete the task easily.", "th": "ถ้าเขาเข้าใจคำแนะนำเหล่านั้น เขาก็น่าจะทำภารกิจนี้สำเร็จได้อย่างง่ายดาย", "e": "✅", "ipa": "/ɪf hiː ˌʌndəstˈʊd ðɪ ɪnstrˈʌkʃənz hiː wʊd kəmplˈiːt ðə tˈask ˈiːzili/"}, {"en": "I would buy a cozy cabin in the mountains if I retired.", "th": "ถ้าฉันเกษียณอายุเมื่อไหร่ ฉันคงจะซื้อบ้านพักตากอากาศหลังเล็กๆ บนภูเขา", "e": "🏔️", "ipa": "/aɪ wʊd bˈaɪ ɐ kˈəʊzi kˈabɪn ɪnðə mˈaʊntɪnz ɪf aɪ rɪtˈaɪəd/"}, {"en": "If it snowed today, we would build a snowman outside.", "th": "สมมติว่าถ้าวันนี้มีหิมะโปรยปรายลงมา พวกเราคงออกไปปั้นตุ๊กตาหิมะกันข้างนอก", "e": "⛄", "ipa": "/ɪf ɪt snˈəʊd tədˈeɪ wiː wʊd bˈɪld ɐ snˈəʊmən aʊtsˈaɪd/"}, {"en": "She would feel much better if she took a long nap.", "th": "เธอน่าจะรู้สึกดีขึ้นกว่าเดิมมากถ้าเธอได้นอนหลับงีบพักผ่อนยาวๆ", "e": "😴", "ipa": "/ʃiː wʊd fˈiːl mˈʌtʃ bˈɛtə ɪf ʃiː tˈʊk ɐ lˈɒŋ nˈap/"}, {"en": "If I were in charge, I would streamline the entire workflow.", "th": "ถ้าฉันเป็นผู้รับผิดชอบดูแลโครงการนี้ ฉันจะปรับปรุงขั้นตอนการทำงานให้กระชับขึ้น", "e": "⚙️", "ipa": "/ɪf aɪ wɜːr ɪn tʃˈɑːdʒ aɪ wʊd strˈiːmlaɪn ðɪ ɛntˈaɪə wˈɜːkfləʊ/"}, {"en": "Who would you ask for help if you got lost?", "th": "คุณจะหันไปเอ่ยปากขอความช่วยเหลือจากใครถ้าคุณเกิดเดินหลงทางขึ้นมา", "e": "🧭", "ipa": "/hˌuː wʊd juː ˈask fɔː hˈɛlp ɪf juː gɒt lˈɒst/"}, {"en": "If we had a larger venue, we would invite more guests.", "th": "ถ้าพวกเรามีสถานที่จัดงานขนาดใหญ่กว่านี้ เราคงจะเชิญแขกมาร่วมงานเพิ่มขึ้น", "e": "🏟️", "ipa": "/ɪf wiː had ɐ lˈɑːdʒə vˈɛnjuː wiː wʊd ɪnvˈaɪt mˈɔː gˈɛsts/"}, {"en": "I would appreciate your honest feedback on this issue.", "th": "ฉันคงจะต้องขอขอบคุณเป็นอย่างยิ่งหากคุณช่วยแสดงความคิดเห็นตรงไปตรงมา", "e": "👍", "ipa": "/aɪ wʊd ɐprˈiːʃɪˌeɪt jɔːr ˈɒnɪst fˈiːdbak ˌɒn ðɪs ˈɪʃuː/"}, {"en": "If the price were lower, customers would purchase the product faster.", "th": "ถ้าราคาสินค้าย่อมเยากว่านี้ ลูกค้าก็น่าจะตัดสินใจซื้อสินค้าได้เร็วยิ่งขึ้น", "e": "🏷️", "ipa": "/ɪf ðə prˈaɪs wɜː lˈəʊə kˈʌstəməz wʊd pˈɜːtʃɪs ðə prˈɒdʌkt fˈastə/"}, {"en": "What would you say if we changed the schedule?", "th": "คุณจะมีความเห็นว่าอย่างไรถ้าพวกเราขอเปลี่ยนแปลงกำหนดการนัดหมาย", "e": "📅", "ipa": "/wˌɒt wʊd juː sˈeɪ ɪf wiː tʃˈeɪndʒd ðə ʃˈɛdjuːl/"}, {"en": "If I possessed a superpower, I would erase all diseases.", "th": "สมมติว่าถ้าฉันมีพลังวิเศษ ฉันคงจะล้างผลาญโรคภัยไข้เจ็บทั้งหมดให้หมดไปจากโลก", "e": "🦸", "ipa": "/ɪf aɪ pəzˈɛst ɐ sˈuːpəpˌaʊə aɪ wʊd ɪrˈeɪz ˈɔːl dɪzˈiːzɪz/"}, {"en": "They would succeed if they collaborated closely.", "th": "พวกเขาน่าจะประสบความสำเร็จได้ถ้าหากรู้จักร่วมมือประสานงานกันอย่างใกล้ชิด", "e": "🙌", "ipa": "/ðeɪ wʊd səksˈiːd ɪf ðeɪ kəlˈabərˌeɪtɪd klˈəʊsli/"}, {"en": "If she had a map, she would find the destination easily.", "th": "ถ้าเธอมีแผนที่นำทาง เธอก็คงจะค้นหาจุดหมายปลายทางพบได้อย่างง่ายดาย", "e": "🗺️", "ipa": "/ɪf ʃiː had ɐ mˈap ʃiː wʊd fˈaɪnd ðə dˌɛstɪnˈeɪʃən ˈiːzili/"}, {"en": "I would prefer a quiet evening at home instead.", "th": "ฉันคงจะขอเลือกใช้เวลาช่วงค่ำอันเงียบสงบอยู่พักผ่อนที่บ้านดีกว่า", "e": "🕯️", "ipa": "/aɪ wʊd prɪfˈɜːr ɐ kwˈaɪət ˈiːvnɪŋ at hˈəʊm ɪnstˈɛd/"}, {"en": "If he studied computer science, he would design apps.", "th": "ถ้าเขาเลือกศึกษาต่อด้านวิทยาการคอมพิวเตอร์ เขาคงจะหันมาออกแบบแอปพลิเคชัน", "e": "💻", "ipa": "/ɪf hiː stˈʌdid kəmpjˈuːtə sˈaɪəns hiː wʊd dɪzˈaɪn ˈaps/"}, {"en": "Where would you go if you had a free ticket?", "th": "คุณอยากจะเดินทางไปเที่ยวที่ไหนถ้าคุณได้รับตั๋วโดยสารฟรีมาหนึ่งใบ", "e": "🎫", "ipa": "/wˌeə wʊd juː gˌəʊ ɪf juː had ɐ frˈiː tˈɪkɪt/"}, {"en": "If I had a printer, I would print these documents now.", "th": "ถ้าฉันมีเครื่องพิมพ์เอกสาร ฉันคงจัดการปริ้นท์เอกสารพวกนี้ให้เดี๋ยวนี้เลย", "e": "🖨️", "ipa": "/ɪf aɪ had ɐ prˈɪntə aɪ wʊd prˈɪnt ðiːz dˈɒkjuːmənts nˈaʊ/"}, {"en": "She would love to visit historical castles in Europe.", "th": "เธอน่าจะชื่นชอบและมีความสุขมากแน่ๆ ถ้าได้ไปเที่ยวชมปราสาทโบราณในยุโรป", "e": "🏰", "ipa": "/ʃiː wʊd lˈʌv tə vˈɪzɪt hɪstˈɒrɪkəl kˈasəlz ɪn jˈʊərəp/"}, {"en": "If we started earlier, we would avoid traffic jams.", "th": "ถ้าพวกเราเริ่มต้นออกเดินทางให้เร็วกว่านี้ เราก็คงจะหลีกเลี่ยงปัญหารถติดได้", "e": "🚦", "ipa": "/ɪf wiː stˈɑːtɪd ˈɜːlɪə wiː wʊd ɐvˈɔɪd trˈafɪk dʒˈamz/"}, {"en": "What would happen if the internet went down?", "th": "จะเกิดเหตุการณ์อะไรขึ้นถ้าหากสัญญาณอินเทอร์เน็ตเกิดล่มใช้งานไม่ได้", "e": "📡", "ipa": "/wˌɒt wʊd hˈapən ɪf ðɪ ˈɪntənˌɛt wɛnt dˈaʊn/"}, {"en": "If I were rich, I would build an animal shelter.", "th": "สมมติว่าถ้าฉันเป็นคนรวย ฉันคงจะสร้างศูนย์พักพิงดูแลสัตว์จรจัดขึ้นมาสักแห่ง", "e": "🐕", "ipa": "/ɪf aɪ wɜː rˈɪtʃ aɪ wʊd bˈɪld ɐn ˈanɪməl ʃˈɛltə/"}, {"en": "They would enjoy the concert if they liked rock music.", "th": "พวกเขาคงจะสนุกกับคอนเสิร์ตนี้นะถ้าพวกเขาชื่นชอบฟังเพลงแนวร็อก", "e": "🎸", "ipa": "/ðeɪ wʊd ɛndʒˈɔɪ ðə kˈɒnsət ɪf ðeɪ lˈaɪkt rˈɒk mjˈuːzɪk/"}, {"en": "If you asked for a discount, they would grant it.", "th": "ถ้าคุณลองเอ่ยปากขอส่วนลดดู พวกเขาก็น่าจะยอมลดราคาให้อยู่แล้ว", "e": "💸", "ipa": "/ɪf juː ˈaskt fərə dˈɪskaʊnt ðeɪ wʊd grˈant ɪt/"}, {"en": "I would help you paint the room if I had time.", "th": "ฉันคงจะอาสามาช่วยคุณทาสีห้องนั้นด้วยนะถ้าฉันมีเวลาว่างพอ", "e": "🎨", "ipa": "/aɪ wʊd hˈɛlp juː pˈeɪnt ðə rˈuːm ɪf aɪ had tˈaɪm/"}, {"en": "If she read more books, she would expand her vocabulary.", "th": "ถ้าเธอขยันอ่านหนังสือให้มากๆ เธอก็จะช่วยขยายคลังคำศัพท์ในหัวให้กว้างขึ้น", "e": "📚", "ipa": "/ɪf ʃiː rˈiːd mˈɔː bˈʊks ʃiː wʊd ɛkspˈand hɜː vəʊkˈabjʊləri/"}, {"en": "Who would you trust with your deepest secret?", "th": "คุณคิดว่าจะยอมไว้วางใจบอกความลับสุดยอดให้ใครฟังเป็นคนแรก", "e": "🤫", "ipa": "/hˌuː wʊd juː trˈʌst wɪð jɔː dˈiːpɪst sˈiːkrɪt/"}, {"en": "If the weather cleared up, we would go outside.", "th": "ถ้าสภาพอากาศกลับมาแจ่มใสโปร่งใส พวกเราคงจะพากันออกไปเดินเล่นข้างนอก", "e": "🌤️", "ipa": "/ɪf ðə wˈɛðə klˈiəd ˈʌp wiː wʊd gˌəʊ aʊtsˈaɪd/"}, {"en": "I would buy a grand piano if I played music.", "th": "ฉันคงจะซื้อเปียโนแกรนด์เปียโนหลังใหญ่มาไว้ฝึกเล่นถ้าฉันมีความสามารถ", "e": "🎼", "ipa": "/aɪ wʊd bˈaɪ ɐ grˈand piˈanəʊ ɪf aɪ plˈeɪd mjˈuːzɪk/"}, {"en": "If he listened carefully, he would understand the lecture.", "th": "ถ้าเขายอมตั้งอกตั้งใจฟังให้ดี เขาก็คงจะเข้าใจเนื้อหาการบรรยายนั้น", "e": "👂", "ipa": "/ɪf hiː lˈɪsənd kˈeəfəli hiː wʊd ˌʌndəstˈand ðə lˈɛktʃə/"}, {"en": "What would you wear to a royal gala dinner?", "th": "คุณจะเลือกสวมชุดอะไรไปร่วมงานเลี้ยงรับรองพระราชทานระดับกาล่าดินเนอร์", "e": "👗", "ipa": "/wˌɒt wʊd juː wˈeə tʊ ɐ rˈɔɪəl gˈɑːlə dˈɪnə/"}, {"en": "If I had a bicycle, I would ride to the park.", "th": "ถ้าฉันมีจักรยานสักคัน ฉันคงปั่นไปเที่ยวเล่นที่สวนสาธารณะแล้ว", "e": "🚲", "ipa": "/ɪf aɪ had ɐ bˈaɪsɪkəl aɪ wʊd rˈaɪd tə ðə pˈɑːk/"}, {"en": "She would succeed if she believed in herself.", "th": "เธอน่าจะประสบความสำเร็จได้ไม่ยากถ้าเธอกล้ามีความมั่นใจในตัวเอง", "e": "💪", "ipa": "/ʃiː wʊd səksˈiːd ɪf ʃiː bɪlˈiːvd ɪn hɜːsˈɛlf/"}, {"en": "If we stayed longer, we would explore more places.", "th": "ถ้าพวกเราอยู่เที่ยวต่ออีกสักหน่อย เราคงจะได้สำรวจสถานที่ท่องเที่ยวเพิ่มขึ้น", "e": "🧭", "ipa": "/ɪf wiː stˈeɪd lˈɒŋgə wiː wʊd ɛksplˈɔː mˈɔː plˈeɪsɪz/"}, {"en": "I would never forget your kindness and support.", "th": "ฉันไม่มีวันลืมความมีน้ำใจและการสนับสนุนช่วยเหลือที่คุณเคยให้มาเลย", "e": "💝", "ipa": "/aɪ wʊd nˈɛvə fəgˈɛt jɔː kˈaɪndnəs and səpˈɔːt/"}, {"en": "If the store were open, I would buy fresh milk.", "th": "ถ้าร้านค้ายังคงเปิดให้บริการอยู่ ฉันคงจะแวะซื้อนมสดมาตุนไว้แล้ว", "e": "🥛", "ipa": "/ɪf ðə stˈɔː wɜːr ˈəʊpən aɪ wʊd bˈaɪ frˈɛʃ mˈɪlk/"}, {"en": "Where would you hide if you played hide-and-seek?", "th": "คุณคิดว่าจะเลือกไปแอบซ่อนตัวอยู่ตรงไหนถ้าเล่นเกมซ่อนหา", "e": "🙈", "ipa": "/wˌeə wʊd juː hˈaɪd ɪf juː plˈeɪd hˈaɪdandsˈiːk/"}, {"en": "If I had a telescope, I would watch the stars.", "th": "ถ้าฉันมีกล้องโทรทรรศน์ส่องทางไกล ฉันคงจะตั้งตารอเฝ้าดูดวงดาวบนท้องฟ้า", "e": "🔭", "ipa": "/ɪf aɪ had ɐ tˈɛlɪskˌəʊp aɪ wʊd wˈɒtʃ ðə stˈɑːz/"}, {"en": "He would enjoy the film if he understood the plot.", "th": "เขาน่าจะอินและสนุกกับภาพยนตร์เรื่องนี้ถ้าเขาเข้าใจปมเนื้อเรื่อง", "e": "🍿", "ipa": "/hiː wʊd ɛndʒˈɔɪ ðə fˈɪlm ɪf hiː ˌʌndəstˈʊd ðə plˈɒt/"}, {"en": "If she had a garden, she would grow roses.", "th": "ถ้าเธอมีพื้นที่สวนหน้าบ้าน เธอก็คงจะลงมือปลูกดอกกุหลาบสวยๆ", "e": "🌹", "ipa": "/ɪf ʃiː had ɐ gˈɑːdən ʃiː wʊd grˈəʊ rˈəʊzɪz/"}, {"en": "What would you do in an emergency situation?", "th": "คุณจะตัดสินใจแก้ปัญหาอย่างไรหากเผชิญหน้ากับสถานการณ์ฉุกเฉิน", "e": "🚨", "ipa": "/wˌɒt wʊd juː dˈuː ɪn ɐn ɪmˈɜːdʒənsi sˌɪtʃuːˈeɪʃən/"}, {"en": "If I were you, I would accept that wonderful offer.", "th": "ถ้าฉันเป็นตัวคุณนะ ฉันจะรีบตอบรับข้อเสนอสุดวิเศษนั้นทันทีเลย", "e": "🤝", "ipa": "/ɪf aɪ wɜː jˈuː aɪ wʊd ɐksˈɛpt ðat wˈʌndəfəl ˈɒfə/"}, {"en": "They would travel abroad if they saved enough.", "th": "พวกเขาน่าจะวางแผนเดินทางไปท่องเที่ยวต่างประเทศถ้าเก็บเงินได้มากพอ", "e": "🛂", "ipa": "/ðeɪ wʊd trˈavəl ɐbrˈɔːd ɪf ðeɪ sˈeɪvd ɪnˈʌf/"}, {"en": "If the soup were hotter, it would taste better.", "th": "ถ้าน้ำซุปชามนี้มีความร้อนมากกว่านี้อีกนิด รสชาติน่าจะอร่อยกลมกล่อมขึ้น", "e": "🍲", "ipa": "/ɪf ðə sˈuːp wɜː hˈɒtə ɪt wʊd tˈeɪst bˈɛtə/"}, {"en": "I would love to learn how to play the violin.", "th": "ฉันคงจะรู้สึกดีและมีความสุขมากถ้าได้เรียนรู้วิธีเล่นไวโอลิน", "e": "🎻", "ipa": "/aɪ wʊd lˈʌv tə lˈɜːn hˌaʊ tə plˈeɪ ðə vaɪəlˈɪn/"}, {"en": "If he worked smarter, he would finish tasks quickly.", "th": "ถ้าเขารู้จักปรับวิธีทำงานให้ฉลาดและมีระบบ เขาก็น่าจะเคลียร์งานเสร็จไวขึ้น", "e": "⏱️", "ipa": "/ɪf hiː wˈɜːkt smˈɑːtə hiː wʊd fˈɪnɪʃ tˈasks kwˈɪkli/"}, {"en": "What would you say to a fresh cup of tea?", "th": "คุณจะว่าอย่างไรหากตอนนี้เรามาลองดื่มชาร้อนๆ สักแก้วกันดู", "e": "🍵", "ipa": "/wˌɒt wʊd juː sˈeɪ tʊ ɐ frˈɛʃ kˈʌp ɒv tˈiː/"}, {"en": "If I had wings, I would fly over the mountains right now.", "th": "ถ้าหากฉันมีปีกบินได้ ฉันคงจะกางปีกบินข้ามเทือกเขาสูงเหล่านั้นไปทันทีในตอนนี้", "e": "🪽", "ipa": "/ɪf aɪ had wˈɪŋz aɪ wʊd flˈaɪ ˌəʊvə ðə mˈaʊntɪnz rˈaɪt nˈaʊ/"}];
+const PER = 50;
+let page = 0;
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+// Highlight "would" and the main verb that follows it (skipping "always")
+function markup(sentence){
+  const parts = sentence.split(" ");
+  const wi = parts.findIndex(p => /^would$/i.test(p.replace(/[^A-Za-z']/g,"")));
+  if(wi < 0) return esc(sentence);
+  let vi = wi + 1;
+  const SKIP = /^(always|never|not|also|just|you|we|they|he|she|i|it|n't)$/i;
+  while(parts[vi] && SKIP.test(parts[vi].replace(/[^A-Za-z']/g,""))) vi++;
+  return parts.map((p,i)=>{
+    if(i===wi) return "<mark>"+esc(p)+"</mark>";
+    if(i===vi) {
+      const m = p.match(/^([A-Za-z']+)(.*)$/);
+      return m ? "<b>"+esc(m[1])+"</b>"+esc(m[2]) : esc(p);
+    }
+    return esc(p);
+  }).join(" ");
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const start = page*PER;
+  grid.innerHTML = DATA.slice(start, start+PER).map((d,i)=>`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${start+i+1} กดเพื่อพลิก">
+      <div class="inner">
+        <div class="face front">
+          <span class="num">${start+i+1}</span>
+          <button class="spk" data-i="${start+i}" aria-label="อ่านออกเสียงประโยค" title="ฟังเสียง">🔊</button>
+          <div class="pic" aria-hidden="true">${d.e}</div>
+          <div class="txt">
+            <p class="en">${markup(d.en)}</p>
+            <p class="ipa">${esc(d.ipa)}</p>
+          </div>
+          <span class="hint">กดเพื่อดูคำแปล</span>
+        </div>
+        <div class="face back">
+          <p class="th">${esc(d.th)}</p>
+          <span class="th-small">กดเพื่อกลับ</span>
+        </div>
+      </div>
+    </div>`).join("");
+  document.getElementById("t0").setAttribute("aria-selected", page===0);
+  document.getElementById("t1").setAttribute("aria-selected", page===1);
+  window.scrollTo({top:0});
+}
+
+// ---------- Speech: prefer a British male voice ----------
+let voice = null;
+const MALE_HINTS = ["google uk english male","daniel","microsoft ryan","microsoft george","microsoft thomas","oliver","arthur","male"];
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  const gb = vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const en = vs.filter(v=>/^en/i.test(v.lang));
+  const lower = v => v.name.toLowerCase();
+  for(const h of MALE_HINTS){
+    const hit = gb.find(v=>lower(v).includes(h)) || en.find(v=>lower(v).includes(h) && /en[-_]GB/i.test(v.lang));
+    if(hit){voice=hit;break;}
+  }
+  if(!voice) voice = gb[0] || en.find(v=>/male|david|mark|james|guy|alex/i.test(v.name)) || en[0] || null;
+  const n = document.getElementById("voiceNote");
+  n.textContent = voice ? "เสียงที่ใช้: " + voice.name + " (" + voice.lang + ") — คุณภาพขึ้นกับเสียงที่มีในอุปกรณ์ของคุณ" : "ไม่พบเสียงภาษาอังกฤษในอุปกรณ์นี้";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  document.querySelectorAll(".spk.on").forEach(b=>b.classList.remove("on"));
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice){u.voice = voice; u.lang = voice.lang;} else u.lang = "en-GB";
+  u.rate = 0.88; u.pitch = 0.9;
+  u.onstart = ()=>btn.classList.add("on");
+  u.onend = u.onerror = ()=>btn.classList.remove("on");
+  speechSynthesis.speak(u);
+}
+
+// ---------- Events ----------
+document.getElementById("grid").addEventListener("click", e=>{
+  const spk = e.target.closest(".spk");
+  if(spk){ e.stopPropagation(); speak(DATA[+spk.dataset.i].en, spk); return; }
+  const card = e.target.closest(".card");
+  if(card) card.classList.toggle("flipped");
+});
+document.getElementById("grid").addEventListener("keydown", e=>{
+  if((e.key==="Enter"||e.key===" ") && e.target.classList.contains("card")){
+    e.preventDefault(); e.target.classList.toggle("flipped");
+  }
+});
+document.getElementById("t0").onclick = ()=>{page=0;render();};
+document.getElementById("t1").onclick = ()=>{page=1;render();};
+document.getElementById("reset").onclick = ()=>document.querySelectorAll(".card.flipped").forEach(c=>c.classList.remove("flipped"));
+render();
+</script>
+</body>
+</html>
