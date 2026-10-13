@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Used to – Flipcards 10.3</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ee; --card:#ffffff; --ink:#000000; --muted:#555; --red:#8b0000; --hl:#ffe14d; --line:#d9d4cc; --btn:#1f2a44; --back:#16213e; --backink:#ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#15171c; --line:#33363d; --muted:#aaa; }
+}
+:root[data-theme="dark"]{ --bg:#15171c; --line:#33363d; --muted:#aaa; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);font-family:"Sarabun","Noto Sans Thai",Arial,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font:700 22px/1.3 Arial,sans-serif;margin:0 0 4px;color:var(--ink)}
+:root[data-theme="dark"] h1,:root[data-theme="dark"] .sub{color:#eee}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h1,:root:not([data-theme="light"]) .sub{color:#eee}}
+.sub{font:14px/1.5 Arial,sans-serif;color:var(--muted);margin:0}
+.sub mark{background:var(--hl);color:#000;padding:0 3px;border-radius:2px}
+.sub b{color:var(--red)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:1100px;margin:0 auto;padding:8px 16px}
+.bar button{font:600 14px Arial,sans-serif;border:1px solid var(--btn);background:#fff;color:var(--btn);padding:8px 14px;border-radius:6px;cursor:pointer}
+.bar button.on{background:var(--btn);color:#fff}
+.bar .info{font:13px Arial,sans-serif;color:var(--muted);margin-left:auto}
+#voiceInfo{max-width:1100px;margin:0 auto;padding:0 16px 6px;font:12px Arial,sans-serif;color:var(--muted)}
+.grid{max-width:1100px;margin:0 auto;padding:8px 16px 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.flip{perspective:1200px;height:300px;cursor:pointer;outline-offset:3px}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.front{background:var(--card)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg)}
+.num{position:absolute;top:8px;left:12px;font:12px Arial,sans-serif;color:#888}
+.pic{font-size:64px;line-height:1.1;margin:10px 0 8px;filter:saturate(1.05)}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:19px;line-height:1.35;color:#000;margin:0}
+.en b{font-weight:800;color:var(--red)}
+.en mark{background:var(--hl);color:#000;font-weight:300;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.4;color:#222;margin:8px 0 0}
+.speak{position:absolute;top:8px;right:10px;border:1px solid var(--btn);background:var(--btn);color:#fff;border-radius:20px;padding:6px 12px;font:600 13px Arial,sans-serif;cursor:pointer}
+.speak:active{transform:scale(.96)}
+.speak.playing{background:var(--red);border-color:var(--red)}
+.th{font-size:22px;line-height:1.55;font-weight:500}
+.hint{position:absolute;bottom:8px;font:11px Arial,sans-serif;color:#999}
+.back .hint{color:#9aa4c4}
+.back .pic{font-size:36px}
+.pager{display:flex;justify-content:center;gap:10px;padding:0 16px 40px}
+.pager button{font:600 15px Arial,sans-serif;border:1px solid var(--btn);background:#fff;color:var(--btn);padding:10px 18px;border-radius:6px;cursor:pointer}
+.pager button.on{background:var(--btn);color:#fff}
+@media (max-width:640px){
+  .flip{height:330px}
+  .en{font-size:16px}.ipa{font-size:14px}.pic{font-size:52px}.th{font-size:18px}
+  .grid{gap:10px;padding:8px 10px 20px}
+  .face{padding:12px 10px}
+  .speak{padding:5px 9px;font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>10.3 Semi-modal verb: “used to” – สภาพในอดีตที่ปัจจุบันไม่เป็นจริงแล้ว</h1>
+  <p class="sub"><mark>used to</mark> = ไฮไลต์เหลือง &nbsp;|&nbsp; <b>main verb</b> = ตัวหนาสีแดงเข้ม &nbsp;|&nbsp; แตะการ์ดเพื่อดูคำแปล</p>
+</header>
+<div class="bar">
+  <button id="p1" class="on">หน้า 1 (1–50)</button>
+  <button id="p2">หน้า 2 (51–100)</button>
+  <button id="flipAll">พลิกทุกใบ</button>
+  <button id="theme">โหมดมืด/สว่าง</button>
+  <span class="info" id="info"></span>
+</div>
+<div id="voiceInfo"></div>
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+
+<script>
+const DATA = `
+I used to *live* in a small countryside town.|ฉันเคยอาศัยอยู่ในเมืองชนบทเล็ก ๆ (ตอนนี้ไม่ได้อยู่แล้ว)|🏡
+She used to *have* long blonde hair.|เธอเคยมีผมบลอนด์ยาว (ตอนนี้ไม่ได้มีแล้ว)|💇‍♀️
+They used to *be* close friends before the argument.|พวกเขาเคยเป็นเพื่อนสนิทกันก่อนจะมีเรื่องทะเลาะกัน|🤝
+He used to *own* a red sports car.|เขาเคยเป็นเจ้าของรถสปอร์ตสีแดง (ตอนนี้ไม่ได้เป็นแล้ว)|🏎️
+We used to *believe* in ghosts when we were kids.|พวกเราเคยเชื่อเรื่องผีตอนที่เรายังเป็นเด็ก|👻
+My grandfather used to *be* a famous actor.|คุณปู่ของฉันเคยเป็นนักแสดงชื่อดัง|🎭
+Bangkok used to *be* much quieter decades ago.|กรุงเทพฯ เคยเงียบสงบกว่านี้มากเมื่อหลายสิบปีก่อน|🌆
+She used to *weigh* much less than she does now.|เธอเคยมีน้ำหนักน้อยกว่าตอนนี้มาก|⚖️
+There used to *be* a grand theater on this corner.|เคยมีโรงละครขนาดใหญ่ตรงหัวมุมนี้|🏛️
+I used to *know* how to speak fluent German.|ฉันเคยรู้วิธีพูดภาษาเยอรมันได้อย่างคล่องแคล่ว|🇩🇪
+He used to *work* as a software engineer.|เขาเคยทำงานเป็นวิศวกรซอฟต์แวร์ (ตอนนี้เปลี่ยนอาชีพแล้ว)|💻
+They used to *live* next door to my parents.|พวกเขาเคยอาศัยอยู่บ้านติดกันกับพ่อแม่ของฉัน|🏘️
+She used to *love* eating spicy food.|เธอเคยชอบกินอาหารรสเผ็ด (ตอนนี้ไม่ชอบแล้ว)|🌶️
+My brother used to *be* very shy as a child.|พี่ชายของฉันเคยเป็นคนขี้อายมากตอนเป็นเด็ก|🙈
+This building used to *belong* to the local government.|อาคารหลังนี้เคยเป็นของหน่วยงานรัฐท้องถิ่น|🏢
+I used to *understand* French grammar quite well.|ฉันเคยเข้าใจไวยากรณ์ภาษาฝรั่งเศสค่อนข้างดี|🇫🇷
+People used to *think* the Earth was flat.|ผู้คนเคยคิดว่าโลกแบน|💭
+She used to *prefer* cats over dogs.|เธอเคยชอบแมวมากกว่าสุนัข|🐱
+He used to *have* a mustache when he was younger.|เขาเคยมีหนวดตอนที่เขายังเด็กกว่านี้|🥸
+We used to *stay* at that seaside cottage every summer.|พวกเราเคยพักอยู่ที่กระท่อมริมทะเลนั้นทุกฤดูร้อน|🏖️
+My grandmother used to *possess* a rare coin collection.|คุณย่าของฉันเคยครอบครองคอลเลกชันเหรียญหายาก|🪙
+The river used to *be* crystal clear years ago.|แม่น้ำสายนี้เคยใสสะอาดบริสุทธิ์เมื่อหลายปีก่อน|🏞️
+I used to *hate* coffee, but now I drink it daily.|ฉันเคยเกลียดกาแฟ แต่ตอนนี้ฉันดื่มมันทุกวัน|☕
+She used to *remember* everyone's phone number.|เธอเคยจำเบอร์โทรศัพท์ของทุกคนได้|🧠
+They used to *be* married for over ten years.|พวกเขาเคยแต่งงานอยู่กินกันมากกว่าสิบปี|💍
+He used to *trust* his business partners implicitly.|เขาเคยไว้ใจหุ้นส่วนทางธุรกิจอย่างสนิทใจ|🤲
+There used to *be* massive trees along this avenue.|เคยมีต้นไม้ขนาดใหญ่เรียงรายอยู่ตามถนนสายนี้|🌳
+My sister used to *want* to become a ballerina.|พี่สาวของฉันเคยอยากเป็นนักเต้นบัลเลต์|🩰
+I used to *feel* safe in that quiet neighborhood.|ฉันเคยรู้สึกปลอดภัยในย่านที่เงียบสงบนั้น|🛡️
+She used to *imagine* traveling to outer space.|เธอเคยจินตนาการถึงการเดินทางไปอวกาศ|🚀
+They used to *recognize* each other from school days.|พวกเขาเคยจำหน้ากันได้ตั้งแต่สมัยเรียน|👀
+He used to *lack* confidence when public speaking.|เขาเคยขาดความมั่นใจเวลาพูดต่อหน้าสาธารณชน|🎤
+We used to *enjoy* winter more than summer.|พวกเราเคยชอบฤดูหนาวมากกว่าฤดูร้อน|❄️
+My uncle used to *smoke* a pipe every evening.|คุณลุงของฉันเคยสูบกล้องไปป์ทุก ๆ เย็น|🚬
+Gas used to *cost* a fraction of what it costs today.|น้ำมันเบนซินเคยมีราคาแค่เพียงเสี้ยวเดียวของราคาในปัจจุบัน|⛽
+I used to *mean* everything I said to you.|ฉันเคยหมายความตามที่พูดกับเธอทุกคำ|💬
+She used to *despise* waking up early in the morning.|เธอเคยเกลียดชังการตื่นนอนแต่เช้าตรู่|⏰
+They used to *depend* entirely on their parents.|พวกเขาเคยพึ่งพาพ่อแม่ของตนเองอย่างเต็มที่|👨‍👩‍👧
+He used to *signify* his approval with a nod.|เขาเคยแสดงความเห็นชอบด้วยการพยักหน้า|👍
+There used to *be* a small grocery store on the corner.|เคยมีร้านขายของชำเล็ก ๆ อยู่ที่หัวมุมถนน|🏪
+My cat used to *be* afraid of thunderstorms.|แมวของฉันเคยกลัวพายุฝนฟ้าคะนอง|⛈️
+I used to *suppose* life would be easier after college.|ฉันเคยคิดคาดการณ์ว่าชีวิตคงจะง่ายขึ้นหลังเรียนจบมหาวิทยาลัย|🎓
+She used to *realize* the importance of saving money.|เธอเคยตระหนักถึงความสำคัญของการออมเงิน|💡
+They used to *hold* different political views.|พวกเขาเคยมีความคิดเห็นทางการเมืองที่แตกต่างกัน|🗳️
+He used to *deserve* a higher position at work.|เขาเคยสมควรได้รับตำแหน่งที่สูงขึ้นในการทำงาน|🏆
+We used to *own* a large farmhouse in the valley.|พวกเราเคยเป็นเจ้าของบ้านไร่หลังใหญ่ในหุบเขา|🚜
+My teacher used to *be* very strict with homework.|คุณครูของฉันเคยเข้มงวดเรื่องการบ้านมาก|📝
+I used to *appreciate* classical music much more.|ฉันเคยชื่นชมดนตรีคลาสสิกมากกว่านี้มาก|🎻
+She used to *imagine* a bright future ahead.|เธอเคยจินตนาการถึงอนาคตที่สดใสรออยู่ข้างหน้า|🔮
+They used to *stand* out in a crowd of people.|พวกเขาเคยโดดเด่นสะดุดตาท่ามกลางฝูงชน|🌟
+He used to *possess* great athletic potential.|เขาเคยมีศักยภาพด้านกีฬาที่ยอดเยี่ยม|🏅
+There used to *be* an old factory across the street.|เคยมีโรงงานเก่าตั้งอยู่ฝั่งตรงข้ามถนน|🏭
+My friends used to *live* just down the road.|เพื่อน ๆ ของฉันเคยอาศัยอยู่ถัดลงไปตามถนนเส้นนี้เอง|🛣️
+I used to *understand* the rules of the board game.|ฉันเคยเข้าใจกติกาของเกมกระดานนั้น|🎲
+She used to *believe* that love conquers all.|เธอเคยเชื่อว่าความรักเอาชนะได้ทุกสิ่ง|❤️
+She used to *hate* wearing winter clothes.|เธอเคยเกลียดการสวมใส่เสื้อผ้ากันหนาว|🧥
+They used to *own* a chain of bookstores.|พวกเขาเคยเป็นเจ้าของเครือร้านหนังสือ|📚
+He used to *be* the captain of the debate team.|เขาเคยเป็นหัวหน้าทีมโต้วาที|🗣️
+We used to *lack* high-speed internet access.|พวกเราเคยขาดการเข้าถึงอินเทอร์เน็ตความเร็วสูง|📶
+My uncle used to *weigh* over ninety kilograms.|คุณลุงของฉันเคยมีน้ำหนักตัวมากกว่าเก้าสิบกิโลกรัม|⚖️
+I used to *remember* all my childhood passwords.|ฉันเคยจำรหัสผ่านทั้งหมดในวัยเด็กได้|🔑
+She used to *prefer* handwritten letters to emails.|เธอเคยชอบจดหมายเขียนมือมากกว่าอีเมล|✉️
+There used to *be* a bakery at the end of the block.|เคยมีร้านเบเกอรี่อยู่ที่ปลายบล็อกถนน|🥖
+He used to *reside* in a downtown apartment.|เขาเคยพำนักอาศัยอยู่ในอพาร์ตเมนต์ใจกลางเมือง|🏙️
+We used to *trust* our neighbors implicitly.|พวกเราเคยไว้ใจเพื่อนบ้านอย่างสนิทใจ|🫱🏽‍🫲🏼
+The old laptop used to *run* much faster.|แล็ปท็อปเครื่องเก่าเคยทำงานเร็วกว่านี้มาก|💻
+Students used to *rely* on physical dictionaries.|นักเรียนเคยพึ่งพาดิกชันนารีที่เป็นเล่มหนังสือ|📖
+People used to *consider* film cameras essential.|ผู้คนเคยถือว่ากล้องฟิล์มเป็นสิ่งจำเป็น|📷
+I used to *feel* indifferent about politics.|ฉันเคยรู้สึกเฉย ๆ เกี่ยวกับเรื่องการเมือง|😐
+She used to *imagine* a life in the big city.|เธอเคยจินตนาการถึงชีวิตในเมืองใหญ่|🌃
+They used to *recognize* each other's handwriting.|พวกเขาเคยจำลายมือของกันและกันได้|✍️
+He used to *possess* an extensive stamp collection.|เขาเคยครอบครองคอลเลกชันแสตมป์ขนาดใหญ่|📮
+We used to *enjoy* simpler weekend routines.|พวกเราเคยสนุกกับกิจวัตรวันหยุดที่เรียบง่ายกว่านี้|🏡
+My sister used to *sound* so soft-spoken.|พี่สาวของฉันเคยมีน้ำเสียงที่พูดจานุ่มนวลมาก|🔉
+Tickets used to *cost* very little years ago.|ตั๋วเคยมีราคาถูกมากเมื่อหลายปีก่อน|🎫
+I used to *mean* everything written in that diary.|ฉันเคยหมายความตามทุกสิ่งที่เขียนไว้ในไดอารี่เล่มนั้น|📔
+She used to *despise* being late for anything.|เธอเคยเกลียดชังการมาสายในทุก ๆ เรื่อง|⏱️
+They used to *depend* on landline communication.|พวกเขาเคยพึ่งพาการสื่อสารทางโทรศัพท์บ้าน|☎️
+He used to *signify* greatness in mathematics.|เขาเคยแสดงถึงความเก่งกาจทางคณิตศาสตร์|➗
+There used to *be* an open field near our school.|เคยมีสนามหญ้าโล่ง ๆ อยู่ใกล้โรงเรียนของเรา|🌾
+My dog used to *be* energetic when he was a puppy.|สุนัขของฉันเคยมีพลังงานเยอะมากตอนที่มันเป็นลูกสุนัข|🐶
+I used to *suppose* everyone shared my opinions.|ฉันเคยคิดคาดการณ์ว่าทุกคนมีความเห็นเหมือนกับฉัน|🙋
+She used to *realize* the value of hard work late.|เธอเคยตระหนักถึงคุณค่าของการทำงานหนักในภายหลัง|💪
+They used to *hold* conflicting views on art.|พวกเขาเคยมีความคิดเห็นที่ขัดแย้งกันเรื่องศิลปะ|🎨
+He used to *deserve* praise for his dedication.|เขาเคยสมควรได้รับคำชมเชยสำหรับความทุ่มเทของเขา|👏
+We used to *own* a cabin by the snowy mountains.|พวกเราเคยเป็นเจ้าของกระท่อมใกล้ภูเขาหิมะ|🏔️
+My professor used to *be* lenient with deadlines.|ศาสตราจารย์ของฉันเคยผ่อนปรนเรื่องกำหนดส่งงาน|👨‍🏫
+I used to *appreciate* film photography much more.|ฉันเคยชื่นชมการถ่ายภาพฟิล์มมากกว่านี้มาก|🎞️
+She used to *imagine* herself as a scientist.|เธอเคยจินตนาการว่าตัวเองเป็นนักวิทยาศาสตร์|🔬
+They used to *stand* out for their bright outfits.|พวกเขาเคยโดดเด่นเพราะชุดแต่งกายสีสันสดใสของพวกเขา|🌈
+He used to *possess* incredible physical stamina.|เขาเคยมีความอึดทางร่างกายที่เหลือเชื่อ|🏃
+There used to *be* a bookstore on Main Street.|เคยมีร้านหนังสืออยู่บนถนนเมนสตรีท|📕
+My cousins used to *live* just around the corner.|ลูกพี่ลูกน้องของฉันเคยอาศัยอยู่แค่หัวมุมถนนนี้เอง|🏘️
+I used to *understand* the inner workings of engines.|ฉันเคยเข้าใจกลไกการทำงานภายในของเครื่องยนต์|⚙️
+She used to *believe* in fairytales as a kid.|เธอเคยเชื่อเรื่องเทพนิทานตอนเป็นเด็ก|🧚
+Families used to *gather* around one television set.|ครอบครัวต่าง ๆ เคยรวมตัวกันรอบโทรทัศน์เครื่องเดียว|📺
+I used to *prefer* silence while studying.|ฉันเคยชอบความเงียบสงบในขณะที่กำลังศึกษา|🤫
+She used to *have* a very different worldview.|เธอเคยมีมุมมองต่อโลกที่แตกต่างไปจากเดิมมาก|🌍
+They used to *be* partners in a small enterprise.|พวกเขาเคยเป็นหุ้นส่วนกันในธุรกิจขนาดเล็ก|🏢
+We used to *know* everyone in our neighborhood.|พวกเราเคยรู้จักทุกคนในละแวกบ้านของเรา|🏘️
+`.trim().split("\n").map(l=>{const [en,th,emo]=l.split("|");return {en,th,emo};});
+
+// UK (RP) IPA, word by word
+const IPA = {
+"a":"ə","an":"ən","ought":"ɔːt","to":"tə","firefighter":"ˈfaɪəˌfaɪtə","extinguish":"ɪkˈstɪŋɡwɪʃ","fires":"ˈfaɪəz","quickly":"ˈkwɪkli","police":"pəˈliːs","officer":"ˈɒfɪsə","protect":"prəˈtekt","citizens":"ˈsɪtɪzənz","from":"frɒm","danger":"ˈdeɪndʒə","doctor":"ˈdɒktə","heal":"hiːl","the":"ðə","sick":"sɪk","teacher":"ˈtiːtʃə","educate":"ˈedʒukeɪt","students":"ˈstjuːdənts","soldier":"ˈsəʊldʒə","defend":"dɪˈfend","country":"ˈkʌntri","nurse":"nɜːs","attend":"əˈtend","patients":"ˈpeɪʃənts","with":"wɪð","care":"keə","judge":"dʒʌdʒ","deliver":"dɪˈlɪvə","fair":"feə","judgments":"ˈdʒʌdʒmənts","pilot":"ˈpaɪlət","ensure":"ɪnˈʃɔː","passenger":"ˈpæsɪndʒə","safety":"ˈseɪfti","librarian":"laɪˈbreəriən","organize":"ˈɔːɡənaɪz","books":"bʊks","properly":"ˈprɒpəli","driver":"ˈdraɪvə","follow":"ˈfɒləʊ","traffic":"ˈtræfɪk","signals":"ˈsɪɡnəlz","parent":"ˈpeərənt","provide":"prəˈvaɪd","for":"fɔː","their":"ðeə","children":"ˈtʃɪldrən","student":"ˈstjuːdənt","complete":"kəmˈpliːt","assignments":"əˈsaɪnmənts","on":"ɒn","time":"taɪm","employee":"ɪmˈplɔɪiː","perform":"pəˈfɔːm","job":"dʒɒb","duties":"ˈdjuːtiz","diligently":"ˈdɪlɪdʒəntli","manager":"ˈmænɪdʒə","supervise":"ˈsuːpəvaɪz","staff":"stɑːf","fairly":"ˈfeəli","politician":"ˌpɒləˈtɪʃən","serve":"sɜːv","constituents":"kənˈstɪtjuənts","journalist":"ˈdʒɜːnəlɪst","verify":"ˈverɪfaɪ","facts":"fækts","before":"bɪˈfɔː","publishing":"ˈpʌblɪʃɪŋ","pharmacist":"ˈfɑːməsɪst","dispense":"dɪˈspens","correct":"kəˈrekt","medications":"ˌmedɪˈkeɪʃənz","mechanic":"məˈkænɪk","repair":"rɪˈpeə","vehicles":"ˈviːəklz","safely":"ˈseɪfli","security":"sɪˈkjʊərəti","guard":"ɡɑːd","monitor":"ˈmɒnɪtə","premises":"ˈpremɪsɪz","closely":"ˈkləʊsli","chef":"ʃef","maintain":"meɪnˈteɪn","kitchen":"ˈkɪtʃɪn","hygiene":"ˈhaɪdʒiːn","captain":"ˈkæptɪn","navigate":"ˈnævɪɡeɪt","ship":"ʃɪp","veterinarian":"ˌvetərɪˈneəriən","treat":"triːt","injured":"ˈɪndʒəd","animals":"ˈænɪməlz","accountant":"əˈkaʊntənt","record":"rɪˈkɔːd","financial":"faɪˈnænʃəl","data":"ˈdeɪtə","accurately":"ˈækjərətli","architect":"ˈɑːkɪtekt","design":"dɪˈzaɪn","stable":"ˈsteɪbl","structures":"ˈstrʌktʃəz","mayor":"meə","improve":"ɪmˈpruːv","city":"ˈsɪti","infrastructure":"ˈɪnfrəˌstrʌktʃə","receptionist":"rɪˈsepʃənɪst","greet":"ɡriːt","visitors":"ˈvɪzɪtəz","politely":"pəˈlaɪtli","translator":"trænzˈleɪtə","translate":"trænzˈleɪt","messages":"ˈmesɪdʒɪz","dentist":"ˈdentɪst","examine":"ɪɡˈzæmɪn","patients'":"ˈpeɪʃənts","teeth":"tiːθ","lifeguard":"ˈlaɪfɡɑːd","watch":"wɒtʃ","swimmers":"ˈswɪməz","carefully":"ˈkeəfəli","coach":"kəʊtʃ","train":"treɪn","athletes":"ˈæθliːts","effectively":"ɪˈfektɪvli","citizen":"ˈsɪtɪzən","pay":"peɪ","municipal":"mjuːˈnɪsɪpəl","taxes":"ˈtæksɪz","remain":"rɪˈmeɪn","impartial":"ɪmˈpɑːʃəl","electrician":"ɪˌlekˈtrɪʃən","handle":"ˈhændl","wires":"ˈwaɪəz","plumber":"ˈplʌmə","fix":"fɪks","pipe":"paɪp","leaks":"liːks","equipment":"ɪˈkwɪpmənt","pre-flight":"ˌpriːˈflaɪt","check":"tʃek","researcher":"rɪˈsɜːtʃə","conduct":"kənˈdʌkt","experiments":"ɪkˈsperɪmənts","honestly":"ˈɒnɪstli","salesperson":"ˈseɪlzˌpɜːsn","assist":"əˈsɪst","customers":"ˈkʌstəməz","helpfully":"ˈhelpfəli","curator":"kjʊˈreɪtə","preserve":"prɪˈzɜːv","museum":"mjuˈziːəm","artifacts":"ˈɑːtɪfækts","cleaner":"ˈkliːnə","sanitize":"ˈsænɪtaɪz","public":"ˈpʌblɪk","areas":"ˈeəriəz","flight":"flaɪt","attendant":"əˈtendənt","passengers":"ˈpæsɪndʒəz","during":"ˈdjʊərɪŋ","emergencies":"ɪˈmɜːdʒənsiz","conductor":"kənˈdʌktə","tickets":"ˈtɪkɪts","diplomat":"ˈdɪpləmæt","represent":"ˌreprɪˈzent","well":"wel","postman":"ˈpəʊstmən","mail":"meɪl","promptly":"ˈprɒmptli","apply":"əˈplaɪ","law":"lɔː","correctly":"kəˈrektli","zookeeper":"ˈzuːˌkiːpə","feed":"fiːd","captive":"ˈkæptɪv","botanist":"ˈbɒtənɪst","study":"ˈstʌdi","plant":"plɑːnt","life":"laɪf","geologist":"dʒiˈɒlədʒɪst","analyze":"ˈænəlaɪz","rock":"rɒk","formations":"fɔːˈmeɪʃənz","astronomer":"əˈstrɒnəmə","observe":"əbˈzɜːv","celestial":"səˈlestiəl","bodies":"ˈbɒdiz","guide":"ɡaɪd","ethically":"ˈeθɪkli","individual":"ˌɪndɪˈvɪdʒuəl","fulfill":"fʊlˈfɪl","civic":"ˈsɪvɪk","responsibilities":"rɪˌspɒnsəˈbɪlətiz","rescue":"ˈreskjuː","drowning":"ˈdraʊnɪŋ","victims":"ˈvɪktɪmz","patrol":"pəˈtrəʊl","building":"ˈbɪldɪŋ","customs":"ˈkʌstəmz","inspect":"ɪnˈspekt","luggage":"ˈlʌɡɪdʒ","at":"æt","borders":"ˈbɔːdəz","park":"pɑːk","ranger":"ˈreɪndʒə","wildlife":"ˈwaɪldlaɪf","in":"ɪn","reserves":"rɪˈzɜːvz","referee":"ˌrefəˈriː","enforce":"ɪnˈfɔːs","game":"ɡeɪm","rules":"ruːlz","strictly":"ˈstrɪktli","surgeon":"ˈsɜːdʒən","operations":"ˌɒpəˈreɪʃənz","precisely":"prɪˈsaɪsli","administer":"ədˈmɪnɪstə","medication":"ˌmedɪˈkeɪʃən","evaluate":"ɪˈvæljueɪt","publish":"ˈpʌblɪʃ","findings":"ˈfaɪndɪŋz","truthfully":"ˈtruːθfəli","editor":"ˈedɪtə","proofread":"ˈpruːfriːd","manuscripts":"ˈmænjuskrɪpts","library":"ˈlaɪbrəri","patrons":"ˈpeɪtrənz","announce":"əˈnaʊns","updates":"ˈʌpdeɪts","web":"web","developer":"dɪˈveləpə","secure":"sɪˈkjʊə","user":"ˈjuːzə","software":"ˈsɒftweə","tester":"ˈtestə","detect":"dɪˈtekt","program":"ˈprəʊɡræm","bugs":"bʌɡz","bus":"bʌs","transport":"trænˈspɔːt","commuters":"kəˈmjuːtəz","adhere":"ədˈhɪə","timetables":"ˈtaɪmˌteɪblz","sailor":"ˈseɪlə","deck":"dek","negotiate":"nɪˈɡəʊʃieɪt","peace":"piːs","treaties":"ˈtriːtiz","prosecutor":"ˈprɒsɪkjuːtə","present":"prɪˈzent","evidence":"ˈevɪdəns","objectively":"əbˈdʒektɪvli","defense":"dɪˈfens","lawyer":"ˈlɔɪə","clients'":"ˈklaɪənts","rights":"raɪts","bank":"bæŋk","teller":"ˈtelə","cash":"kæʃ","transactions":"trænˈzækʃənz","advisor":"ədˈvaɪzə","recommend":"ˌrekəˈmend","sound":"saʊnd","investments":"ɪnˈvestmənts","real":"rɪəl","estate":"ɪˈsteɪt","agent":"ˈeɪdʒənt","disclose":"dɪsˈkləʊz","property":"ˈprɒpəti","details":"ˈdiːteɪlz","social":"ˈsəʊʃəl","worker":"ˈwɜːkə","advocate":"ˈædvəkeɪt","needy":"ˈniːdi","psychologist":"saɪˈkɒlədʒɪst","listen":"ˈlɪsn","confidentially":"ˌkɒnfɪˈdenʃəli","clean":"kliːn","animal":"ˈænɪməl","enclosures":"ɪnˈkləʊʒəz","farmer":"ˈfɑːmə","cultivate":"ˈkʌltɪveɪt","crops":"krɒps","fisherman":"ˈfɪʃəmən","practice":"ˈpræktɪs","sustainable":"səˈsteɪnəbl","fishing":"ˈfɪʃɪŋ","meteorologist":"ˌmiːtiəˈrɒlədʒɪst","forecast":"ˈfɔːkɑːst","weather":"ˈweðə","ecologist":"iˈkɒlədʒɪst","ecosystem":"ˈiːkəʊˌsɪstəm","changes":"ˈtʃeɪndʒɪz","historian":"hɪˈstɔːriən","document":"ˈdɒkjument","historical":"hɪˈstɒrɪkəl","records":"ˈrekɔːdz","anthropologist":"ˌænθrəˈpɒlədʒɪst","human":"ˈhjuːmən","cultures":"ˈkʌltʃəz","philosopher":"fəˈlɒsəfə","question":"ˈkwestʃən","fundamental":"ˌfʌndəˈmentl","ideas":"aɪˈdɪəz","musician":"mjuˈzɪʃən","musical":"ˈmjuːzɪkl","instruments":"ˈɪnstrəmənts","regularly":"ˈreɡjələli","actor":"ˈæktə","memorize":"ˈmeməraɪz","script":"skrɪpt","lines":"laɪnz","director":"daɪˈrektə","film":"fɪlm","performances":"pəˈfɔːmənsɪz","producer":"prəˈdjuːsə","manage":"ˈmænɪdʒ","project":"ˈprɒdʒekt","budgets":"ˈbʌdʒɪts","photographer":"fəˈtɒɡrəfə","capture":"ˈkæptʃə","moments":"ˈməʊmənts","creatively":"kriˈeɪtɪvli","graphic":"ˈɡræfɪk","designer":"dɪˈzaɪnə","create":"kriˈeɪt","appealing":"əˈpiːlɪŋ","visual":"ˈvɪʒuəl","content":"ˈkɒntent","tailor":"ˈteɪlə","stitch":"stɪtʃ","garments":"ˈɡɑːmənts","precision":"prɪˈsɪʒən","baker":"ˈbeɪkə","baking":"ˈbeɪkɪŋ","recipes":"ˈresɪpiz","butcher":"ˈbʊtʃə","meat":"miːt","standards":"ˈstændədz","florist":"ˈflɒrɪst","keep":"kiːp","flowers":"ˈflaʊəz","fresh":"freʃ","jeweler":"ˈdʒuːələ","craft":"krɑːft","precious":"ˈpreʃəs","metals":"ˈmetlz","watchmaker":"ˈwɒtʃˌmeɪkə","intricate":"ˈɪntrɪkət","gear":"ɡɪə","systems":"ˈsɪstəmz","carpenter":"ˈkɑːpəntə","build":"bɪld","durable":"ˈdjʊərəbl","wooden":"ˈwʊdn","furniture":"ˈfɜːnɪtʃə","mason":"ˈmeɪsn","lay":"leɪ","bricks":"brɪks","solidly":"ˈsɒlɪdli","painter":"ˈpeɪntə","coatings":"ˈkəʊtɪŋz","evenly":"ˈiːvnli","window":"ˈwɪndəʊ","wash":"wɒʃ","glass":"ɡlɑːs","surfaces":"ˈsɜːfɪsɪz","clearly":"ˈklɪəli","sanitation":"ˌsænɪˈteɪʃən","collect":"kəˈlekt","waste":"weɪst"
+};
+
+Object.assign(IPA,{
+"foreign":"ˈfɒrən","provider":"prəˈvaɪdə","alliances":"əˈlaɪənsɪz","archivist":"ˈɑːkɪvɪst","catalog":"ˈkætəlɒɡ","ancient":"ˈeɪnʃənt","documents":"ˈdɒkjuments","curate":"kjʊˈreɪt","gallery":"ˈɡæləri","exhibitions":"ˌeksɪˈbɪʃənz","harbor":"ˈhɑːbə","master":"ˈmɑːstə","regulate":"ˈreɡjuleɪt","port":"pɔːt","air":"eə","controller":"kənˈtrəʊlə","direct":"daɪˈrekt","aircraft":"ˈeəkrɑːft","landings":"ˈlændɪŋz","lighthouse":"ˈlaɪthaʊs","keeper":"ˈkiːpə","illuminate":"ɪˈluːmɪneɪt","coastal":"ˈkəʊstl","waters":"ˈwɔːtəz","coast":"kəʊst","sea":"siː","border":"ˈbɔːdə","national":"ˈnæʃnəl","frontiers":"ˈfrʌntɪəz","parole":"pəˈrəʊl","released":"rɪˈliːst","convicts":"ˈkɒnvɪkts","probation":"prəˈbeɪʃn","offenders":"əˈfendəz","mediator":"ˈmiːdieɪtə","resolve":"rɪˈzɒlv","disputes":"dɪˈspjuːts","peacefully":"ˈpiːsfəli","ombudsman":"ˈɒmbʊdzmən","investigate":"ɪnˈvestɪɡeɪt","complaints":"kəmˈpleɪnts","coroner":"ˈkɒrənə","determine":"dɪˈtɜːmɪn","causes":"ˈkɔːzɪz","of":"ɒv","death":"deθ","detective":"dɪˈtektɪv","solve":"sɒlv","criminal":"ˈkrɪmɪnl","cases":"ˈkeɪsɪz","investigator":"ɪnˈvestɪɡeɪtə","gather":"ˈɡæðə","clues":"kluːz","forensic":"fəˈrensɪk","scientist":"ˈsaɪəntɪst","physical":"ˈfɪzɪkl","bodyguard":"ˈbɒdiɡɑːd","shield":"ʃiːld","clients":"ˈklaɪənts","threats":"θrets","bouncer":"ˈbaʊnsə","venue":"ˈvenjuː","order":"ˈɔːdə","toll":"təʊl","collector":"kəˈlektə","process":"ˈprəʊses","highway":"ˈhaɪweɪ","fees":"fiːz","parking":"ˈpɑːkɪŋ","vehicle":"ˈviːəkl","spaces":"ˈspeɪsɪz","driving":"ˈdraɪvɪŋ","instructor":"ɪnˈstrʌktə","teach":"tiːtʃ","road":"rəʊd","pilots":"ˈpaɪləts","sailing":"ˈseɪlɪŋ","demonstrate":"ˈdemənstreɪt","boat":"bəʊt","handling":"ˈhændlɪŋ","ski":"skiː","slope":"sləʊp","tour":"tʊə","inform":"ɪnˈfɔːm","travelers":"ˈtrævələz","docent":"ˈdəʊsnt","explain":"ɪkˈspleɪn","exhibit":"ɪɡˈzɪbɪt","histories":"ˈhɪstəriz","naturalist":"ˈnætʃrəlɪst","nature":"ˈneɪtʃə","camp":"kæmp","counselor":"ˈkaʊnslə","campers":"ˈkæmpəz","scout":"skaʊt","leader":"ˈliːdə","youth":"juːθ","activities":"ækˈtɪvətiz","mentor":"ˈmentɔː","teenagers":"ˈtiːneɪdʒəz","daycare":"ˈdeɪkeə","toddlers":"ˈtɒdləz","nanny":"ˈnæni","tend":"tend","attentively":"əˈtentɪvli","babysitter":"ˈbeɪbiˌsɪtə","home":"həʊm","invalid":"ˈɪnvəlɪd","caregiver":"ˈkeəɡɪvə","support":"səˈpɔːt","elderly":"ˈeldəli","hospice":"ˈhɒspɪs","comfort":"ˈkʌmfət","terminal":"ˈtɜːmɪnl","therapist":"ˈθerəpɪst","rehabilitate":"ˌriːəˈbɪlɪteɪt","limbs":"lɪmz","occupational":"ˌɒkjuˈpeɪʃnəl","restore":"rɪˈstɔː","daily":"ˈdeɪli","skills":"skɪlz","speech":"spiːtʃ","disorders":"dɪsˈɔːdəz","dietician":"ˌdaɪəˈtɪʃn","plan":"plæn","healthy":"ˈhelθi","meal":"miːl","charts":"tʃɑːts","nutritionist":"njuˈtrɪʃənɪst","advise":"ədˈvaɪz","nutritional":"njuˈtrɪʃənl","intakes":"ˈɪnteɪks","personal":"ˈpɜːsənl","trainer":"ˈtreɪnə","workouts":"ˈwɜːkaʊts","yoga":"ˈjəʊɡə","proper":"ˈprɒpə","breathing":"ˈbriːðɪŋ","postures":"ˈpɒstʃəz","pilates":"pɪˈlɑːtiːz","body":"ˈbɒdi","alignments":"əˈlaɪnmənts","sports":"spɔːts","develop":"dɪˈveləp","team":"tiːm","tactics":"ˈtæktɪks","athletic":"æθˈletɪk","programs":"ˈprəʊɡræmz","call":"kɔːl","penalties":"ˈpenltiz","umpire":"ˈʌmpaɪə","matches":"ˈmætʃɪz","impartially":"ɪmˈpɑːʃəli","official":"əˈfɪʃl","uphold":"ʌpˈhəʊld","sport":"spɔːt","regulations":"ˌreɡjuˈleɪʃnz","members":"ˈmembəz","lead":"liːd","responsibly":"rɪˈspɒnsəbli","oversee":"ˌəʊvəˈsiː","timelines":"ˈtaɪmlaɪnz","scrum":"skrʌm","facilitate":"fəˈsɪlɪteɪt","meetings":"ˈmiːtɪŋz","product":"ˈprɒdʌkt","owner":"ˈəʊnə","define":"dɪˈfaɪn","requirements":"rɪˈkwaɪəmənts","analyst":"ˈænəlɪst","workflows":"ˈwɜːkfləʊz","network":"ˈnetwɜːk","engineer":"ˌendʒɪˈnɪə","server":"ˈsɜːvə","connectivity":"ˌkɒnekˈtɪvəti","cybersecurity":"ˌsaɪbəsɪˈkjʊərəti","expert":"ˈekspɜːt","prevent":"prɪˈvent","breaches":"ˈbriːtʃɪz","database":"ˈdeɪtəbeɪs","administrator":"ədˈmɪnɪstreɪtə","backup":"ˈbækʌp","critical":"ˈkrɪtɪkl","files":"faɪlz","interpret":"ɪnˈtɜːprɪt","complex":"ˈkɒmpleks","metrics":"ˈmetrɪks","quality":"ˈkwɒləti","assurance":"əˈʃɔːrəns","production":"prəˈdʌkʃn","defects":"ˈdiːfekts","logistics":"ləˈdʒɪstɪks","coordinate":"kəʊˈɔːdɪneɪt","supply":"səˈplaɪ","chains":"tʃeɪnz","warehouse":"ˈweəhaʊs","supervisor":"ˈsuːpəvaɪzə","track":"træk","inventory":"ˈɪnvəntri","stock":"stɒk","procurement":"prəˈkjʊəmənt","source":"sɔːs","reliable":"rɪˈlaɪəbl","suppliers":"səˈplaɪəz","resources":"rɪˈzɔːsɪz","grievances":"ˈɡriːvənsɪz","recruitment":"rɪˈkruːtmənt","specialist":"ˈspeʃəlɪst","screen":"skriːn","qualified":"ˈkwɒlɪfaɪd","candidates":"ˈkændɪdeɪts","payroll":"ˈpeɪrəʊl","clerk":"klɑːk","calculate":"ˈkælkjuleɪt","salaries":"ˈsæləriz","compliance":"kəmˈplaɪəns","company":"ˈkʌmpəni","policies":"ˈpɒləsiz","relations":"rɪˈleɪʃnz","shape":"ʃeɪp","brand":"brænd","images":"ˈɪmɪdʒɪz","marketing":"ˈmɑːkɪtɪŋ","launch":"lɔːntʃ","promotional":"prəˈməʊʃənl","campaigns":"kæmˈpeɪnz","trademark":"ˈtreɪdmɑːk","values":"ˈvæljuːz","event":"ɪˈvent","coordinator":"kəʊˈɔːdɪneɪtə","travel":"ˈtrævl","itinerary":"aɪˈtɪnərəri","book":"bʊk","reservations":"ˌrezəˈveɪʃnz","concierge":"ˈkɒnsieəʒ","hotel":"həʊˈtel","guests":"ɡests","guest":"ɡest","satisfaction":"ˌsætɪsˈfækʃn","front":"frʌnt","desk":"desk","check-ins":"ˈtʃekɪnz","housekeeper":"ˈhaʊsˌkiːpə","rooms":"ruːmz","thoroughly":"ˈθʌrəli","head":"hed","food":"fuːd","sous":"suː","assistants":"əˈsɪstənts","restaurant":"ˈrestrɒnt","host":"həʊst","seat":"siːt","diners":"ˈdaɪnəz","comfortably":"ˈkʌmftəbli","waiter":"ˈweɪtə","orders":"ˈɔːdəz","bartender":"ˈbɑːtendə","mix":"mɪks","drinks":"drɪŋks","skillfully":"ˈskɪlfəli","barista":"bəˈrɪstə","brew":"bruː","coffee":"ˈkɒfi","perfectly":"ˈpɜːfɪktli","cashier":"kæˈʃɪə","scan":"skæn","items":"ˈaɪtəmz","store":"stɔː","retail":"ˈriːteɪl","merchandiser":"ˈmɜːtʃəndaɪzə","display":"dɪˈspleɪ","products":"ˈprɒdʌkts","attractively":"əˈtræktɪvli","drug":"drʌɡ","side":"saɪd","effects":"ɪˈfekts","optician":"ɒpˈtɪʃn","adjust":"əˈdʒʌst","eyeglasses":"ˈaɪɡlɑːsɪz","chiropractor":"ˈkaɪrəʊˌpræktə","align":"əˈlaɪn","spinal":"ˈspaɪnl","joints":"dʒɔɪnts","acupuncturist":"ˈækjuˌpʌŋktʃərɪst","place":"pleɪs","needles":"ˈniːdlz","sterilely":"ˈsterɪlli","massage":"ˈmæsɑːʒ","relieve":"rɪˈliːv","muscle":"ˈmʌsl","tension":"ˈtenʃn","fitness":"ˈfɪtnəs","exercises":"ˈeksəsaɪzɪz","swimming":"ˈswɪmɪŋ","water":"ˈwɔːtə","tennis":"ˈtenɪs","racket":"ˈrækɪt","grips":"ɡrɪps","golf":"ɡɒlf","pro":"prəʊ","swing":"swɪŋ","techniques":"tekˈniːks","riding":"ˈraɪdɪŋ","horse":"hɔːs","dance":"dɑːns","rhythm":"ˈrɪðəm","routines":"ruːˈtiːnz","music":"ˈmjuːzɪk","vocal":"ˈvəʊkl","pitches":"ˈpɪtʃɪz","art":"ɑːt","encourage":"ɪnˈkʌrɪdʒ","painting":"ˈpeɪntɪŋ","drama":"ˈdrɑːmə","stage":"steɪdʒ","plays":"pleɪz","school":"skuːl","principal":"ˈprɪnsəpl","academic":"ˌækəˈdemɪk","university":"ˌjuːnɪˈvɜːsəti","chancellor":"ˈtʃɑːnsələ","higher":"ˈhaɪə","education":"ˌedjuˈkeɪʃn"
+});
+
+Object.assign(IPA,{
+"abroad":"əˈbrɔːd","actors":"ˈæktəz","after":"ˈɑːftə","airplanes":"ˈeəpleɪnz","alley":"ˈæli","and":"ænd","anna":"ˈænə","around":"əˈraʊnd","arrive":"əˈraɪv","as":"æz","astronaut":"ˈæstrənɔːt","backyard":"ˌbækˈjɑːd","bake":"beɪk","bakery":"ˈbeɪkəri","ballet":"ˈbæleɪ","baseball":"ˈbeɪsbɔːl","bay":"beɪ","be":"biː","beach":"biːtʃ","beard":"bɪəd","becoming":"bɪˈkʌmɪŋ","bed":"bed","bedroom":"ˈbedruːm","berries":"ˈberiz","bicycle":"ˈbaɪsɪkl","birds":"bɜːdz","birthday":"ˈbɜːθdeɪ","birthdays":"ˈbɜːθdeɪz","black":"blæk","boats":"bəʊts","boy":"bɔɪ","bread":"bred","broken":"ˈbrəʊkən","brother":"ˈbrʌðə","burn":"bɜːn","buy":"baɪ","by":"baɪ","cakes":"keɪks","camping":"ˈkæmpɪŋ","car":"kɑː","cards":"kɑːdz","cartoons":"kɑːˈtuːnz","cassette":"kəˈset","cats":"kæts","celebrate":"ˈselɪbreɪt","chat":"tʃæt","child":"tʃaɪld","choir":"ˈkwaɪə","church":"tʃɜːtʃ","climb":"klaɪm","clothes":"kləʊðz","coat":"kəʊt","college":"ˈkɒlɪdʒ","comic":"ˈkɒmɪk","cookies":"ˈkʊkiz","cousins":"ˈkʌzənz","dark":"dɑːk","david":"ˈdeɪvɪd","day":"deɪ","diary":"ˈdaɪəri","dogs":"dɒɡz","draw":"drɔː","dream":"driːm","drink":"drɪŋk","drive":"draɪv","early":"ˈɜːli","eat":"iːt","eating":"ˈiːtɪŋ","emails":"ˈiːmeɪlz","evening":"ˈiːvnɪŋ","every":"ˈevri","farmers":"ˈfɑːməz","father":"ˈfɑːðə","fear":"fɪə","fields":"fiːldz","fire":"ˈfaɪə","fireplace":"ˈfaɪəpleɪs","fish":"fɪʃ","flocks":"flɒks","fluently":"ˈfluːəntli","flute":"fluːt","fly":"flaɪ","football":"ˈfʊtbɔːl","forget":"fəˈɡet","fountain":"ˈfaʊntɪn","freely":"ˈfriːli","french":"frentʃ","friend":"frend","frozen":"ˈfrəʊzn","getting":"ˈɡetɪŋ","glasses":"ˈɡlɑːsɪz","go":"ɡəʊ","going":"ˈɡəʊɪŋ","grandfather":"ˈɡrænfɑːðə","grandmother":"ˈɡrænmʌðə","grandparents":"ˈɡrænpeərənts","grow":"ɡrəʊ","guitar":"ɡɪˈtɑː","hair":"heə","happy":"ˈhæpi","hat":"hæt","hate":"heɪt","have":"hæv","he":"hiː","heavy":"ˈhevi","hide":"haɪd","his":"hɪz","holidays":"ˈhɒlədeɪz","horses":"ˈhɔːsɪz","hunt":"hʌnt","i":"aɪ","incense":"ˈɪnsens","instead":"ɪnˈsted","italian":"ɪˈtæliən","jack":"dʒæk","john":"dʒɒn","junk":"dʒʌŋk","keys":"kiːz","kids":"kɪdz","kites":"kaɪts","knit":"nɪt","lake":"leɪk","landline":"ˈlændlaɪn","landscapes":"ˈlændskeɪps","large":"lɑːdʒ","late":"leɪt","letters":"ˈletəz","linda":"ˈlɪndə","live":"lɪv","local":"ˈləʊkl","locals":"ˈləʊklz","long":"lɒŋ","loose":"luːs","lose":"luːz","love":"lʌv","marathons":"ˈmærəθənz","markets":"ˈmɑːkɪts","mary":"ˈmeəri","mathematics":"ˌmæθəˈmætɪks","miles":"maɪlz","milk":"mɪlk","model":"ˈmɒdl","morning":"ˈmɔːnɪŋ","most":"məʊst","mother":"ˈmʌðə","motorcycle":"ˈməʊtəsaɪkl","mountains":"ˈmaʊntɪnz","my":"maɪ","neighborhood":"ˈneɪbəhʊd","news":"njuːz","newspaper":"ˈnjuːzpeɪpə","night":"naɪt","often":"ˈɒfn","old":"əʊld","our":"ˈaʊə","outside":"ˌaʊtˈsaɪd","over":"ˈəʊvə","own":"əʊn","oxen":"ˈɒksn","paint":"peɪnt","paper":"ˈpeɪpə","pens":"penz","people":"ˈpiːpl","peter":"ˈpiːtə","phones":"fəʊnz","photographic":"ˌfəʊtəˈɡræfɪk","piano":"piˈænəʊ","pickup":"ˈpɪkʌp","play":"pleɪ","plow":"plaʊ","poetry":"ˈpəʊətri","polite":"pəˈlaɪt","porch":"pɔːtʃ","prefer":"prɪˈfɜː","punch":"pʌntʃ","quiet":"ˈkwaɪət","radio":"ˈreɪdiəʊ","read":"riːd","red":"red","research":"rɪˈsɜːtʃ","ride":"raɪd","river":"ˈrɪvə","run":"rʌn","sail":"seɪl","saturdays":"ˈsætədeɪz","scratch":"skrætʃ","seek":"siːk","sew":"səʊ","share":"ʃeə","shave":"ʃeɪv","she":"ʃiː","shift":"ʃɪft","shop":"ʃɒp","sing":"sɪŋ","sister":"ˈsɪstə","skate":"skeɪt","sketches":"ˈsketʃɪz","sleep":"sliːp","small":"smɔːl","smoke":"sməʊk","so":"səʊ","songs":"sɒŋz","speak":"spiːk","spend":"spend","stamps":"stæmps","stories":"ˈstɔːriz","stray":"streɪ","stream":"striːm","summer":"ˈsʌmə","sundays":"ˈsʌndeɪz","sunset":"ˈsʌnset","susan":"ˈsuːzn","sweaters":"ˈswetəz","swim":"swɪm","tapes":"teɪps","tea":"tiː","tell":"tel","theaters":"ˈθɪətəz","they":"ðeɪ","three":"θriː","tom":"tɒm","toys":"tɔɪz","trees":"triːz","truck":"trʌk","tune":"tjuːn","tv":"ˌtiːˈviː","umbrella":"ʌmˈbrelə","uncle":"ˈʌŋkl","until":"ənˈtɪl","up":"ʌp","use":"juːz","used":"juːst","vegetables":"ˈvedʒtəblz","very":"ˈveri","village":"ˈvɪlɪdʒ","visit":"ˈvɪzɪt","wake":"weɪk","walk":"wɔːk","was":"wɒz","watching":"ˈwɒtʃɪŋ","we":"wiː","wear":"weə","week":"wiːk","weekend":"ˌwiːkˈend","weekends":"ˌwiːkˈendz","when":"wen","whistle":"ˈwɪsl","white":"waɪt","wild":"waɪld","winter":"ˈwɪntə","wonderful":"ˈwʌndəfl","wood":"wʊd","wool":"wʊl","work":"wɜːk","workers":"ˈwɜːkəz","write":"raɪt","you":"juː","younger":"ˈjʌŋɡə"
+});
+
+Object.assign(IPA,{
+"about":"əˈbaʊt","abruptly":"əˈbrʌptli","afternoon":"ˌɑːftəˈnuːn","alarm":"əˈlɑːm","aloud":"əˈlaʊd","answers":"ˈɑːnsəz","argue":"ˈɑːɡjuː","back":"bæk","bark":"bɑːk","basis":"ˈbeɪsɪs","bells":"belz","bite":"baɪt","board":"bɔːd","bonfires":"ˈbɒnfaɪəz","bookshelf":"ˈbʊkʃelf","break":"breɪk","cafe":"ˈkæfeɪ","calendar":"ˈkælɪndə","campfire":"ˈkæmpfaɪə","cat":"kæt","chamomile":"ˈkæməmaɪl","change":"tʃeɪndʒ","chant":"tʃɑːnt","chime":"tʃaɪm","chores":"tʃɔːz","class":"klɑːs","clock":"klɒk","closing":"ˈkləʊzɪŋ","constantly":"ˈkɒnstəntli","continuously":"kənˈtɪnjuəsli","count":"kaʊnt","counter":"ˈkaʊntə","cream":"kriːm","dog":"dɒɡ","doing":"ˈduːɪŋ","doorbell":"ˈdɔːbel","double-check":"ˌdʌblˈtʃek","down":"daʊn","draft":"drɑːft","drives":"draɪvz","erase":"ɪˈreɪz","essays":"ˈeseɪz","exam":"ɪɡˈzæm","exchange":"ɪksˈtʃeɪndʒ","extra":"ˈekstrə","farmer's":"ˈfɑːməz","ferns":"fɜːnz","fingers":"ˈfɪŋɡəz","first":"fɜːst","flashcards":"ˈflæʃkɑːdz","flip":"flɪp","folk":"fəʊk","foot":"fʊt","formula":"ˈfɔːmjələ","forth":"fɔːθ","free":"friː","frequently":"ˈfriːkwəntli","friday":"ˈfraɪdeɪ","games":"ɡeɪmz","garage":"ˈɡærɑːʒ","geography":"dʒiˈɒɡrəfi","goals":"ɡəʊlz","good":"ɡʊd","grocery":"ˈɡrəʊsəri","group":"ɡruːp","guitars":"ɡɪˈtɑːz","hands":"hændz","heavily":"ˈhevɪli","her":"hɜː","hike":"haɪk","hour":"ˈaʊə","hourly":"ˈaʊəli","howl":"haʊl","hum":"hʌm","ice":"aɪs","indoor":"ˈɪndɔː","it":"ɪt","jam":"dʒæm","jog":"dʒɒɡ","knock":"nɒk","leather":"ˈleðə","lectures":"ˈlektʃəz","levels":"ˈlevlz","list":"lɪst","lockers":"ˈlɒkəz","locks":"lɒks","looks":"lʊks","luck":"lʌk","lunch":"lʌntʃ","mailboxes":"ˈmeɪlbɒksɪz","make":"meɪk","makeup":"ˈmeɪkʌp","maps":"mæps","market":"ˈmɑːkɪt","math":"mæθ","me":"miː","mechanical":"məˈkænɪkl","meet":"miːt","melodies":"ˈmelədiz","mirror":"ˈmɪrə","mondays":"ˈmʌndeɪz","monthly":"ˈmʌnθli","moves":"muːvz","multiple":"ˈmʌltɪpl","nails":"neɪlz","neat":"niːt","nervous":"ˈnɜːvəs","nightly":"ˈnaɪtli","noon":"nuːn","notes":"nəʊts","oil":"ɔɪl","out":"aʊt","pace":"peɪs","pack":"pæk","passed":"pɑːst","passing":"ˈpɑːsɪŋ","password":"ˈpɑːswɜːd","pencil":"ˈpensl","pencils":"ˈpenslz","penpal":"ˈpenpæl","penpals":"ˈpenpælz","phone":"fəʊn","planting":"ˈplɑːntɪŋ","plants":"plɑːnts","pockets":"ˈpɒkɪts","polish":"ˈpɒlɪʃ","pressure":"ˈpreʃə","printer":"ˈprɪntə","puddles":"ˈpʌdlz","pulse":"pʌls","rained":"reɪnd","raise":"reɪz","rally":"ˈræli","rang":"ræŋ","rearview":"ˈrɪəvjuː","recess":"rɪˈses","reflection":"rɪˈflekʃn","regular":"ˈreɡjələ","rehearse":"rɪˈhɜːs","religiously":"rɪˈlɪdʒəsli","reorganize":"riːˈɔːɡənaɪz","repeat":"rɪˈpiːt","repeatedly":"rɪˈpiːtɪdli","review":"rɪˈvjuː","rewrite":"riːˈraɪt","ring":"rɪŋ","scales":"skeɪlz","sharpen":"ˈʃɑːpən","shoes":"ʃuːz","shovel":"ˈʃʌvl","sigh":"saɪ","single":"ˈsɪŋɡl","sip":"sɪp","siren":"ˈsaɪrən","sirens":"ˈsaɪrənz","sleeping":"ˈsliːpɪŋ","slogans":"ˈsləʊɡənz","snacks":"snæks","snow":"snəʊ","soccer":"ˈsɒkə","sofa":"ˈsəʊfə","spelling":"ˈspelɪŋ","splash":"splæʃ","stats":"stæts","steps":"steps","stop":"stɒp","stressed":"strest","stretch":"stretʃ","stretching":"ˈstretʃɪŋ","sunday":"ˈsʌndeɪ","sweep":"swiːp","tag":"tæɡ","tap":"tæp","tease":"tiːz","test":"test","them":"ðem","thermostat":"ˈθɜːməstæt","things":"θɪŋz","through":"θruː","throughout":"θruːˈaʊt","throws":"θrəʊz","times":"taɪmz","tire":"ˈtaɪə","trace":"treɪs","trade":"treɪd","trip":"trɪp","trivial":"ˈtrɪviəl","tuesdays":"ˈtjuːzdeɪz","twice":"twaɪs","vocabulary":"vəˈkæbjələri","waited":"ˈweɪtɪd","warning":"ˈwɔːnɪŋ","wave":"weɪv","wednesday":"ˈwenzdeɪ","weekly":"ˈwiːkli","whenever":"wenˈevə","while":"waɪl","wind":"waɪnd","windows":"ˈwɪndəʊz","wipe":"waɪp","word":"wɜːd","words":"wɜːdz","working":"ˈwɜːkɪŋ","workout":"ˈwɜːkaʊt"
+});
+
+Object.assign(IPA,{
+"access":"ˈækses","across":"əˈkrɒs","afraid":"əˈfreɪd","ago":"əˈɡəʊ","ahead":"əˈhed","all":"ɔːl","along":"əˈlɒŋ","anything":"ˈeniθɪŋ","apartment":"əˈpɑːtmənt","appreciate":"əˈpriːʃieɪt","approval":"əˈpruːvl","argument":"ˈɑːɡjumənt","avenue":"ˈævənjuː","ballerina":"ˌbæləˈriːnə","bangkok":"bæŋˈkɒk","become":"bɪˈkʌm","being":"ˈbiːɪŋ","believe":"bɪˈliːv","belong":"bɪˈlɒŋ","big":"bɪɡ","block":"blɒk","blonde":"blɒnd","bookstore":"ˈbʊkstɔː","bookstores":"ˈbʊkstɔːz","bright":"braɪt","business":"ˈbɪznəs","but":"bʌt","cabin":"ˈkæbɪn","cameras":"ˈkæmərəz","chain":"tʃeɪn","childhood":"ˈtʃaɪldhʊd","classical":"ˈklæsɪkl","clear":"klɪə","close":"kləʊs","coin":"kɔɪn","collection":"kəˈlekʃn","communication":"kəˌmjuːnɪˈkeɪʃn","confidence":"ˈkɒnfɪdəns","conflicting":"kənˈflɪktɪŋ","conquers":"ˈkɒŋkəz","consider":"kənˈsɪdə","corner":"ˈkɔːnə","cost":"kɒst","costs":"kɒsts","cottage":"ˈkɒtɪdʒ","countryside":"ˈkʌntrisaɪd","crowd":"kraʊd","crystal":"ˈkrɪstl","days":"deɪz","deadlines":"ˈdedlaɪnz","debate":"dɪˈbeɪt","decades":"ˈdekeɪdz","dedication":"ˌdedɪˈkeɪʃn","depend":"dɪˈpend","deserve":"dɪˈzɜːv","despise":"dɪˈspaɪz","dictionaries":"ˈdɪkʃənriz","different":"ˈdɪfrənt","does":"dʌz","door":"dɔː","downtown":"ˌdaʊnˈtaʊn","each":"iːtʃ","earth":"ɜːθ","easier":"ˈiːziə","end":"end","energetic":"ˌenəˈdʒetɪk","engines":"ˈendʒɪnz","enjoy":"ɪnˈdʒɔɪ","enterprise":"ˈentəpraɪz","entirely":"ɪnˈtaɪəli","essential":"ɪˈsenʃl","everyone":"ˈevriwʌn","everyone's":"ˈevriwʌnz","everything":"ˈevriθɪŋ","extensive":"ɪkˈstensɪv","factory":"ˈfæktəri","fairytales":"ˈfeəriteɪlz","families":"ˈfæmɪliz","famous":"ˈfeɪməs","farmhouse":"ˈfɑːmhaʊs","faster":"ˈfɑːstə","feel":"fiːl","field":"fiːld","flat":"flæt","fluent":"ˈfluːənt","fraction":"ˈfrækʃn","friends":"frendz","future":"ˈfjuːtʃə","gas":"ɡæs","german":"ˈdʒɜːmən","ghosts":"ɡəʊsts","government":"ˈɡʌvənmənt","grammar":"ˈɡræmə","grand":"ɡrænd","great":"ɡreɪt","greatness":"ˈɡreɪtnəs","handwriting":"ˈhændˌraɪtɪŋ","handwritten":"ˌhændˈrɪtn","hard":"hɑːd","herself":"həˈself","high-speed":"ˌhaɪˈspiːd","hold":"həʊld","homework":"ˈhəʊmwɜːk","how":"haʊ","imagine":"ɪˈmædʒɪn","implicitly":"ɪmˈplɪsɪtli","importance":"ɪmˈpɔːtns","incredible":"ɪnˈkredəbl","indifferent":"ɪnˈdɪfrənt","inner":"ˈɪnə","internet":"ˈɪntənet","just":"dʒʌst","kid":"kɪd","kilograms":"ˈkɪləɡræmz","know":"nəʊ","lack":"læk","laptop":"ˈlæptɒp","lenient":"ˈliːniənt","less":"les","little":"ˈlɪtl","main":"meɪn","married":"ˈmærid","massive":"ˈmæsɪv","mean":"miːn","money":"ˈmʌni","more":"mɔː","much":"mʌtʃ","mustache":"məˈstɑːʃ","near":"nɪə","neighbors":"ˈneɪbəz","next":"nekst","ninety":"ˈnaɪnti","nod":"nɒd","now":"naʊ","number":"ˈnʌmbə","one":"wʌn","open":"ˈəʊpən","opinions":"əˈpɪnjənz","other":"ˈʌðə","other's":"ˈʌðəz","outer":"ˈaʊtə","outfits":"ˈaʊtfɪts","parents":"ˈpeərənts","partners":"ˈpɑːtnəz","passwords":"ˈpɑːswɜːdz","photography":"fəˈtɒɡrəfi","political":"pəˈlɪtɪkl","politics":"ˈpɒlətɪks","position":"pəˈzɪʃn","possess":"pəˈzes","potential":"pəˈtenʃl","praise":"preɪz","professor":"prəˈfesə","puppy":"ˈpʌpi","quieter":"ˈkwaɪətə","quite":"kwaɪt","rare":"reə","realize":"ˈrɪəlaɪz","recognize":"ˈrekəɡnaɪz","rely":"rɪˈlaɪ","remember":"rɪˈmembə","reside":"rɪˈzaɪd","safe":"seɪf","said":"sed","saving":"ˈseɪvɪŋ","seaside":"ˈsiːsaɪd","set":"set","shared":"ʃeəd","shy":"ʃaɪ","signify":"ˈsɪɡnɪfaɪ","silence":"ˈsaɪləns","simpler":"ˈsɪmplə","snowy":"ˈsnəʊi","soft-spoken":"ˌsɒftˈspəʊkən","space":"speɪs","speaking":"ˈspiːkɪŋ","spicy":"ˈspaɪsi","stamina":"ˈstæmɪnə","stamp":"stæmp","stand":"stænd","stay":"steɪ","street":"striːt","strict":"strɪkt","studying":"ˈstʌdiɪŋ","suppose":"səˈpəʊz","television":"ˈtelɪvɪʒn","ten":"ten","than":"ðæn","that":"ðæt","theater":"ˈθɪətə","there":"ðeə","think":"θɪŋk","this":"ðɪs","thunderstorms":"ˈθʌndəstɔːmz","today":"təˈdeɪ","town":"taʊn","traveling":"ˈtrævəlɪŋ","trust":"trʌst","understand":"ˌʌndəˈstænd","valley":"ˈvæli","value":"ˈvæljuː","views":"vjuːz","waking":"ˈweɪkɪŋ","want":"wɒnt","wearing":"ˈweərɪŋ","weigh":"weɪ","were":"wɜː","what":"wɒt","workings":"ˈwɜːkɪŋz","worldview":"ˈwɜːldvjuː","would":"wʊd","written":"ˈrɪtn","years":"jɪəz"
+});
+
+function ipaOf(plain){
+  return "/ " + plain.split(/\s+/).map(w=>{
+    const k=w.toLowerCase().replace(/[.,!?;:]/g,"");
+    return IPA[k]||k;
+  }).join(" ") + " /";
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function htmlOf(en){
+  // highlight "used to" and bold dark-red main verb
+  const m = en.match(/\*(.+?)\*/);
+  const verb = m ? m[1] : "";
+  let s = esc(en.replace(/\*(.+?)\*/, "§V§"));
+  s = s.replace("used to","<mark>used to</mark>").replace("§V§","<b>"+esc(verb)+"</b>");
+  return s;
+}
+
+const PER_PAGE = 50;
+let page = 0;
+const grid = document.getElementById("grid");
+
+// ---------- Voice (male, UK preferred) ----------
+let voice = null;
+const MALE_HINTS = ["daniel","google uk english male","ryan","george","thomas","oliver","arthur","male"];
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  const gb = vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const en = vs.filter(v=>/^en/i.test(v.lang));
+  const rank = list => {
+    for(const h of MALE_HINTS){
+      const f = list.find(v=>v.name.toLowerCase().includes(h));
+      if(f) return f;
+    }
+    return null;
+  };
+  voice = rank(gb) || rank(en) || gb[0] || en[0] || null;
+  document.getElementById("voiceInfo").textContent = voice
+    ? "เสียงอ่านที่ใช้: " + voice.name + " (" + voice.lang + ")"
+    : "ไม่พบเสียงภาษาอังกฤษในอุปกรณ์นี้";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+let currentBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  if(currentBtn) currentBtn.classList.remove("playing");
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = "en-GB"; }
+  u.rate = 0.88; u.pitch = 0.85;
+  btn.classList.add("playing"); currentBtn = btn;
+  u.onend = u.onerror = ()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+
+// ---------- Render ----------
+function render(){
+  speechSynthesis && speechSynthesis.cancel();
+  grid.innerHTML = "";
+  const start = page*PER_PAGE;
+  DATA.slice(start, start+PER_PAGE).forEach((d,i)=>{
+    const plain = d.en.replace(/\*/g,"");
+    const n = start+i+1;
+    const el = document.createElement("div");
+    el.className = "flip"; el.tabIndex = 0; el.setAttribute("role","button");
+    el.setAttribute("aria-label","Card "+n+": "+plain);
+    el.innerHTML = `
+      <div class="inner">
+        <div class="face front">
+          <span class="num">${n}</span>
+          <button class="speak" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+          <div class="pic" aria-hidden="true">${d.emo}</div>
+          <p class="en">${htmlOf(d.en)}</p>
+          <p class="ipa">${esc(ipaOf(plain))}</p>
+          <span class="hint">แตะเพื่อดูคำแปล</span>
+        </div>
+        <div class="face back">
+          <span class="num" style="color:#9aa4c4">${n}</span>
+          <div class="pic" aria-hidden="true">${d.emo}</div>
+          <p class="th">${esc(d.th)}</p>
+          <span class="hint">แตะเพื่อกลับ</span>
+        </div>
+      </div>`;
+    const toggle = ()=>el.classList.toggle("flipped");
+    el.addEventListener("click", toggle);
+    el.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle();}});
+    const sp = el.querySelector(".speak");
+    sp.addEventListener("click", e=>{ e.stopPropagation(); speak(plain, sp); });
+    sp.addEventListener("keydown", e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  document.getElementById("p1").classList.toggle("on", page===0);
+  document.getElementById("p2").classList.toggle("on", page===1);
+  document.getElementById("info").textContent = "แสดง " + (start+1) + "–" + Math.min(start+PER_PAGE, DATA.length) + " จาก " + DATA.length;
+  buildPager();
+}
+function buildPager(){
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  const pages = Math.ceil(DATA.length/PER_PAGE);
+  for(let i=0;i<pages;i++){
+    const b=document.createElement("button");
+    b.textContent="หน้า "+(i+1); if(i===page) b.className="on";
+    b.onclick=()=>{page=i;render();window.scrollTo({top:0});};
+    pg.appendChild(b);
+  }
+}
+document.getElementById("p1").onclick=()=>{page=0;render();};
+document.getElementById("p2").onclick=()=>{page=1;render();};
+let allFlipped=false;
+document.getElementById("flipAll").onclick=()=>{
+  allFlipped=!allFlipped;
+  grid.querySelectorAll(".flip").forEach(c=>c.classList.toggle("flipped",allFlipped));
+};
+document.getElementById("theme").onclick=()=>{
+  const r=document.documentElement;
+  const dark = r.dataset.theme==="dark" || (!r.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  r.dataset.theme = dark ? "light" : "dark";
+};
+render();
+</script>
+</body>
+</html>

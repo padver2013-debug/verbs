@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ought to – Flipcards 9.2</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ee; --card:#ffffff; --ink:#000000; --muted:#555; --red:#8b0000; --hl:#ffe14d; --line:#d9d4cc; --btn:#1f2a44; --back:#16213e; --backink:#ffffff;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --bg:#15171c; --line:#33363d; --muted:#aaa; }
+}
+:root[data-theme="dark"]{ --bg:#15171c; --line:#33363d; --muted:#aaa; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);font-family:"Sarabun","Noto Sans Thai",Arial,sans-serif;color:var(--ink)}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font:700 22px/1.3 Arial,sans-serif;margin:0 0 4px;color:var(--ink)}
+:root[data-theme="dark"] h1,:root[data-theme="dark"] .sub{color:#eee}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h1,:root:not([data-theme="light"]) .sub{color:#eee}}
+.sub{font:14px/1.5 Arial,sans-serif;color:var(--muted);margin:0}
+.sub mark{background:var(--hl);color:#000;padding:0 3px;border-radius:2px}
+.sub b{color:var(--red)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;max-width:1100px;margin:0 auto;padding:8px 16px}
+.bar button{font:600 14px Arial,sans-serif;border:1px solid var(--btn);background:#fff;color:var(--btn);padding:8px 14px;border-radius:6px;cursor:pointer}
+.bar button.on{background:var(--btn);color:#fff}
+.bar .info{font:13px Arial,sans-serif;color:var(--muted);margin-left:auto}
+#voiceInfo{max-width:1100px;margin:0 auto;padding:0 16px 6px;font:12px Arial,sans-serif;color:var(--muted)}
+.grid{max-width:1100px;margin:0 auto;padding:8px 16px 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.flip{perspective:1200px;height:300px;cursor:pointer;outline-offset:3px}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;border:1px solid var(--line);padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.front{background:var(--card)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg)}
+.num{position:absolute;top:8px;left:12px;font:12px Arial,sans-serif;color:#888}
+.pic{font-size:64px;line-height:1.1;margin:10px 0 8px;filter:saturate(1.05)}
+.en{font-family:Arial,Helvetica,sans-serif;font-weight:300;font-size:19px;line-height:1.35;color:#000;margin:0}
+.en b{font-weight:800;color:var(--red)}
+.en mark{background:var(--hl);color:#000;font-weight:300;padding:0 3px;border-radius:3px}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.4;color:#222;margin:8px 0 0}
+.speak{position:absolute;top:8px;right:10px;border:1px solid var(--btn);background:var(--btn);color:#fff;border-radius:20px;padding:6px 12px;font:600 13px Arial,sans-serif;cursor:pointer}
+.speak:active{transform:scale(.96)}
+.speak.playing{background:var(--red);border-color:var(--red)}
+.th{font-size:22px;line-height:1.55;font-weight:500}
+.hint{position:absolute;bottom:8px;font:11px Arial,sans-serif;color:#999}
+.back .hint{color:#9aa4c4}
+.back .pic{font-size:36px}
+.pager{display:flex;justify-content:center;gap:10px;padding:0 16px 40px}
+.pager button{font:600 15px Arial,sans-serif;border:1px solid var(--btn);background:#fff;color:var(--btn);padding:10px 18px;border-radius:6px;cursor:pointer}
+.pager button.on{background:var(--btn);color:#fff}
+@media (max-width:640px){
+  .flip{height:330px}
+  .en{font-size:16px}.ipa{font-size:14px}.pic{font-size:52px}.th{font-size:18px}
+  .grid{gap:10px;padding:8px 10px 20px}
+  .face{padding:12px 10px}
+  .speak{padding:5px 9px;font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>9.2 Semi-modal verb: “ought to” – ประโยคแนะนำอย่างหนักแน่น</h1>
+  <p class="sub"><mark>ought to</mark> = ไฮไลต์เหลือง &nbsp;|&nbsp; <b>main verb</b> = ตัวหนาสีแดงเข้ม &nbsp;|&nbsp; แตะการ์ดเพื่อดูคำแปล</p>
+</header>
+<div class="bar">
+  <button id="p1" class="on">หน้า 1 (1–50)</button>
+  <button id="p2">หน้า 2 (51–100)</button>
+  <button id="flipAll">พลิกทุกใบ</button>
+  <button id="theme">โหมดมืด/สว่าง</button>
+  <span class="info" id="info"></span>
+</div>
+<div id="voiceInfo"></div>
+<main class="grid" id="grid"></main>
+<div class="pager" id="pager"></div>
+
+<script>
+const DATA = `
+A firefighter ought to *extinguish* fires quickly.|นักดับเพลิงมีหน้าที่ควรดับไฟให้เร็ว|🧯
+A police officer ought to *protect* citizens from danger.|เจ้าหน้าที่ตำรวจมีหน้าที่ควรปกป้องประชาชนจากอันตราย|🛡️
+A doctor ought to *heal* the sick.|แพทย์มีหน้าที่ควรรักษาผู้ป่วย|🩺
+A teacher ought to *educate* students.|ครูมีหน้าที่ควรให้ความรู้แก่นักเรียน|👩‍🏫
+A soldier ought to *defend* the country.|ทหารมีหน้าที่ควรปกป้องประเทศชาติ|💂
+A nurse ought to *attend* to patients with care.|พยาบาลมีหน้าที่ควรดูแลผู้ป่วยด้วยความใส่ใจ|👩‍⚕️
+A judge ought to *deliver* fair judgments.|ผู้พิพากษาพึงปฏิบัติหน้าที่ตัดสินคดีความอย่างยุติธรรม|⚖️
+A pilot ought to *ensure* passenger safety.|นักบินมีหน้าที่ควรรับรองความปลอดภัยของผู้โดยสาร|✈️
+A librarian ought to *organize* books properly.|บรรณารักษ์มีหน้าที่ควรจัดระเบียบหนังสือให้เรียบร้อย|📚
+A driver ought to *follow* traffic signals.|ผู้ขับขี่มีหน้าที่ควรปฏิบัติตามสัญญาณจราจร|🚦
+A parent ought to *provide* for their children.|พ่อแม่มีหน้าที่ควรเลี้ยงดูบุตรหลาน|👨‍👧
+A student ought to *complete* assignments on time.|นักเรียนมีหน้าที่ควรส่งงานให้ตรงเวลา|📝
+An employee ought to *perform* job duties diligently.|พนักงานมีหน้าที่ควรปฏิบัติงานอย่างขยันขันแข็ง|💼
+A manager ought to *supervise* staff fairly.|ผู้จัดการมีหน้าที่ควรกำกับดูแลพนักงานอย่างยุติธรรม|👔
+A politician ought to *serve* constituents.|นักการเมืองมีหน้าที่ควรรับใช้ประชาชนในเขตเลือกตั้ง|🏛️
+A journalist ought to *verify* facts before publishing.|นักข่าวมีหน้าที่ควรตรวจสอบข้อเท็จจริงก่อนเผยแพร่|🔍
+A pharmacist ought to *dispense* correct medications.|เภสัชกรมีหน้าที่ควรจ่ายยาให้ถูกต้อง|💊
+A mechanic ought to *repair* vehicles safely.|ช่างซ่อมรถมีหน้าที่ควรซ่อมแซมยานพาหนะให้ปลอดภัย|🔧
+A security guard ought to *monitor* premises closely.|เจ้าหน้าที่รักษาความปลอดภัย (รปภ.) มีหน้าที่ควรเฝ้าสังเกตพื้นที่อย่างใกล้ชิด|👁️
+A chef ought to *maintain* kitchen hygiene.|เชฟมีหน้าที่ควรรักษาความสะอาดในครัว|🧼
+A captain ought to *navigate* the ship safely.|กัปตันเรือมีหน้าที่ควรเดินเรืออย่างปลอดภัย|🧭
+A veterinarian ought to *treat* injured animals.|สัตวแพทย์มีหน้าที่ควรรักษาสัตว์ที่ได้รับบาดเจ็บ|🐕
+An accountant ought to *record* financial data accurately.|นักบัญชีมีหน้าที่ควรบันทึกข้อมูลทางการเงินให้ถูกต้องแม่นยำ|🧾
+An architect ought to *design* stable structures.|สถาปนิกมีหน้าที่ควรออกแบบโครงสร้างให้มั่นคงแข็งแรง|📐
+A mayor ought to *improve* city infrastructure.|นายกเทศมนตรีมีหน้าที่ควรพัฒนาโครงสร้างพื้นฐานของเมือง|🏗️
+A receptionist ought to *greet* visitors politely.|พนักงานต้อนรับมีหน้าที่ควรต้อนรับผู้มาเยือนอย่างสุภาพ|🤝
+A translator ought to *translate* messages accurately.|นักแปลมีหน้าที่ควรแปลข้อความให้ถูกต้องแม่นยำ|🌐
+A dentist ought to *examine* patients' teeth.|ทันตแพทย์มีหน้าที่ควรตรวจสุขภาพฟันของผู้ป่วย|🦷
+A lifeguard ought to *watch* swimmers carefully.|เจ้าหน้าที่ช่วยชีวิตทางน้ำมีหน้าที่ควรเฝ้ามองนักว่ายน้ำอย่างระมัดระวัง|🏊
+A coach ought to *train* athletes effectively.|ผู้ฝึกสอนมีหน้าที่ควรฝึกซ้อมนักกีฬาอย่างมีประสิทธิภาพ|🏃
+A citizen ought to *pay* municipal taxes.|พลเมืองมีหน้าที่ควรจ่ายภาษีเทศบาล|💰
+A judge ought to *remain* impartial.|ผู้พิพากษาพึงปฏิบัติหน้าที่วางตัวเป็นกลาง|🧘
+An electrician ought to *handle* wires safely.|ช่างไฟฟ้ามีหน้าที่ควรจัดการกับสายไฟอย่างปลอดภัย|⚡
+A plumber ought to *fix* pipe leaks properly.|ช่างประปามีหน้าที่ควรซ่อมรอยรั่วของท่อให้เรียบร้อย|🚰
+A pilot ought to *check* equipment pre-flight.|นักบินมีหน้าที่ควรตรวจสอบอุปกรณ์ก่อนบิน|📋
+A researcher ought to *conduct* experiments honestly.|นักวิจัยมีหน้าที่ควรดำเนินการทดลองอย่างซื่อสัตย์|🧪
+A salesperson ought to *assist* customers helpfully.|พนักงานขายมีหน้าที่ควรช่วยเหลือลูกค้าด้วยความเต็มใจ|🛍️
+A curator ought to *preserve* museum artifacts.|ภัณฑารักษ์มีหน้าที่ควรอนุรักษ์โบราณวัตถุในพิพิธภัณฑ์|🏺
+A cleaner ought to *sanitize* public areas.|พนักงานทำความสะอาดมีหน้าที่ควรฆ่าเชื้อพื้นที่สาธารณะ|🧴
+A flight attendant ought to *assist* passengers during emergencies.|พนักงานต้อนรับบนเครื่องบินมีหน้าที่ควรช่วยเหลือผู้โดยสารในยามฉุกเฉิน|🆘
+A train conductor ought to *check* train tickets.|พนักงานตรวจตั๋วรถไฟมีหน้าที่ควรตรวจตั๋วโดยสาร|🎫
+A diplomat ought to *represent* their country well.|นักการทูตมีหน้าที่ควรเป็นตัวแทนประเทศชาติอย่างดีเยี่ยม|🌍
+A postman ought to *deliver* mail promptly.|บุรุษไปรษณีย์มีหน้าที่ควรส่งจดหมายให้รวดเร็ว|📮
+A judge ought to *apply* the law correctly.|ผู้พิพากษาพึงปฏิบัติหน้าที่บังคับใช้กฎหมายให้ถูกต้อง|📜
+A zookeeper ought to *feed* captive animals.|เจ้าหน้าที่ดูแลสวนสัตว์มีหน้าที่ควรให้อาหารสัตว์ในความดูแล|🥕
+A botanist ought to *study* plant life structures.|นักพฤกษศาสตร์มีหน้าที่ควรศึกษาโครงสร้างชีวิตพืช|🌿
+A geologist ought to *analyze* rock formations.|นักธรณีวิทยาพึงปฏิบัติหน้าที่วิเคราะห์การก่อตัวของหิน|🪨
+An astronomer ought to *observe* celestial bodies.|นักดาราศาสตร์มีหน้าที่ควรสังเกตการณ์วัตถุท้องฟ้า|🔭
+A parent ought to *guide* children ethically.|พ่อแม่มีหน้าที่ควรแนะนำลูกๆ ตามหลักจริยธรรม|🧑‍🏫
+An individual ought to *fulfill* civic responsibilities.|ปัจเจกบุคคลมีหน้าที่ควรปฏิบัติความรับผิดชอบต่อบ้านเมือง|🤲
+A lifeguard ought to *rescue* drowning victims.|เจ้าหน้าที่ช่วยชีวิตทางน้ำมีหน้าที่ควรช่วยเหลือผู้ประสบภัยจมน้ำ|🛟
+A security guard ought to *patrol* the building.|เจ้าหน้าที่รักษาความปลอดภัย (รปภ.) มีหน้าที่ควรตรวจตราลาดตระเวนอาคาร|🔦
+A customs officer ought to *inspect* luggage at borders.|เจ้าหน้าที่ศุลกากรมีหน้าที่ควรตรวจสอบสัมภาระบริเวณชายแดน|🧳
+A park ranger ought to *protect* wildlife in reserves.|เจ้าหน้าที่พิทักษ์อุทยานมีหน้าที่ควรปกป้องสัตว์ป่าในเขตอนุรักษ์|🌲
+A referee ought to *enforce* game rules strictly.|กรรมการตัดสินเกมการแข่งขันมีหน้าที่ควรบังคับใช้กฎกติกาอย่างเคร่งครัด|🟨
+A surgeon ought to *perform* operations precisely.|ศัลยแพทย์มีหน้าที่ควรผ่าตัดด้วยความแม่นยำ|🏥
+A nurse ought to *administer* medication correctly.|พยาบาลมีหน้าที่ควรจ่ายยาหรือให้การรักษาตามคำสั่งแพทย์ให้ถูกต้อง|💉
+A teacher ought to *evaluate* students fairly.|ครูมีหน้าที่ควรประเมินผลนักเรียนอย่างยุติธรรม|📊
+A researcher ought to *publish* findings truthfully.|นักวิจัยมีหน้าที่ควรเผยแพร่ผลการศึกษาอย่างเป็นความจริง|📰
+An editor ought to *proofread* manuscripts carefully.|บรรณาธิการมีหน้าที่ควรตรวจทานต้นฉบับอย่างรอบคอบ|✍️
+A librarian ought to *assist* library patrons.|บรรณารักษ์มีหน้าที่ควรช่วยเหลือผู้ใช้บริการห้องสมุด|🙋
+A flight captain ought to *announce* flight updates.|กัปตันเที่ยวบินมีหน้าที่ควรประกาศแจ้งสถานะการบินให้ทราบ|📢
+A web developer ought to *secure* user data.|นักพัฒนาเว็บไซต์มีหน้าที่ควรปกป้องข้อมูลผู้ใช้งานให้ปลอดภัย|🔒
+A software tester ought to *detect* program bugs.|ผู้ทดสอบระบบซอฟต์แวร์มีหน้าที่ควรตรวจหาข้อผิดพลาดในโปรแกรม|🐛
+A bus driver ought to *transport* commuters safely.|พนักงานขับรถโดยสารประจำทางมีหน้าที่ควรส่งผู้โดยสารให้ถึงที่หมายอย่างปลอดภัย|🚌
+A train driver ought to *adhere* to timetables.|พนักงานขับรถไฟมีหน้าที่ควรยึดถือตามตารางเวลาเดินรถ|🚆
+A sailor ought to *maintain* deck equipment.|ลูกเรือมีหน้าที่ควรบำรุงรักษาอุปกรณ์บนดาดฟ้าเรือ|⚓
+A diplomat ought to *negotiate* peace treaties.|นักการทูตมีหน้าที่ควรเจรจาสนธิสัญญาเพื่อสันติภาพ|🕊️
+A prosecutor ought to *present* evidence objectively.|อัยการมีหน้าที่ควรนำเสนอพยานหลักฐานตามข้อเท็จจริง|📂
+A defense lawyer ought to *protect* clients' rights.|ทนายความฝ่ายจำเลยมีหน้าที่ควรปกป้องสิทธิของลูกความ|👨‍⚖️
+A bank teller ought to *handle* cash transactions accurately.|พนักงานธนาคารมีหน้าที่ควรจัดการธุรกรรมเงินสดให้ถูกต้องแม่นยำ|💵
+A financial advisor ought to *recommend* sound investments.|ที่ปรึกษาทางการเงินมีหน้าที่ควรแนะนำการลงทุนที่มั่นคง|📈
+A real estate agent ought to *disclose* property details honestly.|ตัวแทนอสังหาริมทรัพย์มีหน้าที่ควรเปิดเผยรายละเอียดทรัพย์สินตามจริง|🏠
+A social worker ought to *advocate* for the needy.|นักสังคมสงเคราะห์มีหน้าที่ควรเป็นกระบอกเสียงหรือช่วยเหลือผู้ยากไร้|📣
+A psychologist ought to *listen* to patients confidentially.|นักจิตวิทยาพึงปฏิบัติหน้าที่รับฟังผู้ป่วยโดยเก็บเป็นความลับ|👂
+A zookeeper ought to *clean* animal enclosures.|เจ้าหน้าที่ดูแลสวนสัตว์มีหน้าที่ควรทำความสะอาดกรงสัตว์|🧹
+A farmer ought to *cultivate* crops properly.|เกษตรกรมีหน้าที่ควรเพาะปลูกพืชผลทางการเกษตรให้เหมาะสม|🌾
+A fisherman ought to *practice* sustainable fishing.|ชาวประมงมีหน้าที่ควรทำประมงแบบยั่งยืน|🎣
+A meteorologist ought to *forecast* weather accurately.|นักอุตุนิยมวิทยามีหน้าที่ควรพยากรณ์อากาศให้แม่นยำ|⛅
+An ecologist ought to *monitor* ecosystem changes.|นักนิเวศวิทยามีหน้าที่ควรติดตามการเปลี่ยนแปลงของระบบนิเวศ|🌳
+A historian ought to *document* historical records.|นักประวัติศาสตร์มีหน้าที่ควรบันทึกหลักฐานทางประวัติศาสตร์|🗂️
+An anthropologist ought to *study* human cultures.|นักมานุษยวิทยามีหน้าที่ควรศึกษาวัฒนธรรมของมนุษย์|🧑‍🤝‍🧑
+A philosopher ought to *question* fundamental ideas.|นักปรัชญาพึงปฏิบัติหน้าที่ตั้งคำถามต่อแนวคิดพื้นฐานของชีวิต|❓
+A musician ought to *practice* musical instruments regularly.|นักดนตรีมีหน้าที่ควรฝึกซ้อมเครื่องดนตรีเป็นประจำ|🎸
+An actor ought to *memorize* script lines.|นักแสดงมีหน้าที่ควรจำบทบาทคำพูดในสคริปต์ให้แม่นยำ|🎭
+A director ought to *guide* film performances.|ผู้กำกับภาพยนตร์มีหน้าที่ควรกำกับการแสดงในภาพยนตร์|🎬
+A producer ought to *manage* project budgets.|โปรดิวเซอร์มีหน้าที่ควรบริหารจัดการงบประมาณของโปรเจกต์|🎞️
+A photographer ought to *capture* moments creatively.|ช่างภาพมีหน้าที่ควรบันทึกภาพเหตุการณ์ด้วยความสร้างสรรค์|📷
+A graphic designer ought to *create* appealing visual content.|นักออกแบบกราฟิกมีหน้าที่ควรสร้างสรรค์ผลงานภาพที่น่าดึงดูด|🎨
+A tailor ought to *stitch* garments with precision.|ช่างตัดเสื้อมีหน้าที่ควรเย็บเสื้อผ้าด้วยความประณีตแม่นยำ|🧵
+A baker ought to *follow* baking recipes.|ช่างอบขนมมีหน้าที่ควรทำตามสูตรการอบขนม|🥖
+A butcher ought to *maintain* meat hygiene standards.|ช่างตัดแต่งเนื้อมีหน้าที่ควรรักษามาตรฐานความสะอาดของเนื้อสัตว์|🥩
+A florist ought to *keep* flowers fresh.|ช่างจัดดอกไม้มีหน้าที่ควรดูแลดอกไม้ให้สดใหม่อยู่เสมอ|💐
+A jeweler ought to *craft* precious metals carefully.|ช่างทำเครื่องประดับมีหน้าที่ควรขึ้นรูปโลหะมีค่าด้วยความระมัดระวัง|💍
+A watchmaker ought to *repair* intricate gear systems.|ช่างซ่อมนาฬิกามีหน้าที่ควรซ่อมแซมระบบเฟืองกลไกที่ซับซ้อน|⌚
+A carpenter ought to *build* durable wooden furniture.|ช่างไม้มีหน้าที่ควรสร้างเฟอร์นิเจอร์ไม้ให้มีความทนทาน|🪚
+A mason ought to *lay* bricks solidly.|ช่างก่ออิฐฉาบปูนมีหน้าที่ควรก่ออิฐให้มั่นคงแข็งแรง|🧱
+A painter ought to *apply* coatings evenly.|ช่างทาสีมีหน้าที่ควรทาสีเคลือบพื้นผิวให้เรียบเนียนสม่ำเสมอ|🖌️
+A window cleaner ought to *wash* glass surfaces clearly.|พนักงานทำความสะอาดกระจกมีหน้าที่ควรล้างทำความสะอาดพื้นผิวกระจกให้ใสสะอาด|🪟
+A sanitation worker ought to *collect* municipal waste regularly.|พนักงานเก็บขยะเทศบาลมีหน้าที่ควรจัดเก็บขยะในเมืองเป็นประจำ|🗑️
+`.trim().split("\n").map(l=>{const [en,th,emo]=l.split("|");return {en,th,emo};});
+
+// UK (RP) IPA, word by word
+const IPA = {
+"a":"ə","an":"ən","ought":"ɔːt","to":"tə","firefighter":"ˈfaɪəˌfaɪtə","extinguish":"ɪkˈstɪŋɡwɪʃ","fires":"ˈfaɪəz","quickly":"ˈkwɪkli","police":"pəˈliːs","officer":"ˈɒfɪsə","protect":"prəˈtekt","citizens":"ˈsɪtɪzənz","from":"frɒm","danger":"ˈdeɪndʒə","doctor":"ˈdɒktə","heal":"hiːl","the":"ðə","sick":"sɪk","teacher":"ˈtiːtʃə","educate":"ˈedʒukeɪt","students":"ˈstjuːdənts","soldier":"ˈsəʊldʒə","defend":"dɪˈfend","country":"ˈkʌntri","nurse":"nɜːs","attend":"əˈtend","patients":"ˈpeɪʃənts","with":"wɪð","care":"keə","judge":"dʒʌdʒ","deliver":"dɪˈlɪvə","fair":"feə","judgments":"ˈdʒʌdʒmənts","pilot":"ˈpaɪlət","ensure":"ɪnˈʃɔː","passenger":"ˈpæsɪndʒə","safety":"ˈseɪfti","librarian":"laɪˈbreəriən","organize":"ˈɔːɡənaɪz","books":"bʊks","properly":"ˈprɒpəli","driver":"ˈdraɪvə","follow":"ˈfɒləʊ","traffic":"ˈtræfɪk","signals":"ˈsɪɡnəlz","parent":"ˈpeərənt","provide":"prəˈvaɪd","for":"fɔː","their":"ðeə","children":"ˈtʃɪldrən","student":"ˈstjuːdənt","complete":"kəmˈpliːt","assignments":"əˈsaɪnmənts","on":"ɒn","time":"taɪm","employee":"ɪmˈplɔɪiː","perform":"pəˈfɔːm","job":"dʒɒb","duties":"ˈdjuːtiz","diligently":"ˈdɪlɪdʒəntli","manager":"ˈmænɪdʒə","supervise":"ˈsuːpəvaɪz","staff":"stɑːf","fairly":"ˈfeəli","politician":"ˌpɒləˈtɪʃən","serve":"sɜːv","constituents":"kənˈstɪtjuənts","journalist":"ˈdʒɜːnəlɪst","verify":"ˈverɪfaɪ","facts":"fækts","before":"bɪˈfɔː","publishing":"ˈpʌblɪʃɪŋ","pharmacist":"ˈfɑːməsɪst","dispense":"dɪˈspens","correct":"kəˈrekt","medications":"ˌmedɪˈkeɪʃənz","mechanic":"məˈkænɪk","repair":"rɪˈpeə","vehicles":"ˈviːəklz","safely":"ˈseɪfli","security":"sɪˈkjʊərəti","guard":"ɡɑːd","monitor":"ˈmɒnɪtə","premises":"ˈpremɪsɪz","closely":"ˈkləʊsli","chef":"ʃef","maintain":"meɪnˈteɪn","kitchen":"ˈkɪtʃɪn","hygiene":"ˈhaɪdʒiːn","captain":"ˈkæptɪn","navigate":"ˈnævɪɡeɪt","ship":"ʃɪp","veterinarian":"ˌvetərɪˈneəriən","treat":"triːt","injured":"ˈɪndʒəd","animals":"ˈænɪməlz","accountant":"əˈkaʊntənt","record":"rɪˈkɔːd","financial":"faɪˈnænʃəl","data":"ˈdeɪtə","accurately":"ˈækjərətli","architect":"ˈɑːkɪtekt","design":"dɪˈzaɪn","stable":"ˈsteɪbl","structures":"ˈstrʌktʃəz","mayor":"meə","improve":"ɪmˈpruːv","city":"ˈsɪti","infrastructure":"ˈɪnfrəˌstrʌktʃə","receptionist":"rɪˈsepʃənɪst","greet":"ɡriːt","visitors":"ˈvɪzɪtəz","politely":"pəˈlaɪtli","translator":"trænzˈleɪtə","translate":"trænzˈleɪt","messages":"ˈmesɪdʒɪz","dentist":"ˈdentɪst","examine":"ɪɡˈzæmɪn","patients'":"ˈpeɪʃənts","teeth":"tiːθ","lifeguard":"ˈlaɪfɡɑːd","watch":"wɒtʃ","swimmers":"ˈswɪməz","carefully":"ˈkeəfəli","coach":"kəʊtʃ","train":"treɪn","athletes":"ˈæθliːts","effectively":"ɪˈfektɪvli","citizen":"ˈsɪtɪzən","pay":"peɪ","municipal":"mjuːˈnɪsɪpəl","taxes":"ˈtæksɪz","remain":"rɪˈmeɪn","impartial":"ɪmˈpɑːʃəl","electrician":"ɪˌlekˈtrɪʃən","handle":"ˈhændl","wires":"ˈwaɪəz","plumber":"ˈplʌmə","fix":"fɪks","pipe":"paɪp","leaks":"liːks","equipment":"ɪˈkwɪpmənt","pre-flight":"ˌpriːˈflaɪt","check":"tʃek","researcher":"rɪˈsɜːtʃə","conduct":"kənˈdʌkt","experiments":"ɪkˈsperɪmənts","honestly":"ˈɒnɪstli","salesperson":"ˈseɪlzˌpɜːsn","assist":"əˈsɪst","customers":"ˈkʌstəməz","helpfully":"ˈhelpfəli","curator":"kjʊˈreɪtə","preserve":"prɪˈzɜːv","museum":"mjuˈziːəm","artifacts":"ˈɑːtɪfækts","cleaner":"ˈkliːnə","sanitize":"ˈsænɪtaɪz","public":"ˈpʌblɪk","areas":"ˈeəriəz","flight":"flaɪt","attendant":"əˈtendənt","passengers":"ˈpæsɪndʒəz","during":"ˈdjʊərɪŋ","emergencies":"ɪˈmɜːdʒənsiz","conductor":"kənˈdʌktə","tickets":"ˈtɪkɪts","diplomat":"ˈdɪpləmæt","represent":"ˌreprɪˈzent","well":"wel","postman":"ˈpəʊstmən","mail":"meɪl","promptly":"ˈprɒmptli","apply":"əˈplaɪ","law":"lɔː","correctly":"kəˈrektli","zookeeper":"ˈzuːˌkiːpə","feed":"fiːd","captive":"ˈkæptɪv","botanist":"ˈbɒtənɪst","study":"ˈstʌdi","plant":"plɑːnt","life":"laɪf","geologist":"dʒiˈɒlədʒɪst","analyze":"ˈænəlaɪz","rock":"rɒk","formations":"fɔːˈmeɪʃənz","astronomer":"əˈstrɒnəmə","observe":"əbˈzɜːv","celestial":"səˈlestiəl","bodies":"ˈbɒdiz","guide":"ɡaɪd","ethically":"ˈeθɪkli","individual":"ˌɪndɪˈvɪdʒuəl","fulfill":"fʊlˈfɪl","civic":"ˈsɪvɪk","responsibilities":"rɪˌspɒnsəˈbɪlətiz","rescue":"ˈreskjuː","drowning":"ˈdraʊnɪŋ","victims":"ˈvɪktɪmz","patrol":"pəˈtrəʊl","building":"ˈbɪldɪŋ","customs":"ˈkʌstəmz","inspect":"ɪnˈspekt","luggage":"ˈlʌɡɪdʒ","at":"æt","borders":"ˈbɔːdəz","park":"pɑːk","ranger":"ˈreɪndʒə","wildlife":"ˈwaɪldlaɪf","in":"ɪn","reserves":"rɪˈzɜːvz","referee":"ˌrefəˈriː","enforce":"ɪnˈfɔːs","game":"ɡeɪm","rules":"ruːlz","strictly":"ˈstrɪktli","surgeon":"ˈsɜːdʒən","operations":"ˌɒpəˈreɪʃənz","precisely":"prɪˈsaɪsli","administer":"ədˈmɪnɪstə","medication":"ˌmedɪˈkeɪʃən","evaluate":"ɪˈvæljueɪt","publish":"ˈpʌblɪʃ","findings":"ˈfaɪndɪŋz","truthfully":"ˈtruːθfəli","editor":"ˈedɪtə","proofread":"ˈpruːfriːd","manuscripts":"ˈmænjuskrɪpts","library":"ˈlaɪbrəri","patrons":"ˈpeɪtrənz","announce":"əˈnaʊns","updates":"ˈʌpdeɪts","web":"web","developer":"dɪˈveləpə","secure":"sɪˈkjʊə","user":"ˈjuːzə","software":"ˈsɒftweə","tester":"ˈtestə","detect":"dɪˈtekt","program":"ˈprəʊɡræm","bugs":"bʌɡz","bus":"bʌs","transport":"trænˈspɔːt","commuters":"kəˈmjuːtəz","adhere":"ədˈhɪə","timetables":"ˈtaɪmˌteɪblz","sailor":"ˈseɪlə","deck":"dek","negotiate":"nɪˈɡəʊʃieɪt","peace":"piːs","treaties":"ˈtriːtiz","prosecutor":"ˈprɒsɪkjuːtə","present":"prɪˈzent","evidence":"ˈevɪdəns","objectively":"əbˈdʒektɪvli","defense":"dɪˈfens","lawyer":"ˈlɔɪə","clients'":"ˈklaɪənts","rights":"raɪts","bank":"bæŋk","teller":"ˈtelə","cash":"kæʃ","transactions":"trænˈzækʃənz","advisor":"ədˈvaɪzə","recommend":"ˌrekəˈmend","sound":"saʊnd","investments":"ɪnˈvestmənts","real":"rɪəl","estate":"ɪˈsteɪt","agent":"ˈeɪdʒənt","disclose":"dɪsˈkləʊz","property":"ˈprɒpəti","details":"ˈdiːteɪlz","social":"ˈsəʊʃəl","worker":"ˈwɜːkə","advocate":"ˈædvəkeɪt","needy":"ˈniːdi","psychologist":"saɪˈkɒlədʒɪst","listen":"ˈlɪsn","confidentially":"ˌkɒnfɪˈdenʃəli","clean":"kliːn","animal":"ˈænɪməl","enclosures":"ɪnˈkləʊʒəz","farmer":"ˈfɑːmə","cultivate":"ˈkʌltɪveɪt","crops":"krɒps","fisherman":"ˈfɪʃəmən","practice":"ˈpræktɪs","sustainable":"səˈsteɪnəbl","fishing":"ˈfɪʃɪŋ","meteorologist":"ˌmiːtiəˈrɒlədʒɪst","forecast":"ˈfɔːkɑːst","weather":"ˈweðə","ecologist":"iˈkɒlədʒɪst","ecosystem":"ˈiːkəʊˌsɪstəm","changes":"ˈtʃeɪndʒɪz","historian":"hɪˈstɔːriən","document":"ˈdɒkjument","historical":"hɪˈstɒrɪkəl","records":"ˈrekɔːdz","anthropologist":"ˌænθrəˈpɒlədʒɪst","human":"ˈhjuːmən","cultures":"ˈkʌltʃəz","philosopher":"fəˈlɒsəfə","question":"ˈkwestʃən","fundamental":"ˌfʌndəˈmentl","ideas":"aɪˈdɪəz","musician":"mjuˈzɪʃən","musical":"ˈmjuːzɪkl","instruments":"ˈɪnstrəmənts","regularly":"ˈreɡjələli","actor":"ˈæktə","memorize":"ˈmeməraɪz","script":"skrɪpt","lines":"laɪnz","director":"daɪˈrektə","film":"fɪlm","performances":"pəˈfɔːmənsɪz","producer":"prəˈdjuːsə","manage":"ˈmænɪdʒ","project":"ˈprɒdʒekt","budgets":"ˈbʌdʒɪts","photographer":"fəˈtɒɡrəfə","capture":"ˈkæptʃə","moments":"ˈməʊmənts","creatively":"kriˈeɪtɪvli","graphic":"ˈɡræfɪk","designer":"dɪˈzaɪnə","create":"kriˈeɪt","appealing":"əˈpiːlɪŋ","visual":"ˈvɪʒuəl","content":"ˈkɒntent","tailor":"ˈteɪlə","stitch":"stɪtʃ","garments":"ˈɡɑːmənts","precision":"prɪˈsɪʒən","baker":"ˈbeɪkə","baking":"ˈbeɪkɪŋ","recipes":"ˈresɪpiz","butcher":"ˈbʊtʃə","meat":"miːt","standards":"ˈstændədz","florist":"ˈflɒrɪst","keep":"kiːp","flowers":"ˈflaʊəz","fresh":"freʃ","jeweler":"ˈdʒuːələ","craft":"krɑːft","precious":"ˈpreʃəs","metals":"ˈmetlz","watchmaker":"ˈwɒtʃˌmeɪkə","intricate":"ˈɪntrɪkət","gear":"ɡɪə","systems":"ˈsɪstəmz","carpenter":"ˈkɑːpəntə","build":"bɪld","durable":"ˈdjʊərəbl","wooden":"ˈwʊdn","furniture":"ˈfɜːnɪtʃə","mason":"ˈmeɪsn","lay":"leɪ","bricks":"brɪks","solidly":"ˈsɒlɪdli","painter":"ˈpeɪntə","coatings":"ˈkəʊtɪŋz","evenly":"ˈiːvnli","window":"ˈwɪndəʊ","wash":"wɒʃ","glass":"ɡlɑːs","surfaces":"ˈsɜːfɪsɪz","clearly":"ˈklɪəli","sanitation":"ˌsænɪˈteɪʃən","collect":"kəˈlekt","waste":"weɪst"
+};
+
+function ipaOf(plain){
+  return "/ " + plain.split(/\s+/).map(w=>{
+    const k=w.toLowerCase().replace(/[.,!?;:]/g,"");
+    return IPA[k]||k;
+  }).join(" ") + " /";
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function htmlOf(en){
+  // highlight "ought to" and bold dark-red main verb
+  const m = en.match(/\*(.+?)\*/);
+  const verb = m ? m[1] : "";
+  let s = esc(en.replace(/\*(.+?)\*/, "§V§"));
+  s = s.replace("ought to","<mark>ought to</mark>").replace("§V§","<b>"+esc(verb)+"</b>");
+  return s;
+}
+
+const PER_PAGE = 50;
+let page = 0;
+const grid = document.getElementById("grid");
+
+// ---------- Voice (male, UK preferred) ----------
+let voice = null;
+const MALE_HINTS = ["daniel","google uk english male","ryan","george","thomas","oliver","arthur","male"];
+function pickVoice(){
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  const gb = vs.filter(v=>/en[-_]GB/i.test(v.lang));
+  const en = vs.filter(v=>/^en/i.test(v.lang));
+  const rank = list => {
+    for(const h of MALE_HINTS){
+      const f = list.find(v=>v.name.toLowerCase().includes(h));
+      if(f) return f;
+    }
+    return null;
+  };
+  voice = rank(gb) || rank(en) || gb[0] || en[0] || null;
+  document.getElementById("voiceInfo").textContent = voice
+    ? "เสียงอ่านที่ใช้: " + voice.name + " (" + voice.lang + ")"
+    : "ไม่พบเสียงภาษาอังกฤษในอุปกรณ์นี้";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+let currentBtn = null;
+function speak(text, btn){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  if(currentBtn) currentBtn.classList.remove("playing");
+  const u = new SpeechSynthesisUtterance(text);
+  if(voice){ u.voice = voice; u.lang = voice.lang; } else { u.lang = "en-GB"; }
+  u.rate = 0.88; u.pitch = 0.85;
+  btn.classList.add("playing"); currentBtn = btn;
+  u.onend = u.onerror = ()=>btn.classList.remove("playing");
+  speechSynthesis.speak(u);
+}
+
+// ---------- Render ----------
+function render(){
+  speechSynthesis && speechSynthesis.cancel();
+  grid.innerHTML = "";
+  const start = page*PER_PAGE;
+  DATA.slice(start, start+PER_PAGE).forEach((d,i)=>{
+    const plain = d.en.replace(/\*/g,"");
+    const n = start+i+1;
+    const el = document.createElement("div");
+    el.className = "flip"; el.tabIndex = 0; el.setAttribute("role","button");
+    el.setAttribute("aria-label","Card "+n+": "+plain);
+    el.innerHTML = `
+      <div class="inner">
+        <div class="face front">
+          <span class="num">${n}</span>
+          <button class="speak" type="button" aria-label="Read aloud">🔊 อ่าน</button>
+          <div class="pic" aria-hidden="true">${d.emo}</div>
+          <p class="en">${htmlOf(d.en)}</p>
+          <p class="ipa">${esc(ipaOf(plain))}</p>
+          <span class="hint">แตะเพื่อดูคำแปล</span>
+        </div>
+        <div class="face back">
+          <span class="num" style="color:#9aa4c4">${n}</span>
+          <div class="pic" aria-hidden="true">${d.emo}</div>
+          <p class="th">${esc(d.th)}</p>
+          <span class="hint">แตะเพื่อกลับ</span>
+        </div>
+      </div>`;
+    const toggle = ()=>el.classList.toggle("flipped");
+    el.addEventListener("click", toggle);
+    el.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();toggle();}});
+    const sp = el.querySelector(".speak");
+    sp.addEventListener("click", e=>{ e.stopPropagation(); speak(plain, sp); });
+    sp.addEventListener("keydown", e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  document.getElementById("p1").classList.toggle("on", page===0);
+  document.getElementById("p2").classList.toggle("on", page===1);
+  document.getElementById("info").textContent = "แสดง " + (start+1) + "–" + Math.min(start+PER_PAGE, DATA.length) + " จาก " + DATA.length;
+  buildPager();
+}
+function buildPager(){
+  const pg = document.getElementById("pager"); pg.innerHTML="";
+  const pages = Math.ceil(DATA.length/PER_PAGE);
+  for(let i=0;i<pages;i++){
+    const b=document.createElement("button");
+    b.textContent="หน้า "+(i+1); if(i===page) b.className="on";
+    b.onclick=()=>{page=i;render();window.scrollTo({top:0});};
+    pg.appendChild(b);
+  }
+}
+document.getElementById("p1").onclick=()=>{page=0;render();};
+document.getElementById("p2").onclick=()=>{page=1;render();};
+let allFlipped=false;
+document.getElementById("flipAll").onclick=()=>{
+  allFlipped=!allFlipped;
+  grid.querySelectorAll(".flip").forEach(c=>c.classList.toggle("flipped",allFlipped));
+};
+document.getElementById("theme").onclick=()=>{
+  const r=document.documentElement;
+  const dark = r.dataset.theme==="dark" || (!r.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches);
+  r.dataset.theme = dark ? "light" : "dark";
+};
+render();
+</script>
+</body>
+</html>
