@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Semi-modal "dare" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#e9eef3;--ink:#111;--muted:#52606d;--card:#fff;--tile:#eef2f6;--line:#cfd8e0;--red:#8b0000;--redbg:#fbe9e9;--btn:#14213d;--btnink:#fff;--back:#14213d;--backink:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--ink:#111;--muted:#9fb0c0;--line:#2a3846;--btn:#14213d;--back:#1d3557}}
+:root[data-theme="dark"]{--bg:#0e141b;--ink:#111;--muted:#9fb0c0;--line:#2a3846;--btn:#14213d;--back:#1d3557}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{margin:0;font:700 22px/1.2 Arial,sans-serif;color:var(--hd,#14213d)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hd:#e6edf3}}
+:root[data-theme="dark"]{--hd:#e6edf3}
+.sub{color:var(--muted);font-size:14px;margin-top:4px}
+.pager{display:flex;gap:8px;flex-wrap:wrap}
+.pager button{font:600 14px Arial,sans-serif;padding:9px 16px;border-radius:999px;border:1.5px solid var(--btn);background:transparent;color:var(--hd,#14213d);cursor:pointer}
+.pager button[aria-current="true"]{background:var(--btn);color:var(--btnink)}
+.bar{max-width:1100px;margin:0 auto;padding:6px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:260px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:300px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.front{background:var(--card);border:1px solid var(--line)}
+.card:focus-visible .front,.card:focus-visible .back{box-shadow:0 0 0 3px #4a7bd0}
+.pic{flex:0 0 112px;background:var(--tile);display:flex;align-items:center;justify-content:center;font-size:68px;line-height:1;border-bottom:1px solid var(--line);position:relative}
+.pic small{position:absolute;left:12px;top:8px;font:12px Arial;color:#52606d}
+.txt{flex:1;padding:12px 18px 0;display:flex;flex-direction:column;justify-content:center;gap:8px;text-align:center}
+.en{font:300 21px/1.35 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.dare{background:var(--redbg);border-radius:4px;padding:0 3px}
+.ipa{font:400 16px/1.4 "Times New Roman",Times,serif;color:#333;margin:0}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#52606d}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--btn);color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.25)}
+.say.on{background:var(--red)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg);justify-content:center;align-items:center;padding:24px;text-align:center;gap:14px}
+.back .th{font:500 24px/1.55 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 14px/1.4 Arial;opacity:.75;margin:0}
+.back .hint{color:#c8d3e0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:310px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Semi-modal “dare” · Flip cards</h1>
+    <div class="sub">คลิกการ์ดเพื่อดูคำแปล · กดปุ่มลำโพงเพื่อฟังเสียง (UK)</div>
+  </div>
+  <nav class="pager" id="pager" aria-label="Pages"></nav>
+</header>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<script>
+const DATA = [{"en": "How dare you speak to me like that?", "th": "เธอ/คุณกล้าดียังไงมาพูดกับฉันแบบนั้น", "ipa": "hˌaʊ dˈeə juː spˈiːk tə mˌiː lˈaɪk ðˈat", "dare": 1, "verb": 3, "emo": "🗣️"}, {"en": "I dare not question the manager's authority.", "th": "ฉันไม่กล้าพอที่จะตั้งคำถามกับอำนาจของผู้จัดการ", "ipa": "aɪ dˈeə nˌɒt kwˈɛstʃən ðə mˈanɪdʒəz ɐθˈɒɹɪti", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "Dare she express her true opinions openly?", "th": "เธอกล้าพอที่จะแสดงความคิดเห็นที่แท้จริงของเธออย่างเปิดเผยไหม", "ipa": "dˈeə ʃiː ɛkspɹˈɛs hɜː tɹˈuː əpˈɪniənz ˈəʊpənli", "dare": 0, "verb": 2, "emo": "💬"}, {"en": "He dare not disobey his father's strict orders.", "th": "เขาไม่กล้าพอที่จะขัดคำสั่งอันเข้มงวดของพ่อ", "ipa": "hiː dˈeə nˌɒt dɪsəʊbˈeɪ hɪz fˈɑːðəz stɹˈɪkt ˈɔːdəz", "dare": 1, "verb": 3, "emo": "🙅"}, {"en": "Dare they challenge the reigning champion?", "th": "พวกเขากล้าพอที่จะท้าทายแชมป์ปัจจุบันไหม", "ipa": "dˈeə ðeɪ tʃˈalɪndʒ ðə ɹˈeɪnɪŋ tʃˈampiən", "dare": 0, "verb": 2, "emo": "🥊"}, {"en": "You dare not interrupt the director during the meeting.", "th": "คุณไม่กล้าพอที่จะขัดจังหวะผู้อำนวยการระหว่างการประชุมหรอก", "ipa": "juː dˈeə nˌɒt ˈɪntəɹˌʌpt ðə daɪɹˈɛktə djˈʊəɹɪŋ ðə mˈiːtɪŋ", "dare": 1, "verb": 3, "emo": "✋"}, {"en": "Dare I ask such a delicate question?", "th": "ฉันจะกล้าถามคำถามที่ละเอียดอ่อนเช่นนี้ไหม", "ipa": "dˈeəɹ aɪ ˈask sˈʌtʃ ɐ dˈɛlɪkət kwˈɛstʃən", "dare": 0, "verb": 2, "emo": "🙋"}, {"en": "She dare not admit her mistake to the team.", "th": "เธอไม่กล้าพอที่จะยอมรับความผิดพลาดของเธอกับทีม", "ipa": "ʃiː dˈeə nˌɒt ɐdmˈɪt hɜː mɪstˈeɪk tə ðə tˈiːm", "dare": 1, "verb": 3, "emo": "🙇"}, {"en": "Dare he approach the fierce guard dog?", "th": "เขากล้าพอที่จะเข้าไปใกล้สุนัขเฝ้าบ้านที่ดุร้ายตัวนั้นไหม", "ipa": "dˈeə hiː ɐpɹˈəʊtʃ ðə fˈiəs ɡˈɑːd dˈɒɡ", "dare": 0, "verb": 2, "emo": "🚶"}, {"en": "We dare not venture into the dark forest alone.", "th": "พวกเราไม่กล้าพอที่จะเสี่ยงเข้าไปในป่ามืดทึบตามลำพัง", "ipa": "wiː dˈeə nˌɒt vˈɛntʃəɹ ˌɪntʊ ðə dˈɑːk fˈɒɹɪst ɐlˈəʊn", "dare": 1, "verb": 3, "emo": "🧭"}, {"en": "Dare you touch that dangerous electrical wire?", "th": "คุณกล้าพอที่จะแตะสายไฟอันตรายเส้นนั้นไหม", "ipa": "dˈeə juː tˈʌtʃ ðat dˈeɪndʒəɹəs ɪlˈɛktɹɪkəl wˈaɪə", "dare": 0, "verb": 2, "emo": "👆"}, {"en": "He dare not reveal the secret to anyone.", "th": "เขาไม่กล้าพอที่จะเปิดเผยความลับนี้ให้ใครรู้", "ipa": "hiː dˈeə nˌɒt ɹɪvˈiːl ðə sˈiːkɹɪt tʊ ˈɛnɪwˌɒn", "dare": 1, "verb": 3, "emo": "🔓"}, {"en": "Dare she confront the bully face-to-face?", "th": "เธอกล้าพอที่จะเผชิญหน้ากับอันธพาลคนนั้นแบบตัวต่อตัวไหม", "ipa": "dˈeə ʃiː kənfɹˈʌnt ðə bˈʊlɪ fˈeɪstəfˈeɪs", "dare": 0, "verb": 2, "emo": "😠"}, {"en": "They dare not ignore the warning signs.", "th": "พวกเขาไม่กล้าพอที่จะเมินเฉยต่อสัญญาณเตือนเหล่านั้น", "ipa": "ðeɪ dˈeə nˌɒt ɪɡnˈɔː ðə wˈɔːnɪŋ sˈaɪnz", "dare": 1, "verb": 3, "emo": "🙈"}, {"en": "Dare I step onto the high diving board?", "th": "ฉันจะกล้าก้าวขึ้นไปบนกระโดดน้ำสูงขนาดนั้นไหม", "ipa": "dˈeəɹ aɪ stˈɛp ˌɒntʊ ðə hˈaɪ dˈaɪvɪŋ bˈɔːd", "dare": 0, "verb": 2, "emo": "👣"}, {"en": "She dare not test her limits in the race.", "th": "เธอไม่กล้าพอที่จะทดสอบขีดจำกัดของตัวเองในการแข่งขัน", "ipa": "ʃiː dˈeə nˌɒt tˈɛst hɜː lˈɪmɪts ɪnðə ɹˈeɪs", "dare": 1, "verb": 3, "emo": "🧪"}, {"en": "Dare he step foot in that haunted house?", "th": "เขากล้าพอที่จะก้าวเท้าเข้าไปในบ้านผีสิงหลังนั้นไหม", "ipa": "dˈeə hiː stˈɛp fˈʊt ɪn ðat hˈɔːntɪd hˈaʊs", "dare": 0, "verb": 2, "emo": "👣"}, {"en": "You dare not oppose the committee's final decision.", "th": "คุณไม่กล้าพอที่จะคัดค้านการตัดสินใจครั้งสุดท้ายของคณะกรรมการ", "ipa": "juː dˈeə nˌɒt əpˈəʊz ðə kəmˈɪtiz fˈaɪnəl dɪsˈɪʒən", "dare": 1, "verb": 3, "emo": "🚫"}, {"en": "Dare they invest their savings in this risky project?", "th": "พวกเขากล้าพอที่จะลงทุนเงินออมในโครงการที่มีความเสี่ยงนี้ไหม", "ipa": "dˈeə ðeɪ ɪnvˈɛst ðeə sˈeɪvɪŋz ɪn ðɪs ɹˈɪski pɹˈɒdʒɛkt", "dare": 0, "verb": 2, "emo": "💰"}, {"en": "I dare not look down from the skyscraper roof.", "th": "ฉันไม่กล้าพอที่จะมองลงไปข้างล่างจากหลังคาตึกระฟ้า", "ipa": "aɪ dˈeə nˌɒt lˈʊk dˌaʊn fɹʌmðə skˈaɪskɹeɪpə ɹˈuːf", "dare": 1, "verb": 3, "emo": "👀"}, {"en": "Dare she sing solo in front of a huge crowd?", "th": "เธอกล้าพอที่จะร้องเพลงเดี่ยวต่อหน้าฝูงชนจำนวนมากไหม", "ipa": "dˈeə ʃiː sˈɪŋ sˈəʊləʊ ɪn fɹˈʌnt əvə hjˈuːdʒ kɹˈaʊd", "dare": 0, "verb": 2, "emo": "🎤"}, {"en": "He dare not contradict his teacher in class.", "th": "เขาไม่กล้าพอที่จะเถียงหรือแย้งคุณครูในห้องเรียน", "ipa": "hiː dˈeə nˌɒt kˌɒntɹədˈɪkt hɪz tˈiːtʃəɹ ɪn klˈas", "dare": 1, "verb": 3, "emo": "🔄"}, {"en": "Dare we travel through the desert at night?", "th": "พวกเรากล้าพอที่จะเดินทางข้ามทะเลทรายในเวลากลางคืนไหม", "ipa": "dˈeə wiː tɹˈavəl θɹuː ðə dˈɛzət at nˈaɪt", "dare": 0, "verb": 2, "emo": "🧳"}, {"en": "They dare not break the tradition of the village.", "th": "พวกเขาไม่กล้าพอที่จะฝ่าฝืนประเพณีดั้งเดิมของหมู่บ้าน", "ipa": "ðeɪ dˈeə nˌɒt bɹˈeɪk ðə tɹɐdˈɪʃən ɒvðə vˈɪlɪdʒ", "dare": 1, "verb": 3, "emo": "💥"}, {"en": "Dare I taste this strange-looking food?", "th": "ฉันจะกล้าลองชิมอาหารหน้าตาแปลกประหลาดนี้ไหม", "ipa": "dˈeəɹ aɪ tˈeɪst ðɪs stɹˈeɪndʒlˈʊkɪŋ fˈuːd", "dare": 0, "verb": 2, "emo": "👅"}, {"en": "She dare not resign without securing another job.", "th": "เธอไม่กล้าพอที่จะลาออกจากงานโดยยังไม่ได้งานใหม่รองรับ", "ipa": "ʃiː dˈeə nˌɒt ɹɪzˈaɪn wɪðˌaʊt sɪkjˈʊəɹɪŋ ɐnˈʌðə dʒˈɒb", "dare": 1, "verb": 3, "emo": "📄"}, {"en": "Dare he speak truth to power?", "th": "เขากล้าพอที่จะพูดความจริงต่อหน้าผู้มีอำนาจไหม", "ipa": "dˈeə hiː spˈiːk tɹˈuːθ tə pˈaʊə", "dare": 0, "verb": 2, "emo": "🗣️"}, {"en": "You dare not criticize her artwork publicly.", "th": "คุณไม่กล้าพอที่จะวิจารณ์ผลงานศิลปะของเธอต่อสาธารณชน", "ipa": "juː dˈeə nˌɒt kɹˈɪtɪsˌaɪz hɜːɹ ˈɑːtwɜːk pˈʌblɪkli", "dare": 1, "verb": 3, "emo": "👎"}, {"en": "Dare they question the safety regulations?", "th": "พวกเขากล้าพอที่จะตั้งคำถามกับกฎข้อบังคับด้านความปลอดภัยไหม", "ipa": "dˈeə ðeɪ kwˈɛstʃən ðə sˈeɪfti ɹˌɛɡjʊlˈeɪʃənz", "dare": 0, "verb": 2, "emo": "❓"}, {"en": "I dare not open the mysterious package.", "th": "ฉันไม่กล้าพอที่จะเปิดพัสดุลึกลับกล่องนั้น", "ipa": "aɪ dˈeə nˌɒt ˈəʊpən ðə mɪstˈiəɹiəs pˈakɪdʒ", "dare": 1, "verb": 3, "emo": "📦"}, {"en": "Dare she jump from the cliff into the lake?", "th": "เธอกล้าพอที่จะกระโดดจากหน้าผาลงสู่ทะเลสาบไหม", "ipa": "dˈeə ʃiː dʒˈʌmp fɹʌmðə klˈɪf ˌɪntʊ ðə lˈeɪk", "dare": 0, "verb": 2, "emo": "🤸"}, {"en": "He dare not wear such a flashy suit to work.", "th": "เขาไม่กล้าพอที่จะสวมสูทสีสันฉูดฉาดแบบนั้นไปทำงาน", "ipa": "hiː dˈeə nˌɒt wˈeə sˈʌtʃ ɐ flˈaʃi sˈuːt tə wˈɜːk", "dare": 1, "verb": 3, "emo": "👔"}, {"en": "Dare we expose our flaws to the public?", "th": "พวกเรากล้าพอที่จะเปิดเผยข้อบกพร่องของเราต่อสาธารณะไหม", "ipa": "dˈeə wiː ɛkspˈəʊz ˌaʊə flˈɔːz tə ðə pˈʌblɪk", "dare": 0, "verb": 2, "emo": "🔦"}, {"en": "They dare not delay the project delivery any further.", "th": "พวกเขาไม่กล้าพอที่จะเลื่อนเวลาส่งมอบโครงการออกไปอีกแล้ว", "ipa": "ðeɪ dˈeə nˌɒt dɪlˈeɪ ðə pɹˈɒdʒɛkt dɪlˈɪvəɹi ˌɛni fˈɜːðə", "dare": 1, "verb": 3, "emo": "⏳"}, {"en": "Dare I demand an explanation from him?", "th": "ฉันจะกล้าเรียกร้องคำอธิบายจากเขาไหม", "ipa": "dˈeəɹ aɪ dɪmˈand ɐn ɛksplɐnˈeɪʃən fɹɒm hˌɪm", "dare": 0, "verb": 2, "emo": "📢"}, {"en": "She dare not swim in the deep ocean waters.", "th": "เธอไม่กล้าพอที่จะว่ายน้ำในเขตทะเลลึก", "ipa": "ʃiː dˈeə nˌɒt swˈɪm ɪnðə dˈiːp ˈəʊʃən wˈɔːtəz", "dare": 1, "verb": 3, "emo": "🏊"}, {"en": "Dare he face his fears in the dark?", "th": "เขากล้าพอที่จะเผชิญหน้ากับความกลัวในความมืดไหม", "ipa": "dˈeə hiː fˈeɪs hɪz fˈiəz ɪnðə dˈɑːk", "dare": 0, "verb": 2, "emo": "😨"}, {"en": "You dare not alter the company's code structure.", "th": "คุณไม่กล้าพอที่จะแก้ไขโครงสร้างโค้ดของบริษัท", "ipa": "juː dˈeə nˌɒt ˈɒltə ðə kˈʌmpəniz kˈəʊd stɹˈʌktʃə", "dare": 1, "verb": 3, "emo": "🛠️"}, {"en": "Dare they stand up against the unfair policy?", "th": "พวกเขากล้าพอที่จะลุกขึ้นต่อต้านนโยบายที่ไม่เป็นธรรมไหม", "ipa": "dˈeə ðeɪ stˈand ˌʌp ɐɡˈɛnst ðɪ ʌnfˈeə pˈɒlɪsi", "dare": 0, "verb": 2, "emo": "🧍"}, {"en": "I dare not interrupt the master speaker.", "th": "ฉันไม่กล้าพอที่จะขัดจังหวะผู้บรรยายระดับปรมาจารย์ท่านนั้น", "ipa": "aɪ dˈeə nˌɒt ˈɪntəɹˌʌpt ðə mˈastə spˈiːkə", "dare": 1, "verb": 3, "emo": "✋"}, {"en": "Dare she pitch her startup idea to investors?", "th": "เธอกล้าพอที่จะนำเสนอไอเดียสตาร์ทอัพของเธอกับนักลงทุนไหม", "ipa": "dˈeə ʃiː pˈɪtʃ hɜː stˈɑːtʌp aɪdˈiə tʊ ɪnvˈɛstəz", "dare": 0, "verb": 2, "emo": "📊"}, {"en": "He dare not share his controversial opinions online.", "th": "เขาไม่กล้าพอที่จะแบ่งปันความคิดเห็นที่ขัดแย้งของตนเองบนโลกออนไลน์", "ipa": "hiː dˈeə nˌɒt ʃˈeə hɪz kˌɒntɹəvˈɜːʃəl əpˈɪniənz ˈɒnlaɪn", "dare": 1, "verb": 3, "emo": "🤝"}, {"en": "Dare we explore the uncharted cave system?", "th": "พวกเรากล้าพอที่จะสำรวจระบบถ้ำที่ยังไม่เคยมีใครสำรวจไหม", "ipa": "dˈeə wiː ɛksplˈɔː ðɪ ʌntʃˈɑːtɪd kˈeɪv sˈɪstəm", "dare": 0, "verb": 2, "emo": "🔍"}, {"en": "They dare not dispute the expert findings.", "th": "พวกเขาไม่กล้าพอที่จะโต้แย้งผลการค้นหาของผู้เชี่ยวชาญ", "ipa": "ðeɪ dˈeə nˌɒt dɪspjˈuːt ðɪ ˈɛkspɜːt fˈaɪndɪŋz", "dare": 1, "verb": 3, "emo": "⚖️"}, {"en": "Dare I correct the professor's mistake?", "th": "ฉันจะกล้าท้วงติงข้อผิดพลาดของศาสตราจารย์ไหม", "ipa": "dˈeəɹ aɪ kəɹˈɛkt ðə pɹəfˈɛsəz mɪstˈeɪk", "dare": 0, "verb": 2, "emo": "✏️"}, {"en": "She dare not touch the venomous snake display.", "th": "เธอไม่กล้าพอที่จะแตะตู้จัดแสดงงูพิษ", "ipa": "ʃiː dˈeə nˌɒt tˈʌtʃ ðə vˈɛnəməs snˈeɪk dɪsplˈeɪ", "dare": 1, "verb": 3, "emo": "👆"}, {"en": "Dare he perform his magic tricks on stage?", "th": "เขากล้าพอที่จะแสดงกลบนเวทีไหม", "ipa": "dˈeə hiː pəfˈɔːm hɪz mˈadʒɪk tɹˈɪks ˌɒn stˈeɪdʒ", "dare": 0, "verb": 2, "emo": "🎩"}, {"en": "You dare not challenge her knowledge on history.", "th": "คุณไม่กล้าพอที่จะท้าทายความรู้ประวัติศาสตร์ของเธอหรอก", "ipa": "juː dˈeə nˌɒt tʃˈalɪndʒ hɜː nˈɒlɪdʒ ˌɒn hˈɪstəɹi", "dare": 1, "verb": 3, "emo": "🥊"}, {"en": "Dare they break the world record in sprinting?", "th": "พวกเขากล้าพอที่จะทำลายสถิติโลกในการวิ่งระยะสั้นไหม", "ipa": "dˈeə ðeɪ bɹˈeɪk ðə wˈɜːld ɹˈɛkɔːd ɪn spɹˈɪntɪŋ", "dare": 0, "verb": 2, "emo": "💥"}, {"en": "I dare not disclose the surprise party plan.", "th": "ฉันไม่กล้าพอที่จะเปิดเผยแผนงานปาร์ตี้เซอร์ไพรส์", "ipa": "aɪ dˈeə nˌɒt dɪsklˈəʊz ðə səpɹˈaɪz pˈɑːti plˈan", "dare": 1, "verb": 3, "emo": "📂"}, {"en": "Dare she voice her concerns during the briefing?", "th": "เธอกล้าพอที่จะกล่าวถึงข้อกังวลของเธอระหว่างการบรรยายสรุปไหม", "ipa": "dˈeə ʃiː vˈɔɪs hɜː kənsˈɜːnz djˈʊəɹɪŋ ðə bɹˈiːfɪŋ", "dare": 0, "verb": 2, "emo": "📣"}, {"en": "He dare not test his parents' patience further.", "th": "เขาไม่กล้าพอที่จะทดสอบความอดทนของพ่อแม่ไปมากกว่านี้", "ipa": "hiː dˈeə nˌɒt tˈɛst hɪz pˈeəɹənts pˈeɪʃəns fˈɜːðə", "dare": 1, "verb": 3, "emo": "🧪"}, {"en": "Dare we take such a massive financial risk?", "th": "พวกเรากล้าพอที่จะรับความเสี่ยงทางการเงินที่มหาศาลขนาดนี้ไหม", "ipa": "dˈeə wiː tˈeɪk sˈʌtʃ ɐ mˈasɪv faɪnˈanʃəl ɹˈɪsk", "dare": 0, "verb": 2, "emo": "🎲"}, {"en": "They dare not question the ancient traditions.", "th": "พวกเขาไม่กล้าพอที่จะตั้งคำถามกับประเพณีโบราณ", "ipa": "ðeɪ dˈeə nˌɒt kwˈɛstʃən ðɪ ˈeɪnʃənt tɹɐdˈɪʃənz", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "Dare I hope for a better outcome than this?", "th": "ฉันจะกล้าหวังผลลัพธ์ที่ดีกว่านี้ไหม", "ipa": "dˈeəɹ aɪ hˈəʊp fəɹə bˈɛtəɹ ˈaʊtkʌm ðɐn ðˈɪs", "dare": 0, "verb": 2, "emo": "🙏"}, {"en": "She dare not dispute the expert's conclusion.", "th": "เธอไม่กล้าพอที่จะโต้แย้งข้อสรุปของผู้เชี่ยวชาญ", "ipa": "ʃiː dˈeə nˌɒt dɪspjˈuːt ðɪ ˈɛkspɜːts kəŋklˈuːʒən", "dare": 1, "verb": 3, "emo": "⚖️"}, {"en": "Dare they venture into the stormy sea?", "th": "พวกเขากล้าพอที่จะเสี่ยงออกทะเลในช่วงที่มีพายุไหม", "ipa": "dˈeə ðeɪ vˈɛntʃəɹ ˌɪntʊ ðə stˈɔːmi sˈiː", "dare": 0, "verb": 2, "emo": "🧭"}, {"en": "He dare not question the manager's decision.", "th": "เขาไม่กล้าพอที่จะตั้งคำถามกับการตัดสินใจของผู้จัดการ", "ipa": "hiː dˈeə nˌɒt kwˈɛstʃən ðə mˈanɪdʒəz dɪsˈɪʒən", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "Dare we challenge the market leader?", "th": "พวกเรากล้าพอที่จะท้าทายผู้นำในตลาดนี้ไหม", "ipa": "dˈeə wiː tʃˈalɪndʒ ðə mˈɑːkɪt lˈiːdə", "dare": 0, "verb": 2, "emo": "🥊"}, {"en": "You dare not break the established protocol.", "th": "คุณไม่กล้าพอที่จะฝ่าฝืนระเบียบปฏิบัติที่มีอยู่", "ipa": "juː dˈeə nˌɒt bɹˈeɪk ðɪ ɪstˈablɪʃt pɹˈəʊtəkˌɒl", "dare": 1, "verb": 3, "emo": "💥"}, {"en": "Dare I reveal my true feelings to her?", "th": "ฉันจะกล้าเปิดเผยความรู้สึกที่แท้จริงของฉันให้เธอรู้ไหม", "ipa": "dˈeəɹ aɪ ɹɪvˈiːl maɪ tɹˈuː fˈiːlɪŋz tə hɜː", "dare": 0, "verb": 2, "emo": "🔓"}, {"en": "She dare not interrupt the CEO's keynote speech.", "th": "เธอไม่กล้าพอที่จะขัดจังหวะการกล่าวสุนทรพจน์หลักของซีอีโอ", "ipa": "ʃiː dˈeə nˌɒt ˈɪntəɹˌʌpt ðə sˌiːˌiːˈəʊz kˈiːnəʊt spˈiːtʃ", "dare": 1, "verb": 3, "emo": "✋"}, {"en": "Dare he confront his fears head-on?", "th": "เขากล้าพอที่จะเผชิญหน้ากับความกลัวของตัวเองอย่างตรงไปตรงมาไหม", "ipa": "dˈeə hiː kənfɹˈʌnt hɪz fˈiəz hˈɛdˈɒn", "dare": 0, "verb": 2, "emo": "😠"}, {"en": "They dare not ignore the safety warnings.", "th": "พวกเขาไม่กล้าพอที่จะเมินเฉยต่อคำเตือนด้านความปลอดภัย", "ipa": "ðeɪ dˈeə nˌɒt ɪɡnˈɔː ðə sˈeɪfti wˈɔːnɪŋz", "dare": 1, "verb": 3, "emo": "🙈"}, {"en": "Dare you touch that priceless antique vase?", "th": "คุณกล้าพอที่จะสัมผัสแจกันโบราณล้ำค่าใบนั้นไหม", "ipa": "dˈeə juː tˈʌtʃ ðat pɹˈaɪsləs antˈiːk vˈɑːz", "dare": 0, "verb": 2, "emo": "👆"}, {"en": "I dare not step onto the skating rink without experience.", "th": "ฉันไม่กล้าพอที่จะก้าวลงไปบนลานสเก็ตโดยไม่มีประสบการณ์", "ipa": "aɪ dˈeə nˌɒt stˈɛp ˌɒntʊ ðə skˈeɪtɪŋ ɹˈɪŋk wɪðˌaʊt ɛkspˈiəɹɪəns", "dare": 1, "verb": 3, "emo": "👣"}, {"en": "Dare she express her dissent in public?", "th": "เธอกล้าพอที่จะแสดงความเห็นต่างในที่สาธารณะไหม", "ipa": "dˈeə ʃiː ɛkspɹˈɛs hɜː dɪsˈɛnt ɪn pˈʌblɪk", "dare": 0, "verb": 2, "emo": "💬"}, {"en": "He dare not oppose the board's resolution.", "th": "เขาไม่กล้าพอที่จะคัดค้านมติของคณะกรรมการบริหาร", "ipa": "hiː dˈeə nˌɒt əpˈəʊz ðə bˈɔːdz ɹˌɛzəlˈuːʃən", "dare": 1, "verb": 3, "emo": "🚫"}, {"en": "Dare we investigate the abandoned building?", "th": "พวกเรากล้าพอที่จะเข้าไปตรวจสอบอาคารร้างหลังนั้นไหม", "ipa": "dˈeə wiː ɪnvˈɛstɪɡˌeɪt ðɪ ɐbˈandənd bˈɪldɪŋ", "dare": 0, "verb": 2, "emo": "🕵️"}, {"en": "They dare not test the limits of the law.", "th": "พวกเขาไม่กล้าพอที่จะทดสอบขีดจำกัดของกฎหมาย", "ipa": "ðeɪ dˈeə nˌɒt tˈɛst ðə lˈɪmɪts ɒvðə lˈɔː", "dare": 1, "verb": 3, "emo": "🧪"}, {"en": "Dare I ask for a salary raise today?", "th": "ฉันจะกล้าขอขึ้นเงินเดือนในวันนี้ไหม", "ipa": "dˈeəɹ aɪ ˈask fəɹə sˈaləɹi ɹˈeɪz tədˈeɪ", "dare": 0, "verb": 2, "emo": "🙋"}, {"en": "She dare not contradict her supervisor's instructions.", "th": "เธอไม่กล้าพอที่จะแย้งคำสั่งของผู้บังคับบัญชา", "ipa": "ʃiː dˈeə nˌɒt kˌɒntɹədˈɪkt hɜː sˈuːpəvˌaɪzəz ɪnstɹˈʌkʃənz", "dare": 1, "verb": 3, "emo": "🔄"}, {"en": "Dare he speak out against corruption?", "th": "เขากล้าพอที่จะพูดต่อต้านการทุจริตคอร์รัปชันไหม", "ipa": "dˈeə hiː spˈiːk ˈaʊt ɐɡˈɛnst kəɹˈʌpʃən", "dare": 0, "verb": 2, "emo": "🗣️"}, {"en": "You dare not criticize the master's technique.", "th": "คุณไม่กล้าพอที่จะวิจารณ์เทคนิคของปรมาจารย์ท่านนั้น", "ipa": "juː dˈeə nˌɒt kɹˈɪtɪsˌaɪz ðə mˈastəz tɛknˈiːk", "dare": 1, "verb": 3, "emo": "👎"}, {"en": "Dare they disclose confidential information?", "th": "พวกเขากล้าพอที่จะเปิดเผยข้อมูลที่เป็นความลับไหม", "ipa": "dˈeə ðeɪ dɪsklˈəʊz kˌɒnfɪdˈɛnʃəl ˌɪnfəmˈeɪʃən", "dare": 0, "verb": 2, "emo": "📂"}, {"en": "I dare not look down from the mountain peak.", "th": "ฉันไม่กล้าพอที่จะมองลงมาจากยอดเขา", "ipa": "aɪ dˈeə nˌɒt lˈʊk dˌaʊn fɹʌmðə mˈaʊntɪn pˈiːk", "dare": 1, "verb": 3, "emo": "👀"}, {"en": "Dare she sing an unaccompanied solo?", "th": "เธอกล้าพอที่จะร้องเพลงเดี่ยวแบบไม่มีดนตรีคลอไหม", "ipa": "dˈeə ʃiː sˈɪŋ ɐn ʌnɐkˈʌmpənid sˈəʊləʊ", "dare": 0, "verb": 2, "emo": "🎤"}, {"en": "He dare not alter the core system settings.", "th": "เขาไม่กล้าพอที่จะแก้ไขการตั้งค่าระบบหลัก", "ipa": "hiː dˈeə nˌɒt ˈɒltə ðə kˈɔː sˈɪstəm sˈɛtɪŋz", "dare": 1, "verb": 3, "emo": "🛠️"}, {"en": "Dare we take this unprecedented risk?", "th": "พวกเรากล้าพอที่จะรับความเสี่ยงที่ไม่เคยเกิดขึ้นมาก่อนนี้ไหม", "ipa": "dˈeə wiː tˈeɪk ðɪs ʌnpɹˈɛsɪdəntɪd ɹˈɪsk", "dare": 0, "verb": 2, "emo": "🎲"}, {"en": "They dare not stand in the path of the storm.", "th": "พวกเขาไม่กล้าพอที่จะยืนขวางเส้นทางพายุ", "ipa": "ðeɪ dˈeə nˌɒt stˈand ɪnðə pˈaθ ɒvðə stˈɔːm", "dare": 1, "verb": 3, "emo": "🧍"}, {"en": "Dare I hope for a miracle right now?", "th": "ฉันจะกล้าหวังปาฏิหาริย์ในตอนนี้ไหม", "ipa": "dˈeəɹ aɪ hˈəʊp fəɹə mˈɪɹəkəl ɹˈaɪt nˈaʊ", "dare": 0, "verb": 2, "emo": "🙏"}, {"en": "She dare not swim against the strong current.", "th": "เธอไม่กล้าพอที่จะว่ายน้ำทวนกระแสน้ำเชี่ยว", "ipa": "ʃiː dˈeə nˌɒt swˈɪm ɐɡˈɛnst ðə stɹˈɒŋ kˈʌɹənt", "dare": 1, "verb": 3, "emo": "🏊"}, {"en": "Dare he face the committee without preparation?", "th": "เขากล้าพอที่จะเผชิญหน้ากับคณะกรรมการโดยไม่มีการเตรียมตัวไหม", "ipa": "dˈeə hiː fˈeɪs ðə kəmˈɪti wɪðˌaʊt pɹˌɛpəɹˈeɪʃən", "dare": 0, "verb": 2, "emo": "😨"}, {"en": "You dare not bypass the safety inspections.", "th": "คุณไม่กล้าพอที่จะข้ามขั้นตอนการตรวจสอบความปลอดภัย", "ipa": "juː dˈeə nˌɒt bˈaɪpas ðə sˈeɪfti ɪnspˈɛkʃənz", "dare": 1, "verb": 3, "emo": "⏭️"}, {"en": "Dare they question the validity of the test?", "th": "พวกเขากล้าพอที่จะตั้งคำถามถึงความถูกต้องของการทดสอบไหม", "ipa": "dˈeə ðeɪ kwˈɛstʃən ðə valˈɪdɪti ɒvðə tˈɛst", "dare": 0, "verb": 2, "emo": "❓"}, {"en": "I dare not open the attachment from an unknown sender.", "th": "ฉันไม่กล้าพอที่จะเปิดไฟล์แนบจากผู้ส่งที่ไม่รู้จัก", "ipa": "aɪ dˈeə nˌɒt ˈəʊpən ðɪ ɐtˈatʃmənt fɹɒm ɐn ʌnnˈəʊn sˈɛndə", "dare": 1, "verb": 3, "emo": "📦"}, {"en": "Dare she pitch her novel to a major publisher?", "th": "เธอกล้าพอที่จะเสนอผลงานนวนิยายของเธอกับสำนักพิมพ์ใหญ่ไหม", "ipa": "dˈeə ʃiː pˈɪtʃ hɜː nˈɒvəl tʊ ɐ mˈeɪdʒə pˈʌblɪʃə", "dare": 0, "verb": 2, "emo": "📊"}, {"en": "He dare not share his revolutionary design yet.", "th": "เขาไม่กล้าพอที่จะแบ่งปันการออกแบบปฏิวัติวงการนี้ในตอนนี้", "ipa": "hiː dˈeə nˌɒt ʃˈeə hɪz ɹˌɛvəlˈuːʃənəɹi dɪzˈaɪn jˈɛt", "dare": 1, "verb": 3, "emo": "🤝"}, {"en": "Dare we explore the deep underground tunnels?", "th": "พวกเรากล้าพอที่จะสำรวจอุโมงค์ใต้ดินลึกไหม", "ipa": "dˈeə wiː ɛksplˈɔː ðə dˈiːp ˌʌndəɡɹˈaʊnd tˈʌnəlz", "dare": 0, "verb": 2, "emo": "🔍"}, {"en": "They dare not dispute the historical records.", "th": "พวกเขาไม่กล้าพอที่จะโต้แย้งบันทึกทางประวัติศาสตร์", "ipa": "ðeɪ dˈeə nˌɒt dɪspjˈuːt ðə hɪstˈɒɹɪkəl ɹˈɛkɔːdz", "dare": 1, "verb": 3, "emo": "⚖️"}, {"en": "Dare I correct the financial expert's report?", "th": "ฉันจะกล้าแก้ไขรายงานของผู้เชี่ยวชาญทางการเงินไหม", "ipa": "dˈeəɹ aɪ kəɹˈɛkt ðə faɪnˈanʃəl ˈɛkspɜːts ɹɪpˈɔːt", "dare": 0, "verb": 2, "emo": "✏️"}, {"en": "She dare not touch the hot engine components.", "th": "เธอไม่กล้าพอที่จะสัมผัสชิ้นส่วนเครื่องยนต์ที่กำลังร้อน", "ipa": "ʃiː dˈeə nˌɒt tˈʌtʃ ðə hˈɒt ˈɛndʒɪn kəmpˈəʊnənts", "dare": 1, "verb": 3, "emo": "👆"}, {"en": "Dare he perform his stunts without safety nets?", "th": "เขากล้าพอที่จะแสดงสเก็ตหรือผาดโผนโดยไม่มีตาข่ายนิรภัยไหม", "ipa": "dˈeə hiː pəfˈɔːm hɪz stˈʌnts wɪðˌaʊt sˈeɪfti nˈɛts", "dare": 0, "verb": 2, "emo": "🎩"}, {"en": "You dare not challenge her expertise in physics.", "th": "คุณไม่กล้าพอที่จะท้าทายความเชี่ยวชาญด้านฟิสิกส์ของเธอ", "ipa": "juː dˈeə nˌɒt tʃˈalɪndʒ hɜːɹ ˌɛkspətˈiːz ɪn fˈɪzɪks", "dare": 1, "verb": 3, "emo": "🥊"}, {"en": "Dare they break the long-standing tradition?", "th": "พวกเขากล้าพอที่จะทำลายประเพณีที่มีมาอย่างยาวนานไหม", "ipa": "dˈeə ðeɪ bɹˈeɪk ðə lˈɒŋstˈandɪŋ tɹɐdˈɪʃən", "dare": 0, "verb": 2, "emo": "💥"}, {"en": "I dare not disclose the confidential plans.", "th": "ฉันไม่กล้าพอที่จะเปิดเผยแผนงานที่เป็นความลับ", "ipa": "aɪ dˈeə nˌɒt dɪsklˈəʊz ðə kˌɒnfɪdˈɛnʃəl plˈanz", "dare": 1, "verb": 3, "emo": "📂"}, {"en": "Dare she voice her objections to the board?", "th": "เธอกล้าพอที่จะกล่าวคัดค้านต่อคณะกรรมการบริหารไหม", "ipa": "dˈeə ʃiː vˈɔɪs hɜːɹ ɒbdʒˈɛkʃənz tə ðə bˈɔːd", "dare": 0, "verb": 2, "emo": "📣"}, {"en": "He dare not test the boundaries of corporate patience.", "th": "เขาไม่กล้าพอที่จะทดสอบขีดจำกัดความอดทนของบริษัท", "ipa": "hiː dˈeə nˌɒt tˈɛst ðə bˈaʊndəɹiz ɒv kˈɔːpəɹət pˈeɪʃəns", "dare": 1, "verb": 3, "emo": "🧪"}, {"en": "Dare we take a leap of faith on this venture?", "th": "พวกเรากล้าพอที่จะเสี่ยงศรัทธาลงทุนในกิจการนี้ไหม", "ipa": "dˈeə wiː tˈeɪk ɐ lˈiːp ɒv fˈeɪθ ˌɒn ðɪs vˈɛntʃə", "dare": 0, "verb": 2, "emo": "🎲"}, {"en": "They dare not question the wisdom of the elders.", "th": "พวกเขาไม่กล้าพอที่จะตั้งคำถามถึงภูมิปัญญาของผู้อาวุโส", "ipa": "ðeɪ dˈeə nˌɒt kwˈɛstʃən ðə wˈɪzdəm ɒvðɪ ˈɛldəz", "dare": 1, "verb": 3, "emo": "❓"}];
+const PER_PAGE = 50;
+const pages = Math.ceil(DATA.length / PER_PAGE);
+let page = 0, voices = [], chosen = null;
+const grid = document.getElementById('grid'), pager = document.getElementById('pager');
+
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function mark(d){
+  return d.en.split(' ').map((w,i)=>{
+    const m = w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m || (i!==d.dare && i!==d.verb)) return esc(w);
+    const cls = i===d.dare ? ' class="dare"' : '';
+    return esc(m[1])+'<b'+cls+'>'+esc(m[2])+'</b>'+esc(m[3]);
+  }).join(' ');
+}
+function render(){
+  grid.innerHTML = '';
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((d,k)=>{
+    const n = start+k+1;
+    const el = document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML = `<div class="inner">
+      <div class="face front">
+        <div class="pic" aria-hidden="true"><small>${n}</small>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d)}</p><p class="ipa">/${esc(d.ipa)}/</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">แตะเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${esc(d.en)}</p><span class="hint">แตะเพื่อกลับ</span></div>
+    </div>`;
+    el.addEventListener('click',()=>el.classList.toggle('flipped'));
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b = el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const s=p*PER_PAGE+1, e=Math.min((p+1)*PER_PAGE,DATA.length);
+    const b=document.createElement('button');
+    b.textContent=`Page ${p+1} (${s}–${e})`;
+    if(p===page) b.setAttribute('aria-current','true');
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0})};
+    pager.appendChild(b);
+  }
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children]; const allOn=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!allOn));
+};
+
+/* ---- Speech: prefer a British male voice ---- */
+const MALE_HINTS=['daniel','google uk english male','ryan','george','thomas','oliver','arthur','male'];
+function pickVoice(){
+  voices = (window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  const score=v=>{const n=v.name.toLowerCase();let s=0;
+    if(/en[-_]gb/i.test(v.lang))s+=10;
+    MALE_HINTS.forEach((h,i)=>{if(n.includes(h))s+=8-i*0.5});
+    if(/natural|neural|online/.test(n))s+=6;
+    if(/female|libby|sonia|maisie|kate|serena|susan|hazel|google uk english female/.test(n))s-=20;
+    return s};
+  voices.sort((a,b)=>score(b)-score(a));
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent = chosen ? '' : 'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let activeBtn=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel();
+  if(activeBtn)activeBtn.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB'; if(chosen)u.voice=chosen; u.rate=0.9; u.pitch=0.85;
+  btn.classList.add('on'); activeBtn=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

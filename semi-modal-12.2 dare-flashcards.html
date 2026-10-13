@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>12.2 Semi-modal "dare" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#e9eef3;--ink:#111;--muted:#52606d;--card:#fff;--tile:#eef2f6;--line:#cfd8e0;--red:#8b0000;--redbg:#fbe9e9;--btn:#14213d;--btnink:#fff;--back:#14213d;--backink:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e141b;--ink:#111;--muted:#9fb0c0;--line:#2a3846;--btn:#14213d;--back:#1d3557}}
+:root[data-theme="dark"]{--bg:#0e141b;--ink:#111;--muted:#9fb0c0;--line:#2a3846;--btn:#14213d;--back:#1d3557}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 8px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{margin:0;font:700 22px/1.2 Arial,sans-serif;color:var(--hd,#14213d)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hd:#e6edf3}}
+:root[data-theme="dark"]{--hd:#e6edf3}
+.sub{color:var(--muted);font-size:14px;margin-top:4px}
+.pager{display:flex;gap:8px;flex-wrap:wrap}
+.pager button{font:600 14px Arial,sans-serif;padding:9px 16px;border-radius:999px;border:1.5px solid var(--btn);background:transparent;color:var(--hd,#14213d);cursor:pointer}
+.pager button[aria-current="true"]{background:var(--btn);color:var(--btnink)}
+.bar{max-width:1100px;margin:0 auto;padding:6px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:260px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 40px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:300px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.front{background:var(--card);border:1px solid var(--line)}
+.card:focus-visible .front,.card:focus-visible .back{box-shadow:0 0 0 3px #4a7bd0}
+.pic{flex:0 0 112px;background:var(--tile);display:flex;align-items:center;justify-content:center;font-size:68px;line-height:1;border-bottom:1px solid var(--line);position:relative}
+.pic small{position:absolute;left:12px;top:8px;font:12px Arial;color:#52606d}
+.txt{flex:1;padding:12px 18px 0;display:flex;flex-direction:column;justify-content:center;gap:8px;text-align:center}
+.en{font:300 21px/1.35 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.dare{background:var(--redbg);border-radius:4px;padding:0 3px}
+.ipa{font:400 16px/1.4 "Times New Roman",Times,serif;color:#333;margin:0}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#52606d}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--btn);color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.25)}
+.say.on{background:var(--red)}
+.back{background:var(--back);color:var(--backink);transform:rotateY(180deg);justify-content:center;align-items:center;padding:24px;text-align:center;gap:14px}
+.back .th{font:500 24px/1.55 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 14px/1.4 Arial;opacity:.75;margin:0}
+.back .hint{color:#c8d3e0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:310px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>12.2 Semi-modal “dare” · Boldness</h1>
+    <div class="sub">คลิกการ์ดเพื่อดูคำแปล · กดปุ่มลำโพงเพื่อฟังเสียง (UK)</div>
+  </div>
+  <nav class="pager" id="pager" aria-label="Pages"></nav>
+</header>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<script>
+const DATA = [{"en": "Few people dare speak out against the corruption.", "th": "มีคนเพียงไม่กี่คนที่กล้าพูดต่อต้านการทุจริต", "ipa": "fjˈuː pˈiːpəl dˈeə spˈiːk ˈaʊt ɐɡˈɛnst ðə kəɹˈʌpʃən", "dare": 2, "verb": 3, "emo": "🗣️"}, {"en": "She had the dare to question the expert's thesis.", "th": "เธอกล้าพอที่จะตั้งคำถามกับวิทยานิพนธ์ของผู้เชี่ยวชาญ", "ipa": "ʃiː had ðə dˈeə tə kwˈɛstʃən ðɪ ˈɛkspɜːts θˈiːsɪs", "dare": 3, "verb": 5, "emo": "❓"}, {"en": "He dare to dream big despite his humble background.", "th": "กล้าที่จะฝันให้ยิ่งใหญ่แม้ว่าจะมีพื้นเพที่ยากจนก็ตาม", "ipa": "hiː dˈeə tə dɹˈiːm bˈɪɡ dɪspˈaɪt hɪz hˈʌmbəl bˈakɡɹaʊnd", "dare": 1, "verb": 3, "emo": "💭"}, {"en": "Who would dare to climb that treacherous mountain peak?", "th": "ใครจะกล้าปีนป่ายยอดเขาที่อันตรายลูกนั้น", "ipa": "hˌuː wʊd dˈeə tə klˈaɪm ðat tɹˈɛtʃəɹəs mˈaʊntɪn pˈiːk", "dare": 2, "verb": 4, "emo": "🧗"}, {"en": "They dare to innovate in a conservative industry.", "th": "พวกเขากล้าที่จะสร้างสรรค์นวัตกรรมใหม่ในอุตสาหกรรมที่อนุรักษ์นิยม", "ipa": "ðeɪ dˈeə tʊ ˈɪnəvˌeɪt ɪn ɐ kənsˈɜːvətˌɪv ˈɪndʌstɹi", "dare": 1, "verb": 3, "emo": "💡"}, {"en": "You must dare to take risks if you want to succeed.", "th": "คุณต้องกล้าที่จะเสี่ยงหากคุณต้องการประสบความสำเร็จ", "ipa": "juː mˈʌst dˈeə tə tˈeɪk ɹˈɪsks ɪf juː wˈɒnt tə səksˈiːd", "dare": 2, "verb": 4, "emo": "🎲"}, {"en": "She dare to wear unconventional fashion styles.", "th": "เธอกล้าที่จะสวมใส่แฟชั่นสไตล์แหวกแนว", "ipa": "ʃiː dˈeə tə wˈeəɹ ʌŋkənvˈɛnʃənəl fˈaʃən stˈaɪlz", "dare": 1, "verb": 3, "emo": "👔"}, {"en": "He had the dare to invest his entire life savings.", "th": "เขากล้าพอที่จะลงทุนเงินเก็บทั้งชีวิตของเขา", "ipa": "hiː had ðə dˈeə tʊ ɪnvˈɛst hɪz ɛntˈaɪə lˈaɪf sˈeɪvɪŋz", "dare": 3, "verb": 5, "emo": "💰"}, {"en": "We dare to challenge the status quo every day.", "th": "พวกเรากล้าที่จะท้าทายสภาพที่เป็นอยู่ทุกวัน", "ipa": "wiː dˈeə tə tʃˈalɪndʒ ðə stˈeɪtəs kwˈəʊ ˈɛvɹɪ dˈeɪ", "dare": 1, "verb": 3, "emo": "🥊"}, {"en": "Only a few explorers dare to explore the deep cave.", "th": "มีเพียงนักสำรวจไม่กี่คนที่กล้าสำรวจถ้ำลึกนั้น", "ipa": "ˈəʊnli ɐ fjˈuː ɛksplˈɔːɹəz dˈeə tʊ ɛksplˈɔː ðə dˈiːp kˈeɪv", "dare": 4, "verb": 6, "emo": "🔍"}, {"en": "She dare to propose a radical new company policy.", "th": "เธอกล้าที่จะเสนอนโยบายบริษัทใหม่แบบพลิกโฉม", "ipa": "ʃiː dˈeə tə pɹəpˈəʊz ɐ ɹˈadɪkəl njˈuː kˈʌmpəni pˈɒlɪsi", "dare": 1, "verb": 3, "emo": "📝"}, {"en": "He had the dare to defend his friends in danger.", "th": "เขากล้าพอที่จะปกป้องเพื่อน ๆ ของเขาที่กำลังตกอยู่ในอันตราย", "ipa": "hiː had ðə dˈeə tə dɪfˈɛnd hɪz fɹˈɛndz ɪn dˈeɪndʒə", "dare": 3, "verb": 5, "emo": "🛡️"}, {"en": "They dare to pursue their passions against all odds.", "th": "พวกเขากล้าที่จะทำตามความหลงใหลของตนเองท่ามกลางอุปสรรคทั้งปวง", "ipa": "ðeɪ dˈeə tə pəsjˈuː ðeə pˈaʃənz ɐɡˈɛnst ˈɔːl ˈɒdz", "dare": 1, "verb": 3, "emo": "🎯"}, {"en": "You dare to stand up for what you believe in.", "th": "คุณกล้าที่จะยืนหยัดเพื่อสิ่งที่คุณเชื่อมั่น", "ipa": "juː dˈeə tə stˈand ˌʌp fɔː wɒt juː bɪlˈiːv ˈɪn", "dare": 1, "verb": 3, "emo": "🧍"}, {"en": "She dare to confront her deepest inner fears.", "th": "เธอกล้าที่จะเผชิญหน้ากับความกลัวลึก ๆ ภายในใจของเธอ", "ipa": "ʃiː dˈeə tə kənfɹˈʌnt hɜː dˈiːpɪst ˈɪnə fˈiəz", "dare": 1, "verb": 3, "emo": "😠"}, {"en": "He had the dare to quit his stable job to start a business.", "th": "เขากล้าพอที่จะลาออกจากงานที่มั่นคงเพื่อมาทำธุรกิจ", "ipa": "hiː had ðə dˈeə tə kwˈɪt hɪz stˈeɪbəl dʒˈɒb tə stˈɑːt ɐ bˈɪznəs", "dare": 3, "verb": 5, "emo": "🚪"}, {"en": "We dare to imagine a sustainable future.", "th": "พวกเรากล้าที่จะจินตนาการถึงอนาคตที่ยั่งยืน", "ipa": "wiː dˈeə tʊ ɪmˈadʒɪn ɐ səstˈeɪnəbəl fjˈuːtʃə", "dare": 1, "verb": 3, "emo": "🌈"}, {"en": "They dare to experiment with unusual ingredients.", "th": "พวกเขากล้าที่จะทดลองใช้วัตถุดิบแปลกใหม่", "ipa": "ðeɪ dˈeə tʊ ɛkspˈɛɹɪmənt wɪð ʌnjˈuːʒuːəl ɪŋɡɹˈiːdiənts", "dare": 1, "verb": 3, "emo": "⚗️"}, {"en": "She dare to express her unique artistic vision.", "th": "เธอกล้าที่จะแสดงวิสัยทัศน์ทางศิลปะที่เป็นเอกลักษณ์ของเธอ", "ipa": "ʃiː dˈeə tʊ ɛkspɹˈɛs hɜː juːnˈiːk ɑːtˈɪstɪk vˈɪʒən", "dare": 1, "verb": 3, "emo": "💬"}, {"en": "He had the dare to share his failures publicly.", "th": "เขากล้าพอที่จะแบ่งปันเรื่องความล้มเหลวของตนเองให้สาธารณชนฟัง", "ipa": "hiː had ðə dˈeə tə ʃˈeə hɪz fˈeɪliəz pˈʌblɪkli", "dare": 3, "verb": 5, "emo": "🤝"}, {"en": "You dare to question conventional wisdom.", "th": "คุณกล้าที่จะตั้งคำถามกับความเชื่อดั้งเดิมที่ปฏิบัติกันมา", "ipa": "juː dˈeə tə kwˈɛstʃən kənvˈɛnʃənəl wˈɪzdəm", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "She dare to embark on a solo cross-country journey.", "th": "เธอกล้าที่จะเริ่มต้นเดินทางข้ามประเทศคนเดียว", "ipa": "ʃiː dˈeə tʊ ɛmbˈɑːk ˌɒn ɐ sˈəʊləʊ kɹˈɒskˈʌntɹi dʒˈɜːni", "dare": 1, "verb": 3, "emo": "🧳"}, {"en": "They dare to lead the way through uncharted territory.", "th": "พวกเขากล้าที่จะนำทางบุกเบิกผ่านดินแดนที่ไม่เคยมีใครสำรวจ", "ipa": "ðeɪ dˈeə tə lˈiːd ðə wˈeɪ θɹuː ʌntʃˈɑːtɪd tˈɛɹɪtəɹi", "dare": 1, "verb": 3, "emo": "🧭"}, {"en": "He had the dare to test the experimental vehicle.", "th": "เขากล้าพอที่จะทดลองขับรถยนต์ทดลองต้นแบบ", "ipa": "hiː had ðə dˈeə tə tˈɛst ðɪ ɛkspˌɛɹɪmˈɛntəl vˈiəkəl", "dare": 3, "verb": 5, "emo": "🧪"}, {"en": "We dare to hope for a better social change.", "th": "พวกเรากล้าที่จะหวังถึงการเปลี่ยนแปลงทางสังคมที่ดีขึ้น", "ipa": "wiː dˈeə tə hˈəʊp fəɹə bˈɛtə sˈəʊʃəl tʃˈeɪndʒ", "dare": 1, "verb": 3, "emo": "🙏"}, {"en": "She dare to demand accountability from management.", "th": "เธอกล้าที่จะเรียกร้องความรับผิดชอบจากฝ่ายบริหาร", "ipa": "ʃiː dˈeə tə dɪmˈand ɐkˌaʊntəbˈɪlɪti fɹɒm mˈanɪdʒmənt", "dare": 1, "verb": 3, "emo": "📢"}, {"en": "He had the dare to perform his magic tricks on stage.", "th": "เขากล้าพอที่จะแสดงกลของเขาบนเวที", "ipa": "hiː had ðə dˈeə tə pəfˈɔːm hɪz mˈadʒɪk tɹˈɪks ˌɒn stˈeɪdʒ", "dare": 3, "verb": 5, "emo": "🎩"}, {"en": "They dare to redefine modern architecture.", "th": "พวกเขากล้าที่จะนิยามสถาปัตยกรรมสมัยใหม่ขึ้นมาใหม่", "ipa": "ðeɪ dˈeə tə ɹˌiːdɪfˈaɪn mˈɒdən ˈɑːkɪtˌɛktʃə", "dare": 1, "verb": 3, "emo": "📐"}, {"en": "You dare to speak up when others remain silent.", "th": "คุณกล้าที่จะพูดขึ้นมาในขณะที่คนอื่น ๆ ยังคงเงียบ", "ipa": "juː dˈeə tə spˈiːk ˌʌp wɛn ˈʌðəz ɹɪmˈeɪn sˈaɪlənt", "dare": 1, "verb": 3, "emo": "🗣️"}, {"en": "She dare to trust someone after being hurt.", "th": "เธอกล้าที่จะเชื่อใจใครสักคนหลังจากที่เคยเจ็บช้ำมา", "ipa": "ʃiː dˈeə tə tɹˈʌst sˈʌmwɒn ˈaftə bˌiːɪŋ hˈɜːt", "dare": 1, "verb": 3, "emo": "🤝"}, {"en": "He had the dare to break traditional rules.", "th": "เขากล้าพอที่จะแหกกฎเกณฑ์ดั้งเดิม", "ipa": "hiː had ðə dˈeə tə bɹˈeɪk tɹɐdˈɪʃənəl ɹˈuːlz", "dare": 3, "verb": 5, "emo": "💥"}, {"en": "We dare to tackle complex global issues.", "th": "พวกเรากล้าที่จะรับมือกับปัญหาโลกที่ซับซ้อน", "ipa": "wiː dˈeə tə tˈakəl kˈɒmplɛks ɡlˈəʊbəl ˈɪʃuːz", "dare": 1, "verb": 3, "emo": "🧩"}, {"en": "They dare to create art that provokes thought.", "th": "พวกเขากล้าที่จะสร้างสรรค์งานศิลปะที่กระตุ้นความคิด", "ipa": "ðeɪ dˈeə tə kɹiːˈeɪt ˈɑːt ðat pɹəvˈəʊks θˈɔːt", "dare": 1, "verb": 3, "emo": "🎨"}, {"en": "She had the dare to admit her shortcomings openly.", "th": "เธอกล้าพอที่จะยอมรับข้อบกพร่องของตนเองอย่างเปิดเผย", "ipa": "ʃiː had ðə dˈeə tʊ ɐdmˈɪt hɜː ʃˈɔːtkʌmɪŋz ˈəʊpənli", "dare": 3, "verb": 5, "emo": "🙇"}, {"en": "He dare to investigate controversial mysteries.", "th": "เขากล้าที่จะสืบสวนสอบสวนเรื่องลึกลับที่ยังเป็นข้อถกเถียง", "ipa": "hiː dˈeə tʊ ɪnvˈɛstɪɡˌeɪt kˌɒntɹəvˈɜːʃəl mˈɪstəɹiz", "dare": 1, "verb": 3, "emo": "🕵️"}, {"en": "You dare to visualize a completely new career path.", "th": "คุณกล้าที่จะจินตนาการเส้นทางอาชีพใหม่หมดจด", "ipa": "juː dˈeə tə vˈɪʒuːəlˌaɪz ɐ kəmplˈiːtli njˈuː kəɹˈiə pˈaθ", "dare": 1, "verb": 3, "emo": "🖼️"}, {"en": "She dare to protect vulnerable community members.", "th": "เธอกล้าที่จะปกป้องสมาชิกในชุมชนที่เปราะบาง", "ipa": "ʃiː dˈeə tə pɹətˈɛkt vˈʌlnəɹəbəl kəmjˈuːnɪti mˈɛmbəz", "dare": 1, "verb": 3, "emo": "🛡️"}, {"en": "He had the dare to pitch a disruptive startup concept.", "th": "เขากล้าพอที่จะนำเสนอแนวคิดสตาร์ทอัพที่พลิกตลาด", "ipa": "hiː had ðə dˈeə tə pˈɪtʃ ɐ dɪsɹˈʌptɪv stˈɑːtʌp kˈɒnsɛpt", "dare": 3, "verb": 5, "emo": "📊"}, {"en": "They dare to explore untouched digital frontiers.", "th": "พวกเขากล้าที่จะสำรวจพรมแดนดิจิทัลที่ยังไม่เคยมีใครแตะต้อง", "ipa": "ðeɪ dˈeə tʊ ɛksplˈɔːɹ ʌntˈʌtʃt dˈɪdʒɪtəl fɹˈʌntiəz", "dare": 1, "verb": 3, "emo": "🔍"}, {"en": "We dare to build a better path forward.", "th": "พวกเรากล้าที่จะสร้างหนทางข้างหน้าให้ดีกว่าเดิม", "ipa": "wiː dˈeə tə bˈɪld ɐ bˈɛtə pˈaθ fˈɔːwəd", "dare": 1, "verb": 3, "emo": "🏗️"}, {"en": "She dare to defy expectations with her music.", "th": "เธอกล้าที่จะท้าทายความคาดหวังด้วยผลงานเพลงของเธอ", "ipa": "ʃiː dˈeə tə dɪfˈaɪ ɛkspɪktˈeɪʃənz wɪð hɜː mjˈuːzɪk", "dare": 1, "verb": 3, "emo": "🚀"}, {"en": "He had the dare to pursue professional athletics late in life.", "th": "เขากล้าพอที่จะมุ่งมั่นเป็นนักกีฬาอาชีพในช่วงบั้นปลายของชีวิต", "ipa": "hiː had ðə dˈeə tə pəsjˈuː pɹəfˈɛʃənəl aθlˈɛtɪks lˈeɪt ɪn lˈaɪf", "dare": 3, "verb": 5, "emo": "🎯"}, {"en": "They dare to speak truth to institutional power.", "th": "พวกเขากล้าที่จะพูดความจริงต่ออำนาจของสถาบัน", "ipa": "ðeɪ dˈeə tə spˈiːk tɹˈuːθ tʊ ˌɪnstɪtjˈuːʃənəl pˈaʊə", "dare": 1, "verb": 3, "emo": "🗣️"}, {"en": "You dare to accept challenging responsibilities.", "th": "คุณกล้าที่จะรับหน้าที่ความรับผิดชอบที่ท้าทาย", "ipa": "juː dˈeə tʊ ɐksˈɛpt tʃˈaləndʒˌɪŋ ɹɪspˌɒnsəbˈɪlɪtiz", "dare": 1, "verb": 3, "emo": "✅"}, {"en": "She dare to pioneer a new educational program.", "th": "เธอกล้าที่จะเป็นผู้บุกเบิกโครงการทางการศึกษาใหม่", "ipa": "ʃiː dˈeə tə paɪənˈiəɹ ɐ njˈuː ˌɛdʒuːkˈeɪʃənəl pɹˈəʊɡɹam", "dare": 1, "verb": 3, "emo": "🌱"}, {"en": "He had the dare to reveal his vulnerabilities.", "th": "เขากล้าพอที่จะเปิดเผยจุดอ่อนของตนเอง", "ipa": "hiː had ðə dˈeə tə ɹɪvˈiːl hɪz vˌʌlnəɹəbˈɪlɪtiz", "dare": 3, "verb": 5, "emo": "🔓"}, {"en": "We dare to transform our traditional processes.", "th": "พวกเรากล้าที่จะเปลี่ยนแปลงกระบวนการทำงานแบบเดิม ๆ", "ipa": "wiː dˈeə tə tɹansfˈɔːm ˌaʊə tɹɐdˈɪʃənəl pɹˈəʊsɛsɪz", "dare": 1, "verb": 3, "emo": "🔁"}, {"en": "They dare to question obsolete rules.", "th": "พวกเขากล้าที่จะตั้งคำถามกับกฎระเบียบที่ล้าสมัย", "ipa": "ðeɪ dˈeə tə kwˈɛstʃən ˈɒbsəlˌiːt ɹˈuːlz", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "She dare to dream beyond ordinary limitations.", "th": "เธอกล้าที่จะฝันเกินขีดจำกัดธรรมดาทั่วไป", "ipa": "ʃiː dˈeə tə dɹˈiːm bɪjˌɒnd ˈɔːdɪnəɹi lˌɪmɪtˈeɪʃənz", "dare": 1, "verb": 3, "emo": "💭"}, {"en": "He had the dare to stand against corruption.", "th": "เขากล้าพอที่จะยืนหยัดต่อต้านความทุจริต", "ipa": "hiː had ðə dˈeə tə stˈand ɐɡˈɛnst kəɹˈʌpʃən", "dare": 3, "verb": 5, "emo": "🧍"}, {"en": "You dare to rethink your life choices.", "th": "คุณกล้าที่จะทบทวนทางเลือกในชีวิตของตนเองใหม่", "ipa": "juː dˈeə tə ɹɪθˈɪŋk jɔː lˈaɪf tʃˈɔɪsɪz", "dare": 1, "verb": 3, "emo": "🤔"}, {"en": "She dare to champion environmental causes.", "th": "เธอกล้าที่จะเป็นกระบอกเสียงสนับสนุนประเด็นด้านสิ่งแวดล้อม", "ipa": "ʃiː dˈeə tə tʃˈampiən ɛnvˌaɪɹənmˈɛntəl kˈɔːzɪz", "dare": 1, "verb": 3, "emo": "🏆"}, {"en": "They dare to confront complex global crisis situations.", "th": "พวกเขากล้าที่จะเผชิญหน้ากับสถานการณ์วิกฤตโลกที่ซับซ้อน", "ipa": "ðeɪ dˈeə tə kənfɹˈʌnt kˈɒmplɛks ɡlˈəʊbəl kɹˈaɪsɪs sˌɪtʃuːˈeɪʃənz", "dare": 1, "verb": 3, "emo": "😠"}, {"en": "He had the dare to create an unprecedented masterpiece.", "th": "เขากล้าพอที่จะสร้างสรรค์ผลงานชิ้นเอกที่ไม่เคยมีมาก่อน", "ipa": "hiː had ðə dˈeə tə kɹiːˈeɪt ɐn ʌnpɹˈɛsɪdəntɪd mˈastəpˌiːs", "dare": 3, "verb": 5, "emo": "🎨"}, {"en": "We dare to imagine a world without boundaries.", "th": "พวกเรากล้าที่จะจินตนาการถึงโลกที่ไม่มีพรมแดน", "ipa": "wiː dˈeə tʊ ɪmˈadʒɪn ɐ wˈɜːld wɪðˌaʊt bˈaʊndəɹiz", "dare": 1, "verb": 3, "emo": "🌈"}, {"en": "She dare to challenge the traditional curriculum.", "th": "เธอกล้าที่จะท้าทายหลักสูตรการศึกษาแบบดั้งเดิม", "ipa": "ʃiː dˈeə tə tʃˈalɪndʒ ðə tɹɐdˈɪʃənəl kʌɹˈɪkjʊləm", "dare": 1, "verb": 3, "emo": "🥊"}, {"en": "He had the dare to launch a revolutionary tech startup.", "th": "เขากล้าพอที่จะเปิดตัวบริษัทสตาร์ทอัพด้านเทคโนโลยีที่ปฏิวัติวงการ", "ipa": "hiː had ðə dˈeə tə lˈɔːntʃ ɐ ɹˌɛvəlˈuːʃənəɹi tˈɛk stˈɑːtʌp", "dare": 3, "verb": 5, "emo": "🚀"}, {"en": "They dare to question established medical practices.", "th": "พวกเขากล้าที่จะตั้งคำถามกับแนวปฏิบัติทางการแพทย์ที่มีอยู่", "ipa": "ðeɪ dˈeə tə kwˈɛstʃən ɪstˈablɪʃt mˈɛdɪkəl pɹˈaktɪsɪz", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "You dare to propose a bold new architectural design.", "th": "คุณกล้าที่จะเสนอการออกแบบทางสถาปัตยกรรมใหม่ที่กล้าหาญ", "ipa": "juː dˈeə tə pɹəpˈəʊz ɐ bˈəʊld njˈuː ˌɑːkɪtˈɛktʃəɹəl dɪzˈaɪn", "dare": 1, "verb": 3, "emo": "📝"}, {"en": "She had the dare to explore remote mountain ranges alone.", "th": "เธอกล้าพอที่จะสำรวจเทือกเขาห่างไกลคนเดียว", "ipa": "ʃiː had ðə dˈeə tʊ ɛksplˈɔː ɹɪmˈəʊt mˈaʊntɪn ɹˈeɪndʒɪz ɐlˈəʊn", "dare": 3, "verb": 5, "emo": "🔍"}, {"en": "We dare to reimagine corporate social responsibility.", "th": "พวกเรากล้าที่จะจินตนาการความรับผิดชอบต่อสังคมขององค์กรขึ้นใหม่", "ipa": "wiː dˈeə tə ɹˌiːɪmˈadʒɪn kˈɔːpəɹət sˈəʊʃəl ɹɪspˌɒnsəbˈɪlɪti", "dare": 1, "verb": 3, "emo": "✨"}, {"en": "He dare to express unconventional political views.", "th": "เขากล้าที่จะแสดงมุมมองทางการเมืองที่แหวกแนว", "ipa": "hiː dˈeə tʊ ɛkspɹˈɛs ʌŋkənvˈɛnʃənəl pəlˈɪtɪkəl vjˈuːz", "dare": 1, "verb": 3, "emo": "💬"}, {"en": "They had the dare to defend human rights globally.", "th": "พวกเขากล้าพอที่จะปกป้องสิทธิมนุษยชนในระดับสากล", "ipa": "ðeɪ had ðə dˈeə tə dɪfˈɛnd hjˈuːmən ɹˈaɪts ɡlˈəʊbəli", "dare": 3, "verb": 5, "emo": "🛡️"}, {"en": "You dare to confront difficult personal truths.", "th": "คุณกล้าที่จะเผชิญหน้ากับความจริงส่วนตัวที่ยากจะยอมรับ", "ipa": "juː dˈeə tə kənfɹˈʌnt dˈɪfɪkəlt pˈɜːsənəl tɹˈuːθs", "dare": 1, "verb": 3, "emo": "😠"}, {"en": "She dare to pursue a career in fine arts.", "th": "เธอกล้าที่จะเดินตามความฝันในอาชีพด้านวิจิตรศิลป์", "ipa": "ʃiː dˈeə tə pəsjˈuː ɐ kəɹˈiəɹ ɪn fˈaɪn ˈɑːts", "dare": 1, "verb": 3, "emo": "🎯"}, {"en": "He had the dare to investigate corporate fraud.", "th": "เขากล้าพอที่จะสืบสวนคดีทุจริตในองค์กร", "ipa": "hiː had ðə dˈeə tʊ ɪnvˈɛstɪɡˌeɪt kˈɔːpəɹət fɹˈɔːd", "dare": 3, "verb": 5, "emo": "🕵️"}, {"en": "We dare to experiment with renewable energy solutions.", "th": "พวกเรากล้าที่จะทดลองโซลูชันพลังงานทดแทน", "ipa": "wiː dˈeə tʊ ɛkspˈɛɹɪmənt wɪð ɹɪnjˈuːəbəl ˈɛnədʒi səlˈuːʃənz", "dare": 1, "verb": 3, "emo": "⚗️"}, {"en": "They dare to break away from industrial norms.", "th": "พวกเขากล้าที่จะหลุดพ้นจากบรรทัดฐานของอุตสาหกรรม", "ipa": "ðeɪ dˈeə tə bɹˈeɪk ɐwˈeɪ fɹɒm ɪndˈʌstɹɪəl nˈɔːmz", "dare": 1, "verb": 3, "emo": "💥"}, {"en": "She had the dare to share her personal struggles openly.", "th": "เธอกล้าพอที่จะแบ่งปันเรื่องราวความยากลำบากส่วนตัวอย่างเปิดเผย", "ipa": "ʃiː had ðə dˈeə tə ʃˈeə hɜː pˈɜːsənəl stɹˈʌɡəlz ˈəʊpənli", "dare": 3, "verb": 5, "emo": "🤝"}, {"en": "He dare to demand transparency from leaders.", "th": "เขากล้าที่จะเรียกร้องความโปร่งใสจากบรรดาผู้นำ", "ipa": "hiː dˈeə tə dɪmˈand tɹanspˈaɹənsi fɹɒm lˈiːdəz", "dare": 1, "verb": 3, "emo": "📢"}, {"en": "You dare to test new productivity methods.", "th": "คุณกล้าที่จะทดลองวิธีเพิ่มประสิทธิภาพการทำงานแบบใหม่", "ipa": "juː dˈeə tə tˈɛst njˈuː pɹˌɒdəktˈɪvɪti mˈɛθədz", "dare": 1, "verb": 3, "emo": "🧪"}, {"en": "She had the dare to embark on a solo expedition.", "th": "เธอกล้าพอที่จะเริ่มต้นการเดินทางสำรวจคนเดียว", "ipa": "ʃiː had ðə dˈeə tʊ ɛmbˈɑːk ˌɒn ɐ sˈəʊləʊ ˌɛkspədˈɪʃən", "dare": 3, "verb": 5, "emo": "🧳"}, {"en": "We dare to hope for global peace and unity.", "th": "พวกเรากล้าที่จะหวังถึงสันติภาพและความสามัคคีของโลก", "ipa": "wiː dˈeə tə hˈəʊp fɔː ɡlˈəʊbəl pˈiːs and jˈuːnɪti", "dare": 1, "verb": 3, "emo": "🙏"}, {"en": "They dare to redefine industry standards.", "th": "พวกเขากล้าที่จะกำหนดมาตรฐานอุตสาหกรรมขึ้นมาใหม่", "ipa": "ðeɪ dˈeə tə ɹˌiːdɪfˈaɪn ˈɪndʌstɹi stˈandədz", "dare": 1, "verb": 3, "emo": "📐"}, {"en": "He had the dare to stand against political injustice.", "th": "เขากล้าพอที่จะยืนหยัดต่อต้านความอยุติธรรมทางการเมือง", "ipa": "hiː had ðə dˈeə tə stˈand ɐɡˈɛnst pəlˈɪtɪkəl ɪndʒˈʌstɪs", "dare": 3, "verb": 5, "emo": "🧍"}, {"en": "You dare to speak truth to institutional authority.", "th": "คุณกล้าที่จะพูดความจริงต่ออำนาจของสถาบัน", "ipa": "juː dˈeə tə spˈiːk tɹˈuːθ tʊ ˌɪnstɪtjˈuːʃənəl ɐθˈɒɹɪti", "dare": 1, "verb": 3, "emo": "🗣️"}, {"en": "She dare to trust her instincts over advice.", "th": "เธอกล้าที่จะเชื่อสัญชาตญาณของตัวเองเหนือคำแนะนำอื่น ๆ", "ipa": "ʃiː dˈeə tə tɹˈʌst hɜːɹ ˈɪnstɪŋkts ˌəʊvəɹ ɐdvˈaɪs", "dare": 1, "verb": 3, "emo": "🤝"}, {"en": "He had the dare to tackle systemic economic flaws.", "th": "เขากล้าพอที่จะรับมือกับข้อบกพร่องทางเศรษฐกิจเชิงระบบ", "ipa": "hiː had ðə dˈeə tə tˈakəl sɪstˈɛmɪk ˌiːkənˈɒmɪk flˈɔːz", "dare": 3, "verb": 5, "emo": "🧩"}, {"en": "We dare to create groundbreaking digital tools.", "th": "พวกเรากล้าที่จะสร้างสรรค์เครื่องมือดิจิทัลที่ก้าวล้ำ", "ipa": "wiː dˈeə tə kɹiːˈeɪt ɡɹˈaʊndbɹeɪkɪŋ dˈɪdʒɪtəl tˈuːlz", "dare": 1, "verb": 3, "emo": "🎨"}, {"en": "They dare to protect endangered animal species.", "th": "พวกเขากล้าที่จะปกป้องสายพันธุ์สัตว์ที่ใกล้สูญพันธุ์", "ipa": "ðeɪ dˈeə tə pɹətˈɛkt ɛndˈeɪndʒəd ˈanɪməl spˈiːsiːz", "dare": 1, "verb": 3, "emo": "🛡️"}, {"en": "She had the dare to pitch an unconventional concept.", "th": "เธอกล้าพอที่จะนำเสนอแนวคิดที่แหวกแนว", "ipa": "ʃiː had ðə dˈeə tə pˈɪtʃ ɐn ʌŋkənvˈɛnʃənəl kˈɒnsɛpt", "dare": 3, "verb": 5, "emo": "📊"}, {"en": "He dare to explore uncharted scientific fields.", "th": "เขากล้าที่จะสำรวจสาขาวิทยาศาสตร์ที่ยังไม่เคยมีใครสำรวจ", "ipa": "hiː dˈeə tʊ ɛksplˈɔːɹ ʌntʃˈɑːtɪd saɪəntˈɪfɪk fˈiːldz", "dare": 1, "verb": 3, "emo": "🔍"}, {"en": "You dare to defy conventional wisdom daily.", "th": "คุณกล้าที่จะท้าทายความเชื่อดั้งเดิมอยู่เป็นประจำ", "ipa": "juː dˈeə tə dɪfˈaɪ kənvˈɛnʃənəl wˈɪzdəm dˈeɪli", "dare": 1, "verb": 3, "emo": "🚀"}, {"en": "She had the dare to pioneer organic farming methods.", "th": "เธอกล้าพอที่จะเป็นผู้บุกเบิกวิธีการทำเกษตรอินทรีย์", "ipa": "ʃiː had ðə dˈeə tə paɪənˈiəɹ ɔːɡˈanɪk fˈɑːmɪŋ mˈɛθədz", "dare": 3, "verb": 5, "emo": "🌱"}, {"en": "We dare to transform our community infrastructure.", "th": "พวกเรากล้าที่จะพลิกโฉมโครงสร้างพื้นฐานในชุมชนของเรา", "ipa": "wiː dˈeə tə tɹansfˈɔːm ˌaʊə kəmjˈuːnɪti ˈɪnfɹəstɹˌʌktʃə", "dare": 1, "verb": 3, "emo": "🔁"}, {"en": "They dare to dream of a fully sustainable future.", "th": "พวกเขากล้าที่จะฝันถึงอนาคตที่ยั่งยืนอย่างแท้จริง", "ipa": "ðeɪ dˈeə tə dɹˈiːm əvə fˈʊli səstˈeɪnəbəl fjˈuːtʃə", "dare": 1, "verb": 3, "emo": "💭"}, {"en": "He had the dare to reveal his inner creative vision.", "th": "เขากล้าพอที่จะเปิดเผยวิสัยทัศน์ทางความคิดสร้างสรรค์ภายในตัวเขา", "ipa": "hiː had ðə dˈeə tə ɹɪvˈiːl hɪz ˈɪnə kɹiːˈeɪtɪv vˈɪʒən", "dare": 3, "verb": 5, "emo": "🔓"}, {"en": "You dare to accept massive professional risks.", "th": "คุณกล้าที่จะรับความเสี่ยงในสายอาชีพครั้งใหญ่", "ipa": "juː dˈeə tʊ ɐksˈɛpt mˈasɪv pɹəfˈɛʃənəl ɹˈɪsks", "dare": 1, "verb": 3, "emo": "✅"}, {"en": "She dare to champion universal education rights.", "th": "เธอกล้าที่จะสนับสนุนสิทธิทางการศึกษาทั่วโลก", "ipa": "ʃiː dˈeə tə tʃˈampiən jˌuːnɪvˈɜːsəl ˌɛdʒuːkˈeɪʃən ɹˈaɪts", "dare": 1, "verb": 3, "emo": "🏆"}, {"en": "He had the dare to confront complex market crises.", "th": "เขากล้าพอที่จะเผชิญหน้ากับวิกฤตการณ์ตลาดที่ซับซ้อน", "ipa": "hiː had ðə dˈeə tə kənfɹˈʌnt kˈɒmplɛks mˈɑːkɪt kɹˈaɪsiːz", "dare": 3, "verb": 5, "emo": "😠"}, {"en": "We dare to imagine alternative energy grids.", "th": "พวกเรากล้าที่จะจินตนาการถึงโครงข่ายพลังงานทางเลือก", "ipa": "wiː dˈeə tʊ ɪmˈadʒɪn ɔːltˈɜːnətˌɪv ˈɛnədʒi ɡɹˈɪdz", "dare": 1, "verb": 3, "emo": "🌈"}, {"en": "They dare to question stagnant business processes.", "th": "พวกเขากล้าที่จะตั้งคำถามกับกระบวนการทางธุรกิจที่หยุดนิ่ง", "ipa": "ðeɪ dˈeə tə kwˈɛstʃən stˈaɡnənt bˈɪznəs pɹˈəʊsɛsɪz", "dare": 1, "verb": 3, "emo": "❓"}, {"en": "You dare to propose bold environmental initiatives.", "th": "คุณกล้าที่จะเสนอโครงการริเริ่มด้านสิ่งแวดล้อมที่กล้าหาญ", "ipa": "juː dˈeə tə pɹəpˈəʊz bˈəʊld ɛnvˌaɪɹənmˈɛntəl ɪnˈɪʃiətˌɪvz", "dare": 1, "verb": 3, "emo": "📝"}, {"en": "She had the dare to launch a global arts movement.", "th": "เธอกล้าพอที่จะริเริ่มขับเคลื่อนการเคลื่อนไหวทางศิลปะระดับโลก", "ipa": "ʃiː had ðə dˈeə tə lˈɔːntʃ ɐ ɡlˈəʊbəl ˈɑːts mˈuːvmənt", "dare": 3, "verb": 5, "emo": "🚀"}, {"en": "He dare to express unpopular political opinions.", "th": "เขากล้าที่จะแสดงความคิดเห็นทางการเมืองที่ไม่เป็นที่นิยม", "ipa": "hiː dˈeə tʊ ɛkspɹˈɛs ʌnpˈɒpjʊlə pəlˈɪtɪkəl əpˈɪniənz", "dare": 1, "verb": 3, "emo": "💬"}, {"en": "They had the dare to defend minority communities.", "th": "พวกเขากล้าพอที่จะปกป้องกลุ่มชนกลุ่มน้อย", "ipa": "ðeɪ had ðə dˈeə tə dɪfˈɛnd maɪnˈɒɹɪti kəmjˈuːnɪtiz", "dare": 3, "verb": 5, "emo": "🛡️"}, {"en": "We dare to pursue groundbreaking medical research.", "th": "พวกเรากล้าที่จะศึกษาวิจัยทางการแพทย์ที่ก้าวล้ำ", "ipa": "wiː dˈeə tə pəsjˈuː ɡɹˈaʊndbɹeɪkɪŋ mˈɛdɪkəl ɹɪsˈɜːtʃ", "dare": 1, "verb": 3, "emo": "🎯"}, {"en": "You dare to confront personal emotional barriers.", "th": "คุณกล้าที่จะเผชิญหน้ากับอุปสรรคทางอารมณ์ส่วนตัว", "ipa": "juː dˈeə tə kənfɹˈʌnt pˈɜːsənəl ɪmˈəʊʃənəl bˈaɹiəz", "dare": 1, "verb": 3, "emo": "😠"}, {"en": "She had the dare to investigate deep-sea ecosystems.", "th": "เธอกล้าพอที่จะสำรวจศึกษาหาระบบนิเวศใต้ท้องทะเลลึก", "ipa": "ʃiː had ðə dˈeə tʊ ɪnvˈɛstɪɡˌeɪt dˈiːpsˈiː ˈiːkəʊsˌɪstəmz", "dare": 3, "verb": 5, "emo": "🕵️"}, {"en": "He dare to experiment with advanced software algorithms.", "th": "เขากล้าที่จะทดลองใช้อัลกอริทึมซอฟต์แวร์ขั้นสูง", "ipa": "hiː dˈeə tʊ ɛkspˈɛɹɪmənt wɪð ɐdvˈanst sˈɒftweəɹ ˈalɡəɹˌɪθəmz", "dare": 1, "verb": 3, "emo": "⚗️"}];
+const PER_PAGE = 25;
+const pages = Math.ceil(DATA.length / PER_PAGE);
+let page = 0, voices = [], chosen = null;
+const grid = document.getElementById('grid'), pager = document.getElementById('pager');
+
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function mark(d){
+  return d.en.split(' ').map((w,i)=>{
+    const m = w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m || (i!==d.dare && i!==d.verb)) return esc(w);
+    const cls = i===d.dare ? ' class="dare"' : '';
+    return esc(m[1])+'<b'+cls+'>'+esc(m[2])+'</b>'+esc(m[3]);
+  }).join(' ');
+}
+function render(){
+  grid.innerHTML = '';
+  const start = page*PER_PAGE;
+  DATA.slice(start,start+PER_PAGE).forEach((d,k)=>{
+    const n = start+k+1;
+    const el = document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML = `<div class="inner">
+      <div class="face front">
+        <div class="pic" aria-hidden="true"><small>${n}</small>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d)}</p><p class="ipa">/${esc(d.ipa)}/</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">แตะเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${esc(d.en)}</p><span class="hint">แตะเพื่อกลับ</span></div>
+    </div>`;
+    el.addEventListener('click',()=>el.classList.toggle('flipped'));
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b = el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  pager.innerHTML='';
+  for(let p=0;p<pages;p++){
+    const s=p*PER_PAGE+1, e=Math.min((p+1)*PER_PAGE,DATA.length);
+    const b=document.createElement('button');
+    b.textContent=`Page ${p+1} (${s}–${e})`;
+    if(p===page) b.setAttribute('aria-current','true');
+    b.onclick=()=>{page=p;render();window.scrollTo({top:0})};
+    pager.appendChild(b);
+  }
+}
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children]; const allOn=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!allOn));
+};
+
+/* ---- Speech: prefer a British male voice ---- */
+const MALE_HINTS=['daniel','google uk english male','ryan','george','thomas','oliver','arthur','male'];
+function pickVoice(){
+  voices = (window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  const score=v=>{const n=v.name.toLowerCase();let s=0;
+    if(/en[-_]gb/i.test(v.lang))s+=10;
+    MALE_HINTS.forEach((h,i)=>{if(n.includes(h))s+=8-i*0.5});
+    if(/natural|neural|online/.test(n))s+=6;
+    if(/female|libby|sonia|maisie|kate|serena|susan|hazel|google uk english female/.test(n))s-=20;
+    return s};
+  voices.sort((a,b)=>score(b)-score(a));
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent = chosen ? '' : 'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let activeBtn=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel();
+  if(activeBtn)activeBtn.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-GB'; if(chosen)u.voice=chosen; u.rate=0.9; u.pitch=0.85;
+  btn.classList.add('on'); activeBtn=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>
