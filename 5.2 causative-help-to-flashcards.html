@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>5.2 Causative "help + to V1" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>5.2 Causative verb “help” · to + V1</h1>
+  <div class="formula">Subject + <b>help</b> + someone + <b>to V1</b> &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "I help my brother to repair his bicycle.", "th": "ฉันช่วยพี่ชายซ่อมจักรยานของเขา", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "She helps her mother to prepare breakfast every morning.", "th": "เธอช่วยแม่เตรียมอาหารเช้าทุกเช้า", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม", "emo": "🍳"}, {"en": "He helps his father to paint the fence.", "th": "เขาช่วยพ่อลงสีรั้ว", "mk": 1, "to": 4, "v1": 5, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "We help our neighbors to move into their new house.", "th": "พวกเราช่วยเพื่อนบ้านย้ายเข้าบ้านใหม่", "mk": 1, "to": 4, "v1": 5, "base": "move", "mean": "ย้าย / เคลื่อนย้าย", "emo": "📦"}, {"en": "They help the teacher to collect the test papers.", "th": "พวกเขาช่วยครูเก็บข้อสอบ", "mk": 1, "to": 4, "v1": 5, "base": "collect", "mean": "รวบรวม / เก็บ", "emo": "📥"}, {"en": "I help my friend to improve her English speaking skills.", "th": "ฉันช่วยเพื่อนพัฒนาทักษะการพูดภาษาอังกฤษ", "mk": 1, "to": 4, "v1": 5, "base": "improve", "mean": "ปรับปรุง / พัฒนา", "emo": "📈"}, {"en": "She helps her sister to decorate the living room.", "th": "เธอช่วยพี่สาวตกแต่งห้องนั่งเล่น", "mk": 1, "to": 4, "v1": 5, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "He helps his son to build a treehouse.", "th": "เขาช่วยลูกชายสร้างบ้านต้นไม้", "mk": 1, "to": 4, "v1": 5, "base": "build", "mean": "สร้าง", "emo": "🏗️"}, {"en": "We help the volunteers to distribute food to the villagers.", "th": "พวกเราช่วยอาสาสมัครแจกอาหารให้ชาวบ้าน", "mk": 1, "to": 4, "v1": 5, "base": "distribute", "mean": "แจก / กระจาย", "emo": "🍲"}, {"en": "They help the tourists to buy train tickets.", "th": "พวกเขาช่วยนักท่องเที่ยวซื้อตั๋วรถไฟ", "mk": 1, "to": 4, "v1": 5, "base": "buy", "mean": "ซื้อ", "emo": "🎫"}, {"en": "I help my grandmother to carry her shopping bags.", "th": "ฉันช่วยคุณยายถือถุงช้อปปิ้ง", "mk": 1, "to": 4, "v1": 5, "base": "carry", "mean": "ถือ / ยก / ขน", "emo": "🧳"}, {"en": "She helps her grandfather to water the plants.", "th": "เธอช่วยคุณปู่รดน้ำต้นไม้", "mk": 1, "to": 4, "v1": 5, "base": "water", "mean": "รดน้ำ", "emo": "💧"}, {"en": "He helps his uncle to fix the roof.", "th": "เขาช่วยลุงซ่อมหลังคา", "mk": 1, "to": 4, "v1": 5, "base": "fix", "mean": "ซ่อม", "emo": "🔧"}, {"en": "We help our classmates to understand the lesson.", "th": "พวกเราช่วยเพื่อนร่วมชั้นเข้าใจบทเรียน", "mk": 1, "to": 4, "v1": 5, "base": "understand", "mean": "เข้าใจ", "emo": "💡"}, {"en": "They help the coach to organize the sports competition.", "th": "พวกเขาช่วยโค้ชจัดการแข่งขันกีฬา", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "I help my father to replace the old light bulb.", "th": "ฉันช่วยพ่อเปลี่ยนหลอดไฟเก่า", "mk": 1, "to": 4, "v1": 5, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "She helps her aunt to arrange fresh flowers.", "th": "เธอช่วยป้าจัดดอกไม้สด", "mk": 1, "to": 4, "v1": 5, "base": "arrange", "mean": "จัดเรียง / จัด", "emo": "💐"}, {"en": "He helps his daughter to solve difficult math problems.", "th": "เขาช่วยลูกสาวแก้โจทย์คณิตศาสตร์ที่ยาก", "mk": 1, "to": 4, "v1": 5, "base": "solve", "mean": "แก้ (ปัญหา)", "emo": "🧩"}, {"en": "We help the staff to welcome the guests.", "th": "พวกเราช่วยพนักงานต้อนรับแขก", "mk": 1, "to": 4, "v1": 5, "base": "welcome", "mean": "ต้อนรับ", "emo": "👋"}, {"en": "They help new students to adjust to school life.", "th": "พวกเขาช่วยนักเรียนใหม่ปรับตัวกับชีวิตในโรงเรียน", "mk": 1, "to": 4, "v1": 5, "base": "adjust", "mean": "ปรับตัว / ปรับ", "emo": "⚙️"}, {"en": "I help my cousin to choose a university.", "th": "ฉันช่วยลูกพี่ลูกน้องเลือกมหาวิทยาลัย", "mk": 1, "to": 4, "v1": 5, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "She helps her friend to practice for the presentation.", "th": "เธอช่วยเพื่อนฝึกการนำเสนอ", "mk": 1, "to": 4, "v1": 5, "base": "practice", "mean": "ฝึก / ฝึกซ้อม", "emo": "🏊"}, {"en": "He helps his parents to harvest rice.", "th": "เขาช่วยพ่อแม่เก็บเกี่ยวข้าว", "mk": 1, "to": 4, "v1": 5, "base": "harvest", "mean": "เก็บเกี่ยว", "emo": "🌾"}, {"en": "We help our community to clean the public park.", "th": "พวกเราช่วยชุมชนทำความสะอาดสวนสาธารณะ", "mk": 1, "to": 4, "v1": 5, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They help the doctor to examine the patients.", "th": "พวกเขาช่วยหมอตรวจผู้ป่วย", "mk": 1, "to": 4, "v1": 5, "base": "examine", "mean": "ตรวจ", "emo": "🩺"}, {"en": "I help my teacher to prepare the lesson materials.", "th": "ฉันช่วยครูเตรียมสื่อการสอน", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม", "emo": "🍳"}, {"en": "She helps her mother to serve lunch.", "th": "เธอช่วยแม่เสิร์ฟอาหารกลางวัน", "mk": 1, "to": 4, "v1": 5, "base": "serve", "mean": "เสิร์ฟ", "emo": "🍽️"}, {"en": "He helps his neighbor to trim the trees.", "th": "เขาช่วยเพื่อนบ้านตัดแต่งต้นไม้", "mk": 1, "to": 4, "v1": 5, "base": "trim", "mean": "ตัดแต่ง", "emo": "✂️"}, {"en": "We help the librarian to organize the bookshelves.", "th": "พวกเราช่วยบรรณารักษ์จัดชั้นหนังสือ", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "They help the police to direct traffic.", "th": "พวกเขาช่วยตำรวจอำนวยการจราจร", "mk": 1, "to": 4, "v1": 5, "base": "direct", "mean": "อำนวยการ / ควบคุม (จราจร)", "emo": "🚦"}, {"en": "I help my brother to install a printer.", "th": "ฉันช่วยพี่ชายติดตั้งเครื่องพิมพ์", "mk": 1, "to": 4, "v1": 5, "base": "install", "mean": "ติดตั้ง", "emo": "🔌"}, {"en": "She helps her coworker to complete the report.", "th": "เธอช่วยเพื่อนร่วมงานทำรายงานให้เสร็จ", "mk": 1, "to": 4, "v1": 5, "base": "complete", "mean": "ทำให้เสร็จสมบูรณ์", "emo": "✅"}, {"en": "He helps the customer to carry heavy boxes.", "th": "เขาช่วยลูกค้าถือกล่องหนัก", "mk": 1, "to": 4, "v1": 5, "base": "carry", "mean": "ถือ / ยก / ขน", "emo": "🧳"}, {"en": "We help the farmers to grow organic vegetables.", "th": "พวกเราช่วยเกษตรกรปลูกผักออร์แกนิก", "mk": 1, "to": 4, "v1": 5, "base": "grow", "mean": "ปลูก / เติบโต", "emo": "🥬"}, {"en": "They help the children to develop communication skills.", "th": "พวกเขาช่วยเด็ก ๆ พัฒนาทักษะการสื่อสาร", "mk": 1, "to": 4, "v1": 5, "base": "develop", "mean": "พัฒนา", "emo": "🌟"}, {"en": "I help my parents to organize family photos.", "th": "ฉันช่วยพ่อแม่จัดระเบียบรูปภาพครอบครัว", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "She helps her brother to memorize new vocabulary.", "th": "เธอช่วยพี่ชายท่องจำคำศัพท์ใหม่", "mk": 1, "to": 4, "v1": 5, "base": "memorize", "mean": "ท่องจำ", "emo": "🧠"}, {"en": "He helps his team to achieve its goals.", "th": "เขาช่วยทีมให้บรรลุเป้าหมาย", "mk": 1, "to": 4, "v1": 5, "base": "achieve", "mean": "บรรลุ", "emo": "🏆"}, {"en": "We help our guests to feel comfortable.", "th": "พวกเราช่วยให้แขกรู้สึกสบายใจ", "mk": 1, "to": 4, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😌"}, {"en": "They help the employees to improve their productivity.", "th": "พวกเขาช่วยพนักงานเพิ่มประสิทธิภาพการทำงาน", "mk": 1, "to": 4, "v1": 5, "base": "improve", "mean": "ปรับปรุง / พัฒนา", "emo": "📈"}, {"en": "I help my uncle to build a wooden table.", "th": "ฉันช่วยลุงสร้างโต๊ะไม้", "mk": 1, "to": 4, "v1": 5, "base": "build", "mean": "สร้าง", "emo": "🏗️"}, {"en": "She helps her daughter to practice swimming.", "th": "เธอช่วยลูกสาวฝึกว่ายน้ำ", "mk": 1, "to": 4, "v1": 5, "base": "practice", "mean": "ฝึก / ฝึกซ้อม", "emo": "🏊"}, {"en": "He helps his wife to choose new furniture.", "th": "เขาช่วยภรรยาเลือกเฟอร์นิเจอร์ใหม่", "mk": 1, "to": 4, "v1": 5, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "We help the volunteers to plant trees.", "th": "พวกเราช่วยอาสาสมัครปลูกต้นไม้", "mk": 1, "to": 4, "v1": 5, "base": "plant", "mean": "ปลูก", "emo": "🌳"}, {"en": "They help the visitors to understand the exhibition.", "th": "พวกเขาช่วยผู้เข้าชมเข้าใจนิทรรศการ", "mk": 1, "to": 4, "v1": 5, "base": "understand", "mean": "เข้าใจ", "emo": "💡"}, {"en": "I help my classmate to review for the final exam.", "th": "ฉันช่วยเพื่อนร่วมชั้นทบทวนก่อนสอบปลายภาค", "mk": 1, "to": 4, "v1": 5, "base": "review", "mean": "ทบทวน", "emo": "📑"}, {"en": "She helps her father to install a security camera.", "th": "เธอช่วยพ่อติดตั้งกล้องวงจรปิด", "mk": 1, "to": 4, "v1": 5, "base": "install", "mean": "ติดตั้ง", "emo": "🔌"}, {"en": "He helps the mechanic to repair the engine.", "th": "เขาช่วยช่างซ่อมเครื่องยนต์", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "We help the organizers to arrange the conference.", "th": "พวกเราช่วยผู้จัดงานจัดการประชุม", "mk": 1, "to": 4, "v1": 5, "base": "arrange", "mean": "จัดเรียง / จัด", "emo": "💐"}, {"en": "They help everyone to succeed in their careers.", "th": "พวกเขาช่วยให้ทุกคนประสบความสำเร็จในอาชีพ", "mk": 1, "to": 3, "v1": 4, "base": "succeed", "mean": "ประสบความสำเร็จ", "emo": "🥇"}, {"en": "I help my father to clean the garage every weekend.", "th": "ฉันช่วยพ่อทำความสะอาดโรงรถทุกสุดสัปดาห์", "mk": 1, "to": 4, "v1": 5, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She helps her mother to fold the laundry every evening.", "th": "เธอช่วยแม่พับผ้าทุกเย็น", "mk": 1, "to": 4, "v1": 5, "base": "fold", "mean": "พับ", "emo": "👕"}, {"en": "He helps his brother to install a new computer program.", "th": "เขาช่วยพี่ชายติดตั้งโปรแกรมคอมพิวเตอร์ใหม่", "mk": 1, "to": 4, "v1": 5, "base": "install", "mean": "ติดตั้ง", "emo": "🔌"}, {"en": "We help our neighbors to paint their house.", "th": "พวกเราช่วยเพื่อนบ้านทาสีบ้าน", "mk": 1, "to": 4, "v1": 5, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "They help the teacher to grade simple assignments.", "th": "พวกเขาช่วยครูตรวจงานที่ไม่ซับซ้อน", "mk": 1, "to": 4, "v1": 5, "base": "grade", "mean": "ตรวจ / ให้คะแนน", "emo": "📝"}, {"en": "I help my friend to edit her essay.", "th": "ฉันช่วยเพื่อนแก้ไขเรียงความ", "mk": 1, "to": 4, "v1": 5, "base": "edit", "mean": "แก้ไข / เรียบเรียง", "emo": "🖊️"}, {"en": "She helps her sister to organize her closet.", "th": "เธอช่วยพี่สาวจัดระเบียบตู้เสื้อผ้า", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "He helps his son to practice baseball every Saturday.", "th": "เขาช่วยลูกชายฝึกเบสบอลทุกวันเสาร์", "mk": 1, "to": 4, "v1": 5, "base": "practice", "mean": "ฝึก / ฝึกซ้อม", "emo": "🏊"}, {"en": "We help new employees to understand company policies.", "th": "พวกเราช่วยพนักงานใหม่ให้เข้าใจนโยบายของบริษัท", "mk": 1, "to": 4, "v1": 5, "base": "understand", "mean": "เข้าใจ", "emo": "💡"}, {"en": "They help the tourists to reach the bus terminal.", "th": "พวกเขาช่วยนักท่องเที่ยวไปถึงสถานีขนส่ง", "mk": 1, "to": 4, "v1": 5, "base": "reach", "mean": "ไปถึง / เอื้อมถึง", "emo": "🚌"}, {"en": "I help my grandmother to cook traditional dishes.", "th": "ฉันช่วยคุณยายทำอาหารพื้นเมือง", "mk": 1, "to": 4, "v1": 5, "base": "cook", "mean": "ทำอาหาร", "emo": "👩‍🍳"}, {"en": "She helps her grandfather to use a smartphone.", "th": "เธอช่วยคุณปู่ใช้สมาร์ตโฟน", "mk": 1, "to": 4, "v1": 5, "base": "use", "mean": "ใช้", "emo": "📱"}, {"en": "He helps his uncle to drive to the hospital.", "th": "เขาช่วยลุงขับรถไปโรงพยาบาล", "mk": 1, "to": 4, "v1": 5, "base": "drive", "mean": "ขับรถ", "emo": "🚗"}, {"en": "We help our classmates to prepare for the science fair.", "th": "พวกเราช่วยเพื่อนร่วมชั้นเตรียมงานวิทยาศาสตร์", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม", "emo": "🍳"}, {"en": "They help the coach to train young athletes.", "th": "พวกเขาช่วยโค้ชฝึกนักกีฬารุ่นเยาว์", "mk": 1, "to": 4, "v1": 5, "base": "train", "mean": "ฝึก / ฝึกอบรม", "emo": "🏋️"}, {"en": "I help my mother to decorate the dining room.", "th": "ฉันช่วยแม่ตกแต่งห้องรับประทานอาหาร", "mk": 1, "to": 4, "v1": 5, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "She helps her aunt to plant flowers in the garden.", "th": "เธอช่วยป้าปลูกดอกไม้ในสวน", "mk": 1, "to": 4, "v1": 5, "base": "plant", "mean": "ปลูก", "emo": "🌳"}, {"en": "He helps his daughter to improve her pronunciation.", "th": "เขาช่วยลูกสาวพัฒนาการออกเสียง", "mk": 1, "to": 4, "v1": 5, "base": "improve", "mean": "ปรับปรุง / พัฒนา", "emo": "📈"}, {"en": "We help the volunteers to clean the beach.", "th": "พวกเราช่วยอาสาสมัครทำความสะอาดชายหาด", "mk": 1, "to": 4, "v1": 5, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They help the doctor to treat injured animals.", "th": "พวกเขาช่วยสัตวแพทย์รักษาสัตว์ที่บาดเจ็บ", "mk": 1, "to": 4, "v1": 5, "base": "treat", "mean": "รักษา", "emo": "🐾"}, {"en": "I help my teacher to arrange the desks.", "th": "ฉันช่วยครูจัดโต๊ะเรียน", "mk": 1, "to": 4, "v1": 5, "base": "arrange", "mean": "จัดเรียง / จัด", "emo": "💐"}, {"en": "She helps her friend to solve difficult questions.", "th": "เธอช่วยเพื่อนแก้คำถามยาก ๆ", "mk": 1, "to": 4, "v1": 5, "base": "solve", "mean": "แก้ (ปัญหา)", "emo": "🧩"}, {"en": "He helps his parents to carry heavy furniture.", "th": "เขาช่วยพ่อแม่ยกเฟอร์นิเจอร์หนัก", "mk": 1, "to": 4, "v1": 5, "base": "carry", "mean": "ถือ / ยก / ขน", "emo": "🧳"}, {"en": "We help the librarian to label new books.", "th": "พวกเราช่วยบรรณารักษ์ติดป้ายหนังสือใหม่", "mk": 1, "to": 4, "v1": 5, "base": "label", "mean": "ติดป้าย / ติดฉลาก", "emo": "🏷️"}, {"en": "They help the manager to schedule meetings.", "th": "พวกเขาช่วยผู้จัดการจัดตารางการประชุม", "mk": 1, "to": 4, "v1": 5, "base": "schedule", "mean": "จัดตาราง / กำหนดเวลา", "emo": "🗓️"}, {"en": "I help my cousin to choose a laptop.", "th": "ฉันช่วยลูกพี่ลูกน้องเลือกแล็ปท็อป", "mk": 1, "to": 4, "v1": 5, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "She helps her brother to repair the fence.", "th": "เธอช่วยพี่ชายซ่อมรั้ว", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "He helps his wife to prepare dinner for guests.", "th": "เขาช่วยภรรยาเตรียมอาหารเย็นสำหรับแขก", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม", "emo": "🍳"}, {"en": "We help our community to recycle plastic waste.", "th": "พวกเราช่วยชุมชนรีไซเคิลขยะพลาสติก", "mk": 1, "to": 4, "v1": 5, "base": "recycle", "mean": "รีไซเคิล", "emo": "♻️"}, {"en": "They help the children to discover new talents.", "th": "พวกเขาช่วยเด็ก ๆ ค้นพบความสามารถใหม่ ๆ", "mk": 1, "to": 4, "v1": 5, "base": "discover", "mean": "ค้นพบ", "emo": "🔭"}, {"en": "I help my brother to install solar panels.", "th": "ฉันช่วยพี่ชายติดตั้งแผงโซลาร์เซลล์", "mk": 1, "to": 4, "v1": 5, "base": "install", "mean": "ติดตั้ง", "emo": "🔌"}, {"en": "She helps her mother to choose healthy food.", "th": "เธอช่วยแม่เลือกอาหารเพื่อสุขภาพ", "mk": 1, "to": 4, "v1": 5, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "He helps his friend to write a business proposal.", "th": "เขาช่วยเพื่อนเขียนข้อเสนอโครงการธุรกิจ", "mk": 1, "to": 4, "v1": 5, "base": "write", "mean": "เขียน", "emo": "✍️"}, {"en": "We help the visitors to explore the national park.", "th": "พวกเราช่วยผู้มาเยือนเที่ยวชมอุทยานแห่งชาติ", "mk": 1, "to": 4, "v1": 5, "base": "explore", "mean": "สำรวจ / เที่ยวชม", "emo": "🧭"}, {"en": "They help the nurses to transport patients safely.", "th": "พวกเขาช่วยพยาบาลเคลื่อนย้ายผู้ป่วยอย่างปลอดภัย", "mk": 1, "to": 4, "v1": 5, "base": "transport", "mean": "ขนส่ง / เคลื่อนย้าย", "emo": "🚑"}, {"en": "I help my father to replace the water filter.", "th": "ฉันช่วยพ่อเปลี่ยนไส้กรองน้ำ", "mk": 1, "to": 4, "v1": 5, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "She helps her daughter to memorize multiplication tables.", "th": "เธอช่วยลูกสาวท่องสูตรคูณ", "mk": 1, "to": 4, "v1": 5, "base": "memorize", "mean": "ท่องจำ", "emo": "🧠"}, {"en": "He helps his team to complete the project on time.", "th": "เขาช่วยทีมทำโครงการให้เสร็จตรงเวลา", "mk": 1, "to": 4, "v1": 5, "base": "complete", "mean": "ทำให้เสร็จสมบูรณ์", "emo": "✅"}, {"en": "We help the organizers to welcome international guests.", "th": "พวกเราช่วยผู้จัดงานต้อนรับแขกต่างชาติ", "mk": 1, "to": 4, "v1": 5, "base": "welcome", "mean": "ต้อนรับ", "emo": "👋"}, {"en": "They help new students to make new friends.", "th": "พวกเขาช่วยนักเรียนใหม่สร้างมิตรภาพใหม่", "mk": 1, "to": 4, "v1": 5, "base": "make", "mean": "ทำ / สร้าง (make friends = หาเพื่อน)", "emo": "🤝"}, {"en": "I help my grandparents to harvest fruit.", "th": "ฉันช่วยปู่ย่าตายายเก็บผลไม้", "mk": 1, "to": 4, "v1": 5, "base": "harvest", "mean": "เก็บเกี่ยว", "emo": "🌾"}, {"en": "She helps her coworker to organize important documents.", "th": "เธอช่วยเพื่อนร่วมงานจัดเอกสารสำคัญ", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "He helps the customer to select the right product.", "th": "เขาช่วยลูกค้าเลือกสินค้าที่เหมาะสม", "mk": 1, "to": 4, "v1": 5, "base": "select", "mean": "เลือก / คัดเลือก", "emo": "☑️"}, {"en": "We help local farmers to sell their products online.", "th": "พวกเราช่วยเกษตรกรท้องถิ่นขายสินค้าออนไลน์", "mk": 1, "to": 4, "v1": 5, "base": "sell", "mean": "ขาย", "emo": "🛒"}, {"en": "They help the children to build self-confidence.", "th": "พวกเขาช่วยเด็ก ๆ สร้างความมั่นใจในตนเอง", "mk": 1, "to": 4, "v1": 5, "base": "build", "mean": "สร้าง", "emo": "🏗️"}, {"en": "I help my uncle to repair the garden gate.", "th": "ฉันช่วยลุงซ่อมประตูสวน", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "She helps her father to wash the windows.", "th": "เธอช่วยพ่อล้างหน้าต่าง", "mk": 1, "to": 4, "v1": 5, "base": "wash", "mean": "ล้าง", "emo": "🚿"}, {"en": "He helps his classmates to complete the group assignment.", "th": "เขาช่วยเพื่อนร่วมชั้นทำงานกลุ่มให้เสร็จ", "mk": 1, "to": 4, "v1": 5, "base": "complete", "mean": "ทำให้เสร็จสมบูรณ์", "emo": "✅"}, {"en": "We help everyone to enjoy the festival.", "th": "พวกเราช่วยให้ทุกคนสนุกกับงานเทศกาล", "mk": 1, "to": 3, "v1": 4, "base": "enjoy", "mean": "สนุก / เพลิดเพลิน", "emo": "😄"}, {"en": "They help each other to succeed in life.", "th": "พวกเขาช่วยเหลือกันเพื่อประสบความสำเร็จในชีวิต", "mk": 1, "to": 4, "v1": 5, "base": "succeed", "mean": "ประสบความสำเร็จ", "emo": "🥇"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.to) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

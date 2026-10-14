@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3.1 Causative "get + to V1" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>3.1 Causative · get + someone + to + V1</h1>
+  <div class="formula">Subject + <b>get</b> + someone + <b>to V1</b> &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "I got my brother to wash my car.", "th": "ฉันชวนให้พี่ชายล้างรถของฉัน", "mk": 1, "to": 4, "v1": 5, "base": "wash", "mean": "ล้าง", "emo": "🚿"}, {"en": "She got her son to clean his room.", "th": "เธอทำให้ลูกชายยอมทำความสะอาดห้อง", "mk": 1, "to": 4, "v1": 5, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "He got his friend to help him.", "th": "เขาทำให้เพื่อนยอมช่วยเขา", "mk": 1, "to": 4, "v1": 5, "base": "help", "mean": "ช่วยเหลือ", "emo": "🤝"}, {"en": "We got the staff to prepare lunch.", "th": "เราทำให้พนักงานเตรียมอาหารกลางวัน", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม / จัดทำ", "emo": "🍳"}, {"en": "They got the technician to repair the printer.", "th": "พวกเขาให้ช่างยอมซ่อมเครื่องพิมพ์", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "I got my assistant to send the email.", "th": "ฉันให้ผู้ช่วยส่งอีเมล", "mk": 1, "to": 4, "v1": 5, "base": "send", "mean": "ส่ง", "emo": "📧"}, {"en": "She got her sister to drive her home.", "th": "เธอให้พี่สาวขับรถไปส่งบ้าน", "mk": 1, "to": 4, "v1": 5, "base": "drive", "mean": "ขับ (รถ) / ขับไปส่ง", "emo": "🚗"}, {"en": "He got his daughter to study harder.", "th": "เขาทำให้ลูกสาวตั้งใจเรียนมากขึ้น", "mk": 1, "to": 4, "v1": 5, "base": "study", "mean": "เรียน / ศึกษา", "emo": "📚"}, {"en": "We got the manager to approve the proposal.", "th": "เราทำให้ผู้จัดการอนุมัติข้อเสนอ", "mk": 1, "to": 4, "v1": 5, "base": "approve", "mean": "อนุมัติ", "emo": "✅"}, {"en": "They got the waiter to bring more water.", "th": "พวกเขาขอให้พนักงานเสิร์ฟนำน้ำมาเพิ่ม", "mk": 1, "to": 4, "v1": 5, "base": "bring", "mean": "นำมา", "emo": "🫴"}, {"en": "I got my father to fix my bike.", "th": "ฉันให้พ่อซ่อมจักรยานของฉัน", "mk": 1, "to": 4, "v1": 5, "base": "fix", "mean": "ซ่อม", "emo": "🔧"}, {"en": "She got her husband to cook dinner.", "th": "เธอชวนให้สามีทำอาหารเย็น", "mk": 1, "to": 4, "v1": 5, "base": "cook", "mean": "ทำอาหาร", "emo": "👩‍🍳"}, {"en": "He got the gardener to trim the bushes.", "th": "เขาให้คนสวนตัดแต่งพุ่มไม้", "mk": 1, "to": 4, "v1": 5, "base": "trim", "mean": "ตัดแต่ง", "emo": "✂️"}, {"en": "We got the coach to train the team.", "th": "เราให้โค้ชฝึกทีม", "mk": 1, "to": 4, "v1": 5, "base": "train", "mean": "ฝึก / ฝึกอบรม", "emo": "🏋️"}, {"en": "They got the lawyer to review the contract.", "th": "พวกเขาให้ทนายตรวจสัญญา", "mk": 1, "to": 4, "v1": 5, "base": "review", "mean": "ตรวจทาน / ทบทวน", "emo": "📑"}, {"en": "I got my cousin to carry my bags.", "th": "ฉันให้ลูกพี่ลูกน้องช่วยถือกระเป๋า", "mk": 1, "to": 4, "v1": 5, "base": "carry", "mean": "ถือ / ขน / ยก", "emo": "🧳"}, {"en": "She got her roommate to lock the door.", "th": "เธอให้รูมเมตล็อกประตู", "mk": 1, "to": 4, "v1": 5, "base": "lock", "mean": "ล็อก", "emo": "🔒"}, {"en": "He got the mechanic to inspect the engine.", "th": "เขาให้ช่างตรวจเครื่องยนต์", "mk": 1, "to": 4, "v1": 5, "base": "inspect", "mean": "ตรวจสอบ", "emo": "🔍"}, {"en": "We got the volunteers to collect donations.", "th": "เราให้อาสาสมัครรวบรวมเงินบริจาค", "mk": 1, "to": 4, "v1": 5, "base": "collect", "mean": "รวบรวม / เก็บ", "emo": "📥"}, {"en": "They got the guide to recommend a hotel.", "th": "พวกเขาให้ไกด์แนะนำโรงแรม", "mk": 1, "to": 4, "v1": 5, "base": "recommend", "mean": "แนะนำ", "emo": "👍"}, {"en": "I got my niece to organize the books.", "th": "ฉันให้หลานสาวจัดหนังสือ", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัดระเบียบ / จัด", "emo": "🗂️"}, {"en": "She got the nurse to check her temperature.", "th": "เธอให้พยาบาลตรวจวัดอุณหภูมิ", "mk": 1, "to": 4, "v1": 5, "base": "check", "mean": "ตรวจ", "emo": "✔️"}, {"en": "He got his secretary to arrange the meeting.", "th": "เขาให้เลขานุการจัดการประชุม", "mk": 1, "to": 4, "v1": 5, "base": "arrange", "mean": "จัดเตรียม / จัดเรียง", "emo": "📅"}, {"en": "We got the receptionist to welcome the guests.", "th": "เราให้พนักงานต้อนรับรับแขก", "mk": 1, "to": 4, "v1": 5, "base": "welcome", "mean": "ต้อนรับ", "emo": "👋"}, {"en": "They got the designer to create a new logo.", "th": "พวกเขาให้นักออกแบบสร้างโลโก้ใหม่", "mk": 1, "to": 4, "v1": 5, "base": "create", "mean": "สร้างสรรค์ / สร้าง", "emo": "💡"}, {"en": "I got my classmate to explain the lesson.", "th": "ฉันให้เพื่อนร่วมชั้นอธิบายบทเรียน", "mk": 1, "to": 4, "v1": 5, "base": "explain", "mean": "อธิบาย", "emo": "🗣️"}, {"en": "She got her brother to replace the batteries.", "th": "เธอให้พี่ชายเปลี่ยนแบตเตอรี่", "mk": 1, "to": 4, "v1": 5, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "He got the cleaner to polish the floor.", "th": "เขาให้พนักงานทำความสะอาดขัดพื้น", "mk": 1, "to": 4, "v1": 5, "base": "polish", "mean": "ขัดเงา", "emo": "✨"}, {"en": "We got the engineer to improve the system.", "th": "เราให้วิศวกรปรับปรุงระบบ", "mk": 1, "to": 4, "v1": 5, "base": "improve", "mean": "ปรับปรุง", "emo": "📈"}, {"en": "They got the photographer to take family photos.", "th": "พวกเขาให้ช่างภาพถ่ายรูปครอบครัว", "mk": 1, "to": 4, "v1": 5, "base": "take", "mean": "ถ่าย / เอา / พา", "emo": "📸"}, {"en": "I got my friend to join our club.", "th": "ฉันชวนเพื่อนเข้าชมรมของเรา", "mk": 1, "to": 4, "v1": 5, "base": "join", "mean": "เข้าร่วม", "emo": "🎉"}, {"en": "She got her teacher to recommend a good book.", "th": "เธอให้ครูแนะนำหนังสือดี ๆ", "mk": 1, "to": 4, "v1": 5, "base": "recommend", "mean": "แนะนำ", "emo": "👍"}, {"en": "He got his neighbor to receive the package.", "th": "เขาให้เพื่อนบ้านรับพัสดุ", "mk": 1, "to": 4, "v1": 5, "base": "receive", "mean": "รับ", "emo": "📦"}, {"en": "We got the electrician to replace the light bulb.", "th": "เราให้ช่างไฟเปลี่ยนหลอดไฟ", "mk": 1, "to": 4, "v1": 5, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "They got the pilot to fly them to the island.", "th": "พวกเขาให้นักบินพาไปเกาะ", "mk": 1, "to": 4, "v1": 5, "base": "fly", "mean": "บิน / ขับ (อากาศยาน)", "emo": "🚁"}, {"en": "I got my son to finish his homework.", "th": "ฉันทำให้ลูกชายทำการบ้านเสร็จ", "mk": 1, "to": 4, "v1": 5, "base": "finish", "mean": "ทำให้เสร็จ", "emo": "🏁"}, {"en": "She got her daughter to practice the piano.", "th": "เธอทำให้ลูกสาวฝึกเปียโน", "mk": 1, "to": 4, "v1": 5, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "He got his team to work together.", "th": "เขาทำให้ทีมทำงานร่วมกัน", "mk": 1, "to": 4, "v1": 5, "base": "work", "mean": "ทำงาน", "emo": "🤜🤛"}, {"en": "We got our children to recycle plastic bottles.", "th": "เราทำให้ลูก ๆ รีไซเคิลขวดพลาสติก", "mk": 1, "to": 4, "v1": 5, "base": "recycle", "mean": "รีไซเคิล", "emo": "♻️"}, {"en": "They got the workers to finish the project early.", "th": "พวกเขาทำให้คนงานทำโครงการเสร็จก่อนกำหนด", "mk": 1, "to": 4, "v1": 5, "base": "finish", "mean": "ทำให้เสร็จ", "emo": "🏁"}, {"en": "I got my mother to bake a cake.", "th": "ฉันชวนให้แม่อบเค้ก", "mk": 1, "to": 4, "v1": 5, "base": "bake", "mean": "อบ", "emo": "🎂"}, {"en": "She got her father to paint her room.", "th": "เธอให้พ่อทาสีห้อง", "mk": 1, "to": 4, "v1": 5, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "He got the clerk to copy the documents.", "th": "เขาให้พนักงานถ่ายเอกสาร", "mk": 1, "to": 4, "v1": 5, "base": "copy", "mean": "ถ่ายเอกสาร / คัดลอก", "emo": "📄"}, {"en": "We got the interpreter to translate the conversation.", "th": "เราให้ล่ามแปลการสนทนา", "mk": 1, "to": 4, "v1": 5, "base": "translate", "mean": "แปล", "emo": "🌐"}, {"en": "They got the accountant to calculate the taxes.", "th": "พวกเขาให้นักบัญชีคำนวณภาษี", "mk": 1, "to": 4, "v1": 5, "base": "calculate", "mean": "คำนวณ", "emo": "🧮"}, {"en": "I got my roommate to vacuum the living room.", "th": "ฉันให้รูมเมตดูดฝุ่นห้องนั่งเล่น", "mk": 1, "to": 4, "v1": 5, "base": "vacuum", "mean": "ดูดฝุ่น", "emo": "🧽"}, {"en": "She got the maid to make the bed.", "th": "เธอให้แม่บ้านจัดที่นอน", "mk": 1, "to": 4, "v1": 5, "base": "make", "mean": "ทำ / จัด (make the bed = จัดที่นอน)", "emo": "🛏️"}, {"en": "He got the salesman to demonstrate the product.", "th": "เขาให้พนักงานขายสาธิตสินค้า", "mk": 1, "to": 4, "v1": 5, "base": "demonstrate", "mean": "สาธิต", "emo": "🛍️"}, {"en": "We got the captain to lead the team.", "th": "เราให้กัปตันนำทีม", "mk": 1, "to": 4, "v1": 5, "base": "lead", "mean": "นำ", "emo": "🧭"}, {"en": "They got the consultant to evaluate the project.", "th": "พวกเขาให้ที่ปรึกษาประเมินโครงการ", "mk": 1, "to": 4, "v1": 5, "base": "evaluate", "mean": "ประเมิน", "emo": "📊"}, {"en": "I got my father to repair my bicycle.", "th": "ฉันให้พ่อซ่อมจักรยานของฉัน", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "She got her mother to cook breakfast.", "th": "เธอชวนให้แม่ทำอาหารเช้า", "mk": 1, "to": 4, "v1": 5, "base": "cook", "mean": "ทำอาหาร", "emo": "👩‍🍳"}, {"en": "He got his brother to drive him to work.", "th": "เขาให้พี่ชายขับรถไปส่งที่ทำงาน", "mk": 1, "to": 4, "v1": 5, "base": "drive", "mean": "ขับ (รถ) / ขับไปส่ง", "emo": "🚗"}, {"en": "We got our neighbors to join the party.", "th": "เราชวนเพื่อนบ้านมาร่วมงานเลี้ยง", "mk": 1, "to": 4, "v1": 5, "base": "join", "mean": "เข้าร่วม", "emo": "🎉"}, {"en": "They got the manager to extend the deadline.", "th": "พวกเขาทำให้ผู้จัดการขยายกำหนดส่งงาน", "mk": 1, "to": 4, "v1": 5, "base": "extend", "mean": "ขยาย / ต่อ (เวลา)", "emo": "⏳"}, {"en": "I got my teacher to explain the grammar again.", "th": "ฉันให้ครูอธิบายไวยากรณ์อีกครั้ง", "mk": 1, "to": 4, "v1": 5, "base": "explain", "mean": "อธิบาย", "emo": "🗣️"}, {"en": "She got her friend to lend her a dictionary.", "th": "เธอให้เพื่อนยืมพจนานุกรม", "mk": 1, "to": 4, "v1": 5, "base": "lend", "mean": "ให้ยืม", "emo": "📖"}, {"en": "He got the waiter to refill his coffee.", "th": "เขาให้พนักงานเสิร์ฟเติมกาแฟ", "mk": 1, "to": 4, "v1": 5, "base": "refill", "mean": "เติมใหม่", "emo": "☕"}, {"en": "We got the mechanic to replace the brake pads.", "th": "เราให้ช่างเปลี่ยนผ้าเบรก", "mk": 1, "to": 4, "v1": 5, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "They got the electrician to install new lights.", "th": "พวกเขาให้ช่างไฟติดตั้งไฟใหม่", "mk": 1, "to": 4, "v1": 5, "base": "install", "mean": "ติดตั้ง", "emo": "💡"}, {"en": "I got my cousin to mow the lawn.", "th": "ฉันให้ลูกพี่ลูกน้องตัดหญ้า", "mk": 1, "to": 4, "v1": 5, "base": "mow", "mean": "ตัด (หญ้า)", "emo": "🌱"}, {"en": "She got her son to feed the dog.", "th": "เธอให้ลูกชายให้อาหารสุนัข", "mk": 1, "to": 4, "v1": 5, "base": "feed", "mean": "ให้อาหาร", "emo": "🐶"}, {"en": "He got his daughter to wash the dishes.", "th": "เขาให้ลูกสาวล้างจาน", "mk": 1, "to": 4, "v1": 5, "base": "wash", "mean": "ล้าง", "emo": "🚿"}, {"en": "We got the volunteers to clean the park.", "th": "เราให้อาสาสมัครทำความสะอาดสวนสาธารณะ", "mk": 1, "to": 4, "v1": 5, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They got the workers to paint the fence.", "th": "พวกเขาให้คนงานทาสีรั้ว", "mk": 1, "to": 4, "v1": 5, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "I got my roommate to buy some milk.", "th": "ฉันให้รูมเมตซื้อนม", "mk": 1, "to": 4, "v1": 5, "base": "buy", "mean": "ซื้อ", "emo": "🥛"}, {"en": "She got her assistant to schedule the meeting.", "th": "เธอให้ผู้ช่วยจัดตารางการประชุม", "mk": 1, "to": 4, "v1": 5, "base": "schedule", "mean": "จัดตาราง / กำหนดเวลา", "emo": "🗓️"}, {"en": "He got his secretary to answer the phone.", "th": "เขาให้เลขานุการรับโทรศัพท์", "mk": 1, "to": 4, "v1": 5, "base": "answer", "mean": "ตอบ / รับ (สาย)", "emo": "📞"}, {"en": "We got the receptionist to reserve a conference room.", "th": "เราให้พนักงานต้อนรับจองห้องประชุม", "mk": 1, "to": 4, "v1": 5, "base": "reserve", "mean": "จอง", "emo": "🔖"}, {"en": "They got the designer to redesign the website.", "th": "พวกเขาให้นักออกแบบออกแบบเว็บไซต์ใหม่", "mk": 1, "to": 4, "v1": 5, "base": "redesign", "mean": "ออกแบบใหม่", "emo": "🖥️"}, {"en": "I got my uncle to build a bookshelf.", "th": "ฉันให้อาสร้างชั้นหนังสือ", "mk": 1, "to": 4, "v1": 5, "base": "build", "mean": "สร้าง / ก่อสร้าง", "emo": "🏗️"}, {"en": "She got her sister to decorate the room.", "th": "เธอให้พี่สาวตกแต่งห้อง", "mk": 1, "to": 4, "v1": 5, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "He got the doctor to examine his knee.", "th": "เขาให้แพทย์ตรวจหัวเข่า", "mk": 1, "to": 4, "v1": 5, "base": "examine", "mean": "ตรวจ", "emo": "🩺"}, {"en": "We got the dentist to check our teeth.", "th": "เราให้ทันตแพทย์ตรวจฟัน", "mk": 1, "to": 4, "v1": 5, "base": "check", "mean": "ตรวจ", "emo": "✔️"}, {"en": "They got the lawyer to prepare the contract.", "th": "พวกเขาให้ทนายจัดทำสัญญา", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม / จัดทำ", "emo": "🍳"}, {"en": "I got my friend to recommend a good restaurant.", "th": "ฉันให้เพื่อนแนะนำร้านอาหารดี ๆ", "mk": 1, "to": 4, "v1": 5, "base": "recommend", "mean": "แนะนำ", "emo": "👍"}, {"en": "She got her neighbor to water her plants.", "th": "เธอให้เพื่อนบ้านรดน้ำต้นไม้", "mk": 1, "to": 4, "v1": 5, "base": "water", "mean": "รดน้ำ", "emo": "💧"}, {"en": "He got the gardener to plant more trees.", "th": "เขาให้คนสวนปลูกต้นไม้เพิ่ม", "mk": 1, "to": 4, "v1": 5, "base": "plant", "mean": "ปลูก", "emo": "🌳"}, {"en": "We got the coach to organize a tournament.", "th": "เราให้โค้ชจัดการแข่งขัน", "mk": 1, "to": 4, "v1": 5, "base": "organize", "mean": "จัดระเบียบ / จัด", "emo": "🗂️"}, {"en": "They got the guide to show them around the city.", "th": "พวกเขาให้ไกด์พาชมเมือง", "mk": 1, "to": 4, "v1": 5, "base": "show", "mean": "แสดง / พา (ชม)", "emo": "👉"}, {"en": "I got my son to apologize to his teacher.", "th": "ฉันทำให้ลูกชายยอมขอโทษครู", "mk": 1, "to": 4, "v1": 5, "base": "apologize", "mean": "ขอโทษ", "emo": "🙇"}, {"en": "She got her daughter to practice English every day.", "th": "เธอทำให้ลูกสาวฝึกภาษาอังกฤษทุกวัน", "mk": 1, "to": 4, "v1": 5, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "He got his team to finish the project on time.", "th": "เขาทำให้ทีมทำโครงการเสร็จตรงเวลา", "mk": 1, "to": 4, "v1": 5, "base": "finish", "mean": "ทำให้เสร็จ", "emo": "🏁"}, {"en": "We got our children to recycle paper.", "th": "เราทำให้ลูก ๆ รีไซเคิลกระดาษ", "mk": 1, "to": 4, "v1": 5, "base": "recycle", "mean": "รีไซเคิล", "emo": "♻️"}, {"en": "They got the students to participate in the activity.", "th": "พวกเขาทำให้นักเรียนเข้าร่วมกิจกรรม", "mk": 1, "to": 4, "v1": 5, "base": "participate", "mean": "เข้าร่วม / มีส่วนร่วม", "emo": "🙋"}, {"en": "I got my classmate to share his notes.", "th": "ฉันให้เพื่อนร่วมชั้นแบ่งปันโน้ต", "mk": 1, "to": 4, "v1": 5, "base": "share", "mean": "แบ่งปัน", "emo": "🤲"}, {"en": "She got her boss to approve her vacation.", "th": "เธอทำให้หัวหน้าอนุมัติวันลาพักร้อน", "mk": 1, "to": 4, "v1": 5, "base": "approve", "mean": "อนุมัติ", "emo": "✅"}, {"en": "He got the cashier to exchange the damaged item.", "th": "เขาให้แคชเชียร์เปลี่ยนสินค้าที่ชำรุด", "mk": 1, "to": 4, "v1": 5, "base": "exchange", "mean": "แลกเปลี่ยน / เปลี่ยน", "emo": "🔁"}, {"en": "We got the interpreter to interpret the speech.", "th": "เราให้ล่ามแปลสุนทรพจน์", "mk": 1, "to": 4, "v1": 5, "base": "interpret", "mean": "แปลด้วยวาจา / ตีความ", "emo": "🗨️"}, {"en": "They got the accountant to review the budget.", "th": "พวกเขาให้นักบัญชีตรวจสอบงบประมาณ", "mk": 1, "to": 4, "v1": 5, "base": "review", "mean": "ตรวจทาน / ทบทวน", "emo": "📑"}, {"en": "I got my nephew to carry the groceries.", "th": "ฉันให้หลานชายช่วยถือของชำ", "mk": 1, "to": 4, "v1": 5, "base": "carry", "mean": "ถือ / ขน / ยก", "emo": "🧳"}, {"en": "She got her husband to fix the sink.", "th": "เธอให้สามีซ่อมอ่างล้างจาน", "mk": 1, "to": 4, "v1": 5, "base": "fix", "mean": "ซ่อม", "emo": "🔧"}, {"en": "He got the plumber to repair the leaking pipe.", "th": "เขาให้ช่างประปาซ่อมท่อที่รั่ว", "mk": 1, "to": 4, "v1": 5, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "We got the photographer to edit the wedding photos.", "th": "เราให้ช่างภาพแต่งภาพงานแต่ง", "mk": 1, "to": 4, "v1": 5, "base": "edit", "mean": "แก้ไข / ตกแต่ง", "emo": "🖼️"}, {"en": "They got the engineer to inspect the bridge.", "th": "พวกเขาให้วิศวกรตรวจสอบสะพาน", "mk": 1, "to": 4, "v1": 5, "base": "inspect", "mean": "ตรวจสอบ", "emo": "🔍"}, {"en": "I got my grandmother to tell me a story.", "th": "ฉันชวนให้คุณยายเล่านิทานให้ฟัง", "mk": 1, "to": 4, "v1": 5, "base": "tell", "mean": "เล่า / บอก", "emo": "📖"}, {"en": "She got her grandfather to teach her chess.", "th": "เธอให้คุณปู่สอนเล่นหมากรุก", "mk": 1, "to": 4, "v1": 5, "base": "teach", "mean": "สอน", "emo": "♟️"}, {"en": "He got the chef to prepare a vegetarian meal.", "th": "เขาให้เชฟเตรียมอาหารมังสวิรัติ", "mk": 1, "to": 4, "v1": 5, "base": "prepare", "mean": "เตรียม / จัดทำ", "emo": "🍳"}, {"en": "We got the pilot to delay the departure for a few minutes.", "th": "เราทำให้นักบินเลื่อนเวลาออกเดินทางออกไปไม่กี่นาที", "mk": 1, "to": 4, "v1": 5, "base": "delay", "mean": "เลื่อน / ทำให้ล่าช้า", "emo": "⏰"}, {"en": "They got the consultant to suggest a better solution.", "th": "พวกเขาให้ที่ปรึกษาเสนอวิธีแก้ปัญหาที่ดีกว่า", "mk": 1, "to": 4, "v1": 5, "base": "suggest", "mean": "เสนอ / แนะนำ", "emo": "💬"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.to) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

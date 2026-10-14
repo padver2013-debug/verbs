@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.1 Causative verb "have" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>2.1 Causative verb “have” · Flip cards</h1>
+  <div class="formula">Subject + <b>have</b> + someone + <b>V1</b> + object &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "I have my brother wash my car.", "th": "ฉันให้พี่ชายล้างรถของฉัน", "mk": 1, "v1": 4, "base": "wash", "mean": "ล้าง", "emo": "🚿"}, {"en": "I have my assistant print the report.", "th": "ฉันให้ผู้ช่วยพิมพ์รายงาน", "mk": 1, "v1": 4, "base": "print", "mean": "พิมพ์", "emo": "🖨️"}, {"en": "She has her secretary answer the phone.", "th": "เธอให้เลขานุการรับโทรศัพท์", "mk": 1, "v1": 4, "base": "answer", "mean": "ตอบ / รับ (สาย)", "emo": "📞"}, {"en": "We have the chef prepare dinner.", "th": "เราให้เชฟเตรียมอาหารเย็น", "mk": 1, "v1": 4, "base": "prepare", "mean": "เตรียม / จัดทำ", "emo": "🍳"}, {"en": "They have the staff clean the office.", "th": "พวกเขาให้พนักงานทำความสะอาดสำนักงาน", "mk": 1, "v1": 4, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "He has his son mow the lawn.", "th": "เขาให้ลูกชายตัดหญ้า", "mk": 1, "v1": 4, "base": "mow", "mean": "ตัด (หญ้า)", "emo": "🌱"}, {"en": "I have my friend carry my suitcase.", "th": "ฉันให้เพื่อนถือกระเป๋าเดินทาง", "mk": 1, "v1": 4, "base": "carry", "mean": "ถือ / ขน / ยก", "emo": "🧳"}, {"en": "She has her daughter water the plants.", "th": "เธอให้ลูกสาวรดน้ำต้นไม้", "mk": 1, "v1": 4, "base": "water", "mean": "รดน้ำ", "emo": "💧"}, {"en": "We have the technician fix the printer.", "th": "เราให้ช่างซ่อมเครื่องพิมพ์", "mk": 1, "v1": 4, "base": "fix", "mean": "ซ่อม", "emo": "🔧"}, {"en": "They have the driver pick us up.", "th": "พวกเขาให้คนขับรถมารับพวกเรา", "mk": 1, "v1": 4, "base": "pick", "mean": "รับ (pick up = มารับ)", "emo": "🚗"}, {"en": "I have my mother cook lunch.", "th": "ฉันให้แม่ทำอาหารกลางวัน", "mk": 1, "v1": 4, "base": "cook", "mean": "ทำอาหาร", "emo": "👩‍🍳"}, {"en": "He has his wife book the hotel.", "th": "เขาให้ภรรยาจองโรงแรม", "mk": 1, "v1": 4, "base": "book", "mean": "จอง", "emo": "🏨"}, {"en": "She has her friend take pictures.", "th": "เธอให้เพื่อนถ่ายรูป", "mk": 1, "v1": 4, "base": "take", "mean": "ถ่าย / เอา / พา", "emo": "📸"}, {"en": "We have our teacher explain the lesson.", "th": "เราให้ครูอธิบายบทเรียน", "mk": 1, "v1": 4, "base": "explain", "mean": "อธิบาย", "emo": "🗣️"}, {"en": "They have their lawyer review the contract.", "th": "พวกเขาให้ทนายตรวจสัญญา", "mk": 1, "v1": 4, "base": "review", "mean": "ตรวจทาน / ทบทวน", "emo": "📑"}, {"en": "I have my sister feed the cat.", "th": "ฉันให้น้องสาวให้อาหารแมว", "mk": 1, "v1": 4, "base": "feed", "mean": "ให้อาหาร", "emo": "🐱"}, {"en": "He has the gardener trim the bushes.", "th": "เขาให้คนสวนตัดแต่งพุ่มไม้", "mk": 1, "v1": 4, "base": "trim", "mean": "ตัดแต่ง", "emo": "✂️"}, {"en": "She has the babysitter watch the children.", "th": "เธอให้พี่เลี้ยงดูแลเด็ก ๆ", "mk": 1, "v1": 4, "base": "watch", "mean": "ดูแล / เฝ้าดู", "emo": "👀"}, {"en": "We have the mechanic inspect the engine.", "th": "เราให้ช่างตรวจเครื่องยนต์", "mk": 1, "v1": 4, "base": "inspect", "mean": "ตรวจสอบ", "emo": "🔍"}, {"en": "They have their accountant calculate the taxes.", "th": "พวกเขาให้นักบัญชีคำนวณภาษี", "mk": 1, "v1": 4, "base": "calculate", "mean": "คำนวณ", "emo": "🧮"}, {"en": "I have my cousin paint the fence.", "th": "ฉันให้ลูกพี่ลูกน้องทาสีรั้ว", "mk": 1, "v1": 4, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "He has the waiter bring some water.", "th": "เขาให้พนักงานเสิร์ฟนำน้ำมา", "mk": 1, "v1": 4, "base": "bring", "mean": "นำมา", "emo": "🫴"}, {"en": "She has her brother drive her home.", "th": "เธอให้พี่ชายขับรถไปส่งบ้าน", "mk": 1, "v1": 4, "base": "drive", "mean": "ขับ (รถ)", "emo": "🚗"}, {"en": "We have the manager approve the proposal.", "th": "เราให้ผู้จัดการอนุมัติข้อเสนอ", "mk": 1, "v1": 4, "base": "approve", "mean": "อนุมัติ", "emo": "✅"}, {"en": "They have the designer create a logo.", "th": "พวกเขาให้นักออกแบบสร้างโลโก้", "mk": 1, "v1": 4, "base": "create", "mean": "สร้างสรรค์ / สร้าง", "emo": "💡"}, {"en": "I have my roommate lock the door.", "th": "ฉันให้รูมเมตล็อกประตู", "mk": 1, "v1": 4, "base": "lock", "mean": "ล็อก", "emo": "🔒"}, {"en": "He has the nurse check his temperature.", "th": "เขาให้พยาบาลตรวจวัดอุณหภูมิ", "mk": 1, "v1": 4, "base": "check", "mean": "ตรวจ / ตรวจสอบ", "emo": "✔️"}, {"en": "She has her husband fix the shelf.", "th": "เธอให้สามีซ่อมชั้นวางของ", "mk": 1, "v1": 4, "base": "fix", "mean": "ซ่อม", "emo": "🔧"}, {"en": "We have the coach train the team.", "th": "เราให้โค้ชฝึกทีม", "mk": 1, "v1": 4, "base": "train", "mean": "ฝึก / ฝึกอบรม", "emo": "🏋️"}, {"en": "They have the guide show them around.", "th": "พวกเขาให้ไกด์พาชมสถานที่", "mk": 1, "v1": 4, "base": "show", "mean": "แสดง / พา (ชม)", "emo": "👉"}, {"en": "I have my father repair the bike.", "th": "ฉันให้พ่อซ่อมจักรยาน", "mk": 1, "v1": 4, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "He has his assistant schedule the meeting.", "th": "เขาให้ผู้ช่วยจัดตารางการประชุม", "mk": 1, "v1": 4, "base": "schedule", "mean": "จัดตาราง / กำหนดเวลา", "emo": "📅"}, {"en": "She has the receptionist welcome the guests.", "th": "เธอให้พนักงานต้อนรับรับแขก", "mk": 1, "v1": 4, "base": "welcome", "mean": "ต้อนรับ", "emo": "👋"}, {"en": "We have the volunteers collect donations.", "th": "เราให้อาสาสมัครรวบรวมเงินบริจาค", "mk": 1, "v1": 4, "base": "collect", "mean": "รวบรวม / เก็บ", "emo": "📥"}, {"en": "They have the photographer record the event.", "th": "พวกเขาให้ช่างภาพบันทึกงาน", "mk": 1, "v1": 4, "base": "record", "mean": "บันทึก", "emo": "🎥"}, {"en": "I have my uncle install the software.", "th": "ฉันให้อาติดตั้งโปรแกรม", "mk": 1, "v1": 4, "base": "install", "mean": "ติดตั้ง", "emo": "💾"}, {"en": "He has the electrician replace the light bulb.", "th": "เขาให้ช่างไฟเปลี่ยนหลอดไฟ", "mk": 1, "v1": 4, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "She has her neighbor receive the package.", "th": "เธอให้เพื่อนบ้านรับพัสดุ", "mk": 1, "v1": 4, "base": "receive", "mean": "รับ", "emo": "📦"}, {"en": "We have the janitor empty the trash bins.", "th": "เราให้ภารโรงเทถังขยะ", "mk": 1, "v1": 4, "base": "empty", "mean": "เท / ทำให้ว่าง", "emo": "🗑️"}, {"en": "They have the translator translate the document.", "th": "พวกเขาให้นักแปลแปลเอกสาร", "mk": 1, "v1": 4, "base": "translate", "mean": "แปล", "emo": "🌐"}, {"en": "I have my son organize the books.", "th": "ฉันให้ลูกชายจัดหนังสือ", "mk": 1, "v1": 4, "base": "organize", "mean": "จัดระเบียบ / จัด", "emo": "🗂️"}, {"en": "He has his daughter decorate the room.", "th": "เขาให้ลูกสาวตกแต่งห้อง", "mk": 1, "v1": 4, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "She has the clerk copy the files.", "th": "เธอให้พนักงานถ่ายเอกสารไฟล์", "mk": 1, "v1": 4, "base": "copy", "mean": "ถ่ายเอกสาร / คัดลอก", "emo": "📄"}, {"en": "We have the security guard open the gate.", "th": "เราให้เจ้าหน้าที่รักษาความปลอดภัยเปิดประตู", "mk": 1, "v1": 5, "base": "open", "mean": "เปิด", "emo": "🚪"}, {"en": "They have the engineer test the machine.", "th": "พวกเขาให้วิศวกรทดสอบเครื่องจักร", "mk": 1, "v1": 4, "base": "test", "mean": "ทดสอบ", "emo": "🧪"}, {"en": "I have my niece arrange the flowers.", "th": "ฉันให้หลานสาวจัดดอกไม้", "mk": 1, "v1": 4, "base": "arrange", "mean": "จัดเรียง / จัด", "emo": "💐"}, {"en": "He has the pilot fly the helicopter.", "th": "เขาให้นักบินขับเฮลิคอปเตอร์", "mk": 1, "v1": 4, "base": "fly", "mean": "บิน / ขับ (อากาศยาน)", "emo": "🚁"}, {"en": "She has the cashier count the money.", "th": "เธอให้แคชเชียร์นับเงิน", "mk": 1, "v1": 4, "base": "count", "mean": "นับ", "emo": "💵"}, {"en": "We have the students complete the exercise.", "th": "เราให้นักเรียนทำแบบฝึกหัดให้เสร็จ", "mk": 1, "v1": 4, "base": "complete", "mean": "ทำให้เสร็จ / ทำให้สมบูรณ์", "emo": "✍️"}, {"en": "They have the workers build a new bridge.", "th": "พวกเขาให้คนงานสร้างสะพานใหม่", "mk": 1, "v1": 4, "base": "build", "mean": "สร้าง / ก่อสร้าง", "emo": "🏗️"}, {"en": "I have my assistant organize my schedule.", "th": "ฉันให้ผู้ช่วยจัดตารางงานของฉัน", "mk": 1, "v1": 4, "base": "organize", "mean": "จัดระเบียบ / จัด", "emo": "🗂️"}, {"en": "She has her son vacuum the living room.", "th": "เธอให้ลูกชายดูดฝุ่นห้องนั่งเล่น", "mk": 1, "v1": 4, "base": "vacuum", "mean": "ดูดฝุ่น", "emo": "🧽"}, {"en": "He has his daughter fold the clothes.", "th": "เขาให้ลูกสาวพับเสื้อผ้า", "mk": 1, "v1": 4, "base": "fold", "mean": "พับ", "emo": "👕"}, {"en": "We have the chef bake a birthday cake.", "th": "เราให้เชฟอบเค้กวันเกิด", "mk": 1, "v1": 4, "base": "bake", "mean": "อบ", "emo": "🎂"}, {"en": "They have the waiter serve the drinks.", "th": "พวกเขาให้พนักงานเสิร์ฟเครื่องดื่ม", "mk": 1, "v1": 4, "base": "serve", "mean": "เสิร์ฟ", "emo": "🍹"}, {"en": "I have my friend deliver the package.", "th": "ฉันให้เพื่อนนำพัสดุไปส่ง", "mk": 1, "v1": 4, "base": "deliver", "mean": "นำส่ง", "emo": "📮"}, {"en": "She has her husband wash the dishes.", "th": "เธอให้สามีล้างจาน", "mk": 1, "v1": 4, "base": "wash", "mean": "ล้าง", "emo": "🚿"}, {"en": "He has the plumber repair the sink.", "th": "เขาให้ช่างประปาซ่อมอ่างล้างจาน", "mk": 1, "v1": 4, "base": "repair", "mean": "ซ่อมแซม", "emo": "🛠️"}, {"en": "We have the workers install new windows.", "th": "เราให้คนงานติดตั้งหน้าต่างใหม่", "mk": 1, "v1": 4, "base": "install", "mean": "ติดตั้ง", "emo": "💾"}, {"en": "They have the technician examine the equipment.", "th": "พวกเขาให้ช่างตรวจสอบอุปกรณ์", "mk": 1, "v1": 4, "base": "examine", "mean": "ตรวจ / ตรวจสอบ", "emo": "🩺"}, {"en": "I have my sister decorate the room.", "th": "ฉันให้น้องสาวตกแต่งห้อง", "mk": 1, "v1": 4, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "She has the gardener plant roses.", "th": "เธอให้คนสวนปลูกกุหลาบ", "mk": 1, "v1": 4, "base": "plant", "mean": "ปลูก", "emo": "🌹"}, {"en": "He has his secretary arrange the documents.", "th": "เขาให้เลขานุการจัดเรียงเอกสาร", "mk": 1, "v1": 4, "base": "arrange", "mean": "จัดเรียง / จัด", "emo": "💐"}, {"en": "We have the coach encourage the players.", "th": "เราให้โค้ชให้กำลังใจนักกีฬา", "mk": 1, "v1": 4, "base": "encourage", "mean": "ให้กำลังใจ", "emo": "💪"}, {"en": "They have the guide recommend good restaurants.", "th": "พวกเขาให้ไกด์แนะนำร้านอาหารดี ๆ", "mk": 1, "v1": 4, "base": "recommend", "mean": "แนะนำ", "emo": "👍"}, {"en": "I have my cousin clean the garage.", "th": "ฉันให้ลูกพี่ลูกน้องทำความสะอาดโรงรถ", "mk": 1, "v1": 4, "base": "clean", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She has the nurse measure her blood pressure.", "th": "เธอให้พยาบาลวัดความดันโลหิต", "mk": 1, "v1": 4, "base": "measure", "mean": "วัด", "emo": "📏"}, {"en": "He has his friend return the books.", "th": "เขาให้เพื่อนคืนหนังสือ", "mk": 1, "v1": 4, "base": "return", "mean": "คืน", "emo": "↩️"}, {"en": "We have the manager interview the applicants.", "th": "เราให้ผู้จัดการสัมภาษณ์ผู้สมัคร", "mk": 1, "v1": 4, "base": "interview", "mean": "สัมภาษณ์", "emo": "🎙️"}, {"en": "They have the accountant prepare the financial report.", "th": "พวกเขาให้นักบัญชีจัดทำรายงานการเงิน", "mk": 1, "v1": 4, "base": "prepare", "mean": "เตรียม / จัดทำ", "emo": "🍳"}, {"en": "I have my father sharpen the knife.", "th": "ฉันให้พ่อลับมีด", "mk": 1, "v1": 4, "base": "sharpen", "mean": "ลับ / ทำให้คม", "emo": "🔪"}, {"en": "She has her room mate lock the door.", "th": "เธอให้รูมเมตล็อกประตู", "mk": 1, "v1": 5, "base": "lock", "mean": "ล็อก", "emo": "🔒"}, {"en": "He has the mechanic change the oil.", "th": "เขาให้ช่างเปลี่ยนน้ำมันเครื่อง", "mk": 1, "v1": 4, "base": "change", "mean": "เปลี่ยน", "emo": "🛢️"}, {"en": "We have the volunteers distribute food.", "th": "เราให้อาสาสมัครแจกอาหาร", "mk": 1, "v1": 4, "base": "distribute", "mean": "แจก / กระจาย", "emo": "🍲"}, {"en": "They have the security guard check everyone's ID.", "th": "พวกเขาให้เจ้าหน้าที่รักษาความปลอดภัยตรวจบัตรประชาชนของทุกคน", "mk": 1, "v1": 5, "base": "check", "mean": "ตรวจ / ตรวจสอบ", "emo": "✔️"}, {"en": "I have my nephew carry the boxes.", "th": "ฉันให้หลานชายยกกล่อง", "mk": 1, "v1": 4, "base": "carry", "mean": "ถือ / ขน / ยก", "emo": "🧳"}, {"en": "She has the maid make the bed.", "th": "เธอให้แม่บ้านจัดที่นอน", "mk": 1, "v1": 4, "base": "make", "mean": "ทำ / จัด (make the bed = จัดที่นอน)", "emo": "🛏️"}, {"en": "He has his employee update the database.", "th": "เขาให้พนักงานอัปเดตฐานข้อมูล", "mk": 1, "v1": 4, "base": "update", "mean": "อัปเดต", "emo": "🔃"}, {"en": "We have the librarian reserve the books.", "th": "เราให้บรรณารักษ์สำรองหนังสือ", "mk": 1, "v1": 4, "base": "reserve", "mean": "สำรอง / จอง", "emo": "🔖"}, {"en": "They have the tailor shorten the pants.", "th": "พวกเขาให้ช่างตัดเสื้อแก้กางเกงให้สั้นลง", "mk": 1, "v1": 4, "base": "shorten", "mean": "ทำให้สั้นลง", "emo": "📐"}, {"en": "I have my mother sew the button back on.", "th": "ฉันให้แม่เย็บกระดุมกลับเข้าไป", "mk": 1, "v1": 4, "base": "sew", "mean": "เย็บ", "emo": "🧵"}, {"en": "She has her assistant remind her about the meeting.", "th": "เธอให้ผู้ช่วยเตือนเรื่องการประชุม", "mk": 1, "v1": 4, "base": "remind", "mean": "เตือน", "emo": "⏰"}, {"en": "He has the electrician inspect the wiring.", "th": "เขาให้ช่างไฟตรวจสอบระบบสายไฟ", "mk": 1, "v1": 4, "base": "inspect", "mean": "ตรวจสอบ", "emo": "🔍"}, {"en": "We have the receptionist confirm the reservation.", "th": "เราให้พนักงานต้อนรับยืนยันการจอง", "mk": 1, "v1": 4, "base": "confirm", "mean": "ยืนยัน", "emo": "☑️"}, {"en": "They have the photographer edit the pictures.", "th": "พวกเขาให้ช่างภาพแต่งรูป", "mk": 1, "v1": 4, "base": "edit", "mean": "แก้ไข / ตกแต่ง", "emo": "🖼️"}, {"en": "I have my friend explain the rules.", "th": "ฉันให้เพื่อนอธิบายกติกา", "mk": 1, "v1": 4, "base": "explain", "mean": "อธิบาย", "emo": "🗣️"}, {"en": "She has her brother replace the batteries.", "th": "เธอให้พี่ชายเปลี่ยนแบตเตอรี่", "mk": 1, "v1": 4, "base": "replace", "mean": "เปลี่ยน / แทนที่", "emo": "🔄"}, {"en": "He has the cleaner polish the floor.", "th": "เขาให้พนักงานทำความสะอาดขัดพื้น", "mk": 1, "v1": 4, "base": "polish", "mean": "ขัดเงา", "emo": "✨"}, {"en": "We have the designer redesign the website.", "th": "เราให้นักออกแบบออกแบบเว็บไซต์ใหม่", "mk": 1, "v1": 4, "base": "redesign", "mean": "ออกแบบใหม่", "emo": "🖥️"}, {"en": "They have the engineer improve the system.", "th": "พวกเขาให้วิศวกรปรับปรุงระบบ", "mk": 1, "v1": 4, "base": "improve", "mean": "ปรับปรุง", "emo": "📈"}, {"en": "I have my classmate check my homework.", "th": "ฉันให้เพื่อนร่วมชั้นตรวจการบ้านของฉัน", "mk": 1, "v1": 4, "base": "check", "mean": "ตรวจ / ตรวจสอบ", "emo": "✔️"}, {"en": "She has the dentist examine her teeth.", "th": "เธอให้ทันตแพทย์ตรวจฟัน", "mk": 1, "v1": 4, "base": "examine", "mean": "ตรวจ / ตรวจสอบ", "emo": "🩺"}, {"en": "He has his lawyer explain the legal process.", "th": "เขาให้ทนายอธิบายขั้นตอนทางกฎหมาย", "mk": 1, "v1": 4, "base": "explain", "mean": "อธิบาย", "emo": "🗣️"}, {"en": "We have the captain lead the team.", "th": "เราให้กัปตันนำทีม", "mk": 1, "v1": 4, "base": "lead", "mean": "นำ", "emo": "🧭"}, {"en": "They have the consultant evaluate the project.", "th": "พวกเขาให้ที่ปรึกษาประเมินโครงการ", "mk": 1, "v1": 4, "base": "evaluate", "mean": "ประเมิน", "emo": "📊"}, {"en": "I have my daughter pack the clothes.", "th": "ฉันให้ลูกสาวเก็บเสื้อผ้าลงกระเป๋า", "mk": 1, "v1": 4, "base": "pack", "mean": "เก็บของ / บรรจุ", "emo": "🎒"}, {"en": "She has her father drive her to school.", "th": "เธอให้พ่อขับรถไปส่งที่โรงเรียน", "mk": 1, "v1": 4, "base": "drive", "mean": "ขับ (รถ)", "emo": "🚗"}, {"en": "He has the salesman demonstrate the product.", "th": "เขาให้พนักงานขายสาธิตสินค้า", "mk": 1, "v1": 4, "base": "demonstrate", "mean": "สาธิต", "emo": "🛍️"}, {"en": "We have the interpreter interpret the conversation.", "th": "เราให้ล่ามแปลการสนทนา", "mk": 1, "v1": 4, "base": "interpret", "mean": "แปลด้วยวาจา / ตีความ", "emo": "🗨️"}, {"en": "They have the architect design their new house.", "th": "พวกเขาให้สถาปนิกออกแบบบ้านหลังใหม่", "mk": 1, "v1": 4, "base": "design", "mean": "ออกแบบ", "emo": "🏠"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

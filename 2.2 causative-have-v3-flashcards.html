@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2.2 Causative "have + V3" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>2.2 Causative · have + something + V3</h1>
+  <div class="formula">Subject + <b>have</b> + something + <b>V3</b> &nbsp;·&nbsp; ชี้เมาส์ที่ V3 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "I have my car washed every week.", "th": "ฉันให้คนล้างรถของฉันทุกสัปดาห์", "mk": 1, "v1": 4, "base": "washed  (V1: wash)", "mean": "ล้าง / ซัก", "emo": "🚿"}, {"en": "She has her hair cut once a month.", "th": "เธอไปตัดผมเดือนละครั้ง", "mk": 1, "v1": 4, "base": "cut  (V1: cut)", "mean": "ตัด", "emo": "✂️"}, {"en": "He has his bike repaired today.", "th": "เขาเอาจักรยานไปซ่อมวันนี้", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "We have our house painted every five years.", "th": "เราให้คนมาทาสีบ้านทุกห้าปี", "mk": 1, "v1": 4, "base": "painted  (V1: paint)", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "They have their computer fixed immediately.", "th": "พวกเขาเอาคอมพิวเตอร์ไปซ่อมทันที", "mk": 1, "v1": 4, "base": "fixed  (V1: fix)", "mean": "ซ่อม", "emo": "🔧"}, {"en": "I have my phone repaired this afternoon.", "th": "ฉันเอาโทรศัพท์ไปซ่อมบ่ายนี้", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "She has her nails done every weekend.", "th": "เธอไปทำเล็บทุกสุดสัปดาห์", "mk": 1, "v1": 4, "base": "done  (V1: do)", "mean": "ทำ (ทำเล็บ)", "emo": "💅"}, {"en": "He has his suit cleaned before the meeting.", "th": "เขาเอาสูทไปซักก่อนการประชุม", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "We have our windows cleaned every month.", "th": "เราให้คนมาทำความสะอาดหน้าต่างทุกเดือน", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They have their roof repaired after the storm.", "th": "พวกเขาให้คนซ่อมหลังคาหลังพายุ", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "I have my watch fixed tomorrow.", "th": "ฉันจะเอานาฬิกาไปซ่อมพรุ่งนี้", "mk": 1, "v1": 4, "base": "fixed  (V1: fix)", "mean": "ซ่อม", "emo": "🔧"}, {"en": "She has her dress altered before the wedding.", "th": "เธอเอาชุดไปแก้ก่อนงานแต่ง", "mk": 1, "v1": 4, "base": "altered  (V1: alter)", "mean": "ดัดแปลง / แก้ไข", "emo": "🪡"}, {"en": "He has his shoes polished every Friday.", "th": "เขาให้คนขัดรองเท้าทุกวันศุกร์", "mk": 1, "v1": 4, "base": "polished  (V1: polish)", "mean": "ขัดเงา", "emo": "✨"}, {"en": "We have our air conditioner serviced twice a year.", "th": "เราให้ช่างล้างแอร์ปีละสองครั้ง", "mk": 1, "v1": 5, "base": "serviced  (V1: service)", "mean": "ตรวจเช็ก / บำรุงรักษา", "emo": "🧰"}, {"en": "They have their passports renewed this month.", "th": "พวกเขาไปต่ออายุหนังสือเดินทางเดือนนี้", "mk": 1, "v1": 4, "base": "renewed  (V1: renew)", "mean": "ต่ออายุ", "emo": "🔄"}, {"en": "I have my glasses adjusted at the optical shop.", "th": "ฉันเอาแว่นไปปรับที่ร้านแว่น", "mk": 1, "v1": 4, "base": "adjusted  (V1: adjust)", "mean": "ปรับ", "emo": "👓"}, {"en": "She has her teeth checked every six months.", "th": "เธอไปตรวจฟันทุกหกเดือน", "mk": 1, "v1": 4, "base": "checked  (V1: check)", "mean": "ตรวจ", "emo": "✔️"}, {"en": "He has his blood tested every year.", "th": "เขาไปตรวจเลือดทุกปี", "mk": 1, "v1": 4, "base": "tested  (V1: test)", "mean": "ตรวจ / ทดสอบ", "emo": "🩸"}, {"en": "We have our documents translated into English.", "th": "เราให้คนแปลเอกสารเป็นภาษาอังกฤษ", "mk": 1, "v1": 4, "base": "translated  (V1: translate)", "mean": "แปล", "emo": "🌐"}, {"en": "They have their furniture delivered tomorrow.", "th": "พวกเขาให้ร้านส่งเฟอร์นิเจอร์พรุ่งนี้", "mk": 1, "v1": 4, "base": "delivered  (V1: deliver)", "mean": "จัดส่ง", "emo": "🚚"}, {"en": "I have my jacket dry-cleaned.", "th": "ฉันเอาเสื้อแจ็กเก็ตไปซักแห้ง", "mk": 1, "v1": 4, "base": "dry-cleaned  (V1: dry-clean)", "mean": "ซักแห้ง", "emo": "🧥"}, {"en": "She has her ring resized.", "th": "เธอเอาแหวนไปปรับขนาด", "mk": 1, "v1": 4, "base": "resized  (V1: resize)", "mean": "ปรับขนาด", "emo": "💍"}, {"en": "He has his laptop upgraded.", "th": "เขาให้คนอัปเกรดโน้ตบุ๊ก", "mk": 1, "v1": 4, "base": "upgraded  (V1: upgrade)", "mean": "อัปเกรด", "emo": "⬆️"}, {"en": "We have our garden landscaped.", "th": "เราให้คนจัดสวน", "mk": 1, "v1": 4, "base": "landscaped  (V1: landscape)", "mean": "จัดสวน / ตกแต่งภูมิทัศน์", "emo": "🌳"}, {"en": "They have their car inspected every year.", "th": "พวกเขาเอารถไปตรวจสภาพทุกปี", "mk": 1, "v1": 4, "base": "inspected  (V1: inspect)", "mean": "ตรวจสอบ / ตรวจสภาพ", "emo": "🔍"}, {"en": "I have my bicycle cleaned every weekend.", "th": "ฉันให้คนทำความสะอาดจักรยานทุกสุดสัปดาห์", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She has her bag repaired.", "th": "เธอเอากระเป๋าไปซ่อม", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "He has his camera cleaned.", "th": "เขาเอากล้องไปทำความสะอาด", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "We have our printer repaired.", "th": "เราเอาเครื่องพิมพ์ไปซ่อม", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "They have their carpet cleaned.", "th": "พวกเขาให้คนซักพรม", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "I have my computer updated.", "th": "ฉันให้คนอัปเดตคอมพิวเตอร์", "mk": 1, "v1": 4, "base": "updated  (V1: update)", "mean": "อัปเดต / ปรับปรุง", "emo": "🔃"}, {"en": "She has her eyebrows shaped.", "th": "เธอไปจัดทรงคิ้ว", "mk": 1, "v1": 4, "base": "shaped  (V1: shape)", "mean": "จัดทรง", "emo": "🖌️"}, {"en": "He has his beard trimmed.", "th": "เขาไปเล็มเครา", "mk": 1, "v1": 4, "base": "trimmed  (V1: trim)", "mean": "เล็ม / ตัดแต่ง", "emo": "🧔"}, {"en": "We have our fence repaired.", "th": "เราให้คนซ่อมรั้ว", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "They have their sofa cleaned.", "th": "พวกเขาให้คนทำความสะอาดโซฟา", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "I have my passport copied.", "th": "ฉันให้คนถ่ายสำเนาหนังสือเดินทาง", "mk": 1, "v1": 4, "base": "copied  (V1: copy)", "mean": "ถ่ายสำเนา", "emo": "📄"}, {"en": "She has her report printed.", "th": "เธอให้คนพิมพ์รายงาน", "mk": 1, "v1": 4, "base": "printed  (V1: print)", "mean": "พิมพ์ / อัด", "emo": "🖨️"}, {"en": "He has his documents signed.", "th": "เขาให้ผู้มีอำนาจลงนามในเอกสาร", "mk": 1, "v1": 4, "base": "signed  (V1: sign)", "mean": "ลงนาม", "emo": "🖊️"}, {"en": "We have our meals prepared in advance.", "th": "เราให้คนเตรียมอาหารไว้ล่วงหน้า", "mk": 1, "v1": 4, "base": "prepared  (V1: prepare)", "mean": "เตรียม", "emo": "🍱"}, {"en": "They have their photos printed.", "th": "พวกเขาให้ร้านอัดรูป", "mk": 1, "v1": 4, "base": "printed  (V1: print)", "mean": "พิมพ์ / อัด", "emo": "🖨️"}, {"en": "I have my curtains cleaned every year.", "th": "ฉันให้คนซักผ้าม่านทุกปี", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She has her furniture moved.", "th": "เธอให้คนย้ายเฟอร์นิเจอร์", "mk": 1, "v1": 4, "base": "moved  (V1: move)", "mean": "ย้าย", "emo": "📦"}, {"en": "He has his room painted blue.", "th": "เขาให้คนทาสีห้องเป็นสีน้ำเงิน", "mk": 1, "v1": 4, "base": "painted  (V1: paint)", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "We have our swimming pool cleaned weekly.", "th": "เราให้คนทำความสะอาดสระว่ายน้ำทุกสัปดาห์", "mk": 1, "v1": 5, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They have their website redesigned.", "th": "พวกเขาให้คนออกแบบเว็บไซต์ใหม่", "mk": 1, "v1": 4, "base": "redesigned  (V1: redesign)", "mean": "ออกแบบใหม่", "emo": "🖥️"}, {"en": "I have my essay checked by my teacher.", "th": "ฉันให้ครูตรวจเรียงความของฉัน", "mk": 1, "v1": 4, "base": "checked  (V1: check)", "mean": "ตรวจ", "emo": "✔️"}, {"en": "She has her resume updated.", "th": "เธอให้คนปรับปรุงประวัติการทำงาน", "mk": 1, "v1": 4, "base": "updated  (V1: update)", "mean": "อัปเดต / ปรับปรุง", "emo": "🔃"}, {"en": "He has his car detailed before selling it.", "th": "เขาให้คนทำความสะอาดรถอย่างละเอียดก่อนขาย", "mk": 1, "v1": 4, "base": "detailed  (V1: detail)", "mean": "ทำความสะอาดอย่างละเอียด", "emo": "🚗"}, {"en": "We have our security system installed.", "th": "เราให้คนติดตั้งระบบรักษาความปลอดภัย", "mk": 1, "v1": 5, "base": "installed  (V1: install)", "mean": "ติดตั้ง", "emo": "🔌"}, {"en": "They have their new office decorated.", "th": "พวกเขาให้คนตกแต่งสำนักงานใหม่", "mk": 1, "v1": 5, "base": "decorated  (V1: decorate)", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "I have my passport renewed every ten years.", "th": "ฉันต่ออายุหนังสือเดินทางทุกสิบปี", "mk": 1, "v1": 4, "base": "renewed  (V1: renew)", "mean": "ต่ออายุ", "emo": "🔄"}, {"en": "She has her bicycle repaired at a local shop.", "th": "เธอเอาจักรยานไปซ่อมที่ร้านใกล้บ้าน", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "He has his suit tailored for the wedding.", "th": "เขาให้ช่างตัดชุดสูทสำหรับงานแต่ง", "mk": 1, "v1": 4, "base": "tailored  (V1: tailor)", "mean": "ตัด (เสื้อผ้า) ให้พอดีตัว", "emo": "🧵"}, {"en": "We have our furniture assembled by professionals.", "th": "เราให้ช่างประกอบเฟอร์นิเจอร์", "mk": 1, "v1": 4, "base": "assembled  (V1: assemble)", "mean": "ประกอบ", "emo": "🪑"}, {"en": "They have their lawn mowed every Saturday.", "th": "พวกเขาให้คนตัดหญ้าทุกวันเสาร์", "mk": 1, "v1": 4, "base": "mowed  (V1: mow)", "mean": "ตัด (หญ้า)", "emo": "🌱"}, {"en": "I have my shoes repaired instead of buying new ones.", "th": "ฉันเอารองเท้าไปซ่อมแทนการซื้อคู่ใหม่", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "She has her necklace cleaned before the party.", "th": "เธอเอาสร้อยคอไปทำความสะอาดก่อนงานเลี้ยง", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "He has his television repaired this week.", "th": "เขาเอาโทรทัศน์ไปซ่อมสัปดาห์นี้", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "We have our walls painted white.", "th": "เราให้คนทาสีกำแพงเป็นสีขาว", "mk": 1, "v1": 4, "base": "painted  (V1: paint)", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "They have their kitchen remodeled this year.", "th": "พวกเขาให้คนปรับปรุงห้องครัวปีนี้", "mk": 1, "v1": 4, "base": "remodeled  (V1: remodel)", "mean": "ปรับปรุง / รีโมเดล", "emo": "🍳"}, {"en": "I have my keyboard cleaned every month.", "th": "ฉันให้คนทำความสะอาดแป้นพิมพ์ทุกเดือน", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She has her laptop repaired after work.", "th": "เธอเอาโน้ตบุ๊กไปซ่อมหลังเลิกงาน", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "He has his air conditioner cleaned every summer.", "th": "เขาให้ช่างล้างแอร์ทุกฤดูร้อน", "mk": 1, "v1": 5, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "We have our bathroom renovated next month.", "th": "เราจะให้คนปรับปรุงห้องน้ำเดือนหน้า", "mk": 1, "v1": 4, "base": "renovated  (V1: renovate)", "mean": "ปรับปรุง / ซ่อมแซมใหญ่", "emo": "🚿"}, {"en": "They have their floor polished once a year.", "th": "พวกเขาให้คนขัดพื้นปีละครั้ง", "mk": 1, "v1": 4, "base": "polished  (V1: polish)", "mean": "ขัดเงา", "emo": "✨"}, {"en": "I have my computer repaired immediately.", "th": "ฉันเอาคอมพิวเตอร์ไปซ่อมทันที", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "She has her hair colored every three months.", "th": "เธอไปทำสีผมทุกสามเดือน", "mk": 1, "v1": 4, "base": "colored  (V1: color)", "mean": "ทำสี / ย้อม", "emo": "🎨"}, {"en": "He has his jacket dry-cleaned before the interview.", "th": "เขาเอาเสื้อแจ็กเก็ตไปซักแห้งก่อนสัมภาษณ์งาน", "mk": 1, "v1": 4, "base": "dry-cleaned  (V1: dry-clean)", "mean": "ซักแห้ง", "emo": "🧥"}, {"en": "We have our chimney cleaned every winter.", "th": "เราให้คนทำความสะอาดปล่องไฟทุกฤดูหนาว", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "They have their garage organized by experts.", "th": "พวกเขาให้ผู้เชี่ยวชาญจัดโรงรถ", "mk": 1, "v1": 4, "base": "organized  (V1: organize)", "mean": "จัดระเบียบ", "emo": "🗂️"}, {"en": "I have my visa extended before it expires.", "th": "ฉันต่ออายุวีซ่าก่อนหมดอายุ", "mk": 1, "v1": 4, "base": "extended  (V1: extend)", "mean": "ต่อ / ขยายเวลา", "emo": "🛂"}, {"en": "She has her carpet vacuumed every Friday.", "th": "เธอให้คนดูดฝุ่นพรมทุกวันศุกร์", "mk": 1, "v1": 4, "base": "vacuumed  (V1: vacuum)", "mean": "ดูดฝุ่น", "emo": "🧽"}, {"en": "He has his printer serviced regularly.", "th": "เขาให้ช่างตรวจเช็กเครื่องพิมพ์เป็นประจำ", "mk": 1, "v1": 4, "base": "serviced  (V1: service)", "mean": "ตรวจเช็ก / บำรุงรักษา", "emo": "🧰"}, {"en": "We have our driveway repaired after the rain.", "th": "เราให้คนซ่อมทางเข้าบ้านหลังฝนตก", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "They have their windows replaced with energy-saving ones.", "th": "พวกเขาให้คนเปลี่ยนหน้าต่างเป็นแบบประหยัดพลังงาน", "mk": 1, "v1": 4, "base": "replaced  (V1: replace)", "mean": "เปลี่ยน / แทนที่", "emo": "🔁"}, {"en": "I have my bicycle serviced every six months.", "th": "ฉันให้ช่างตรวจเช็กจักรยานทุกหกเดือน", "mk": 1, "v1": 4, "base": "serviced  (V1: service)", "mean": "ตรวจเช็ก / บำรุงรักษา", "emo": "🧰"}, {"en": "She has her smartphone unlocked.", "th": "เธอให้คนปลดล็อกสมาร์ตโฟน", "mk": 1, "v1": 4, "base": "unlocked  (V1: unlock)", "mean": "ปลดล็อก", "emo": "🔓"}, {"en": "He has his office cleaned every evening.", "th": "เขาให้คนทำความสะอาดสำนักงานทุกเย็น", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "We have our project reviewed by experts.", "th": "เราให้ผู้เชี่ยวชาญตรวจทานโครงการ", "mk": 1, "v1": 4, "base": "reviewed  (V1: review)", "mean": "ตรวจทาน", "emo": "📑"}, {"en": "They have their report edited before submission.", "th": "พวกเขาให้คนแก้ไขรายงานก่อนส่ง", "mk": 1, "v1": 4, "base": "edited  (V1: edit)", "mean": "แก้ไข / เรียบเรียง", "emo": "📝"}, {"en": "I have my teeth cleaned twice a year.", "th": "ฉันไปขูดหินปูนปีละสองครั้ง", "mk": 1, "v1": 4, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "She has her vision tested every year.", "th": "เธอไปตรวจสายตาทุกปี", "mk": 1, "v1": 4, "base": "tested  (V1: test)", "mean": "ตรวจ / ทดสอบ", "emo": "🩸"}, {"en": "He has his hearing checked at the clinic.", "th": "เขาไปตรวจการได้ยินที่คลินิก", "mk": 1, "v1": 4, "base": "checked  (V1: check)", "mean": "ตรวจ", "emo": "✔️"}, {"en": "We have our water filter replaced every six months.", "th": "เราให้คนเปลี่ยนไส้กรองน้ำทุกหกเดือน", "mk": 1, "v1": 5, "base": "replaced  (V1: replace)", "mean": "เปลี่ยน / แทนที่", "emo": "🔁"}, {"en": "They have their air ducts cleaned annually.", "th": "พวกเขาให้คนทำความสะอาดท่ออากาศทุกปี", "mk": 1, "v1": 5, "base": "cleaned  (V1: clean)", "mean": "ทำความสะอาด", "emo": "🧹"}, {"en": "I have my application reviewed before sending it.", "th": "ฉันให้คนตรวจใบสมัครก่อนส่ง", "mk": 1, "v1": 4, "base": "reviewed  (V1: review)", "mean": "ตรวจทาน", "emo": "📑"}, {"en": "She has her presentation prepared in advance.", "th": "เธอให้คนเตรียมงานนำเสนอไว้ล่วงหน้า", "mk": 1, "v1": 4, "base": "prepared  (V1: prepare)", "mean": "เตรียม", "emo": "🍱"}, {"en": "He has his speech translated into Japanese.", "th": "เขาให้คนแปลสุนทรพจน์เป็นภาษาญี่ปุ่น", "mk": 1, "v1": 4, "base": "translated  (V1: translate)", "mean": "แปล", "emo": "🌐"}, {"en": "We have our meeting room reserved every Monday.", "th": "เราจองห้องประชุมไว้ทุกวันจันทร์", "mk": 1, "v1": 5, "base": "reserved  (V1: reserve)", "mean": "จอง", "emo": "🔖"}, {"en": "They have their invoices processed quickly.", "th": "พวกเขาให้เจ้าหน้าที่ดำเนินการใบแจ้งหนี้อย่างรวดเร็ว", "mk": 1, "v1": 4, "base": "processed  (V1: process)", "mean": "ดำเนินการ / ประมวลผล", "emo": "⚙️"}, {"en": "I have my mailbox repaired this weekend.", "th": "ฉันเอาตู้จดหมายไปซ่อมสุดสัปดาห์นี้", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "She has her curtains replaced with new ones.", "th": "เธอให้คนเปลี่ยนผ้าม่านใหม่", "mk": 1, "v1": 4, "base": "replaced  (V1: replace)", "mean": "เปลี่ยน / แทนที่", "emo": "🔁"}, {"en": "He has his portrait painted by an artist.", "th": "เขาให้ศิลปินวาดภาพเหมือนของเขา", "mk": 1, "v1": 4, "base": "painted  (V1: paint)", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "We have our coffee machine repaired today.", "th": "เราเอาเครื่องชงกาแฟไปซ่อมวันนี้", "mk": 1, "v1": 5, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "They have their uniforms washed every week.", "th": "พวกเขาให้คนซักเครื่องแบบทุกสัปดาห์", "mk": 1, "v1": 4, "base": "washed  (V1: wash)", "mean": "ล้าง / ซัก", "emo": "🚿"}, {"en": "I have my documents notarized before submitting them.", "th": "ฉันนำเอกสารไปรับรองลายมือชื่อก่อนยื่น", "mk": 1, "v1": 4, "base": "notarized  (V1: notarize)", "mean": "รับรองเอกสาร", "emo": "🏛️"}, {"en": "She has her bracelet repaired at the jewelry shop.", "th": "เธอเอาสร้อยข้อมือไปซ่อมที่ร้านเครื่องประดับ", "mk": 1, "v1": 4, "base": "repaired  (V1: repair)", "mean": "ซ่อม", "emo": "🛠️"}, {"en": "He has his sofa reupholstered.", "th": "เขาให้คนเปลี่ยนผ้าหุ้มโซฟาใหม่", "mk": 1, "v1": 4, "base": "reupholstered  (V1: reupholster)", "mean": "หุ้มใหม่ (เบาะ/ผ้า)", "emo": "🛋️"}, {"en": "We have our company logo redesigned this year.", "th": "เราให้คนออกแบบโลโก้บริษัทใหม่ปีนี้", "mk": 1, "v1": 5, "base": "redesigned  (V1: redesign)", "mean": "ออกแบบใหม่", "emo": "🖥️"}, {"en": "They have their new building inspected before opening it.", "th": "พวกเขาให้เจ้าหน้าที่ตรวจอาคารใหม่ก่อนเปิดใช้งาน", "mk": 1, "v1": 5, "base": "inspected  (V1: inspect)", "mean": "ตรวจสอบ / ตรวจสภาพ", "emo": "🔍"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V3 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

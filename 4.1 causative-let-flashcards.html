@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4.1 Causative "let" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>4.1 Causative verb “let” · Flip cards</h1>
+  <div class="formula">Subject + <b>let</b> + someone + <b>V1</b> (base form) &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "My parents let me stay up late on weekends.", "th": "พ่อแม่ให้ฉันนอนดึกในวันหยุดสุดสัปดาห์", "mk": 2, "v1": 4, "base": "stay", "mean": "อยู่ / พัก (stay up = อยู่ดึก)", "emo": "🏠"}, {"en": "The teacher lets us use dictionaries during class.", "th": "ครูอนุญาตให้พวกเราใช้พจนานุกรมระหว่างเรียน", "mk": 2, "v1": 4, "base": "use", "mean": "ใช้", "emo": "🔧"}, {"en": "My boss lets me work from home on Fridays.", "th": "เจ้านายอนุญาตให้ฉันทำงานที่บ้านในวันศุกร์", "mk": 2, "v1": 4, "base": "work", "mean": "ทำงาน", "emo": "💻"}, {"en": "She lets her children play outside after school.", "th": "เธอปล่อยให้ลูก ๆ เล่นข้างนอกหลังเลิกเรียน", "mk": 1, "v1": 4, "base": "play", "mean": "เล่น", "emo": "⚽"}, {"en": "He lets his dog sleep on the sofa.", "th": "เขาปล่อยให้สุนัขนอนบนโซฟา", "mk": 1, "v1": 4, "base": "sleep", "mean": "นอน", "emo": "😴"}, {"en": "Our coach lets us rest after practice.", "th": "โค้ชให้พวกเราพักหลังซ้อม", "mk": 2, "v1": 4, "base": "rest", "mean": "พักผ่อน", "emo": "🛋️"}, {"en": "My father lets me drive his car.", "th": "พ่อให้ฉันขับรถของพ่อ", "mk": 2, "v1": 4, "base": "drive", "mean": "ขับรถ", "emo": "🚗"}, {"en": "My mother lets my sister choose her clothes.", "th": "แม่ให้พี่/น้องสาวเลือกเสื้อผ้าของเธอเอง", "mk": 2, "v1": 5, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "The manager lets employees leave early on holidays.", "th": "ผู้จัดการอนุญาตให้พนักงานเลิกงานเร็วในวันหยุด", "mk": 2, "v1": 4, "base": "leave", "mean": "ออกจาก / กลับ", "emo": "🚪"}, {"en": "The librarian lets students borrow five books.", "th": "บรรณารักษ์อนุญาตให้นักเรียนยืมหนังสือได้ห้าเล่ม", "mk": 2, "v1": 4, "base": "borrow", "mean": "ยืม", "emo": "📚"}, {"en": "My uncle lets me fish in his pond.", "th": "ลุง/อาให้ฉันตกปลาในบ่อของเขา", "mk": 2, "v1": 4, "base": "fish", "mean": "ตกปลา", "emo": "🎣"}, {"en": "The owner lets customers park for free.", "th": "เจ้าของให้ลูกค้าจอดรถฟรี", "mk": 2, "v1": 4, "base": "park", "mean": "จอดรถ", "emo": "🅿️"}, {"en": "My teacher lets Tom answer first.", "th": "ครูให้ทอมตอบก่อน", "mk": 2, "v1": 4, "base": "answer", "mean": "ตอบ", "emo": "🙋"}, {"en": "She lets her son watch TV after homework.", "th": "เธอให้ลูกชายดูทีวีหลังทำการบ้านเสร็จ", "mk": 1, "v1": 4, "base": "watch", "mean": "ดู", "emo": "📺"}, {"en": "He lets his daughter ride her bicycle alone.", "th": "เขาปล่อยให้ลูกสาวปั่นจักรยานคนเดียว", "mk": 1, "v1": 4, "base": "ride", "mean": "ขี่ / ปั่น", "emo": "🚲"}, {"en": "My grandparents let us visit anytime.", "th": "ปู่ย่า/ตายายให้พวกเรามาเยี่ยมได้ทุกเมื่อ", "mk": 2, "v1": 4, "base": "visit", "mean": "เยี่ยม / มาเยือน", "emo": "🏡"}, {"en": "The company lets employees wear casual clothes on Fridays.", "th": "บริษัทอนุญาตให้พนักงานแต่งชุดลำลองในวันศุกร์", "mk": 2, "v1": 4, "base": "wear", "mean": "สวมใส่", "emo": "👖"}, {"en": "The teacher lets students ask questions anytime.", "th": "ครูอนุญาตให้นักเรียนถามคำถามได้ทุกเมื่อ", "mk": 2, "v1": 4, "base": "ask", "mean": "ถาม", "emo": "❓"}, {"en": "My friend lets me borrow his laptop.", "th": "เพื่อนให้ฉันยืมโน้ตบุ๊กของเขา", "mk": 2, "v1": 4, "base": "borrow", "mean": "ยืม", "emo": "📚"}, {"en": "My parents let my brother travel alone.", "th": "พ่อแม่ให้พี่/น้องชายเดินทางคนเดียว", "mk": 2, "v1": 5, "base": "travel", "mean": "เดินทาง", "emo": "🧳"}, {"en": "The guide lets tourists take photos.", "th": "ไกด์อนุญาตให้นักท่องเที่ยวถ่ายรูป", "mk": 2, "v1": 4, "base": "take", "mean": "ถ่าย / เอา / ใช้ (เวลา)", "emo": "📸"}, {"en": "She lets her guests choose their seats.", "th": "เธอให้แขกเลือกที่นั่งเอง", "mk": 1, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "He lets his workers decide the schedule.", "th": "เขาให้คนงานตัดสินใจเรื่องตารางงานเอง", "mk": 1, "v1": 4, "base": "decide", "mean": "ตัดสินใจ", "emo": "⚖️"}, {"en": "My father lets me keep the puppy.", "th": "พ่อให้ฉันเลี้ยงลูกสุนัขตัวนั้นไว้", "mk": 2, "v1": 4, "base": "keep", "mean": "เก็บไว้ / เลี้ยงไว้", "emo": "🐶"}, {"en": "The principal lets students participate in competitions.", "th": "ผู้อำนวยการอนุญาตให้นักเรียนเข้าร่วมการแข่งขัน", "mk": 2, "v1": 4, "base": "participate", "mean": "เข้าร่วม", "emo": "🏅"}, {"en": "My coach lets us practice by ourselves.", "th": "โค้ชให้พวกเราซ้อมกันเอง", "mk": 2, "v1": 4, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "The doctor lets him return to work.", "th": "หมออนุญาตให้เขากลับไปทำงาน", "mk": 2, "v1": 4, "base": "return", "mean": "กลับ / คืน", "emo": "↩️"}, {"en": "The nurse lets visitors enter after 2 p.m.", "th": "พยาบาลให้ผู้มาเยี่ยมเข้าได้หลังบ่ายสองโมง", "mk": 2, "v1": 4, "base": "enter", "mean": "เข้า", "emo": "🚶"}, {"en": "My mother lets me invite my friends over.", "th": "แม่ให้ฉันชวนเพื่อนมาที่บ้าน", "mk": 2, "v1": 4, "base": "invite", "mean": "เชิญ / ชวน", "emo": "💌"}, {"en": "The hotel lets guests check in early.", "th": "โรงแรมให้แขกเช็กอินก่อนเวลา", "mk": 2, "v1": 4, "base": "check", "mean": "เช็ก (check in = เช็กอิน)", "emo": "🛎️"}, {"en": "My boss lets us take longer lunch breaks.", "th": "เจ้านายให้พวกเราพักกลางวันนานขึ้น", "mk": 2, "v1": 4, "base": "take", "mean": "ถ่าย / เอา / ใช้ (เวลา)", "emo": "📸"}, {"en": "She lets her children eat ice cream on Sundays.", "th": "เธอให้ลูก ๆ กินไอศกรีมวันอาทิตย์", "mk": 1, "v1": 4, "base": "eat", "mean": "กิน", "emo": "🍦"}, {"en": "He lets his son learn from mistakes.", "th": "เขาให้ลูกชายเรียนรู้จากความผิดพลาด", "mk": 1, "v1": 4, "base": "learn", "mean": "เรียนรู้", "emo": "🎓"}, {"en": "The teacher lets us work in groups.", "th": "ครูให้พวกเราทำงานเป็นกลุ่ม", "mk": 2, "v1": 4, "base": "work", "mean": "ทำงาน", "emo": "💻"}, {"en": "My parents let me choose my own career.", "th": "พ่อแม่ให้ฉันเลือกอาชีพของตัวเอง", "mk": 2, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "The manager lets customers exchange defective products.", "th": "ผู้จัดการให้ลูกค้าเปลี่ยนสินค้าที่ชำรุดได้", "mk": 2, "v1": 4, "base": "exchange", "mean": "แลกเปลี่ยน / เปลี่ยน", "emo": "🔁"}, {"en": "My sister lets me use her bicycle.", "th": "พี่/น้องสาวให้ฉันใช้จักรยานของเธอ", "mk": 2, "v1": 4, "base": "use", "mean": "ใช้", "emo": "🔧"}, {"en": "The museum lets visitors touch some exhibits.", "th": "พิพิธภัณฑ์อนุญาตให้ผู้เข้าชมสัมผัสนิทรรศการบางชิ้นได้", "mk": 2, "v1": 4, "base": "touch", "mean": "สัมผัส", "emo": "🖐️"}, {"en": "My neighbor lets us pick mangoes from his tree.", "th": "เพื่อนบ้านให้พวกเราเก็บมะม่วงจากต้นของเขา", "mk": 2, "v1": 4, "base": "pick", "mean": "เก็บ / เด็ด / เลือก", "emo": "🥭"}, {"en": "The coach lets the players decide the team captain.", "th": "โค้ชให้ผู้เล่นตัดสินใจเลือกกัปตันทีม", "mk": 2, "v1": 5, "base": "decide", "mean": "ตัดสินใจ", "emo": "⚖️"}, {"en": "My father lets me paint my bedroom.", "th": "พ่อให้ฉันทาสีห้องนอนของฉัน", "mk": 2, "v1": 4, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "My mother lets us cook dinner together.", "th": "แม่ให้พวกเราทำอาหารเย็นด้วยกัน", "mk": 2, "v1": 4, "base": "cook", "mean": "ทำอาหาร", "emo": "👩‍🍳"}, {"en": "The teacher lets students present their ideas.", "th": "ครูให้นักเรียนนำเสนอความคิดของตน", "mk": 2, "v1": 4, "base": "present", "mean": "นำเสนอ", "emo": "📊"}, {"en": "The company lets employees suggest improvements.", "th": "บริษัทให้พนักงานเสนอแนวทางปรับปรุง", "mk": 2, "v1": 4, "base": "suggest", "mean": "เสนอ / แนะนำ", "emo": "💡"}, {"en": "My friend lets me stay at his house.", "th": "เพื่อนให้ฉันพักที่บ้านของเขา", "mk": 2, "v1": 4, "base": "stay", "mean": "อยู่ / พัก (stay up = อยู่ดึก)", "emo": "🏠"}, {"en": "The security guard lets visitors enter after checking their IDs.", "th": "เจ้าหน้าที่รักษาความปลอดภัยให้ผู้มาเยี่ยมเข้าได้หลังตรวจบัตรประชาชน", "mk": 3, "v1": 5, "base": "enter", "mean": "เข้า", "emo": "🚶"}, {"en": "The restaurant lets customers pay by credit card.", "th": "ร้านอาหารให้ลูกค้าชำระด้วยบัตรเครดิต", "mk": 2, "v1": 4, "base": "pay", "mean": "จ่าย / ชำระเงิน", "emo": "💳"}, {"en": "My grandparents let us help in the garden.", "th": "ปู่ย่า/ตายายให้พวกเราช่วยทำสวน", "mk": 2, "v1": 4, "base": "help", "mean": "ช่วยเหลือ", "emo": "🤝"}, {"en": "The captain lets the team celebrate after the victory.", "th": "กัปตันให้ทีมฉลองหลังชัยชนะ", "mk": 2, "v1": 5, "base": "celebrate", "mean": "ฉลอง", "emo": "🎉"}, {"en": "My teacher lets everyone share their opinions.", "th": "ครูให้ทุกคนแบ่งปันความคิดเห็น", "mk": 2, "v1": 4, "base": "share", "mean": "แบ่งปัน", "emo": "🗣️"}, {"en": "My parents let me choose my own clothes.", "th": "พ่อแม่ให้ฉันเลือกเสื้อผ้าเอง", "mk": 2, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "The teacher lets the students leave early today.", "th": "ครูให้นักเรียนกลับก่อนเวลาวันนี้", "mk": 2, "v1": 5, "base": "leave", "mean": "ออกจาก / กลับ", "emo": "🚪"}, {"en": "My boss lets me start work at 9 a.m.", "th": "เจ้านายให้ฉันเริ่มงานตอนเก้าโมงเช้า", "mk": 2, "v1": 4, "base": "start", "mean": "เริ่ม", "emo": "🕘"}, {"en": "She lets her children stay with their grandparents.", "th": "เธอให้ลูก ๆ ไปอยู่กับปู่ย่า/ตายาย", "mk": 1, "v1": 4, "base": "stay", "mean": "อยู่ / พัก (stay up = อยู่ดึก)", "emo": "🏠"}, {"en": "He lets his daughter join the school band.", "th": "เขาให้ลูกสาวเข้าวงดนตรีของโรงเรียน", "mk": 1, "v1": 4, "base": "join", "mean": "เข้าร่วม / เข้า (ชมรม/วง)", "emo": "🎸"}, {"en": "Our coach lets us practice in the gym after school.", "th": "โค้ชให้พวกเราซ้อมในยิมหลังเลิกเรียน", "mk": 2, "v1": 4, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "My father lets me borrow his motorcycle.", "th": "พ่อให้ฉันยืมมอเตอร์ไซค์ของพ่อ", "mk": 2, "v1": 4, "base": "borrow", "mean": "ยืม", "emo": "📚"}, {"en": "My mother lets my brother invite his friends over.", "th": "แม่ให้พี่/น้องชายชวนเพื่อนมาที่บ้าน", "mk": 2, "v1": 5, "base": "invite", "mean": "เชิญ / ชวน", "emo": "💌"}, {"en": "The manager lets the staff decorate the office.", "th": "ผู้จัดการให้พนักงานตกแต่งสำนักงาน", "mk": 2, "v1": 5, "base": "decorate", "mean": "ตกแต่ง", "emo": "🎄"}, {"en": "The librarian lets students renew borrowed books online.", "th": "บรรณารักษ์ให้นักเรียนต่ออายุการยืมหนังสือทางออนไลน์", "mk": 2, "v1": 4, "base": "renew", "mean": "ต่ออายุ / ต่อใหม่", "emo": "🔄"}, {"en": "My uncle lets me drive his truck.", "th": "ลุง/อาให้ฉันขับรถบรรทุกของเขา", "mk": 2, "v1": 4, "base": "drive", "mean": "ขับรถ", "emo": "🚗"}, {"en": "The owner lets customers return products within 30 days.", "th": "เจ้าของให้ลูกค้าคืนสินค้าได้ภายใน 30 วัน", "mk": 2, "v1": 4, "base": "return", "mean": "กลับ / คืน", "emo": "↩️"}, {"en": "My teacher lets Jane explain the answer.", "th": "ครูให้เจนอธิบายคำตอบ", "mk": 2, "v1": 4, "base": "explain", "mean": "อธิบาย", "emo": "🗯️"}, {"en": "She lets her son decide what to study.", "th": "เธอให้ลูกชายตัดสินใจเองว่าจะเรียนอะไร", "mk": 1, "v1": 4, "base": "decide", "mean": "ตัดสินใจ", "emo": "⚖️"}, {"en": "He lets his son swim in the pool.", "th": "เขาให้ลูกชายว่ายน้ำในสระ", "mk": 1, "v1": 4, "base": "swim", "mean": "ว่ายน้ำ", "emo": "🏊"}, {"en": "My grandparents let us camp in their backyard.", "th": "ปู่ย่า/ตายายให้พวกเรากางเต็นท์ในสนามหลังบ้าน", "mk": 2, "v1": 4, "base": "camp", "mean": "ตั้งแคมป์ / กางเต็นท์", "emo": "⛺"}, {"en": "The company lets employees choose flexible working hours.", "th": "บริษัทให้พนักงานเลือกเวลาทำงานแบบยืดหยุ่นได้", "mk": 2, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "The teacher lets students discuss the answers together.", "th": "ครูให้นักเรียนอภิปรายคำตอบร่วมกัน", "mk": 2, "v1": 4, "base": "discuss", "mean": "อภิปราย / หารือ", "emo": "💬"}, {"en": "My friend lets me keep his book for another week.", "th": "เพื่อนให้ฉันเก็บหนังสือของเขาไว้อีกหนึ่งสัปดาห์", "mk": 2, "v1": 4, "base": "keep", "mean": "เก็บไว้ / เลี้ยงไว้", "emo": "🐶"}, {"en": "My parents let my sister study abroad.", "th": "พ่อแม่ให้พี่/น้องสาวไปเรียนต่างประเทศ", "mk": 2, "v1": 5, "base": "study", "mean": "เรียน / ศึกษา", "emo": "📖"}, {"en": "The guide lets visitors explore the museum freely.", "th": "ไกด์ให้ผู้เข้าชมสำรวจพิพิธภัณฑ์ได้อย่างอิสระ", "mk": 2, "v1": 4, "base": "explore", "mean": "สำรวจ", "emo": "🧭"}, {"en": "She lets her guests serve themselves.", "th": "เธอให้แขกตักอาหารเอง", "mk": 1, "v1": 4, "base": "serve", "mean": "เสิร์ฟ / ตัก (อาหาร)", "emo": "🍽️"}, {"en": "He lets his employees work remotely.", "th": "เขาให้พนักงานทำงานจากระยะไกล", "mk": 1, "v1": 4, "base": "work", "mean": "ทำงาน", "emo": "💻"}, {"en": "My father lets me paint the fence.", "th": "พ่อให้ฉันทาสีรั้ว", "mk": 2, "v1": 4, "base": "paint", "mean": "ทาสี / วาด", "emo": "🎨"}, {"en": "The principal lets students organize school events.", "th": "ผู้อำนวยการให้นักเรียนจัดกิจกรรมของโรงเรียน", "mk": 2, "v1": 4, "base": "organize", "mean": "จัด / จัดระเบียบ", "emo": "🗂️"}, {"en": "My coach lets us choose our partners.", "th": "โค้ชให้พวกเราเลือกคู่ของตัวเอง", "mk": 2, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "The doctor lets him exercise again.", "th": "หมออนุญาตให้เขากลับมาออกกำลังกายได้อีกครั้ง", "mk": 2, "v1": 4, "base": "exercise", "mean": "ออกกำลังกาย", "emo": "🏋️"}, {"en": "The nurse lets family members visit in the evening.", "th": "พยาบาลให้ญาติเข้าเยี่ยมได้ในช่วงเย็น", "mk": 2, "v1": 5, "base": "visit", "mean": "เยี่ยม / มาเยือน", "emo": "🏡"}, {"en": "My mother lets me bake cookies by myself.", "th": "แม่ให้ฉันอบคุกกี้เองคนเดียว", "mk": 2, "v1": 4, "base": "bake", "mean": "อบ", "emo": "🍪"}, {"en": "The hotel lets guests use the fitness center for free.", "th": "โรงแรมให้แขกใช้ฟิตเนสฟรี", "mk": 2, "v1": 4, "base": "use", "mean": "ใช้", "emo": "🔧"}, {"en": "My boss lets us wear jeans on Fridays.", "th": "เจ้านายให้พวกเราใส่ยีนส์ในวันศุกร์", "mk": 2, "v1": 4, "base": "wear", "mean": "สวมใส่", "emo": "👖"}, {"en": "She lets her children bring toys to school.", "th": "เธอให้ลูก ๆ เอาของเล่นไปโรงเรียน", "mk": 1, "v1": 4, "base": "bring", "mean": "นำมา / เอามา", "emo": "🧸"}, {"en": "He lets his daughter practice the piano every evening.", "th": "เขาให้ลูกสาวซ้อมเปียโนทุกเย็น", "mk": 1, "v1": 4, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "The teacher lets us correct our own mistakes.", "th": "ครูให้พวกเราแก้ไขข้อผิดพลาดของตัวเอง", "mk": 2, "v1": 4, "base": "correct", "mean": "แก้ไข", "emo": "✏️"}, {"en": "My parents let me manage my own money.", "th": "พ่อแม่ให้ฉันจัดการเงินของตัวเอง", "mk": 2, "v1": 4, "base": "manage", "mean": "จัดการ / บริหาร", "emo": "📒"}, {"en": "The manager lets the team decide the best solution.", "th": "ผู้จัดการให้ทีมตัดสินใจเลือกวิธีแก้ปัญหาที่ดีที่สุด", "mk": 2, "v1": 5, "base": "decide", "mean": "ตัดสินใจ", "emo": "⚖️"}, {"en": "The museum lets children enter for free.", "th": "พิพิธภัณฑ์ให้เด็กเข้าชมฟรี", "mk": 2, "v1": 4, "base": "enter", "mean": "เข้า", "emo": "🚶"}, {"en": "My coach lets the players vote for the captain.", "th": "โค้ชให้ผู้เล่นโหวตเลือกกัปตัน", "mk": 2, "v1": 5, "base": "vote", "mean": "ลงคะแนน / โหวต", "emo": "🗳️"}, {"en": "The teacher lets us practice speaking in pairs.", "th": "ครูให้พวกเราฝึกพูดเป็นคู่", "mk": 2, "v1": 4, "base": "practice", "mean": "ฝึกซ้อม", "emo": "🎹"}, {"en": "My father lets me save my allowance in my own bank account.", "th": "พ่อให้ฉันฝากเงินค่าขนมไว้ในบัญชีธนาคารของฉันเอง", "mk": 2, "v1": 4, "base": "save", "mean": "เก็บออม", "emo": "🐷"}, {"en": "The company lets employees attend training courses.", "th": "บริษัทให้พนักงานเข้าร่วมอบรม", "mk": 2, "v1": 4, "base": "attend", "mean": "เข้าร่วม / เข้าเรียน", "emo": "🎒"}, {"en": "She lets her husband choose the vacation destination.", "th": "เธอให้สามีเลือกจุดหมายปลายทางพักร้อน", "mk": 1, "v1": 4, "base": "choose", "mean": "เลือก", "emo": "👆"}, {"en": "He lets his friend borrow his camera.", "th": "เขาให้เพื่อนยืมกล้องของเขา", "mk": 1, "v1": 4, "base": "borrow", "mean": "ยืม", "emo": "📚"}, {"en": "The school lets students participate in international competitions.", "th": "โรงเรียนให้นักเรียนเข้าร่วมการแข่งขันระดับนานาชาติ", "mk": 2, "v1": 4, "base": "participate", "mean": "เข้าร่วม", "emo": "🏅"}, {"en": "My parents let me learn Japanese.", "th": "พ่อแม่ให้ฉันเรียนภาษาญี่ปุ่น", "mk": 2, "v1": 4, "base": "learn", "mean": "เรียนรู้", "emo": "🎓"}, {"en": "The restaurant lets customers customize their meals.", "th": "ร้านอาหารให้ลูกค้าปรับแต่งอาหารตามต้องการ", "mk": 2, "v1": 4, "base": "customize", "mean": "ปรับแต่งตามต้องการ", "emo": "🛠️"}, {"en": "My brother lets me play his guitar.", "th": "พี่/น้องชายให้ฉันเล่นกีตาร์ของเขา", "mk": 2, "v1": 4, "base": "play", "mean": "เล่น", "emo": "⚽"}, {"en": "The coach lets the athletes recover after the competition.", "th": "โค้ชให้นักกีฬาพักฟื้นหลังการแข่งขัน", "mk": 2, "v1": 5, "base": "recover", "mean": "ฟื้นตัว / พักฟื้น", "emo": "🩹"}, {"en": "The teacher lets every student express their opinions.", "th": "ครูให้นักเรียนทุกคนแสดงความคิดเห็น", "mk": 2, "v1": 5, "base": "express", "mean": "แสดง (ความคิดเห็น)", "emo": "📢"}, {"en": "My parents let me make my own decisions.", "th": "พ่อแม่ให้ฉันตัดสินใจด้วยตัวเอง", "mk": 2, "v1": 4, "base": "make", "mean": "ทำ / ตัดสิน (make decisions)", "emo": "✅"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.1 Causative verb "make" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:230px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:28px 22px 4px;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:240px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>1.1 Causative verb “make” · Flip cards</h1>
+  <div class="formula">Subject + <b>make</b> + someone + <b>V1</b> + object &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "My teacher makes us study every day.", "th": "ครูของฉันบังคับให้พวกเราเรียนทุกวัน", "mk": 2, "v1": 4, "base": "study", "mean": "เรียน / ศึกษา"}, {"en": "My father makes me clean my room.", "th": "พ่อให้ฉันทำความสะอาดห้องของฉัน", "mk": 2, "v1": 4, "base": "clean", "mean": "ทำความสะอาด"}, {"en": "My mother makes me eat vegetables.", "th": "แม่บังคับให้ฉันกินผัก", "mk": 2, "v1": 4, "base": "eat", "mean": "กิน"}, {"en": "The coach makes the players practice every morning.", "th": "โค้ชให้ผู้เล่นซ้อมทุกเช้า", "mk": 2, "v1": 5, "base": "practice", "mean": "ฝึกซ้อม"}, {"en": "The manager makes the staff work overtime.", "th": "ผู้จัดการให้พนักงานทำงานล่วงเวลา", "mk": 2, "v1": 5, "base": "work", "mean": "ทำงาน"}, {"en": "The rain makes us stay indoors.", "th": "ฝนทำให้พวกเราต้องอยู่ในบ้าน", "mk": 2, "v1": 4, "base": "stay", "mean": "อยู่ / พัก"}, {"en": "The cold weather makes people wear warm clothes.", "th": "อากาศหนาวทำให้ผู้คนต้องสวมเสื้อผ้าอุ่น ๆ", "mk": 3, "v1": 5, "base": "wear", "mean": "สวมใส่"}, {"en": "His joke made everyone laugh.", "th": "มุกตลกของเขาทำให้ทุกคนหัวเราะ", "mk": 2, "v1": 4, "base": "laugh", "mean": "หัวเราะ"}, {"en": "The movie made me cry.", "th": "ภาพยนตร์เรื่องนั้นทำให้ฉันร้องไห้", "mk": 2, "v1": 4, "base": "cry", "mean": "ร้องไห้"}, {"en": "The news made her smile.", "th": "ข่าวนั้นทำให้เธอยิ้ม", "mk": 2, "v1": 4, "base": "smile", "mean": "ยิ้ม"}, {"en": "The noise made the baby wake up.", "th": "เสียงดังทำให้ทารกตื่น", "mk": 2, "v1": 5, "base": "wake", "mean": "ตื่น (wake up = ตื่นนอน)"}, {"en": "The doctor made him rest for a week.", "th": "หมอให้เขาพักผ่อนหนึ่งสัปดาห์", "mk": 2, "v1": 4, "base": "rest", "mean": "พักผ่อน"}, {"en": "The teacher made the students rewrite the essay.", "th": "ครูให้นักเรียนเขียนเรียงความใหม่", "mk": 2, "v1": 5, "base": "rewrite", "mean": "เขียนใหม่"}, {"en": "My boss made me finish the report today.", "th": "เจ้านายให้ฉันทำรายงานให้เสร็จวันนี้", "mk": 2, "v1": 4, "base": "finish", "mean": "ทำให้เสร็จ"}, {"en": "The police officer made the driver stop the car.", "th": "ตำรวจให้คนขับหยุดรถ", "mk": 3, "v1": 6, "base": "stop", "mean": "หยุด"}, {"en": "My parents make me apologize when I'm wrong.", "th": "พ่อแม่ให้ฉันขอโทษเมื่อฉันทำผิด", "mk": 2, "v1": 4, "base": "apologize", "mean": "ขอโทษ"}, {"en": "The rules make everyone follow the instructions.", "th": "กฎทำให้ทุกคนต้องทำตามคำแนะนำ", "mk": 2, "v1": 4, "base": "follow", "mean": "ปฏิบัติตาม"}, {"en": "The storm made us cancel the trip.", "th": "พายุทำให้พวกเราต้องยกเลิกการเดินทาง", "mk": 2, "v1": 4, "base": "cancel", "mean": "ยกเลิก"}, {"en": "The teacher made Tom answer the question.", "th": "ครูให้ทอมตอบคำถาม", "mk": 2, "v1": 4, "base": "answer", "mean": "ตอบ"}, {"en": "The manager made the employees attend the meeting.", "th": "ผู้จัดการให้พนักงานเข้าร่วมการประชุม", "mk": 2, "v1": 5, "base": "attend", "mean": "เข้าร่วม"}, {"en": "The movie made them think about life.", "th": "ภาพยนตร์ทำให้พวกเขาคิดถึงชีวิต", "mk": 2, "v1": 4, "base": "think", "mean": "คิด"}, {"en": "The accident made him realize his mistake.", "th": "อุบัติเหตุทำให้เขาตระหนักถึงความผิดพลาดของตัวเอง", "mk": 2, "v1": 4, "base": "realize", "mean": "ตระหนักได้"}, {"en": "Her kindness made me trust her.", "th": "ความใจดีของเธอทำให้ฉันไว้ใจเธอ", "mk": 2, "v1": 4, "base": "trust", "mean": "ไว้ใจ"}, {"en": "The speech made everyone listen carefully.", "th": "สุนทรพจน์ทำให้ทุกคนตั้งใจฟังอย่างดี", "mk": 2, "v1": 4, "base": "listen", "mean": "ฟัง"}, {"en": "The teacher made us memorize the vocabulary.", "th": "ครูให้พวกเราท่องจำคำศัพท์", "mk": 2, "v1": 4, "base": "memorize", "mean": "ท่องจำ"}, {"en": "My coach made me run five kilometers.", "th": "โค้ชให้ฉันวิ่งห้ากิโลเมตร", "mk": 2, "v1": 4, "base": "run", "mean": "วิ่ง"}, {"en": "The loud music made the neighbors complain.", "th": "เพลงเสียงดังทำให้เพื่อนบ้านบ่น", "mk": 3, "v1": 6, "base": "complain", "mean": "บ่น / ร้องเรียน"}, {"en": "The smell made me leave the room.", "th": "กลิ่นนั้นทำให้ฉันต้องออกจากห้อง", "mk": 2, "v1": 4, "base": "leave", "mean": "ออกจาก"}, {"en": "The exam made the students study harder.", "th": "การสอบทำให้นักเรียนตั้งใจเรียนหนักขึ้น", "mk": 2, "v1": 5, "base": "study", "mean": "เรียน / ศึกษา"}, {"en": "The deadline made us hurry.", "th": "กำหนดส่งทำให้พวกเราต้องรีบ", "mk": 2, "v1": 4, "base": "hurry", "mean": "รีบ"}, {"en": "My brother makes me laugh every day.", "th": "พี่/น้องชายของฉันทำให้ฉันหัวเราะทุกวัน", "mk": 2, "v1": 4, "base": "laugh", "mean": "หัวเราะ"}, {"en": "Her story made us believe her.", "th": "เรื่องเล่าของเธอทำให้พวกเราเชื่อเธอ", "mk": 2, "v1": 4, "base": "believe", "mean": "เชื่อ"}, {"en": "The teacher made Jack stay after class.", "th": "ครูให้แจ็คอยู่ต่อหลังเลิกเรียน", "mk": 2, "v1": 4, "base": "stay", "mean": "อยู่ / พัก"}, {"en": "My mother made my sister wash the dishes.", "th": "แม่ให้พี่/น้องสาวของฉันล้างจาน", "mk": 2, "v1": 5, "base": "wash", "mean": "ล้าง"}, {"en": "The manager made the workers wear helmets.", "th": "ผู้จัดการให้คนงานสวมหมวกนิรภัย", "mk": 2, "v1": 5, "base": "wear", "mean": "สวมใส่"}, {"en": "The law makes people obey the rules.", "th": "กฎหมายทำให้ผู้คนต้องปฏิบัติตามกฎ", "mk": 2, "v1": 4, "base": "obey", "mean": "เชื่อฟัง / ปฏิบัติตาม"}, {"en": "The teacher made us write ten sentences.", "th": "ครูให้พวกเราเขียนสิบประโยค", "mk": 2, "v1": 4, "base": "write", "mean": "เขียน"}, {"en": "The guide made us wait outside.", "th": "ไกด์ให้พวกเรารออยู่ข้างนอก", "mk": 2, "v1": 4, "base": "wait", "mean": "รอ"}, {"en": "The nurse made the patient sit down.", "th": "พยาบาลให้ผู้ป่วยนั่งลง", "mk": 2, "v1": 5, "base": "sit", "mean": "นั่ง"}, {"en": "My friend made me try Japanese food.", "th": "เพื่อนทำให้ฉันได้ลองอาหารญี่ปุ่น", "mk": 2, "v1": 4, "base": "try", "mean": "ลอง"}, {"en": "The teacher made us read the passage aloud.", "th": "ครูให้พวกเราอ่านข้อความออกเสียง", "mk": 2, "v1": 4, "base": "read", "mean": "อ่าน"}, {"en": "The captain made the team practice harder.", "th": "กัปตันให้ทีมซ้อมหนักขึ้น", "mk": 2, "v1": 5, "base": "practice", "mean": "ฝึกซ้อม"}, {"en": "The difficult question made me think carefully.", "th": "คำถามที่ยากทำให้ฉันต้องคิดอย่างรอบคอบ", "mk": 3, "v1": 5, "base": "think", "mean": "คิด"}, {"en": "The warning made them leave immediately.", "th": "คำเตือนทำให้พวกเขาออกไปทันที", "mk": 2, "v1": 4, "base": "leave", "mean": "ออกจาก"}, {"en": "The teacher made the class keep quiet.", "th": "ครูให้ทั้งห้องเงียบ", "mk": 2, "v1": 5, "base": "keep", "mean": "คงไว้ / รักษา"}, {"en": "My parents made me save money.", "th": "พ่อแม่ให้ฉันเก็บเงิน", "mk": 2, "v1": 4, "base": "save", "mean": "เก็บออม"}, {"en": "The company made employees wear uniforms.", "th": "บริษัทให้พนักงานสวมเครื่องแบบ", "mk": 2, "v1": 4, "base": "wear", "mean": "สวมใส่"}, {"en": "The strong wind made the door slam shut.", "th": "ลมแรงทำให้ประตูปิดดังปัง", "mk": 3, "v1": 6, "base": "slam", "mean": "ปิดดังปัง"}, {"en": "The teacher made everyone participate in the activity.", "th": "ครูให้ทุกคนมีส่วนร่วมในกิจกรรม", "mk": 2, "v1": 4, "base": "participate", "mean": "มีส่วนร่วม"}, {"en": "His success made his parents feel proud.", "th": "ความสำเร็จของเขาทำให้พ่อแม่รู้สึกภูมิใจ", "mk": 2, "v1": 5, "base": "feel", "mean": "รู้สึก"}, {"en": "My parents make me wake up early every day.", "th": "พ่อแม่ให้ฉันตื่นแต่เช้าทุกวัน", "mk": 2, "v1": 4, "base": "wake", "mean": "ตื่น (wake up = ตื่นนอน)"}, {"en": "The teacher makes the students review the lesson before every quiz.", "th": "ครูให้นักเรียนทบทวนบทเรียนก่อนการทดสอบย่อยทุกครั้ง", "mk": 2, "v1": 5, "base": "review", "mean": "ทบทวน"}, {"en": "My boss makes us attend every meeting.", "th": "เจ้านายให้พวกเราเข้าร่วมทุกการประชุม", "mk": 2, "v1": 4, "base": "attend", "mean": "เข้าร่วม"}, {"en": "The coach makes the team stretch before practice.", "th": "โค้ชให้ทีมยืดเส้นยืดสายก่อนซ้อม", "mk": 2, "v1": 5, "base": "stretch", "mean": "ยืดเส้นยืดสาย"}, {"en": "The manager makes the employees arrive on time.", "th": "ผู้จัดการให้พนักงานมาถึงตรงเวลา", "mk": 2, "v1": 5, "base": "arrive", "mean": "มาถึง"}, {"en": "The doctor made me stop smoking.", "th": "หมอให้ฉันเลิกสูบบุหรี่", "mk": 2, "v1": 4, "base": "stop", "mean": "หยุด / เลิก"}, {"en": "The rain made us postpone the game.", "th": "ฝนทำให้พวกเราต้องเลื่อนการแข่งขัน", "mk": 2, "v1": 4, "base": "postpone", "mean": "เลื่อน"}, {"en": "The heavy traffic made her miss the train.", "th": "การจราจรที่หนาแน่นทำให้เธอพลาดรถไฟ", "mk": 3, "v1": 5, "base": "miss", "mean": "พลาด / ตกขบวน"}, {"en": "The loud alarm made everyone leave the building.", "th": "เสียงสัญญาณเตือนดังทำให้ทุกคนออกจากอาคาร", "mk": 3, "v1": 5, "base": "leave", "mean": "ออกจาก"}, {"en": "My father made my brother mow the lawn.", "th": "พ่อให้พี่/น้องชายของฉันตัดหญ้า", "mk": 2, "v1": 5, "base": "mow", "mean": "ตัด (หญ้า)"}, {"en": "My mother made me fold the laundry.", "th": "แม่ให้ฉันพับผ้า", "mk": 2, "v1": 4, "base": "fold", "mean": "พับ"}, {"en": "The principal made the students apologize.", "th": "ผู้อำนวยการให้นักเรียนขอโทษ", "mk": 2, "v1": 5, "base": "apologize", "mean": "ขอโทษ"}, {"en": "The police officer made the driver show his license.", "th": "ตำรวจให้คนขับแสดงใบขับขี่", "mk": 3, "v1": 6, "base": "show", "mean": "แสดง"}, {"en": "The referee made the player leave the field.", "th": "ผู้ตัดสินให้ผู้เล่นออกจากสนาม", "mk": 2, "v1": 5, "base": "leave", "mean": "ออกจาก"}, {"en": "The manager made the workers clean the warehouse.", "th": "ผู้จัดการให้คนงานทำความสะอาดโกดัง", "mk": 2, "v1": 5, "base": "clean", "mean": "ทำความสะอาด"}, {"en": "My English teacher makes us speak English in class.", "th": "ครูภาษาอังกฤษของฉันให้พวกเราพูดภาษาอังกฤษในชั้นเรียน", "mk": 3, "v1": 5, "base": "speak", "mean": "พูด"}, {"en": "The difficult homework made me stay up late.", "th": "การบ้านที่ยากทำให้ฉันต้องนอนดึก", "mk": 3, "v1": 5, "base": "stay", "mean": "อยู่ (stay up = อดนอน)"}, {"en": "His behavior made everyone feel uncomfortable.", "th": "พฤติกรรมของเขาทำให้ทุกคนรู้สึกอึดอัด", "mk": 2, "v1": 4, "base": "feel", "mean": "รู้สึก"}, {"en": "The smell made my sister cover her nose.", "th": "กลิ่นนั้นทำให้พี่/น้องสาวของฉันต้องปิดจมูก", "mk": 2, "v1": 5, "base": "cover", "mean": "ปิด / คลุม"}, {"en": "The movie made the audience clap loudly.", "th": "ภาพยนตร์ทำให้ผู้ชมปรบมือดัง ๆ", "mk": 2, "v1": 5, "base": "clap", "mean": "ปรบมือ"}, {"en": "My grandfather made me plant a tree.", "th": "ปู่/ตาให้ฉันปลูกต้นไม้", "mk": 2, "v1": 4, "base": "plant", "mean": "ปลูก"}, {"en": "The teacher made Linda solve the problem on the board.", "th": "ครูให้ลินดาแก้โจทย์บนกระดาน", "mk": 2, "v1": 4, "base": "solve", "mean": "แก้ (ปัญหา)"}, {"en": "The manager made the receptionist answer every call politely.", "th": "ผู้จัดการให้พนักงานต้อนรับรับทุกสายอย่างสุภาพ", "mk": 2, "v1": 5, "base": "answer", "mean": "ตอบ / รับ (สาย)"}, {"en": "The strong wind made the windows shake.", "th": "ลมแรงทำให้หน้าต่างสั่น", "mk": 3, "v1": 6, "base": "shake", "mean": "สั่น"}, {"en": "The cold weather made the river freeze.", "th": "อากาศหนาวทำให้แม่น้ำกลายเป็นน้ำแข็ง", "mk": 3, "v1": 6, "base": "freeze", "mean": "เยือกแข็ง"}, {"en": "My father made me wash his car.", "th": "พ่อให้ฉันล้างรถของพ่อ", "mk": 2, "v1": 4, "base": "wash", "mean": "ล้าง"}, {"en": "My mother made my sister cook dinner.", "th": "แม่ให้พี่/น้องสาวของฉันทำอาหารเย็น", "mk": 2, "v1": 5, "base": "cook", "mean": "ทำอาหาร"}, {"en": "The teacher made the class finish the test before lunch.", "th": "ครูให้ทั้งห้องทำข้อสอบให้เสร็จก่อนมื้อเที่ยง", "mk": 2, "v1": 5, "base": "finish", "mean": "ทำให้เสร็จ"}, {"en": "The boss made his assistant book the flights.", "th": "เจ้านายให้ผู้ช่วยจองตั๋วเครื่องบิน", "mk": 2, "v1": 5, "base": "book", "mean": "จอง"}, {"en": "The customer made the company improve its service.", "th": "ลูกค้าทำให้บริษัทต้องปรับปรุงการบริการ", "mk": 2, "v1": 5, "base": "improve", "mean": "ปรับปรุง"}, {"en": "The storm made fishermen return to shore.", "th": "พายุทำให้ชาวประมงต้องกลับเข้าฝั่ง", "mk": 2, "v1": 4, "base": "return", "mean": "กลับ"}, {"en": "The bright sunlight made me wear sunglasses.", "th": "แสงแดดจ้าทำให้ฉันต้องสวมแว่นกันแดด", "mk": 3, "v1": 5, "base": "wear", "mean": "สวมใส่"}, {"en": "The nurse made the patient drink more water.", "th": "พยาบาลให้ผู้ป่วยดื่มน้ำมากขึ้น", "mk": 2, "v1": 5, "base": "drink", "mean": "ดื่ม"}, {"en": "The trainer made us repeat the exercise.", "th": "เทรนเนอร์ให้พวกเราทำการออกกำลังกายซ้ำ", "mk": 2, "v1": 4, "base": "repeat", "mean": "ทำซ้ำ"}, {"en": "My parents made me promise to study hard.", "th": "พ่อแม่ให้ฉันสัญญาว่าจะตั้งใจเรียน", "mk": 2, "v1": 4, "base": "promise", "mean": "สัญญา"}, {"en": "The accident made him become more careful.", "th": "อุบัติเหตุทำให้เขากลายเป็นคนระมัดระวังมากขึ้น", "mk": 2, "v1": 4, "base": "become", "mean": "กลายเป็น"}, {"en": "The long journey made the children feel tired.", "th": "การเดินทางที่ยาวนานทำให้เด็ก ๆ รู้สึกเหนื่อย", "mk": 3, "v1": 6, "base": "feel", "mean": "รู้สึก"}, {"en": "My coach made me improve my skills.", "th": "โค้ชทำให้ฉันต้องพัฒนาทักษะของตัวเอง", "mk": 2, "v1": 4, "base": "improve", "mean": "ปรับปรุง / พัฒนา"}, {"en": "The teacher made us pay attention.", "th": "ครูทำให้พวกเราต้องตั้งใจ", "mk": 2, "v1": 4, "base": "pay", "mean": "จ่าย (pay attention = ตั้งใจ / ใส่ใจ)"}, {"en": "The loud thunder made the baby cry.", "th": "เสียงฟ้าร้องดังทำให้ทารกร้องไห้", "mk": 3, "v1": 6, "base": "cry", "mean": "ร้องไห้"}, {"en": "The company made employees sign the agreement.", "th": "บริษัทให้พนักงานลงนามในข้อตกลง", "mk": 2, "v1": 4, "base": "sign", "mean": "ลงนาม"}, {"en": "The movie made my parents laugh together.", "th": "ภาพยนตร์ทำให้พ่อแม่ของฉันหัวเราะด้วยกัน", "mk": 2, "v1": 5, "base": "laugh", "mean": "หัวเราะ"}, {"en": "His words made her change her mind.", "th": "คำพูดของเขาทำให้เธอเปลี่ยนใจ", "mk": 2, "v1": 4, "base": "change", "mean": "เปลี่ยน"}, {"en": "The teacher made the students stand in a line.", "th": "ครูให้นักเรียนยืนเข้าแถว", "mk": 2, "v1": 5, "base": "stand", "mean": "ยืน"}, {"en": "The bad weather made us stay home.", "th": "อากาศแย่ทำให้พวกเราต้องอยู่บ้าน", "mk": 3, "v1": 5, "base": "stay", "mean": "อยู่ / พัก"}, {"en": "My father made me save part of my allowance.", "th": "พ่อให้ฉันเก็บเงินค่าขนมส่วนหนึ่งไว้", "mk": 2, "v1": 4, "base": "save", "mean": "เก็บออม"}, {"en": "The manager made the team submit the report early.", "th": "ผู้จัดการให้ทีมส่งรายงานเร็วขึ้น", "mk": 2, "v1": 5, "base": "submit", "mean": "ส่ง"}, {"en": "The teacher made every student participate in the discussion.", "th": "ครูให้นักเรียนทุกคนมีส่วนร่วมในการอภิปราย", "mk": 2, "v1": 5, "base": "participate", "mean": "มีส่วนร่วม"}, {"en": "The fire drill made everyone evacuate the building.", "th": "การซ้อมหนีไฟทำให้ทุกคนอพยพออกจากอาคาร", "mk": 3, "v1": 5, "base": "evacuate", "mean": "อพยพ"}, {"en": "His encouragement made me believe in myself.", "th": "กำลังใจจากเขาทำให้ฉันเชื่อมั่นในตัวเอง", "mk": 2, "v1": 4, "base": "believe", "mean": "เชื่อ"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><span class="num">${n}</span>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

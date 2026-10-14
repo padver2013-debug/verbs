@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.2 Causative passive "be made to" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:300px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 22px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.aux{background:var(--redbg);padding:0 2px;border-radius:3px}
+.en b.mk{box-shadow:inset 0 -2px 0 var(--red)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.badge{position:absolute;right:12px;top:10px;font:600 11px Arial;color:#8b0000;background:#fff;border:1px solid #e3c4c4;border-radius:999px;padding:3px 9px}
+.badge.neg{background:#8b0000;color:#fff;border-color:#8b0000}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:310px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>1.2 Causative verb · Passive voice form</h1>
+  <div class="formula">Subject + <b>be + made</b> + to + <b>V1</b> &nbsp;·&nbsp; ชี้เมาส์ที่ V1 (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "I am made to stay quiet.", "th": "ฉันถูกทำให้ต้องอยู่อย่างเงียบ ๆ", "mk": 2, "as_": 1, "v1": 4, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Present simple", "neg": false}, {"en": "She is made to feel happy.", "th": "เธอถูกทำให้รู้สึกมีความสุข", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "😊", "tense": "Present simple", "neg": false}, {"en": "He is made to look nervous.", "th": "เขาถูกทำให้ดูประหม่า", "mk": 2, "as_": 1, "v1": 4, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😰", "tense": "Present simple", "neg": false}, {"en": "We are made to remain calm.", "th": "พวกเราถูกทำให้ต้องสงบสติอารมณ์", "mk": 2, "as_": 1, "v1": 4, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "😌", "tense": "Present simple", "neg": false}, {"en": "They are made to keep silent.", "th": "พวกเขาถูกทำให้ต้องเงียบ", "mk": 2, "as_": 1, "v1": 4, "base": "keep", "mean": "คงไว้ (keep silent = นิ่งเงียบ)", "emo": "🤐", "tense": "Present simple", "neg": false}, {"en": "The students are made to feel comfortable.", "th": "นักเรียนถูกทำให้รู้สึกสบาย", "mk": 3, "as_": 2, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Present simple", "neg": false}, {"en": "The children are not made to stay quiet.", "th": "เด็ก ๆ ไม่ได้ถูกบังคับให้ต้องอยู่อย่างเงียบ ๆ", "mk": 4, "as_": 2, "v1": 6, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Present simple", "neg": true}, {"en": "My brother is not made to feel nervous.", "th": "พี่ชาย/น้องชายของฉันไม่ได้ถูกทำให้รู้สึกประหม่า", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Present simple", "neg": true}, {"en": "I was made to stay awake.", "th": "ฉันถูกทำให้ต้องตื่นอยู่", "mk": 2, "as_": 1, "v1": 4, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Past simple", "neg": false}, {"en": "She was made to feel embarrassed.", "th": "เธอถูกทำให้รู้สึกอับอาย", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "😳", "tense": "Past simple", "neg": false}, {"en": "He was made to look serious.", "th": "เขาถูกทำให้ดูจริงจัง", "mk": 2, "as_": 1, "v1": 4, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😐", "tense": "Past simple", "neg": false}, {"en": "We were made to remain silent.", "th": "พวกเราถูกทำให้ต้องเงียบ", "mk": 2, "as_": 1, "v1": 4, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤐", "tense": "Past simple", "neg": false}, {"en": "They were made to feel comfortable.", "th": "พวกเขาถูกทำให้รู้สึกสบาย", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Past simple", "neg": false}, {"en": "The workers were made to stay alert.", "th": "คนงานถูกทำให้ต้องตื่นตัว", "mk": 3, "as_": 2, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "⚡", "tense": "Past simple", "neg": false}, {"en": "The students were not made to feel afraid.", "th": "นักเรียนไม่ได้ถูกทำให้รู้สึกกลัว", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😨", "tense": "Past simple", "neg": true}, {"en": "She was not made to stay calm.", "th": "เธอไม่ได้ถูกทำให้ต้องสงบ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😌", "tense": "Past simple", "neg": true}, {"en": "I will be made to stay quiet.", "th": "ฉันจะถูกทำให้ต้องอยู่อย่างเงียบ ๆ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Future simple", "neg": false}, {"en": "He will be made to feel happy.", "th": "เขาจะถูกทำให้รู้สึกมีความสุข", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😊", "tense": "Future simple", "neg": false}, {"en": "We will be made to remain calm.", "th": "พวกเราจะถูกทำให้ต้องสงบ", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "😌", "tense": "Future simple", "neg": false}, {"en": "They will be made to look confident.", "th": "พวกเขาจะถูกทำให้ดูมั่นใจ", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😎", "tense": "Future simple", "neg": false}, {"en": "The guests will be made to feel comfortable.", "th": "แขกจะถูกทำให้รู้สึกสบาย", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Future simple", "neg": false}, {"en": "The players will not be made to stay nervous.", "th": "ผู้เล่นจะไม่ถูกทำให้ต้องรู้สึกประหม่า", "mk": 5, "as_": 2, "v1": 7, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😰", "tense": "Future simple", "neg": true}, {"en": "I have been made to feel happy.", "th": "ฉันถูกทำให้รู้สึกมีความสุข", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😊", "tense": "Present perfect", "neg": false}, {"en": "She has been made to stay calm.", "th": "เธอถูกทำให้ต้องสงบ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😌", "tense": "Present perfect", "neg": false}, {"en": "He has been made to look confident.", "th": "เขาถูกทำให้ดูมั่นใจ", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😎", "tense": "Present perfect", "neg": false}, {"en": "We have been made to remain silent.", "th": "พวกเราถูกทำให้ต้องเงียบ", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤐", "tense": "Present perfect", "neg": false}, {"en": "They have not been made to feel uncomfortable.", "th": "พวกเขาไม่ได้ถูกทำให้รู้สึกไม่สบาย", "mk": 4, "as_": 1, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Present perfect", "neg": true}, {"en": "The children have not been made to stay awake.", "th": "เด็ก ๆ ไม่ได้ถูกทำให้ต้องตื่นอยู่", "mk": 5, "as_": 2, "v1": 7, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Present perfect", "neg": true}, {"en": "I had been made to feel nervous.", "th": "ฉันถูกทำให้รู้สึกประหม่ามาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Past perfect", "neg": false}, {"en": "She had been made to look angry.", "th": "เธอถูกทำให้ดูโกรธมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😠", "tense": "Past perfect", "neg": false}, {"en": "He had been made to stay quiet.", "th": "เขาถูกทำให้ต้องเงียบมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Past perfect", "neg": false}, {"en": "We had been made to remain alert.", "th": "พวกเราถูกทำให้ต้องตื่นตัวมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "⚡", "tense": "Past perfect", "neg": false}, {"en": "They had not been made to feel afraid.", "th": "พวกเขาไม่ได้ถูกทำให้รู้สึกกลัวมาก่อนหน้านั้น", "mk": 4, "as_": 1, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😨", "tense": "Past perfect", "neg": true}, {"en": "The workers had not been made to stay awake.", "th": "คนงานไม่ได้ถูกทำให้ต้องตื่นอยู่มาก่อนหน้านั้น", "mk": 5, "as_": 2, "v1": 7, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Past perfect", "neg": true}, {"en": "I am being made to feel uncomfortable.", "th": "ฉันกำลังถูกทำให้รู้สึกไม่สบายใจ", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Present continuous", "neg": false}, {"en": "She is being made to look beautiful.", "th": "เธอกำลังถูกทำให้ดูสวย", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "💄", "tense": "Present continuous", "neg": false}, {"en": "They are being made to stay quiet.", "th": "พวกเขากำลังถูกทำให้ต้องเงียบ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Present continuous", "neg": false}, {"en": "He was being made to feel nervous.", "th": "เขากำลังถูกทำให้รู้สึกประหม่าในเวลานั้น", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Past continuous", "neg": false}, {"en": "We were being made to remain calm.", "th": "พวกเรากำลังถูกทำให้ต้องสงบในเวลานั้น", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "😌", "tense": "Past continuous", "neg": false}, {"en": "The students were not being made to feel uncomfortable.", "th": "นักเรียนไม่ได้กำลังถูกทำให้รู้สึกไม่สบายใจ", "mk": 5, "as_": 2, "v1": 7, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Past continuous", "neg": true}, {"en": "I am made to feel proud.", "th": "ฉันถูกทำให้รู้สึกภูมิใจ", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "🏅", "tense": "Present simple", "neg": false}, {"en": "She is made to look beautiful.", "th": "เธอถูกทำให้ดูสวย", "mk": 2, "as_": 1, "v1": 4, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "💄", "tense": "Present simple", "neg": false}, {"en": "He is made to feel confident.", "th": "เขาถูกทำให้รู้สึกมั่นใจ", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "😎", "tense": "Present simple", "neg": false}, {"en": "We are made to stay focused.", "th": "พวกเราถูกทำให้ต้องมีสมาธิ", "mk": 2, "as_": 1, "v1": 4, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🎯", "tense": "Present simple", "neg": false}, {"en": "They are made to remain quiet.", "th": "พวกเขาถูกทำให้ต้องอยู่อย่างเงียบ ๆ", "mk": 2, "as_": 1, "v1": 4, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤫", "tense": "Present simple", "neg": false}, {"en": "The students are made to feel responsible.", "th": "นักเรียนถูกทำให้รู้สึกรับผิดชอบ", "mk": 3, "as_": 2, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "📋", "tense": "Present simple", "neg": false}, {"en": "My sister is not made to feel uncomfortable.", "th": "พี่สาว/น้องสาวของฉันไม่ได้ถูกทำให้รู้สึกไม่สบายใจ", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Present simple", "neg": true}, {"en": "The children are not made to stay awake.", "th": "เด็ก ๆ ไม่ได้ถูกทำให้ต้องตื่นอยู่", "mk": 4, "as_": 2, "v1": 6, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Present simple", "neg": true}, {"en": "I was made to feel important.", "th": "ฉันถูกทำให้รู้สึกว่าตัวเองสำคัญ", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "⭐", "tense": "Past simple", "neg": false}, {"en": "She was made to stay calm.", "th": "เธอถูกทำให้ต้องสงบ", "mk": 2, "as_": 1, "v1": 4, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😌", "tense": "Past simple", "neg": false}, {"en": "He was made to look serious.", "th": "เขาถูกทำให้ดูจริงจัง", "mk": 2, "as_": 1, "v1": 4, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😐", "tense": "Past simple", "neg": false}, {"en": "We were made to feel welcome.", "th": "พวกเราถูกทำให้รู้สึกได้รับการต้อนรับ", "mk": 2, "as_": 1, "v1": 4, "base": "feel", "mean": "รู้สึก", "emo": "🤝", "tense": "Past simple", "neg": false}, {"en": "They were made to remain patient.", "th": "พวกเขาถูกทำให้ต้องอดทน", "mk": 2, "as_": 1, "v1": 4, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "⏳", "tense": "Past simple", "neg": false}, {"en": "The workers were made to stay alert.", "th": "คนงานถูกทำให้ต้องตื่นตัว", "mk": 3, "as_": 2, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "⚡", "tense": "Past simple", "neg": false}, {"en": "The guests were not made to feel uncomfortable.", "th": "แขกไม่ได้ถูกทำให้รู้สึกไม่สบายใจ", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Past simple", "neg": true}, {"en": "My brother was not made to feel embarrassed.", "th": "พี่ชาย/น้องชายของฉันไม่ได้ถูกทำให้รู้สึกอับอาย", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😳", "tense": "Past simple", "neg": true}, {"en": "I will be made to feel comfortable.", "th": "ฉันจะถูกทำให้รู้สึกสบาย", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Future simple", "neg": false}, {"en": "She will be made to look confident.", "th": "เธอจะถูกทำให้ดูมั่นใจ", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😎", "tense": "Future simple", "neg": false}, {"en": "He will be made to stay quiet.", "th": "เขาจะถูกทำให้ต้องอยู่อย่างเงียบ ๆ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Future simple", "neg": false}, {"en": "We will be made to remain calm.", "th": "พวกเราจะถูกทำให้ต้องสงบ", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "😌", "tense": "Future simple", "neg": false}, {"en": "They will be made to feel happy.", "th": "พวกเขาจะถูกทำให้รู้สึกมีความสุข", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😊", "tense": "Future simple", "neg": false}, {"en": "The players will be made to stay focused.", "th": "ผู้เล่นจะถูกทำให้ต้องมีสมาธิ", "mk": 4, "as_": 2, "v1": 6, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🎯", "tense": "Future simple", "neg": false}, {"en": "The children will not be made to feel afraid.", "th": "เด็ก ๆ จะไม่ถูกทำให้รู้สึกกลัว", "mk": 5, "as_": 2, "v1": 7, "base": "feel", "mean": "รู้สึก", "emo": "😨", "tense": "Future simple", "neg": true}, {"en": "The employees will not be made to remain silent.", "th": "พนักงานจะไม่ถูกทำให้ต้องนิ่งเงียบ", "mk": 5, "as_": 2, "v1": 7, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤐", "tense": "Future simple", "neg": true}, {"en": "I have been made to feel nervous.", "th": "ฉันถูกทำให้รู้สึกประหม่า", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Present perfect", "neg": false}, {"en": "She has been made to look happy.", "th": "เธอถูกทำให้ดูมีความสุข", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😊", "tense": "Present perfect", "neg": false}, {"en": "He has been made to feel proud.", "th": "เขาถูกทำให้รู้สึกภูมิใจ", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "🏅", "tense": "Present perfect", "neg": false}, {"en": "We have been made to stay calm.", "th": "พวกเราถูกทำให้ต้องสงบ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😌", "tense": "Present perfect", "neg": false}, {"en": "They have been made to remain alert.", "th": "พวกเขาถูกทำให้ต้องตื่นตัว", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "⚡", "tense": "Present perfect", "neg": false}, {"en": "The students have been made to feel responsible.", "th": "นักเรียนถูกทำให้รู้สึกรับผิดชอบ", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "📋", "tense": "Present perfect", "neg": false}, {"en": "The workers have not been made to stay awake.", "th": "คนงานไม่ได้ถูกทำให้ต้องตื่นอยู่", "mk": 5, "as_": 2, "v1": 7, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Present perfect", "neg": true}, {"en": "My parents have not been made to feel uncomfortable.", "th": "พ่อแม่ของฉันไม่ได้ถูกทำให้รู้สึกไม่สบายใจ", "mk": 5, "as_": 2, "v1": 7, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Present perfect", "neg": true}, {"en": "I had been made to feel angry.", "th": "ฉันถูกทำให้รู้สึกโกรธมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😠", "tense": "Past perfect", "neg": false}, {"en": "She had been made to look nervous.", "th": "เธอถูกทำให้ดูประหม่ามาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😰", "tense": "Past perfect", "neg": false}, {"en": "He had been made to stay awake.", "th": "เขาถูกทำให้ต้องตื่นอยู่มาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Past perfect", "neg": false}, {"en": "We had been made to remain quiet.", "th": "พวกเราถูกทำให้ต้องเงียบมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤫", "tense": "Past perfect", "neg": false}, {"en": "They had been made to feel comfortable.", "th": "พวกเขาถูกทำให้รู้สึกสบายมาก่อนหน้านั้น", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Past perfect", "neg": false}, {"en": "The guests had been made to feel welcome.", "th": "แขกถูกทำให้รู้สึกได้รับการต้อนรับมาก่อนหน้านั้น", "mk": 4, "as_": 2, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "🤝", "tense": "Past perfect", "neg": false}, {"en": "The students had not been made to feel afraid.", "th": "นักเรียนไม่ได้ถูกทำให้รู้สึกกลัวมาก่อนหน้านั้น", "mk": 5, "as_": 2, "v1": 7, "base": "feel", "mean": "รู้สึก", "emo": "😨", "tense": "Past perfect", "neg": true}, {"en": "My sister had not been made to stay calm.", "th": "พี่สาว/น้องสาวของฉันไม่ได้ถูกทำให้ต้องสงบมาก่อนหน้านั้น", "mk": 5, "as_": 2, "v1": 7, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "😌", "tense": "Past perfect", "neg": true}, {"en": "I am being made to feel nervous.", "th": "ฉันกำลังถูกทำให้รู้สึกประหม่า", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Present continuous", "neg": false}, {"en": "She is being made to look serious.", "th": "เธอกำลังถูกทำให้ดูจริงจัง", "mk": 3, "as_": 1, "v1": 5, "base": "look", "mean": "ดู / ดูเหมือน", "emo": "😐", "tense": "Present continuous", "neg": false}, {"en": "He is being made to stay quiet.", "th": "เขากำลังถูกทำให้ต้องเงียบ", "mk": 3, "as_": 1, "v1": 5, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🤫", "tense": "Present continuous", "neg": false}, {"en": "We are being made to remain patient.", "th": "พวกเรากำลังถูกทำให้ต้องอดทน", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "⏳", "tense": "Present continuous", "neg": false}, {"en": "They are being made to feel comfortable.", "th": "พวกเขากำลังถูกทำให้รู้สึกสบาย", "mk": 3, "as_": 1, "v1": 5, "base": "feel", "mean": "รู้สึก", "emo": "🛋️", "tense": "Present continuous", "neg": false}, {"en": "The children are being made to stay focused.", "th": "เด็ก ๆ กำลังถูกทำให้ต้องมีสมาธิ", "mk": 4, "as_": 2, "v1": 6, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "🎯", "tense": "Present continuous", "neg": false}, {"en": "I am not being made to feel uncomfortable.", "th": "ฉันไม่ได้กำลังถูกทำให้รู้สึกไม่สบายใจ", "mk": 4, "as_": 1, "v1": 6, "base": "feel", "mean": "รู้สึก", "emo": "😣", "tense": "Present continuous", "neg": true}, {"en": "She is not being made to stay awake.", "th": "เธอไม่ได้กำลังถูกทำให้ต้องตื่นอยู่", "mk": 4, "as_": 1, "v1": 6, "base": "stay", "mean": "อยู่ / คงอยู่ในสภาพ (stay quiet = อยู่เงียบ ๆ)", "emo": "👀", "tense": "Present continuous", "neg": true}, {"en": "They were being made to remain silent.", "th": "พวกเขากำลังถูกทำให้ต้องเงียบในเวลานั้น", "mk": 3, "as_": 1, "v1": 5, "base": "remain", "mean": "ยังคง / คงอยู่", "emo": "🤐", "tense": "Past continuous", "neg": false}, {"en": "The workers were not being made to feel nervous.", "th": "คนงานไม่ได้กำลังถูกทำให้รู้สึกประหม่าในเวลานั้น", "mk": 5, "as_": 2, "v1": 7, "base": "feel", "mean": "รู้สึก", "emo": "😰", "tense": "Past continuous", "neg": true}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i>=d.as_&&i<=d.mk) return esc(m[1])+'<b class="aux'+(i===d.mk?' mk':'')+'">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1) return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>V1 · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span><span class="badge${d.neg?' neg':''}">${d.tense}${d.neg?' · negative':''}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>

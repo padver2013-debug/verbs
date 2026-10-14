@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1.3 Causative "make + adjective" – Flip Cards</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#eef0f4;--hd:#1b2540;--muted:#566176;--line:#cdd3de;--red:#8b0000;--redbg:#fbe6e6;--navy:#1b2540;--tab:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}}
+:root[data-theme="dark"]{--bg:#0f1420;--hd:#e8ecf4;--muted:#9aa6bd;--line:#2b3550;--tab:#1b2236}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--hd);font-family:Arial,Helvetica,sans-serif}
+header{max-width:1100px;margin:0 auto;padding:22px 16px 6px}
+h1{margin:0;font:700 22px/1.25 Arial,sans-serif}
+.formula{margin-top:8px;font:15px/1.5 Arial;color:var(--muted)}
+.formula b{color:var(--red)}
+.tabs{max-width:1100px;margin:12px auto 0;padding:0 16px;display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:600 14px Arial;padding:9px 16px;border-radius:10px;border:1.5px solid var(--navy);background:var(--tab);color:#1b2540;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tabs button[aria-selected="true"]{background:#e8ecf4;color:#1b2540}}
+.bar{max-width:1100px;margin:10px auto 0;padding:0 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+.bar select{font:13px Arial;padding:5px 8px;border-radius:8px;max-width:280px}
+.bar button{font:600 13px Arial;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#111;cursor:pointer}
+main{max-width:1100px;margin:0 auto;padding:14px 16px 60px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{perspective:1200px;height:290px;cursor:pointer;outline:none}
+.inner{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column}
+.card:focus-visible .face{box-shadow:0 0 0 3px #4a7bd0}
+.front{background:#fff;border:1px solid var(--line)}
+.pic{flex:0 0 96px;background:#f1f3f8;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center;font-size:58px;line-height:1;position:relative}
+.num{position:absolute;left:14px;top:10px;font:12px Arial;color:#6b7588}
+.txt{flex:1;display:flex;align-items:center;justify-content:center;padding:8px 22px 0;text-align:center}
+.en{font:400 23px/1.4 Arial,Helvetica,sans-serif;color:#000;margin:0}
+.en b{font-weight:700;color:var(--red)}
+.en b.mk{background:var(--redbg);border-radius:4px;padding:0 3px}
+.en b.v1{border-bottom:2px dotted var(--red);cursor:help}
+.foot{padding:8px 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:#6b7588}
+.say{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:#1b2540;color:#fff;font:600 13px Arial;padding:8px 14px;cursor:pointer}
+.say:hover{filter:brightness(1.3)}
+.say.on{background:var(--red)}
+.back{background:#1b2540;color:#fff;transform:rotateY(180deg);justify-content:center;align-items:center;text-align:center;padding:20px 22px;gap:16px}
+.back .th{font:500 24px/1.5 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;margin:0}
+.back .en2{font:300 16px/1.4 Arial;color:#c9d2e3;margin:0;border-top:1px solid #3b4768;padding-top:12px;width:100%}
+.back .en2 b{font-weight:700;color:#ff9b9b}
+#tip{position:fixed;z-index:10;pointer-events:none;background:#14192b;color:#fff;border:1px solid #4a5578;border-radius:10px;padding:8px 12px;font:500 15px/1.4 "Noto Sans Thai","Sarabun",Tahoma,Arial,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);opacity:0;transform:translateY(4px);transition:opacity .12s,transform .12s;max-width:260px}
+#tip.show{opacity:1;transform:none}
+#tip small{display:block;font:11px Arial;color:#9fb0d0}
+@media (max-width:720px){main{grid-template-columns:1fr}.card{height:300px}.en{font-size:21px}}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>1.3 Causative verb “make” · make + something + adjective</h1>
+  <div class="formula">Subject + <b>make</b> + something + <b>adjective</b> &nbsp;·&nbsp; ชี้เมาส์ที่ Adjective (ตัวหนามีเส้นประ) เพื่อดูความหมาย · คลิกการ์ดเพื่อดูคำแปล</div>
+</header>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="bar">
+  <label for="voice">Voice:</label><select id="voice"></select>
+  <button id="flipAll" type="button">Flip all</button>
+  <span id="vnote"></span>
+</div>
+<main id="grid"></main>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA = [{"en": "The sun makes the room warm.", "th": "แสงแดดทำให้ห้องอบอุ่น", "mk": 2, "as_": 2, "v1": 5, "base": "warm", "mean": "อบอุ่น / อุ่น", "emo": "🔥"}, {"en": "The sun does not make the room cold.", "th": "แสงแดดไม่ได้ทำให้ห้องเย็น", "mk": 4, "as_": 2, "v1": 7, "base": "cold", "mean": "เย็น / หนาว", "emo": "🥶"}, {"en": "This music makes me happy.", "th": "เพลงนี้ทำให้ฉันมีความสุข", "mk": 2, "as_": 2, "v1": 4, "base": "happy", "mean": "มีความสุข", "emo": "😊"}, {"en": "This music does not make me sad.", "th": "เพลงนี้ไม่ได้ทำให้ฉันเศร้า", "mk": 4, "as_": 2, "v1": 6, "base": "sad", "mean": "เศร้า", "emo": "😢"}, {"en": "The news makes him nervous.", "th": "ข่าวนั้นทำให้เขาประหม่า", "mk": 2, "as_": 2, "v1": 4, "base": "nervous", "mean": "ประหม่า / กังวล", "emo": "😰"}, {"en": "The news does not make him angry.", "th": "ข่าวนั้นไม่ได้ทำให้เขาโกรธ", "mk": 4, "as_": 2, "v1": 6, "base": "angry", "mean": "โกรธ", "emo": "😠"}, {"en": "The joke makes everyone happy.", "th": "เรื่องตลกนั้นทำให้ทุกคนมีความสุข", "mk": 2, "as_": 2, "v1": 4, "base": "happy", "mean": "มีความสุข", "emo": "😊"}, {"en": "The joke does not make everyone uncomfortable.", "th": "เรื่องตลกนั้นไม่ได้ทำให้ทุกคนรู้สึกไม่สบายใจ", "mk": 4, "as_": 2, "v1": 6, "base": "uncomfortable", "mean": "ไม่สบาย / อึดอัด", "emo": "😣"}, {"en": "Exercise makes my body strong.", "th": "การออกกำลังกายทำให้ร่างกายของฉันแข็งแรง", "mk": 1, "as_": 1, "v1": 4, "base": "strong", "mean": "แข็งแรง", "emo": "💪"}, {"en": "Exercise does not make my body weak.", "th": "การออกกำลังกายไม่ได้ทำให้ร่างกายของฉันอ่อนแอ", "mk": 3, "as_": 1, "v1": 6, "base": "weak", "mean": "อ่อนแอ", "emo": "🥱"}, {"en": "Fresh air makes the room comfortable.", "th": "อากาศบริสุทธิ์ทำให้ห้องสบาย", "mk": 2, "as_": 2, "v1": 5, "base": "comfortable", "mean": "สบาย", "emo": "🛋️"}, {"en": "Fresh air does not make the room stuffy.", "th": "อากาศบริสุทธิ์ไม่ได้ทำให้ห้องอับ", "mk": 4, "as_": 2, "v1": 7, "base": "stuffy", "mean": "อับ / อบอ้าว", "emo": "😮‍💨"}, {"en": "The teacher makes the lesson interesting.", "th": "ครูทำให้บทเรียนน่าสนใจ", "mk": 2, "as_": 2, "v1": 5, "base": "interesting", "mean": "น่าสนใจ", "emo": "🤩"}, {"en": "The teacher does not make the lesson boring.", "th": "ครูไม่ได้ทำให้บทเรียนน่าเบื่อ", "mk": 4, "as_": 2, "v1": 7, "base": "boring", "mean": "น่าเบื่อ", "emo": "😑"}, {"en": "This book makes the subject clear.", "th": "หนังสือเล่มนี้ทำให้เนื้อหาชัดเจน", "mk": 2, "as_": 2, "v1": 5, "base": "clear", "mean": "ชัดเจน", "emo": "🔎"}, {"en": "This book does not make the subject confusing.", "th": "หนังสือเล่มนี้ไม่ได้ทำให้เนื้อหาสับสน", "mk": 4, "as_": 2, "v1": 7, "base": "confusing", "mean": "สับสน / ทำให้งง", "emo": "😵‍💫"}, {"en": "The rain makes the road slippery.", "th": "ฝนทำให้ถนนลื่น", "mk": 2, "as_": 2, "v1": 5, "base": "slippery", "mean": "ลื่น", "emo": "⚠️"}, {"en": "The rain does not make the road dry.", "th": "ฝนไม่ได้ทำให้ถนนแห้ง", "mk": 4, "as_": 2, "v1": 7, "base": "dry", "mean": "แห้ง", "emo": "🏜️"}, {"en": "The sunlight makes the flowers beautiful.", "th": "แสงแดดทำให้ดอกไม้สวยงาม", "mk": 2, "as_": 2, "v1": 5, "base": "beautiful", "mean": "สวยงาม", "emo": "🌸"}, {"en": "The sunlight does not make the flowers ugly.", "th": "แสงแดดไม่ได้ทำให้ดอกไม้น่าเกลียด", "mk": 4, "as_": 2, "v1": 7, "base": "ugly", "mean": "น่าเกลียด", "emo": "🥀"}, {"en": "The new design makes the website attractive.", "th": "การออกแบบใหม่ทำให้เว็บไซต์น่าสนใจ", "mk": 3, "as_": 3, "v1": 6, "base": "attractive", "mean": "น่าสนใจ / ดึงดูดใจ", "emo": "✨"}, {"en": "The new design does not make the website unattractive.", "th": "การออกแบบใหม่ไม่ได้ทำให้เว็บไซต์ไม่น่าสนใจ", "mk": 5, "as_": 3, "v1": 8, "base": "unattractive", "mean": "ไม่น่าสนใจ / ไม่ดึงดูดใจ", "emo": "🙁"}, {"en": "Good lighting makes the room bright.", "th": "แสงสว่างที่ดีทำให้ห้องสว่าง", "mk": 2, "as_": 2, "v1": 5, "base": "bright", "mean": "สว่าง", "emo": "💡"}, {"en": "Good lighting does not make the room dark.", "th": "แสงสว่างที่ดีไม่ได้ทำให้ห้องมืด", "mk": 4, "as_": 2, "v1": 7, "base": "dark", "mean": "มืด", "emo": "🌑"}, {"en": "The heater makes the water hot.", "th": "เครื่องทำความร้อนทำให้น้ำร้อน", "mk": 2, "as_": 2, "v1": 5, "base": "hot", "mean": "ร้อน", "emo": "♨️"}, {"en": "The heater does not make the water cold.", "th": "เครื่องทำความร้อนไม่ได้ทำให้น้ำเย็น", "mk": 4, "as_": 2, "v1": 7, "base": "cold", "mean": "เย็น / หนาว", "emo": "🥶"}, {"en": "The refrigerator makes the drinks cold.", "th": "ตู้เย็นทำให้เครื่องดื่มเย็น", "mk": 2, "as_": 2, "v1": 5, "base": "cold", "mean": "เย็น / หนาว", "emo": "🥶"}, {"en": "The refrigerator does not make the drinks hot.", "th": "ตู้เย็นไม่ได้ทำให้เครื่องดื่มร้อน", "mk": 4, "as_": 2, "v1": 7, "base": "hot", "mean": "ร้อน", "emo": "♨️"}, {"en": "The cleaner makes the floor clean.", "th": "น้ำยาทำความสะอาด/คนทำความสะอาดทำให้พื้นสะอาด", "mk": 2, "as_": 2, "v1": 5, "base": "clean", "mean": "สะอาด", "emo": "🧼"}, {"en": "The cleaner does not make the floor dirty.", "th": "น้ำยาทำความสะอาด/คนทำความสะอาดไม่ได้ทำให้พื้นสกปรก", "mk": 4, "as_": 2, "v1": 7, "base": "dirty", "mean": "สกปรก", "emo": "🗑️"}, {"en": "The software makes the process easy.", "th": "ซอฟต์แวร์ทำให้กระบวนการง่าย", "mk": 2, "as_": 2, "v1": 5, "base": "easy", "mean": "ง่าย", "emo": "👌"}, {"en": "The software does not make the process difficult.", "th": "ซอฟต์แวร์ไม่ได้ทำให้กระบวนการยาก", "mk": 4, "as_": 2, "v1": 7, "base": "difficult", "mean": "ยาก", "emo": "🧗"}, {"en": "The loud noise makes the baby frightened.", "th": "เสียงดังทำให้เด็กทารกตกใจกลัว", "mk": 3, "as_": 3, "v1": 6, "base": "frightened", "mean": "ตกใจกลัว", "emo": "😱"}, {"en": "The loud noise does not make the baby calm.", "th": "เสียงดังไม่ได้ทำให้เด็กทารกสงบ", "mk": 5, "as_": 3, "v1": 8, "base": "calm", "mean": "สงบ", "emo": "😌"}, {"en": "The good news makes my parents proud.", "th": "ข่าวดีทำให้พ่อแม่ของฉันภูมิใจ", "mk": 3, "as_": 3, "v1": 6, "base": "proud", "mean": "ภูมิใจ", "emo": "🏅"}, {"en": "The good news does not make my parents worried.", "th": "ข่าวดีไม่ได้ทำให้พ่อแม่ของฉันกังวล", "mk": 5, "as_": 3, "v1": 8, "base": "worried", "mean": "กังวล", "emo": "😟"}, {"en": "The long wait makes the customers impatient.", "th": "การรอคอยที่นานทำให้ลูกค้าใจร้อน", "mk": 3, "as_": 3, "v1": 6, "base": "impatient", "mean": "ใจร้อน / ไม่อดทน", "emo": "⏰"}, {"en": "The long wait does not make the customers patient.", "th": "การรอคอยที่นานไม่ได้ทำให้ลูกค้าอดทน", "mk": 5, "as_": 3, "v1": 8, "base": "patient", "mean": "อดทน", "emo": "⏳"}, {"en": "Regular practice makes English easier.", "th": "การฝึกฝนเป็นประจำทำให้ภาษาอังกฤษง่ายขึ้น", "mk": 2, "as_": 2, "v1": 4, "base": "easier", "mean": "ง่ายขึ้น", "emo": "📈"}, {"en": "Regular practice does not make English harder.", "th": "การฝึกฝนเป็นประจำไม่ได้ทำให้ภาษาอังกฤษยากขึ้น", "mk": 4, "as_": 2, "v1": 6, "base": "harder", "mean": "ยากขึ้น", "emo": "📉"}];
+const PER = 20, TABS = Math.ceil(DATA.length/PER);
+let tab = 0, voices = [], chosen = null;
+const grid=document.getElementById('grid'), tabsEl=document.getElementById('tabs'), tip=document.getElementById('tip');
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function mark(d,withV1){
+  return d.en.split(' ').map((w,i)=>{
+    const m=w.match(/^([^A-Za-z']*)([A-Za-z'’-]+)(.*)$/);
+    if(!m) return esc(w);
+    if(i>=d.as_&&i<d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.mk) return esc(m[1])+'<b class="mk">'+esc(m[2])+'</b>'+esc(m[3]);
+    if(i===d.v1){
+      return esc(m[1])+(withV1?`<b class="v1" tabindex="0" data-base="${esc(d.base)}" data-mean="${esc(d.mean)}">${esc(m[2])}</b>`:'<b>'+esc(m[2])+'</b>')+esc(m[3]);
+    }
+    return esc(w);
+  }).join(' ');
+}
+function showTip(el){
+  tip.innerHTML=`<small>Adjective · ${esc(el.dataset.base)}</small>${el.dataset.mean}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), t=tip.getBoundingClientRect();
+  let x=r.left+r.width/2-t.width/2; x=Math.max(8,Math.min(x,innerWidth-t.width-8));
+  let y=r.top-t.height-8; if(y<8) y=r.bottom+8;
+  tip.style.left=x+'px'; tip.style.top=y+'px';
+}
+function hideTip(){tip.classList.remove('show')}
+function render(){
+  hideTip(); grid.innerHTML='';
+  const s=tab*PER;
+  DATA.slice(s,s+PER).forEach((d,k)=>{
+    const n=s+k+1, el=document.createElement('div');
+    el.className='card'; el.tabIndex=0; el.setAttribute('role','button');
+    el.setAttribute('aria-label','Card '+n+': '+d.en+' (press to flip)');
+    el.innerHTML=`<div class="inner">
+      <div class="face front"><div class="pic" aria-hidden="true"><span class="num">${n}</span>${d.emo}</div>
+        <div class="txt"><p class="en">${mark(d,true)}</p></div>
+        <div class="foot"><button class="say" type="button" aria-label="Read sentence aloud">🔊 Listen</button><span class="hint">คลิกเพื่อดูคำแปล</span></div>
+      </div>
+      <div class="face back"><p class="th">${esc(d.th)}</p><p class="en2">${mark(d,false)}</p></div>
+    </div>`;
+    el.addEventListener('click',()=>{hideTip();el.classList.toggle('flipped')});
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target===el){e.preventDefault();el.classList.toggle('flipped')}});
+    const b=el.querySelector('.say');
+    b.addEventListener('click',e=>{e.stopPropagation();speak(d.en,b)});
+    b.addEventListener('keydown',e=>e.stopPropagation());
+    const v=el.querySelector('.v1');
+    v.addEventListener('mouseenter',()=>showTip(v));
+    v.addEventListener('mouseleave',hideTip);
+    v.addEventListener('focus',()=>showTip(v));
+    v.addEventListener('blur',hideTip);
+    v.addEventListener('click',e=>{e.stopPropagation();tip.classList.contains('show')&&tip.dataset.for===String(n)?hideTip():(showTip(v),tip.dataset.for=String(n))});
+    v.addEventListener('keydown',e=>e.stopPropagation());
+    grid.appendChild(el);
+  });
+  tabsEl.innerHTML='';
+  for(let t=0;t<TABS;t++){
+    const b=document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-selected',t===tab);
+    b.textContent=`Tab ${t+1} (${t*PER+1}–${Math.min((t+1)*PER,DATA.length)})`;
+    b.onclick=()=>{tab=t;render();window.scrollTo({top:0})};
+    tabsEl.appendChild(b);
+  }
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.v1'))hideTip()});
+window.addEventListener('scroll',hideTip,{passive:true});
+document.getElementById('flipAll').onclick=()=>{
+  const cs=[...grid.children],on=cs.every(c=>c.classList.contains('flipped'));
+  cs.forEach(c=>c.classList.toggle('flipped',!on));
+};
+
+/* ---- Speech: pick the clearest English voice available ---- */
+function score(v){
+  const n=v.name.toLowerCase(); let s=0;
+  if(/natural|neural|online|enhanced|premium/.test(n)) s+=12;
+  if(/en[-_]us/i.test(v.lang)) s+=4; else if(/en[-_]gb/i.test(v.lang)) s+=3;
+  if(/google us english|google uk english|samantha|ava|allison|aria|jenny|guy|ryan|daniel|serena|libby/.test(n)) s+=5;
+  if(/espeak|compact|novelty|bad news|whisper|bells|boing|cellos|zarvox/.test(n)) s-=15;
+  if(v.localService===false) s+=1;
+  return s;
+}
+function pickVoice(){
+  voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^en/i.test(v.lang));
+  voices.sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice'); sel.innerHTML='';
+  voices.forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';sel.appendChild(o)});
+  chosen=voices[0]||null;
+  document.getElementById('vnote').textContent=chosen?'':'No English voice found on this device.';
+}
+document.getElementById('voice').onchange=e=>{chosen=voices[+e.target.value]};
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+let active=null;
+function speak(text,btn){
+  if(!window.speechSynthesis){alert('This browser does not support speech.');return}
+  speechSynthesis.cancel(); if(active)active.classList.remove('on');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=chosen?chosen.lang:'en-US'; if(chosen)u.voice=chosen; u.rate=0.9;
+  btn.classList.add('on'); active=btn;
+  u.onend=u.onerror=()=>btn.classList.remove('on');
+  speechSynthesis.speak(u);
+}
+render();
+</script>
+</body>
+</html>
