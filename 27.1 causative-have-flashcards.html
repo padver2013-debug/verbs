@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Causative HAVE Flashcards</title>
+<style>
+:root{--bg:#f4f1ea;--tx:#1d1d1f;--mu:#6b6b70;--pn:#fff;--bd:#d9d4c7;--ac:#8b0000;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17161a;--tx:#f1efe9;--mu:#a5a3ad;--pn:#26252b;--bd:#3a3841}}
+:root[data-theme="dark"]{--bg:#17161a;--tx:#f1efe9;--mu:#a5a3ad;--pn:#26252b;--bd:#3a3841}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",Tahoma,system-ui,sans-serif;padding:16px}
+h1{font-size:1.25rem;margin:0 0 4px}
+.sub{color:var(--mu);font-size:.9rem;margin:0 0 12px}
+.legend{background:var(--pn);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:1rem;line-height:1.7}
+mark{background:#ffe97a;color:#1a1a1a;padding:2px 5px;border-radius:5px}
+.h{color:#8b0000;font-weight:800}
+.v{color:#0b4fa8;font-weight:700;border-bottom:2px dotted #0b4fa8;position:relative;cursor:help}
+.v::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;font-size:.85rem;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:20}
+.v:hover::after,.v.show::after{opacity:1}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 100%}
+.tab{border:1px solid var(--bd);background:var(--pn);color:var(--tx);padding:8px 12px;border-radius:999px;font:inherit;font-size:.9rem;cursor:pointer}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+select,.btn{border:1px solid var(--bd);background:var(--pn);color:var(--tx);padding:7px 10px;border-radius:8px;font:inherit;font-size:.85rem;max-width:100%}
+.btn{cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{position:relative;height:300px;perspective:1000px;cursor:pointer}
+.card:hover{z-index:5}
+.in{position:absolute;inset:0;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;background:#fffdf8;color:#1a1a1a;border:1px solid #d9d4c7;border-radius:16px;padding:14px 16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.back{transform:rotateY(180deg);background:#fff8e6}
+.no{position:absolute;top:10px;left:14px;font-size:.75rem;color:#777}
+.em{font-size:3.6rem;line-height:1;position:relative}
+.em i{position:absolute;right:-14px;bottom:-6px;font-size:1.8rem;font-style:normal}
+.en{font-size:1.2rem;line-height:1.9}
+.th{font-size:1.5rem;font-weight:700;line-height:1.5;color:#8b0000}
+.hint{font-size:.72rem;color:#888}
+.sp{border:0;background:#8b0000;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer}
+.sp:active{transform:scale(.92)}
+hr{width:70%;border:0;border-top:1px dashed #cdbf9a;margin:2px 0}
+.small{font-size:1.05rem;line-height:1.8}
+</style></head><body>
+<h1>27 Causative Verb: HAVE + Someone + V1 + Something</h1>
+<p class="sub">แตะการ์ดเพื่อพลิก • ชี้เมาส์ที่ V1 (สีน้ำเงิน) เพื่อดูความหมาย • กด 🔊 เพื่อฟังเสียง</p>
+<div class="legend">He <mark><b class="h">has</b> his assistant <span class="v" data-t="prepare = เตรียม">prepare</span> the report</mark>. &nbsp;<small style="color:var(--mu)">(<b class="h" style="color:#d94a4a">have/has</b> = กริยาหลัก • ไฮไลต์เหลือง = โครงสร้าง • น้ำเงิน = V1)</small></div>
+<div class="bar">
+<div class="tabs" id="tabs"></div>
+<select id="vs" title="Voice"></select>
+<select id="rt" title="Speed"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<button class="btn" id="fl">↺ พลิกกลับทั้งหมด</button><button class="btn" id="sh">🔀 สลับลำดับ</button>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const V={clean:["ทำความสะอาด","🧹"],wash:["ล้าง","🧼"],prepare:["เตรียม","📝"],complete:["ทำให้เสร็จ","✅"],practice:["ฝึกซ้อม","🏃"],organize:["จัดระเบียบ","🗂️"],book:["จอง","🏨"],check:["ตรวจ/ตรวจสอบ","🔍"],repair:["ซ่อม","🔧"],do:["ทำ","✏️"],fix:["ซ่อม","🛠️"],return:["คืน","📚"],water:["รดน้ำ","🪴"],carry:["ถือ/หิ้ว","👜"],discuss:["อภิปราย","💬"],brush:["แปรง","🪥"],cook:["ปรุงอาหาร","🍳"],cut:["ตัด","✂️"],set:["จัด (โต๊ะ)","🍽️"],buy:["ซื้อ","🛒"],feed:["ให้อาหาร","🐱"],iron:["รีดผ้า","👔"],paint:["ทาสี","🎨"],drive:["ขับรถ","🚗"],sweep:["กวาด","🧹"],write:["เขียน","✍️"],chop:["หั่น","🔪"],change:["เปลี่ยน","🛞"],send:["ส่ง","✉️"],collect:["เก็บรวบรวม","📥"],read:["อ่าน","📖"],draw:["วาด","🖌️"],copy:["ถ่ายเอกสาร","📄"],pick:["เก็บ (ผลไม้)","🍎"],sing:["ร้องเพลง","🎤"]};
+const O=[["I","have","him","clean","the room","ฉันให้เขาทำความสะอาดห้อง"],["She","has","her brother","wash","the car","เธอให้พี่ชาย/น้องชายล้างรถ"],["He","has","his assistant","prepare","the report","เขาให้ผู้ช่วยเตรียมรายงาน"],["My mother","has","me","clean","my room","แม่ให้ฉันทำความสะอาดห้อง"],["My father","has","me","wash","the dishes","พ่อให้ฉันล้างจาน"],["The teacher","has","the students","complete","the exercise","ครูให้นักเรียนทำแบบฝึกหัด"],["The coach","has","the players","practice","the drills","โค้ชให้นักกีฬาฝึกซ้อมแบบฝึกต่าง ๆ"],["The manager","has","the employees","organize","the files","ผู้จัดการให้พนักงานจัดระเบียบแฟ้ม"],["The boss","has","his secretary","book","a hotel","เจ้านายให้เลขานุการจองโรงแรม"],["The doctor","has","the nurse","check","the patient","หมอให้พยาบาลตรวจคนไข้"],["The company","has","its workers","repair","the equipment","บริษัทให้คนงานซ่อมอุปกรณ์"],["We","have","our children","do","their homework","เราให้ลูก ๆ ทำการบ้าน"],["They","have","their son","fix","the bicycle","พวกเขาให้ลูกชายซ่อมจักรยาน"],["The director","has","the actors","practice","the scene","ผู้กำกับให้นักแสดงซ้อมฉาก"],["The captain","has","the crew","check","the equipment","กัปตันให้ลูกเรือตรวจสอบอุปกรณ์"],["The librarian","has","the student","return","the book","บรรณารักษ์ให้นักเรียนนำหนังสือมาคืน"],["The gardener","has","his assistant","water","the plants","คนสวนให้ผู้ช่วยรดน้ำต้นไม้"],["The hotel manager","has","the staff","clean","the rooms","ผู้จัดการโรงแรมให้พนักงานทำความสะอาดห้อง"],["The parent","has","the child","carry","the bag","ผู้ปกครองให้เด็กถือกระเป๋า"],["The team leader","has","the members","discuss","the problem","หัวหน้าทีมให้สมาชิกอภิปรายปัญหา"]];
+const H=[["She","has","her son","brush","his teeth","เธอให้ลูกชายแปรงฟัน"],["I","have","my sister","cook","dinner","ฉันให้พี่สาว/น้องสาวทำอาหารเย็น"],["He","has","his brother","cut","the grass","เขาให้พี่ชาย/น้องชายตัดหญ้า"],["We","have","the kids","set","the table","เราให้เด็ก ๆ จัดโต๊ะอาหาร"],["My grandmother","has","me","buy","vegetables","คุณยายให้ฉันซื้อผัก"],["My aunt","has","her daughter","feed","the cat","ป้า/น้าให้ลูกสาวให้อาหารแมว"],["They","have","the maid","iron","the clothes","พวกเขาให้แม่บ้านรีดผ้า"],["The father","has","his son","paint","the fence","พ่อให้ลูกชายทาสีรั้ว"],["I","have","my brother","drive","me to school","ฉันให้พี่ชาย/น้องชายขับรถไปส่งที่โรงเรียน"],["The mother","has","her daughter","sweep","the floor","แม่ให้ลูกสาวกวาดพื้น"]];
+const W=[["The professor","has","the students","write","an essay","อาจารย์ให้นักเรียนเขียนเรียงความ"],["The chef","has","the cook","chop","the onions","เชฟให้พ่อครัวหั่นหัวหอม"],["The mechanic","has","his helper","change","the tire","ช่างให้ผู้ช่วยเปลี่ยนยาง"],["The mayor","has","the staff","send","the letters","นายกเทศมนตรีให้เจ้าหน้าที่ส่งจดหมาย"],["The principal","has","the teachers","collect","the homework","ครูใหญ่ให้ครูเก็บการบ้าน"],["The pilot","has","the co-pilot","read","the checklist","นักบินให้นักบินผู้ช่วยอ่านเช็กลิสต์"],["The designer","has","the intern","draw","the logo","นักออกแบบให้เด็กฝึกงานวาดโลโก้"],["The lawyer","has","his clerk","copy","the documents","ทนายให้เสมียนถ่ายเอกสาร"],["The farmer","has","his workers","pick","the fruit","เกษตรกรให้คนงานเก็บผลไม้"],["The music teacher","has","the class","sing","a song","ครูดนตรีให้นักเรียนร้องเพลง"]];
+const pair=a=>a.flatMap(b=>[[b,'a'],[b,'n']]);
+const TABS=[["1 ประโยคทั่วไป A",pair(O.slice(0,10))],["2 ประโยคทั่วไป B",pair(O.slice(10))],["3 ที่บ้าน",pair(H)],["4 งาน/โรงเรียน",pair(W)],["5 คำถาม ?",O.map(b=>[b,'q'])]];
+let cur=0,items=[];
+function parts(b,m){const[s,h,w,v,r,t]=b;const vs=`<span class="v" data-t="${v} = ${V[v][0]}">${v}</span>`;
+const mk=hh=>`<mark><b class="h">${hh}</b> ${w} ${vs} ${r}</mark>`;
+if(m=='a')return[`${s} ${mk(h)}.`,t];
+if(m=='n')return[`${s} ${h=='has'?'does':'do'} not ${mk('have')}.`,t.replace('ให้','ไม่ได้ให้')];
+const sl=s=='I'?s:s[0].toLowerCase()+s.slice(1);
+return[`${h=='has'?'Does':'Do'} ${sl} ${mk('have')}?`,t+'ไหม'];}
+const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent};
+function render(){const g=document.getElementById('grid');g.innerHTML='';
+items.forEach(([b,m],i)=>{const[e,t]=parts(b,m);const em=V[b[3]][1]+(m=='n'?'<i>🚫</i>':m=='q'?'<i>❓</i>':'');
+const c=document.createElement('div');c.className='card';
+c.innerHTML=`<div class="in"><div class="face front"><span class="no">${cur+1}-${i+1}</span><div class="em">${em}</div><div class="en">${e}</div><button class="sp" title="ฟังเสียง">🔊</button><span class="hint">แตะการ์ดเพื่อดูคำแปล</span></div><div class="face back"><div class="th">${t}</div><hr><div class="en small">${e}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.addEventListener('click',ev=>{const v=ev.target.closest('.v');if(v){v.classList.toggle('show');return}if(ev.target.closest('.sp')){speak(plain(e));return}c.classList.toggle('f')});
+g.appendChild(c)})}
+function setTab(i){cur=i;items=TABS[i][1].slice();document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j==i));render()}
+const tb=document.getElementById('tabs');TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=t[0]+' (20)';b.onclick=()=>setTab(i);tb.appendChild(b)});
+document.getElementById('fl').onclick=()=>document.querySelectorAll('.card.f').forEach(c=>c.classList.remove('f'));
+document.getElementById('sh').onclick=()=>{for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}render()};
+/* Speech: pick the best-sounding English voice available */
+const vsel=document.getElementById('vs');let voices=[];
+function score(v){const n=v.name.toLowerCase();let s=0;if(/^en[-_]us/i.test(v.lang))s+=3;else if(/^en/i.test(v.lang))s+=1;else return -1;
+if(/natural|neural|online/.test(n))s+=10;if(/aria|jenny|guy|ava|andrew|emma/.test(n))s+=4;if(/google us english/.test(n))s+=6;if(/premium|enhanced|siri/.test(n))s+=7;if(/samantha|alex|ava|zoe/.test(n))s+=3;if(/espeak|compact/.test(n))s-=5;return s}
+function loadVoices(){try{voices=speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+const old=vsel.value;vsel.innerHTML=voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('')||'<option>ไม่พบเสียงอังกฤษ</option>';if(old&&voices[old])vsel.value=old}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voices[vsel.value];if(v){u.voice=v;u.lang=v.lang}else u.lang='en-US';u.rate=parseFloat(document.getElementById('rt').value);u.pitch=1;speechSynthesis.speak(u)}catch(e){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง')}}
+setTab(0);
+</script></body></html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Causative GET Flashcards</title>
+<style>
+:root{--bg:#f4f1ea;--tx:#1d1d1f;--mu:#6b6b70;--pn:#fff;--bd:#d9d4c7;--ac:#8b0000;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17161a;--tx:#f1efe9;--mu:#a5a3ad;--pn:#26252b;--bd:#3a3841}}
+:root[data-theme="dark"]{--bg:#17161a;--tx:#f1efe9;--mu:#a5a3ad;--pn:#26252b;--bd:#3a3841}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI","Noto Sans Thai",Tahoma,system-ui,sans-serif;padding:16px}
+h1{font-size:1.25rem;margin:0 0 4px}
+.sub{color:var(--mu);font-size:.9rem;margin:0 0 12px}
+.legend{background:var(--pn);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:1rem;line-height:1.7}
+mark{background:#ffe97a;color:#1a1a1a;padding:2px 5px;border-radius:5px}
+.h{color:#8b0000;font-weight:800}
+.v{color:#0b4fa8;font-weight:700;border-bottom:2px dotted #0b4fa8;position:relative;cursor:help}
+.v::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;font-size:.85rem;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:20}
+.v:hover::after,.v.show::after{opacity:1}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;flex:1 1 100%}
+.tab{border:1px solid var(--bd);background:var(--pn);color:var(--tx);padding:8px 12px;border-radius:999px;font:inherit;font-size:.9rem;cursor:pointer}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+select,.btn{border:1px solid var(--bd);background:var(--pn);color:var(--tx);padding:7px 10px;border-radius:8px;font:inherit;font-size:.85rem;max-width:100%}
+.btn{cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.card{position:relative;height:300px;perspective:1000px;cursor:pointer}
+.card:hover{z-index:5}
+.in{position:absolute;inset:0;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;background:#fffdf8;color:#1a1a1a;border:1px solid #d9d4c7;border-radius:16px;padding:14px 16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.back{transform:rotateY(180deg);background:#fff8e6}
+.no{position:absolute;top:10px;left:14px;font-size:.75rem;color:#777}
+.em{font-size:3.6rem;line-height:1;position:relative}
+.em i{position:absolute;right:-14px;bottom:-6px;font-size:1.8rem;font-style:normal}
+.en{font-size:1.2rem;line-height:1.9}
+.th{font-size:1.5rem;font-weight:700;line-height:1.5;color:#8b0000}
+.hint{font-size:.72rem;color:#888}
+.sp{border:0;background:#8b0000;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer}
+.sp:active{transform:scale(.92)}
+hr{width:70%;border:0;border-top:1px dashed #cdbf9a;margin:2px 0}
+.small{font-size:1.05rem;line-height:1.8}
+</style></head><body>
+<h1>26 Causative Verb: GET + Something + V3</h1>
+<p class="sub">แตะการ์ดเพื่อพลิก • ชี้เมาส์ที่ V3 (สีน้ำเงิน) เพื่อดูความหมาย • กด 🔊 เพื่อฟังเสียง</p>
+<div class="legend">I <mark><b class="h">get</b> my car <span class="v" data-t="washed (V1: wash) = ล้าง">washed</span></mark> every week. &nbsp;<small style="color:var(--mu)">(<b style="color:#d94a4a">get/gets</b> = กริยาหลัก • ไฮไลต์เหลือง = โครงสร้าง GET + Something + V3 • น้ำเงิน = V3)</small></div>
+<div class="bar">
+<div class="tabs" id="tabs"></div>
+<select id="vs" title="Voice"></select>
+<select id="rt" title="Speed"><option value="0.7">ช้า</option><option value="0.85" selected>ปกติ</option><option value="1">เร็ว</option></select>
+<button class="btn" id="fl">↺ พลิกกลับทั้งหมด</button><button class="btn" id="sh">🔀 สลับลำดับ</button>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const V={washed:["wash","ล้าง","🚿"],cut:["cut","ตัด","✂️"],cleaned:["clean","ทำความสะอาด","🧹"],painted:["paint","ทาสี","🎨"],repaired:["repair","ซ่อม","🔧"],altered:["alter","แก้/ปรับ (เสื้อผ้า)","📏"],printed:["print","พิมพ์","🖨️"],copied:["copy","ถ่ายสำเนา","📄"],fixed:["fix","ซ่อม","🛠️"],polished:["polish","ขัด","✨"],inspected:["inspect","ตรวจสอบ","🔍"],checked:["check","ตรวจ","✅"],decorated:["decorate","ตกแต่ง","🎀"],done:["do","ทำ","💅"],tested:["test","ทดสอบ/ตรวจ","👁️"],made:["make","ทำ/ตัดเย็บ","🧵"],dyed:["dye","ย้อม","🌈"],delivered:["deliver","ส่งมอบ","📦"],tuned:["tune","จูน/ตั้งเสียง","🎹"],designed:["design","ออกแบบ","🖥️"],translated:["translate","แปล","🌐"],replaced:["replace","เปลี่ยน","🔄"],swept:["sweep","กวาด","🧹"],sorted:["sort","คัดแยก","🗂️"],sharpened:["sharpen","ลับ","🔪"]};
+/* [subject, get/gets, something, V3, rest(aff), Thai(aff), rest(neg), Thai(neg)] */
+const O=[["I","get","my car","washed","every week","ฉันให้คนล้างรถให้ทุกสัปดาห์","every week","ฉันไม่ได้ให้คนล้างรถให้ทุกสัปดาห์"],
+["She","gets","her hair","cut","every month","เธอให้ช่างตัดผมให้ทุกเดือน","every month","เธอไม่ได้ให้ช่างตัดผมให้ทุกเดือน"],
+["He","gets","his suit","cleaned","at the dry cleaner","เขาให้ร้านซักแห้งทำความสะอาดชุดสูทให้","regularly","เขาไม่ได้ให้ร้านซักแห้งทำความสะอาดชุดสูทเป็นประจำ"],
+["We","get","our house","painted","every five years","เราให้คนทาสีบ้านทุกห้าปี","every year","เราไม่ได้ให้คนทาสีบ้านทุกปี"],
+["They","get","their windows","cleaned","twice a year","พวกเขาให้คนทำความสะอาดหน้าต่างปีละสองครั้ง","regularly","พวกเขาไม่ได้ให้คนทำความสะอาดหน้าต่างเป็นประจำ"],
+["My father","gets","his car","repaired","at the garage","พ่อให้ช่างซ่อมรถให้ที่อู่","there","พ่อไม่ได้ให้ช่างซ่อมรถที่นั่น"],
+["My mother","gets","her dress","altered","by a tailor","แม่ให้ช่างตัดเสื้อแก้ชุดให้","often","แม่ไม่ได้ให้ช่างแก้ชุดบ่อย ๆ"],
+["The manager","gets","the report","printed","before the meeting","ผู้จัดการให้พิมพ์รายงานก่อนการประชุม","today","ผู้จัดการไม่ได้ให้พิมพ์รายงานวันนี้"],
+["The company","gets","the office","cleaned","every morning","บริษัทให้คนทำความสะอาดสำนักงานทุกเช้า","on Sundays","บริษัทไม่ได้ให้คนทำความสะอาดสำนักงานในวันอาทิตย์"],
+["The teacher","gets","the documents","copied","for the students","ครูให้ถ่ายสำเนาเอกสารสำหรับนักเรียน","today","ครูไม่ได้ให้ถ่ายสำเนาเอกสารวันนี้"],
+["I","get","my computer","repaired","by a technician","ฉันให้ช่างซ่อมคอมพิวเตอร์ให้","at that shop","ฉันไม่ได้ให้ร้านนั้นซ่อมคอมพิวเตอร์ให้"],
+["She","gets","her phone","fixed","at the service center","เธอให้ศูนย์บริการซ่อมโทรศัพท์ให้","immediately","เธอไม่ได้ให้ซ่อมโทรศัพท์ทันที"],
+["He","gets","his shoes","polished","before the ceremony","เขาให้คนขัดรองเท้าให้ก่อนพิธี","regularly","เขาไม่ได้ให้คนขัดรองเท้าเป็นประจำ"],
+["We","get","our garden","cleaned","every weekend","เราให้คนทำความสะอาดสวนทุกสุดสัปดาห์","during the rainy season","เราไม่ได้ให้คนทำความสะอาดสวนในช่วงฤดูฝน"],
+["They","get","their photographs","printed","at a local shop","พวกเขาให้ร้านท้องถิ่นพิมพ์รูปถ่ายให้","anymore","พวกเขาไม่ได้ให้พิมพ์รูปถ่ายอีกต่อไป"],
+["The hotel","gets","its rooms","cleaned","every day","โรงแรมให้คนทำความสะอาดห้องทุกวัน","at night","โรงแรมไม่ได้ให้คนทำความสะอาดห้องในตอนกลางคืน"],
+["The restaurant","gets","its kitchen","inspected","regularly","ร้านอาหารให้ตรวจสอบห้องครัวเป็นประจำ","every month","ร้านอาหารไม่ได้ให้ตรวจสอบห้องครัวทุกเดือน"],
+["The doctor","gets","the equipment","checked","regularly","หมอให้อุปกรณ์ได้รับการตรวจสอบเป็นประจำ","every day","หมอไม่ได้ให้อุปกรณ์ได้รับการตรวจสอบทุกวัน"],
+["The owner","gets","the roof","repaired","before the rainy season","เจ้าของให้ซ่อมหลังคาก่อนฤดูฝน","every year","เจ้าของไม่ได้ให้ซ่อมหลังคาทุกปี"],
+["Our school","gets","the classrooms","decorated","for the festival","โรงเรียนของเราให้ตกแต่งห้องเรียนสำหรับเทศกาล","every month","โรงเรียนของเราไม่ได้ให้ตกแต่งห้องเรียนทุกเดือน"]];
+const H=[["She","gets","her nails","done","on Fridays","เธอให้ช่างทำเล็บให้ทุกวันศุกร์"],["He","gets","his teeth","checked","twice a year","เขาให้หมอตรวจฟันปีละสองครั้ง"],["I","get","my bicycle","fixed","before the trip","ฉันให้ช่างซ่อมจักรยานก่อนเดินทาง"],["We","get","our carpet","cleaned","every spring","เราให้คนทำความสะอาดพรมทุกฤดูใบไม้ผลิ"],["My sister","gets","her hair","dyed","in a salon","พี่สาว/น้องสาวให้ช่างย้อมผมที่ร้านเสริมสวย"],["They","get","their furniture","delivered","to their house","พวกเขาให้ส่งเฟอร์นิเจอร์ไปที่บ้าน"],["My uncle","gets","his fence","painted","every summer","ลุง/อาให้คนทาสีรั้วทุกฤดูร้อน"],["I","get","my eyes","tested","once a year","ฉันให้หมอตรวจสายตาปีละครั้ง"],["She","gets","her dress","made","by a local tailor","เธอให้ช่างตัดเสื้อท้องถิ่นตัดชุดให้"],["He","gets","his piano","tuned","every year","เขาให้ช่างจูนเปียโนทุกปี"]];
+const W=[["The manager","gets","the website","designed","by a professional","ผู้จัดการให้มืออาชีพออกแบบเว็บไซต์ให้"],["The school","gets","the bus","checked","every week","โรงเรียนให้ตรวจรถบัสทุกสัปดาห์"],["The company","gets","the contract","translated","into English","บริษัทให้แปลสัญญาเป็นภาษาอังกฤษ"],["The shop","gets","its sign","replaced","after the storm","ร้านให้เปลี่ยนป้ายหลังพายุ"],["The farmer","gets","his tractor","repaired","before the harvest","ชาวนาให้ซ่อมรถแทรกเตอร์ก่อนเก็บเกี่ยว"],["The mayor","gets","the streets","swept","every morning","นายกเทศมนตรีให้กวาดถนนทุกเช้า"],["The café","gets","its coffee","delivered","every Monday","คาเฟ่ให้ส่งกาแฟมาทุกวันจันทร์"],["The library","gets","the books","sorted","every month","ห้องสมุดให้คัดแยกหนังสือทุกเดือน"],["The chef","gets","his knives","sharpened","every week","เชฟให้ลับมีดทุกสัปดาห์"],["The airline","gets","its planes","inspected","before every flight","สายการบินให้ตรวจสอบเครื่องบินก่อนทุกเที่ยวบิน"]];
+const pair=a=>a.flatMap(b=>[[b,'a'],[b,'n']]);
+const TABS=[["1 ประโยค A",pair(O.slice(0,10))],["2 ประโยค B",pair(O.slice(10))],["3 บริการส่วนตัว/บ้าน",pair(H)],["4 ธุรกิจ/สถานที่",pair(W)],["5 คำถาม ?",O.map(b=>[b,'q'])]];
+let cur=0,items=[];
+function parts(b,m){const[s,g,o,v,ra,ta,rn,tn]=b;const vs=`<span class="v" data-t="${v} (V1: ${V[v][0]}) = ${V[v][1]}">${v}</span>`;
+const mk=gg=>`<mark><b class="h">${gg}</b> ${o} ${vs}</mark>`;
+if(m=='a')return[`${s} ${mk(g)} ${ra}.`,ta];
+if(m=='n')return[`${s} ${g=='gets'?'does':'do'} not ${mk('get')} ${rn||ra}.`,tn||ta.replace('ให้','ไม่ได้ให้')];
+const sl=s=='I'?s:s[0].toLowerCase()+s.slice(1);
+return[`${g=='gets'?'Does':'Do'} ${sl} ${mk('get')} ${ra}?`,ta+'ไหม'];}
+const plain=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent};
+function render(){const g=document.getElementById('grid');g.innerHTML='';
+items.forEach(([b,m],i)=>{const[e,t]=parts(b,m);const em=V[b[3]][2]+(m=='n'?'<i>🚫</i>':m=='q'?'<i>❓</i>':'');
+const c=document.createElement('div');c.className='card';
+c.innerHTML=`<div class="in"><div class="face front"><span class="no">${cur+1}-${i+1}</span><div class="em">${em}</div><div class="en">${e}</div><button class="sp" title="ฟังเสียง">🔊</button><span class="hint">แตะการ์ดเพื่อดูคำแปล</span></div><div class="face back"><div class="th">${t}</div><hr><div class="en small">${e}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.addEventListener('click',ev=>{const v=ev.target.closest('.v');if(v){v.classList.toggle('show');return}if(ev.target.closest('.sp')){speak(plain(e));return}c.classList.toggle('f')});
+g.appendChild(c)})}
+function setTab(i){cur=i;items=TABS[i][1].slice();document.querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('on',j==i));render()}
+const tb=document.getElementById('tabs');TABS.forEach((t,i)=>{const b=document.createElement('button');b.className='tab';b.textContent=t[0]+' (20)';b.onclick=()=>setTab(i);tb.appendChild(b)});
+document.getElementById('fl').onclick=()=>document.querySelectorAll('.card.f').forEach(c=>c.classList.remove('f'));
+document.getElementById('sh').onclick=()=>{for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}render()};
+/* Speech: pick the best-sounding English voice available */
+const vsel=document.getElementById('vs');let voices=[];
+function score(v){const n=v.name.toLowerCase();let s=0;if(/^en[-_]us/i.test(v.lang))s+=3;else if(/^en/i.test(v.lang))s+=1;else return -1;
+if(/natural|neural|online/.test(n))s+=10;if(/aria|jenny|guy|ava|andrew|emma/.test(n))s+=4;if(/google us english/.test(n))s+=6;if(/premium|enhanced|siri/.test(n))s+=7;if(/samantha|alex|ava|zoe/.test(n))s+=3;if(/espeak|compact/.test(n))s-=5;return s}
+function loadVoices(){try{voices=speechSynthesis.getVoices().filter(v=>score(v)>=0).sort((a,b)=>score(b)-score(a));
+const old=vsel.value;vsel.innerHTML=voices.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('')||'<option>ไม่พบเสียงอังกฤษ</option>';if(old&&voices[old])vsel.value=old}catch(e){}}
+try{loadVoices();speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);const v=voices[vsel.value];if(v){u.voice=v;u.lang=v.lang}else u.lang='en-US';u.rate=parseFloat(document.getElementById('rt').value);u.pitch=1;speechSynthesis.speak(u)}catch(e){alert('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง')}}
+setTab(0);
+</script></body></html>
