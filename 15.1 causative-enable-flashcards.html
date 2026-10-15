@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.18 Causative Verb: ENABLE + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.18 Causative Verb: <span class="rm">ENABLE</span> + Someone + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">enable(s)</b> + someone + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I enable him to *work* independently.|ฉันช่วยให้เขาสามารถทำงานได้อย่างอิสระ|ทำงาน|💼
+I do not enable her to *access* the system.|ฉันไม่ได้เปิดโอกาสให้เธอเข้าถึงระบบ|เข้าถึง|🔓
+She enables me to *learn* new skills.|เธอช่วยให้ฉันสามารถเรียนรู้ทักษะใหม่ ๆ ได้|เรียนรู้|💡
+She does not enable me to *participate* in the activity.|เธอไม่ได้เปิดโอกาสให้ฉันเข้าร่วมกิจกรรม|เข้าร่วม|🙌
+He enables his son to *study* abroad.|เขาช่วยให้ลูกชายสามารถเรียนต่อต่างประเทศได้|เรียน|🎓
+He does not enable his son to *travel* alone.|เขาไม่ได้เปิดโอกาสให้ลูกชายเดินทางคนเดียว|เดินทาง|🧳
+My parents enable me to *attend* a good school.|พ่อแม่ช่วยให้ฉันสามารถเข้าเรียนในโรงเรียนดี ๆ ได้|เข้าเรียน|🏫
+My parents do not enable me to *use* their car.|พ่อแม่ไม่ได้อนุญาตให้ฉันใช้รถของพวกเขา|ใช้|🚗
+The teacher enables students to *understand* difficult concepts.|ครูช่วยให้นักเรียนเข้าใจแนวคิดที่ยากได้|เข้าใจ|🧠
+The teacher does not enable students to *complete* the task independently.|ครูไม่ได้ช่วยให้นักเรียนทำงานให้เสร็จได้ด้วยตนเอง|ทำให้เสร็จ|✅
+The training enables employees to *improve* their skills.|การฝึกอบรมช่วยให้พนักงานพัฒนาทักษะของตนได้|พัฒนา|📈
+The training does not enable employees to *work* remotely.|การฝึกอบรมไม่ได้ช่วยให้พนักงานสามารถทำงานทางไกลได้|ทำงาน|🏠
+The new software enables users to *create* documents quickly.|ซอฟต์แวร์ใหม่ช่วยให้ผู้ใช้สร้างเอกสารได้อย่างรวดเร็ว|สร้าง|📝
+The old software does not enable users to *edit* the files.|ซอฟต์แวร์เก่าไม่ช่วยให้ผู้ใช้แก้ไขไฟล์ได้|แก้ไข|✏️
+This app enables customers to *pay* online.|แอปนี้ช่วยให้ลูกค้าสามารถชำระเงินออนไลน์ได้|จ่าย|💳
+This app does not enable customers to *transfer* money internationally.|แอปนี้ไม่ช่วยให้ลูกค้าสามารถโอนเงินระหว่างประเทศได้|โอน|🌐
+The internet enables people to *communicate* instantly.|อินเทอร์เน็ตช่วยให้ผู้คนสามารถสื่อสารกันได้ทันที|สื่อสาร|💬
+The internet does not enable everyone to *access* the information.|อินเทอร์เน็ตไม่ได้ช่วยให้ทุกคนเข้าถึงข้อมูลได้|เข้าถึง|🔓
+The library enables students to *study* quietly.|ห้องสมุดช่วยให้นักเรียนสามารถอ่านหนังสืออย่างเงียบ ๆ ได้|เรียน/อ่านหนังสือ|📖
+The library does not enable visitors to *borrow* rare books.|ห้องสมุดไม่อนุญาตให้ผู้มาเยือนยืมหนังสือหายาก|ยืม|📚
+The scholarship enables students to *continue* their education.|ทุนการศึกษาช่วยให้นักเรียนสามารถศึกษาต่อได้|ทำต่อ|🎓
+The scholarship does not enable students to *study* overseas.|ทุนการศึกษาไม่ได้ช่วยให้นักเรียนสามารถเรียนต่อต่างประเทศได้|เรียน|🌏
+The machine enables workers to *produce* goods faster.|เครื่องจักรช่วยให้คนงานผลิตสินค้าได้เร็วขึ้น|ผลิต|🏭
+The machine does not enable workers to *control* the temperature manually.|เครื่องจักรไม่ช่วยให้คนงานควบคุมอุณหภูมิด้วยตนเองได้|ควบคุม|🌡️
+The camera enables photographers to *capture* clear images.|กล้องช่วยให้ช่างภาพสามารถถ่ายภาพที่คมชัดได้|บันทึกภาพ|📸
+The camera does not enable photographers to *record* sound.|กล้องไม่ช่วยให้ช่างภาพสามารถบันทึกเสียงได้|บันทึก|🎙️
+The GPS system enables drivers to *find* their destinations easily.|ระบบ GPS ช่วยให้คนขับหาจุดหมายได้ง่าย|หา|🧭
+The GPS system does not enable drivers to *avoid* every traffic jam.|ระบบ GPS ไม่ได้ช่วยให้คนขับหลีกเลี่ยงรถติดได้ทุกครั้ง|หลีกเลี่ยง|🚦
+The online course enables learners to *practice* English every day.|หลักสูตรออนไลน์ช่วยให้ผู้เรียนฝึกภาษาอังกฤษได้ทุกวัน|ฝึก|🗣️
+The online course does not enable learners to *communicate* with native speakers directly.|หลักสูตรออนไลน์ไม่ได้ช่วยให้ผู้เรียนสื่อสารกับเจ้าของภาษาโดยตรงได้|สื่อสาร|🌍
+The key enables me to *open* the door.|กุญแจช่วยให้ฉันสามารถเปิดประตูได้|เปิด|🔑
+The key does not enable me to *unlock* the back door.|กุญแจไม่ช่วยให้ฉันสามารถปลดล็อกประตูด้านหลังได้|ปลดล็อก|🚪
+The discount enables customers to *buy* more products.|ส่วนลดช่วยให้ลูกค้าสามารถซื้อสินค้าได้มากขึ้น|ซื้อ|🛒
+The discount does not enable customers to *receive* free delivery.|ส่วนลดไม่ได้ทำให้ลูกค้าได้รับบริการจัดส่งฟรี|ได้รับ|🚚
+The new system enables employees to *share* information easily.|ระบบใหม่ช่วยให้พนักงานแบ่งปันข้อมูลได้ง่าย|แบ่งปัน|🔗
+The new system does not enable employees to *change* the settings.|ระบบใหม่ไม่ช่วยให้พนักงานเปลี่ยนการตั้งค่าได้|เปลี่ยน|⚙️
+The exercise program enables athletes to *improve* their performance.|โปรแกรมออกกำลังกายช่วยให้นักกีฬาพัฒนาประสิทธิภาพของตนได้|พัฒนา|🏅
+The exercise program does not enable athletes to *recover* quickly.|โปรแกรมออกกำลังกายไม่ได้ช่วยให้นักกีฬาฟื้นตัวได้อย่างรวดเร็ว|ฟื้นตัว|💪
+The language app enables users to *practice* speaking English.|แอปภาษาอังกฤษช่วยให้ผู้ใช้ฝึกพูดภาษาอังกฤษได้|ฝึก|🎤
+The language app does not enable users to *download* every lesson.|แอปภาษาไม่ได้ช่วยให้ผู้ใช้ดาวน์โหลดทุกบทเรียนได้|ดาวน์โหลด|⬇️
+The ramp enables wheelchair users to *enter* the building.|ทางลาดช่วยให้ผู้ใช้รถเข็นเข้าอาคารได้|เข้า|♿
+The ramp does not enable trucks to *pass* through the gate.|ทางลาดไม่ได้ช่วยให้รถบรรทุกผ่านประตูไปได้|ผ่าน|🚚
+The microscope enables scientists to *see* tiny cells.|กล้องจุลทรรศน์ช่วยให้นักวิทยาศาสตร์มองเห็นเซลล์เล็ก ๆ ได้|มองเห็น|🔬
+The microscope does not enable scientists to *touch* the cells.|กล้องจุลทรรศน์ไม่ได้ช่วยให้นักวิทยาศาสตร์สัมผัสเซลล์ได้|สัมผัส|✋
+The loan enables families to *buy* a house.|เงินกู้ช่วยให้ครอบครัวซื้อบ้านได้|ซื้อ|🏡
+The loan does not enable families to *repay* the debt quickly.|เงินกู้ไม่ได้ช่วยให้ครอบครัวชำระหนี้ได้อย่างรวดเร็ว|ชำระคืน|⏳
+The bridge enables villagers to *cross* the river.|สะพานช่วยให้ชาวบ้านข้ามแม่น้ำได้|ข้าม|🌉
+The bridge does not enable villagers to *drive* trucks across.|สะพานไม่ได้ช่วยให้ชาวบ้านขับรถบรรทุกข้ามไปได้|ขับ|🚛
+The subtitles enable viewers to *follow* the story.|คำบรรยายช่วยให้ผู้ชมติดตามเรื่องราวได้|ติดตาม|🎬
+The subtitles do not enable viewers to *hear* the sound.|คำบรรยายไม่ได้ช่วยให้ผู้ชมได้ยินเสียง|ได้ยิน|👂
+The glasses enable him to *read* small print.|แว่นตาช่วยให้เขาอ่านตัวพิมพ์เล็ก ๆ ได้|อ่าน|👓
+The glasses do not enable him to *see* in the dark.|แว่นตาไม่ได้ช่วยให้เขามองเห็นในที่มืด|มองเห็น|🌑
+The ladder enables workers to *reach* the roof.|บันไดช่วยให้คนงานขึ้นถึงหลังคาได้|เอื้อมถึง|🪜
+The ladder does not enable workers to *carry* heavy tools.|บันไดไม่ได้ช่วยให้คนงานยกเครื่องมือหนัก ๆ ได้|ยก/ถือ|🧰
+The map enables tourists to *find* the temple.|แผนที่ช่วยให้นักท่องเที่ยวหาวัดเจอ|หา|🗺️
+The map does not enable tourists to *avoid* the crowd.|แผนที่ไม่ได้ช่วยให้นักท่องเที่ยวหลีกเลี่ยงฝูงชนได้|หลีกเลี่ยง|👥
+The cooler enables fishermen to *keep* fish fresh.|ถังแช่เย็นช่วยให้ชาวประมงเก็บปลาให้สดได้|เก็บรักษา|🧊
+The cooler does not enable fishermen to *store* fish for a month.|ถังแช่เย็นไม่ได้ช่วยให้ชาวประมงเก็บปลาได้นานหนึ่งเดือน|เก็บ|📦
+The password enables users to *log in*.|รหัสผ่านช่วยให้ผู้ใช้เข้าสู่ระบบได้|เข้าสู่ระบบ|🔐
+The password does not enable users to *delete* accounts.|รหัสผ่านไม่ได้ช่วยให้ผู้ใช้ลบบัญชีได้|ลบ|🗑️
+Email enables managers to *send* files quickly.|อีเมลช่วยให้ผู้จัดการส่งไฟล์ได้อย่างรวดเร็ว|ส่ง|📧
+Email does not enable managers to *print* documents.|อีเมลไม่ได้ช่วยให้ผู้จัดการพิมพ์เอกสารได้|พิมพ์|🖨️
+The calendar enables teams to *plan* meetings.|ปฏิทินช่วยให้ทีมวางแผนการประชุมได้|วางแผน|📅
+The calendar does not enable teams to *predict* delays.|ปฏิทินไม่ได้ช่วยให้ทีมคาดการณ์ความล่าช้าได้|คาดการณ์|🔮
+The headphones enable students to *listen* carefully.|หูฟังช่วยให้นักเรียนฟังได้อย่างตั้งใจ|ฟัง|🎧
+The headphones do not enable students to *talk* with friends in class.|หูฟังไม่ได้ช่วยให้นักเรียนคุยกับเพื่อนในชั้นเรียนได้|คุย|💬
+The solar panels enable the school to *save* electricity.|แผงโซลาร์เซลล์ช่วยให้โรงเรียนประหยัดไฟฟ้าได้|ประหยัด|☀️
+The solar panels do not enable the school to *work* at night.|แผงโซลาร์เซลล์ไม่ได้ช่วยให้โรงเรียนใช้งานได้ในตอนกลางคืน|ทำงาน|🌙
+The vaccine enables children to *resist* the disease.|วัคซีนช่วยให้เด็ก ๆ ต้านทานโรคได้|ต้านทาน|💉
+The vaccine does not enable children to *ignore* hygiene.|วัคซีนไม่ได้ช่วยให้เด็ก ๆ ละเลยสุขอนามัยได้|ละเลย|🧼
+The scale enables nurses to *measure* weight accurately.|เครื่องชั่งช่วยให้พยาบาลวัดน้ำหนักได้อย่างแม่นยำ|วัด|⚖️
+The scale does not enable nurses to *check* blood pressure.|เครื่องชั่งไม่ได้ช่วยให้พยาบาลตรวจความดันโลหิตได้|ตรวจ|🩺
+The tractor enables farmers to *plow* the field quickly.|รถแทรกเตอร์ช่วยให้เกษตรกรไถนาได้อย่างรวดเร็ว|ไถ|🚜
+The tractor does not enable farmers to *harvest* rice by hand.|รถแทรกเตอร์ไม่ได้ช่วยให้เกษตรกรเก็บเกี่ยวข้าวด้วยมือได้|เก็บเกี่ยว|🌾
+The stage enables singers to *perform* for large crowds.|เวทีช่วยให้นักร้องแสดงให้ผู้ชมจำนวนมากได้|แสดง|🎤
+The stage does not enable singers to *hide* behind the curtain.|เวทีไม่ได้ช่วยให้นักร้องซ่อนตัวหลังม่านได้|ซ่อน|🎭
+The recipe enables beginners to *cook* a good meal.|สูตรอาหารช่วยให้มือใหม่ทำอาหารอร่อยได้|ทำอาหาร|🍳
+The recipe does not enable beginners to *bake* without an oven.|สูตรอาหารไม่ได้ช่วยให้มือใหม่อบขนมโดยไม่มีเตาอบได้|อบ|🍰
+The tutorial enables beginners to *edit* videos.|บทเรียนช่วยให้มือใหม่ตัดต่อวิดีโอได้|ตัดต่อ|🎞️
+The tutorial does not enable beginners to *record* music professionally.|บทเรียนไม่ได้ช่วยให้มือใหม่บันทึกเสียงดนตรีได้อย่างมืออาชีพ|บันทึกเสียง|🎶
+The elevator enables elderly people to *reach* the top floor.|ลิฟต์ช่วยให้ผู้สูงอายุขึ้นถึงชั้นบนสุดได้|ขึ้นถึง|🛗
+The elevator does not enable elderly people to *exit* the building during a fire.|ลิฟต์ไม่ได้ช่วยให้ผู้สูงอายุออกจากอาคารเมื่อเกิดไฟไหม้ได้|ออก|🚒
+The wheelchair enables patients to *move* around.|รถเข็นช่วยให้ผู้ป่วยเคลื่อนที่ไปมาได้|เคลื่อนที่|🦽
+The wheelchair does not enable patients to *climb* stairs.|รถเข็นไม่ได้ช่วยให้ผู้ป่วยขึ้นบันไดได้|ปีน/ขึ้น|🪜
+The visa enables tourists to *enter* the country.|วีซ่าช่วยให้นักท่องเที่ยวเข้าประเทศได้|เข้า|🛂
+The visa does not enable tourists to *work* there.|วีซ่าไม่ได้ช่วยให้นักท่องเที่ยวทำงานที่นั่นได้|ทำงาน|💼
+The ticket enables fans to *watch* the match.|ตั๋วช่วยให้แฟน ๆ ดูการแข่งขันได้|ดู|🎟️
+The ticket does not enable fans to *meet* the players.|ตั๋วไม่ได้ช่วยให้แฟน ๆ พบนักกีฬาได้|พบ|🤝
+The rainwater enables farmers to *irrigate* their land.|น้ำฝนช่วยให้เกษตรกรชลประทานที่ดินของตนได้|ให้น้ำ|💧
+The rainwater does not enable farmers to *swim* in the pond.|น้ำฝนไม่ได้ช่วยให้เกษตรกรว่ายน้ำในบ่อได้|ว่ายน้ำ|🏊
+The microphone enables the speaker to *address* the audience.|ไมโครโฟนช่วยให้ผู้พูดกล่าวกับผู้ฟังได้|กล่าวกับ|🎙️
+The microphone does not enable the speaker to *whisper* secrets.|ไมโครโฟนไม่ได้ช่วยให้ผู้พูดกระซิบความลับได้|กระซิบ|🤫
+The oven enables bakers to *prepare* fresh bread.|เตาอบช่วยให้คนทำขนมปังเตรียมขนมปังสดได้|เตรียม|🍞
+The oven does not enable bakers to *freeze* food.|เตาอบไม่ได้ช่วยให้คนทำขนมปังแช่แข็งอาหารได้|แช่แข็ง|🥶
+The charger enables me to *power* my laptop.|ที่ชาร์จช่วยให้ฉันจ่ายไฟให้แล็ปท็อปได้|จ่ายไฟ|🔌
+The charger does not enable me to *connect* to Wi-Fi.|ที่ชาร์จไม่ได้ช่วยให้ฉันเชื่อมต่อ Wi-Fi ได้|เชื่อมต่อ|📶
+The training course enables nurses to *handle* emergencies.|หลักสูตรอบรมช่วยให้พยาบาลรับมือเหตุฉุกเฉินได้|รับมือ|🚑
+The training course does not enable nurses to *perform* surgery.|หลักสูตรอบรมไม่ได้ช่วยให้พยาบาลผ่าตัดได้|ทำ(ผ่าตัด)|🏥
+The partnership enables both companies to *expand* abroad.|ความร่วมมือช่วยให้ทั้งสองบริษัทขยายกิจการไปต่างประเทศได้|ขยาย|🌐
+The partnership does not enable both companies to *merge* completely.|ความร่วมมือไม่ได้ช่วยให้ทั้งสองบริษัทควบรวมกันได้อย่างสมบูรณ์|ควบรวม|🔗`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(enable(?:s)?)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.31 Causative Verb: FORCED + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.31 Causative Verb (Passive): Someone + be + <span class="rm">FORCED</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Someone + <b>am/is/are (not)</b> + <b class="rm">forced</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I am forced to *apologize*.|ฉันถูกบังคับให้ขอโทษ|ขอโทษ|🙏
+I am not forced to *leave*.|ฉันไม่ได้ถูกบังคับให้ออกไป|ออกไป|🚪
+He is forced to *work*.|เขาถูกบังคับให้ทำงาน|ทำงาน|💼
+He is not forced to *stay*.|เขาไม่ได้ถูกบังคับให้อยู่ต่อ|อยู่|🏠
+She is forced to *study*.|เธอถูกบังคับให้เรียน|เรียน|📚
+She is not forced to *participate*.|เธอไม่ได้ถูกบังคับให้เข้าร่วม|เข้าร่วม|🙌
+We are forced to *wait*.|พวกเราถูกบังคับให้รอ|รอ|⏳
+We are not forced to *pay*.|พวกเราไม่ได้ถูกบังคับให้จ่ายเงิน|จ่าย|💳
+They are forced to *leave*.|พวกเขาถูกบังคับให้ออกไป|ออกไป|🚶
+They are not forced to *agree*.|พวกเขาไม่ได้ถูกบังคับให้เห็นด้วย|เห็นด้วย|👍
+The student is forced to *apologize*.|นักเรียนถูกบังคับให้ขอโทษ|ขอโทษ|🙇
+The student is not forced to *answer*.|นักเรียนไม่ได้ถูกบังคับให้ตอบ|ตอบ|💬
+The workers are forced to *work*.|คนงานถูกบังคับให้ทำงาน|ทำงาน|🏗️
+The workers are not forced to *work* overtime.|คนงานไม่ได้ถูกบังคับให้ทำงานล่วงเวลา|ทำงาน|🕘
+The children are forced to *clean*.|เด็ก ๆ ถูกบังคับให้ทำความสะอาด|ทำความสะอาด|🧹
+The children are not forced to *eat*.|เด็ก ๆ ไม่ได้ถูกบังคับให้กิน|กิน|🍽️
+The player is forced to *practice*.|ผู้เล่นถูกบังคับให้ฝึกซ้อม|ฝึกซ้อม|🏋️
+The player is not forced to *compete*.|ผู้เล่นไม่ได้ถูกบังคับให้แข่งขัน|แข่งขัน|🥇
+The driver is forced to *stop*.|คนขับถูกบังคับให้หยุด|หยุด|🚓
+The driver is not forced to *answer*.|คนขับไม่ได้ถูกบังคับให้ตอบ|ตอบ|🗣️
+The patient is forced to *rest*.|คนไข้ถูกบังคับให้พักผ่อน|พักผ่อน|🛌
+The patient is not forced to *exercise*.|คนไข้ไม่ได้ถูกบังคับให้ออกกำลังกาย|ออกกำลังกาย|🧘
+The employees are forced to *attend* the meeting.|พนักงานถูกบังคับให้เข้าร่วมการประชุม|เข้าร่วม|👥
+The employees are not forced to *stay* late.|พนักงานไม่ได้ถูกบังคับให้อยู่ดึก|อยู่|🌙
+The customer is forced to *wait*.|ลูกค้าถูกบังคับให้รอ|รอ|🕒
+The customer is not forced to *buy* anything.|ลูกค้าไม่ได้ถูกบังคับให้ซื้ออะไร|ซื้อ|🛒
+The team is forced to *change* its plan.|ทีมถูกบังคับให้เปลี่ยนแผน|เปลี่ยน|🔁
+The team is not forced to *cancel* the event.|ทีมไม่ได้ถูกบังคับให้ยกเลิกงาน|ยกเลิก|❌
+Everyone is forced to *follow* the rules.|ทุกคนถูกบังคับให้ปฏิบัติตามกฎ|ปฏิบัติตาม|📋
+Nobody is forced to *participate*.|ไม่มีใครถูกบังคับให้เข้าร่วม|เข้าร่วม|🎉
+The nurse is forced to *give* the patient medicine.|พยาบาลถูกบังคับให้ให้ยาแก่คนไข้|ให้|💊
+The nurse is not forced to *walk* with the patient.|พยาบาลไม่ได้ถูกบังคับให้เดินไปกับคนไข้|เดิน|🚶
+We are forced to *follow* the guide.|พวกเราถูกบังคับให้ตามไกด์|ตาม|🚩
+We are not forced to *separate* from the group.|พวกเราไม่ได้ถูกบังคับให้แยกจากกลุ่ม|แยก|✂️
+The visitors are forced to *be* quiet.|ผู้มาเยือนถูกบังคับให้เงียบ|เป็น/อยู่|🤫
+The visitors are not forced to *leave* immediately.|ผู้มาเยือนไม่ได้ถูกบังคับให้ออกไปทันที|ออกไป|🚪
+The security guards are forced to *check* everyone's ID.|เจ้าหน้าที่รักษาความปลอดภัยถูกบังคับให้ตรวจบัตรประจำตัวของทุกคน|ตรวจ|🪪
+The security guards are not forced to *enter* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้ถูกบังคับให้เข้าไปในอาคาร|เข้า|🚧
+We are forced to *exercise* regularly.|พวกเราถูกบังคับให้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+We are not forced to *stop* exercising.|พวกเราไม่ได้ถูกบังคับให้หยุดออกกำลังกาย|หยุด|⛔
+The witness is forced to *tell* the truth.|พยานถูกบังคับให้พูดความจริง|บอก|⚖️
+The witness is not forced to *leave* the court.|พยานไม่ได้ถูกบังคับให้ออกจากศาล|ออก|🚪
+The army is forced to *advance*.|กองทัพถูกบังคับให้รุกคืบ|รุกคืบ|🪖
+The army is not forced to *retreat*.|กองทัพไม่ได้ถูกบังคับให้ถอยทัพ|ถอย|🏳️
+The guards are forced to *open* the gate.|ทหารยามถูกบังคับให้เปิดประตู|เปิด|👑
+The guards are not forced to *harm* the prisoners.|ทหารยามไม่ได้ถูกบังคับให้ทำร้ายนักโทษ|ทำร้าย|⛓️
+The kids are forced to *line up*.|เด็ก ๆ ถูกบังคับให้เข้าแถว|เข้าแถว|🧍
+The kids are not forced to *run* in the hallway.|เด็ก ๆ ไม่ได้ถูกบังคับให้วิ่งในทางเดิน|วิ่ง|🏃
+The cooks are forced to *clean* the kitchen.|พ่อครัวถูกบังคับให้ทำความสะอาดครัว|ทำความสะอาด|🧽
+The cooks are not forced to *serve* cold soup.|พ่อครัวไม่ได้ถูกบังคับให้เสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The crew is forced to *check* the engines.|ลูกเรือถูกบังคับให้ตรวจเครื่องยนต์|ตรวจ|🛫
+The crew is not forced to *delay* the takeoff.|ลูกเรือไม่ได้ถูกบังคับให้เลื่อนการขึ้นบิน|เลื่อน|⏰
+The officials are forced to *repair* the road.|เจ้าหน้าที่ถูกบังคับให้ซ่อมถนน|ซ่อม|🛠️
+The officials are not forced to *raise* the taxes.|เจ้าหน้าที่ไม่ได้ถูกบังคับให้ขึ้นภาษี|ขึ้น|💲
+The tenants are forced to *pay* the rent.|ผู้เช่าถูกบังคับให้จ่ายค่าเช่า|จ่าย|🏠
+The tenants are not forced to *paint* the walls.|ผู้เช่าไม่ได้ถูกบังคับให้ทาสีผนัง|ทาสี|🎨
+The owner is forced to *close* the shop.|เจ้าของถูกบังคับให้ปิดร้าน|ปิด|🏪
+The owner is not forced to *throw away* the food.|เจ้าของไม่ได้ถูกบังคับให้ทิ้งอาหาร|ทิ้ง|🗑️
+The traveler is forced to *open* the bag.|ผู้เดินทางถูกบังคับให้เปิดกระเป๋า|เปิด|🧳
+The traveler is not forced to *remove* his shoes.|ผู้เดินทางไม่ได้ถูกบังคับให้ถอดรองเท้า|ถอด|👟
+The player is forced to *leave* the field.|นักกีฬาถูกบังคับให้ออกจากสนาม|ออก|🟥
+The player is not forced to *sit* on the bench.|นักกีฬาไม่ได้ถูกบังคับให้นั่งม้านั่งสำรอง|นั่ง|🪑
+The musicians are forced to *play* softly.|นักดนตรีถูกบังคับให้เล่นเบา ๆ|เล่น|🎻
+The musicians are not forced to *tune* the violins.|นักดนตรีไม่ได้ถูกบังคับให้เทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The laborers are forced to *wear* helmets.|กรรมกรถูกบังคับให้สวมหมวกนิรภัย|สวม|⛑️
+The laborers are not forced to *work* in the rain.|กรรมกรไม่ได้ถูกบังคับให้ทำงานกลางฝน|ทำงาน|🌧️
+The boy is forced to *carry* the boxes.|เด็กชายถูกบังคับให้ยกกล่อง|ยก|📦
+The boy is not forced to *touch* the goods.|เด็กชายไม่ได้ถูกบังคับให้แตะต้องสินค้า|แตะ|🛒
+The recruits are forced to *stand* straight.|ทหารใหม่ถูกบังคับให้ยืนตรง|ยืน|💂
+The recruits are not forced to *shout*.|ทหารใหม่ไม่ได้ถูกบังคับให้ตะโกน|ตะโกน|📢
+The clerk is forced to *copy* the files.|เสมียนถูกบังคับให้ถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The clerk is not forced to *call* the client.|เสมียนไม่ได้ถูกบังคับให้โทรหาลูกความ|โทร|📞
+The writer is forced to *shorten* the article.|นักเขียนถูกบังคับให้ย่อบทความ|ย่อ|📰
+The writer is not forced to *publish* the draft.|นักเขียนไม่ได้ถูกบังคับให้ตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmers are forced to *plant* rice.|เกษตรกรถูกบังคับให้ปลูกข้าว|ปลูก|🌾
+The farmers are not forced to *burn* the straw.|เกษตรกรไม่ได้ถูกบังคับให้เผาฟาง|เผา|🔥
+The teachers are forced to *attend* the meeting.|ครูถูกบังคับให้เข้าร่วมประชุม|เข้าร่วม|🏫
+The teachers are not forced to *ignore* the complaints.|ครูไม่ได้ถูกบังคับให้เพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The interns are forced to *file* the documents.|นักศึกษาฝึกงานถูกบังคับให้จัดเก็บเอกสาร|จัดเก็บ|🗂️
+The interns are not forced to *answer* the phone.|นักศึกษาฝึกงานไม่ได้ถูกบังคับให้รับโทรศัพท์|รับสาย|☎️
+The patients are forced to *rinse* their mouths.|คนไข้ถูกบังคับให้บ้วนปาก|บ้วนปาก|🦷
+The patients are not forced to *eat* anything.|คนไข้ไม่ได้ถูกบังคับให้กินอะไรเลย|กิน|🍔
+The swimmers are forced to *get out* of the pool.|ผู้ว่ายน้ำถูกบังคับให้ขึ้นจากสระ|ขึ้น/ออก|🏊
+The swimmers are not forced to *dive* here.|ผู้ว่ายน้ำไม่ได้ถูกบังคับให้ดำน้ำตรงนี้|ดำน้ำ|🤿
+The passengers are forced to *fasten* their seat belts.|ผู้โดยสารถูกบังคับให้คาดเข็มขัดนิรภัย|คาด|💺
+The passengers are not forced to *stand* up.|ผู้โดยสารไม่ได้ถูกบังคับให้ลุกขึ้นยืน|ยืน|🧍
+The children are forced to *move* to the back.|เด็ก ๆ ถูกบังคับให้ไปนั่งข้างหลัง|ย้าย|🚌
+The children are not forced to *throw* trash on the floor.|เด็ก ๆ ไม่ได้ถูกบังคับให้ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The waiter is forced to *bring* more drinks.|พนักงานเสิร์ฟถูกบังคับให้นำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The waiter is not forced to *turn off* the music.|พนักงานเสิร์ฟไม่ได้ถูกบังคับให้ปิดเพลง|ปิด|🎶
+The pilots are forced to *take off*.|นักบินถูกบังคับให้ขึ้นบิน|ขึ้นบิน|🛩️
+The pilots are not forced to *land* now.|นักบินไม่ได้ถูกบังคับให้ลงจอดตอนนี้|ลงจอด|🛬
+I am forced to *wash* the dishes.|ฉันถูกบังคับให้ล้างจาน|ล้าง|🍽️
+I am not forced to *throw away* the toys.|ฉันไม่ได้ถูกบังคับให้ทิ้งของเล่น|ทิ้ง|🧸
+The cashier is forced to *count* the cash.|แคชเชียร์ถูกบังคับให้นับเงินสด|นับ|💵
+The cashier is not forced to *lock* the vault.|แคชเชียร์ไม่ได้ถูกบังคับให้ล็อกห้องนิรภัย|ล็อก|🔒
+The cadets are forced to *march*.|นักเรียนนายร้อยถูกบังคับให้เดินสวนสนาม|เดินสวนสนาม|🥁
+The cadets are not forced to *talk* during the drill.|นักเรียนนายร้อยไม่ได้ถูกบังคับให้พูดคุยระหว่างการฝึก|พูดคุย|🗣️
+The engineers are forced to *test* the bridge.|วิศวกรถูกบังคับให้ทดสอบสะพาน|ทดสอบ|🌉
+The engineers are not forced to *change* the design.|วิศวกรไม่ได้ถูกบังคับให้เปลี่ยนแบบ|เปลี่ยน|📐`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b((?:am|is|are)(?: not)? forced)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

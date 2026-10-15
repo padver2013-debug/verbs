@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.28 Causative Verb: REQUIRE + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.28 Causative Verb: <span class="rm">REQUIRE</span> + <span class="ob">Someone</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">require(s)</b> + <b class="ob">someone</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I require him to *attend* the meeting.|ฉันกำหนดให้เขาเข้าร่วมการประชุม|เข้าร่วม|👥
+I do not require her to *work* on Sunday.|ฉันไม่ได้กำหนดให้เธอทำงานวันอาทิตย์|ทำงาน|💼
+She requires me to *study* every day.|เธอกำหนดให้ฉันเรียนทุกวัน|เรียน|📚
+She does not require me to *stay* late.|เธอไม่ได้กำหนดให้ฉันอยู่ดึก|อยู่|🌙
+He requires his son to *clean* his room.|เขากำหนดให้ลูกชายทำความสะอาดห้อง|ทำความสะอาด|🧹
+He does not require his son to *wear* a uniform.|เขาไม่ได้กำหนดให้ลูกชายสวมเครื่องแบบ|สวม|👔
+The teacher requires the students to *complete* the assignment.|ครูกำหนดให้นักเรียนทำงานที่ได้รับมอบหมายให้เสร็จ|ทำให้เสร็จ|✅
+The teacher does not require the students to *memorize* every word.|ครูไม่ได้กำหนดให้นักเรียนท่องจำทุกคำ|ท่องจำ|🧠
+My mother requires me to *help* with the housework.|แม่กำหนดให้ฉันช่วยงานบ้าน|ช่วย|🧺
+My mother does not require me to *cook* dinner.|แม่ไม่ได้กำหนดให้ฉันทำอาหารเย็น|ทำอาหาร|🍳
+The coach requires the players to *practice* every morning.|โค้ชกำหนดให้นักกีฬาฝึกซ้อมทุกเช้า|ฝึกซ้อม|🏋️
+The coach does not require the players to *run* today.|โค้ชไม่ได้กำหนดให้นักกีฬาวิ่งวันนี้|วิ่ง|🏃
+They require us to *wait* outside.|พวกเขากำหนดให้เรารอข้างนอก|รอ|⏳
+They do not require us to *pay* in advance.|พวกเขาไม่ได้กำหนดให้เราจ่ายเงินล่วงหน้า|จ่าย|💳
+The manager requires his employees to *arrive* on time.|ผู้จัดการกำหนดให้พนักงานมาถึงตรงเวลา|มาถึง|🕒
+The manager does not require his employees to *wear* suits.|ผู้จัดการไม่ได้กำหนดให้พนักงานสวมสูท|สวม|🤵
+The company requires workers to *follow* the safety rules.|บริษัทกำหนดให้คนงานปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The company does not require workers to *work* overtime.|บริษัทไม่ได้กำหนดให้คนงานทำงานล่วงเวลา|ทำงาน|🕘
+The doctor requires the patient to *rest* for two days.|หมอกำหนดให้คนไข้พักผ่อนเป็นเวลาสองวัน|พักผ่อน|🛌
+The doctor does not require the patient to *stay* in the hospital.|หมอไม่ได้กำหนดให้คนไข้พักอยู่ในโรงพยาบาล|พักอยู่|🏥
+The school requires students to *wear* uniforms.|โรงเรียนกำหนดให้นักเรียนสวมเครื่องแบบ|สวม|🎽
+The school does not require students to *bring* laptops.|โรงเรียนไม่ได้กำหนดให้นักเรียนนำแล็ปท็อปมา|นำมา|💻
+The boss requires her assistant to *prepare* the report.|เจ้านายกำหนดให้ผู้ช่วยของเธอเตรียมรายงาน|เตรียม|📑
+The boss does not require her assistant to *work* late.|เจ้านายไม่ได้กำหนดให้ผู้ช่วยของเธอทำงานดึก|ทำงาน|🌃
+The law requires drivers to *wear* seat belts.|กฎหมายกำหนดให้ผู้ขับขี่คาดเข็มขัดนิรภัย|คาด/สวม|🚘
+The law does not require drivers to *carry* cash.|กฎหมายไม่ได้กำหนดให้ผู้ขับขี่พกเงินสด|พก|💵
+The program requires users to *create* an account.|โปรแกรมกำหนดให้ผู้ใช้สร้างบัญชี|สร้าง|🆕
+The program does not require users to *install* additional software.|โปรแกรมไม่ได้กำหนดให้ผู้ใช้ติดตั้งซอฟต์แวร์เพิ่มเติม|ติดตั้ง|⚙️
+The application requires applicants to *provide* personal information.|ใบสมัครกำหนดให้ผู้สมัครให้ข้อมูลส่วนตัว|ให้|📝
+The application does not require applicants to *submit* a photo.|ใบสมัครไม่ได้กำหนดให้ผู้สมัครส่งรูปถ่าย|ส่ง|📷
+My father requires me to *wake up* early.|พ่อกำหนดให้ฉันตื่นแต่เช้า|ตื่น|⏰
+My father does not require me to *hurry*.|พ่อไม่ได้กำหนดให้ฉันรีบ|รีบ|🐢
+The nurse requires the patient to *take* the medicine.|พยาบาลกำหนดให้คนไข้กินยา|กิน|💊
+The nurse does not require the patient to *walk* alone.|พยาบาลไม่ได้กำหนดให้คนไข้เดินคนเดียว|เดิน|🚶
+Our guide requires us to *follow* the group.|ไกด์ของเรากำหนดให้เราตามกลุ่ม|ตาม|🚩
+Our guide does not require us to *separate* from the group.|ไกด์ของเราไม่ได้กำหนดให้เราแยกจากกลุ่ม|แยก|✂️
+The librarian requires the visitors to *be* quiet.|บรรณารักษ์กำหนดให้ผู้มาเยือนเงียบ|เป็น/อยู่|🤫
+The librarian does not require the visitors to *leave* immediately.|บรรณารักษ์ไม่ได้กำหนดให้ผู้มาเยือนออกไปทันที|ออกไป|🚪
+The trainer requires us to *exercise* regularly.|เทรนเนอร์กำหนดให้เราออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+The trainer does not require us to *stop* exercising.|เทรนเนอร์ไม่ได้กำหนดให้เราหยุดออกกำลังกาย|หยุด|⛔
+The judge requires the witness to *tell* the truth.|ผู้พิพากษากำหนดให้พยานพูดความจริง|บอก|⚖️
+The judge does not require the witness to *leave* the court.|ผู้พิพากษาไม่ได้กำหนดให้พยานออกจากศาล|ออก|🚪
+The general requires the army to *advance*.|นายพลกำหนดให้กองทัพรุกคืบ|รุกคืบ|🪖
+The general does not require the army to *retreat*.|นายพลไม่ได้กำหนดให้กองทัพถอยทัพ|ถอย|🏳️
+The king requires the guards to *open* the gate.|กษัตริย์กำหนดให้ทหารยามเปิดประตู|เปิด|👑
+The king does not require the guards to *harm* the prisoners.|กษัตริย์ไม่ได้กำหนดให้ทหารยามทำร้ายนักโทษ|ทำร้าย|⛓️
+The principal requires the students to *line up*.|ผู้อำนวยการกำหนดให้นักเรียนเข้าแถว|เข้าแถว|🧍
+The principal does not require the students to *run* in the hallway.|ผู้อำนวยการไม่ได้กำหนดให้นักเรียนวิ่งในทางเดิน|วิ่ง|🏃
+The professor requires the students to *submit* their essays.|ศาสตราจารย์กำหนดให้นักศึกษาส่งเรียงความ|ส่ง|📄
+The professor does not require the students to *rewrite* the paper.|ศาสตราจารย์ไม่ได้กำหนดให้นักศึกษาเขียนรายงานใหม่|เขียนใหม่|✏️
+The chef requires the cooks to *clean* the kitchen.|เชฟกำหนดให้พ่อครัวทำความสะอาดครัว|ทำความสะอาด|🧽
+The chef does not require the cooks to *serve* cold soup.|เชฟไม่ได้กำหนดให้พ่อครัวเสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The pilot requires the crew to *check* the engines.|นักบินกำหนดให้ลูกเรือตรวจเครื่องยนต์|ตรวจ|🛫
+The pilot does not require the crew to *delay* the takeoff.|นักบินไม่ได้กำหนดให้ลูกเรือเลื่อนการขึ้นบิน|เลื่อน|⏰
+The mayor requires the officials to *repair* the road.|นายกเทศมนตรีกำหนดให้เจ้าหน้าที่ซ่อมถนน|ซ่อม|🛠️
+The mayor does not require the officials to *raise* the taxes.|นายกเทศมนตรีไม่ได้กำหนดให้เจ้าหน้าที่ขึ้นภาษี|ขึ้น|💲
+The landlord requires the tenants to *pay* the rent.|เจ้าของบ้านกำหนดให้ผู้เช่าจ่ายค่าเช่า|จ่าย|🏠
+The landlord does not require the tenants to *paint* the walls.|เจ้าของบ้านไม่ได้กำหนดให้ผู้เช่าทาสีผนัง|ทาสี|🎨
+The inspector requires the owner to *close* the shop.|ผู้ตรวจสอบกำหนดให้เจ้าของปิดร้าน|ปิด|🕵️
+The inspector does not require the owner to *throw away* the food.|ผู้ตรวจสอบไม่ได้กำหนดให้เจ้าของทิ้งอาหาร|ทิ้ง|🗑️
+The customs officer requires the traveler to *open* the bag.|เจ้าหน้าที่ศุลกากรกำหนดให้ผู้เดินทางเปิดกระเป๋า|เปิด|🧳
+The customs officer does not require the traveler to *remove* his shoes.|เจ้าหน้าที่ศุลกากรไม่ได้กำหนดให้ผู้เดินทางถอดรองเท้า|ถอด|👟
+The referee requires the player to *leave* the field.|ผู้ตัดสินกำหนดให้นักกีฬาออกจากสนาม|ออก|🟥
+The referee does not require the player to *sit* on the bench.|ผู้ตัดสินไม่ได้กำหนดให้นักกีฬานั่งม้านั่งสำรอง|นั่ง|🪑
+The conductor requires the musicians to *play* softly.|วาทยกรกำหนดให้นักดนตรีเล่นเบา ๆ|เล่น|🎻
+The conductor does not require the musicians to *tune* the violins.|วาทยกรไม่ได้กำหนดให้นักดนตรีเทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The foreman requires the workers to *wear* helmets.|หัวหน้าคนงานกำหนดให้คนงานสวมหมวกนิรภัย|สวม|⛑️
+The foreman does not require the workers to *work* in the rain.|หัวหน้าคนงานไม่ได้กำหนดให้คนงานทำงานกลางฝน|ทำงาน|🌧️
+The shopkeeper requires the boy to *carry* the boxes.|เจ้าของร้านกำหนดให้เด็กชายยกกล่อง|ยก|📦
+The shopkeeper does not require the boy to *touch* the goods.|เจ้าของร้านไม่ได้กำหนดให้เด็กชายแตะต้องสินค้า|แตะ|🛒
+The sergeant requires the soldiers to *stand* straight.|จ่ากำหนดให้ทหารยืนตรง|ยืน|💂
+The sergeant does not require the soldiers to *shout*.|จ่าไม่ได้กำหนดให้ทหารตะโกน|ตะโกน|📢
+The lawyer requires his assistant to *copy* the files.|ทนายกำหนดให้ผู้ช่วยถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The lawyer does not require his assistant to *call* the client.|ทนายไม่ได้กำหนดให้ผู้ช่วยโทรหาลูกความ|โทร|📞
+The editor requires the writer to *shorten* the article.|บรรณาธิการกำหนดให้นักเขียนย่อบทความ|ย่อ|📰
+The editor does not require the writer to *publish* the draft.|บรรณาธิการไม่ได้กำหนดให้นักเขียนตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmer requires the workers to *plant* rice.|ชาวนากำหนดให้คนงานปลูกข้าว|ปลูก|🌾
+The farmer does not require the workers to *burn* the straw.|ชาวนาไม่ได้กำหนดให้คนงานเผาฟาง|เผา|🔥
+The headmaster requires the teachers to *attend* the meeting.|ครูใหญ่กำหนดให้ครูเข้าร่วมประชุม|เข้าร่วม|🏫
+The headmaster does not require the teachers to *ignore* the complaints.|ครูใหญ่ไม่ได้กำหนดให้ครูเพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The supervisor requires the interns to *file* the documents.|หัวหน้างานกำหนดให้นักศึกษาฝึกงานจัดเก็บเอกสาร|จัดเก็บ|🗂️
+The supervisor does not require the interns to *answer* the phone.|หัวหน้างานไม่ได้กำหนดให้นักศึกษาฝึกงานรับโทรศัพท์|รับสาย|☎️
+The dentist requires the patient to *rinse* his mouth.|ทันตแพทย์กำหนดให้คนไข้บ้วนปาก|บ้วนปาก|🦷
+The dentist does not require the patient to *eat* anything.|ทันตแพทย์ไม่ได้กำหนดให้คนไข้กินอะไรเลย|กิน|🍔
+The therapist requires the patient to *breathe* slowly.|นักบำบัดกำหนดให้คนไข้หายใจช้า ๆ|หายใจ|🧘
+The therapist does not require the patient to *skip* the session.|นักบำบัดไม่ได้กำหนดให้คนไข้ข้ามการนัดบำบัด|ข้าม|⏭️
+The lifeguard requires the swimmers to *get out* of the pool.|ไลฟ์การ์ดกำหนดให้ผู้ว่ายน้ำขึ้นจากสระ|ขึ้น/ออก|🏊
+The lifeguard does not require the swimmers to *dive* here.|ไลฟ์การ์ดไม่ได้กำหนดให้ผู้ว่ายน้ำดำน้ำตรงนี้|ดำน้ำ|🤿
+The flight attendant requires the passengers to *fasten* their seat belts.|พนักงานต้อนรับบนเครื่องกำหนดให้ผู้โดยสารคาดเข็มขัดนิรภัย|คาด|💺
+The flight attendant does not require the passengers to *stand* up.|พนักงานต้อนรับบนเครื่องไม่ได้กำหนดให้ผู้โดยสารลุกขึ้นยืน|ยืน|🧍
+The bus driver requires the kids to *move* to the back.|คนขับรถบัสกำหนดให้เด็ก ๆ ไปนั่งข้างหลัง|ย้าย|🚌
+The bus driver does not require the kids to *throw* trash on the floor.|คนขับรถบัสไม่ได้กำหนดให้เด็ก ๆ ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The host requires the waiter to *bring* more drinks.|เจ้าภาพกำหนดให้พนักงานเสิร์ฟนำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The host does not require the waiter to *turn off* the music.|เจ้าภาพไม่ได้กำหนดให้พนักงานเสิร์ฟปิดเพลง|ปิด|🎶
+The commander requires the pilots to *take off*.|ผู้บัญชาการกำหนดให้นักบินขึ้นบิน|ขึ้นบิน|🛩️
+The commander does not require the pilots to *land* now.|ผู้บัญชาการไม่ได้กำหนดให้นักบินลงจอดตอนนี้|ลงจอด|🛬
+My mother requires me to *wash* the dishes.|แม่กำหนดให้ฉันล้างจาน|ล้าง|🍽️
+My mother does not require me to *throw away* the toys.|แม่ไม่ได้กำหนดให้ฉันทิ้งของเล่น|ทิ้ง|🧸
+The bank manager requires the clerk to *count* the cash.|ผู้จัดการธนาคารกำหนดให้พนักงานนับเงินสด|นับ|💵
+The bank manager does not require the clerk to *lock* the vault.|ผู้จัดการธนาคารไม่ได้กำหนดให้พนักงานล็อกห้องนิรภัย|ล็อก|🔒`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(require(?:s)?)\b( .*?)(?= to \*)/,(x,v,o)=>`<span class="rm">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

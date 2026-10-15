@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.21 Causative Verb: ORDERED + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.21 Causative Verb (Passive): Someone + be + <span class="rm">ORDERED</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Someone + <b>am/is/are (not)</b> + <b class="rm">ordered</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I am ordered to *wait* outside.|ฉันถูกสั่งให้รอข้างนอก|รอ|⏳
+I am not ordered to *leave* early.|ฉันไม่ได้ถูกสั่งให้ออกไปก่อน|ออกไป|🚪
+He is ordered to *study* harder.|เขาถูกสั่งให้เรียนให้หนักขึ้น|เรียน|📚
+He is not ordered to *stay* here.|เขาไม่ได้ถูกสั่งให้อยู่ที่นี่|อยู่|🏠
+She is ordered to *clean* the room.|เธอถูกสั่งให้ทำความสะอาดห้อง|ทำความสะอาด|🧹
+She is not ordered to *leave* the building.|เธอไม่ได้ถูกสั่งให้ออกจากอาคาร|ออกจาก|🏢
+We are ordered to *wait* outside.|พวกเราถูกสั่งให้รอข้างนอก|รอ|⏳
+We are not ordered to *pay* in advance.|พวกเราไม่ได้ถูกสั่งให้จ่ายเงินล่วงหน้า|จ่าย|💳
+They are ordered to *stop* immediately.|พวกเขาถูกสั่งให้หยุดทันที|หยุด|🛑
+They are not ordered to *leave* the area.|พวกเขาไม่ได้ถูกสั่งให้ออกจากพื้นที่|ออกจาก|🚧
+The students are ordered to *sit down*.|นักเรียนถูกสั่งให้นั่งลง|นั่งลง|🪑
+The students are not ordered to *memorize* everything.|นักเรียนไม่ได้ถูกสั่งให้ท่องจำทุกอย่าง|ท่องจำ|🧠
+The players are ordered to *practice* every morning.|นักกีฬาถูกสั่งให้ฝึกซ้อมทุกเช้า|ฝึกซ้อม|🏋️
+The players are not ordered to *run* today.|นักกีฬาไม่ได้ถูกสั่งให้วิ่งวันนี้|วิ่ง|🏃
+The employees are ordered to *arrive* on time.|พนักงานถูกสั่งให้มาถึงตรงเวลา|มาถึง|🕒
+The employees are not ordered to *work* overtime.|พนักงานไม่ได้ถูกสั่งให้ทำงานล่วงเวลา|ทำงาน|💼
+The workers are ordered to *follow* the safety rules.|คนงานถูกสั่งให้ปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The workers are not ordered to *wear* suits.|คนงานไม่ได้ถูกสั่งให้สวมสูท|สวม|🤵
+The patient is ordered to *rest* for two days.|คนไข้ถูกสั่งให้พักผ่อนเป็นเวลาสองวัน|พักผ่อน|🛌
+The patient is not ordered to *stay* in the hospital.|คนไข้ไม่ได้ถูกสั่งให้อยู่ในโรงพยาบาล|อยู่|🏥
+The students are ordered to *wear* uniforms.|นักเรียนถูกสั่งให้สวมเครื่องแบบ|สวม|👔
+The students are not ordered to *bring* laptops.|นักเรียนไม่ได้ถูกสั่งให้นำแล็ปท็อปมา|นำมา|💻
+The assistant is ordered to *prepare* the report.|ผู้ช่วยถูกสั่งให้เตรียมรายงาน|เตรียม|📑
+The assistant is not ordered to *work* late.|ผู้ช่วยไม่ได้ถูกสั่งให้ทำงานดึก|ทำงาน|🌃
+The driver is ordered to *stop* the car.|คนขับถูกสั่งให้หยุดรถ|หยุด|🚓
+The driver is not ordered to *leave* immediately.|คนขับไม่ได้ถูกสั่งให้ออกไปทันที|ออกไป|💨
+The soldiers are ordered to *move* forward.|ทหารถูกสั่งให้เคลื่อนที่ไปข้างหน้า|เคลื่อนที่|🪖
+The soldiers are not ordered to *attack*.|ทหารไม่ได้ถูกสั่งให้โจมตี|โจมตี|⚔️
+The staff are ordered to *prepare* the room.|เจ้าหน้าที่ถูกสั่งให้เตรียมห้อง|เตรียม|🛋️
+The staff are not ordered to *cancel* the meeting.|เจ้าหน้าที่ไม่ได้ถูกสั่งให้ยกเลิกการประชุม|ยกเลิก|❌
+The nurse is ordered to *give* the patient medicine.|พยาบาลถูกสั่งให้ให้ยาแก่คนไข้|ให้|💊
+The nurse is not ordered to *walk* with the patient.|พยาบาลไม่ได้ถูกสั่งให้เดินไปกับคนไข้|เดิน|🚶
+We are ordered to *follow* the guide.|พวกเราถูกสั่งให้ตามไกด์|ตาม|🚩
+We are not ordered to *separate* from the group.|พวกเราไม่ได้ถูกสั่งให้แยกจากกลุ่ม|แยก|✂️
+The visitors are ordered to *be* quiet.|ผู้มาเยือนถูกสั่งให้เงียบ|เป็น/อยู่|🤫
+The visitors are not ordered to *leave* immediately.|ผู้มาเยือนไม่ได้ถูกสั่งให้ออกไปทันที|ออกไป|🚪
+The security guards are ordered to *check* everyone's ID.|เจ้าหน้าที่รักษาความปลอดภัยถูกสั่งให้ตรวจบัตรประจำตัวของทุกคน|ตรวจ|🪪
+The security guards are not ordered to *enter* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้ถูกสั่งให้เข้าไปในอาคาร|เข้า|🚧
+We are ordered to *exercise* regularly.|พวกเราถูกสั่งให้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+We are not ordered to *stop* exercising.|พวกเราไม่ได้ถูกสั่งให้หยุดออกกำลังกาย|หยุด|⛔
+The witness is ordered to *tell* the truth.|พยานถูกสั่งให้พูดความจริง|บอก|⚖️
+The witness is not ordered to *leave* the court.|พยานไม่ได้ถูกสั่งให้ออกจากศาล|ออก|🚪
+The army is ordered to *advance*.|กองทัพถูกสั่งให้รุกคืบ|รุกคืบ|🪖
+The army is not ordered to *retreat*.|กองทัพไม่ได้ถูกสั่งให้ถอยทัพ|ถอย|🏳️
+The guards are ordered to *open* the gate.|ทหารยามถูกสั่งให้เปิดประตู|เปิด|👑
+The guards are not ordered to *harm* the prisoners.|ทหารยามไม่ได้ถูกสั่งให้ทำร้ายนักโทษ|ทำร้าย|⛓️
+The kids are ordered to *line up*.|เด็ก ๆ ถูกสั่งให้เข้าแถว|เข้าแถว|🧍
+The kids are not ordered to *run* in the hallway.|เด็ก ๆ ไม่ได้ถูกสั่งให้วิ่งในทางเดิน|วิ่ง|🏃
+The cooks are ordered to *clean* the kitchen.|พ่อครัวถูกสั่งให้ทำความสะอาดครัว|ทำความสะอาด|🧽
+The cooks are not ordered to *serve* cold soup.|พ่อครัวไม่ได้ถูกสั่งให้เสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The crew is ordered to *check* the engines.|ลูกเรือถูกสั่งให้ตรวจเครื่องยนต์|ตรวจ|🛫
+The crew is not ordered to *delay* the takeoff.|ลูกเรือไม่ได้ถูกสั่งให้เลื่อนการขึ้นบิน|เลื่อน|⏰
+The officials are ordered to *repair* the road.|เจ้าหน้าที่ถูกสั่งให้ซ่อมถนน|ซ่อม|🛠️
+The officials are not ordered to *raise* the taxes.|เจ้าหน้าที่ไม่ได้ถูกสั่งให้ขึ้นภาษี|ขึ้น|💲
+The tenants are ordered to *pay* the rent.|ผู้เช่าถูกสั่งให้จ่ายค่าเช่า|จ่าย|🏠
+The tenants are not ordered to *paint* the walls.|ผู้เช่าไม่ได้ถูกสั่งให้ทาสีผนัง|ทาสี|🎨
+The owner is ordered to *close* the shop.|เจ้าของถูกสั่งให้ปิดร้าน|ปิด|🏪
+The owner is not ordered to *throw away* the food.|เจ้าของไม่ได้ถูกสั่งให้ทิ้งอาหาร|ทิ้ง|🗑️
+The traveler is ordered to *open* the bag.|ผู้เดินทางถูกสั่งให้เปิดกระเป๋า|เปิด|🧳
+The traveler is not ordered to *remove* his shoes.|ผู้เดินทางไม่ได้ถูกสั่งให้ถอดรองเท้า|ถอด|👟
+The player is ordered to *leave* the field.|นักกีฬาถูกสั่งให้ออกจากสนาม|ออก|🟥
+The player is not ordered to *sit* on the bench.|นักกีฬาไม่ได้ถูกสั่งให้นั่งม้านั่งสำรอง|นั่ง|🪑
+The musicians are ordered to *play* softly.|นักดนตรีถูกสั่งให้เล่นเบา ๆ|เล่น|🎻
+The musicians are not ordered to *tune* the violins.|นักดนตรีไม่ได้ถูกสั่งให้เทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The laborers are ordered to *wear* helmets.|กรรมกรถูกสั่งให้สวมหมวกนิรภัย|สวม|⛑️
+The laborers are not ordered to *work* in the rain.|กรรมกรไม่ได้ถูกสั่งให้ทำงานกลางฝน|ทำงาน|🌧️
+The boy is ordered to *carry* the boxes.|เด็กชายถูกสั่งให้ยกกล่อง|ยก|📦
+The boy is not ordered to *touch* the goods.|เด็กชายไม่ได้ถูกสั่งให้แตะต้องสินค้า|แตะ|🛒
+The recruits are ordered to *stand* straight.|ทหารใหม่ถูกสั่งให้ยืนตรง|ยืน|💂
+The recruits are not ordered to *shout*.|ทหารใหม่ไม่ได้ถูกสั่งให้ตะโกน|ตะโกน|📢
+The clerk is ordered to *copy* the files.|เสมียนถูกสั่งให้ถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The clerk is not ordered to *call* the client.|เสมียนไม่ได้ถูกสั่งให้โทรหาลูกความ|โทร|📞
+The writer is ordered to *shorten* the article.|นักเขียนถูกสั่งให้ย่อบทความ|ย่อ|📰
+The writer is not ordered to *publish* the draft.|นักเขียนไม่ได้ถูกสั่งให้ตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmers are ordered to *plant* rice.|เกษตรกรถูกสั่งให้ปลูกข้าว|ปลูก|🌾
+The farmers are not ordered to *burn* the straw.|เกษตรกรไม่ได้ถูกสั่งให้เผาฟาง|เผา|🔥
+The teachers are ordered to *attend* the meeting.|ครูถูกสั่งให้เข้าร่วมประชุม|เข้าร่วม|🏫
+The teachers are not ordered to *ignore* the complaints.|ครูไม่ได้ถูกสั่งให้เพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The interns are ordered to *file* the documents.|นักศึกษาฝึกงานถูกสั่งให้จัดเก็บเอกสาร|จัดเก็บ|🗂️
+The interns are not ordered to *answer* the phone.|นักศึกษาฝึกงานไม่ได้ถูกสั่งให้รับโทรศัพท์|รับสาย|☎️
+The patients are ordered to *rinse* their mouths.|คนไข้ถูกสั่งให้บ้วนปาก|บ้วนปาก|🦷
+The patients are not ordered to *eat* anything.|คนไข้ไม่ได้ถูกสั่งให้กินอะไรเลย|กิน|🍔
+The swimmers are ordered to *get out* of the pool.|ผู้ว่ายน้ำถูกสั่งให้ขึ้นจากสระ|ขึ้น/ออก|🏊
+The swimmers are not ordered to *dive* here.|ผู้ว่ายน้ำไม่ได้ถูกสั่งให้ดำน้ำตรงนี้|ดำน้ำ|🤿
+The passengers are ordered to *fasten* their seat belts.|ผู้โดยสารถูกสั่งให้คาดเข็มขัดนิรภัย|คาด|💺
+The passengers are not ordered to *stand* up.|ผู้โดยสารไม่ได้ถูกสั่งให้ลุกขึ้นยืน|ยืน|🧍
+The children are ordered to *move* to the back.|เด็ก ๆ ถูกสั่งให้ไปนั่งข้างหลัง|ย้าย|🚌
+The children are not ordered to *throw* trash on the floor.|เด็ก ๆ ไม่ได้ถูกสั่งให้ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The waiter is ordered to *bring* more drinks.|พนักงานเสิร์ฟถูกสั่งให้นำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The waiter is not ordered to *turn off* the music.|พนักงานเสิร์ฟไม่ได้ถูกสั่งให้ปิดเพลง|ปิด|🎶
+The pilots are ordered to *take off*.|นักบินถูกสั่งให้ขึ้นบิน|ขึ้นบิน|🛩️
+The pilots are not ordered to *land* now.|นักบินไม่ได้ถูกสั่งให้ลงจอดตอนนี้|ลงจอด|🛬
+I am ordered to *wash* the dishes.|ฉันถูกสั่งให้ล้างจาน|ล้าง|🍽️
+I am not ordered to *throw away* the toys.|ฉันไม่ได้ถูกสั่งให้ทิ้งของเล่น|ทิ้ง|🧸
+The cashier is ordered to *count* the cash.|แคชเชียร์ถูกสั่งให้นับเงินสด|นับ|💵
+The cashier is not ordered to *lock* the vault.|แคชเชียร์ไม่ได้ถูกสั่งให้ล็อกห้องนิรภัย|ล็อก|🔒
+The cadets are ordered to *march*.|นักเรียนนายร้อยถูกสั่งให้เดินสวนสนาม|เดินสวนสนาม|🥁
+The cadets are not ordered to *talk* during the drill.|นักเรียนนายร้อยไม่ได้ถูกสั่งให้พูดคุยระหว่างการฝึก|พูดคุย|🗣️
+The engineers are ordered to *test* the bridge.|วิศวกรถูกสั่งให้ทดสอบสะพาน|ทดสอบ|🌉
+The engineers are not ordered to *change* the design.|วิศวกรไม่ได้ถูกสั่งให้เปลี่ยนแบบ|เปลี่ยน|📐`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b((?:am|is|are)(?: not)? ordered)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

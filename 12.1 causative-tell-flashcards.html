@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.22 Causative Verb: TELL + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.22 Causative Verb: <span class="rm">TELL</span> + <span class="ob">Someone</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">tell(s)</b> + <b class="ob">someone</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I tell him to *wait* outside.|ฉันบอกให้เขารอข้างนอก|รอ|⏳
+I do not tell her to *leave* early.|ฉันไม่ได้บอกให้เธอออกไปก่อน|ออกไป|🚪
+She tells me to *study* harder.|เธอบอกให้ฉันเรียนให้หนักขึ้น|เรียน|📚
+She does not tell me to *worry*.|เธอไม่ได้บอกให้ฉันกังวล|กังวล|😟
+He tells his son to *clean* his room.|เขาบอกให้ลูกชายทำความสะอาดห้อง|ทำความสะอาด|🧹
+He does not tell his son to *stay* home.|เขาไม่ได้บอกให้ลูกชายอยู่บ้าน|อยู่|🏠
+My mother tells me to *help* my brother.|แม่บอกให้ฉันช่วยน้องชาย|ช่วย|🤝
+My mother does not tell me to *cook* dinner.|แม่ไม่ได้บอกให้ฉันทำอาหารเย็น|ทำอาหาร|🍳
+The teacher tells the students to *listen* carefully.|ครูบอกให้นักเรียนตั้งใจฟัง|ฟัง|👂
+The teacher does not tell the students to *memorize* everything.|ครูไม่ได้บอกให้นักเรียนท่องจำทุกอย่าง|ท่องจำ|🧠
+The coach tells the players to *practice* every day.|โค้ชบอกให้นักกีฬาฝึกซ้อมทุกวัน|ฝึกซ้อม|🏋️
+The coach does not tell the players to *run* today.|โค้ชไม่ได้บอกให้นักกีฬาวิ่งวันนี้|วิ่ง|🏃
+They tell us to *wait* outside.|พวกเขาบอกให้เรารอข้างนอก|รอ|⏳
+They do not tell us to *leave* the building.|พวกเขาไม่ได้บอกให้เราออกจากอาคาร|ออกจาก|🏢
+The manager tells his employees to *arrive* on time.|ผู้จัดการบอกให้พนักงานมาถึงตรงเวลา|มาถึง|🕒
+The manager does not tell his employees to *work* overtime.|ผู้จัดการไม่ได้บอกให้พนักงานทำงานล่วงเวลา|ทำงาน|💼
+The company tells workers to *follow* the safety rules.|บริษัทบอกให้คนงานปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The company does not tell workers to *wear* suits.|บริษัทไม่ได้บอกให้คนงานสวมสูท|สวม|🤵
+The doctor tells the patient to *rest* for two days.|หมอบอกให้คนไข้พักผ่อนเป็นเวลาสองวัน|พักผ่อน|🛌
+The doctor does not tell the patient to *stay* in the hospital.|หมอไม่ได้บอกให้คนไข้พักอยู่ในโรงพยาบาล|พักอยู่|🏥
+The school tells students to *wear* uniforms.|โรงเรียนบอกให้นักเรียนสวมเครื่องแบบ|สวม|👔
+The school does not tell students to *bring* laptops.|โรงเรียนไม่ได้บอกให้นักเรียนนำแล็ปท็อปมา|นำมา|💻
+The boss tells her assistant to *prepare* the report.|เจ้านายบอกให้ผู้ช่วยเตรียมรายงาน|เตรียม|📑
+The boss does not tell her assistant to *work* late.|เจ้านายไม่ได้บอกให้ผู้ช่วยทำงานดึก|ทำงาน|🌃
+The police officer tells the driver to *stop* the car.|ตำรวจบอกให้คนขับหยุดรถ|หยุด|🚓
+The police officer does not tell the driver to *leave* immediately.|ตำรวจไม่ได้บอกให้คนขับออกไปทันที|ออกไป|💨
+The hotel tells guests to *provide* their passports.|โรงแรมบอกให้แขกแสดงหนังสือเดินทาง|แสดง/ให้|🛂
+The hotel does not tell guests to *pay* in advance.|โรงแรมไม่ได้บอกให้แขกจ่ายเงินล่วงหน้า|จ่าย|💳
+The website tells users to *create* a password.|เว็บไซต์บอกให้ผู้ใช้สร้างรหัสผ่าน|สร้าง|🔐
+The website does not tell users to *provide* their phone numbers.|เว็บไซต์ไม่ได้บอกให้ผู้ใช้ให้หมายเลขโทรศัพท์|ให้|📱
+My father tells me to *wake up* early.|พ่อบอกให้ฉันตื่นแต่เช้า|ตื่น|⏰
+My father does not tell me to *hurry*.|พ่อไม่ได้บอกให้ฉันรีบ|รีบ|🐢
+The nurse tells the patient to *take* the medicine.|พยาบาลบอกให้คนไข้กินยา|กิน|💊
+The nurse does not tell the patient to *walk* alone.|พยาบาลไม่ได้บอกให้คนไข้เดินคนเดียว|เดิน|🚶
+Our guide tells us to *follow* the group.|ไกด์ของเราบอกให้เราตามกลุ่ม|ตาม|🚩
+Our guide does not tell us to *separate* from the group.|ไกด์ของเราไม่ได้บอกให้เราแยกจากกลุ่ม|แยก|✂️
+The librarian tells the visitors to *be* quiet.|บรรณารักษ์บอกให้ผู้มาเยือนเงียบ|เป็น/อยู่|🤫
+The librarian does not tell the visitors to *leave* immediately.|บรรณารักษ์ไม่ได้บอกให้ผู้มาเยือนออกไปทันที|ออกไป|🚪
+The trainer tells us to *exercise* regularly.|เทรนเนอร์บอกให้เราออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+The trainer does not tell us to *stop* exercising.|เทรนเนอร์ไม่ได้บอกให้เราหยุดออกกำลังกาย|หยุด|⛔
+The judge tells the witness to *tell* the truth.|ผู้พิพากษาบอกให้พยานพูดความจริง|บอก|⚖️
+The judge does not tell the witness to *leave* the court.|ผู้พิพากษาไม่ได้บอกให้พยานออกจากศาล|ออก|🚪
+The general tells the army to *advance*.|นายพลบอกให้กองทัพรุกคืบ|รุกคืบ|🪖
+The general does not tell the army to *retreat*.|นายพลไม่ได้บอกให้กองทัพถอยทัพ|ถอย|🏳️
+The king tells the guards to *open* the gate.|กษัตริย์บอกให้ทหารยามเปิดประตู|เปิด|👑
+The king does not tell the guards to *harm* the prisoners.|กษัตริย์ไม่ได้บอกให้ทหารยามทำร้ายนักโทษ|ทำร้าย|⛓️
+The principal tells the students to *line up*.|ผู้อำนวยการบอกให้นักเรียนเข้าแถว|เข้าแถว|🧍
+The principal does not tell the students to *run* in the hallway.|ผู้อำนวยการไม่ได้บอกให้นักเรียนวิ่งในทางเดิน|วิ่ง|🏃
+The professor tells the students to *submit* their essays.|ศาสตราจารย์บอกให้นักศึกษาส่งเรียงความ|ส่ง|📄
+The professor does not tell the students to *rewrite* the paper.|ศาสตราจารย์ไม่ได้บอกให้นักศึกษาเขียนรายงานใหม่|เขียนใหม่|✏️
+The chef tells the cooks to *clean* the kitchen.|เชฟบอกให้พ่อครัวทำความสะอาดครัว|ทำความสะอาด|🧽
+The chef does not tell the cooks to *serve* cold soup.|เชฟไม่ได้บอกให้พ่อครัวเสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The pilot tells the crew to *check* the engines.|นักบินบอกให้ลูกเรือตรวจเครื่องยนต์|ตรวจ|🛫
+The pilot does not tell the crew to *delay* the takeoff.|นักบินไม่ได้บอกให้ลูกเรือเลื่อนการขึ้นบิน|เลื่อน|⏰
+The mayor tells the officials to *repair* the road.|นายกเทศมนตรีบอกให้เจ้าหน้าที่ซ่อมถนน|ซ่อม|🛠️
+The mayor does not tell the officials to *raise* the taxes.|นายกเทศมนตรีไม่ได้บอกให้เจ้าหน้าที่ขึ้นภาษี|ขึ้น|💲
+The landlord tells the tenants to *pay* the rent.|เจ้าของบ้านบอกให้ผู้เช่าจ่ายค่าเช่า|จ่าย|🏠
+The landlord does not tell the tenants to *paint* the walls.|เจ้าของบ้านไม่ได้บอกให้ผู้เช่าทาสีผนัง|ทาสี|🎨
+The inspector tells the owner to *close* the shop.|ผู้ตรวจสอบบอกให้เจ้าของปิดร้าน|ปิด|🕵️
+The inspector does not tell the owner to *throw away* the food.|ผู้ตรวจสอบไม่ได้บอกให้เจ้าของทิ้งอาหาร|ทิ้ง|🗑️
+The customs officer tells the traveler to *open* the bag.|เจ้าหน้าที่ศุลกากรบอกให้ผู้เดินทางเปิดกระเป๋า|เปิด|🧳
+The customs officer does not tell the traveler to *remove* his shoes.|เจ้าหน้าที่ศุลกากรไม่ได้บอกให้ผู้เดินทางถอดรองเท้า|ถอด|👟
+The referee tells the player to *leave* the field.|ผู้ตัดสินบอกให้นักกีฬาออกจากสนาม|ออก|🟥
+The referee does not tell the player to *sit* on the bench.|ผู้ตัดสินไม่ได้บอกให้นักกีฬานั่งม้านั่งสำรอง|นั่ง|🪑
+The conductor tells the musicians to *play* softly.|วาทยกรบอกให้นักดนตรีเล่นเบา ๆ|เล่น|🎻
+The conductor does not tell the musicians to *tune* the violins.|วาทยกรไม่ได้บอกให้นักดนตรีเทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The foreman tells the workers to *wear* helmets.|หัวหน้าคนงานบอกให้คนงานสวมหมวกนิรภัย|สวม|⛑️
+The foreman does not tell the workers to *work* in the rain.|หัวหน้าคนงานไม่ได้บอกให้คนงานทำงานกลางฝน|ทำงาน|🌧️
+The shopkeeper tells the boy to *carry* the boxes.|เจ้าของร้านบอกให้เด็กชายยกกล่อง|ยก|📦
+The shopkeeper does not tell the boy to *touch* the goods.|เจ้าของร้านไม่ได้บอกให้เด็กชายแตะต้องสินค้า|แตะ|🛒
+The sergeant tells the soldiers to *stand* straight.|จ่าบอกให้ทหารยืนตรง|ยืน|💂
+The sergeant does not tell the soldiers to *shout*.|จ่าไม่ได้บอกให้ทหารตะโกน|ตะโกน|📢
+The lawyer tells his assistant to *copy* the files.|ทนายบอกให้ผู้ช่วยถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The lawyer does not tell his assistant to *call* the client.|ทนายไม่ได้บอกให้ผู้ช่วยโทรหาลูกความ|โทร|📞
+The editor tells the writer to *shorten* the article.|บรรณาธิการบอกให้นักเขียนย่อบทความ|ย่อ|📰
+The editor does not tell the writer to *publish* the draft.|บรรณาธิการไม่ได้บอกให้นักเขียนตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmer tells the workers to *plant* rice.|ชาวนาบอกให้คนงานปลูกข้าว|ปลูก|🌾
+The farmer does not tell the workers to *burn* the straw.|ชาวนาไม่ได้บอกให้คนงานเผาฟาง|เผา|🔥
+The headmaster tells the teachers to *attend* the meeting.|ครูใหญ่บอกให้ครูเข้าร่วมประชุม|เข้าร่วม|🏫
+The headmaster does not tell the teachers to *ignore* the complaints.|ครูใหญ่ไม่ได้บอกให้ครูเพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The supervisor tells the interns to *file* the documents.|หัวหน้างานบอกให้นักศึกษาฝึกงานจัดเก็บเอกสาร|จัดเก็บ|🗂️
+The supervisor does not tell the interns to *answer* the phone.|หัวหน้างานไม่ได้บอกให้นักศึกษาฝึกงานรับโทรศัพท์|รับสาย|☎️
+The dentist tells the patient to *rinse* his mouth.|ทันตแพทย์บอกให้คนไข้บ้วนปาก|บ้วนปาก|🦷
+The dentist does not tell the patient to *eat* anything.|ทันตแพทย์ไม่ได้บอกให้คนไข้กินอะไรเลย|กิน|🍔
+The therapist tells the patient to *breathe* slowly.|นักบำบัดบอกให้คนไข้หายใจช้า ๆ|หายใจ|🧘
+The therapist does not tell the patient to *skip* the session.|นักบำบัดไม่ได้บอกให้คนไข้ข้ามการนัดบำบัด|ข้าม|⏭️
+The lifeguard tells the swimmers to *get out* of the pool.|ไลฟ์การ์ดบอกให้ผู้ว่ายน้ำขึ้นจากสระ|ขึ้น/ออก|🏊
+The lifeguard does not tell the swimmers to *dive* here.|ไลฟ์การ์ดไม่ได้บอกให้ผู้ว่ายน้ำดำน้ำตรงนี้|ดำน้ำ|🤿
+The flight attendant tells the passengers to *fasten* their seat belts.|พนักงานต้อนรับบนเครื่องบอกให้ผู้โดยสารคาดเข็มขัดนิรภัย|คาด|💺
+The flight attendant does not tell the passengers to *stand* up.|พนักงานต้อนรับบนเครื่องไม่ได้บอกให้ผู้โดยสารลุกขึ้นยืน|ยืน|🧍
+The bus driver tells the kids to *move* to the back.|คนขับรถบัสบอกให้เด็ก ๆ ไปนั่งข้างหลัง|ย้าย|🚌
+The bus driver does not tell the kids to *throw* trash on the floor.|คนขับรถบัสไม่ได้บอกให้เด็ก ๆ ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The host tells the waiter to *bring* more drinks.|เจ้าภาพบอกให้พนักงานเสิร์ฟนำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The host does not tell the waiter to *turn off* the music.|เจ้าภาพไม่ได้บอกให้พนักงานเสิร์ฟปิดเพลง|ปิด|🎶
+The commander tells the pilots to *take off*.|ผู้บัญชาการบอกให้นักบินขึ้นบิน|ขึ้นบิน|🛩️
+The commander does not tell the pilots to *land* now.|ผู้บัญชาการไม่ได้บอกให้นักบินลงจอดตอนนี้|ลงจอด|🛬
+My mother tells me to *wash* the dishes.|แม่บอกให้ฉันล้างจาน|ล้าง|🍽️
+My mother does not tell me to *throw away* the toys.|แม่ไม่ได้บอกให้ฉันทิ้งของเล่น|ทิ้ง|🧸
+The bank manager tells the clerk to *count* the cash.|ผู้จัดการธนาคารบอกให้พนักงานนับเงินสด|นับ|💵
+The bank manager does not tell the clerk to *lock* the vault.|ผู้จัดการธนาคารไม่ได้บอกให้พนักงานล็อกห้องนิรภัย|ล็อก|🔒`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(tell(?:s)?)\b( .*?)(?= to \*)/,(x,v,o)=>`<span class="rm">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

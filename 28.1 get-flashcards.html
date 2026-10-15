@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.28 Causative Verb: GET + Someone + V1 + Something</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+.sm{background:var(--smg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--smc)}
+:root{--smg:#ffe3cc;--smc:#8a3b00}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--smg:#5a3317;--smc:#ffc999}}:root[data-theme="dark"]{--smg:#5a3317;--smc:#ffc999}
+</style></head><body>
+<header><h1>6.28 Causative Verb: <span class="rm">GET</span> + <span class="ob">Someone</span> + <span class="to">TO V1</span> + <span class="sm">Something</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ get หรือ V1เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">get(s)</b> + <b class="ob">someone</b> + <b class="to">to V1</b> + <b class="sm">something</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I get him to *clean* the room.|ฉันให้เขาทำความสะอาดห้อง|ทำความสะอาด|🧹
+I do not get him to *clean* the room.|ฉันไม่ได้ให้เขาทำความสะอาดห้อง|ทำความสะอาด|🚫
+She gets her brother to *wash* the car.|เธอให้น้องชาย/พี่ชายล้างรถ|ล้าง|🚗
+She does not get her brother to *wash* the car.|เธอไม่ได้ให้พี่ชาย/น้องชายล้างรถ|ล้าง|🧽
+He gets his assistant to *prepare* the report.|เขาให้ผู้ช่วยเตรียมรายงาน|เตรียม|📑
+He does not get his assistant to *prepare* the report.|เขาไม่ได้ให้ผู้ช่วยเตรียมรายงาน|เตรียม|🚫
+My mother gets me to *clean* my room.|แม่ให้ฉันทำความสะอาดห้อง|ทำความสะอาด|🧼
+My mother does not get me to *clean* my room.|แม่ไม่ได้ให้ฉันทำความสะอาดห้อง|ทำความสะอาด|🚫
+My father gets me to *wash* the dishes.|พ่อให้ฉันล้างจาน|ล้าง|🍽️
+My father does not get me to *wash* the dishes.|พ่อไม่ได้ให้ฉันล้างจาน|ล้าง|🚫
+The teacher gets the students to *complete* the exercise.|ครูให้นักเรียนทำแบบฝึกหัดให้เสร็จ|ทำให้เสร็จ|✅
+The teacher does not get the students to *complete* the exercise.|ครูไม่ได้ให้นักเรียนทำแบบฝึกหัด|ทำให้เสร็จ|📝
+The coach gets the players to *practice* the drills.|โค้ชให้นักกีฬาฝึกซ้อมแบบฝึกต่าง ๆ|ฝึกซ้อม|🏋️
+The coach does not get the players to *practice* the drills.|โค้ชไม่ได้ให้นักกีฬาฝึกซ้อมแบบฝึกต่าง ๆ|ฝึกซ้อม|⚽
+The manager gets the employees to *organize* the files.|ผู้จัดการให้พนักงานจัดระเบียบแฟ้ม|จัดระเบียบ|🗂️
+The manager does not get the employees to *organize* the files.|ผู้จัดการไม่ได้ให้พนักงานจัดระเบียบแฟ้ม|จัดระเบียบ|📁
+The boss gets his secretary to *book* a hotel.|เจ้านายให้เลขานุการจองโรงแรม|จอง|🏨
+The boss does not get his secretary to *book* a hotel.|เจ้านายไม่ได้ให้เลขานุการจองโรงแรม|จอง|🛎️
+The doctor gets the nurse to *check* the patient.|หมอให้พยาบาลตรวจคนไข้|ตรวจ|🩺
+The doctor does not get the nurse to *check* the patient.|หมอไม่ได้ให้พยาบาลตรวจคนไข้|ตรวจ|🏥
+The company gets its workers to *repair* the equipment.|บริษัทให้คนงานซ่อมอุปกรณ์|ซ่อม|🔧
+The company does not get its workers to *repair* the equipment.|บริษัทไม่ได้ให้คนงานซ่อมอุปกรณ์|ซ่อม|🛠️
+We get our children to *do* their homework.|เราให้ลูก ๆ ทำการบ้าน|ทำ|📚
+We do not get our children to *do* their homework.|เราไม่ได้ให้ลูก ๆ ทำการบ้าน|ทำ|🚫
+They get their son to *fix* the bicycle.|พวกเขาให้ลูกชายซ่อมจักรยาน|ซ่อม|🚲
+They do not get their son to *fix* the bicycle.|พวกเขาไม่ได้ให้ลูกชายซ่อมจักรยาน|ซ่อม|🔩
+The director gets the actors to *practice* the scene.|ผู้กำกับให้นักแสดงซ้อมฉาก|ซ้อม|🎬
+The director does not get the actors to *practice* the scene.|ผู้กำกับไม่ได้ให้นักแสดงซ้อมฉาก|ซ้อม|🎭
+The captain gets the crew to *check* the equipment.|กัปตันให้ลูกเรือตรวจสอบอุปกรณ์|ตรวจสอบ|⚓
+The captain does not get the crew to *check* the equipment.|กัปตันไม่ได้ให้ลูกเรือตรวจสอบอุปกรณ์|ตรวจสอบ|🚢
+The librarian gets the student to *return* the book.|บรรณารักษ์ให้นักเรียนนำหนังสือมาคืน|คืน|📖
+The librarian does not get the student to *return* the book.|บรรณารักษ์ไม่ได้ให้นักเรียนนำหนังสือมาคืน|คืน|📚
+The gardener gets his assistant to *water* the plants.|คนสวนให้ผู้ช่วยรดน้ำต้นไม้|รดน้ำ|🪴
+The gardener does not get his assistant to *water* the plants.|คนสวนไม่ได้ให้ผู้ช่วยรดน้ำต้นไม้|รดน้ำ|🌱
+The hotel manager gets the staff to *clean* the rooms.|ผู้จัดการโรงแรมให้พนักงานทำความสะอาดห้อง|ทำความสะอาด|🛏️
+The hotel manager does not get the staff to *clean* the rooms.|ผู้จัดการโรงแรมไม่ได้ให้พนักงานทำความสะอาดห้อง|ทำความสะอาด|🧺
+The parent gets the child to *carry* the bag.|ผู้ปกครองให้เด็กถือกระเป๋า|ถือ|🎒
+The parent does not get the child to *carry* the bag.|ผู้ปกครองไม่ได้ให้เด็กถือกระเป๋า|ถือ|👜
+The team leader gets the members to *discuss* the problem.|หัวหน้าทีมให้สมาชิกอภิปรายปัญหา|อภิปราย|💬
+The team leader does not get the members to *discuss* the problem.|หัวหน้าทีมไม่ได้ให้สมาชิกอภิปรายปัญหา|อภิปราย|🗣️
+My sister gets me to *wear* her jacket.|น้องสาวให้ฉันสวมแจ็กเก็ตของเธอ|สวม|🧥
+My sister does not get me to *borrow* her phone.|น้องสาวไม่ได้ให้ฉันยืมโทรศัพท์ของเธอ|ยืม|📱
+My brother gets me to *play* his guitar.|น้องชายให้ฉันเล่นกีตาร์ของเขา|เล่น|🎸
+My brother does not get me to *touch* his camera.|น้องชายไม่ได้ให้ฉันแตะกล้องของเขา|แตะ|📷
+My grandmother gets the kids to *eat* cookies.|คุณยายให้เด็ก ๆ กินคุกกี้|กิน|🍪
+My grandmother does not get the kids to *eat* candy before dinner.|คุณยายไม่ได้ให้เด็ก ๆ กินลูกอมก่อนมื้อเย็น|กิน|🍬
+My husband gets me to *choose* the movie.|สามีให้ฉันเลือกหนัง|เลือก|🎬
+My husband does not get me to *pay* the bill.|สามีไม่ได้ให้ฉันจ่ายบิล|จ่าย|💳
+My wife gets me to *cook* dinner.|ภรรยาให้ฉันทำอาหารเย็น|ทำอาหาร|🍳
+My wife does not get me to *wash* the car.|ภรรยาไม่ได้ให้ฉันล้างรถ|ล้าง|🚗
+The principal gets the students to *go* home early.|ผู้อำนวยการให้นักเรียนกลับบ้านเร็ว|ไป/กลับ|🏫
+The principal does not get the students to *skip* the exam.|ผู้อำนวยการไม่ได้ให้นักเรียนข้ามการสอบ|ข้าม|📝
+The professor gets the students to *take* notes.|ศาสตราจารย์ให้นักศึกษาจดบันทึก|จด|✏️
+The professor does not get the students to *record* the lecture.|ศาสตราจารย์ไม่ได้ให้นักศึกษาบันทึกเสียงการบรรยาย|บันทึก|🎙️
+The tutor gets me to *ask* questions.|ติวเตอร์ให้ฉันถามคำถาม|ถาม|🙋
+The tutor does not get me to *copy* the answers.|ติวเตอร์ไม่ได้ให้ฉันลอกคำตอบ|คัดลอก|📋
+The chef gets the cooks to *taste* the soup.|เชฟให้พ่อครัวชิมซุป|ชิม|🥣
+The chef does not get the cooks to *change* the recipe.|เชฟไม่ได้ให้พ่อครัวเปลี่ยนสูตรอาหาร|เปลี่ยน|📜
+The pilot gets the passengers to *use* their phones.|นักบินให้ผู้โดยสารใช้โทรศัพท์|ใช้|✈️
+The pilot does not get the passengers to *open* the doors.|นักบินไม่ได้ให้ผู้โดยสารเปิดประตู|เปิด|🚪
+The driver gets the children to *sit* in the front.|คนขับให้เด็ก ๆ นั่งข้างหน้า|นั่ง|🚌
+The driver does not get the children to *eat* snacks on the bus.|คนขับไม่ได้ให้เด็ก ๆ กินขนมบนรถบัส|กิน|🍿
+The mayor gets citizens to *use* the park.|นายกเทศมนตรีให้ประชาชนใช้สวนสาธารณะ|ใช้|🏞️
+The mayor does not get citizens to *build* houses here.|นายกเทศมนตรีไม่ได้ให้ประชาชนสร้างบ้านที่นี่|สร้าง|🏗️
+The landlord gets tenants to *keep* pets.|เจ้าของบ้านให้ผู้เช่าเลี้ยงสัตว์|เลี้ยง|🐱
+The landlord does not get tenants to *paint* the walls.|เจ้าของบ้านไม่ได้ให้ผู้เช่าทาสีผนัง|ทาสี|🎨
+The neighbor gets us to *pick* his mangoes.|เพื่อนบ้านให้เราเก็บมะม่วงของเขา|เก็บ|🥭
+The neighbor does not get us to *cut* his trees.|เพื่อนบ้านไม่ได้ให้เราตัดต้นไม้ของเขา|ตัด|🪓
+The nurse gets the patient to *see* his family.|พยาบาลให้คนไข้พบครอบครัว|พบ|👨‍👩‍👧
+The nurse does not get the patient to *leave* the room.|พยาบาลไม่ได้ให้คนไข้ออกจากห้อง|ออก|🛏️
+The dentist gets me to *rest* between treatments.|ทันตแพทย์ให้ฉันพักระหว่างการรักษา|พัก|🦷
+The dentist does not get me to *eat* anything today.|ทันตแพทย์ไม่ได้ให้ฉันกินอะไรเลยวันนี้|กิน|🍽️
+The farmer gets the children to *feed* the animals.|ชาวนาให้เด็ก ๆ ให้อาหารสัตว์|ให้อาหาร|🐄
+The farmer does not get the children to *ride* the tractor.|ชาวนาไม่ได้ให้เด็ก ๆ ขึ้นรถแทรกเตอร์|ขี่/ขึ้น|🚜
+The shop owner gets customers to *try* the clothes.|เจ้าของร้านให้ลูกค้าลองเสื้อผ้า|ลอง|👗
+The shop owner does not get customers to *return* used items.|เจ้าของร้านไม่ได้ให้ลูกค้าคืนสินค้าที่ใช้แล้ว|คืน|🔁
+The bank gets customers to *open* an account online.|ธนาคารให้ลูกค้าเปิดบัญชีออนไลน์|เปิด|🏦
+The bank does not get customers to *withdraw* large amounts.|ธนาคารไม่ได้ให้ลูกค้าถอนเงินจำนวนมาก|ถอน|🏧
+The airline gets passengers to *change* their tickets.|สายการบินให้ผู้โดยสารเปลี่ยนตั๋ว|เปลี่ยน|🎫
+The airline does not get passengers to *bring* large bags.|สายการบินไม่ได้ให้ผู้โดยสารนำกระเป๋าใบใหญ่มา|นำมา|🧳
+The museum gets visitors to *draw* the paintings.|พิพิธภัณฑ์ให้ผู้มาเยือนวาดภาพจากภาพวาด|วาด|🖼️
+The museum does not get visitors to *touch* the statues.|พิพิธภัณฑ์ไม่ได้ให้ผู้มาเยือนแตะรูปปั้น|แตะ|🗿
+The school gets parents to *join* the event.|โรงเรียนให้ผู้ปกครองเข้าร่วมงาน|เข้าร่วม|🎉
+The school does not get parents to *enter* the classroom.|โรงเรียนไม่ได้ให้ผู้ปกครองเข้าห้องเรียน|เข้า|🚪
+The website gets users to *edit* their profiles.|เว็บไซต์ให้ผู้ใช้แก้ไขโปรไฟล์ของตน|แก้ไข|🌐
+The website does not get users to *delete* other accounts.|เว็บไซต์ไม่ได้ให้ผู้ใช้ลบบัญชีของผู้อื่น|ลบ|🗑️
+The app gets me to *track* my steps.|แอปให้ฉันติดตามจำนวนก้าวเดิน|ติดตาม|👟
+The app does not get me to *share* my location.|แอปไม่ได้ให้ฉันแชร์ตำแหน่งของฉัน|แชร์|📍
+The teacher gets the class to *go* home early.|ครูให้ห้องเรียนกลับบ้านเร็ว|ไป/กลับ|🎒
+The teacher does not get the class to *talk* during the test.|ครูไม่ได้ให้ห้องเรียนพูดคุยระหว่างการสอบ|พูดคุย|🤫
+The referee gets the players to *continue* the game.|ผู้ตัดสินให้นักกีฬาเล่นเกมต่อ|เล่นต่อ|⚽
+The referee does not get the players to *argue* with him.|ผู้ตัดสินไม่ได้ให้นักกีฬาเถียงเขา|เถียง|😤
+The conductor gets the musicians to *practice* the song.|วาทยกรให้นักดนตรีซ้อมเพลง|ซ้อม|🎻
+The conductor does not get the musicians to *skip* the rehearsal.|วาทยกรไม่ได้ให้นักดนตรีข้ามการซ้อม|ข้าม|⏭️
+The lifeguard gets children to *swim* in the shallow area.|ไลฟ์การ์ดให้เด็ก ๆ ว่ายน้ำในบริเวณน้ำตื้น|ว่ายน้ำ|🏊
+The lifeguard does not get children to *dive* from the rocks.|ไลฟ์การ์ดไม่ได้ให้เด็ก ๆ ดำน้ำจากโขดหิน|ดำน้ำ|🤿
+The editor gets the writer to *choose* the title.|บรรณาธิการให้นักเขียนเลือกชื่อเรื่อง|เลือก|📰
+The editor does not get the writer to *publish* the story early.|บรรณาธิการไม่ได้ให้นักเขียนตีพิมพ์เรื่องก่อนกำหนด|ตีพิมพ์|🖨️
+My grandfather gets the boy to *fish* in the pond.|คุณตาให้เด็กชายตกปลาในบ่อ|ตกปลา|🎣
+My grandfather does not get the boy to *swim* alone in the pond.|คุณตาไม่ได้ให้เด็กชายว่ายน้ำคนเดียวในบ่อ|ว่ายน้ำ|🚫`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(get(?:s)?)\b (.*?) to \*(.+?)\*(.*?)\.$/,(x,g,o,v,r)=>`<span class="rm v" data-m="ให้ / ทำให้ (ผู้อื่นทำ)">${g}</span> <span class="ob">${o}</span> <span class="to">to <span class="v" data-m="${m}">${v}</span></span>${r.trim()?' <span class="sm">'+r.trim()+'</span>':''}.`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🤝<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

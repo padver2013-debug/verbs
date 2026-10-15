@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.10 Causative Verb: INVITE + Someone + TO V1 – Flashcards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ec; --surface:#ffffff; --surface2:#faf8f4; --ink:#1d2433; --muted:#5d6678; --line:#d9d4c8;
+  --verb:#8b0000; --adj-bg:#cfe3ff; --adj-ink:#0b2f66; --accent:#0b2f66; --back:#16284a; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#1b6e3c; --no:#a61b1b; --tip-bg:#1d2433; --tip-ink:#f4f6fb;
+  --font:'Sarabun','Noto Sans Thai','Leelawadee UI',Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+    --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+    --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+  --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 4px;font-weight:700;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted)}
+.formula{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:1.05rem}
+.formula span{padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.92rem;flex:1 1 280px}
+.v{color:var(--verb);font-weight:700;cursor:help;border-bottom:2px dotted var(--verb)}
+.a{background:var(--adj-bg);color:var(--adj-ink);font-weight:700;padding:0 5px;border-radius:4px;cursor:help}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+.ctrl select,.ctrl input[type=range]{font-family:inherit}
+.ctrl select{max-width:230px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+button{font-family:inherit;cursor:pointer}
+.btn{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:.9rem}
+.btn:hover{border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.tab{flex:0 0 auto;padding:9px 16px;border-radius:8px 8px 0 0;border:1px solid var(--line);border-bottom:none;background:var(--surface2);color:var(--muted);font-size:.98rem;font-weight:600}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1530}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1530}
+.tabinfo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px;color:var(--muted);font-size:.92rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.cw{perspective:1200px;height:340px}
+.card{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d;cursor:pointer;border-radius:14px}
+.card.flipped{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden}
+.front{background:var(--surface);border:1px solid var(--line)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);border:1px solid var(--back-line)}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted)}
+.back .meta{color:#b6c3df}
+.badge{padding:1px 9px;border-radius:99px;font-weight:600;border:1px solid currentColor}
+.badge.pos{color:var(--ok)} .badge.neg{color:var(--no)}
+.back .badge.pos{color:#7fe0a8} .back .badge.neg{color:#ff9d9d}
+.scene{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px 0 6px;min-height:76px}
+.sc{font-size:2.3rem;line-height:1}
+.person{position:relative;display:inline-block}
+.person .face-e{position:absolute;right:-14px;top:-10px;font-size:1.4rem;background:var(--surface);border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+.car{position:relative;display:inline-flex;align-items:center;font-size:2rem;margin:0 8px}
+.car .wind{font-size:1.1rem;opacity:.7;margin-right:-4px}
+.car.neg::after{content:"✖";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:2.6rem;color:#d62828;font-weight:700;text-shadow:0 0 0 #fff,0 0 4px #fff}
+.arrow{color:var(--muted);font-size:1.2rem}
+.sent{font-size:1.2rem;font-weight:500;line-height:1.55;text-align:center;margin:6px 0 auto;padding:0 2px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+.hint{font-size:.78rem;color:var(--muted)}
+.back .hint{color:#b6c3df}
+.spk{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:.9rem;font-weight:600}
+.spk:hover{background:var(--accent);color:#fff}
+.spk.on{background:var(--accent);color:#fff}
+.back .spk{color:#cfe0ff;border-color:#8fb5ff}
+.back .spk:hover,.back .spk.on{background:#8fb5ff;color:#0b1530}
+.th{font-size:1.5rem;font-weight:700;text-align:center;margin:18px 0 10px;line-height:1.4}
+.sep{border:0;border-top:1px solid var(--back-line);margin:6px 0 10px}
+.back .sent{font-size:1.08rem;margin-bottom:auto}
+.back .v{color:#ff9a9a;border-bottom-color:#ff9a9a}
+.back .a{background:#2a4a82;color:#dbe9ff}
+
+#tip{position:fixed;z-index:50;max-width:300px;padding:9px 12px;border-radius:8px;background:var(--tip-bg);color:var(--tip-ink);font-size:.88rem;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font-size:.98rem;margin-bottom:2px}
+#tip .tv{display:block;margin-top:4px;opacity:.8;font-size:.82rem}
+.note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>6.10 Causative Verb: INVITE + Someone + TO V1</h1>
+    <p>ฝึกอ่านและแปลประโยค · คลิกการ์ดเพื่อดูคำแปลภาษาไทย · ชี้เมาส์ที่คำเพื่อดูความหมาย</p>
+    <div class="formula"><span class="v" style="border:none">invite</span> + <span>someone</span> + <span class="a">to V1</span> = เชิญ/ชวน (ใคร) ให้ทำ...</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><span class="v">invite / invites</span> = กริยาหลัก</span>
+      <span><span class="a">to V1</span> = to + กริยาช่อง 1 (ชี้ที่คำเพื่อดูความหมาย)</span>
+    </div>
+    <div class="ctrl">
+      <label>เสียง <select id="voice" aria-label="เลือกเสียงอ่าน"></select></label>
+      <label>ความเร็ว <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.85"> <span id="rateVal">0.85×</span></label>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="tabinfo">
+    <span id="info"></span>
+    <span><button class="btn" id="flipAll">พลิกทั้งหมด</button> <button class="btn" id="resetAll">กลับด้านหน้า</button></span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <p class="note">การอ่านออกเสียงใช้เสียงภาษาอังกฤษที่มีในอุปกรณ์/เบราว์เซอร์ของคุณ ระบบจะเลือกเสียงที่ชัดที่สุดให้อัตโนมัติ (เช่น Google US English, Microsoft Natural, Samantha) หากอยากได้เสียงอื่นให้เลือกจากเมนู "เสียง"</p>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+// [subject, plural?, object, adjective, Thai subject, Thai rest, subject emoji, object emoji]
+const CARDS = [["I invite him to join the party.", "ฉันเชิญเขาให้มาร่วมงานปาร์ตี้", "🧑", "👨", "join"], ["I do not invite her to stay overnight.", "ฉันไม่ได้เชิญเธอให้พักค้างคืน", "🧑", "👩", "stay"], ["She invites me to visit her home.", "เธอเชิญฉันไปเยี่ยมบ้านของเธอ", "👩", "🧑", "visit"], ["She does not invite me to attend the meeting.", "เธอไม่ได้เชิญฉันเข้าร่วมการประชุม", "👩", "🧑", "attend"], ["He invites his friends to play football.", "เขาชวนเพื่อน ๆ มาเล่นฟุตบอล", "👨", "👥", "play"], ["He does not invite his friends to stay at his house.", "เขาไม่ได้เชิญเพื่อน ๆ ให้พักที่บ้าน", "👨", "👥", "stay"], ["My mother invites me to eat dinner with the family.", "แม่ชวนฉันกินอาหารเย็นกับครอบครัว", "👩", "🧑", "eat"], ["My mother does not invite me to cook dinner.", "แม่ไม่ได้ชวนฉันทำอาหารเย็น", "👩", "🧑", "cook"], ["The teacher invites the students to participate in the activity.", "ครูเชิญนักเรียนให้เข้าร่วมกิจกรรม", "👩‍🏫", "🧑‍🎓", "participate"], ["The teacher does not invite the students to speak first.", "ครูไม่ได้เชิญนักเรียนให้พูดก่อน", "👩‍🏫", "🧑‍🎓", "speak"], ["The coach invites the players to practice after school.", "โค้ชชวนนักกีฬาฝึกซ้อมหลังเลิกเรียน", "📣", "🏃", "practice"], ["The coach does not invite the players to stay after practice.", "โค้ชไม่ได้ชวนนักกีฬาให้อยู่ต่อหลังการฝึกซ้อม", "📣", "🏃", "stay"], ["They invite us to visit their new office.", "พวกเขาเชิญเราไปเยี่ยมสำนักงานใหม่", "👥", "🧑", "visit"], ["They do not invite us to join the celebration.", "พวกเขาไม่ได้เชิญเราเข้าร่วมงานฉลอง", "👥", "🧑", "join"], ["The manager invites employees to attend the meeting.", "ผู้จัดการเชิญพนักงานเข้าร่วมการประชุม", "🧑‍💼", "👥", "attend"], ["The manager does not invite employees to work on Sunday.", "ผู้จัดการไม่ได้เชิญพนักงานมาทำงานวันอาทิตย์", "🧑‍💼", "👥", "work"], ["The host invites guests to sit at the table.", "เจ้าภาพเชิญแขกให้นั่งที่โต๊ะ", "🎩", "🧳", "sit"], ["The host does not invite guests to enter the room yet.", "เจ้าภาพยังไม่ได้เชิญแขกให้เข้าไปในห้อง", "🎩", "🧳", "enter"], ["My father invites his friends to have dinner.", "พ่อเชิญเพื่อน ๆ มารับประทานอาหารเย็น", "👨", "👥", "have"], ["My father does not invite his friends to stay overnight.", "พ่อไม่ได้เชิญเพื่อน ๆ ให้พักค้างคืน", "👨", "👥", "stay"], ["The guide invites tourists to explore the old town.", "ไกด์ชวนนักท่องเที่ยวสำรวจเมืองเก่า", "🚩", "🧳", "explore"], ["The guide does not invite tourists to enter the restricted area.", "ไกด์ไม่ได้เชิญนักท่องเที่ยวเข้าไปในพื้นที่หวงห้าม", "🚩", "🧳", "enter"], ["The doctor invites the patient to return next week.", "หมอนัด/เชิญคนไข้กลับมาอีกครั้งในสัปดาห์หน้า", "🧑‍⚕️", "🤒", "return"], ["The doctor does not invite the patient to stay overnight.", "หมอไม่ได้ให้คนไข้พักค้างคืน", "🧑‍⚕️", "🤒", "stay"], ["The librarian invites children to read in the library.", "บรรณารักษ์ชวนเด็ก ๆ มาอ่านหนังสือในห้องสมุด", "🧑‍💼", "🧒", "read"], ["The librarian does not invite children to play inside the library.", "บรรณารักษ์ไม่ได้ชวนเด็ก ๆ มาเล่นในห้องสมุด", "🧑‍💼", "🧒", "play"], ["The parents invite their children to watch a movie.", "พ่อแม่ชวนลูก ๆ ดูหนัง", "👪", "🧒", "watch"], ["The parents do not invite their children to go out late.", "พ่อแม่ไม่ได้ชวนลูก ๆ ออกไปข้างนอกดึก ๆ", "👪", "🧒", "go"], ["My friend invites me to try the new restaurant.", "เพื่อนชวนฉันไปลองร้านอาหารใหม่", "🧑", "🧑", "try"], ["My friend does not invite me to order dessert.", "เพื่อนไม่ได้ชวนฉันสั่งของหวาน", "🧑", "🧑", "order"], ["The company invites customers to attend the event.", "บริษัทเชิญลูกค้าเข้าร่วมงาน", "🏢", "👥", "attend"], ["The company does not invite customers to visit the factory.", "บริษัทไม่ได้เชิญลูกค้าเยี่ยมชมโรงงาน", "🏢", "👥", "visit"], ["The speaker invites the audience to ask questions.", "ผู้พูดเชิญผู้ฟังถามคำถาม", "🎤", "👥", "ask"], ["The speaker does not invite the audience to leave early.", "ผู้พูดไม่ได้เชิญผู้ฟังให้ออกไปก่อน", "🎤", "👥", "leave"], ["The team leader invites the members to discuss the problem.", "หัวหน้าทีมเชิญสมาชิกมาหารือปัญหา", "🧑‍💼", "👥", "discuss"], ["The team leader does not invite the members to vote yet.", "หัวหน้าทีมยังไม่ได้เชิญสมาชิกลงคะแนน", "🧑‍💼", "👥", "vote"], ["The hotel invites guests to enjoy the swimming pool.", "โรงแรมเชิญแขกใช้บริการสระว่ายน้ำ", "🏨", "🧳", "enjoy"], ["The hotel does not invite guests to use the private facilities.", "โรงแรมไม่ได้เชิญแขกใช้สิ่งอำนวยความสะดวกส่วนตัว", "🏨", "🧳", "use"], ["The organizer invites everyone to participate in the event.", "ผู้จัดงานเชิญทุกคนเข้าร่วมงาน", "📋", "👥", "participate"], ["The organizer does not invite everyone to speak on stage.", "ผู้จัดงานไม่ได้เชิญทุกคนขึ้นมาพูดบนเวที", "📋", "👥", "speak"], ["The nurse invites the patient to wait in the lobby.", "พยาบาลเชิญคนไข้รอที่ห้องรับรอง", "🧑‍⚕️", "🤒", "wait"], ["The nurse does not invite the patient to enter the operating room.", "พยาบาลไม่ได้เชิญคนไข้เข้าห้องผ่าตัด", "🧑‍⚕️", "🤒", "enter"], ["My wife invites me to try her new recipe.", "ภรรยาชวนฉันลองสูตรใหม่ของเธอ", "👩", "🧑", "try"], ["My wife does not invite me to wash the dishes.", "ภรรยาไม่ได้ชวนฉันล้างจาน", "👩", "🧑", "wash"], ["The mayor invites citizens to join the festival.", "นายกเทศมนตรีเชิญประชาชนร่วมเทศกาล", "🏛️", "👥", "join"], ["The mayor does not invite citizens to enter the office.", "นายกเทศมนตรีไม่ได้เชิญประชาชนเข้าไปในสำนักงาน", "🏛️", "👥", "enter"], ["We invite our neighbors to have lunch with us.", "เราชวนเพื่อนบ้านมารับประทานอาหารกลางวันกับเรา", "👥", "👥", "have"], ["We do not invite our neighbors to borrow our car.", "เราไม่ได้ชวนเพื่อนบ้านยืมรถของเรา", "👥", "👥", "borrow"], ["The principal invites parents to visit the school.", "ครูใหญ่เชิญผู้ปกครองมาเยี่ยมชมโรงเรียน", "🧑‍🏫", "👪", "visit"], ["The principal does not invite parents to speak at the ceremony.", "ครูใหญ่ไม่ได้เชิญผู้ปกครองกล่าวในพิธี", "🧑‍🏫", "👪", "speak"], ["The chef invites the guests to taste the new dish.", "เชฟชวนแขกชิมอาหารจานใหม่", "🧑‍🍳", "🧳", "taste"], ["The chef does not invite the guests to enter the kitchen.", "เชฟไม่ได้ชวนแขกเข้าครัว", "🧑‍🍳", "🧳", "enter"], ["The customer invites the waiter to sit with us.", "ลูกค้าชวนพนักงานเสิร์ฟนั่งกับพวกเรา", "🙍", "🤵", "sit"], ["The customer does not invite the waiter to pay the bill.", "ลูกค้าไม่ได้ชวนพนักงานเสิร์ฟจ่ายค่าอาหาร", "🙍", "🤵", "pay"], ["The judge invites the lawyer to present the case.", "ผู้พิพากษาเชิญทนายนำเสนอคดี", "⚖️", "🧑‍💼", "present"], ["The judge does not invite the lawyer to interrupt the witness.", "ผู้พิพากษาไม่ได้เชิญทนายขัดจังหวะพยาน", "⚖️", "🧑‍💼", "interrupt"], ["My roommate invites me to watch a movie.", "เพื่อนร่วมห้องชวนฉันดูหนัง", "🧑", "🧑", "watch"], ["My roommate does not invite me to clean her room.", "เพื่อนร่วมห้องไม่ได้ชวนฉันทำความสะอาดห้องของเธอ", "🧑", "🧑", "clean"], ["The editor invites the writer to discuss the plan.", "บรรณาธิการเชิญนักเขียนหารือแผนงาน", "🧑‍💼", "✍️", "discuss"], ["The editor does not invite the writer to change the title.", "บรรณาธิการไม่ได้เชิญนักเขียนเปลี่ยนชื่อเรื่อง", "🧑‍💼", "✍️", "change"], ["The director invites the actors to read the script.", "ผู้กำกับเชิญนักแสดงอ่านบท", "🎬", "🎭", "read"], ["The director does not invite the actors to leave the set.", "ผู้กำกับไม่ได้เชิญนักแสดงออกจากกองถ่าย", "🎬", "🎭", "leave"], ["The pilot invites the passengers to enjoy the view.", "นักบินชวนผู้โดยสารชมวิว", "🧑‍✈️", "🧳", "enjoy"], ["The pilot does not invite the passengers to stand during takeoff.", "นักบินไม่ได้ชวนผู้โดยสารยืนตอนเครื่องขึ้น", "🧑‍✈️", "🧳", "stand"], ["The farmer invites the visitors to pick fresh fruit.", "ชาวสวนเชิญผู้มาเยือนเก็บผลไม้สด", "👨‍🌾", "👥", "pick"], ["The farmer does not invite the visitors to feed the animals.", "ชาวสวนไม่ได้เชิญผู้มาเยือนให้อาหารสัตว์", "👨‍🌾", "👥", "feed"], ["My neighbor invites me to have tea.", "เพื่อนบ้านเชิญฉันดื่มชา", "🧑", "🧑", "have"], ["My neighbor does not invite me to use his phone.", "เพื่อนบ้านไม่ได้เชิญฉันใช้โทรศัพท์ของเขา", "🧑", "🧑", "use"], ["The bank invites customers to try the new app.", "ธนาคารเชิญลูกค้าลองแอปใหม่", "🏦", "👥", "try"], ["The bank does not invite customers to visit the vault.", "ธนาคารไม่ได้เชิญลูกค้าเข้าชมห้องนิรภัย", "🏦", "👥", "visit"], ["The landlord invites tenants to join the meeting.", "เจ้าของบ้านเช่าเชิญผู้เช่าเข้าร่วมประชุม", "🏠", "👥", "join"], ["The landlord does not invite tenants to move out.", "เจ้าของบ้านเช่าไม่ได้เชิญผู้เช่าย้ายออก", "🏠", "👥", "move"], ["The conductor invites the musicians to play a solo.", "ผู้ควบคุมวงเชิญนักดนตรีเล่นเดี่ยว", "🎼", "🎻", "play"], ["The conductor does not invite the musicians to stop early.", "ผู้ควบคุมวงไม่ได้เชิญนักดนตรีหยุดก่อนเวลา", "🎼", "🎻", "stop"], ["The kindergarten teacher invites the parents to watch the show.", "ครูอนุบาลเชิญผู้ปกครองชมการแสดง", "👩‍🏫", "👪", "watch"], ["The kindergarten teacher does not invite the parents to bring food.", "ครูอนุบาลไม่ได้เชิญผู้ปกครองนำอาหารมา", "👩‍🏫", "👪", "bring"], ["The captain invites the passengers to explore the deck.", "กัปตันชวนผู้โดยสารสำรวจดาดฟ้า", "🧑‍✈️", "🧳", "explore"], ["The captain does not invite the passengers to enter the engine room.", "กัปตันไม่ได้ชวนผู้โดยสารเข้าห้องเครื่อง", "🧑‍✈️", "🧳", "enter"], ["The tour guide invites us to taste local food.", "ไกด์ชวนพวกเราชิมอาหารท้องถิ่น", "🚩", "🧑", "taste"], ["The tour guide does not invite us to wander off alone.", "ไกด์ไม่ได้ชวนพวกเราแยกไปเดินคนเดียว", "🚩", "🧑", "wander off"], ["My sister invites me to go shopping.", "น้องสาวชวนฉันไปช้อปปิ้ง", "👧", "🧑", "go"], ["My sister does not invite me to borrow her clothes.", "น้องสาวไม่ได้ชวนฉันยืมเสื้อผ้าของเธอ", "👧", "🧑", "borrow"], ["The tourists invite the guide to join their dinner.", "นักท่องเที่ยวเชิญไกด์ร่วมรับประทานอาหารเย็น", "🧳", "🚩", "join"], ["The tourists do not invite the guide to carry their bags.", "นักท่องเที่ยวไม่ได้เชิญไกด์ถือกระเป๋า", "🧳", "🚩", "carry"], ["The students invite the teacher to sing with them.", "นักเรียนชวนครูร้องเพลงด้วยกัน", "🧑‍🎓", "👩‍🏫", "sing"], ["The students do not invite the teacher to sit at the back.", "นักเรียนไม่ได้ชวนครูนั่งหลังห้อง", "🧑‍🎓", "👩‍🏫", "sit"], ["The company invites the designer to present the logo.", "บริษัทเชิญนักออกแบบนำเสนอโลโก้", "🏢", "🧑‍🎨", "present"], ["The company does not invite the designer to change the contract.", "บริษัทไม่ได้เชิญนักออกแบบเปลี่ยนสัญญา", "🏢", "🧑‍🎨", "change"], ["The doctor invites the nurse to join the surgery.", "หมอเชิญพยาบาลร่วมการผ่าตัด", "🧑‍⚕️", "🧑‍⚕️", "join"], ["The doctor does not invite the nurse to give the medicine.", "หมอไม่ได้เชิญพยาบาลให้ยา", "🧑‍⚕️", "🧑‍⚕️", "give"], ["The police officer invites the witness to sit down.", "ตำรวจเชิญพยานนั่งลง", "👮", "🧑", "sit"], ["The police officer does not invite the witness to leave the station.", "ตำรวจไม่ได้เชิญพยานออกจากสถานี", "👮", "🧑", "leave"], ["The coach invites the swimmers to try the new pool.", "โค้ชชวนนักว่ายน้ำลองสระใหม่", "📣", "🏊", "try"], ["The coach does not invite the swimmers to swim alone.", "โค้ชไม่ได้ชวนนักว่ายน้ำว่ายคนเดียว", "📣", "🏊", "swim"], ["The neighbors invite my family to come to dinner.", "เพื่อนบ้านเชิญครอบครัวของฉันมาทานอาหารเย็น", "🏘️", "👪", "come"], ["The neighbors do not invite my family to use our garden.", "เพื่อนบ้านไม่ได้เชิญครอบครัวของฉันใช้สวน", "🏘️", "👪", "use"], ["The professor invites the students to ask questions.", "ศาสตราจารย์เชิญนักศึกษาถามคำถาม", "🧑‍🏫", "🧑‍🎓", "ask"], ["The professor does not invite the students to skip class.", "ศาสตราจารย์ไม่ได้เชิญนักศึกษาโดดเรียน", "🧑‍🏫", "🧑‍🎓", "skip"], ["The manager invites the interns to share their ideas.", "ผู้จัดการเชิญนักศึกษาฝึกงานแบ่งปันความคิด", "🧑‍💼", "🧑‍🎓", "share"], ["The manager does not invite the interns to make decisions.", "ผู้จัดการไม่ได้เชิญนักศึกษาฝึกงานตัดสินใจ", "🧑‍💼", "🧑‍🎓", "make"]];
+
+const VERBS = {"help": ["🤝", "ช่วย, ช่วยเหลือ"], "stay": ["🏠", "อยู่, พักอยู่"], "join": ["🙋", "เข้าร่วม"], "leave": ["🚪", "ออกไป, จากไป"], "study": ["📖", "เรียน, ศึกษา"], "play": ["⚽", "เล่น"], "wake up": ["⏰", "ตื่นนอน"], "stay up": ["🌙", "นอนดึก, อดนอน"], "complete": ["✅", "ทำให้เสร็จ, ทำให้สมบูรณ์"], "talk": ["🗣️", "พูดคุย"], "practice": ["🏋️", "ฝึกซ้อม"], "quit": ["🚫", "เลิก, ลาออก"], "arrive": ["🛬", "มาถึง"], "wait": ["⏳", "รอ"], "work": ["💼", "ทำงาน"], "prepare": ["📝", "เตรียม"], "cancel": ["❌", "ยกเลิก"], "rest": ["🛌", "พักผ่อน"], "exercise": ["🏃", "ออกกำลังกาย"], "save": ["🐷", "เก็บออม, ประหยัด"], "spend": ["💸", "ใช้จ่าย"], "call": ["📞", "โทรหา"], "visit": ["🏡", "ไปเยี่ยม"], "follow": ["📜", "ปฏิบัติตาม, ตาม"], "enter": ["🚪", "เข้าไป"], "behave": ["😇", "ประพฤติตัว, วางตัว"], "attend": ["🎓", "เข้าร่วม, เข้าเรียน"], "use": ["📱", "ใช้"], "listen": ["👂", "ฟัง"], "cooperate": ["🤝", "ให้ความร่วมมือ"], "argue": ["😠", "โต้เถียง"], "participate": ["🙌", "มีส่วนร่วม, เข้าร่วม"], "speak": ["🎤", "พูด"], "improve": ["📈", "พัฒนา, ปรับปรุง"], "compete": ["🏆", "แข่งขัน"], "read": ["📚", "อ่าน"], "copy": ["📋", "ลอก, คัดลอก"], "cook": ["🍳", "ทำอาหาร"], "come": ["🏠", "มา, กลับมา"], "take": ["📸", "กิน (ยา), ถ่าย (ภาพ), หยุด (พัก), รับ, หยิบ"], "skip": ["⏭️", "ข้าม, งด"], "fasten": ["🔒", "คาด, รัด"], "stand": ["🧍", "ยืน"], "tell": ["🗣️", "บอก"], "lie": ["🤥", "โกหก"], "clean": ["🧹", "ทำความสะอาด"], "touch": ["✋", "แตะ, สัมผัส"], "wear": ["👕", "สวมใส่"], "run": ["🏃", "วิ่ง"], "bring": ["🍽️", "นำมา, พามา"], "clear": ["🧽", "เก็บ (โต๊ะ), ทำให้โล่ง"], "sing": ["🎤", "ร้องเพลง"], "forget": ["🎂", "ลืม"], "finish": ["📰", "ทำให้เสร็จ, จบ"], "change": ["🔄", "เปลี่ยน"], "recycle": ["♻️", "รีไซเคิล"], "throw": ["🗑️", "ทิ้ง, ขว้าง"], "remain": ["💺", "ยังคงอยู่"], "switch on": ["📲", "เปิด (อุปกรณ์)"], "plant": ["🌾", "ปลูก"], "waste": ["💧", "สิ้นเปลือง, ทำเปล่าประโยชน์"], "keep": ["🤫", "รักษา, เก็บไว้, คง"], "eat": ["🍔", "กิน"], "memorize": ["🧠", "ท่องจำ"], "be": ["⏰", "เป็น, อยู่ในสภาพ"], "turn down": ["🔉", "ลดเสียง"], "explain": ["🧑‍🏫", "อธิบาย"], "interrupt": ["✋", "ขัดจังหวะ"], "wash": ["🧼", "ล้าง"], "rush": ["💨", "รีบเร่ง"], "drink": ["🥛", "ดื่ม"], "watch": ["📺", "ดู"], "meet": ["🎯", "ทำให้ถึง (เป้า), พบ"], "give up": ["🏳️", "ยอมแพ้"], "tune": ["🎻", "เทียบเสียง, ปรับเสียง"], "start": ["🎼", "เริ่ม"], "gather": ["🧑‍🤝‍🧑", "รวมตัว"], "wander off": ["🚶", "แยกตัวไปเดินเอง, เดินหลงไป"], "check": ["🔧", "ตรวจสอบ"], "ignore": ["🔕", "เพิกเฉย, ไม่สนใจ"], "submit": ["📄", "ส่ง (งาน)"], "plagiarize": ["📋", "ลอกผลงานผู้อื่น"], "water": ["🪴", "รดน้ำ"], "park": ["🅿️", "จอดรถ"], "protect": ["🔐", "ปกป้อง"], "share": ["🔑", "แบ่งปัน, เปิดเผยให้ผู้อื่น"], "line up": ["🧒", "เข้าแถว"], "push": ["🫸", "ผลัก"], "warm up": ["🤸", "วอร์มอัพ, อบอุ่นร่างกาย"], "swim": ["🏊", "ว่ายน้ำ"], "send": ["📧", "ส่ง"], "pay": ["💵", "จ่าย"], "buy": ["🛒", "ซื้อ"], "answer": ["💬", "ตอบ"], "pick up": ["🚸", "ไปรับ, หยิบขึ้น"], "fix": ["🔧", "ซ่อม, แก้ไข"], "hurry": ["🏃", "รีบ, เร่งรีบ"], "move": ["📦", "ย้าย, เคลื่อนที่"], "rewrite": ["✍️", "เขียนใหม่"], "vote": ["🗳️", "ลงคะแนนเสียง"], "open": ["🚪", "เปิด"], "sell": ["🏷️", "ขาย"], "feed": ["🦴", "ให้อาหาร"], "return": ["↩️", "คืน, ส่งคืน"], "rehearse": ["🎭", "ซ้อม, ซ้อมการแสดง"], "print": ["🖨️", "พิมพ์"], "repair": ["🛠️", "ซ่อมแซม"], "nap": ["😴", "งีบหลับ"], "lend": ["🤲", "ให้ยืม"], "drive": ["🚗", "ขับรถ"], "carry": ["🎒", "ถือ, แบก, พก"], "show": ["🗺️", "แสดง, ชี้ให้ดู"], "give": ["🎁", "ให้"], "create": ["🎨", "สร้าง, สร้างสรรค์"], "measure": ["🩺", "วัด"], "describe": ["🧾", "บรรยาย, อธิบายลักษณะ"], "sign": ["✍️", "ลงชื่อ"], "worry": ["😟", "กังวล"], "learn": ["🧠", "เรียนรู้, เรียน"], "get up": ["🧍", "ลุกขึ้น"], "sit": ["🪑", "นั่ง"], "smoke": ["🚬", "สูบบุหรี่"], "respect": ["🙇", "เคารพ"], "taste": ["👅", "ชิม"], "add": ["➕", "เติม, เพิ่ม"], "recommend": ["👍", "แนะนำ"], "present": ["📑", "นำเสนอ"], "lock": ["🔒", "ล็อก"], "miss": ["⏰", "พลาด, ไม่ทัน, คิดถึง"], "damage": ["💥", "ทำลาย, ทำให้เสียหาย"], "announce": ["📢", "ประกาศ"], "panic": ["😱", "ตื่นตระหนก"], "harvest": ["🌾", "เก็บเกี่ยว"], "borrow": ["🤲", "ยืม"], "update": ["🔄", "อัปเดต, ปรับปรุงข้อมูล"], "turn off": ["💡", "ปิด (ไฟ/เครื่อง)"], "make": ["🔨", "ทำ, สร้าง, ก่อให้เกิด"], "stop": ["🛑", "หยุด"], "fight": ["🥊", "ทะเลาะ, ต่อสู้"], "secure": ["🔗", "ยึดให้แน่น, ทำให้ปลอดภัย"], "repeat": ["🔁", "พูดซ้ำ, ทำซ้ำ"], "record": ["📝", "บันทึก"], "disturb": ["🔕", "รบกวน"], "stretch": ["🤸", "ยืดเส้นยืดสาย"], "win": ["🏆", "ชนะ, ได้รับ (รางวัล)"], "understand": ["💡", "เข้าใจ"], "agree": ["🤝", "เห็นด้วย"], "lose": ["😞", "แพ้, สูญเสีย"], "land": ["🛬", "ลงจอด, นำเครื่องลงจอด"], "fly": ["🛫", "บิน"], "allow": ["✅", "อนุญาต"], "raise": ["⬆️", "ขึ้น, เพิ่มขึ้น, ยกขึ้น"], "decide": ["⚖️", "ตัดสิน, ตัดสินใจ"], "pass": ["✅", "สอบผ่าน, ผ่าน"], "fail": ["❌", "สอบตก, ล้มเหลว"], "launch": ["🚀", "เปิดตัว, ปล่อย"], "close": ["🔒", "ปิด"], "perform": ["🎤", "แสดง, ขึ้นแสดง"], "train": ["🏋️", "ฝึก, ฝึกซ้อม"], "introduce": ["🙋", "แนะนำ (ตัว)"], "sleep": ["😴", "นอนหลับ"], "walk": ["🚶", "เดิน"], "drop": ["📉", "ลดลง, ตก"], "rise": ["📈", "สูงขึ้น, เพิ่มขึ้น"], "appear": ["💻", "ปรากฏ"], "disappoint": ["😞", "ทำให้ผิดหวัง"], "last": ["⏱️", "ยาวนาน, ต่อเนื่อง"], "receive": ["🎁", "ได้รับ"], "blame": ["👉", "โทษ, ตำหนิ"], "recover": ["💪", "ฟื้นตัว, หายป่วย"], "improvise": ["🎭", "พูด/แสดงด้นสด"], "write": ["✍️", "เขียน"], "paint": ["🎨", "ทาสี, วาดภาพ"], "redo": ["🔁", "ทำใหม่"], "remember": ["🧠", "จำ, จดจำ"], "have": ["🍽️", "รับประทาน, ดื่ม, มี"], "explore": ["🧭", "สำรวจ"], "try": ["🍜", "ลอง"], "order": ["🧾", "สั่ง"], "ask": ["🙋", "ถาม"], "discuss": ["💬", "หารือ, อภิปราย"], "enjoy": ["😊", "เพลิดเพลิน, ใช้บริการอย่างเพลิดเพลิน"], "go": ["🚶", "ไป"], "pick": ["🍎", "เก็บ, เด็ด, เลือก"]};
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+
+function build(c){
+  const [plain,th,se,oe,k]=c;
+  const neg=/(?:does|do) not invite/.test(plain);
+  const pat="invite + someone + to + V1 = เชิญ/ชวน (ใคร) ให้ทำ... · invite – invited – invited";
+  let en=esc(plain).replace(/(does not invite|do not invite|invites|invite)/,m=>`<span class="v" data-t="${m}" data-b="${esc(neg?"ไม่ได้เชิญ / ไม่ได้ชวน (ใคร) ให้ทำ...":"เชิญ / ชวน (ใคร) ให้ทำ...")}" data-v="${esc(pat+(m==="invites"?" · invites = invite + s":""))}">${m}</span>`);
+  en=en.replace("to "+k,m=>`<span class="a" data-t="${k} (V1)" data-b="${esc(VERBS[k][1])}" data-v="${esc("invite + someone + to + V1")}">${m}</span>`);
+  return {en,plain,th,neg,se,oe,ve:VERBS[k][0]};
+}
+
+const SETS = 5, PER = 20;
+const sets = [];
+for(let k=0;k<SETS;k++){ sets.push(CARDS.slice(k*PER,k*PER+PER).map(build)); }
+
+/* ---------- speech ---------- */
+let voices=[], chosen=null, speakingBtn=null;
+const supports = 'speechSynthesis' in window;
+function score(v){
+  const n=(v.name||"").toLowerCase(); let s=0;
+  if(!/^en/i.test(v.lang)) return -1;
+  if(/en[-_]us/i.test(v.lang)) s+=5;
+  if(/natural|neural/.test(n)) s+=50;
+  if(/online/.test(n)) s+=15;
+  if(/google us english/.test(n)) s+=40;
+  if(/aria|jenny|guy|samantha|ava|allison|zoe|siri|serena|daniel|karen|alex/.test(n)) s+=25;
+  if(/google/.test(n)) s+=10;
+  if(/espeak|compact/.test(n)) s-=30;
+  if(v.localService===false) s+=3;
+  return s;
+}
+function loadVoices(){
+  if(!supports) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)).sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice');
+  sel.innerHTML="";
+  if(!voices.length){ sel.innerHTML='<option>ใช้เสียงเริ่มต้น</option>'; return; }
+  voices.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=`${v.name} (${v.lang})`; sel.appendChild(o); });
+  chosen=voices[0]; sel.value=0;
+}
+if(supports){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('voice').addEventListener('change',e=>{ chosen=voices[+e.target.value]||null; });
+const rate=document.getElementById('rate');
+rate.addEventListener('input',()=>document.getElementById('rateVal').textContent=(+rate.value).toFixed(2)+"×");
+
+function speak(text, btn){
+  if(!supports){ alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง"); return; }
+  const wasThis = speakingBtn===btn;
+  speechSynthesis.cancel();
+  if(speakingBtn) speakingBtn.classList.remove('on');
+  speakingBtn=null;
+  if(wasThis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=+rate.value; u.pitch=1; u.volume=1;
+  if(chosen) u.voice=chosen;
+  btn.classList.add('on'); speakingBtn=btn;
+  const done=()=>{ btn.classList.remove('on'); if(speakingBtn===btn) speakingBtn=null; };
+  u.onend=done; u.onerror=done;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- render ---------- */
+let cur=0;
+const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid'), info=document.getElementById('info');
+sets.forEach((_,k)=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.setAttribute('role','tab'); b.textContent=`Set ${k+1} · ${k*PER+1}–${k*PER+PER}`;
+  b.onclick=()=>show(k); tabsEl.appendChild(b);
+});
+
+function sceneHTML(c){
+  return `<div class="scene" aria-hidden="true">
+    <span class="sc">${c.se}</span><span class="arrow">➜</span>
+    <span class="car${c.neg?' neg':''}"><span class="wind">🎉</span>💌</span><span class="arrow">➜</span>
+    <span class="sc">${c.oe}</span><span class="arrow">➜</span><span class="sc">${c.ve}</span></div>`;
+}
+function show(k){
+  cur=k; speechSynthesis && speechSynthesis.cancel(); speakingBtn=null;
+  [...tabsEl.children].forEach((b,i)=>b.setAttribute('aria-selected',i===k));
+  info.textContent=`Set ${k+1}: การ์ด ${PER} ใบ (ประโยคบอกเล่า/ปฏิเสธ สลับกัน)` + (k>=2 ? " · ประโยคชุดนี้เพิ่มให้ตามรูปแบบเดียวกัน" : "");
+  grid.innerHTML="";
+  sets[k].forEach((c,i)=>{
+    const n=k*PER+i+1;
+    const w=document.createElement('div'); w.className='cw';
+    w.innerHTML=`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${n} คลิกเพื่อพลิก">
+      <div class="face front">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        ${sceneHTML(c)}
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อดูคำแปล</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+      <div class="face back">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        <div class="th">${c.th}</div>
+        <hr class="sep">
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อพลิกกลับ</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+    </div>`;
+    const card=w.firstElementChild;
+    card.addEventListener('click',e=>{
+      const spk=e.target.closest('.spk');
+      if(spk){ e.stopPropagation(); speak(c.plain,spk); return; }
+      const t=e.target.closest('[data-t]');
+      if(t && e.pointerType==='touch'){ showTip(t); e.stopPropagation(); return; }
+      card.classList.toggle('flipped');
+    });
+    card.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ') && e.target===card){ e.preventDefault(); card.classList.toggle('flipped'); }});
+    grid.appendChild(w);
+  });
+}
+document.getElementById('flipAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.add('flipped'));
+document.getElementById('resetAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.remove('flipped'));
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function showTip(el){
+  const v=el.dataset.v ? `<span class="tv">${el.dataset.v}</span>` : "";
+  tip.innerHTML=`<b>${el.dataset.t}</b>${el.dataset.b}${v}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=Math.min(Math.max(8,r.left+r.width/2-tw/2), innerWidth-tw-8);
+  let y=r.top-th-10; if(y<8) y=r.bottom+10;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+document.addEventListener('mouseover',e=>{ const t=e.target.closest('[data-t]'); if(t) showTip(t); });
+document.addEventListener('mouseout',e=>{ if(e.target.closest('[data-t]')) tip.classList.remove('show'); });
+document.addEventListener('click',e=>{ if(!e.target.closest('[data-t]')) tip.classList.remove('show'); });
+window.addEventListener('scroll',()=>tip.classList.remove('show'),{passive:true});
+
+show(0);
+</script>
+</body>
+</html>

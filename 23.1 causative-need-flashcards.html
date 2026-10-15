@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Causative Verb: NEED + Someone + TO V1 – Flashcards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ec; --surface:#ffffff; --surface2:#faf8f4; --ink:#1d2433; --muted:#5d6678; --line:#d9d4c8;
+  --verb:#8b0000; --adj-bg:#cfe3ff; --adj-ink:#0b2f66; --accent:#0b2f66; --back:#16284a; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#1b6e3c; --no:#a61b1b; --tip-bg:#1d2433; --tip-ink:#f4f6fb;
+  --font:'Sarabun','Noto Sans Thai','Leelawadee UI',Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+    --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+    --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+  --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 4px;font-weight:700;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted)}
+.formula{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:1.05rem}
+.formula span{padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.92rem;flex:1 1 280px}
+.v{color:var(--verb);font-weight:700;cursor:help;border-bottom:2px dotted var(--verb)}
+.a{background:var(--adj-bg);color:var(--adj-ink);font-weight:700;padding:0 5px;border-radius:4px;cursor:help}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+.ctrl select,.ctrl input[type=range]{font-family:inherit}
+.ctrl select{max-width:230px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+button{font-family:inherit;cursor:pointer}
+.btn{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:.9rem}
+.btn:hover{border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.tab{flex:0 0 auto;padding:9px 16px;border-radius:8px 8px 0 0;border:1px solid var(--line);border-bottom:none;background:var(--surface2);color:var(--muted);font-size:.98rem;font-weight:600}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1530}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1530}
+.tabinfo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px;color:var(--muted);font-size:.92rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.cw{perspective:1200px;height:340px}
+.card{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d;cursor:pointer;border-radius:14px}
+.card.flipped{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden}
+.front{background:var(--surface);border:1px solid var(--line)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);border:1px solid var(--back-line)}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted)}
+.back .meta{color:#b6c3df}
+.badge{padding:1px 9px;border-radius:99px;font-weight:600;border:1px solid currentColor}
+.badge.pos{color:var(--ok)} .badge.neg{color:var(--no)}
+.back .badge.pos{color:#7fe0a8} .back .badge.neg{color:#ff9d9d}
+.scene{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px 0 6px;min-height:76px}
+.sc{font-size:2.3rem;line-height:1}
+.person{position:relative;display:inline-block}
+.person .face-e{position:absolute;right:-14px;top:-10px;font-size:1.4rem;background:var(--surface);border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+.car{position:relative;display:inline-flex;align-items:center;font-size:2rem;margin:0 8px}
+.car .wind{font-size:1.1rem;opacity:.7;margin-right:-4px}
+.car.neg::after{content:"✖";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:2.6rem;color:#d62828;font-weight:700;text-shadow:0 0 0 #fff,0 0 4px #fff}
+.arrow{color:var(--muted);font-size:1.2rem}
+.sent{font-size:1.2rem;font-weight:500;line-height:1.55;text-align:center;margin:6px 0 auto;padding:0 2px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+.hint{font-size:.78rem;color:var(--muted)}
+.back .hint{color:#b6c3df}
+.spk{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:.9rem;font-weight:600}
+.spk:hover{background:var(--accent);color:#fff}
+.spk.on{background:var(--accent);color:#fff}
+.back .spk{color:#cfe0ff;border-color:#8fb5ff}
+.back .spk:hover,.back .spk.on{background:#8fb5ff;color:#0b1530}
+.th{font-size:1.5rem;font-weight:700;text-align:center;margin:18px 0 10px;line-height:1.4}
+.sep{border:0;border-top:1px solid var(--back-line);margin:6px 0 10px}
+.back .sent{font-size:1.08rem;margin-bottom:auto}
+.back .v{color:#ff9a9a;border-bottom-color:#ff9a9a}
+.back .a{background:#2a4a82;color:#dbe9ff}
+
+#tip{position:fixed;z-index:50;max-width:300px;padding:9px 12px;border-radius:8px;background:var(--tip-bg);color:var(--tip-ink);font-size:.88rem;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font-size:.98rem;margin-bottom:2px}
+#tip .tv{display:block;margin-top:4px;opacity:.8;font-size:.82rem}
+.note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>6.6 Causative Verb: NEED + Someone + Adjective</h1>
+    <p>ฝึกอ่านและแปลประโยค · คลิกการ์ดเพื่อดูคำแปลภาษาไทย · ชี้เมาส์ที่คำเพื่อดูความหมาย</p>
+    <div class="formula"><span class="v" style="border:none">need</span> + <span>someone</span> + <span class="a">to V1</span> = ต้องการให้ (ใคร) ทำ...</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><span class="v">need / needs</span> = กริยาหลัก</span>
+      <span><span class="a">to V1</span> = to + กริยาช่อง 1 (ชี้ที่คำเพื่อดูความหมาย)</span>
+    </div>
+    <div class="ctrl">
+      <label>เสียง <select id="voice" aria-label="เลือกเสียงอ่าน"></select></label>
+      <label>ความเร็ว <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.85"> <span id="rateVal">0.85×</span></label>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="tabinfo">
+    <span id="info"></span>
+    <span><button class="btn" id="flipAll">พลิกทั้งหมด</button> <button class="btn" id="resetAll">กลับด้านหน้า</button></span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <p class="note">การอ่านออกเสียงใช้เสียงภาษาอังกฤษที่มีในอุปกรณ์/เบราว์เซอร์ของคุณ ระบบจะเลือกเสียงที่ชัดที่สุดให้อัตโนมัติ (เช่น Google US English, Microsoft Natural, Samantha) หากอยากได้เสียงอื่นให้เลือกจากเมนู "เสียง"</p>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+// [subject, plural?, object, adjective, Thai subject, Thai rest, subject emoji, object emoji]
+const CARDS = [["I need him to help me.", "ฉันต้องการให้เขาช่วยฉัน", "🧑", "👨", "help"], ["I do not need her to stay here.", "ฉันไม่จำเป็นต้องให้เธออยู่ที่นี่", "🧑", "👩", "stay"], ["She needs me to call her later.", "เธอต้องการให้ฉันโทรหาเธอทีหลัง", "👩", "🧑", "call"], ["She does not need me to wait outside.", "เธอไม่จำเป็นต้องให้ฉันรอข้างนอก", "👩", "🧑", "wait"], ["He needs his son to study harder.", "เขาต้องการให้ลูกชายตั้งใจเรียนมากขึ้น", "👨", "👦", "study"], ["He does not need his son to work today.", "เขาไม่จำเป็นต้องให้ลูกชายทำงานวันนี้", "👨", "👦", "work"], ["My mother needs me to buy some vegetables.", "แม่ต้องการให้ฉันซื้อผัก", "👩", "🧑", "buy"], ["My mother does not need me to cook dinner tonight.", "แม่ไม่จำเป็นต้องให้ฉันทำอาหารเย็นคืนนี้", "👩", "🧑", "cook"], ["The teacher needs the students to complete their homework.", "ครูต้องการให้นักเรียนทำการบ้านให้เสร็จ", "👩‍🏫", "🧑‍🎓", "complete"], ["The teacher does not need the students to bring their books today.", "ครูไม่จำเป็นต้องให้นักเรียนนำหนังสือมาวันนี้", "👩‍🏫", "🧑‍🎓", "bring"], ["The coach needs the players to practice every day.", "โค้ชต้องการให้นักกีฬาฝึกซ้อมทุกวัน", "📣", "🏃", "practice"], ["The coach does not need the players to stay after practice.", "โค้ชไม่จำเป็นต้องให้นักกีฬาอยู่ต่อหลังการฝึกซ้อม", "📣", "🏃", "stay"], ["They need us to arrive early.", "พวกเขาต้องการให้เรามาถึงแต่เช้า", "👥", "🧑", "arrive"], ["They do not need us to wait for them.", "พวกเขาไม่จำเป็นต้องให้เรารอพวกเขา", "👥", "🧑", "wait"], ["The manager needs employees to work together.", "ผู้จัดการต้องการให้พนักงานทำงานร่วมกัน", "🧑‍💼", "👥", "work"], ["The manager does not need employees to work overtime.", "ผู้จัดการไม่จำเป็นต้องให้พนักงานทำงานล่วงเวลา", "🧑‍💼", "👥", "work"], ["The boss needs her assistant to prepare the report.", "เจ้านายต้องการให้ผู้ช่วยเตรียมรายงาน", "🧑‍💼", "🧑‍💻", "prepare"], ["The boss does not need her assistant to attend the meeting.", "เจ้านายไม่จำเป็นต้องให้ผู้ช่วยเข้าร่วมการประชุม", "🧑‍💼", "🧑‍💻", "attend"], ["The doctor needs the patient to rest.", "หมอต้องการให้คนไข้พักผ่อน", "🧑‍⚕️", "🤒", "rest"], ["The doctor does not need the patient to stay overnight.", "หมอไม่จำเป็นต้องให้คนไข้พักค้างคืน", "🧑‍⚕️", "🤒", "stay"], ["My father needs me to save some money.", "พ่อต้องการให้ฉันเก็บเงินไว้บ้าง", "👨", "🧑", "save"], ["My father does not need me to spend more money.", "พ่อไม่จำเป็นต้องให้ฉันใช้เงินมากขึ้น", "👨", "🧑", "spend"], ["My friend needs me to check the schedule.", "เพื่อนต้องการให้ฉันตรวจสอบตารางเวลา", "🧑", "🧑", "check"], ["My friend does not need me to visit him today.", "เพื่อนไม่จำเป็นต้องให้ฉันไปเยี่ยมเขาวันนี้", "🧑", "🧑", "visit"], ["The guide needs tourists to follow the rules.", "ไกด์ต้องการให้นักท่องเที่ยวปฏิบัติตามกฎ", "🚩", "🧳", "follow"], ["The guide does not need tourists to enter the restricted area.", "ไกด์ไม่จำเป็นต้องให้นักท่องเที่ยวเข้าไปในพื้นที่หวงห้าม", "🚩", "🧳", "enter"], ["The parents need their children to behave well.", "พ่อแม่ต้องการให้ลูก ๆ ประพฤติตัวดี", "👪", "🧒", "behave"], ["The parents do not need their children to wake up early tomorrow.", "พ่อแม่ไม่จำเป็นต้องให้ลูก ๆ ตื่นแต่เช้าพรุ่งนี้", "👪", "🧒", "wake up"], ["The company needs employees to attend the training.", "บริษัทต้องการให้พนักงานเข้าร่วมการฝึกอบรม", "🏢", "🧑‍💼", "attend"], ["The company does not need employees to work on Sunday.", "บริษัทไม่จำเป็นต้องให้พนักงานทำงานวันอาทิตย์", "🏢", "🧑‍💼", "work"], ["The speaker needs the audience to listen carefully.", "ผู้พูดต้องการให้ผู้ฟังตั้งใจฟัง", "🎤", "👥", "listen"], ["The speaker does not need the audience to answer every question.", "ผู้พูดไม่จำเป็นต้องให้ผู้ฟังตอบทุกคำถาม", "🎤", "👥", "answer"], ["The team leader needs the members to cooperate.", "หัวหน้าทีมต้องการให้สมาชิกให้ความร่วมมือ", "🧑‍💼", "👥", "cooperate"], ["The team leader does not need the members to work alone.", "หัวหน้าทีมไม่จำเป็นต้องให้สมาชิกทำงานคนเดียว", "🧑‍💼", "👥", "work"], ["The hotel needs guests to follow the hotel rules.", "โรงแรมต้องการให้แขกปฏิบัติตามกฎของโรงแรม", "🏨", "🧳", "follow"], ["The hotel does not need guests to leave early.", "โรงแรมไม่จำเป็นต้องให้แขกออกไปก่อนเวลา", "🏨", "🧳", "leave"], ["The organizer needs everyone to participate in the event.", "ผู้จัดงานต้องการให้ทุกคนเข้าร่วมงาน", "📋", "👥", "participate"], ["The organizer does not need everyone to speak at once.", "ผู้จัดงานไม่จำเป็นต้องให้ทุกคนพูดพร้อมกัน", "📋", "👥", "speak"], ["The trainer needs athletes to improve their skills.", "เทรนเนอร์ต้องการให้นักกีฬาพัฒนาทักษะของตน", "🏋️", "🏃", "improve"], ["The trainer does not need athletes to compete every day.", "เทรนเนอร์ไม่จำเป็นต้องให้นักกีฬาแข่งขันทุกวัน", "🏋️", "🏃", "compete"], ["The nurse needs the patient to take the medicine.", "พยาบาลต้องการให้คนไข้กินยา", "🧑‍⚕️", "🤒", "take"], ["The nurse does not need the patient to stay in bed all day.", "พยาบาลไม่จำเป็นต้องให้คนไข้นอนบนเตียงทั้งวัน", "🧑‍⚕️", "🤒", "stay"], ["My wife needs me to pick up the kids.", "ภรรยาต้องการให้ฉันไปรับลูก", "👩", "🧑", "pick up"], ["My wife does not need me to cook tonight.", "ภรรยาไม่จำเป็นต้องให้ฉันทำอาหารคืนนี้", "👩", "🧑", "cook"], ["The driver needs passengers to fasten their seatbelts.", "คนขับต้องการให้ผู้โดยสารคาดเข็มขัดนิรภัย", "🧑", "🧳", "fasten"], ["The driver does not need passengers to pay in cash.", "คนขับไม่จำเป็นต้องให้ผู้โดยสารจ่ายเงินสด", "🧑", "🧳", "pay"], ["We need him to fix the car.", "เราต้องการให้เขาซ่อมรถ", "👥", "👨", "fix"], ["We do not need him to call a mechanic.", "เราไม่จำเป็นต้องให้เขาเรียกช่าง", "👥", "👨", "call"], ["The principal needs teachers to attend the meeting.", "ครูใหญ่ต้องการให้ครูเข้าร่วมการประชุม", "🧑‍🏫", "🧑‍🏫", "attend"], ["The principal does not need teachers to arrive early.", "ครูใหญ่ไม่จำเป็นต้องให้ครูมาถึงแต่เช้า", "🧑‍🏫", "🧑‍🏫", "arrive"], ["The chef needs the cooks to wash their hands.", "เชฟต้องการให้ลูกมือล้างมือ", "🧑‍🍳", "🧑‍🍳", "wash"], ["The chef does not need the cooks to wait for orders.", "เชฟไม่จำเป็นต้องให้ลูกมือรอออเดอร์", "🧑‍🍳", "🧑‍🍳", "wait"], ["The customer needs the waiter to bring the bill.", "ลูกค้าต้องการให้พนักงานเสิร์ฟนำใบเสร็จมา", "🙍", "🤵", "bring"], ["The customer does not need the waiter to hurry.", "ลูกค้าไม่จำเป็นต้องให้พนักงานเสิร์ฟรีบ", "🙍", "🤵", "hurry"], ["The judge needs the witness to tell the truth.", "ผู้พิพากษาต้องการให้พยานบอกความจริง", "⚖️", "🧑", "tell"], ["The judge does not need the witness to answer every question.", "ผู้พิพากษาไม่จำเป็นต้องให้พยานตอบทุกคำถาม", "⚖️", "🧑", "answer"], ["My roommate needs me to clean the kitchen.", "เพื่อนร่วมห้องต้องการให้ฉันทำความสะอาดครัว", "🧑", "🧑", "clean"], ["My roommate does not need me to move out.", "เพื่อนร่วมห้องไม่จำเป็นต้องให้ฉันย้ายออก", "🧑", "🧑", "move"], ["The editor needs the writer to finish the article.", "บรรณาธิการต้องการให้นักเขียนเขียนบทความให้เสร็จ", "🧑‍💼", "✍️", "finish"], ["The editor does not need the writer to rewrite the story.", "บรรณาธิการไม่จำเป็นต้องให้นักเขียนเขียนเรื่องใหม่", "🧑‍💼", "✍️", "rewrite"], ["The mayor needs citizens to vote on Sunday.", "นายกเทศมนตรีต้องการให้ประชาชนไปลงคะแนนวันอาทิตย์", "🏛️", "👥", "vote"], ["The mayor does not need citizens to pay extra tax.", "นายกเทศมนตรีไม่จำเป็นต้องให้ประชาชนจ่ายภาษีเพิ่ม", "🏛️", "👥", "pay"], ["The pilot needs the crew to check the engine.", "นักบินต้องการให้ลูกเรือตรวจเครื่องยนต์", "🧑‍✈️", "👥", "check"], ["The pilot does not need the crew to open the door.", "นักบินไม่จำเป็นต้องให้ลูกเรือเปิดประตู", "🧑‍✈️", "👥", "open"], ["The farmer needs his sons to plant rice.", "ชาวนาต้องการให้ลูกชายปลูกข้าว", "👨‍🌾", "👦", "plant"], ["The farmer does not need his sons to sell the cows.", "ชาวนาไม่จำเป็นต้องให้ลูกชายขายวัว", "👨‍🌾", "👦", "sell"], ["My neighbor needs me to water his plants.", "เพื่อนบ้านต้องการให้ฉันรดน้ำต้นไม้ของเขา", "🧑", "🧑", "water"], ["My neighbor does not need me to feed his dog.", "เพื่อนบ้านไม่จำเป็นต้องให้ฉันให้อาหารสุนัขของเขา", "🧑", "🧑", "feed"], ["The librarian needs visitors to return the books on time.", "บรรณารักษ์ต้องการให้ผู้มาใช้บริการคืนหนังสือตรงเวลา", "🧑‍💼", "👥", "return"], ["The librarian does not need visitors to pay a fine.", "บรรณารักษ์ไม่จำเป็นต้องให้ผู้มาใช้บริการจ่ายค่าปรับ", "🧑‍💼", "👥", "pay"], ["The director needs the actors to memorize their lines.", "ผู้กำกับต้องการให้นักแสดงท่องบทให้ได้", "🎬", "🎭", "memorize"], ["The director does not need the actors to rehearse again.", "ผู้กำกับไม่จำเป็นต้องให้นักแสดงซ้อมอีกครั้ง", "🎬", "🎭", "rehearse"], ["The professor needs the students to submit their papers online.", "ศาสตราจารย์ต้องการให้นักศึกษาส่งรายงานออนไลน์", "🧑‍🏫", "🧑‍🎓", "submit"], ["The professor does not need the students to print their papers.", "ศาสตราจารย์ไม่จำเป็นต้องให้นักศึกษาพิมพ์รายงาน", "🧑‍🏫", "🧑‍🎓", "print"], ["The bank needs customers to protect their passwords.", "ธนาคารต้องการให้ลูกค้าปกป้องรหัสผ่านของตน", "🏦", "👥", "protect"], ["The bank does not need customers to visit the branch.", "ธนาคารไม่จำเป็นต้องให้ลูกค้ามาที่สาขา", "🏦", "👥", "visit"], ["The landlord needs tenants to pay rent on time.", "เจ้าของบ้านเช่าต้องการให้ผู้เช่าจ่ายค่าเช่าตรงเวลา", "🏠", "👥", "pay"], ["The landlord does not need tenants to repair the roof.", "เจ้าของบ้านเช่าไม่จำเป็นต้องให้ผู้เช่าซ่อมหลังคา", "🏠", "👥", "repair"], ["The conductor needs the musicians to tune their instruments.", "ผู้ควบคุมวงต้องการให้นักดนตรีเทียบเสียงเครื่องดนตรี", "🎼", "🎻", "tune"], ["The conductor does not need the musicians to play louder.", "ผู้ควบคุมวงไม่จำเป็นต้องให้นักดนตรีเล่นให้ดังขึ้น", "🎼", "🎻", "play"], ["The kindergarten teacher needs the kids to line up.", "ครูอนุบาลต้องการให้เด็ก ๆ เข้าแถว", "👩‍🏫", "🧒", "line up"], ["The kindergarten teacher does not need the kids to nap after lunch.", "ครูอนุบาลไม่จำเป็นต้องให้เด็ก ๆ งีบหลังอาหารกลางวัน", "👩‍🏫", "🧒", "nap"], ["The captain needs the crew to prepare the boat.", "กัปตันต้องการให้ลูกเรือเตรียมเรือ", "🧑‍✈️", "👥", "prepare"], ["The captain does not need the crew to leave tonight.", "กัปตันไม่จำเป็นต้องให้ลูกเรือออกเดินทางคืนนี้", "🧑‍✈️", "👥", "leave"], ["The tour guide needs us to gather in the lobby.", "ไกด์ต้องการให้พวกเรารวมตัวกันที่ล็อบบี้", "🚩", "🧑", "gather"], ["The tour guide does not need us to buy tickets today.", "ไกด์ไม่จำเป็นต้องให้พวกเราซื้อตั๋ววันนี้", "🚩", "🧑", "buy"], ["My sister needs me to lend her some money.", "น้องสาวต้องการให้ฉันให้ยืมเงินเธอบ้าง", "👧", "🧑", "lend"], ["My sister does not need me to drive her home.", "น้องสาวไม่จำเป็นต้องให้ฉันขับรถไปส่งเธอที่บ้าน", "👧", "🧑", "drive"], ["The tourists need the guide to show them the map.", "นักท่องเที่ยวต้องการให้ไกด์ชี้แผนที่ให้ดู", "🧳", "🚩", "show"], ["The tourists do not need the guide to carry their bags.", "นักท่องเที่ยวไม่จำเป็นต้องให้ไกด์ถือกระเป๋าให้", "🧳", "🚩", "carry"], ["The students need the teacher to explain the lesson again.", "นักเรียนต้องการให้ครูอธิบายบทเรียนอีกครั้ง", "🧑‍🎓", "👩‍🏫", "explain"], ["The students do not need the teacher to give more homework.", "นักเรียนไม่จำเป็นต้องให้ครูให้การบ้านเพิ่ม", "🧑‍🎓", "👩‍🏫", "give"], ["The company needs the designer to create a new logo.", "บริษัทต้องการให้นักออกแบบสร้างโลโก้ใหม่", "🏢", "🧑‍🎨", "create"], ["The company does not need the designer to change the colors.", "บริษัทไม่จำเป็นต้องให้นักออกแบบเปลี่ยนสี", "🏢", "🧑‍🎨", "change"], ["The doctor needs the nurse to measure his blood pressure.", "หมอต้องการให้พยาบาลวัดความดันของเขา", "🧑‍⚕️", "🧑‍⚕️", "measure"], ["The doctor does not need the nurse to give him medicine.", "หมอไม่จำเป็นต้องให้พยาบาลให้ยาเขา", "🧑‍⚕️", "🧑‍⚕️", "give"], ["The police officer needs the witness to describe the thief.", "ตำรวจต้องการให้พยานบรรยายลักษณะของโจร", "👮", "🧑", "describe"], ["The police officer does not need the witness to sign the statement.", "ตำรวจไม่จำเป็นต้องให้พยานลงชื่อในคำให้การ", "👮", "🧑", "sign"], ["The coach needs the swimmers to warm up.", "โค้ชต้องการให้นักว่ายน้ำวอร์มอัพ", "📣", "🏊", "warm up"], ["The coach does not need the swimmers to swim alone.", "โค้ชไม่จำเป็นต้องให้นักว่ายน้ำว่ายคนเดียว", "📣", "🏊", "swim"]];
+
+const VERBS = {"help": ["🤝", "ช่วย, ช่วยเหลือ"], "stay": ["🏠", "อยู่, พักอยู่"], "join": ["🙋", "เข้าร่วม"], "leave": ["🚪", "ออกไป, จากไป"], "study": ["📖", "เรียน, ศึกษา"], "play": ["⚽", "เล่น"], "wake up": ["⏰", "ตื่นนอน"], "stay up": ["🌙", "นอนดึก, อดนอน"], "complete": ["✅", "ทำให้เสร็จ, ทำให้สมบูรณ์"], "talk": ["🗣️", "พูดคุย"], "practice": ["🏋️", "ฝึกซ้อม"], "quit": ["🚫", "เลิก, ลาออก"], "arrive": ["🛬", "มาถึง"], "wait": ["⏳", "รอ"], "work": ["💼", "ทำงาน"], "prepare": ["📝", "เตรียม"], "cancel": ["❌", "ยกเลิก"], "rest": ["🛌", "พักผ่อน"], "exercise": ["🏃", "ออกกำลังกาย"], "save": ["🐷", "เก็บออม, ประหยัด"], "spend": ["💸", "ใช้จ่าย"], "call": ["📞", "โทรหา"], "visit": ["🏡", "ไปเยี่ยม"], "follow": ["📜", "ปฏิบัติตาม, ตาม"], "enter": ["🚪", "เข้าไป"], "behave": ["😇", "ประพฤติตัว, วางตัว"], "attend": ["🎓", "เข้าร่วม, เข้าเรียน"], "use": ["📱", "ใช้"], "listen": ["👂", "ฟัง"], "cooperate": ["🤝", "ให้ความร่วมมือ"], "argue": ["😠", "โต้เถียง"], "participate": ["🙌", "มีส่วนร่วม, เข้าร่วม"], "speak": ["🎤", "พูด"], "improve": ["📈", "พัฒนา, ปรับปรุง"], "compete": ["🏆", "แข่งขัน"], "read": ["📚", "อ่าน"], "copy": ["📋", "ลอก, คัดลอก"], "cook": ["🍳", "ทำอาหาร"], "come": ["🏠", "มา, กลับมา"], "take": ["💊", "กิน (ยา), หยิบ, รับ"], "skip": ["⏭️", "ข้าม, งด"], "fasten": ["🔒", "คาด, รัด"], "stand": ["🧍", "ยืน"], "tell": ["🗣️", "บอก"], "lie": ["🤥", "โกหก"], "clean": ["🧹", "ทำความสะอาด"], "touch": ["✋", "แตะ, สัมผัส"], "wear": ["👕", "สวมใส่"], "run": ["🏃", "วิ่ง"], "bring": ["🍽️", "นำมา, พามา"], "clear": ["🧽", "เก็บ (โต๊ะ), ทำให้โล่ง"], "sing": ["🎤", "ร้องเพลง"], "forget": ["🎂", "ลืม"], "finish": ["📰", "ทำให้เสร็จ, จบ"], "change": ["🔄", "เปลี่ยน"], "recycle": ["♻️", "รีไซเคิล"], "throw": ["🗑️", "ทิ้ง, ขว้าง"], "remain": ["💺", "ยังคงอยู่"], "switch on": ["📲", "เปิด (อุปกรณ์)"], "plant": ["🌾", "ปลูก"], "waste": ["💧", "สิ้นเปลือง, ทำเปล่าประโยชน์"], "keep": ["🤫", "รักษา, เก็บไว้, คง"], "eat": ["🍔", "กิน"], "memorize": ["🧠", "ท่องจำ"], "be": ["⏰", "เป็น, อยู่ในสภาพ"], "turn down": ["🔉", "ลดเสียง"], "explain": ["🧑‍🏫", "อธิบาย"], "interrupt": ["✋", "ขัดจังหวะ"], "wash": ["🧼", "ล้าง"], "rush": ["💨", "รีบเร่ง"], "drink": ["🥛", "ดื่ม"], "watch": ["📺", "ดู"], "meet": ["🎯", "ทำให้ถึง (เป้า), พบ"], "give up": ["🏳️", "ยอมแพ้"], "tune": ["🎻", "เทียบเสียง, ปรับเสียง"], "start": ["🎼", "เริ่ม"], "gather": ["🧑‍🤝‍🧑", "รวมตัว"], "wander off": ["🚶", "แยกตัวไปเดินเอง, เดินหลงไป"], "check": ["🔧", "ตรวจสอบ"], "ignore": ["🔕", "เพิกเฉย, ไม่สนใจ"], "submit": ["📄", "ส่ง (งาน)"], "plagiarize": ["📋", "ลอกผลงานผู้อื่น"], "water": ["🪴", "รดน้ำ"], "park": ["🅿️", "จอดรถ"], "protect": ["🔐", "ปกป้อง"], "share": ["🔑", "แบ่งปัน, เปิดเผยให้ผู้อื่น"], "line up": ["🧒", "เข้าแถว"], "push": ["🫸", "ผลัก"], "warm up": ["🤸", "วอร์มอัพ, อบอุ่นร่างกาย"], "swim": ["🏊", "ว่ายน้ำ"], "send": ["📧", "ส่ง"], "pay": ["💵", "จ่าย"], "buy": ["🛒", "ซื้อ"], "answer": ["💬", "ตอบ"], "pick up": ["🚸", "ไปรับ, หยิบขึ้น"], "fix": ["🔧", "ซ่อม, แก้ไข"], "hurry": ["🏃", "รีบ, เร่งรีบ"], "move": ["📦", "ย้าย, เคลื่อนที่"], "rewrite": ["✍️", "เขียนใหม่"], "vote": ["🗳️", "ลงคะแนนเสียง"], "open": ["🚪", "เปิด"], "sell": ["🏷️", "ขาย"], "feed": ["🦴", "ให้อาหาร"], "return": ["↩️", "คืน, ส่งคืน"], "rehearse": ["🎭", "ซ้อม, ซ้อมการแสดง"], "print": ["🖨️", "พิมพ์"], "repair": ["🛠️", "ซ่อมแซม"], "nap": ["😴", "งีบหลับ"], "lend": ["🤲", "ให้ยืม"], "drive": ["🚗", "ขับรถ"], "carry": ["🎒", "ถือ, แบก, พก"], "show": ["🗺️", "แสดง, ชี้ให้ดู"], "give": ["🎁", "ให้"], "create": ["🎨", "สร้าง, สร้างสรรค์"], "measure": ["🩺", "วัด"], "describe": ["🧾", "บรรยาย, อธิบายลักษณะ"], "sign": ["✍️", "ลงชื่อ"]};
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+
+function build(c){
+  const [plain,th,se,oe,k]=c;
+  const neg=/(?:does|do) not need/.test(plain);
+  const pat="need + someone + to + V1 = ต้องการให้ (ใคร) ทำ...";
+  let en=esc(plain).replace(/(does not need|do not need|needs|need)/,m=>`<span class="v" data-t="${m}" data-b="${esc(neg?"ไม่จำเป็นต้องให้ (ใคร) ทำ...":"ต้องการให้ / จำเป็นต้องให้ (ใคร) ทำ...")}" data-v="${esc(pat+(m==="needs"?" · needs = need + s":""))}">${m}</span>`);
+  en=en.replace("to "+k,m=>`<span class="a" data-t="${k} (V1)" data-b="${esc(VERBS[k][1])}" data-v="${esc(pat)}">${m}</span>`);
+  return {en,plain,th,neg,se,oe,ve:VERBS[k][0]};
+}
+
+const SETS = 5, PER = 20;
+const sets = [];
+for(let k=0;k<SETS;k++){ sets.push(CARDS.slice(k*PER,k*PER+PER).map(build)); }
+
+/* ---------- speech ---------- */
+let voices=[], chosen=null, speakingBtn=null;
+const supports = 'speechSynthesis' in window;
+function score(v){
+  const n=(v.name||"").toLowerCase(); let s=0;
+  if(!/^en/i.test(v.lang)) return -1;
+  if(/en[-_]us/i.test(v.lang)) s+=5;
+  if(/natural|neural/.test(n)) s+=50;
+  if(/online/.test(n)) s+=15;
+  if(/google us english/.test(n)) s+=40;
+  if(/aria|jenny|guy|samantha|ava|allison|zoe|siri|serena|daniel|karen|alex/.test(n)) s+=25;
+  if(/google/.test(n)) s+=10;
+  if(/espeak|compact/.test(n)) s-=30;
+  if(v.localService===false) s+=3;
+  return s;
+}
+function loadVoices(){
+  if(!supports) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)).sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice');
+  sel.innerHTML="";
+  if(!voices.length){ sel.innerHTML='<option>ใช้เสียงเริ่มต้น</option>'; return; }
+  voices.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=`${v.name} (${v.lang})`; sel.appendChild(o); });
+  chosen=voices[0]; sel.value=0;
+}
+if(supports){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('voice').addEventListener('change',e=>{ chosen=voices[+e.target.value]||null; });
+const rate=document.getElementById('rate');
+rate.addEventListener('input',()=>document.getElementById('rateVal').textContent=(+rate.value).toFixed(2)+"×");
+
+function speak(text, btn){
+  if(!supports){ alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง"); return; }
+  const wasThis = speakingBtn===btn;
+  speechSynthesis.cancel();
+  if(speakingBtn) speakingBtn.classList.remove('on');
+  speakingBtn=null;
+  if(wasThis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=+rate.value; u.pitch=1; u.volume=1;
+  if(chosen) u.voice=chosen;
+  btn.classList.add('on'); speakingBtn=btn;
+  const done=()=>{ btn.classList.remove('on'); if(speakingBtn===btn) speakingBtn=null; };
+  u.onend=done; u.onerror=done;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- render ---------- */
+let cur=0;
+const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid'), info=document.getElementById('info');
+sets.forEach((_,k)=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.setAttribute('role','tab'); b.textContent=`Set ${k+1} · ${k*PER+1}–${k*PER+PER}`;
+  b.onclick=()=>show(k); tabsEl.appendChild(b);
+});
+
+function sceneHTML(c){
+  return `<div class="scene" aria-hidden="true">
+    <span class="sc">${c.se}</span><span class="arrow">➜</span>
+    <span class="car${c.neg?' neg':''}"><span class="wind">❗</span>🤲</span><span class="arrow">➜</span>
+    <span class="sc">${c.oe}</span><span class="arrow">➜</span><span class="sc">${c.ve}</span></div>`;
+}
+function show(k){
+  cur=k; speechSynthesis && speechSynthesis.cancel(); speakingBtn=null;
+  [...tabsEl.children].forEach((b,i)=>b.setAttribute('aria-selected',i===k));
+  info.textContent=`Set ${k+1}: การ์ด ${PER} ใบ (ประโยคบอกเล่า/ปฏิเสธ สลับกัน)` + (k>=2 ? " · ประโยคชุดนี้เพิ่มให้ตามรูปแบบเดียวกัน" : "");
+  grid.innerHTML="";
+  sets[k].forEach((c,i)=>{
+    const n=k*PER+i+1;
+    const w=document.createElement('div'); w.className='cw';
+    w.innerHTML=`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${n} คลิกเพื่อพลิก">
+      <div class="face front">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        ${sceneHTML(c)}
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อดูคำแปล</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+      <div class="face back">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        <div class="th">${c.th}</div>
+        <hr class="sep">
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อพลิกกลับ</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+    </div>`;
+    const card=w.firstElementChild;
+    card.addEventListener('click',e=>{
+      const spk=e.target.closest('.spk');
+      if(spk){ e.stopPropagation(); speak(c.plain,spk); return; }
+      const t=e.target.closest('[data-t]');
+      if(t && e.pointerType==='touch'){ showTip(t); e.stopPropagation(); return; }
+      card.classList.toggle('flipped');
+    });
+    card.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ') && e.target===card){ e.preventDefault(); card.classList.toggle('flipped'); }});
+    grid.appendChild(w);
+  });
+}
+document.getElementById('flipAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.add('flipped'));
+document.getElementById('resetAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.remove('flipped'));
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function showTip(el){
+  const v=el.dataset.v ? `<span class="tv">${el.dataset.v}</span>` : "";
+  tip.innerHTML=`<b>${el.dataset.t}</b>${el.dataset.b}${v}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=Math.min(Math.max(8,r.left+r.width/2-tw/2), innerWidth-tw-8);
+  let y=r.top-th-10; if(y<8) y=r.bottom+10;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+document.addEventListener('mouseover',e=>{ const t=e.target.closest('[data-t]'); if(t) showTip(t); });
+document.addEventListener('mouseout',e=>{ if(e.target.closest('[data-t]')) tip.classList.remove('show'); });
+document.addEventListener('click',e=>{ if(!e.target.closest('[data-t]')) tip.classList.remove('show'); });
+window.addEventListener('scroll',()=>tip.classList.remove('show'),{passive:true});
+
+show(0);
+</script>
+</body>
+</html>

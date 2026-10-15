@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.16 Causative Verb: ENCOURAGE + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.16 Causative Verb: <span class="rm">ENCOURAGE</span> + Someone + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">encourage(s)</b> + someone + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I encourage him to *study* every day.|ฉันสนับสนุนให้เขาเรียนทุกวัน|เรียน|📚
+I do not encourage her to *worry* about small things.|ฉันไม่สนับสนุนให้เธอกังวลกับเรื่องเล็ก ๆ|กังวล|😟
+She encourages me to *exercise* regularly.|เธอสนับสนุนให้ฉันออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃
+She does not encourage me to *give up* easily.|เธอไม่สนับสนุนให้ฉันยอมแพ้ง่าย ๆ|ยอมแพ้|🏳️
+He encourages his son to *read* more books.|เขาสนับสนุนให้ลูกชายอ่านหนังสือมากขึ้น|อ่าน|📖
+He does not encourage his son to *stay up* late.|เขาไม่สนับสนุนให้ลูกชายนอนดึก|นอนดึก|🌙
+My mother encourages me to *practice* English every day.|แม่สนับสนุนให้ฉันฝึกภาษาอังกฤษทุกวัน|ฝึก|🗣️
+My mother does not encourage me to *waste* my time.|แม่ไม่สนับสนุนให้ฉันเสียเวลา|เสีย/สิ้นเปลือง|⌛
+The teacher encourages students to *ask* questions.|ครูสนับสนุนให้นักเรียนถามคำถาม|ถาม|🙋
+The teacher does not encourage students to *memorize* everything.|ครูไม่สนับสนุนให้นักเรียนท่องจำทุกอย่าง|ท่องจำ|🧠
+The coach encourages the players to *practice* harder.|โค้ชกระตุ้นให้นักกีฬาฝึกซ้อมให้หนักขึ้น|ฝึกซ้อม|🏋️
+The coach does not encourage the players to *relax* during practice.|โค้ชไม่สนับสนุนให้นักกีฬาผ่อนคลายระหว่างการฝึกซ้อม|ผ่อนคลาย|😌
+They encourage us to *participate* in the activity.|พวกเขาสนับสนุนให้เราเข้าร่วมกิจกรรม|เข้าร่วม|🙌
+They do not encourage us to *complain* about the situation.|พวกเขาไม่สนับสนุนให้เราบ่นเกี่ยวกับสถานการณ์|บ่น|😤
+The manager encourages employees to *communicate* openly.|ผู้จัดการสนับสนุนให้พนักงานสื่อสารกันอย่างเปิดเผย|สื่อสาร|💬
+The manager does not encourage employees to *work* without breaks.|ผู้จัดการไม่สนับสนุนให้พนักงานทำงานโดยไม่พัก|ทำงาน|💼
+The company encourages workers to *follow* safety rules.|บริษัทส่งเสริมให้คนงานปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The company does not encourage workers to *ignore* safety rules.|บริษัทไม่สนับสนุนให้คนงานเพิกเฉยต่อกฎความปลอดภัย|เพิกเฉย|🙈
+The doctor encourages the patient to *exercise* regularly.|หมอกระตุ้นให้คนไข้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🧘
+The doctor does not encourage the patient to *eat* too much sugar.|หมอไม่สนับสนุนให้คนไข้กินน้ำตาลมากเกินไป|กิน|🍬
+The school encourages students to *join* sports activities.|โรงเรียนส่งเสริมให้นักเรียนเข้าร่วมกิจกรรมกีฬา|เข้าร่วม|⚽
+The school does not encourage students to *use* phones in class.|โรงเรียนไม่สนับสนุนให้นักเรียนใช้โทรศัพท์ในชั้นเรียน|ใช้|📵
+The boss encourages her assistant to *learn* new skills.|เจ้านายสนับสนุนให้ผู้ช่วยเรียนรู้ทักษะใหม่ ๆ|เรียนรู้|💡
+The boss does not encourage her assistant to *work* late.|เจ้านายไม่สนับสนุนให้ผู้ช่วยทำงานดึก|ทำงาน|🌃
+The trainer encourages us to *improve* our skills.|เทรนเนอร์กระตุ้นให้เราพัฒนาทักษะของเรา|พัฒนา|📈
+The trainer does not encourage us to *skip* training sessions.|เทรนเนอร์ไม่สนับสนุนให้เราข้ามการฝึกซ้อม|ข้าม|⏭️
+My father encourages me to *save* money.|พ่อสนับสนุนให้ฉันเก็บเงิน|เก็บออม|💰
+My father does not encourage me to *spend* money carelessly.|พ่อไม่สนับสนุนให้ฉันใช้เงินอย่างไม่ระมัดระวัง|ใช้จ่าย|💸
+Our guide encourages us to *explore* the city.|ไกด์ของเราสนับสนุนให้เราเที่ยวสำรวจเมือง|สำรวจ|🧭
+Our guide does not encourage us to *travel* alone at night.|ไกด์ของเราไม่สนับสนุนให้เราเดินทางคนเดียวในเวลากลางคืน|เดินทาง|🧳
+The librarian encourages children to *read* more books.|บรรณารักษ์ส่งเสริมให้เด็ก ๆ อ่านหนังสือมากขึ้น|อ่าน|📚
+The librarian does not encourage children to *talk* loudly.|บรรณารักษ์ไม่สนับสนุนให้เด็ก ๆ พูดเสียงดัง|พูด|📢
+The parents encourage their children to *be* independent.|พ่อแม่สนับสนุนให้ลูก ๆ พึ่งพาตนเอง|เป็น|🦸
+The parents do not encourage their children to *quit* easily.|พ่อแม่ไม่สนับสนุนให้ลูก ๆ เลิกง่าย ๆ|เลิก|🛑
+The trainer encourages athletes to *compete* fairly.|เทรนเนอร์สนับสนุนให้นักกีฬาแข่งขันอย่างยุติธรรม|แข่งขัน|🥇
+The trainer does not encourage athletes to *cheat*.|เทรนเนอร์ไม่สนับสนุนให้นักกีฬาโกง|โกง|🃏
+The program encourages people to *recycle* more.|โครงการส่งเสริมให้ผู้คนรีไซเคิลมากขึ้น|รีไซเคิล|♻️
+The program does not encourage people to *waste* resources.|โครงการไม่สนับสนุนให้ผู้คนใช้ทรัพยากรอย่างสิ้นเปลือง|ทิ้งขว้าง|🗑️
+This book encourages readers to *think* critically.|หนังสือเล่มนี้กระตุ้นให้ผู้อ่านคิดอย่างมีวิจารณญาณ|คิด|🤔
+This book does not encourage readers to *judge* others quickly.|หนังสือเล่มนี้ไม่สนับสนุนให้ผู้อ่านตัดสินผู้อื่นอย่างรวดเร็ว|ตัดสิน|⚖️
+My brother encourages me to *adopt* a puppy.|น้องชายสนับสนุนให้ฉันรับเลี้ยงลูกสุนัข|รับเลี้ยง|🐶
+My brother does not encourage me to *sell* my bike.|น้องชายไม่สนับสนุนให้ฉันขายจักรยาน|ขาย|🚲
+My sister encourages me to *apply* for the scholarship.|น้องสาวสนับสนุนให้ฉันสมัครทุนการศึกษา|สมัคร|🎓
+My sister does not encourage me to *skip* class.|น้องสาวไม่สนับสนุนให้ฉันโดดเรียน|โดด|🏫
+My grandmother encourages me to *visit* the temple.|คุณยายสนับสนุนให้ฉันไปวัด|ไปเยี่ยม|🛕
+My grandmother does not encourage me to *eat* fast food.|คุณยายไม่สนับสนุนให้ฉันกินฟาสต์ฟู้ด|กิน|🍔
+My husband encourages me to *swim* every weekend.|สามีสนับสนุนให้ฉันว่ายน้ำทุกสุดสัปดาห์|ว่ายน้ำ|🏊
+My husband does not encourage me to *quit* my job.|สามีไม่สนับสนุนให้ฉันลาออกจากงาน|ลาออก|💼
+My wife encourages me to *clean* the garage.|ภรรยาสนับสนุนให้ฉันทำความสะอาดโรงรถ|ทำความสะอาด|🧹
+My wife does not encourage me to *buy* a new car.|ภรรยาไม่สนับสนุนให้ฉันซื้อรถคันใหม่|ซื้อ|🚗
+The mayor encourages citizens to *vote*.|นายกเทศมนตรีสนับสนุนให้ประชาชนไปลงคะแนนเสียง|ลงคะแนน|🗳️
+The mayor does not encourage citizens to *ignore* the rules.|นายกเทศมนตรีไม่สนับสนุนให้ประชาชนเพิกเฉยต่อกฎ|เพิกเฉย|🙈
+The principal encourages teachers to *try* new methods.|ผู้อำนวยการสนับสนุนให้ครูลองวิธีใหม่ ๆ|ลอง|💡
+The principal does not encourage teachers to *change* the schedule.|ผู้อำนวยการไม่สนับสนุนให้ครูเปลี่ยนตารางเวลา|เปลี่ยน|📅
+The professor encourages students to *write* a thesis.|ศาสตราจารย์สนับสนุนให้นักศึกษาเขียนวิทยานิพนธ์|เขียน|📄
+The professor does not encourage students to *copy* the answers.|ศาสตราจารย์ไม่สนับสนุนให้นักศึกษาลอกคำตอบ|คัดลอก|📋
+The tutor encourages me to *review* every lesson.|ติวเตอร์สนับสนุนให้ฉันทบทวนทุกบทเรียน|ทบทวน|🗒️
+The tutor does not encourage me to *give up*.|ติวเตอร์ไม่สนับสนุนให้ฉันยอมแพ้|ยอมแพ้|🏳️
+My coworker encourages me to *join* the project.|เพื่อนร่วมงานสนับสนุนให้ฉันเข้าร่วมโครงการ|เข้าร่วม|👥
+My coworker does not encourage me to *resign*.|เพื่อนร่วมงานไม่สนับสนุนให้ฉันลาออก|ลาออก|📤
+The advisor encourages investors to *wait*.|ที่ปรึกษาสนับสนุนให้นักลงทุนรอ|รอ|⏳
+The advisor does not encourage investors to *sell* their shares.|ที่ปรึกษาไม่สนับสนุนให้นักลงทุนขายหุ้น|ขาย|📉
+The nurse encourages the patient to *walk* around.|พยาบาลสนับสนุนให้คนไข้เดินไปมา|เดิน|🚶
+The nurse does not encourage the patient to *refuse* the medicine.|พยาบาลไม่สนับสนุนให้คนไข้ปฏิเสธยา|ปฏิเสธ|🙅
+The captain encourages the crew to *work* together.|กัปตันสนับสนุนให้ลูกเรือทำงานร่วมกัน|ทำงาน|⚓
+The captain does not encourage the crew to *leave* the ship.|กัปตันไม่สนับสนุนให้ลูกเรือออกจากเรือ|ออกจาก|🚢
+The pilot encourages passengers to *stay* calm.|นักบินสนับสนุนให้ผู้โดยสารใจเย็น|คงอยู่|😌
+The pilot does not encourage passengers to *panic*.|นักบินไม่สนับสนุนให้ผู้โดยสารตื่นตระหนก|ตื่นตระหนก|😱
+The chef encourages the cooks to *use* fresh ingredients.|เชฟสนับสนุนให้พ่อครัวใช้วัตถุดิบสด|ใช้|🥬
+The chef does not encourage the cooks to *waste* food.|เชฟไม่สนับสนุนให้พ่อครัวทิ้งขว้างอาหาร|ทิ้งขว้าง|🗑️
+The mechanic encourages me to *repair* the engine.|ช่างซ่อมรถสนับสนุนให้ฉันซ่อมเครื่องยนต์|ซ่อม|🔧
+The mechanic does not encourage me to *replace* the car.|ช่างซ่อมรถไม่สนับสนุนให้ฉันเปลี่ยนรถ|เปลี่ยน|🔄
+The dentist encourages me to *brush* twice a day.|ทันตแพทย์สนับสนุนให้ฉันแปรงฟันวันละสองครั้ง|แปรง|🪥
+The dentist does not encourage me to *avoid* the clinic.|ทันตแพทย์ไม่สนับสนุนให้ฉันหลีกเลี่ยงคลินิก|หลีกเลี่ยง|🦷
+The politician encourages voters to *support* the bill.|นักการเมืองสนับสนุนให้ผู้ลงคะแนนสนับสนุนร่างกฎหมาย|สนับสนุน|🏛️
+The politician does not encourage voters to *oppose* the plan.|นักการเมืองไม่สนับสนุนให้ผู้ลงคะแนนคัดค้านแผน|คัดค้าน|✋
+The activist encourages people to *protect* the forest.|นักเคลื่อนไหวสนับสนุนให้ผู้คนปกป้องป่า|ปกป้อง|🌳
+The activist does not encourage people to *cut down* trees.|นักเคลื่อนไหวไม่สนับสนุนให้ผู้คนตัดต้นไม้|ตัดลง|🪓
+The agent encourages the buyer to *visit* the house.|นายหน้าสนับสนุนให้ผู้ซื้อไปดูบ้าน|ไปดู|🏠
+The agent does not encourage the buyer to *lower* the price.|นายหน้าไม่สนับสนุนให้ผู้ซื้อลดราคา|ลด|💲
+The landlord encourages tenants to *renew* the lease.|เจ้าของบ้านสนับสนุนให้ผู้เช่าต่อสัญญาเช่า|ต่อ|📃
+The landlord does not encourage tenants to *move out*.|เจ้าของบ้านไม่สนับสนุนให้ผู้เช่าย้ายออก|ย้ายออก|📦
+The neighbor encourages us to *attend* the party.|เพื่อนบ้านสนับสนุนให้เราไปงานเลี้ยง|เข้าร่วม|🎈
+The neighbor does not encourage us to *call* the police.|เพื่อนบ้านไม่สนับสนุนให้เราโทรหาตำรวจ|โทร|📞
+The driver encourages passengers to *wear* seat belts.|คนขับสนับสนุนให้ผู้โดยสารคาดเข็มขัดนิรภัย|สวม/คาด|🚘
+The driver does not encourage passengers to *open* the door.|คนขับไม่สนับสนุนให้ผู้โดยสารเปิดประตู|เปิด|🚪
+The trainer encourages athletes to *stretch* before running.|เทรนเนอร์สนับสนุนให้นักกีฬายืดเส้นก่อนวิ่ง|ยืดเส้น|🤸
+The trainer does not encourage athletes to *skip* meals.|เทรนเนอร์ไม่สนับสนุนให้นักกีฬางดมื้ออาหาร|ข้าม|🍽️
+The librarian encourages children to *read* aloud.|บรรณารักษ์สนับสนุนให้เด็ก ๆ อ่านออกเสียง|อ่าน|🗣️
+The librarian does not encourage children to *make* noise.|บรรณารักษ์ไม่สนับสนุนให้เด็ก ๆ ส่งเสียงดัง|ทำให้เกิด|🔊
+The secretary encourages the boss to *take* a break.|เลขานุการสนับสนุนให้เจ้านายพักสักหน่อย|พัก|☕
+The secretary does not encourage the boss to *work* all night.|เลขานุการไม่สนับสนุนให้เจ้านายทำงานทั้งคืน|ทำงาน|🌙
+The banker encourages clients to *open* an account.|พนักงานธนาคารสนับสนุนให้ลูกค้าเปิดบัญชี|เปิด|💳
+The banker does not encourage clients to *close* their accounts.|พนักงานธนาคารไม่สนับสนุนให้ลูกค้าปิดบัญชี|ปิด|🔒
+The influencer encourages fans to *follow* the channel.|อินฟลูเอนเซอร์สนับสนุนให้แฟน ๆ ติดตามช่อง|ติดตาม|📱
+The influencer does not encourage fans to *share* false news.|อินฟลูเอนเซอร์ไม่สนับสนุนให้แฟน ๆ แชร์ข่าวปลอม|แชร์|📰
+The committee encourages members to *approve* the plan.|คณะกรรมการสนับสนุนให้สมาชิกอนุมัติแผน|อนุมัติ|✅
+The committee does not encourage members to *reject* the proposal.|คณะกรรมการไม่สนับสนุนให้สมาชิกปฏิเสธข้อเสนอ|ปฏิเสธ|🚫
+The farmer encourages workers to *harvest* the rice.|ชาวนาสนับสนุนให้คนงานเก็บเกี่ยวข้าว|เก็บเกี่ยว|🌾
+The farmer does not encourage workers to *waste* water.|ชาวนาไม่สนับสนุนให้คนงานใช้น้ำสิ้นเปลือง|ทิ้งขว้าง|💧`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(encourage(?:s)?)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.12 Causative Verb: CONVINCED + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.12 Causative Verb (Passive): Someone + be + <span class="rm">CONVINCED</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Someone + <b>am/is/are (not)</b> + <b class="rm">convinced</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I am convinced to *join* the club.|ฉันถูกโน้มน้าวให้เข้าชมรม|เข้าร่วม|🤝
+I am not convinced to *stay* here.|ฉันไม่ได้ถูกโน้มน้าวให้อยู่ที่นี่|อยู่|🏠
+He is convinced to *study* harder.|เขาถูกโน้มน้าวให้เรียนหนักขึ้น|เรียน|📚
+He is not convinced to *leave* early.|เขาไม่ได้ถูกโน้มน้าวให้ออกไปก่อน|ออกไป|🚪
+She is convinced to *read* more books.|เธอถูกโน้มน้าวให้อ่านหนังสือมากขึ้น|อ่าน|📖
+She is not convinced to *travel* alone.|เธอไม่ได้ถูกโน้มน้าวให้เดินทางคนเดียว|เดินทาง|🧳
+We are convinced to *exercise* every morning.|พวกเราถูกโน้มน้าวให้ออกกำลังกายทุกเช้า|ออกกำลังกาย|🏃
+We are not convinced to *spend* more money.|พวกเราไม่ได้ถูกโน้มน้าวให้ใช้เงินมากขึ้น|ใช้จ่าย|💸
+The students are convinced to *participate* in the activity.|นักเรียนถูกโน้มน้าวให้เข้าร่วมกิจกรรม|เข้าร่วม|🙋
+The students are not convinced to *memorize* everything.|นักเรียนไม่ได้ถูกโน้มน้าวให้ท่องจำทุกอย่าง|ท่องจำ|🧠
+The players are convinced to *practice* harder.|นักกีฬาถูกโน้มน้าวให้ฝึกซ้อมให้หนักขึ้น|ฝึกซ้อม|🏋️
+The players are not convinced to *quit* the team.|นักกีฬาไม่ได้ถูกโน้มน้าวให้ออกจากทีม|เลิก/ออก|🛑
+The employees are convinced to *cooperate* with each other.|พนักงานถูกโน้มน้าวให้ร่วมมือกัน|ร่วมมือ|🤝
+The employees are not convinced to *work* overtime.|พนักงานไม่ได้ถูกโน้มน้าวให้ทำงานล่วงเวลา|ทำงาน|🕘
+The customer is convinced to *buy* the product.|ลูกค้าถูกโน้มน้าวให้ซื้อสินค้า|ซื้อ|🛒
+The customer is not convinced to *sign* the contract.|ลูกค้าไม่ได้ถูกโน้มน้าวให้เซ็นสัญญา|เซ็น|✍️
+I am convinced to *save* money.|ฉันถูกโน้มน้าวให้เก็บเงิน|เก็บออม|💰
+I am not convinced to *borrow* money.|ฉันไม่ได้ถูกโน้มน้าวให้ยืมเงิน|ยืม|🏦
+The patient is convinced to *exercise* regularly.|คนไข้ถูกโน้มน้าวให้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🧘
+The patient is not convinced to *stop* the treatment.|คนไข้ไม่ได้ถูกโน้มน้าวให้หยุดการรักษา|หยุด|⛔
+We are convinced to *visit* the museum.|พวกเราถูกโน้มน้าวให้ไปเยี่ยมชมพิพิธภัณฑ์|ไปเยี่ยมชม|🏛️
+We are not convinced to *stay* overnight.|พวกเราไม่ได้ถูกโน้มน้าวให้พักค้างคืน|พักอยู่|🏨
+The assistant is convinced to *prepare* the report.|ผู้ช่วยถูกโน้มน้าวให้เตรียมรายงาน|เตรียม|📑
+The assistant is not convinced to *cancel* the meeting.|ผู้ช่วยไม่ได้ถูกโน้มน้าวให้ยกเลิกการประชุม|ยกเลิก|❌
+The children are convinced to *eat* vegetables.|เด็ก ๆ ถูกโน้มน้าวให้กินผัก|กิน|🥦
+The children are not convinced to *sleep* early.|เด็ก ๆ ไม่ได้ถูกโน้มน้าวให้นอนเร็ว|นอน|😴
+The client is convinced to *accept* the agreement.|ลูกค้าถูกโน้มน้าวให้ยอมรับข้อตกลง|ยอมรับ|👍
+The client is not convinced to *admit* the mistake.|ลูกค้าไม่ได้ถูกโน้มน้าวให้ยอมรับความผิด|ยอมรับ(ผิด)|🙇
+The audience is convinced to *support* the project.|ผู้ฟังถูกโน้มน้าวให้สนับสนุนโครงการ|สนับสนุน|📣
+The audience is not convinced to *donate* money.|ผู้ฟังไม่ได้ถูกโน้มน้าวให้บริจาคเงิน|บริจาค|🎁
+The team members are convinced to *cooperate*.|สมาชิกทีมถูกโน้มน้าวให้ร่วมมือกัน|ร่วมมือ|🤝
+The team members are not convinced to *compete* against each other.|สมาชิกทีมไม่ได้ถูกโน้มน้าวให้แข่งขันกันเอง|แข่งขัน|🥊
+I am convinced to *try* the new restaurant.|ฉันถูกโน้มน้าวให้ลองร้านอาหารใหม่|ลอง|🍜
+I am not convinced to *order* dessert.|ฉันไม่ได้ถูกโน้มน้าวให้สั่งของหวาน|สั่ง|🍰
+Customers are convinced to *choose* the new service.|ลูกค้าถูกโน้มน้าวให้เลือกบริการใหม่|เลือก|👆
+Customers are not convinced to *renew* their contracts.|ลูกค้าไม่ได้ถูกโน้มน้าวให้ต่อสัญญา|ต่ออายุ|🔄
+People are convinced to *recycle* more.|ผู้คนถูกโน้มน้าวให้รีไซเคิลมากขึ้น|รีไซเคิล|♻️
+People are not convinced to *change* their habits.|ผู้คนไม่ได้ถูกโน้มน้าวให้เปลี่ยนนิสัย|เปลี่ยน|🔁
+New employees are convinced to *participate* in meetings.|พนักงานใหม่ถูกโน้มน้าวให้เข้าร่วมการประชุม|เข้าร่วม|👥
+New employees are not convinced to *leave* early.|พนักงานใหม่ไม่ได้ถูกโน้มน้าวให้ออกก่อนเวลา|ออกไป|🚪
+He is convinced to *apologize* to her.|เขาถูกโน้มน้าวให้ขอโทษเธอ|ขอโทษ|🙏
+He is not convinced to *lie* to his boss.|เขาไม่ได้ถูกโน้มน้าวให้โกหกเจ้านาย|โกหก|🤥
+She is convinced to *apply* for the job.|เธอถูกโน้มน้าวให้สมัครงาน|สมัคร|📄
+She is not convinced to *resign* from her job.|เธอไม่ได้ถูกโน้มน้าวให้ลาออกจากงาน|ลาออก|📤
+They are convinced to *adopt* a dog.|พวกเขาถูกโน้มน้าวให้รับเลี้ยงสุนัข|รับเลี้ยง|🐶
+They are not convinced to *sell* the house.|พวกเขาไม่ได้ถูกโน้มน้าวให้ขายบ้าน|ขาย|🏠
+The manager is convinced to *hire* more staff.|ผู้จัดการถูกโน้มน้าวให้จ้างพนักงานเพิ่ม|จ้าง|🧑‍💼
+The manager is not convinced to *fire* anyone.|ผู้จัดการไม่ได้ถูกโน้มน้าวให้ไล่ใครออก|ไล่ออก|🔥
+My brother is convinced to *learn* English.|น้องชายถูกโน้มน้าวให้เรียนภาษาอังกฤษ|เรียนรู้|🌍
+My brother is not convinced to *skip* class.|น้องชายไม่ได้ถูกโน้มน้าวให้โดดเรียน|โดด|🏫
+My sister is convinced to *volunteer* at the shelter.|น้องสาวถูกโน้มน้าวให้เป็นอาสาสมัครที่ศูนย์พักพิง|อาสา|🧡
+My sister is not convinced to *drop out* of school.|น้องสาวไม่ได้ถูกโน้มน้าวให้ออกจากโรงเรียนกลางคัน|ลาออก|🎓
+The voters are convinced to *support* the candidate.|ผู้ลงคะแนนถูกโน้มน้าวให้สนับสนุนผู้สมัคร|สนับสนุน|🗳️
+The voters are not convinced to *boycott* the election.|ผู้ลงคะแนนไม่ได้ถูกโน้มน้าวให้คว่ำบาตรการเลือกตั้ง|คว่ำบาตร|🚫
+The tourists are convinced to *book* a tour.|นักท่องเที่ยวถูกโน้มน้าวให้จองทัวร์|จอง|🧭
+The tourists are not convinced to *cancel* the trip.|นักท่องเที่ยวไม่ได้ถูกโน้มน้าวให้ยกเลิกการเดินทาง|ยกเลิก|✈️
+The farmers are convinced to *plant* new crops.|เกษตรกรถูกโน้มน้าวให้ปลูกพืชชนิดใหม่|ปลูก|🌱
+The farmers are not convinced to *burn* the fields.|เกษตรกรไม่ได้ถูกโน้มน้าวให้เผาทุ่งนา|เผา|🌾
+The doctors are convinced to *try* a new treatment.|หมอถูกโน้มน้าวให้ลองการรักษาแบบใหม่|ลอง|🩺
+The doctors are not convinced to *delay* the surgery.|หมอไม่ได้ถูกโน้มน้าวให้เลื่อนการผ่าตัด|เลื่อน|⏰
+The teacher is convinced to *change* the schedule.|ครูถูกโน้มน้าวให้เปลี่ยนตารางเวลา|เปลี่ยน|📅
+The teacher is not convinced to *postpone* the exam.|ครูไม่ได้ถูกโน้มน้าวให้เลื่อนการสอบ|เลื่อน|📝
+The workers are convinced to *wear* helmets.|คนงานถูกโน้มน้าวให้สวมหมวกนิรภัย|สวมใส่|⛑️
+The workers are not convinced to *strike* tomorrow.|คนงานไม่ได้ถูกโน้มน้าวให้นัดหยุดงานพรุ่งนี้|นัดหยุดงาน|✊
+The investors are convinced to *invest* in the company.|นักลงทุนถูกโน้มน้าวให้ลงทุนในบริษัท|ลงทุน|📈
+The investors are not convinced to *withdraw* their money.|นักลงทุนไม่ได้ถูกโน้มน้าวให้ถอนเงิน|ถอน|🏧
+The residents are convinced to *move* to the new building.|ผู้อยู่อาศัยถูกโน้มน้าวให้ย้ายไปอาคารใหม่|ย้าย|📦
+The residents are not convinced to *protest* against the plan.|ผู้อยู่อาศัยไม่ได้ถูกโน้มน้าวให้ประท้วงแผนนี้|ประท้วง|📢
+The citizens are convinced to *pay* the tax.|ประชาชนถูกโน้มน้าวให้จ่ายภาษี|จ่าย|🧾
+The citizens are not convinced to *ignore* the rules.|ประชาชนไม่ได้ถูกโน้มน้าวให้เพิกเฉยต่อกฎ|เพิกเฉย|🙈
+The council is convinced to *build* a park.|สภาถูกโน้มน้าวให้สร้างสวนสาธารณะ|สร้าง|🏞️
+The council is not convinced to *close* the library.|สภาไม่ได้ถูกโน้มน้าวให้ปิดห้องสมุด|ปิด|📚
+The jury is convinced to *accept* the evidence.|คณะลูกขุนถูกโน้มน้าวให้ยอมรับหลักฐาน|ยอมรับ|⚖️
+The jury is not convinced to *reject* the claim.|คณะลูกขุนไม่ได้ถูกโน้มน้าวให้ปฏิเสธข้อเรียกร้อง|ปฏิเสธ|🙅
+The visitors are convinced to *join* the tour.|ผู้มาเยือนถูกโน้มน้าวให้เข้าร่วมทัวร์|เข้าร่วม|🚶
+The visitors are not convinced to *touch* the exhibits.|ผู้มาเยือนไม่ได้ถูกโน้มน้าวให้สัมผัสสิ่งที่จัดแสดง|สัมผัส|🖼️
+The driver is convinced to *slow down*.|คนขับถูกโน้มน้าวให้ชะลอความเร็ว|ชะลอ|🐢
+The driver is not convinced to *drive* at night.|คนขับไม่ได้ถูกโน้มน้าวให้ขับรถตอนกลางคืน|ขับรถ|🌙
+The buyers are convinced to *purchase* the car.|ผู้ซื้อถูกโน้มน้าวให้ซื้อรถคันนี้|ซื้อ|🚗
+The buyers are not convinced to *negotiate* the price.|ผู้ซื้อไม่ได้ถูกโน้มน้าวให้ต่อรองราคา|ต่อรอง|💬
+The members are convinced to *approve* the budget.|สมาชิกถูกโน้มน้าวให้อนุมัติงบประมาณ|อนุมัติ|✅
+The members are not convinced to *leave* the group.|สมาชิกไม่ได้ถูกโน้มน้าวให้ออกจากกลุ่ม|ออกจาก|👋
+My parents are convinced to *travel* abroad.|พ่อแม่ถูกโน้มน้าวให้เดินทางไปต่างประเทศ|เดินทาง|🧳
+My parents are not convinced to *retire* early.|พ่อแม่ไม่ได้ถูกโน้มน้าวให้เกษียณก่อนกำหนด|เกษียณ|🏖️
+The neighbors are convinced to *share* the cost.|เพื่อนบ้านถูกโน้มน้าวให้แบ่งค่าใช้จ่าย|แบ่งปัน|🤲
+The neighbors are not convinced to *complain* to the police.|เพื่อนบ้านไม่ได้ถูกโน้มน้าวให้ร้องเรียนตำรวจ|ร้องเรียน|👮
+The athletes are convinced to *train* together.|นักกีฬาถูกโน้มน้าวให้ฝึกซ้อมร่วมกัน|ฝึกซ้อม|🏅
+The athletes are not convinced to *cheat* in the game.|นักกีฬาไม่ได้ถูกโน้มน้าวให้โกงในเกม|โกง|🃏
+The staff are convinced to *follow* the new rules.|พนักงานถูกโน้มน้าวให้ปฏิบัติตามกฎใหม่|ปฏิบัติตาม|📋
+The staff are not convinced to *discuss* salaries.|พนักงานไม่ได้ถูกโน้มน้าวให้พูดคุยเรื่องเงินเดือน|พูดคุย|🗣️
+The boy is convinced to *tell* the truth.|เด็กชายถูกโน้มน้าวให้พูดความจริง|บอก|💬
+The boy is not convinced to *run* away.|เด็กชายไม่ได้ถูกโน้มน้าวให้หนีไป|วิ่ง/หนี|🏃
+The girl is convinced to *sing* on stage.|เด็กหญิงถูกโน้มน้าวให้ร้องเพลงบนเวที|ร้องเพลง|🎤
+The girl is not convinced to *give up*.|เด็กหญิงไม่ได้ถูกโน้มน้าวให้ยอมแพ้|ยอมแพ้|🏳️
+The couple is convinced to *rent* an apartment.|คู่รักถูกโน้มน้าวให้เช่าอพาร์ตเมนต์|เช่า|🏢
+The couple is not convinced to *get married* this year.|คู่รักไม่ได้ถูกโน้มน้าวให้แต่งงานปีนี้|แต่งงาน|💍
+The committee is convinced to *choose* a new leader.|คณะกรรมการถูกโน้มน้าวให้เลือกผู้นำคนใหม่|เลือก|🗂️
+The committee is not convinced to *raise* the fee.|คณะกรรมการไม่ได้ถูกโน้มน้าวให้ขึ้นค่าธรรมเนียม|เพิ่ม|💲
+The shoppers are convinced to *use* reusable bags.|ผู้ซื้อของถูกโน้มน้าวให้ใช้ถุงใช้ซ้ำ|ใช้|🛍️
+The shoppers are not convinced to *wait* in line.|ผู้ซื้อของไม่ได้ถูกโน้มน้าวให้รอเข้าแถว|รอ|🧍`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(convinced)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

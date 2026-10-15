@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.25 Causative Verb: PERMITTED + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.25 Causative Verb (Passive): Someone + be + <span class="rm">PERMITTED</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Someone + <b>am/is/are (not)</b> + <b class="rm">permitted</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I am permitted to *enter* the room.|ฉันได้รับอนุญาตให้เข้าห้อง|เข้า|🚪
+I am not permitted to *drive* this car.|ฉันไม่ได้รับอนุญาตให้ขับรถคันนี้|ขับ|🚗
+He is permitted to *stay* here.|เขาได้รับอนุญาตให้อยู่ที่นี่|อยู่|🏠
+He is not permitted to *enter* this office.|เขาไม่ได้รับอนุญาตให้เข้าสำนักงานนี้|เข้า|🏢
+She is permitted to *use* the computer.|เธอได้รับอนุญาตให้ใช้คอมพิวเตอร์|ใช้|💻
+She is not permitted to *smoke* here.|เธอไม่ได้รับอนุญาตให้สูบบุหรี่ที่นี่|สูบบุหรี่|🚭
+We are permitted to *ask* questions.|พวกเราได้รับอนุญาตให้ถามคำถาม|ถาม|🙋
+We are not permitted to *park* here.|พวกเราไม่ได้รับอนุญาตให้จอดรถที่นี่|จอดรถ|🅿️
+They are permitted to *enter* the building.|พวกเขาได้รับอนุญาตให้เข้าไปในอาคาร|เข้า|🏢
+They are not permitted to *use* their phones.|พวกเขาไม่ได้รับอนุญาตให้ใช้โทรศัพท์|ใช้|📵
+The students are permitted to *use* computers.|นักเรียนได้รับอนุญาตให้ใช้คอมพิวเตอร์|ใช้|🖥️
+The students are not permitted to *leave* early.|นักเรียนไม่ได้รับอนุญาตให้ออกก่อนเวลา|ออก|🚶
+The players are permitted to *rest* after practice.|นักกีฬาได้รับอนุญาตให้พักหลังการฝึกซ้อม|พัก|😴
+The players are not permitted to *enter* the stadium yet.|นักกีฬาไม่ได้รับอนุญาตให้เข้าสนามกีฬาตอนนี้|เข้า|🏟️
+The employees are permitted to *work* from home.|พนักงานได้รับอนุญาตให้ทำงานจากบ้าน|ทำงาน|🏡
+The employees are not permitted to *share* their passwords.|พนักงานไม่ได้รับอนุญาตให้แชร์รหัสผ่านของตน|แชร์|🔐
+The workers are permitted to *take* a break.|คนงานได้รับอนุญาตให้พักเบรก|พัก|☕
+The workers are not permitted to *enter* this area.|คนงานไม่ได้รับอนุญาตให้เข้าไปในบริเวณนี้|เข้า|⛔
+The children are permitted to *play* in the garden.|เด็ก ๆ ได้รับอนุญาตให้เล่นในสวน|เล่น|🛝
+The children are not permitted to *eat* in the classroom.|เด็ก ๆ ไม่ได้รับอนุญาตให้กินอาหารในห้องเรียน|กิน|🍪
+The customer is permitted to *return* the product.|ลูกค้าได้รับอนุญาตให้คืนสินค้า|คืน|📦
+The customer is not permitted to *change* the order.|ลูกค้าไม่ได้รับอนุญาตให้เปลี่ยนคำสั่งซื้อ|เปลี่ยน|🔁
+The guests are permitted to *check in* early.|แขกได้รับอนุญาตให้เช็กอินก่อนเวลา|เช็กอิน|🛎️
+The guests are not permitted to *bring* pets.|แขกไม่ได้รับอนุญาตให้นำสัตว์เลี้ยงมา|นำมา|🐶
+The visitors are permitted to *take* photos.|ผู้มาเยือนได้รับอนุญาตให้ถ่ายรูป|ถ่าย|📷
+The visitors are not permitted to *touch* the paintings.|ผู้มาเยือนไม่ได้รับอนุญาตให้สัมผัสภาพวาด|สัมผัส|🖼️
+Users are permitted to *create* an account.|ผู้ใช้ได้รับอนุญาตให้สร้างบัญชี|สร้าง|🆕
+Users are not permitted to *upload* large files.|ผู้ใช้ไม่ได้รับอนุญาตให้อัปโหลดไฟล์ขนาดใหญ่|อัปโหลด|⬆️
+Everyone is permitted to *participate* in the event.|ทุกคนได้รับอนุญาตให้เข้าร่วมงาน|เข้าร่วม|🎉
+Nobody is permitted to *enter* this area.|ไม่มีใครได้รับอนุญาตให้เข้าไปในบริเวณนี้|เข้า|🚫
+The nurse is permitted to *give* the patient medicine.|พยาบาลได้รับอนุญาตให้ให้ยาแก่คนไข้|ให้|💊
+The nurse is not permitted to *walk* with the patient.|พยาบาลไม่ได้รับอนุญาตให้เดินไปกับคนไข้|เดิน|🚶
+We are permitted to *follow* the guide.|พวกเราได้รับอนุญาตให้ตามไกด์|ตาม|🚩
+We are not permitted to *separate* from the group.|พวกเราไม่ได้รับอนุญาตให้แยกจากกลุ่ม|แยก|✂️
+The visitors are permitted to *be* quiet.|ผู้มาเยือนได้รับอนุญาตให้เงียบ|เป็น/อยู่|🤫
+The visitors are not permitted to *leave* immediately.|ผู้มาเยือนไม่ได้รับอนุญาตให้ออกไปทันที|ออกไป|🚪
+The security guards are permitted to *check* everyone's ID.|เจ้าหน้าที่รักษาความปลอดภัยได้รับอนุญาตให้ตรวจบัตรประจำตัวของทุกคน|ตรวจ|🪪
+The security guards are not permitted to *enter* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้รับอนุญาตให้เข้าไปในอาคาร|เข้า|🚧
+We are permitted to *exercise* regularly.|พวกเราได้รับอนุญาตให้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+We are not permitted to *stop* exercising.|พวกเราไม่ได้รับอนุญาตให้หยุดออกกำลังกาย|หยุด|⛔
+The witness is permitted to *tell* the truth.|พยานได้รับอนุญาตให้พูดความจริง|บอก|⚖️
+The witness is not permitted to *leave* the court.|พยานไม่ได้รับอนุญาตให้ออกจากศาล|ออก|🚪
+The army is permitted to *advance*.|กองทัพได้รับอนุญาตให้รุกคืบ|รุกคืบ|🪖
+The army is not permitted to *retreat*.|กองทัพไม่ได้รับอนุญาตให้ถอยทัพ|ถอย|🏳️
+The guards are permitted to *open* the gate.|ทหารยามได้รับอนุญาตให้เปิดประตู|เปิด|👑
+The guards are not permitted to *harm* the prisoners.|ทหารยามไม่ได้รับอนุญาตให้ทำร้ายนักโทษ|ทำร้าย|⛓️
+The kids are permitted to *line up*.|เด็ก ๆ ได้รับอนุญาตให้เข้าแถว|เข้าแถว|🧍
+The kids are not permitted to *run* in the hallway.|เด็ก ๆ ไม่ได้รับอนุญาตให้วิ่งในทางเดิน|วิ่ง|🏃
+The cooks are permitted to *clean* the kitchen.|พ่อครัวได้รับอนุญาตให้ทำความสะอาดครัว|ทำความสะอาด|🧽
+The cooks are not permitted to *serve* cold soup.|พ่อครัวไม่ได้รับอนุญาตให้เสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The crew is permitted to *check* the engines.|ลูกเรือได้รับอนุญาตให้ตรวจเครื่องยนต์|ตรวจ|🛫
+The crew is not permitted to *delay* the takeoff.|ลูกเรือไม่ได้รับอนุญาตให้เลื่อนการขึ้นบิน|เลื่อน|⏰
+The officials are permitted to *repair* the road.|เจ้าหน้าที่ได้รับอนุญาตให้ซ่อมถนน|ซ่อม|🛠️
+The officials are not permitted to *raise* the taxes.|เจ้าหน้าที่ไม่ได้รับอนุญาตให้ขึ้นภาษี|ขึ้น|💲
+The tenants are permitted to *pay* the rent.|ผู้เช่าได้รับอนุญาตให้จ่ายค่าเช่า|จ่าย|🏠
+The tenants are not permitted to *paint* the walls.|ผู้เช่าไม่ได้รับอนุญาตให้ทาสีผนัง|ทาสี|🎨
+The owner is permitted to *close* the shop.|เจ้าของได้รับอนุญาตให้ปิดร้าน|ปิด|🏪
+The owner is not permitted to *throw away* the food.|เจ้าของไม่ได้รับอนุญาตให้ทิ้งอาหาร|ทิ้ง|🗑️
+The traveler is permitted to *open* the bag.|ผู้เดินทางได้รับอนุญาตให้เปิดกระเป๋า|เปิด|🧳
+The traveler is not permitted to *remove* his shoes.|ผู้เดินทางไม่ได้รับอนุญาตให้ถอดรองเท้า|ถอด|👟
+The player is permitted to *leave* the field.|นักกีฬาได้รับอนุญาตให้ออกจากสนาม|ออก|🟥
+The player is not permitted to *sit* on the bench.|นักกีฬาไม่ได้รับอนุญาตให้นั่งม้านั่งสำรอง|นั่ง|🪑
+The musicians are permitted to *play* softly.|นักดนตรีได้รับอนุญาตให้เล่นเบา ๆ|เล่น|🎻
+The musicians are not permitted to *tune* the violins.|นักดนตรีไม่ได้รับอนุญาตให้เทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The laborers are permitted to *wear* helmets.|กรรมกรได้รับอนุญาตให้สวมหมวกนิรภัย|สวม|⛑️
+The laborers are not permitted to *work* in the rain.|กรรมกรไม่ได้รับอนุญาตให้ทำงานกลางฝน|ทำงาน|🌧️
+The boy is permitted to *carry* the boxes.|เด็กชายได้รับอนุญาตให้ยกกล่อง|ยก|📦
+The boy is not permitted to *touch* the goods.|เด็กชายไม่ได้รับอนุญาตให้แตะต้องสินค้า|แตะ|🛒
+The recruits are permitted to *stand* straight.|ทหารใหม่ได้รับอนุญาตให้ยืนตรง|ยืน|💂
+The recruits are not permitted to *shout*.|ทหารใหม่ไม่ได้รับอนุญาตให้ตะโกน|ตะโกน|📢
+The clerk is permitted to *copy* the files.|เสมียนได้รับอนุญาตให้ถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The clerk is not permitted to *call* the client.|เสมียนไม่ได้รับอนุญาตให้โทรหาลูกความ|โทร|📞
+The writer is permitted to *shorten* the article.|นักเขียนได้รับอนุญาตให้ย่อบทความ|ย่อ|📰
+The writer is not permitted to *publish* the draft.|นักเขียนไม่ได้รับอนุญาตให้ตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmers are permitted to *plant* rice.|เกษตรกรได้รับอนุญาตให้ปลูกข้าว|ปลูก|🌾
+The farmers are not permitted to *burn* the straw.|เกษตรกรไม่ได้รับอนุญาตให้เผาฟาง|เผา|🔥
+The teachers are permitted to *attend* the meeting.|ครูได้รับอนุญาตให้เข้าร่วมประชุม|เข้าร่วม|🏫
+The teachers are not permitted to *ignore* the complaints.|ครูไม่ได้รับอนุญาตให้เพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The interns are permitted to *file* the documents.|นักศึกษาฝึกงานได้รับอนุญาตให้จัดเก็บเอกสาร|จัดเก็บ|🗂️
+The interns are not permitted to *answer* the phone.|นักศึกษาฝึกงานไม่ได้รับอนุญาตให้รับโทรศัพท์|รับสาย|☎️
+The patients are permitted to *rinse* their mouths.|คนไข้ได้รับอนุญาตให้บ้วนปาก|บ้วนปาก|🦷
+The patients are not permitted to *eat* anything.|คนไข้ไม่ได้รับอนุญาตให้กินอะไรเลย|กิน|🍔
+The swimmers are permitted to *get out* of the pool.|ผู้ว่ายน้ำได้รับอนุญาตให้ขึ้นจากสระ|ขึ้น/ออก|🏊
+The swimmers are not permitted to *dive* here.|ผู้ว่ายน้ำไม่ได้รับอนุญาตให้ดำน้ำตรงนี้|ดำน้ำ|🤿
+The passengers are permitted to *fasten* their seat belts.|ผู้โดยสารได้รับอนุญาตให้คาดเข็มขัดนิรภัย|คาด|💺
+The passengers are not permitted to *stand* up.|ผู้โดยสารไม่ได้รับอนุญาตให้ลุกขึ้นยืน|ยืน|🧍
+The children are permitted to *move* to the back.|เด็ก ๆ ได้รับอนุญาตให้ไปนั่งข้างหลัง|ย้าย|🚌
+The children are not permitted to *throw* trash on the floor.|เด็ก ๆ ไม่ได้รับอนุญาตให้ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The waiter is permitted to *bring* more drinks.|พนักงานเสิร์ฟได้รับอนุญาตให้นำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The waiter is not permitted to *turn off* the music.|พนักงานเสิร์ฟไม่ได้รับอนุญาตให้ปิดเพลง|ปิด|🎶
+The pilots are permitted to *take off*.|นักบินได้รับอนุญาตให้ขึ้นบิน|ขึ้นบิน|🛩️
+The pilots are not permitted to *land* now.|นักบินไม่ได้รับอนุญาตให้ลงจอดตอนนี้|ลงจอด|🛬
+I am permitted to *wash* the dishes.|ฉันได้รับอนุญาตให้ล้างจาน|ล้าง|🍽️
+I am not permitted to *throw away* the toys.|ฉันไม่ได้รับอนุญาตให้ทิ้งของเล่น|ทิ้ง|🧸
+The cashier is permitted to *count* the cash.|แคชเชียร์ได้รับอนุญาตให้นับเงินสด|นับ|💵
+The cashier is not permitted to *lock* the vault.|แคชเชียร์ไม่ได้รับอนุญาตให้ล็อกห้องนิรภัย|ล็อก|🔒
+The cadets are permitted to *march*.|นักเรียนนายร้อยได้รับอนุญาตให้เดินสวนสนาม|เดินสวนสนาม|🥁
+The cadets are not permitted to *talk* during the drill.|นักเรียนนายร้อยไม่ได้รับอนุญาตให้พูดคุยระหว่างการฝึก|พูดคุย|🗣️
+The engineers are permitted to *test* the bridge.|วิศวกรได้รับอนุญาตให้ทดสอบสะพาน|ทดสอบ|🌉
+The engineers are not permitted to *change* the design.|วิศวกรไม่ได้รับอนุญาตให้เปลี่ยนแบบ|เปลี่ยน|📐`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b((?:am|is|are)(?: not)? permitted)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

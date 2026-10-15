@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.11 Causative Verb: REMIND + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.11 Causative Verb: <span class="rm">REMIND</span> + Someone + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">remind(s)</b> + someone + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I remind him to *study* every day.|ฉันเตือนเขาให้เรียนทุกวัน|เรียน|📚
+I do not remind her to *call* her mother.|ฉันไม่ได้เตือนเธอให้โทรหาแม่|โทรหา|📞
+She reminds me to *bring* my notebook.|เธอเตือนให้ฉันนำสมุดมาด้วย|นำมา|🎒
+She does not remind me to *lock* the door.|เธอไม่ได้เตือนให้ฉันล็อกประตู|ล็อก|🔒
+He reminds his son to *clean* his room.|เขาเตือนลูกชายให้ทำความสะอาดห้อง|ทำความสะอาด|🧹
+He does not remind his son to *finish* his homework.|เขาไม่ได้เตือนลูกชายให้ทำการบ้านให้เสร็จ|ทำให้เสร็จ|✅
+My mother reminds me to *wake up* early.|แม่เตือนให้ฉันตื่นแต่เช้า|ตื่นนอน|⏰
+My mother does not remind me to *take* my umbrella.|แม่ไม่ได้เตือนให้ฉันเอาร่มไป|เอาไป|☂️
+The teacher reminds students to *complete* their homework.|ครูเตือนนักเรียนให้ทำการบ้านให้เสร็จ|ทำให้สมบูรณ์|📝
+The teacher does not remind students to *bring* their books.|ครูไม่ได้เตือนนักเรียนให้นำหนังสือมา|นำมา|📚
+The coach reminds the players to *practice* every day.|โค้ชเตือนนักกีฬาให้ฝึกซ้อมทุกวัน|ฝึกซ้อม|🏃
+The coach does not remind the players to *rest* after practice.|โค้ชไม่ได้เตือนนักกีฬาให้พักหลังการฝึกซ้อม|พักผ่อน|😴
+They remind us to *arrive* on time.|พวกเขาเตือนให้เรามาถึงตรงเวลา|มาถึง|🕒
+They do not remind us to *wait* outside.|พวกเขาไม่ได้เตือนให้เรารอข้างนอก|รอ|⏳
+The manager reminds employees to *attend* the meeting.|ผู้จัดการเตือนพนักงานให้เข้าร่วมประชุม|เข้าร่วม|👥
+The manager does not remind employees to *submit* the report today.|ผู้จัดการไม่ได้เตือนพนักงานให้ส่งรายงานวันนี้|ส่ง|📤
+The secretary reminds the boss to *sign* the document.|เลขานุการเตือนเจ้านายให้เซ็นเอกสาร|เซ็น|✍️
+The secretary does not remind the boss to *check* the email.|เลขานุการไม่ได้เตือนเจ้านายให้ตรวจอีเมล|ตรวจ|📧
+The doctor reminds the patient to *take* the medicine.|หมอเตือนคนไข้ให้กินยา|กิน|💊
+The doctor does not remind the patient to *drink* more water.|หมอไม่ได้เตือนคนไข้ให้ดื่มน้ำมากขึ้น|ดื่ม|💧
+My father reminds me to *save* money.|พ่อเตือนให้ฉันเก็บเงิน|เก็บออม|💰
+My father does not remind me to *spend* less money.|พ่อไม่ได้เตือนให้ฉันใช้เงินน้อยลง|ใช้จ่าย|🛍️
+My friend reminds me to *call* the hotel.|เพื่อนเตือนให้ฉันโทรหาโรงแรม|โทรหา|📞
+My friend does not remind me to *book* a table.|เพื่อนไม่ได้เตือนให้ฉันจองโต๊ะ|จอง|🍽️
+The guide reminds tourists to *stay* with the group.|ไกด์เตือนนักท่องเที่ยวให้อยู่กับกลุ่ม|อยู่|👨‍👩‍👧‍👦
+The guide does not remind tourists to *carry* their passports.|ไกด์ไม่ได้เตือนนักท่องเที่ยวให้นำหนังสือเดินทางติดตัว|พกติดตัว|🛂
+The librarian reminds children to *return* their books.|บรรณารักษ์เตือนเด็ก ๆ ให้นำหนังสือมาคืน|คืน|📖
+The librarian does not remind children to *speak* quietly.|บรรณารักษ์ไม่ได้เตือนเด็ก ๆ ให้พูดเบา ๆ|พูด|🤫
+The nurse reminds the patient to *rest*.|พยาบาลเตือนคนไข้ให้พักผ่อน|พักผ่อน|🛌
+The nurse does not remind the patient to *walk* slowly.|พยาบาลไม่ได้เตือนคนไข้ให้เดินช้า ๆ|เดิน|🚶
+The parents remind their children to *brush* their teeth.|พ่อแม่เตือนลูก ๆ ให้แปรงฟัน|แปรง|🪥
+The parents do not remind their children to *eat* breakfast.|พ่อแม่ไม่ได้เตือนลูก ๆ ให้กินอาหารเช้า|กิน|🍳
+The security guard reminds visitors to *show* their IDs.|เจ้าหน้าที่รักษาความปลอดภัยเตือนผู้มาเยือนให้แสดงบัตรประจำตัว|แสดง|🪪
+The security guard does not remind visitors to *leave* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้เตือนผู้มาเยือนให้ออกจากอาคาร|ออกจาก|🚪
+The trainer reminds athletes to *warm up* before training.|เทรนเนอร์เตือนนักกีฬาให้อบอุ่นร่างกายก่อนฝึกซ้อม|วอร์มอัป|🤸
+The trainer does not remind athletes to *wear* their uniforms.|เทรนเนอร์ไม่ได้เตือนนักกีฬาให้สวมเครื่องแบบ|สวมใส่|👕
+The company reminds employees to *follow* the safety rules.|บริษัทเตือนพนักงานให้ปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The company does not remind employees to *use* the new system.|บริษัทไม่ได้เตือนพนักงานให้ใช้ระบบใหม่|ใช้|💻
+The app reminds users to *update* their passwords.|แอปเตือนผู้ใช้ให้อัปเดตรหัสผ่าน|อัปเดต|🔑
+The app does not remind users to *check* their notifications.|แอปไม่ได้เตือนผู้ใช้ให้ตรวจสอบการแจ้งเตือน|ตรวจสอบ|🔔
+My brother reminds me to *charge* my phone.|น้องชายเตือนให้ฉันชาร์จโทรศัพท์|ชาร์จ|🔋
+My brother does not remind me to *buy* milk.|น้องชายไม่ได้เตือนให้ฉันซื้อนม|ซื้อ|🥛
+My sister reminds me to *feed* the cat.|น้องสาวเตือนให้ฉันให้อาหารแมว|ให้อาหาร|🐱
+My sister does not remind me to *water* the plants.|น้องสาวไม่ได้เตือนให้ฉันรดน้ำต้นไม้|รดน้ำ|🪴
+My grandmother reminds me to *wear* a jacket.|คุณยายเตือนให้ฉันสวมเสื้อแจ็กเก็ต|สวมใส่|🧥
+My grandmother does not remind me to *eat* vegetables.|คุณยายไม่ได้เตือนให้ฉันกินผัก|กิน|🥦
+My husband reminds me to *pay* the bills.|สามีเตือนให้ฉันจ่ายค่าบิล|จ่าย|💳
+My husband does not remind me to *turn off* the lights.|สามีไม่ได้เตือนให้ฉันปิดไฟ|ปิด|💡
+My wife reminds me to *buy* eggs.|ภรรยาเตือนให้ฉันซื้อไข่|ซื้อ|🥚
+My wife does not remind me to *take out* the trash.|ภรรยาไม่ได้เตือนให้ฉันเอาขยะไปทิ้ง|เอาออกไป|🗑️
+The neighbor reminds us to *close* the gate.|เพื่อนบ้านเตือนให้เราปิดประตูรั้ว|ปิด|🚧
+The neighbor does not remind us to *park* near the house.|เพื่อนบ้านไม่ได้เตือนให้เราจอดรถใกล้บ้าน|จอดรถ|🚗
+The landlord reminds tenants to *pay* the rent.|เจ้าของบ้านเตือนผู้เช่าให้จ่ายค่าเช่า|จ่าย|🏠
+The landlord does not remind tenants to *clean* the yard.|เจ้าของบ้านไม่ได้เตือนผู้เช่าให้ทำความสะอาดลานบ้าน|ทำความสะอาด|🧽
+The driver reminds passengers to *fasten* their seat belts.|คนขับเตือนผู้โดยสารให้คาดเข็มขัดนิรภัย|คาด/ติด|🚘
+The driver does not remind passengers to *open* the windows.|คนขับไม่ได้เตือนผู้โดยสารให้เปิดหน้าต่าง|เปิด|🪟
+The pilot reminds passengers to *stay* seated.|นักบินเตือนผู้โดยสารให้นั่งอยู่กับที่|อยู่|✈️
+The pilot does not remind passengers to *eat* lunch.|นักบินไม่ได้เตือนผู้โดยสารให้กินอาหารกลางวัน|กิน|🍱
+The flight attendant reminds us to *put away* our bags.|พนักงานต้อนรับบนเครื่องบินเตือนให้เราเก็บกระเป๋า|เก็บ|🧳
+The flight attendant does not remind us to *change* seats.|พนักงานต้อนรับบนเครื่องบินไม่ได้เตือนให้เราเปลี่ยนที่นั่ง|เปลี่ยน|💺
+The captain reminds the crew to *check* the engine.|กัปตันเตือนลูกเรือให้ตรวจเครื่องยนต์|ตรวจ|🛠️
+The captain does not remind the crew to *clean* the deck.|กัปตันไม่ได้เตือนลูกเรือให้ทำความสะอาดดาดฟ้า|ทำความสะอาด|🚢
+The mayor reminds citizens to *vote*.|นายกเทศมนตรีเตือนประชาชนให้ไปลงคะแนนเสียง|ลงคะแนน|🗳️
+The mayor does not remind citizens to *join* the parade.|นายกเทศมนตรีไม่ได้เตือนประชาชนให้เข้าร่วมขบวนพาเหรด|เข้าร่วม|🎉
+The principal reminds teachers to *submit* the grades.|ผู้อำนวยการเตือนครูให้ส่งเกรด|ส่ง|🏫
+The principal does not remind teachers to *wear* name tags.|ผู้อำนวยการไม่ได้เตือนครูให้ติดป้ายชื่อ|สวม/ติด|🏷️
+The professor reminds students to *read* the chapter.|ศาสตราจารย์เตือนนักศึกษาให้อ่านบทเรียน|อ่าน|📖
+The professor does not remind students to *write* an essay.|ศาสตราจารย์ไม่ได้เตือนนักศึกษาให้เขียนเรียงความ|เขียน|✏️
+The tutor reminds me to *review* my notes.|ติวเตอร์เตือนให้ฉันทบทวนบันทึก|ทบทวน|🗒️
+The tutor does not remind me to *memorize* every word.|ติวเตอร์ไม่ได้เตือนให้ฉันท่องจำทุกคำ|ท่องจำ|🧠
+My coworker reminds me to *send* the invoice.|เพื่อนร่วมงานเตือนให้ฉันส่งใบแจ้งหนี้|ส่ง|📨
+My coworker does not remind me to *print* the schedule.|เพื่อนร่วมงานไม่ได้เตือนให้ฉันพิมพ์ตารางเวลา|พิมพ์|🖨️
+The client reminds us to *deliver* the order.|ลูกค้าเตือนให้เราส่งมอบสินค้า|ส่งมอบ|📦
+The client does not remind us to *cancel* the contract.|ลูกค้าไม่ได้เตือนให้เรายกเลิกสัญญา|ยกเลิก|❌
+The bank reminds customers to *protect* their PINs.|ธนาคารเตือนลูกค้าให้ปกป้องรหัส PIN|ปกป้อง|🏦
+The bank does not remind customers to *visit* the branch.|ธนาคารไม่ได้เตือนลูกค้าให้ไปที่สาขา|ไปเยี่ยม|🏢
+The school reminds parents to *pick up* their children.|โรงเรียนเตือนผู้ปกครองให้มารับลูก|รับ|🏃‍♂️
+The school does not remind parents to *buy* uniforms.|โรงเรียนไม่ได้เตือนผู้ปกครองให้ซื้อเครื่องแบบ|ซื้อ|👔
+The hospital reminds visitors to *wash* their hands.|โรงพยาบาลเตือนผู้มาเยี่ยมให้ล้างมือ|ล้าง|🧼
+The hospital does not remind visitors to *bring* flowers.|โรงพยาบาลไม่ได้เตือนผู้มาเยี่ยมให้นำดอกไม้มา|นำมา|💐
+The website reminds users to *log in*.|เว็บไซต์เตือนผู้ใช้ให้เข้าสู่ระบบ|เข้าสู่ระบบ|🔐
+The website does not remind users to *subscribe* to the newsletter.|เว็บไซต์ไม่ได้เตือนผู้ใช้ให้สมัครรับจดหมายข่าว|สมัครรับ|📰
+My alarm reminds me to *exercise*.|นาฬิกาปลุกเตือนให้ฉันออกกำลังกาย|ออกกำลังกาย|🏋️
+My alarm does not remind me to *meditate*.|นาฬิกาปลุกไม่ได้เตือนให้ฉันทำสมาธิ|ทำสมาธิ|🧘
+The calendar reminds me to *prepare* for the exam.|ปฏิทินเตือนให้ฉันเตรียมตัวสอบ|เตรียม|📅
+The calendar does not remind me to *celebrate* her birthday.|ปฏิทินไม่ได้เตือนให้ฉันฉลองวันเกิดเธอ|ฉลอง|🎂
+My uncle reminds me to *drive* carefully.|ลุงเตือนให้ฉันขับรถอย่างระมัดระวัง|ขับรถ|🚙
+My uncle does not remind me to *fill* the tank.|ลุงไม่ได้เตือนให้ฉันเติมน้ำมันเต็มถัง|เติม|⛽
+My aunt reminds me to *visit* my grandmother.|ป้าเตือนให้ฉันไปเยี่ยมคุณยาย|ไปเยี่ยม|👵
+My aunt does not remind me to *send* a card.|ป้าไม่ได้เตือนให้ฉันส่งการ์ด|ส่ง|💌
+My roommate reminds me to *wash* the dishes.|เพื่อนร่วมห้องเตือนให้ฉันล้างจาน|ล้าง|🍽️
+My roommate does not remind me to *close* the window.|เพื่อนร่วมห้องไม่ได้เตือนให้ฉันปิดหน้าต่าง|ปิด|🪟
+The chef reminds the cooks to *taste* the soup.|เชฟเตือนพ่อครัวให้ชิมซุป|ชิม|🥣
+The chef does not remind the cooks to *add* more salt.|เชฟไม่ได้เตือนพ่อครัวให้เติมเกลือเพิ่ม|เติม|🧂
+The cashier reminds customers to *take* their receipts.|แคชเชียร์เตือนลูกค้าให้รับใบเสร็จ|รับ|🧾
+The cashier does not remind customers to *use* coupons.|แคชเชียร์ไม่ได้เตือนลูกค้าให้ใช้คูปอง|ใช้|🎟️
+The mechanic reminds me to *change* the oil.|ช่างซ่อมรถเตือนให้ฉันเปลี่ยนน้ำมันเครื่อง|เปลี่ยน|🛢️
+The mechanic does not remind me to *replace* the tires.|ช่างซ่อมรถไม่ได้เตือนให้ฉันเปลี่ยนยาง|เปลี่ยนใหม่|🛞
+The dentist reminds me to *floss* every night.|ทันตแพทย์เตือนให้ฉันใช้ไหมขัดฟันทุกคืน|ใช้ไหมขัดฟัน|🦷
+The dentist does not remind me to *avoid* sweets.|ทันตแพทย์ไม่ได้เตือนให้ฉันหลีกเลี่ยงของหวาน|หลีกเลี่ยง|🍬`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(remind(?:s)?)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🔔<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

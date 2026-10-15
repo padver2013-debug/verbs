@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Causative Verb: LEAVE + Someone + Adjective – Flashcards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ec; --surface:#ffffff; --surface2:#faf8f4; --ink:#1d2433; --muted:#5d6678; --line:#d9d4c8;
+  --verb:#8b0000; --adj-bg:#cfe3ff; --adj-ink:#0b2f66; --accent:#0b2f66; --back:#16284a; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#1b6e3c; --no:#a61b1b; --tip-bg:#1d2433; --tip-ink:#f4f6fb;
+  --font:'Sarabun','Noto Sans Thai','Leelawadee UI',Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+    --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+    --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+  --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 4px;font-weight:700;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted)}
+.formula{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:1.05rem}
+.formula span{padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.92rem;flex:1 1 280px}
+.v{color:var(--verb);font-weight:700;cursor:help;border-bottom:2px dotted var(--verb)}
+.a{background:var(--adj-bg);color:var(--adj-ink);font-weight:700;padding:0 5px;border-radius:4px;cursor:help}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+.ctrl select,.ctrl input[type=range]{font-family:inherit}
+.ctrl select{max-width:230px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+button{font-family:inherit;cursor:pointer}
+.btn{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:.9rem}
+.btn:hover{border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.tab{flex:0 0 auto;padding:9px 16px;border-radius:8px 8px 0 0;border:1px solid var(--line);border-bottom:none;background:var(--surface2);color:var(--muted);font-size:.98rem;font-weight:600}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1530}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1530}
+.tabinfo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px;color:var(--muted);font-size:.92rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.cw{perspective:1200px;height:340px}
+.card{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d;cursor:pointer;border-radius:14px}
+.card.flipped{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden}
+.front{background:var(--surface);border:1px solid var(--line)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);border:1px solid var(--back-line)}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted)}
+.back .meta{color:#b6c3df}
+.badge{padding:1px 9px;border-radius:99px;font-weight:600;border:1px solid currentColor}
+.badge.pos{color:var(--ok)} .badge.neg{color:var(--no)}
+.back .badge.pos{color:#7fe0a8} .back .badge.neg{color:#ff9d9d}
+.scene{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px 0 6px;min-height:76px}
+.sc{font-size:2.3rem;line-height:1}
+.person{position:relative;display:inline-block}
+.person .face-e{position:absolute;right:-14px;top:-10px;font-size:1.4rem;background:var(--surface);border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+.car{position:relative;display:inline-flex;align-items:center;font-size:2rem;margin:0 8px}
+.car .wind{font-size:1.1rem;opacity:.7;margin-right:-4px}
+.car.neg::after{content:"✖";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:2.6rem;color:#d62828;font-weight:700;text-shadow:0 0 0 #fff,0 0 4px #fff}
+.arrow{color:var(--muted);font-size:1.2rem}
+.sent{font-size:1.2rem;font-weight:500;line-height:1.55;text-align:center;margin:6px 0 auto;padding:0 2px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+.hint{font-size:.78rem;color:var(--muted)}
+.back .hint{color:#b6c3df}
+.spk{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:.9rem;font-weight:600}
+.spk:hover{background:var(--accent);color:#fff}
+.spk.on{background:var(--accent);color:#fff}
+.back .spk{color:#cfe0ff;border-color:#8fb5ff}
+.back .spk:hover,.back .spk.on{background:#8fb5ff;color:#0b1530}
+.th{font-size:1.5rem;font-weight:700;text-align:center;margin:18px 0 10px;line-height:1.4}
+.sep{border:0;border-top:1px solid var(--back-line);margin:6px 0 10px}
+.back .sent{font-size:1.08rem;margin-bottom:auto}
+.back .v{color:#ff9a9a;border-bottom-color:#ff9a9a}
+.back .a{background:#2a4a82;color:#dbe9ff}
+
+#tip{position:fixed;z-index:50;max-width:300px;padding:9px 12px;border-radius:8px;background:var(--tip-bg);color:var(--tip-ink);font-size:.88rem;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font-size:.98rem;margin-bottom:2px}
+#tip .tv{display:block;margin-top:4px;opacity:.8;font-size:.82rem}
+.note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>6.3 Causative Verb: LEAVE + Someone + Adjective</h1>
+    <p>ฝึกอ่านและแปลประโยค · คลิกการ์ดเพื่อดูคำแปลภาษาไทย · ชี้เมาส์ที่คำเพื่อดูความหมาย</p>
+    <div class="formula"><span class="v" style="border:none">leave</span> + <span>someone</span> + <span class="a">adjective</span> = ปล่อยให้/ทำให้ (ใคร) อยู่ในสภาพ...</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><span class="v">leave / leaves</span> = กริยาหลัก (V1)</span>
+      <span><span class="a">adjective</span> = คำคุณศัพท์</span>
+    </div>
+    <div class="ctrl">
+      <label>เสียง <select id="voice" aria-label="เลือกเสียงอ่าน"></select></label>
+      <label>ความเร็ว <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.85"> <span id="rateVal">0.85×</span></label>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="tabinfo">
+    <span id="info"></span>
+    <span><button class="btn" id="flipAll">พลิกทั้งหมด</button> <button class="btn" id="resetAll">กลับด้านหน้า</button></span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <p class="note">การอ่านออกเสียงใช้เสียงภาษาอังกฤษที่มีในอุปกรณ์/เบราว์เซอร์ของคุณ ระบบจะเลือกเสียงที่ชัดที่สุดให้อัตโนมัติ (เช่น Google US English, Microsoft Natural, Samantha) หากอยากได้เสียงอื่นให้เลือกจากเมนู "เสียง"</p>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+// [subject, plural?, object, adjective, Thai subject, Thai rest, subject emoji, object emoji]
+const ROWS = [
+ // ---- Set 1 ----
+ ["I",1,"him","alone","ฉัน","ปล่อยให้เขาอยู่ตามลำพัง","🧑","🧍","ฉันไม่ปล่อยให้เขาอยู่ตามลำพัง"],
+ ["She",0,"her brother","alone","เธอ","ปล่อยให้น้องชาย/พี่ชายอยู่ตามลำพัง","👩","👦","เธอไม่ปล่อยให้พี่ชาย/น้องชายอยู่ตามลำพัง"],
+ ["He",0,"me","confused","เขา","ทำให้ฉันอยู่ในสภาพสับสน","👨","🧑"],
+ ["The teacher",0,"the students","confused","ครู","ทำให้นักเรียนยังคงสับสน","👩‍🏫","🧑‍🎓","ครูไม่ได้ปล่อยให้นักเรียนยังคงสับสน"],
+ ["The news",0,"everyone","shocked","ข่าวนั้น","ทำให้ทุกคนตกใจ","📰","👥"],
+ ["The accident",0,"him","injured","อุบัติเหตุ","ทำให้เขาได้รับบาดเจ็บ","💥","👨"],
+ ["The experience",0,"her","disappointed","ประสบการณ์นั้น","ทำให้เธอรู้สึกผิดหวัง","✨","👩"],
+ ["The movie",0,"me","speechless","ภาพยนตร์เรื่องนั้น","ทำให้ฉันพูดไม่ออก","🎬","🧑"],
+ ["The long journey",0,"us","exhausted","การเดินทางที่ยาวนาน","ทำให้เราเหนื่อยหมดแรง","🧭","👥"],
+ ["The storm",0,"the streets","flooded","พายุ","ทำให้ถนนมีน้ำท่วมขัง","⛈️","🛣️"],
+ // ---- Set 2 ----
+ ["The fire",0,"the building","damaged","ไฟไหม้","ทำให้อาคารได้รับความเสียหาย","🔥","🏢"],
+ ["The joke",0,"everyone","amused","เรื่องตลกนั้น","ทำให้ทุกคนรู้สึกขบขัน","😂","👥"],
+ ["The question",0,"him","puzzled","คำถามนั้น","ทำให้เขางุนงง","❓","👨"],
+ ["The result",0,"the team","disappointed","ผลลัพธ์","ทำให้ทีมรู้สึกผิดหวัง","📊","👥"],
+ ["The accident",0,"the car","damaged","อุบัติเหตุ","ทำให้รถได้รับความเสียหาย","💥","🚗"],
+ ["The cold weather",0,"the windows","frozen","อากาศหนาว","ทำให้หน้าต่างมีน้ำแข็งเกาะ","🥶","🪟"],
+ ["The sudden announcement",0,"the employees","worried","การประกาศอย่างกะทันหัน","ทำให้พนักงานกังวล","📢","🧑‍💼"],
+ ["The beautiful performance",0,"the audience","amazed","การแสดงที่ยอดเยี่ยม","ทำให้ผู้ชมประทับใจ/ทึ่ง","🎭","👥","การแสดงที่ยอดเยี่ยมไม่ได้ทำให้ผู้ชมรู้สึกทึ่ง"],
+ ["The difficult situation",0,"the family","helpless","สถานการณ์ที่ยากลำบาก","ทำให้ครอบครัวรู้สึกหมดหนทาง","🌪️","👪"],
+ ["The final decision",0,"everyone","satisfied","การตัดสินใจครั้งสุดท้าย","ทำให้ทุกคนพอใจ","⚖️","👥"],
+ // ---- Set 3 (เพิ่มให้ตามรูปแบบเดียวกัน) ----
+ ["The long meeting",0,"the staff","tired","การประชุมที่ยาวนาน","ทำให้พนักงานเหนื่อยล้า","📊","🧑‍💼"],
+ ["The heavy rain",0,"the roads","wet","ฝนตกหนัก","ทำให้ถนนเปียกแฉะ","🌧️","🛣️"],
+ ["The surprise party",0,"her","stunned","ปาร์ตี้เซอร์ไพรส์","ทำให้เธออึ้ง","🎉","👩"],
+ ["The earthquake",0,"thousands of people","homeless","แผ่นดินไหว","ทำให้ผู้คนนับพันไร้บ้าน","🏚️","👥"],
+ ["The bad review",0,"the author","upset","รีวิวที่แย่","ทำให้ผู้เขียนไม่พอใจ","⭐","🧑"],
+ ["The loud explosion",0,"the villagers","terrified","เสียงระเบิดดัง","ทำให้ชาวบ้านตกใจกลัว","💥","👥"],
+ ["The heavy workload",0,"the nurses","exhausted","ภาระงานที่หนัก","ทำให้พยาบาลหมดแรง","🗂️","🧑‍⚕️"],
+ ["The medicine",0,"the patient","sleepy","ยานั้น","ทำให้ผู้ป่วยง่วง","💊","🤒"],
+ ["The kind words",1,"her","happy","คำพูดที่อ่อนโยน","ทำให้เธอมีความสุข","💬","👩"],
+ ["The scandal",0,"the company","ruined","เรื่องอื้อฉาว","ทำให้บริษัทพังพินาศ","📰","🏢"],
+ // ---- Set 4 ----
+ ["The surgery",0,"him","weak","การผ่าตัด","ทำให้เขาอ่อนแอ","🏥","👨"],
+ ["The thief",0,"the house","empty","โจร","ทำให้บ้านว่างเปล่า","🦹","🏠"],
+ ["The argument",0,"the couple","angry","การทะเลาะ","ทำให้คู่รักโกรธ","🗯️","💑"],
+ ["The strict rules",1,"the students","unhappy","กฎที่เข้มงวด","ทำให้นักเรียนไม่มีความสุข","📜","🧑‍🎓"],
+ ["The long queue",0,"the customers","annoyed","แถวที่ยาว","ทำให้ลูกค้ารำคาญ","🧍","👥"],
+ ["The mistake",0,"the manager","embarrassed","ความผิดพลาด","ทำให้ผู้จัดการอับอาย","❌","🧑‍💼"],
+ ["The delay",0,"the passengers","stranded","ความล่าช้า","ทำให้ผู้โดยสารติดค้าง","🕒","👥"],
+ ["The winter",0,"the lake","frozen","ฤดูหนาว","ทำให้ทะเลสาบกลายเป็นน้ำแข็ง","❄️","🏞️"],
+ ["The flood",0,"the village","isolated","น้ำท่วม","ทำให้หมู่บ้านถูกตัดขาด","🌊","🏘️"],
+ ["The final exam",0,"the students","anxious","ข้อสอบปลายภาค","ทำให้นักเรียนวิตกกังวล","📝","🧑‍🎓"],
+ // ---- Set 5 ----
+ ["The lovely garden",0,"the visitors","delighted","สวนที่น่ารัก","ทำให้ผู้มาเยือนยินดี","🌷","👥"],
+ ["The sad story",0,"the readers","heartbroken","เรื่องเศร้า","ทำให้ผู้อ่านเสียใจมาก","📖","👥"],
+ ["The generous gift",0,"her","grateful","ของขวัญที่ใจกว้าง","ทำให้เธอรู้สึกซาบซึ้ง","🎁","👩"],
+ ["The delicious meal",0,"the guests","satisfied","อาหารมื้ออร่อย","ทำให้แขกพอใจ","🍽️","👥"],
+ ["The power cut",0,"the city","dark","ไฟดับ","ทำให้เมืองมืดมิด","🔌","🌃"],
+ ["The haircut",0,"him","unrecognizable","ทรงผม","ทำให้เขาดูไม่เหมือนเดิมจนจำไม่ได้","✂️","👨"],
+ ["The heavy snow",0,"the road","blocked","หิมะตกหนัก","ทำให้ถนนถูกปิดกั้น","☃️","🛣️"],
+ ["The surprising result",0,"the experts","baffled","ผลลัพธ์ที่น่าประหลาดใจ","ทำให้ผู้เชี่ยวชาญงงงัน","📈","🧑‍🔬"],
+ ["The rude comment",0,"her","offended","ความเห็นที่หยาบคาย","ทำให้เธอรู้สึกถูกลบหลู่","💬","👩"],
+ ["The good test results",1,"the doctor","hopeful","ผลตรวจที่ดี","ทำให้หมอมีความหวัง","✅","🧑‍⚕️"],
+];
+
+const ADJ = {
+ alone:["🧍","อยู่ตามลำพัง, โดดเดี่ยว"], confused:["😕","สับสน"], shocked:["😲","ตกใจ, ช็อก"], injured:["🤕","ได้รับบาดเจ็บ"],
+ disappointed:["😞","ผิดหวัง"], speechless:["😶","พูดไม่ออก"], exhausted:["🥱","หมดแรง, อ่อนล้า"], flooded:["🌊","น้ำท่วมขัง"],
+ damaged:["🛠️","เสียหาย"], amused:["😄","ขบขัน"], puzzled:["🤔","งุนงง"], frozen:["🧊","แข็งตัว/เป็นน้ำแข็ง"],
+ worried:["😟","กังวล"], amazed:["🤩","ทึ่ง, ประทับใจ"], helpless:["😢","หมดหนทาง, ช่วยตัวเองไม่ได้"], satisfied:["😊","พอใจ"],
+ tired:["😫","เหนื่อยล้า"], wet:["💧","เปียก"], stunned:["😳","อึ้ง, ตะลึง"], homeless:["🏚️","ไร้บ้าน"], upset:["😢","ไม่พอใจ, อารมณ์เสีย"],
+ terrified:["😱","ตกใจกลัวมาก"], sleepy:["😴","ง่วง"], happy:["😄","มีความสุข"], ruined:["💔","พังพินาศ, เสียหายยับเยิน"],
+ weak:["🥴","อ่อนแอ"], empty:["🕳️","ว่างเปล่า"], angry:["😠","โกรธ"], unhappy:["🙁","ไม่มีความสุข"], annoyed:["😒","รำคาญ"],
+ embarrassed:["😳","อับอาย, เขินอาย"], stranded:["🧳","ติดค้าง, ไปต่อไม่ได้"], isolated:["🏝️","โดดเดี่ยว, ถูกตัดขาด"],
+ anxious:["😰","วิตกกังวล"], delighted:["😁","ยินดี, ปลื้มใจ"], heartbroken:["💔","เสียใจมาก, อกหัก"], grateful:["🙏","ซาบซึ้ง, รู้สึกขอบคุณ"],
+ dark:["🌑","มืด"], unrecognizable:["🫥","จำไม่ได้"], blocked:["🚧","ถูกปิดกั้น"], baffled:["🤷","งงงัน"], offended:["😤","รู้สึกถูกลบหลู่/ไม่พอใจ"], hopeful:["🤞","มีความหวัง"]
+};
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+
+function build(r, neg){
+  const [s,pl,o,adj,ths,thr,,,negFull] = r;
+  const vForm = (neg || pl) ? "leave" : "leaves";
+  const aux = neg ? (pl ? "do not " : "does not ") : "";
+  const tipForm = neg ? "does/do not + leave (V1)" : (pl ? "leave (V1)" : "leaves = leave (V1) + s");
+  const vSpan = `<span class="v" data-t="leave (V1)" data-b="${esc("ปล่อยให้ / ทำให้ (ใครบางคน) ยังคงอยู่ในสภาพหนึ่ง ๆ · ความหมายทั่วไป: ออกจาก, ทิ้งไว้")}" data-v="${esc("รูปในประโยค: "+tipForm+" · leave – left – left")}">${vForm}</span>`;
+  const aSpan = `<span class="a" data-t="${adj}" data-b="${esc(ADJ[adj][1])}">${adj}</span>`;
+  const en = `${s} ${aux}${vSpan} ${o} ${aSpan}.`;
+  const plain = `${s} ${aux}${vForm} ${o} ${adj}.`;
+  const th = neg ? (negFull || ths + "ไม่ได้" + thr) : ths + thr;
+  return {en, plain, th};
+}
+
+const SETS = 5, PER = 20;
+const sets = [];
+for(let k=0;k<SETS;k++){
+  const cards=[];
+  ROWS.slice(k*10,k*10+10).forEach(r=>{
+    cards.push({r,neg:false,...build(r,false)});
+    cards.push({r,neg:true,...build(r,true)});
+  });
+  sets.push(cards);
+}
+
+/* ---------- speech ---------- */
+let voices=[], chosen=null, speakingBtn=null;
+const supports = 'speechSynthesis' in window;
+function score(v){
+  const n=(v.name||"").toLowerCase(); let s=0;
+  if(!/^en/i.test(v.lang)) return -1;
+  if(/en[-_]us/i.test(v.lang)) s+=5;
+  if(/natural|neural/.test(n)) s+=50;
+  if(/online/.test(n)) s+=15;
+  if(/google us english/.test(n)) s+=40;
+  if(/aria|jenny|guy|samantha|ava|allison|zoe|siri|serena|daniel|karen|alex/.test(n)) s+=25;
+  if(/google/.test(n)) s+=10;
+  if(/espeak|compact/.test(n)) s-=30;
+  if(v.localService===false) s+=3;
+  return s;
+}
+function loadVoices(){
+  if(!supports) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)).sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice');
+  sel.innerHTML="";
+  if(!voices.length){ sel.innerHTML='<option>ใช้เสียงเริ่มต้น</option>'; return; }
+  voices.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=`${v.name} (${v.lang})`; sel.appendChild(o); });
+  chosen=voices[0]; sel.value=0;
+}
+if(supports){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('voice').addEventListener('change',e=>{ chosen=voices[+e.target.value]||null; });
+const rate=document.getElementById('rate');
+rate.addEventListener('input',()=>document.getElementById('rateVal').textContent=(+rate.value).toFixed(2)+"×");
+
+function speak(text, btn){
+  if(!supports){ alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง"); return; }
+  const wasThis = speakingBtn===btn;
+  speechSynthesis.cancel();
+  if(speakingBtn) speakingBtn.classList.remove('on');
+  speakingBtn=null;
+  if(wasThis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=+rate.value; u.pitch=1; u.volume=1;
+  if(chosen) u.voice=chosen;
+  btn.classList.add('on'); speakingBtn=btn;
+  const done=()=>{ btn.classList.remove('on'); if(speakingBtn===btn) speakingBtn=null; };
+  u.onend=done; u.onerror=done;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- render ---------- */
+let cur=0;
+const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid'), info=document.getElementById('info');
+sets.forEach((_,k)=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.setAttribute('role','tab'); b.textContent=`Set ${k+1} · ${k*PER+1}–${k*PER+PER}`;
+  b.onclick=()=>show(k); tabsEl.appendChild(b);
+});
+
+function sceneHTML(c){
+  const adj=c.r[3], se=c.r[6], oe=c.r[7];
+  return `<div class="scene" aria-hidden="true">
+    <span class="sc">${se}</span><span class="arrow">➜</span>
+    <span class="car${c.neg?' neg':''}"><span class="wind">💨</span>🚶🚪</span><span class="arrow">➜</span>
+    <span class="person sc">${oe}<span class="face-e">${ADJ[adj][0]}</span></span></div>`;
+}
+function show(k){
+  cur=k; speechSynthesis && speechSynthesis.cancel(); speakingBtn=null;
+  [...tabsEl.children].forEach((b,i)=>b.setAttribute('aria-selected',i===k));
+  info.textContent=`Set ${k+1}: การ์ด ${PER} ใบ (ประโยคบอกเล่า/ปฏิเสธ สลับกัน)` + (k>=2 ? " · ประโยคชุดนี้เพิ่มให้ตามรูปแบบเดียวกัน" : "");
+  grid.innerHTML="";
+  sets[k].forEach((c,i)=>{
+    const n=k*PER+i+1;
+    const w=document.createElement('div'); w.className='cw';
+    w.innerHTML=`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${n} คลิกเพื่อพลิก">
+      <div class="face front">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        ${sceneHTML(c)}
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อดูคำแปล</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+      <div class="face back">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        <div class="th">${c.th}</div>
+        <hr class="sep">
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อพลิกกลับ</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+    </div>`;
+    const card=w.firstElementChild;
+    card.addEventListener('click',e=>{
+      const spk=e.target.closest('.spk');
+      if(spk){ e.stopPropagation(); speak(c.plain,spk); return; }
+      const t=e.target.closest('[data-t]');
+      if(t && e.pointerType==='touch'){ showTip(t); e.stopPropagation(); return; }
+      card.classList.toggle('flipped');
+    });
+    card.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ') && e.target===card){ e.preventDefault(); card.classList.toggle('flipped'); }});
+    grid.appendChild(w);
+  });
+}
+document.getElementById('flipAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.add('flipped'));
+document.getElementById('resetAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.remove('flipped'));
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function showTip(el){
+  const v=el.dataset.v ? `<span class="tv">${el.dataset.v}</span>` : "";
+  tip.innerHTML=`<b>${el.dataset.t}</b>${el.dataset.b}${v}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=Math.min(Math.max(8,r.left+r.width/2-tw/2), innerWidth-tw-8);
+  let y=r.top-th-10; if(y<8) y=r.bottom+10;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+document.addEventListener('mouseover',e=>{ const t=e.target.closest('[data-t]'); if(t) showTip(t); });
+document.addEventListener('mouseout',e=>{ if(e.target.closest('[data-t]')) tip.classList.remove('show'); });
+document.addEventListener('click',e=>{ if(!e.target.closest('[data-t]')) tip.classList.remove('show'); });
+window.addEventListener('scroll',()=>tip.classList.remove('show'),{passive:true});
+
+show(0);
+</script>
+</body>
+</html>

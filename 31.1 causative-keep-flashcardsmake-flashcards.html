@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.31 Causative Verb: MAKE + Someone + Adjective</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.31 Causative Verb: <span class="rm">MAKE</span> + <span class="ob">Something</span> + <span class="to">Adjective</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ make หรือคำคุณศัพท์เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">make(s)</b> + <b class="ob">something</b> + <b class="to">adjective</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`The sun makes the room *warm*.|แสงแดดทำให้ห้องอบอุ่น|อบอุ่น|☀️
+The sun does not make the room *cold*.|แสงแดดไม่ได้ทำให้ห้องเย็น|เย็น|🥶
+This music makes me *happy*.|เพลงนี้ทำให้ฉันมีความสุข|มีความสุข|🎵
+This music does not make me *sad*.|เพลงนี้ไม่ได้ทำให้ฉันเศร้า|เศร้า|😢
+The news makes him *nervous*.|ข่าวนั้นทำให้เขาประหม่า|ประหม่า|😰
+The news does not make him *angry*.|ข่าวนั้นไม่ได้ทำให้เขาโกรธ|โกรธ|😠
+The joke makes everyone *happy*.|เรื่องตลกนั้นทำให้ทุกคนมีความสุข|มีความสุข|😂
+The joke does not make everyone *uncomfortable*.|เรื่องตลกนั้นไม่ได้ทำให้ทุกคนรู้สึกไม่สบายใจ|ไม่สบายใจ|😬
+Exercise makes my body *strong*.|การออกกำลังกายทำให้ร่างกายของฉันแข็งแรง|แข็งแรง|💪
+Exercise does not make my body *weak*.|การออกกำลังกายไม่ได้ทำให้ร่างกายของฉันอ่อนแอ|อ่อนแอ|🥴
+Fresh air makes the room *comfortable*.|อากาศบริสุทธิ์ทำให้ห้องสบาย|สบาย|🌬️
+Fresh air does not make the room *stuffy*.|อากาศบริสุทธิ์ไม่ได้ทำให้ห้องอับ|อับ/อึดอัด|😶‍🌫️
+The teacher makes the lesson *interesting*.|ครูทำให้บทเรียนน่าสนใจ|น่าสนใจ|📖
+The teacher does not make the lesson *boring*.|ครูไม่ได้ทำให้บทเรียนน่าเบื่อ|น่าเบื่อ|😴
+This book makes the subject *clear*.|หนังสือเล่มนี้ทำให้เนื้อหาชัดเจน|ชัดเจน|📘
+This book does not make the subject *confusing*.|หนังสือเล่มนี้ไม่ได้ทำให้เนื้อหาสับสน|ทำให้สับสน|😵
+The rain makes the road *slippery*.|ฝนทำให้ถนนลื่น|ลื่น|🌧️
+The rain does not make the road *dry*.|ฝนไม่ได้ทำให้ถนนแห้ง|แห้ง|🏜️
+The sunlight makes the flowers *beautiful*.|แสงแดดทำให้ดอกไม้สวยงาม|สวยงาม|🌸
+The sunlight does not make the flowers *ugly*.|แสงแดดไม่ได้ทำให้ดอกไม้น่าเกลียด|น่าเกลียด|🥀
+The new design makes the website *attractive*.|การออกแบบใหม่ทำให้เว็บไซต์น่าสนใจ|น่าดึงดูด|🖥️
+The new design does not make the website *unattractive*.|การออกแบบใหม่ไม่ได้ทำให้เว็บไซต์ไม่น่าสนใจ|ไม่น่าดึงดูด|👎
+Good lighting makes the room *bright*.|แสงสว่างที่ดีทำให้ห้องสว่าง|สว่าง|💡
+Good lighting does not make the room *dark*.|แสงสว่างที่ดีไม่ได้ทำให้ห้องมืด|มืด|🌑
+The heater makes the water *hot*.|เครื่องทำความร้อนทำให้น้ำร้อน|ร้อน|♨️
+The heater does not make the water *cold*.|เครื่องทำความร้อนไม่ได้ทำให้น้ำเย็น|เย็น|🧊
+The refrigerator makes the drinks *cold*.|ตู้เย็นทำให้เครื่องดื่มเย็น|เย็น|🥤
+The refrigerator does not make the drinks *hot*.|ตู้เย็นไม่ได้ทำให้เครื่องดื่มร้อน|ร้อน|🔥
+The cleaner makes the floor *clean*.|น้ำยาทำความสะอาด/คนทำความสะอาดทำให้พื้นสะอาด|สะอาด|🧼
+The cleaner does not make the floor *dirty*.|น้ำยาทำความสะอาด/คนทำความสะอาดไม่ได้ทำให้พื้นสกปรก|สกปรก|🗑️
+The software makes the process *easy*.|ซอฟต์แวร์ทำให้กระบวนการง่าย|ง่าย|✅
+The software does not make the process *difficult*.|ซอฟต์แวร์ไม่ได้ทำให้กระบวนการยาก|ยาก|🧗
+The loud noise makes the baby *frightened*.|เสียงดังทำให้เด็กทารกตกใจกลัว|ตกใจกลัว|👶
+The loud noise does not make the baby *calm*.|เสียงดังไม่ได้ทำให้เด็กทารกสงบ|สงบ|😌
+The good news makes my parents *proud*.|ข่าวดีทำให้พ่อแม่ของฉันภูมิใจ|ภูมิใจ|🥹
+The good news does not make my parents *worried*.|ข่าวดีไม่ได้ทำให้พ่อแม่ของฉันกังวล|กังวล|😟
+The long wait makes the customers *impatient*.|การรอคอยที่นานทำให้ลูกค้าใจร้อน|ใจร้อน|⏳
+The long wait does not make the customers *patient*.|การรอคอยที่นานไม่ได้ทำให้ลูกค้าอดทน|อดทน|🧘
+Regular practice makes English *easier*.|การฝึกฝนเป็นประจำทำให้ภาษาอังกฤษง่ายขึ้น|ง่ายขึ้น|📚
+Regular practice does not make English *harder*.|การฝึกฝนเป็นประจำไม่ได้ทำให้ภาษาอังกฤษยากขึ้น|ยากขึ้น|📈
+Sugar makes the tea *sweet*.|น้ำตาลทำให้ชาหวาน|หวาน|🍬
+Sugar does not make the tea *bitter*.|น้ำตาลไม่ได้ทำให้ชาขม|ขม|🍵
+Salt makes the soup *salty*.|เกลือทำให้ซุปเค็ม|เค็ม|🧂
+Salt does not make the soup *bland*.|เกลือไม่ได้ทำให้ซุปจืด|จืด|🥣
+Chili makes the food *spicy*.|พริกทำให้อาหารเผ็ด|เผ็ด|🌶️
+Chili does not make the food *mild*.|พริกไม่ได้ทำให้อาหารรสอ่อน|รสอ่อน|🍚
+Snow makes the ground *white*.|หิมะทำให้พื้นดินเป็นสีขาว|ขาว|❄️
+Snow does not make the ground *green*.|หิมะไม่ได้ทำให้พื้นดินเป็นสีเขียว|เขียว|🌱
+The wind makes the weather *cool*.|ลมทำให้อากาศเย็น|เย็น|🌬️
+The wind does not make the weather *hot*.|ลมไม่ได้ทำให้อากาศร้อน|ร้อน|🥵
+Fog makes the road *dangerous*.|หมอกทำให้ถนนอันตราย|อันตราย|🌫️
+Fog does not make the road *clear*.|หมอกไม่ได้ทำให้ถนนโปร่งชัดเจน|ชัดเจน/โปร่ง|🛣️
+Paint makes the wall *colorful*.|สีทำให้ผนังมีสีสัน|มีสีสัน|🎨
+Paint does not make the wall *plain*.|สีไม่ได้ทำให้ผนังเรียบจืด|เรียบ/จืดชืด|⬜
+A mirror makes the room *bigger*.|กระจกทำให้ห้องดูใหญ่ขึ้น|ใหญ่ขึ้น|🪞
+A mirror does not make the room *smaller*.|กระจกไม่ได้ทำให้ห้องเล็กลง|เล็กลง|📦
+A fan makes the air *fresh*.|พัดลมทำให้อากาศสดชื่น|สดชื่น|🌀
+A fan does not make the air *hot*.|พัดลมไม่ได้ทำให้อากาศร้อน|ร้อน|🌡️
+Coffee makes me *awake*.|กาแฟทำให้ฉันตื่น|ตื่น|☕
+Coffee does not make me *sleepy*.|กาแฟไม่ได้ทำให้ฉันง่วง|ง่วง|😪
+Tea makes me *relaxed*.|ชาทำให้ฉันผ่อนคลาย|ผ่อนคลาย|🫖
+Tea does not make me *tense*.|ชาไม่ได้ทำให้ฉันเครียด|เครียด|😬
+Medicine makes the patient *better*.|ยาทำให้คนไข้ดีขึ้น|ดีขึ้น|💊
+Medicine does not make the patient *worse*.|ยาไม่ได้ทำให้คนไข้แย่ลง|แย่ลง|📉
+A smile makes people *friendly*.|รอยยิ้มทำให้ผู้คนเป็นมิตร|เป็นมิตร|😊
+A smile does not make people *unfriendly*.|รอยยิ้มไม่ได้ทำให้ผู้คนไม่เป็นมิตร|ไม่เป็นมิตร|😒
+Teamwork makes the group *strong*.|การทำงานเป็นทีมทำให้กลุ่มเข้มแข็ง|เข้มแข็ง|🤝
+Teamwork does not make the group *divided*.|การทำงานเป็นทีมไม่ได้ทำให้กลุ่มแตกแยก|แตกแยก|✂️
+Training makes athletes *fast*.|การฝึกซ้อมทำให้นักกีฬาเร็ว|เร็ว|🏃
+Training does not make athletes *slow*.|การฝึกซ้อมไม่ได้ทำให้นักกีฬาช้า|ช้า|🐢
+Practice makes the task *simple*.|การฝึกฝนทำให้งานง่าย|ง่าย|✅
+Practice does not make the task *impossible*.|การฝึกฝนไม่ได้ทำให้งานเป็นไปไม่ได้|เป็นไปไม่ได้|🚫
+Technology makes life *convenient*.|เทคโนโลยีทำให้ชีวิตสะดวก|สะดวก|📱
+Technology does not make life *complicated*.|เทคโนโลยีไม่ได้ทำให้ชีวิตซับซ้อน|ซับซ้อน|🧩
+Education makes people *wise*.|การศึกษาทำให้ผู้คนฉลาด|ฉลาด|🎓
+Education does not make people *foolish*.|การศึกษาไม่ได้ทำให้ผู้คนโง่เขลา|โง่เขลา|🤡
+Money makes some people *selfish*.|เงินทำให้บางคนเห็นแก่ตัว|เห็นแก่ตัว|💰
+Money does not make everyone *generous*.|เงินไม่ได้ทำให้ทุกคนใจกว้าง|ใจกว้าง|🎁
+Success makes him *confident*.|ความสำเร็จทำให้เขามั่นใจ|มั่นใจ|🏆
+Success does not make him *shy*.|ความสำเร็จไม่ได้ทำให้เขาขี้อาย|ขี้อาย|🙈
+Failure makes her *determined*.|ความล้มเหลวทำให้เธอมุ่งมั่น|มุ่งมั่น|🔥
+Failure does not make her *hopeless*.|ความล้มเหลวไม่ได้ทำให้เธอสิ้นหวัง|สิ้นหวัง|😞
+Pollution makes the air *dirty*.|มลพิษทำให้อากาศสกปรก|สกปรก|🏭
+Pollution does not make the air *clean*.|มลพิษไม่ได้ทำให้อากาศสะอาด|สะอาด|🌿
+A lamp makes the desk *bright*.|โคมไฟทำให้โต๊ะสว่าง|สว่าง|🛋️
+A lamp does not make the desk *dark*.|โคมไฟไม่ได้ทำให้โต๊ะมืด|มืด|🌑
+A carpet makes the floor *soft*.|พรมทำให้พื้นนุ่ม|นุ่ม|🧶
+A carpet does not make the floor *hard*.|พรมไม่ได้ทำให้พื้นแข็ง|แข็ง|🪨
+Cotton makes the shirt *comfortable*.|ผ้าฝ้ายทำให้เสื้อสวมสบาย|สบาย|👕
+Cotton does not make the shirt *itchy*.|ผ้าฝ้ายไม่ได้ทำให้เสื้อคัน|คัน|🐜
+Ice makes the drink *refreshing*.|น้ำแข็งทำให้เครื่องดื่มสดชื่น|สดชื่น|🧊
+Ice does not make the drink *warm*.|น้ำแข็งไม่ได้ทำให้เครื่องดื่มอุ่น|อุ่น|☀️
+A lock makes the door *secure*.|กุญแจทำให้ประตูปลอดภัย|ปลอดภัย|🔒
+A lock does not make the door *open*.|กุญแจไม่ได้ทำให้ประตูเปิด|เปิด|🚪
+A map makes the journey *smooth*.|แผนที่ทำให้การเดินทางราบรื่น|ราบรื่น|🗺️
+A map does not make the journey *difficult*.|แผนที่ไม่ได้ทำให้การเดินทางยาก|ยาก|🧗
+Honey makes the cake *delicious*.|น้ำผึ้งทำให้เค้กอร่อย|อร่อย|🍯
+Honey does not make the cake *tasteless*.|น้ำผึ้งไม่ได้ทำให้เค้กจืดชืด|ไม่มีรส|🍰
+Sleep makes the brain *active*.|การนอนหลับทำให้สมองกระฉับกระเฉง|กระฉับกระเฉง|😴
+Sleep does not make the brain *tired*.|การนอนหลับไม่ได้ทำให้สมองเหนื่อยล้า|เหนื่อยล้า|🧠`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(make(?:s)?)\b( .*?)(?= \*)/,(x,v,o)=>`<span class="rm v" data-m="ทำให้ (เป็น…)">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/\*(.+?)\*/,`<span class="to"><span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🛠️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

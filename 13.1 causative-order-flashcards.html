@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.20 Causative Verb: ORDER + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.20 Causative Verb: <span class="rm">ORDER</span> + <span class="ob">Someone</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">order(s)</b> + <b class="ob">someone</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I order him to *wait* outside.|ฉันสั่งให้เขารอข้างนอก|รอ|⏳
+I do not order her to *leave* early.|ฉันไม่ได้สั่งให้เธอออกไปก่อน|ออกไป|🚪
+She orders me to *study* harder.|เธอสั่งให้ฉันเรียนให้หนักขึ้น|เรียน|📚
+She does not order me to *stay* here.|เธอไม่ได้สั่งให้ฉันอยู่ที่นี่|อยู่|🏠
+He orders his son to *clean* his room.|เขาสั่งให้ลูกชายทำความสะอาดห้อง|ทำความสะอาด|🧹
+He does not order his son to *go* outside.|เขาไม่ได้สั่งให้ลูกชายออกไปข้างนอก|ไป|🚶
+My father orders me to *help* my brother.|พ่อสั่งให้ฉันช่วยน้องชาย|ช่วย|🤝
+My father does not order me to *cook* dinner.|พ่อไม่ได้สั่งให้ฉันทำอาหารเย็น|ทำอาหาร|🍳
+The teacher orders the students to *sit down*.|ครูสั่งให้นักเรียนนั่งลง|นั่งลง|🪑
+The teacher does not order the students to *memorize* everything.|ครูไม่ได้สั่งให้นักเรียนท่องจำทุกอย่าง|ท่องจำ|🧠
+The coach orders the players to *practice* every morning.|โค้ชสั่งให้นักกีฬาฝึกซ้อมทุกเช้า|ฝึกซ้อม|🏋️
+The coach does not order the players to *run* today.|โค้ชไม่ได้สั่งให้นักกีฬาวิ่งวันนี้|วิ่ง|🏃
+They order us to *wait* outside.|พวกเขาสั่งให้เรารอข้างนอก|รอ|⏳
+They do not order us to *leave* the building.|พวกเขาไม่ได้สั่งให้เราออกจากอาคาร|ออกจาก|🏢
+The manager orders his employees to *arrive* on time.|ผู้จัดการสั่งให้พนักงานมาถึงตรงเวลา|มาถึง|🕒
+The manager does not order his employees to *work* overtime.|ผู้จัดการไม่ได้สั่งให้พนักงานทำงานล่วงเวลา|ทำงาน|💼
+The company orders workers to *follow* the safety rules.|บริษัทสั่งให้คนงานปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+The company does not order workers to *wear* suits.|บริษัทไม่ได้สั่งให้คนงานสวมสูท|สวม|🤵
+The doctor orders the patient to *rest* for two days.|หมอสั่งให้คนไข้พักผ่อนเป็นเวลาสองวัน|พักผ่อน|🛌
+The doctor does not order the patient to *stay* in the hospital.|หมอไม่ได้สั่งให้คนไข้พักอยู่ในโรงพยาบาล|พักอยู่|🏥
+The school orders students to *wear* uniforms.|โรงเรียนสั่งให้นักเรียนสวมเครื่องแบบ|สวม|👔
+The school does not order students to *bring* laptops.|โรงเรียนไม่ได้สั่งให้นักเรียนนำแล็ปท็อปมา|นำมา|💻
+The boss orders her assistant to *prepare* the report.|เจ้านายสั่งให้ผู้ช่วยเตรียมรายงาน|เตรียม|📑
+The boss does not order her assistant to *work* late.|เจ้านายไม่ได้สั่งให้ผู้ช่วยทำงานดึก|ทำงาน|🌃
+The police officer orders the driver to *stop* the car.|ตำรวจสั่งให้คนขับหยุดรถ|หยุด|🚓
+The police officer does not order the driver to *leave* immediately.|ตำรวจไม่ได้สั่งให้คนขับออกไปทันที|ออกไป|💨
+The captain orders the soldiers to *move* forward.|กัปตันสั่งให้ทหารเคลื่อนที่ไปข้างหน้า|เคลื่อนที่|🪖
+The captain does not order the soldiers to *attack*.|กัปตันไม่ได้สั่งให้ทหารโจมตี|โจมตี|⚔️
+The director orders the staff to *prepare* the room.|ผู้อำนวยการสั่งให้เจ้าหน้าที่เตรียมห้อง|เตรียม|🛋️
+The director does not order the staff to *cancel* the meeting.|ผู้อำนวยการไม่ได้สั่งให้เจ้าหน้าที่ยกเลิกการประชุม|ยกเลิก|❌
+The nurse orders the patient to *take* the medicine.|พยาบาลสั่งให้คนไข้กินยา|กิน|💊
+The nurse does not order the patient to *walk* alone.|พยาบาลไม่ได้สั่งให้คนไข้เดินคนเดียว|เดิน|🚶
+The guide orders us to *follow* the group.|ไกด์สั่งให้เราตามกลุ่ม|ตาม|👨‍👩‍👧‍👦
+The guide does not order us to *separate* from the group.|ไกด์ไม่ได้สั่งให้เราแยกจากกลุ่ม|แยก|✂️
+The librarian orders the visitors to *be* quiet.|บรรณารักษ์สั่งให้ผู้มาเยือนเงียบ|เป็น/อยู่|🤫
+The librarian does not order the visitors to *leave* immediately.|บรรณารักษ์ไม่ได้สั่งให้ผู้มาเยือนออกไปทันที|ออกไป|🚪
+The security guard orders the visitors to *show* their IDs.|เจ้าหน้าที่รักษาความปลอดภัยสั่งให้ผู้มาเยือนแสดงบัตรประจำตัว|แสดง|🪪
+The security guard does not order the visitors to *enter* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้สั่งให้ผู้มาเยือนเข้าไปในอาคาร|เข้า|🚧
+The trainer orders us to *exercise* regularly.|เทรนเนอร์สั่งให้เราออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+The trainer does not order us to *stop* exercising.|เทรนเนอร์ไม่ได้สั่งให้เราหยุดออกกำลังกาย|หยุด|⛔
+The judge orders the witness to *tell* the truth.|ผู้พิพากษาสั่งให้พยานพูดความจริง|บอก|⚖️
+The judge does not order the witness to *leave* the court.|ผู้พิพากษาไม่ได้สั่งให้พยานออกจากศาล|ออก|🚪
+The general orders the army to *advance*.|นายพลสั่งให้กองทัพรุกคืบ|รุกคืบ|🪖
+The general does not order the army to *retreat*.|นายพลไม่ได้สั่งให้กองทัพถอยทัพ|ถอย|🏳️
+The king orders the guards to *open* the gate.|กษัตริย์สั่งให้ทหารยามเปิดประตู|เปิด|👑
+The king does not order the guards to *harm* the prisoners.|กษัตริย์ไม่ได้สั่งให้ทหารยามทำร้ายนักโทษ|ทำร้าย|⛓️
+The principal orders the students to *line up*.|ผู้อำนวยการสั่งให้นักเรียนเข้าแถว|เข้าแถว|🧍
+The principal does not order the students to *run* in the hallway.|ผู้อำนวยการไม่ได้สั่งให้นักเรียนวิ่งในทางเดิน|วิ่ง|🏃
+The professor orders the students to *submit* their essays.|ศาสตราจารย์สั่งให้นักศึกษาส่งเรียงความ|ส่ง|📄
+The professor does not order the students to *rewrite* the paper.|ศาสตราจารย์ไม่ได้สั่งให้นักศึกษาเขียนรายงานใหม่|เขียนใหม่|✏️
+The chef orders the cooks to *clean* the kitchen.|เชฟสั่งให้พ่อครัวทำความสะอาดครัว|ทำความสะอาด|🧽
+The chef does not order the cooks to *serve* cold soup.|เชฟไม่ได้สั่งให้พ่อครัวเสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The pilot orders the crew to *check* the engines.|นักบินสั่งให้ลูกเรือตรวจเครื่องยนต์|ตรวจ|🛫
+The pilot does not order the crew to *delay* the takeoff.|นักบินไม่ได้สั่งให้ลูกเรือเลื่อนการขึ้นบิน|เลื่อน|⏰
+The mayor orders the officials to *repair* the road.|นายกเทศมนตรีสั่งให้เจ้าหน้าที่ซ่อมถนน|ซ่อม|🛠️
+The mayor does not order the officials to *raise* the taxes.|นายกเทศมนตรีไม่ได้สั่งให้เจ้าหน้าที่ขึ้นภาษี|ขึ้น|💲
+The landlord orders the tenants to *pay* the rent.|เจ้าของบ้านสั่งให้ผู้เช่าจ่ายค่าเช่า|จ่าย|🏠
+The landlord does not order the tenants to *paint* the walls.|เจ้าของบ้านไม่ได้สั่งให้ผู้เช่าทาสีผนัง|ทาสี|🎨
+The inspector orders the owner to *close* the shop.|ผู้ตรวจสอบสั่งให้เจ้าของปิดร้าน|ปิด|🕵️
+The inspector does not order the owner to *throw away* the food.|ผู้ตรวจสอบไม่ได้สั่งให้เจ้าของทิ้งอาหาร|ทิ้ง|🗑️
+The customs officer orders the traveler to *open* the bag.|เจ้าหน้าที่ศุลกากรสั่งให้ผู้เดินทางเปิดกระเป๋า|เปิด|🧳
+The customs officer does not order the traveler to *remove* his shoes.|เจ้าหน้าที่ศุลกากรไม่ได้สั่งให้ผู้เดินทางถอดรองเท้า|ถอด|👟
+The referee orders the player to *leave* the field.|ผู้ตัดสินสั่งให้นักกีฬาออกจากสนาม|ออก|🟥
+The referee does not order the player to *sit* on the bench.|ผู้ตัดสินไม่ได้สั่งให้นักกีฬานั่งม้านั่งสำรอง|นั่ง|🪑
+The conductor orders the musicians to *play* softly.|วาทยกรสั่งให้นักดนตรีเล่นเบา ๆ|เล่น|🎻
+The conductor does not order the musicians to *tune* the violins.|วาทยกรไม่ได้สั่งให้นักดนตรีเทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The foreman orders the workers to *wear* helmets.|หัวหน้าคนงานสั่งให้คนงานสวมหมวกนิรภัย|สวม|⛑️
+The foreman does not order the workers to *work* in the rain.|หัวหน้าคนงานไม่ได้สั่งให้คนงานทำงานกลางฝน|ทำงาน|🌧️
+The shopkeeper orders the boy to *carry* the boxes.|เจ้าของร้านสั่งให้เด็กชายยกกล่อง|ยก|📦
+The shopkeeper does not order the boy to *touch* the goods.|เจ้าของร้านไม่ได้สั่งให้เด็กชายแตะต้องสินค้า|แตะ|🛒
+The sergeant orders the soldiers to *stand* straight.|จ่าสั่งให้ทหารยืนตรง|ยืน|💂
+The sergeant does not order the soldiers to *shout*.|จ่าไม่ได้สั่งให้ทหารตะโกน|ตะโกน|📢
+The lawyer orders his assistant to *copy* the files.|ทนายสั่งให้ผู้ช่วยถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The lawyer does not order his assistant to *call* the client.|ทนายไม่ได้สั่งให้ผู้ช่วยโทรหาลูกความ|โทร|📞
+The editor orders the writer to *shorten* the article.|บรรณาธิการสั่งให้นักเขียนย่อบทความ|ย่อ|📰
+The editor does not order the writer to *publish* the draft.|บรรณาธิการไม่ได้สั่งให้นักเขียนตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmer orders the workers to *plant* rice.|ชาวนาสั่งให้คนงานปลูกข้าว|ปลูก|🌾
+The farmer does not order the workers to *burn* the straw.|ชาวนาไม่ได้สั่งให้คนงานเผาฟาง|เผา|🔥
+The headmaster orders the teachers to *attend* the meeting.|ครูใหญ่สั่งให้ครูเข้าร่วมประชุม|เข้าร่วม|🏫
+The headmaster does not order the teachers to *ignore* the complaints.|ครูใหญ่ไม่ได้สั่งให้ครูเพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The supervisor orders the interns to *file* the documents.|หัวหน้างานสั่งให้นักศึกษาฝึกงานจัดเก็บเอกสาร|จัดเก็บ|🗂️
+The supervisor does not order the interns to *answer* the phone.|หัวหน้างานไม่ได้สั่งให้นักศึกษาฝึกงานรับโทรศัพท์|รับสาย|☎️
+The dentist orders the patient to *rinse* his mouth.|ทันตแพทย์สั่งให้คนไข้บ้วนปาก|บ้วนปาก|🦷
+The dentist does not order the patient to *eat* anything.|ทันตแพทย์ไม่ได้สั่งให้คนไข้กินอะไรเลย|กิน|🍔
+The therapist orders the patient to *breathe* slowly.|นักบำบัดสั่งให้คนไข้หายใจช้า ๆ|หายใจ|🧘
+The therapist does not order the patient to *skip* the session.|นักบำบัดไม่ได้สั่งให้คนไข้ข้ามการนัดบำบัด|ข้าม|⏭️
+The lifeguard orders the swimmers to *get out* of the pool.|ไลฟ์การ์ดสั่งให้ผู้ว่ายน้ำขึ้นจากสระ|ขึ้น/ออก|🏊
+The lifeguard does not order the swimmers to *dive* here.|ไลฟ์การ์ดไม่ได้สั่งให้ผู้ว่ายน้ำดำน้ำตรงนี้|ดำน้ำ|🤿
+The flight attendant orders the passengers to *fasten* their seat belts.|พนักงานต้อนรับบนเครื่องสั่งให้ผู้โดยสารคาดเข็มขัดนิรภัย|คาด|💺
+The flight attendant does not order the passengers to *stand* up.|พนักงานต้อนรับบนเครื่องไม่ได้สั่งให้ผู้โดยสารลุกขึ้นยืน|ยืน|🧍
+The bus driver orders the kids to *move* to the back.|คนขับรถบัสสั่งให้เด็ก ๆ ไปนั่งข้างหลัง|ย้าย|🚌
+The bus driver does not order the kids to *throw* trash on the floor.|คนขับรถบัสไม่ได้สั่งให้เด็ก ๆ ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The host orders the waiter to *bring* more drinks.|เจ้าภาพสั่งให้พนักงานเสิร์ฟนำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The host does not order the waiter to *turn off* the music.|เจ้าภาพไม่ได้สั่งให้พนักงานเสิร์ฟปิดเพลง|ปิด|🎶
+The commander orders the pilots to *take off*.|ผู้บัญชาการสั่งให้นักบินขึ้นบิน|ขึ้นบิน|🛩️
+The commander does not order the pilots to *land* now.|ผู้บัญชาการไม่ได้สั่งให้นักบินลงจอดตอนนี้|ลงจอด|🛬
+My mother orders me to *wash* the dishes.|แม่สั่งให้ฉันล้างจาน|ล้าง|🍽️
+My mother does not order me to *throw away* the toys.|แม่ไม่ได้สั่งให้ฉันทิ้งของเล่น|ทิ้ง|🧸
+The bank manager orders the clerk to *count* the cash.|ผู้จัดการธนาคารสั่งให้พนักงานนับเงินสด|นับ|💵
+The bank manager does not order the clerk to *lock* the vault.|ผู้จัดการธนาคารไม่ได้สั่งให้พนักงานล็อกห้องนิรภัย|ล็อก|🔒`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(order(?:s)?)\b( .*?)(?= to \*)/,(x,v,o)=>`<span class="rm">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Causative Verb: WOULD LIKE + Someone + TO V1 – Flashcards</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f3f1ec; --surface:#ffffff; --surface2:#faf8f4; --ink:#1d2433; --muted:#5d6678; --line:#d9d4c8;
+  --verb:#8b0000; --adj-bg:#cfe3ff; --adj-ink:#0b2f66; --accent:#0b2f66; --back:#16284a; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#1b6e3c; --no:#a61b1b; --tip-bg:#1d2433; --tip-ink:#f4f6fb;
+  --font:'Sarabun','Noto Sans Thai','Leelawadee UI',Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+    --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+    --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10141d; --surface:#1a2130; --surface2:#202a3d; --ink:#eef1f7; --muted:#a2abbd; --line:#323d54;
+  --verb:#ff8f8f; --adj-bg:#27467a; --adj-ink:#d6e6ff; --accent:#8fb5ff; --back:#0c1730; --back-ink:#f4f6fb;
+  --back-line:#3b5282; --ok:#6fd49a; --no:#ff8f8f; --tip-bg:#eef1f7; --tip-ink:#10141d;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:clamp(1.4rem,3.2vw,2rem);margin:0 0 4px;font-weight:700;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted)}
+.formula{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:1.05rem}
+.formula span{padding:2px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:18px 0 10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:.92rem;flex:1 1 280px}
+.v{color:var(--verb);font-weight:700;cursor:help;border-bottom:2px dotted var(--verb)}
+.a{background:var(--adj-bg);color:var(--adj-ink);font-weight:700;padding:0 5px;border-radius:4px;cursor:help}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.9rem;color:var(--muted)}
+.ctrl select,.ctrl input[type=range]{font-family:inherit}
+.ctrl select{max-width:230px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+button{font-family:inherit;cursor:pointer}
+.btn{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font-size:.9rem}
+.btn:hover{border-color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.tab{flex:0 0 auto;padding:9px 16px;border-radius:8px 8px 0 0;border:1px solid var(--line);border-bottom:none;background:var(--surface2);color:var(--muted);font-size:.98rem;font-weight:600}
+.tab[aria-selected="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0b1530}}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0b1530}
+.tabinfo{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px;color:var(--muted);font-size:.92rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.cw{perspective:1200px;height:340px}
+.card{position:relative;width:100%;height:100%;transition:transform .55s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d;cursor:pointer;border-radius:14px}
+.card.flipped{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;overflow:hidden}
+.front{background:var(--surface);border:1px solid var(--line)}
+.back{background:var(--back);color:var(--back-ink);transform:rotateY(180deg);border:1px solid var(--back-line)}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted)}
+.back .meta{color:#b6c3df}
+.badge{padding:1px 9px;border-radius:99px;font-weight:600;border:1px solid currentColor}
+.badge.pos{color:var(--ok)} .badge.neg{color:var(--no)}
+.back .badge.pos{color:#7fe0a8} .back .badge.neg{color:#ff9d9d}
+.scene{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px 0 6px;min-height:76px}
+.sc{font-size:2.3rem;line-height:1}
+.person{position:relative;display:inline-block}
+.person .face-e{position:absolute;right:-14px;top:-10px;font-size:1.4rem;background:var(--surface);border-radius:50%;box-shadow:0 0 0 2px var(--surface)}
+.car{position:relative;display:inline-flex;align-items:center;font-size:2rem;margin:0 8px}
+.car .wind{font-size:1.1rem;opacity:.7;margin-right:-4px}
+.car.neg::after{content:"✖";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:2.6rem;color:#d62828;font-weight:700;text-shadow:0 0 0 #fff,0 0 4px #fff}
+.arrow{color:var(--muted);font-size:1.2rem}
+.sent{font-size:1.2rem;font-weight:500;line-height:1.55;text-align:center;margin:6px 0 auto;padding:0 2px}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+.hint{font-size:.78rem;color:var(--muted)}
+.back .hint{color:#b6c3df}
+.spk{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:99px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:.9rem;font-weight:600}
+.spk:hover{background:var(--accent);color:#fff}
+.spk.on{background:var(--accent);color:#fff}
+.back .spk{color:#cfe0ff;border-color:#8fb5ff}
+.back .spk:hover,.back .spk.on{background:#8fb5ff;color:#0b1530}
+.th{font-size:1.5rem;font-weight:700;text-align:center;margin:18px 0 10px;line-height:1.4}
+.sep{border:0;border-top:1px solid var(--back-line);margin:6px 0 10px}
+.back .sent{font-size:1.08rem;margin-bottom:auto}
+.back .v{color:#ff9a9a;border-bottom-color:#ff9a9a}
+.back .a{background:#2a4a82;color:#dbe9ff}
+
+#tip{position:fixed;z-index:50;max-width:300px;padding:9px 12px;border-radius:8px;background:var(--tip-bg);color:var(--tip-ink);font-size:.88rem;line-height:1.45;box-shadow:0 6px 24px rgba(0,0,0,.28);pointer-events:none;opacity:0;transition:opacity .12s}
+#tip.show{opacity:1}
+#tip b{display:block;font-size:.98rem;margin-bottom:2px}
+#tip .tv{display:block;margin-top:4px;opacity:.8;font-size:.82rem}
+.note{margin-top:22px;font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>6.5 Causative Verb: WOULD LIKE + Someone + Adjective</h1>
+    <p>ฝึกอ่านและแปลประโยค · คลิกการ์ดเพื่อดูคำแปลภาษาไทย · ชี้เมาส์ที่คำเพื่อดูความหมาย</p>
+    <div class="formula"><span class="v" style="border:none">would like</span> + <span>someone</span> + <span class="a">to V1</span> = อยากให้ (ใคร) ทำ...</div>
+  </header>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><span class="v">would like</span> = กริยาหลัก</span>
+      <span><span class="a">to V1</span> = to + กริยาช่อง 1 (ชี้ที่คำเพื่อดูความหมาย)</span>
+    </div>
+    <div class="ctrl">
+      <label>เสียง <select id="voice" aria-label="เลือกเสียงอ่าน"></select></label>
+      <label>ความเร็ว <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.85"> <span id="rateVal">0.85×</span></label>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="tabinfo">
+    <span id="info"></span>
+    <span><button class="btn" id="flipAll">พลิกทั้งหมด</button> <button class="btn" id="resetAll">กลับด้านหน้า</button></span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <p class="note">การอ่านออกเสียงใช้เสียงภาษาอังกฤษที่มีในอุปกรณ์/เบราว์เซอร์ของคุณ ระบบจะเลือกเสียงที่ชัดที่สุดให้อัตโนมัติ (เช่น Google US English, Microsoft Natural, Samantha) หากอยากได้เสียงอื่นให้เลือกจากเมนู "เสียง"</p>
+</div>
+<div id="tip" role="tooltip"></div>
+
+<script>
+// [subject, plural?, object, adjective, Thai subject, Thai rest, subject emoji, object emoji]
+const CARDS = [["I would like him to help me.","ฉันอยากให้เขาช่วยฉัน","🧑","👨","help"],
+["I would not like her to stay here tonight.","ฉันไม่อยากให้เธออยู่ที่นี่คืนนี้","🧑","👩","stay"],
+["She would like me to join the meeting.","เธออยากให้ฉันเข้าร่วมการประชุม","👩","🧑","join"],
+["She would not like me to leave early.","เธอไม่อยากให้ฉันออกไปก่อน","👩","🧑","leave"],
+["He would like his son to study English.","เขาอยากให้ลูกชายเรียนภาษาอังกฤษ","👨","👦","study"],
+["He would not like his son to play outside alone.","เขาไม่อยากให้ลูกชายเล่นข้างนอกคนเดียว","👨","👦","play"],
+["My mother would like me to wake up early.","แม่อยากให้ฉันตื่นแต่เช้า","👩","🧑","wake up"],
+["My mother would not like me to stay up late.","แม่ไม่อยากให้ฉันนอนดึก","👩","🧑","stay up"],
+["The teacher would like the students to complete their homework.","ครูอยากให้นักเรียนทำการบ้านให้เสร็จ","👩‍🏫","🧑‍🎓","complete"],
+["The teacher would not like the students to talk during the test.","ครูไม่อยากให้นักเรียนพูดระหว่างการสอบ","👩‍🏫","🧑‍🎓","talk"],
+["The coach would like the players to practice every day.","โค้ชอยากให้นักกีฬาฝึกซ้อมทุกวัน","📣","🏃","practice"],
+["The coach would not like the players to quit the team.","โค้ชไม่อยากให้นักกีฬาออกจากทีม","📣","🏃","quit"],
+["They would like us to arrive early.","พวกเขาอยากให้เรามาถึงแต่เช้า","👥","🧑","arrive"],
+["They would not like us to wait outside.","พวกเขาไม่อยากให้เรารอข้างนอก","👥","🧑","wait"],
+["The manager would like employees to work together.","ผู้จัดการอยากให้พนักงานทำงานร่วมกัน","🧑‍💼","👥","work"],
+["The manager would not like employees to work overtime.","ผู้จัดการไม่อยากให้พนักงานทำงานล่วงเวลา","🧑‍💼","👥","work"],
+["The boss would like her assistant to prepare the report.","เจ้านายอยากให้ผู้ช่วยเตรียมรายงาน","🧑‍💼","🧑‍💻","prepare"],
+["The boss would not like her assistant to cancel the meeting.","เจ้านายไม่อยากให้ผู้ช่วยยกเลิกการประชุม","🧑‍💼","🧑‍💻","cancel"],
+["The doctor would like the patient to rest.","หมออยากให้คนไข้พักผ่อน","🧑‍⚕️","🤒","rest"],
+["The doctor would not like the patient to exercise today.","หมอไม่อยากให้คนไข้ออกกำลังกายวันนี้","🧑‍⚕️","🤒","exercise"],
+["My father would like me to save some money.","พ่ออยากให้ฉันเก็บเงินไว้บ้าง","👨","🧑","save"],
+["My father would not like me to spend too much money.","พ่อไม่อยากให้ฉันใช้เงินมากเกินไป","👨","🧑","spend"],
+["My friend would like me to call him later.","เพื่อนอยากให้ฉันโทรหาเขาทีหลัง","🧑","🧑","call"],
+["My friend would not like me to visit him today.","เพื่อนไม่อยากให้ฉันไปเยี่ยมเขาวันนี้","🧑","🧑","visit"],
+["The guide would like tourists to follow the rules.","ไกด์อยากให้นักท่องเที่ยวปฏิบัติตามกฎ","🚩","🧳","follow"],
+["The guide would not like tourists to enter the restricted area.","ไกด์ไม่อยากให้นักท่องเที่ยวเข้าไปในพื้นที่หวงห้าม","🚩","🧳","enter"],
+["The parents would like their children to behave well.","พ่อแม่อยากให้ลูก ๆ ประพฤติตัวดี","👪","🧒","behave"],
+["The parents would not like their children to play outside at night.","พ่อแม่ไม่อยากให้ลูก ๆ เล่นข้างนอกตอนกลางคืน","👪","🧒","play"],
+["The company would like employees to attend the training.","บริษัทอยากให้พนักงานเข้าร่วมการฝึกอบรม","🏢","🧑‍💼","attend"],
+["The company would not like employees to use personal phones at work.","บริษัทไม่อยากให้พนักงานใช้โทรศัพท์ส่วนตัวในที่ทำงาน","🏢","🧑‍💼","use"],
+["The speaker would like the audience to listen carefully.","ผู้พูดอยากให้ผู้ฟังตั้งใจฟัง","🎤","👥","listen"],
+["The speaker would not like the audience to leave early.","ผู้พูดไม่อยากให้ผู้ฟังออกไปก่อน","🎤","👥","leave"],
+["The team leader would like the members to cooperate.","หัวหน้าทีมอยากให้สมาชิกให้ความร่วมมือ","🧑‍💼","👥","cooperate"],
+["The team leader would not like the members to argue.","หัวหน้าทีมไม่อยากให้สมาชิกโต้เถียงกัน","🧑‍💼","👥","argue"],
+["The hotel would like guests to follow the hotel rules.","โรงแรมอยากให้แขกปฏิบัติตามกฎของโรงแรม","🏨","🧳","follow"],
+["The hotel would not like guests to enter the staff area.","โรงแรมไม่อยากให้แขกเข้าไปในพื้นที่พนักงาน","🏨","🧳","enter"],
+["The organizer would like everyone to participate in the event.","ผู้จัดงานอยากให้ทุกคนเข้าร่วมงาน","📋","👥","participate"],
+["The organizer would not like everyone to speak at once.","ผู้จัดงานไม่อยากให้ทุกคนพูดพร้อมกัน","📋","👥","speak"],
+["The trainer would like athletes to improve their skills.","เทรนเนอร์อยากให้นักกีฬาพัฒนาทักษะของตน","🏋️","🏃","improve"],
+["The trainer would not like athletes to compete every day.","เทรนเนอร์ไม่อยากให้นักกีฬาแข่งขันทุกวัน","🏋️","🏃","compete"],
+["Our teacher would like us to read more books.","ครูของเราอยากให้พวกเราอ่านหนังสือให้มากขึ้น","👩‍🏫","🧑‍🎓","read"],
+["Our teacher would not like us to copy answers.","ครูของเราไม่อยากให้พวกเราลอกคำตอบ","👩‍🏫","🧑‍🎓","copy"],
+["My wife would like me to cook dinner.","ภรรยาอยากให้ฉันทำอาหารเย็น","👩","🧑","cook"],
+["My wife would not like me to come home late.","ภรรยาไม่อยากให้ฉันกลับบ้านดึก","👩","🧑","come"],
+["The nurse would like the patient to take the medicine.","พยาบาลอยากให้คนไข้กินยา","🧑‍⚕️","🤒","take"],
+["The nurse would not like the patient to skip breakfast.","พยาบาลไม่อยากให้คนไข้งดอาหารเช้า","🧑‍⚕️","🤒","skip"],
+["The driver would like passengers to fasten their seatbelts.","คนขับอยากให้ผู้โดยสารคาดเข็มขัดนิรภัย","🧑","🧳","fasten"],
+["The driver would not like passengers to stand near the door.","คนขับไม่อยากให้ผู้โดยสารยืนใกล้ประตู","🧑","🧳","stand"],
+["I would like you to tell me the truth.","ฉันอยากให้คุณบอกความจริงกับฉัน","🧑","🧑","tell"],
+["I would not like you to lie to me.","ฉันไม่อยากให้คุณโกหกฉัน","🧑","🧑","lie"],
+["She would like her little brother to clean his room.","เธออยากให้น้องชายทำความสะอาดห้องของเขา","👩","👦","clean"],
+["She would not like her little brother to touch her things.","เธอไม่อยากให้น้องชายแตะต้องของของเธอ","👩","👦","touch"],
+["The principal would like the students to wear uniforms.","ครูใหญ่อยากให้นักเรียนสวมเครื่องแบบ","🧑‍🏫","🧑‍🎓","wear"],
+["The principal would not like the students to run in the hallway.","ครูใหญ่ไม่อยากให้นักเรียนวิ่งในทางเดิน","🧑‍🏫","🧑‍🎓","run"],
+["The customer would like the waiter to bring the menu.","ลูกค้าอยากให้พนักงานเสิร์ฟนำเมนูมา","🙍","🤵","bring"],
+["The customer would not like the waiter to clear the table yet.","ลูกค้าไม่อยากให้พนักงานเสิร์ฟเก็บโต๊ะตอนนี้","🙍","🤵","clear"],
+["My grandmother would like me to sing a song.","คุณยายอยากให้ฉันร้องเพลง","👵","🧑","sing"],
+["My grandmother would not like me to forget her birthday.","คุณยายไม่อยากให้ฉันลืมวันเกิดของท่าน","👵","🧑","forget"],
+["The editor would like the writer to finish the article.","บรรณาธิการอยากให้นักเขียนเขียนบทความให้เสร็จ","🧑‍💼","✍️","finish"],
+["The editor would not like the writer to change the title.","บรรณาธิการไม่อยากให้นักเขียนเปลี่ยนชื่อเรื่อง","🧑‍💼","✍️","change"],
+["The mayor would like citizens to recycle waste.","นายกเทศมนตรีอยากให้ประชาชนรีไซเคิลขยะ","🏛️","👥","recycle"],
+["The mayor would not like citizens to throw trash on the street.","นายกเทศมนตรีไม่อยากให้ประชาชนทิ้งขยะบนถนน","🏛️","👥","throw"],
+["The pilot would like passengers to remain seated.","นักบินอยากให้ผู้โดยสารนั่งอยู่กับที่","🧑‍✈️","🧳","remain"],
+["The pilot would not like passengers to switch on electronic devices during takeoff.","นักบินไม่อยากให้ผู้โดยสารเปิดอุปกรณ์อิเล็กทรอนิกส์ในช่วงขึ้นบิน","🧑‍✈️","🧳","switch on"],
+["The farmer would like his sons to plant rice.","ชาวนาอยากให้ลูกชายปลูกข้าว","👨‍🌾","👦","plant"],
+["The farmer would not like his sons to waste water.","ชาวนาไม่อยากให้ลูกชายสิ้นเปลืองน้ำ","👨‍🌾","👦","waste"],
+["The librarian would like visitors to keep quiet.","บรรณารักษ์อยากให้ผู้มาใช้บริการรักษาความเงียบ","🧑‍💼","👥","keep"],
+["The librarian would not like visitors to eat in the library.","บรรณารักษ์ไม่อยากให้ผู้มาใช้บริการกินอาหารในห้องสมุด","🧑‍💼","👥","eat"],
+["The director would like the actors to memorize their lines.","ผู้กำกับอยากให้นักแสดงท่องบทให้ได้","🎬","🎭","memorize"],
+["The director would not like the actors to be late.","ผู้กำกับไม่อยากให้นักแสดงมาสาย","🎬","🎭","be"],
+["My roommate would like me to turn down the music.","เพื่อนร่วมห้องอยากให้ฉันลดเสียงเพลง","🧑","🧑","turn down"],
+["My roommate would not like me to bring friends home.","เพื่อนร่วมห้องไม่อยากให้ฉันพาเพื่อนมาที่ห้อง","🧑","🧑","bring"],
+["The judge would like the lawyer to explain the case.","ผู้พิพากษาอยากให้ทนายอธิบายคดี","⚖️","🧑‍💼","explain"],
+["The judge would not like the lawyer to interrupt the witness.","ผู้พิพากษาไม่อยากให้ทนายขัดจังหวะพยาน","⚖️","🧑‍💼","interrupt"],
+["The chef would like the cooks to wash their hands.","เชฟอยากให้ลูกมือล้างมือ","🧑‍🍳","🧑‍🍳","wash"],
+["The chef would not like the cooks to rush.","เชฟไม่อยากให้ลูกมือรีบร้อน","🧑‍🍳","🧑‍🍳","rush"],
+["The mother would like her daughter to drink milk.","แม่อยากให้ลูกสาวดื่มนม","👩","👧","drink"],
+["The mother would not like her daughter to watch TV all day.","แม่ไม่อยากให้ลูกสาวดูทีวีทั้งวัน","👩","👧","watch"],
+["The sales manager would like the team to meet the target.","ผู้จัดการฝ่ายขายอยากให้ทีมทำยอดให้ถึงเป้า","🧑‍💼","👥","meet"],
+["The sales manager would not like the team to give up.","ผู้จัดการฝ่ายขายไม่อยากให้ทีมยอมแพ้","🧑‍💼","👥","give up"],
+["The conductor would like the musicians to tune their instruments.","ผู้ควบคุมวงอยากให้นักดนตรีเทียบเสียงเครื่องดนตรี","🎼","🎻","tune"],
+["The conductor would not like the musicians to start early.","ผู้ควบคุมวงไม่อยากให้นักดนตรีเริ่มก่อนเวลา","🎼","🎻","start"],
+["The tour guide would like us to gather in the lobby.","ไกด์อยากให้พวกเรารวมตัวกันที่ล็อบบี้","🚩","🧑","gather"],
+["The tour guide would not like us to wander off.","ไกด์ไม่อยากให้พวกเราแยกไปเดินเอง","🚩","🧑","wander off"],
+["The captain would like the crew to check the engine.","กัปตันอยากให้ลูกเรือตรวจเครื่องยนต์","🧑‍✈️","👥","check"],
+["The captain would not like the crew to ignore the warning.","กัปตันไม่อยากให้ลูกเรือเพิกเฉยต่อคำเตือน","🧑‍✈️","👥","ignore"],
+["The professor would like the students to submit their papers on time.","ศาสตราจารย์อยากให้นักศึกษาส่งรายงานตรงเวลา","🧑‍🏫","🧑‍🎓","submit"],
+["The professor would not like the students to plagiarize.","ศาสตราจารย์ไม่อยากให้นักศึกษาลอกผลงานของผู้อื่น","🧑‍🏫","🧑‍🎓","plagiarize"],
+["My neighbor would like me to water his plants.","เพื่อนบ้านอยากให้ฉันรดน้ำต้นไม้ของเขา","🧑","🧑","water"],
+["My neighbor would not like me to park in front of his house.","เพื่อนบ้านไม่อยากให้ฉันจอดรถหน้าบ้านของเขา","🧑","🧑","park"],
+["The bank would like customers to protect their passwords.","ธนาคารอยากให้ลูกค้าปกป้องรหัสผ่านของตน","🏦","👥","protect"],
+["The bank would not like customers to share their PINs.","ธนาคารไม่อยากให้ลูกค้าบอกรหัส PIN ให้ผู้อื่น","🏦","👥","share"],
+["The kindergarten teacher would like the kids to line up.","ครูอนุบาลอยากให้เด็ก ๆ เข้าแถว","👩‍🏫","🧒","line up"],
+["The kindergarten teacher would not like the kids to push each other.","ครูอนุบาลไม่อยากให้เด็ก ๆ ผลักกัน","👩‍🏫","🧒","push"],
+["The coach would like the swimmers to warm up.","โค้ชอยากให้นักว่ายน้ำวอร์มอัพ","📣","🏊","warm up"],
+["The coach would not like the swimmers to swim alone.","โค้ชไม่อยากให้นักว่ายน้ำว่ายคนเดียว","📣","🏊","swim"],
+["My boss would like me to send the email today.","เจ้านายอยากให้ฉันส่งอีเมลวันนี้","🧑‍💼","🧑","send"],
+["My boss would not like me to share the file with anyone.","เจ้านายไม่อยากให้ฉันแชร์ไฟล์กับใคร","🧑‍💼","🧑","share"],
+["The landlord would like tenants to pay rent on time.","เจ้าของบ้านเช่าอยากให้ผู้เช่าจ่ายค่าเช่าตรงเวลา","🏠","👥","pay"],
+["The landlord would not like tenants to keep pets.","เจ้าของบ้านเช่าไม่อยากให้ผู้เช่าเลี้ยงสัตว์","🏠","👥","keep"]];
+
+const VERBS = {"help": ["🤝", "ช่วย, ช่วยเหลือ"], "stay": ["🏠", "อยู่, พักอยู่"], "join": ["🙋", "เข้าร่วม"], "leave": ["🚪", "ออกไป, จากไป"], "study": ["📖", "เรียน, ศึกษา"], "play": ["⚽", "เล่น"], "wake up": ["⏰", "ตื่นนอน"], "stay up": ["🌙", "นอนดึก, อดนอน"], "complete": ["✅", "ทำให้เสร็จ, ทำให้สมบูรณ์"], "talk": ["🗣️", "พูดคุย"], "practice": ["🏋️", "ฝึกซ้อม"], "quit": ["🚫", "เลิก, ลาออก"], "arrive": ["🛬", "มาถึง"], "wait": ["⏳", "รอ"], "work": ["💼", "ทำงาน"], "prepare": ["📝", "เตรียม"], "cancel": ["❌", "ยกเลิก"], "rest": ["🛌", "พักผ่อน"], "exercise": ["🏃", "ออกกำลังกาย"], "save": ["🐷", "เก็บออม, ประหยัด"], "spend": ["💸", "ใช้จ่าย"], "call": ["📞", "โทรหา"], "visit": ["🏡", "ไปเยี่ยม"], "follow": ["📜", "ปฏิบัติตาม, ตาม"], "enter": ["🚪", "เข้าไป"], "behave": ["😇", "ประพฤติตัว, วางตัว"], "attend": ["🎓", "เข้าร่วม, เข้าเรียน"], "use": ["📱", "ใช้"], "listen": ["👂", "ฟัง"], "cooperate": ["🤝", "ให้ความร่วมมือ"], "argue": ["😠", "โต้เถียง"], "participate": ["🙌", "มีส่วนร่วม, เข้าร่วม"], "speak": ["🎤", "พูด"], "improve": ["📈", "พัฒนา, ปรับปรุง"], "compete": ["🏆", "แข่งขัน"], "read": ["📚", "อ่าน"], "copy": ["📋", "ลอก, คัดลอก"], "cook": ["🍳", "ทำอาหาร"], "come": ["🏠", "มา, กลับมา"], "take": ["💊", "กิน (ยา), หยิบ, รับ"], "skip": ["⏭️", "ข้าม, งด"], "fasten": ["🔒", "คาด, รัด"], "stand": ["🧍", "ยืน"], "tell": ["🗣️", "บอก"], "lie": ["🤥", "โกหก"], "clean": ["🧹", "ทำความสะอาด"], "touch": ["✋", "แตะ, สัมผัส"], "wear": ["👕", "สวมใส่"], "run": ["🏃", "วิ่ง"], "bring": ["🍽️", "นำมา, พามา"], "clear": ["🧽", "เก็บ (โต๊ะ), ทำให้โล่ง"], "sing": ["🎤", "ร้องเพลง"], "forget": ["🎂", "ลืม"], "finish": ["📰", "ทำให้เสร็จ, จบ"], "change": ["🔄", "เปลี่ยน"], "recycle": ["♻️", "รีไซเคิล"], "throw": ["🗑️", "ทิ้ง, ขว้าง"], "remain": ["💺", "ยังคงอยู่"], "switch on": ["📲", "เปิด (อุปกรณ์)"], "plant": ["🌾", "ปลูก"], "waste": ["💧", "สิ้นเปลือง, ทำเปล่าประโยชน์"], "keep": ["🤫", "รักษา, เก็บไว้, คง"], "eat": ["🍔", "กิน"], "memorize": ["🧠", "ท่องจำ"], "be": ["⏰", "เป็น, อยู่ในสภาพ"], "turn down": ["🔉", "ลดเสียง"], "explain": ["🧑‍🏫", "อธิบาย"], "interrupt": ["✋", "ขัดจังหวะ"], "wash": ["🧼", "ล้าง"], "rush": ["💨", "รีบเร่ง"], "drink": ["🥛", "ดื่ม"], "watch": ["📺", "ดู"], "meet": ["🎯", "ทำให้ถึง (เป้า), พบ"], "give up": ["🏳️", "ยอมแพ้"], "tune": ["🎻", "เทียบเสียง, ปรับเสียง"], "start": ["🎼", "เริ่ม"], "gather": ["🧑‍🤝‍🧑", "รวมตัว"], "wander off": ["🚶", "แยกตัวไปเดินเอง, เดินหลงไป"], "check": ["🔧", "ตรวจสอบ"], "ignore": ["🔕", "เพิกเฉย, ไม่สนใจ"], "submit": ["📄", "ส่ง (งาน)"], "plagiarize": ["📋", "ลอกผลงานผู้อื่น"], "water": ["🪴", "รดน้ำ"], "park": ["🅿️", "จอดรถ"], "protect": ["🔐", "ปกป้อง"], "share": ["🔑", "แบ่งปัน, เปิดเผยให้ผู้อื่น"], "line up": ["🧒", "เข้าแถว"], "push": ["🫸", "ผลัก"], "warm up": ["🤸", "วอร์มอัพ, อบอุ่นร่างกาย"], "swim": ["🏊", "ว่ายน้ำ"], "send": ["📧", "ส่ง"], "pay": ["💵", "จ่าย"]};
+
+const esc = s => s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+
+function build(c){
+  const [plain,th,se,oe,k]=c;
+  const neg=/would not like/.test(plain);
+  const pat="would like + someone + to + V1 = อยากให้ (ใคร) ทำ...";
+  let en=esc(plain).replace(/would (?:not )?like/,m=>`<span class="v" data-t="${m}" data-b="${esc(neg?"ไม่อยากให้ (ใคร) ทำ...":"อยากให้ (ใคร) ทำ... (สุภาพกว่า want)")}" data-v="${esc(pat)}">${m}</span>`);
+  en=en.replace("to "+k,m=>`<span class="a" data-t="${k} (V1)" data-b="${esc(VERBS[k][1])}" data-v="${esc(pat)}">${m}</span>`);
+  return {en,plain,th,neg,se,oe,ve:VERBS[k][0]};
+}
+
+const SETS = 5, PER = 20;
+const sets = [];
+for(let k=0;k<SETS;k++){ sets.push(CARDS.slice(k*PER,k*PER+PER).map(build)); }
+
+/* ---------- speech ---------- */
+let voices=[], chosen=null, speakingBtn=null;
+const supports = 'speechSynthesis' in window;
+function score(v){
+  const n=(v.name||"").toLowerCase(); let s=0;
+  if(!/^en/i.test(v.lang)) return -1;
+  if(/en[-_]us/i.test(v.lang)) s+=5;
+  if(/natural|neural/.test(n)) s+=50;
+  if(/online/.test(n)) s+=15;
+  if(/google us english/.test(n)) s+=40;
+  if(/aria|jenny|guy|samantha|ava|allison|zoe|siri|serena|daniel|karen|alex/.test(n)) s+=25;
+  if(/google/.test(n)) s+=10;
+  if(/espeak|compact/.test(n)) s-=30;
+  if(v.localService===false) s+=3;
+  return s;
+}
+function loadVoices(){
+  if(!supports) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)).sort((a,b)=>score(b)-score(a));
+  const sel=document.getElementById('voice');
+  sel.innerHTML="";
+  if(!voices.length){ sel.innerHTML='<option>ใช้เสียงเริ่มต้น</option>'; return; }
+  voices.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=`${v.name} (${v.lang})`; sel.appendChild(o); });
+  chosen=voices[0]; sel.value=0;
+}
+if(supports){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+document.getElementById('voice').addEventListener('change',e=>{ chosen=voices[+e.target.value]||null; });
+const rate=document.getElementById('rate');
+rate.addEventListener('input',()=>document.getElementById('rateVal').textContent=(+rate.value).toFixed(2)+"×");
+
+function speak(text, btn){
+  if(!supports){ alert("เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง"); return; }
+  const wasThis = speakingBtn===btn;
+  speechSynthesis.cancel();
+  if(speakingBtn) speakingBtn.classList.remove('on');
+  speakingBtn=null;
+  if(wasThis) return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang="en-US"; u.rate=+rate.value; u.pitch=1; u.volume=1;
+  if(chosen) u.voice=chosen;
+  btn.classList.add('on'); speakingBtn=btn;
+  const done=()=>{ btn.classList.remove('on'); if(speakingBtn===btn) speakingBtn=null; };
+  u.onend=done; u.onerror=done;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- render ---------- */
+let cur=0;
+const tabsEl=document.getElementById('tabs'), grid=document.getElementById('grid'), info=document.getElementById('info');
+sets.forEach((_,k)=>{
+  const b=document.createElement('button');
+  b.className='tab'; b.setAttribute('role','tab'); b.textContent=`Set ${k+1} · ${k*PER+1}–${k*PER+PER}`;
+  b.onclick=()=>show(k); tabsEl.appendChild(b);
+});
+
+function sceneHTML(c){
+  return `<div class="scene" aria-hidden="true">
+    <span class="sc">${c.se}</span><span class="arrow">➜</span>
+    <span class="car${c.neg?' neg':''}"><span class="wind">💭</span>🙏</span><span class="arrow">➜</span>
+    <span class="sc">${c.oe}</span><span class="arrow">➜</span><span class="sc">${c.ve}</span></div>`;
+}
+function show(k){
+  cur=k; speechSynthesis && speechSynthesis.cancel(); speakingBtn=null;
+  [...tabsEl.children].forEach((b,i)=>b.setAttribute('aria-selected',i===k));
+  info.textContent=`Set ${k+1}: การ์ด ${PER} ใบ (ประโยคบอกเล่า/ปฏิเสธ สลับกัน)` + (k>=2 ? " · ประโยคชุดนี้เพิ่มให้ตามรูปแบบเดียวกัน" : "");
+  grid.innerHTML="";
+  sets[k].forEach((c,i)=>{
+    const n=k*PER+i+1;
+    const w=document.createElement('div'); w.className='cw';
+    w.innerHTML=`
+    <div class="card" tabindex="0" role="button" aria-label="การ์ดที่ ${n} คลิกเพื่อพลิก">
+      <div class="face front">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        ${sceneHTML(c)}
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อดูคำแปล</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+      <div class="face back">
+        <div class="meta"><span>#${n}</span><span class="badge ${c.neg?'neg':'pos'}">${c.neg?'Negative':'Affirmative'}</span></div>
+        <div class="th">${c.th}</div>
+        <hr class="sep">
+        <div class="sent">${c.en}</div>
+        <div class="foot"><span class="hint">คลิกเพื่อพลิกกลับ</span><button class="spk" aria-label="อ่านประโยคนี้">🔊 ฟัง</button></div>
+      </div>
+    </div>`;
+    const card=w.firstElementChild;
+    card.addEventListener('click',e=>{
+      const spk=e.target.closest('.spk');
+      if(spk){ e.stopPropagation(); speak(c.plain,spk); return; }
+      const t=e.target.closest('[data-t]');
+      if(t && e.pointerType==='touch'){ showTip(t); e.stopPropagation(); return; }
+      card.classList.toggle('flipped');
+    });
+    card.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ') && e.target===card){ e.preventDefault(); card.classList.toggle('flipped'); }});
+    grid.appendChild(w);
+  });
+}
+document.getElementById('flipAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.add('flipped'));
+document.getElementById('resetAll').onclick=()=>grid.querySelectorAll('.card').forEach(c=>c.classList.remove('flipped'));
+
+/* ---------- tooltip ---------- */
+const tip=document.getElementById('tip');
+function showTip(el){
+  const v=el.dataset.v ? `<span class="tv">${el.dataset.v}</span>` : "";
+  tip.innerHTML=`<b>${el.dataset.t}</b>${el.dataset.b}${v}`;
+  tip.classList.add('show');
+  const r=el.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+  let x=Math.min(Math.max(8,r.left+r.width/2-tw/2), innerWidth-tw-8);
+  let y=r.top-th-10; if(y<8) y=r.bottom+10;
+  tip.style.left=x+"px"; tip.style.top=y+"px";
+}
+document.addEventListener('mouseover',e=>{ const t=e.target.closest('[data-t]'); if(t) showTip(t); });
+document.addEventListener('mouseout',e=>{ if(e.target.closest('[data-t]')) tip.classList.remove('show'); });
+document.addEventListener('click',e=>{ if(!e.target.closest('[data-t]')) tip.classList.remove('show'); });
+window.addEventListener('scroll',()=>tip.classList.remove('show'),{passive:true});
+
+show(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.29 Causative Verb: REQUIRED + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.29 Causative Verb (Passive): Someone + be + <span class="rm">REQUIRED</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Someone + <b>am/is/are (not)</b> + <b class="rm">required</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I am required to *attend* the meeting.|ฉันถูกกำหนดให้เข้าร่วมการประชุม|เข้าร่วม|👥
+I am not required to *work* on Sunday.|ฉันไม่ได้ถูกกำหนดให้ทำงานวันอาทิตย์|ทำงาน|💼
+He is required to *study* every day.|เขาถูกกำหนดให้เรียนทุกวัน|เรียน|📚
+He is not required to *stay* late.|เขาไม่ได้ถูกกำหนดให้อยู่ดึก|อยู่|🌙
+She is required to *wear* a uniform.|เธอถูกกำหนดให้สวมเครื่องแบบ|สวม|👔
+She is not required to *participate* in the activity.|เธอไม่ได้ถูกกำหนดให้เข้าร่วมกิจกรรม|เข้าร่วม|🙌
+We are required to *wait* outside.|พวกเราถูกกำหนดให้รอข้างนอก|รอ|⏳
+We are not required to *pay* in advance.|พวกเราไม่ได้ถูกกำหนดให้จ่ายเงินล่วงหน้า|จ่าย|💳
+They are required to *follow* the rules.|พวกเขาถูกกำหนดให้ปฏิบัติตามกฎ|ปฏิบัติตาม|📋
+They are not required to *agree* with the decision.|พวกเขาไม่ได้ถูกกำหนดให้เห็นด้วยกับการตัดสินใจ|เห็นด้วย|🤝
+The student is required to *complete* the assignment.|นักเรียนถูกกำหนดให้ทำงานที่ได้รับมอบหมายให้เสร็จ|ทำให้เสร็จ|✅
+The student is not required to *memorize* every word.|นักเรียนไม่ได้ถูกกำหนดให้ท่องจำทุกคำ|ท่องจำ|🧠
+The workers are required to *wear* safety helmets.|คนงานถูกกำหนดให้สวมหมวกนิรภัย|สวม|⛑️
+The workers are not required to *work* overtime.|คนงานไม่ได้ถูกกำหนดให้ทำงานล่วงเวลา|ทำงาน|🕘
+The children are required to *clean* their rooms.|เด็ก ๆ ถูกกำหนดให้ทำความสะอาดห้องของตน|ทำความสะอาด|🧹
+The children are not required to *cook* dinner.|เด็ก ๆ ไม่ได้ถูกกำหนดให้ทำอาหารเย็น|ทำอาหาร|🍳
+The players are required to *practice* every morning.|นักกีฬาถูกกำหนดให้ฝึกซ้อมทุกเช้า|ฝึกซ้อม|🏋️
+The players are not required to *compete* today.|นักกีฬาไม่ได้ถูกกำหนดให้แข่งขันวันนี้|แข่งขัน|🥇
+The driver is required to *stop* at the checkpoint.|คนขับถูกกำหนดให้หยุดที่จุดตรวจ|หยุด|🚓
+The driver is not required to *pay* a fee.|คนขับไม่ได้ถูกกำหนดให้จ่ายค่าธรรมเนียม|จ่าย|💰
+The patient is required to *rest* for two days.|คนไข้ถูกกำหนดให้พักผ่อนเป็นเวลาสองวัน|พักผ่อน|🛌
+The patient is not required to *stay* in the hospital.|คนไข้ไม่ได้ถูกกำหนดให้พักอยู่ในโรงพยาบาล|พักอยู่|🏥
+The employees are required to *attend* the training.|พนักงานถูกกำหนดให้เข้าร่วมการฝึกอบรม|เข้าร่วม|🎓
+The employees are not required to *wear* suits.|พนักงานไม่ได้ถูกกำหนดให้สวมสูท|สวม|🤵
+The customer is required to *provide* an ID.|ลูกค้าถูกกำหนดให้แสดงบัตรประจำตัว|แสดง/ให้|🪪
+The customer is not required to *sign* the form.|ลูกค้าไม่ได้ถูกกำหนดให้เซ็นแบบฟอร์ม|เซ็น|✍️
+The applicants are required to *submit* their documents.|ผู้สมัครถูกกำหนดให้ส่งเอกสารของตน|ส่ง|📤
+The applicants are not required to *pay* a registration fee.|ผู้สมัครไม่ได้ถูกกำหนดให้จ่ายค่าลงทะเบียน|จ่าย|🧾
+Everyone is required to *follow* the safety rules.|ทุกคนถูกกำหนดให้ปฏิบัติตามกฎความปลอดภัย|ปฏิบัติตาม|🦺
+Nobody is required to *participate* in the event.|ไม่มีใครถูกกำหนดให้เข้าร่วมงาน|เข้าร่วม|🎉
+The nurse is required to *give* the patient medicine.|พยาบาลถูกกำหนดให้ให้ยาแก่คนไข้|ให้|💊
+The nurse is not required to *walk* with the patient.|พยาบาลไม่ได้ถูกกำหนดให้เดินไปกับคนไข้|เดิน|🚶
+We are required to *follow* the guide.|พวกเราถูกกำหนดให้ตามไกด์|ตาม|🚩
+We are not required to *separate* from the group.|พวกเราไม่ได้ถูกกำหนดให้แยกจากกลุ่ม|แยก|✂️
+The visitors are required to *be* quiet.|ผู้มาเยือนถูกกำหนดให้เงียบ|เป็น/อยู่|🤫
+The visitors are not required to *leave* immediately.|ผู้มาเยือนไม่ได้ถูกกำหนดให้ออกไปทันที|ออกไป|🚪
+The security guards are required to *check* everyone's ID.|เจ้าหน้าที่รักษาความปลอดภัยถูกกำหนดให้ตรวจบัตรประจำตัวของทุกคน|ตรวจ|🪪
+The security guards are not required to *enter* the building.|เจ้าหน้าที่รักษาความปลอดภัยไม่ได้ถูกกำหนดให้เข้าไปในอาคาร|เข้า|🚧
+We are required to *exercise* regularly.|พวกเราถูกกำหนดให้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+We are not required to *stop* exercising.|พวกเราไม่ได้ถูกกำหนดให้หยุดออกกำลังกาย|หยุด|⛔
+The witness is required to *tell* the truth.|พยานถูกกำหนดให้พูดความจริง|บอก|⚖️
+The witness is not required to *leave* the court.|พยานไม่ได้ถูกกำหนดให้ออกจากศาล|ออก|🚪
+The army is required to *advance*.|กองทัพถูกกำหนดให้รุกคืบ|รุกคืบ|🪖
+The army is not required to *retreat*.|กองทัพไม่ได้ถูกกำหนดให้ถอยทัพ|ถอย|🏳️
+The guards are required to *open* the gate.|ทหารยามถูกกำหนดให้เปิดประตู|เปิด|👑
+The guards are not required to *harm* the prisoners.|ทหารยามไม่ได้ถูกกำหนดให้ทำร้ายนักโทษ|ทำร้าย|⛓️
+The kids are required to *line up*.|เด็ก ๆ ถูกกำหนดให้เข้าแถว|เข้าแถว|🧍
+The kids are not required to *run* in the hallway.|เด็ก ๆ ไม่ได้ถูกกำหนดให้วิ่งในทางเดิน|วิ่ง|🏃
+The cooks are required to *clean* the kitchen.|พ่อครัวถูกกำหนดให้ทำความสะอาดครัว|ทำความสะอาด|🧽
+The cooks are not required to *serve* cold soup.|พ่อครัวไม่ได้ถูกกำหนดให้เสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The crew is required to *check* the engines.|ลูกเรือถูกกำหนดให้ตรวจเครื่องยนต์|ตรวจ|🛫
+The crew is not required to *delay* the takeoff.|ลูกเรือไม่ได้ถูกกำหนดให้เลื่อนการขึ้นบิน|เลื่อน|⏰
+The officials are required to *repair* the road.|เจ้าหน้าที่ถูกกำหนดให้ซ่อมถนน|ซ่อม|🛠️
+The officials are not required to *raise* the taxes.|เจ้าหน้าที่ไม่ได้ถูกกำหนดให้ขึ้นภาษี|ขึ้น|💲
+The tenants are required to *pay* the rent.|ผู้เช่าถูกกำหนดให้จ่ายค่าเช่า|จ่าย|🏠
+The tenants are not required to *paint* the walls.|ผู้เช่าไม่ได้ถูกกำหนดให้ทาสีผนัง|ทาสี|🎨
+The owner is required to *close* the shop.|เจ้าของถูกกำหนดให้ปิดร้าน|ปิด|🏪
+The owner is not required to *throw away* the food.|เจ้าของไม่ได้ถูกกำหนดให้ทิ้งอาหาร|ทิ้ง|🗑️
+The traveler is required to *open* the bag.|ผู้เดินทางถูกกำหนดให้เปิดกระเป๋า|เปิด|🧳
+The traveler is not required to *remove* his shoes.|ผู้เดินทางไม่ได้ถูกกำหนดให้ถอดรองเท้า|ถอด|👟
+The player is required to *leave* the field.|นักกีฬาถูกกำหนดให้ออกจากสนาม|ออก|🟥
+The player is not required to *sit* on the bench.|นักกีฬาไม่ได้ถูกกำหนดให้นั่งม้านั่งสำรอง|นั่ง|🪑
+The musicians are required to *play* softly.|นักดนตรีถูกกำหนดให้เล่นเบา ๆ|เล่น|🎻
+The musicians are not required to *tune* the violins.|นักดนตรีไม่ได้ถูกกำหนดให้เทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The laborers are required to *wear* helmets.|กรรมกรถูกกำหนดให้สวมหมวกนิรภัย|สวม|⛑️
+The laborers are not required to *work* in the rain.|กรรมกรไม่ได้ถูกกำหนดให้ทำงานกลางฝน|ทำงาน|🌧️
+The boy is required to *carry* the boxes.|เด็กชายถูกกำหนดให้ยกกล่อง|ยก|📦
+The boy is not required to *touch* the goods.|เด็กชายไม่ได้ถูกกำหนดให้แตะต้องสินค้า|แตะ|🛒
+The recruits are required to *stand* straight.|ทหารใหม่ถูกกำหนดให้ยืนตรง|ยืน|💂
+The recruits are not required to *shout*.|ทหารใหม่ไม่ได้ถูกกำหนดให้ตะโกน|ตะโกน|📢
+The clerk is required to *copy* the files.|เสมียนถูกกำหนดให้ถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The clerk is not required to *call* the client.|เสมียนไม่ได้ถูกกำหนดให้โทรหาลูกความ|โทร|📞
+The writer is required to *shorten* the article.|นักเขียนถูกกำหนดให้ย่อบทความ|ย่อ|📰
+The writer is not required to *publish* the draft.|นักเขียนไม่ได้ถูกกำหนดให้ตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmers are required to *plant* rice.|เกษตรกรถูกกำหนดให้ปลูกข้าว|ปลูก|🌾
+The farmers are not required to *burn* the straw.|เกษตรกรไม่ได้ถูกกำหนดให้เผาฟาง|เผา|🔥
+The teachers are required to *attend* the meeting.|ครูถูกกำหนดให้เข้าร่วมประชุม|เข้าร่วม|🏫
+The teachers are not required to *ignore* the complaints.|ครูไม่ได้ถูกกำหนดให้เพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The interns are required to *file* the documents.|นักศึกษาฝึกงานถูกกำหนดให้จัดเก็บเอกสาร|จัดเก็บ|🗂️
+The interns are not required to *answer* the phone.|นักศึกษาฝึกงานไม่ได้ถูกกำหนดให้รับโทรศัพท์|รับสาย|☎️
+The patients are required to *rinse* their mouths.|คนไข้ถูกกำหนดให้บ้วนปาก|บ้วนปาก|🦷
+The patients are not required to *eat* anything.|คนไข้ไม่ได้ถูกกำหนดให้กินอะไรเลย|กิน|🍔
+The swimmers are required to *get out* of the pool.|ผู้ว่ายน้ำถูกกำหนดให้ขึ้นจากสระ|ขึ้น/ออก|🏊
+The swimmers are not required to *dive* here.|ผู้ว่ายน้ำไม่ได้ถูกกำหนดให้ดำน้ำตรงนี้|ดำน้ำ|🤿
+The passengers are required to *fasten* their seat belts.|ผู้โดยสารถูกกำหนดให้คาดเข็มขัดนิรภัย|คาด|💺
+The passengers are not required to *stand* up.|ผู้โดยสารไม่ได้ถูกกำหนดให้ลุกขึ้นยืน|ยืน|🧍
+The children are required to *move* to the back.|เด็ก ๆ ถูกกำหนดให้ไปนั่งข้างหลัง|ย้าย|🚌
+The children are not required to *throw* trash on the floor.|เด็ก ๆ ไม่ได้ถูกกำหนดให้ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The waiter is required to *bring* more drinks.|พนักงานเสิร์ฟถูกกำหนดให้นำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The waiter is not required to *turn off* the music.|พนักงานเสิร์ฟไม่ได้ถูกกำหนดให้ปิดเพลง|ปิด|🎶
+The pilots are required to *take off*.|นักบินถูกกำหนดให้ขึ้นบิน|ขึ้นบิน|🛩️
+The pilots are not required to *land* now.|นักบินไม่ได้ถูกกำหนดให้ลงจอดตอนนี้|ลงจอด|🛬
+I am required to *wash* the dishes.|ฉันถูกกำหนดให้ล้างจาน|ล้าง|🍽️
+I am not required to *throw away* the toys.|ฉันไม่ได้ถูกกำหนดให้ทิ้งของเล่น|ทิ้ง|🧸
+The cashier is required to *count* the cash.|แคชเชียร์ถูกกำหนดให้นับเงินสด|นับ|💵
+The cashier is not required to *lock* the vault.|แคชเชียร์ไม่ได้ถูกกำหนดให้ล็อกห้องนิรภัย|ล็อก|🔒
+The cadets are required to *march*.|นักเรียนนายร้อยถูกกำหนดให้เดินสวนสนาม|เดินสวนสนาม|🥁
+The cadets are not required to *talk* during the drill.|นักเรียนนายร้อยไม่ได้ถูกกำหนดให้พูดคุยระหว่างการฝึก|พูดคุย|🗣️
+The engineers are required to *test* the bridge.|วิศวกรถูกกำหนดให้ทดสอบสะพาน|ทดสอบ|🌉
+The engineers are not required to *change* the design.|วิศวกรไม่ได้ถูกกำหนดให้เปลี่ยนแบบ|เปลี่ยน|📐`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b((?:am|is|are)(?: not)? required)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.32 Causative Verb: KEEP + Someone + Adjective</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.32 Causative Verb: <span class="rm">KEEP</span> + <span class="ob">Someone/Something</span> + <span class="to">Adjective</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ keep หรือคำคุณศัพท์เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">keep(s)</b> + <b class="ob">someone/something</b> + <b class="to">adjective</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I keep my room *clean*.|ฉันรักษาห้องของฉันให้สะอาด|สะอาด|🧼
+I do not keep my room *dirty*.|ฉันไม่ปล่อยให้ห้องของฉันสกปรก|สกปรก|🗑️
+She keeps her clothes *neat*.|เธอรักษาเสื้อผ้าของเธอให้เป็นระเบียบ|เป็นระเบียบ|👚
+She does not keep her clothes *messy*.|เธอไม่ปล่อยให้เสื้อผ้าของเธอรก|รก|🧺
+He keeps his car *clean*.|เขารักษารถของเขาให้สะอาด|สะอาด|🚗
+He does not keep his car *dirty*.|เขาไม่ปล่อยให้รถของเขาสกปรก|สกปรก|🚙
+My mother keeps the kitchen *tidy*.|แม่รักษาห้องครัวให้เป็นระเบียบ|เป็นระเบียบ|🍳
+My mother does not keep the kitchen *messy*.|แม่ไม่ปล่อยให้ห้องครัวรก|รก|🥘
+My father keeps the garden *beautiful*.|พ่อรักษาสวนให้สวยงาม|สวยงาม|🌺
+My father does not keep the garden *untidy*.|พ่อไม่ปล่อยให้สวนไม่เป็นระเบียบ|ไม่เป็นระเบียบ|🌿
+The teacher keeps the students *quiet*.|ครูให้นักเรียนอยู่เงียบ ๆ|เงียบ|🤫
+The teacher does not keep the students *noisy*.|ครูไม่ได้ปล่อยให้นักเรียนส่งเสียงดัง|เสียงดัง|📢
+The manager keeps the employees *busy*.|ผู้จัดการทำให้พนักงานมีงานทำอยู่ตลอด|ยุ่ง/มีงานทำ|💼
+The manager does not keep the employees *idle*.|ผู้จัดการไม่ปล่อยให้พนักงานว่างงาน|ว่างงาน|🪑
+The coach keeps the players *fit*.|โค้ชช่วยรักษาให้นักกีฬามีร่างกายแข็งแรง|ฟิต/แข็งแรง|💪
+The coach does not keep the players *tired*.|โค้ชไม่ได้ทำให้นักกีฬาเหนื่อยอยู่ตลอด|เหนื่อย|🥵
+The doctor keeps the patient *comfortable*.|หมอทำให้คนไข้รู้สึกสบาย|สบาย|🛌
+The doctor does not keep the patient *uncomfortable*.|หมอไม่ได้ปล่อยให้คนไข้รู้สึกไม่สบาย|ไม่สบาย|😣
+The company keeps its offices *clean*.|บริษัทรักษาสำนักงานให้สะอาด|สะอาด|🏢
+The company does not keep its offices *dirty*.|บริษัทไม่ปล่อยให้สำนักงานสกปรก|สกปรก|🧹
+We keep our children *safe*.|เราดูแลให้ลูก ๆ ของเราปลอดภัย|ปลอดภัย|🛡️
+We do not keep our children *unsafe*.|เราไม่ปล่อยให้ลูก ๆ ของเราอยู่ในสภาพไม่ปลอดภัย|ไม่ปลอดภัย|⚠️
+They keep their house *warm*.|พวกเขารักษาบ้านให้อบอุ่น|อบอุ่น|🔥
+They do not keep their house *cold*.|พวกเขาไม่ปล่อยให้บ้านเย็น|เย็น|🥶
+The hotel keeps its rooms *clean*.|โรงแรมรักษาห้องพักให้สะอาด|สะอาด|🛏️
+The hotel does not keep its rooms *dirty*.|โรงแรมไม่ปล่อยให้ห้องพักสกปรก|สกปรก|🏨
+The librarian keeps the books *organized*.|บรรณารักษ์จัดหนังสือให้เป็นระเบียบ|เป็นระเบียบ|📚
+The librarian does not keep the books *disorganized*.|บรรณารักษ์ไม่ปล่อยให้หนังสือไม่เป็นระเบียบ|ไม่เป็นระเบียบ|📖
+The gardener keeps the plants *healthy*.|คนสวนดูแลต้นไม้ให้แข็งแรง|แข็งแรง|🌱
+The gardener does not keep the plants *dry*.|คนสวนไม่ปล่อยให้ต้นไม้แห้ง|แห้ง|🥀
+The security guard keeps the building *secure*.|เจ้าหน้าที่รักษาความปลอดภัยดูแลให้อาคารปลอดภัย|ปลอดภัย|🔒
+The security guard does not keep the building *unsafe*.|เจ้าหน้าที่รักษาความปลอดภัยไม่ปล่อยให้อาคารไม่ปลอดภัย|ไม่ปลอดภัย|🚨
+The parents keep their children *happy*.|พ่อแม่ทำให้ลูก ๆ มีความสุข|มีความสุข|😊
+The parents do not keep their children *unhappy*.|พ่อแม่ไม่ปล่อยให้ลูก ๆ ไม่มีความสุข|ไม่มีความสุข|😢
+The teacher keeps the classroom *quiet*.|ครูรักษาห้องเรียนให้เงียบ|เงียบ|🏫
+The teacher does not keep the classroom *noisy*.|ครูไม่ปล่อยให้ห้องเรียนเสียงดัง|เสียงดัง|🔊
+The chef keeps the food *fresh*.|เชฟรักษาอาหารให้สด|สด|🥬
+The chef does not keep the food *cold*.|เชฟไม่ได้เก็บอาหารไว้ให้เย็น|เย็น|🧊
+The owner keeps the store *open*.|เจ้าของเปิดร้านไว้|เปิด|🏪
+The owner does not keep the store *closed*.|เจ้าของไม่ได้ปิดร้านไว้|ปิด|🚪
+My sister keeps her hair *short*.|น้องสาวไว้ผมสั้น|สั้น|💇
+My sister does not keep her hair *long*.|น้องสาวไม่ไว้ผมยาว|ยาว|👩
+My brother keeps his bike *safe*.|น้องชายเก็บจักรยานของเขาไว้ให้ปลอดภัย|ปลอดภัย|🚲
+My brother does not keep his bike *wet*.|น้องชายไม่ปล่อยให้จักรยานของเขาเปียก|เปียก|💦
+The nurse keeps the patient *calm*.|พยาบาลทำให้คนไข้สงบ|สงบ|😌
+The nurse does not keep the patient *nervous*.|พยาบาลไม่ปล่อยให้คนไข้ตื่นเต้นกังวล|ตื่นเต้น/กังวล|😰
+The cashier keeps the customers *happy*.|แคชเชียร์ทำให้ลูกค้ามีความสุข|มีความสุข|😊
+The cashier does not keep the customers *angry*.|แคชเชียร์ไม่ปล่อยให้ลูกค้าโกรธ|โกรธ|😠
+The farmer keeps the cows *healthy*.|ชาวนาดูแลวัวให้แข็งแรง|แข็งแรง|🐄
+The farmer does not keep the cows *hungry*.|ชาวนาไม่ปล่อยให้วัวหิว|หิว|🌾
+The baker keeps the bread *warm*.|คนทำขนมปังรักษาขนมปังให้อุ่น|อุ่น|🍞
+The baker does not keep the bread *stale*.|คนทำขนมปังไม่ปล่อยให้ขนมปังไม่สด|ไม่สด/แข็ง|🥖
+The cleaner keeps the floor *dry*.|คนทำความสะอาดรักษาพื้นให้แห้ง|แห้ง|🧽
+The cleaner does not keep the floor *slippery*.|คนทำความสะอาดไม่ปล่อยให้พื้นลื่น|ลื่น|⚠️
+The driver keeps the passengers *comfortable*.|คนขับทำให้ผู้โดยสารรู้สึกสบาย|สบาย|🚌
+The driver does not keep the passengers *worried*.|คนขับไม่ปล่อยให้ผู้โดยสารกังวล|กังวล|😟
+The waiter keeps the glasses *full*.|พนักงานเสิร์ฟเติมแก้วให้เต็มอยู่เสมอ|เต็ม|🥛
+The waiter does not keep the glasses *empty*.|พนักงานเสิร์ฟไม่ปล่อยให้แก้วว่างเปล่า|ว่างเปล่า|🫗
+The mayor keeps the city *safe*.|นายกเทศมนตรีดูแลให้เมืองปลอดภัย|ปลอดภัย|🏙️
+The mayor does not keep the city *noisy*.|นายกเทศมนตรีไม่ปล่อยให้เมืองเสียงดัง|เสียงดัง|🔊
+The captain keeps the crew *alert*.|กัปตันทำให้ลูกเรือตื่นตัว|ตื่นตัว|⚓
+The captain does not keep the crew *bored*.|กัปตันไม่ปล่อยให้ลูกเรือเบื่อ|เบื่อ|🥱
+The pilot keeps the passengers *informed*.|นักบินแจ้งข่าวให้ผู้โดยสารทราบอยู่เสมอ|ได้รับแจ้ง|✈️
+The pilot does not keep the passengers *confused*.|นักบินไม่ปล่อยให้ผู้โดยสารสับสน|สับสน|😵
+The mechanic keeps the engine *cool*.|ช่างซ่อมรถรักษาเครื่องยนต์ให้เย็น|เย็น|🔧
+The mechanic does not keep the engine *hot*.|ช่างซ่อมรถไม่ปล่อยให้เครื่องยนต์ร้อน|ร้อน|🌡️
+The dentist keeps your teeth *strong*.|ทันตแพทย์ช่วยรักษาฟันของคุณให้แข็งแรง|แข็งแรง|🦷
+The dentist does not keep your teeth *yellow*.|ทันตแพทย์ไม่ปล่อยให้ฟันของคุณเหลือง|เหลือง|🟡
+The tutor keeps the lessons *interesting*.|ติวเตอร์ทำให้บทเรียนน่าสนใจ|น่าสนใจ|📖
+The tutor does not keep the lessons *boring*.|ติวเตอร์ไม่ปล่อยให้บทเรียนน่าเบื่อ|น่าเบื่อ|😴
+The principal keeps the school *peaceful*.|ผู้อำนวยการรักษาโรงเรียนให้สงบสุข|สงบสุข|🕊️
+The principal does not keep the school *dangerous*.|ผู้อำนวยการไม่ปล่อยให้โรงเรียนอันตราย|อันตราย|☠️
+The neighbor keeps his dog *quiet*.|เพื่อนบ้านทำให้สุนัขของเขาเงียบ|เงียบ|🐕
+The neighbor does not keep his dog *loose*.|เพื่อนบ้านไม่ปล่อยให้สุนัขของเขาหลุดวิ่งเพ่นพ่าน|หลุด/ไม่ถูกล่าม|🔗
+The landlord keeps the rent *low*.|เจ้าของบ้านรักษาค่าเช่าให้ต่ำ|ต่ำ|🏠
+The landlord does not keep the rent *high*.|เจ้าของบ้านไม่ปล่อยให้ค่าเช่าสูง|สูง|📈
+The shop keeps its doors *open*.|ร้านเปิดประตูไว้|เปิด|🛍️
+The shop does not keep its doors *locked*.|ร้านไม่ได้ล็อกประตูไว้|ล็อก|🔐
+The restaurant keeps its customers *satisfied*.|ร้านอาหารทำให้ลูกค้าพึงพอใจ|พึงพอใจ|🍽️
+The restaurant does not keep its customers *disappointed*.|ร้านอาหารไม่ปล่อยให้ลูกค้าผิดหวัง|ผิดหวัง|😞
+The airline keeps its crew *rested*.|สายการบินดูแลให้ลูกเรือได้พักผ่อน|ได้พักผ่อน|🛫
+The airline does not keep its crew *exhausted*.|สายการบินไม่ปล่อยให้ลูกเรือหมดแรง|หมดแรง|😩
+The bank keeps your money *safe*.|ธนาคารเก็บเงินของคุณไว้อย่างปลอดภัย|ปลอดภัย|🏦
+The bank does not keep your money *unprotected*.|ธนาคารไม่ปล่อยให้เงินของคุณไม่มีการป้องกัน|ไม่มีการป้องกัน|🔓
+The museum keeps the paintings *protected*.|พิพิธภัณฑ์ดูแลภาพวาดให้ได้รับการปกป้อง|ได้รับการปกป้อง|🖼️
+The museum does not keep the paintings *damaged*.|พิพิธภัณฑ์ไม่ปล่อยให้ภาพวาดเสียหาย|เสียหาย|💥
+The park keeps the air *fresh*.|สวนสาธารณะช่วยให้อากาศสดชื่น|สดชื่น|🌳
+The park does not keep the air *polluted*.|สวนสาธารณะไม่ปล่อยให้อากาศเป็นมลพิษ|เป็นมลพิษ|🏭
+The app keeps your data *private*.|แอปเก็บข้อมูลของคุณให้เป็นส่วนตัว|เป็นส่วนตัว|📱
+The app does not keep your data *public*.|แอปไม่เปิดเผยข้อมูลของคุณเป็นสาธารณะ|สาธารณะ|🌐
+The fridge keeps the milk *cold*.|ตู้เย็นรักษานมให้เย็น|เย็น|🧊
+The fridge does not keep the milk *warm*.|ตู้เย็นไม่ปล่อยให้นมอุ่น|อุ่น|🥛
+The heater keeps the baby *cozy*.|เครื่องทำความร้อนทำให้ทารกอบอุ่นสบาย|อบอุ่นสบาย|🛏️
+The heater does not keep the baby *freezing*.|เครื่องทำความร้อนไม่ปล่อยให้ทารกหนาวเหน็บ|หนาวเหน็บ|🥶
+The raincoat keeps me *dry*.|เสื้อกันฝนทำให้ฉันแห้ง|แห้ง|🌧️
+The raincoat does not keep me *soaked*.|เสื้อกันฝนไม่ปล่อยให้ฉันเปียกโชก|เปียกโชก|💧
+The gloves keep my hands *warm*.|ถุงมือทำให้มือของฉันอุ่น|อุ่น|🧤
+The gloves do not keep my hands *cold*.|ถุงมือไม่ปล่อยให้มือของฉันเย็น|เย็น|❄️
+The music keeps me *awake*.|เพลงทำให้ฉันตื่นอยู่|ตื่น|🎵
+The music does not keep me *sleepy*.|เพลงไม่ได้ทำให้ฉันง่วง|ง่วง|😪`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(keep(?:s)?)\b( .*?)(?= \*)/,(x,v,o)=>`<span class="rm v" data-m="รักษา / ทำให้คงอยู่ในสภาพ">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/\*(.+?)\*/,`<span class="to"><span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">✋<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

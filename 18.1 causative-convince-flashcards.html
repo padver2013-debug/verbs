@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.14 Causative Verb: CONVINCE + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+</style></head><body>
+<header><h1>6.14 Causative Verb: <span class="rm">CONVINCE</span> + Someone + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">convince(s)</b> + someone + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I convince him to *join* the club.|ฉันโน้มน้าวให้เขาเข้าชมรม|เข้าร่วม|🤝
+I do not convince her to *stay* here.|ฉันไม่ได้โน้มน้าวให้เธออยู่ที่นี่|อยู่|🏠
+She convinces me to *study* harder.|เธอโน้มน้าวให้ฉันเรียนหนักขึ้น|เรียน|📚
+She does not convince me to *leave* early.|เธอไม่ได้โน้มน้าวให้ฉันออกไปก่อน|ออกไป|🚪
+He convinces his son to *read* more books.|เขาโน้มน้าวให้ลูกชายอ่านหนังสือมากขึ้น|อ่าน|📖
+He does not convince his son to *travel* alone.|เขาไม่ได้โน้มน้าวให้ลูกชายเดินทางคนเดียว|เดินทาง|🧳
+My mother convinces me to *exercise* every morning.|แม่โน้มน้าวให้ฉันออกกำลังกายทุกเช้า|ออกกำลังกาย|🏃
+My mother does not convince me to *spend* more money.|แม่ไม่ได้โน้มน้าวให้ฉันใช้เงินมากขึ้น|ใช้จ่าย|💸
+The teacher convinces the students to *participate* in the activity.|ครูโน้มน้าวให้นักเรียนเข้าร่วมกิจกรรม|เข้าร่วม|🙋
+The teacher does not convince the students to *memorize* everything.|ครูไม่ได้โน้มน้าวให้นักเรียนท่องจำทุกอย่าง|ท่องจำ|🧠
+The coach convinces the players to *practice* harder.|โค้ชโน้มน้าวให้นักกีฬาฝึกซ้อมให้หนักขึ้น|ฝึกซ้อม|🏋️
+The coach does not convince the players to *quit* the team.|โค้ชไม่ได้โน้มน้าวให้นักกีฬาออกจากทีม|เลิก/ออก|🛑
+They convince us to *accept* their proposal.|พวกเขาโน้มน้าวให้เรายอมรับข้อเสนอของพวกเขา|ยอมรับ|👍
+They do not convince us to *change* our plans.|พวกเขาไม่ได้โน้มน้าวให้เราเปลี่ยนแผน|เปลี่ยน|🔁
+The manager convinces employees to *cooperate* with each other.|ผู้จัดการโน้มน้าวให้พนักงานร่วมมือกัน|ร่วมมือ|🤝
+The manager does not convince employees to *work* overtime.|ผู้จัดการไม่ได้โน้มน้าวให้พนักงานทำงานล่วงเวลา|ทำงาน|🕘
+The salesman convinces the customer to *buy* the product.|พนักงานขายโน้มน้าวให้ลูกค้าซื้อสินค้า|ซื้อ|🛒
+The salesman does not convince the customer to *sign* the contract.|พนักงานขายไม่ได้โน้มน้าวให้ลูกค้าเซ็นสัญญา|เซ็น|✍️
+My father convinces me to *save* money.|พ่อโน้มน้าวให้ฉันเก็บเงิน|เก็บออม|💰
+My father does not convince me to *borrow* money.|พ่อไม่ได้โน้มน้าวให้ฉันยืมเงิน|ยืม|🏦
+The doctor convinces the patient to *exercise* regularly.|หมอโน้มน้าวให้คนไข้ออกกำลังกายเป็นประจำ|ออกกำลังกาย|🧘
+The doctor does not convince the patient to *stop* the treatment.|หมอไม่ได้โน้มน้าวให้คนไข้หยุดการรักษา|หยุด|⛔
+The guide convinces us to *visit* the museum.|ไกด์โน้มน้าวให้เราไปเยี่ยมชมพิพิธภัณฑ์|ไปเยี่ยมชม|🏛️
+The guide does not convince us to *stay* overnight.|ไกด์ไม่ได้โน้มน้าวให้เราพักค้างคืน|พักอยู่|🏨
+The boss convinces her assistant to *prepare* the report.|เจ้านายโน้มน้าวให้ผู้ช่วยเตรียมรายงาน|เตรียม|📑
+The boss does not convince her assistant to *cancel* the meeting.|เจ้านายไม่ได้โน้มน้าวให้ผู้ช่วยยกเลิกการประชุม|ยกเลิก|❌
+The parents convince their children to *eat* vegetables.|พ่อแม่โน้มน้าวให้ลูก ๆ กินผัก|กิน|🥦
+The parents do not convince their children to *sleep* late.|พ่อแม่ไม่ได้โน้มน้าวให้ลูก ๆ นอนดึก|นอน|😴
+The lawyer convinces his client to *accept* the agreement.|ทนายโน้มน้าวให้ลูกความยอมรับข้อตกลง|ยอมรับ|📃
+The lawyer does not convince his client to *admit* the mistake.|ทนายไม่ได้โน้มน้าวให้ลูกความยอมรับความผิด|ยอมรับ(ผิด)|🙇
+The speaker convinces the audience to *support* the project.|ผู้พูดโน้มน้าวผู้ฟังให้สนับสนุนโครงการ|สนับสนุน|📣
+The speaker does not convince the audience to *donate* money.|ผู้พูดไม่ได้โน้มน้าวผู้ฟังให้บริจาคเงิน|บริจาค|🎁
+The team leader convinces the members to *cooperate*.|หัวหน้าทีมโน้มน้าวให้สมาชิกให้ความร่วมมือ|ร่วมมือ|🤝
+The team leader does not convince the members to *compete* against each other.|หัวหน้าทีมไม่ได้โน้มน้าวให้สมาชิกแข่งขันกันเอง|แข่งขัน|🥊
+My friend convinces me to *try* the new restaurant.|เพื่อนโน้มน้าวให้ฉันลองร้านอาหารใหม่|ลอง|🍜
+My friend does not convince me to *order* dessert.|เพื่อนไม่ได้โน้มน้าวให้ฉันสั่งของหวาน|สั่ง|🍰
+The company convinces customers to *choose* its new service.|บริษัทโน้มน้าวให้ลูกค้าเลือกบริการใหม่ของบริษัท|เลือก|👆
+The company does not convince customers to *renew* their contracts.|บริษัทไม่ได้โน้มน้าวให้ลูกค้าต่อสัญญา|ต่ออายุ|🔄
+The campaign convinces people to *recycle* more.|แคมเปญโน้มน้าวให้ผู้คนรีไซเคิลมากขึ้น|รีไซเคิล|♻️
+The campaign does not convince people to *change* their habits.|แคมเปญไม่ได้โน้มน้าวให้ผู้คนเปลี่ยนนิสัย|เปลี่ยน|🔁
+My brother convinces me to *adopt* a puppy.|น้องชายโน้มน้าวให้ฉันรับเลี้ยงลูกสุนัข|รับเลี้ยง|🐶
+My brother does not convince me to *sell* my bike.|น้องชายไม่ได้โน้มน้าวให้ฉันขายจักรยาน|ขาย|🚲
+My sister convinces me to *apply* for the scholarship.|น้องสาวโน้มน้าวให้ฉันสมัครทุนการศึกษา|สมัคร|🎓
+My sister does not convince me to *skip* class.|น้องสาวไม่ได้โน้มน้าวให้ฉันโดดเรียน|โดด|🏫
+My grandmother convinces me to *visit* the temple.|คุณยายโน้มน้าวให้ฉันไปวัด|ไปเยี่ยม|🛕
+My grandmother does not convince me to *eat* fast food.|คุณยายไม่ได้โน้มน้าวให้ฉันกินฟาสต์ฟู้ด|กิน|🍔
+My husband convinces me to *swim* every weekend.|สามีโน้มน้าวให้ฉันว่ายน้ำทุกสุดสัปดาห์|ว่ายน้ำ|🏊
+My husband does not convince me to *quit* my job.|สามีไม่ได้โน้มน้าวให้ฉันลาออกจากงาน|ลาออก|💼
+My wife convinces me to *clean* the garage.|ภรรยาโน้มน้าวให้ฉันทำความสะอาดโรงรถ|ทำความสะอาด|🧹
+My wife does not convince me to *buy* a new car.|ภรรยาไม่ได้โน้มน้าวให้ฉันซื้อรถคันใหม่|ซื้อ|🚗
+The mayor convinces citizens to *vote*.|นายกเทศมนตรีโน้มน้าวให้ประชาชนไปลงคะแนนเสียง|ลงคะแนน|🗳️
+The mayor does not convince citizens to *ignore* the rules.|นายกเทศมนตรีไม่ได้โน้มน้าวให้ประชาชนเพิกเฉยต่อกฎ|เพิกเฉย|🙈
+The principal convinces teachers to *try* new methods.|ผู้อำนวยการโน้มน้าวให้ครูลองวิธีใหม่ ๆ|ลอง|💡
+The principal does not convince teachers to *change* the schedule.|ผู้อำนวยการไม่ได้โน้มน้าวให้ครูเปลี่ยนตารางเวลา|เปลี่ยน|📅
+The professor convinces students to *write* a thesis.|ศาสตราจารย์โน้มน้าวให้นักศึกษาเขียนวิทยานิพนธ์|เขียน|📄
+The professor does not convince students to *copy* the answers.|ศาสตราจารย์ไม่ได้โน้มน้าวให้นักศึกษาลอกคำตอบ|คัดลอก|📋
+The tutor convinces me to *review* every lesson.|ติวเตอร์โน้มน้าวให้ฉันทบทวนทุกบทเรียน|ทบทวน|🗒️
+The tutor does not convince me to *give up*.|ติวเตอร์ไม่ได้โน้มน้าวให้ฉันยอมแพ้|ยอมแพ้|🏳️
+My coworker convinces me to *join* the project.|เพื่อนร่วมงานโน้มน้าวให้ฉันเข้าร่วมโครงการ|เข้าร่วม|👥
+My coworker does not convince me to *resign*.|เพื่อนร่วมงานไม่ได้โน้มน้าวให้ฉันลาออก|ลาออก|📤
+The advisor convinces investors to *wait*.|ที่ปรึกษาโน้มน้าวให้นักลงทุนรอ|รอ|⏳
+The advisor does not convince investors to *sell* their shares.|ที่ปรึกษาไม่ได้โน้มน้าวให้นักลงทุนขายหุ้น|ขาย|📉
+The nurse convinces the patient to *walk* around.|พยาบาลโน้มน้าวให้คนไข้เดินไปมา|เดิน|🚶
+The nurse does not convince the patient to *refuse* the medicine.|พยาบาลไม่ได้โน้มน้าวให้คนไข้ปฏิเสธยา|ปฏิเสธ|🙅
+The captain convinces the crew to *work* together.|กัปตันโน้มน้าวให้ลูกเรือทำงานร่วมกัน|ทำงาน|⚓
+The captain does not convince the crew to *leave* the ship.|กัปตันไม่ได้โน้มน้าวให้ลูกเรือออกจากเรือ|ออกจาก|🚢
+The pilot convinces passengers to *stay* calm.|นักบินโน้มน้าวให้ผู้โดยสารใจเย็น|คงอยู่|😌
+The pilot does not convince passengers to *panic*.|นักบินไม่ได้โน้มน้าวให้ผู้โดยสารตื่นตระหนก|ตื่นตระหนก|😱
+The chef convinces the cooks to *use* fresh ingredients.|เชฟโน้มน้าวให้พ่อครัวใช้วัตถุดิบสด|ใช้|🥬
+The chef does not convince the cooks to *waste* food.|เชฟไม่ได้โน้มน้าวให้พ่อครัวทิ้งขว้างอาหาร|ทิ้งขว้าง|🗑️
+The mechanic convinces me to *repair* the engine.|ช่างซ่อมรถโน้มน้าวให้ฉันซ่อมเครื่องยนต์|ซ่อม|🔧
+The mechanic does not convince me to *replace* the car.|ช่างซ่อมรถไม่ได้โน้มน้าวให้ฉันเปลี่ยนรถ|เปลี่ยน|🔄
+The dentist convinces me to *brush* twice a day.|ทันตแพทย์โน้มน้าวให้ฉันแปรงฟันวันละสองครั้ง|แปรง|🪥
+The dentist does not convince me to *avoid* the clinic.|ทันตแพทย์ไม่ได้โน้มน้าวให้ฉันหลีกเลี่ยงคลินิก|หลีกเลี่ยง|🦷
+The politician convinces voters to *support* the bill.|นักการเมืองโน้มน้าวให้ผู้ลงคะแนนสนับสนุนร่างกฎหมาย|สนับสนุน|🏛️
+The politician does not convince voters to *oppose* the plan.|นักการเมืองไม่ได้โน้มน้าวให้ผู้ลงคะแนนคัดค้านแผน|คัดค้าน|✋
+The activist convinces people to *protect* the forest.|นักเคลื่อนไหวโน้มน้าวให้ผู้คนปกป้องป่า|ปกป้อง|🌳
+The activist does not convince people to *cut down* trees.|นักเคลื่อนไหวไม่ได้โน้มน้าวให้ผู้คนตัดต้นไม้|ตัดลง|🪓
+The agent convinces the buyer to *visit* the house.|นายหน้าโน้มน้าวให้ผู้ซื้อไปดูบ้าน|ไปดู|🏠
+The agent does not convince the buyer to *lower* the price.|นายหน้าไม่ได้โน้มน้าวให้ผู้ซื้อลดราคา|ลด|💲
+The landlord convinces tenants to *renew* the lease.|เจ้าของบ้านโน้มน้าวให้ผู้เช่าต่อสัญญาเช่า|ต่อ|📃
+The landlord does not convince tenants to *move out*.|เจ้าของบ้านไม่ได้โน้มน้าวให้ผู้เช่าย้ายออก|ย้ายออก|📦
+The neighbor convinces us to *attend* the party.|เพื่อนบ้านโน้มน้าวให้เราไปงานเลี้ยง|เข้าร่วม|🎈
+The neighbor does not convince us to *call* the police.|เพื่อนบ้านไม่ได้โน้มน้าวให้เราโทรหาตำรวจ|โทร|📞
+The driver convinces passengers to *wear* seat belts.|คนขับโน้มน้าวให้ผู้โดยสารคาดเข็มขัดนิรภัย|สวม/คาด|🚘
+The driver does not convince passengers to *open* the door.|คนขับไม่ได้โน้มน้าวให้ผู้โดยสารเปิดประตู|เปิด|🚪
+The trainer convinces athletes to *stretch* before running.|เทรนเนอร์โน้มน้าวให้นักกีฬายืดเส้นก่อนวิ่ง|ยืดเส้น|🤸
+The trainer does not convince athletes to *skip* meals.|เทรนเนอร์ไม่ได้โน้มน้าวให้นักกีฬางดมื้ออาหาร|ข้าม|🍽️
+The librarian convinces children to *read* aloud.|บรรณารักษ์โน้มน้าวให้เด็ก ๆ อ่านออกเสียง|อ่าน|🗣️
+The librarian does not convince children to *make* noise.|บรรณารักษ์ไม่ได้โน้มน้าวให้เด็ก ๆ ส่งเสียงดัง|ทำให้เกิด|🔊
+The secretary convinces the boss to *take* a break.|เลขานุการโน้มน้าวให้เจ้านายพักสักหน่อย|พัก|☕
+The secretary does not convince the boss to *work* all night.|เลขานุการไม่ได้โน้มน้าวให้เจ้านายทำงานทั้งคืน|ทำงาน|🌙
+The banker convinces clients to *open* an account.|พนักงานธนาคารโน้มน้าวให้ลูกค้าเปิดบัญชี|เปิด|💳
+The banker does not convince clients to *close* their accounts.|พนักงานธนาคารไม่ได้โน้มน้าวให้ลูกค้าปิดบัญชี|ปิด|🔒
+The influencer convinces fans to *follow* the channel.|อินฟลูเอนเซอร์โน้มน้าวให้แฟน ๆ ติดตามช่อง|ติดตาม|📱
+The influencer does not convince fans to *share* false news.|อินฟลูเอนเซอร์ไม่ได้โน้มน้าวให้แฟน ๆ แชร์ข่าวปลอม|แชร์|📰
+The committee convinces members to *approve* the plan.|คณะกรรมการโน้มน้าวให้สมาชิกอนุมัติแผน|อนุมัติ|✅
+The committee does not convince members to *reject* the proposal.|คณะกรรมการไม่ได้โน้มน้าวให้สมาชิกปฏิเสธข้อเสนอ|ปฏิเสธ|🚫
+The farmer convinces workers to *harvest* the rice.|ชาวนาโน้มน้าวให้คนงานเก็บเกี่ยวข้าว|เก็บเกี่ยว|🌾
+The farmer does not convince workers to *waste* water.|ชาวนาไม่ได้โน้มน้าวให้คนงานใช้น้ำสิ้นเปลือง|ทิ้งขว้าง|💧`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(convince(?:s)?)\b/,'<span class="rm">$1</span>').replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.26 Causative Verb: ALLOW + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.26 Causative Verb: <span class="rm">ALLOW</span> + <span class="ob">Someone</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">allow(s)</b> + <b class="ob">someone</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I allow him to *use* my computer.|ฉันอนุญาตให้เขาใช้คอมพิวเตอร์ของฉัน|ใช้|💻
+I do not allow her to *drive* my car.|ฉันไม่อนุญาตให้เธอขับรถของฉัน|ขับ|🚗
+She allows me to *stay* at her house.|เธออนุญาตให้ฉันพักที่บ้านของเธอ|พัก|🏠
+She does not allow me to *enter* the room.|เธอไม่อนุญาตให้ฉันเข้าไปในห้อง|เข้า|🚪
+He allows his son to *play* outside.|เขาอนุญาตให้ลูกชายเล่นข้างนอก|เล่น|⚽
+He does not allow his son to *watch* TV late.|เขาไม่อนุญาตให้ลูกชายดูทีวีดึก|ดู|📺
+My mother allows me to *choose* my clothes.|แม่อนุญาตให้ฉันเลือกเสื้อผ้าของฉัน|เลือก|👕
+My mother does not allow me to *eat* in my room.|แม่ไม่อนุญาตให้ฉันกินอาหารในห้อง|กิน|🍕
+The teacher allows the students to *ask* questions.|ครูอนุญาตให้นักเรียนถามคำถาม|ถาม|🙋
+The teacher does not allow the students to *use* phones.|ครูไม่อนุญาตให้นักเรียนใช้โทรศัพท์|ใช้|📵
+The coach allows the players to *rest*.|โค้ชอนุญาตให้นักกีฬาพัก|พัก|😴
+The coach does not allow the players to *leave* early.|โค้ชไม่อนุญาตให้นักกีฬาออกก่อนเวลา|ออก|🚶
+They allow us to *enter* the building.|พวกเขาอนุญาตให้เราเข้าไปในอาคาร|เข้า|🏢
+They do not allow us to *park* here.|พวกเขาไม่อนุญาตให้เราจอดรถที่นี่|จอดรถ|🅿️
+The manager allows employees to *work* from home.|ผู้จัดการอนุญาตให้พนักงานทำงานจากบ้าน|ทำงาน|🏡
+The manager does not allow employees to *smoke* inside.|ผู้จัดการไม่อนุญาตให้พนักงานสูบบุหรี่ข้างใน|สูบบุหรี่|🚭
+The company allows workers to *take* breaks.|บริษัทอนุญาตให้คนงานพักเบรก|พัก|☕
+The company does not allow workers to *share* passwords.|บริษัทไม่อนุญาตให้พนักงานแชร์รหัสผ่าน|แชร์|🔐
+The school allows students to *bring* their own lunch.|โรงเรียนอนุญาตให้นักเรียนนำอาหารกลางวันมาเอง|นำมา|🍱
+The school does not allow students to *wear* hats.|โรงเรียนไม่อนุญาตให้นักเรียนสวมหมวก|สวม|🧢
+The doctor allows the patient to *walk* around.|หมออนุญาตให้คนไข้เดินไปรอบ ๆ|เดิน|🚶
+The doctor does not allow the patient to *eat* solid food.|หมอไม่อนุญาตให้คนไข้กินอาหารแข็ง|กิน|🥩
+The hotel allows guests to *check in* early.|โรงแรมอนุญาตให้แขกเช็กอินก่อนเวลา|เช็กอิน|🛎️
+The hotel does not allow guests to *bring* pets.|โรงแรมไม่อนุญาตให้แขกนำสัตว์เลี้ยงมา|นำมา|🐶
+The library allows visitors to *use* the computers.|ห้องสมุดอนุญาตให้ผู้มาเยือนใช้คอมพิวเตอร์|ใช้|🖥️
+The library does not allow visitors to *talk* loudly.|ห้องสมุดไม่อนุญาตให้ผู้มาเยือนพูดเสียงดัง|พูด|📢
+The website allows users to *create* an account.|เว็บไซต์อนุญาตให้ผู้ใช้สร้างบัญชี|สร้าง|🆕
+The website does not allow users to *upload* large files.|เว็บไซต์ไม่อนุญาตให้ผู้ใช้อัปโหลดไฟล์ขนาดใหญ่|อัปโหลด|⬆️
+The rules allow visitors to *take* photos.|กฎอนุญาตให้ผู้มาเยือนถ่ายรูป|ถ่าย|📷
+The rules do not allow visitors to *enter* this area.|กฎไม่อนุญาตให้ผู้มาเยือนเข้าไปในบริเวณนี้|เข้า|⛔
+My father allows me to *wake up* early.|พ่ออนุญาตให้ฉันตื่นแต่เช้า|ตื่น|⏰
+My father does not allow me to *hurry*.|พ่อไม่อนุญาตให้ฉันรีบ|รีบ|🐢
+The nurse allows the patient to *take* the medicine.|พยาบาลอนุญาตให้คนไข้กินยา|กิน|💊
+The nurse does not allow the patient to *walk* alone.|พยาบาลไม่อนุญาตให้คนไข้เดินคนเดียว|เดิน|🚶
+Our guide allows us to *follow* the group.|ไกด์ของเราอนุญาตให้เราตามกลุ่ม|ตาม|🚩
+Our guide does not allow us to *separate* from the group.|ไกด์ของเราไม่อนุญาตให้เราแยกจากกลุ่ม|แยก|✂️
+The librarian allows the visitors to *be* quiet.|บรรณารักษ์อนุญาตให้ผู้มาเยือนเงียบ|เป็น/อยู่|🤫
+The librarian does not allow the visitors to *leave* immediately.|บรรณารักษ์ไม่อนุญาตให้ผู้มาเยือนออกไปทันที|ออกไป|🚪
+The trainer allows us to *exercise* regularly.|เทรนเนอร์อนุญาตให้เราออกกำลังกายเป็นประจำ|ออกกำลังกาย|🏃‍♂️
+The trainer does not allow us to *stop* exercising.|เทรนเนอร์ไม่อนุญาตให้เราหยุดออกกำลังกาย|หยุด|⛔
+The judge allows the witness to *tell* the truth.|ผู้พิพากษาอนุญาตให้พยานพูดความจริง|บอก|⚖️
+The judge does not allow the witness to *leave* the court.|ผู้พิพากษาไม่อนุญาตให้พยานออกจากศาล|ออก|🚪
+The general allows the army to *advance*.|นายพลอนุญาตให้กองทัพรุกคืบ|รุกคืบ|🪖
+The general does not allow the army to *retreat*.|นายพลไม่อนุญาตให้กองทัพถอยทัพ|ถอย|🏳️
+The king allows the guards to *open* the gate.|กษัตริย์อนุญาตให้ทหารยามเปิดประตู|เปิด|👑
+The king does not allow the guards to *harm* the prisoners.|กษัตริย์ไม่อนุญาตให้ทหารยามทำร้ายนักโทษ|ทำร้าย|⛓️
+The principal allows the students to *line up*.|ผู้อำนวยการอนุญาตให้นักเรียนเข้าแถว|เข้าแถว|🧍
+The principal does not allow the students to *run* in the hallway.|ผู้อำนวยการไม่อนุญาตให้นักเรียนวิ่งในทางเดิน|วิ่ง|🏃
+The professor allows the students to *submit* their essays.|ศาสตราจารย์อนุญาตให้นักศึกษาส่งเรียงความ|ส่ง|📄
+The professor does not allow the students to *rewrite* the paper.|ศาสตราจารย์ไม่อนุญาตให้นักศึกษาเขียนรายงานใหม่|เขียนใหม่|✏️
+The chef allows the cooks to *clean* the kitchen.|เชฟอนุญาตให้พ่อครัวทำความสะอาดครัว|ทำความสะอาด|🧽
+The chef does not allow the cooks to *serve* cold soup.|เชฟไม่อนุญาตให้พ่อครัวเสิร์ฟซุปเย็น|เสิร์ฟ|🥣
+The pilot allows the crew to *check* the engines.|นักบินอนุญาตให้ลูกเรือตรวจเครื่องยนต์|ตรวจ|🛫
+The pilot does not allow the crew to *delay* the takeoff.|นักบินไม่อนุญาตให้ลูกเรือเลื่อนการขึ้นบิน|เลื่อน|⏰
+The mayor allows the officials to *repair* the road.|นายกเทศมนตรีอนุญาตให้เจ้าหน้าที่ซ่อมถนน|ซ่อม|🛠️
+The mayor does not allow the officials to *raise* the taxes.|นายกเทศมนตรีไม่อนุญาตให้เจ้าหน้าที่ขึ้นภาษี|ขึ้น|💲
+The landlord allows the tenants to *pay* the rent.|เจ้าของบ้านอนุญาตให้ผู้เช่าจ่ายค่าเช่า|จ่าย|🏠
+The landlord does not allow the tenants to *paint* the walls.|เจ้าของบ้านไม่อนุญาตให้ผู้เช่าทาสีผนัง|ทาสี|🎨
+The inspector allows the owner to *close* the shop.|ผู้ตรวจสอบอนุญาตให้เจ้าของปิดร้าน|ปิด|🕵️
+The inspector does not allow the owner to *throw away* the food.|ผู้ตรวจสอบไม่อนุญาตให้เจ้าของทิ้งอาหาร|ทิ้ง|🗑️
+The customs officer allows the traveler to *open* the bag.|เจ้าหน้าที่ศุลกากรอนุญาตให้ผู้เดินทางเปิดกระเป๋า|เปิด|🧳
+The customs officer does not allow the traveler to *remove* his shoes.|เจ้าหน้าที่ศุลกากรไม่อนุญาตให้ผู้เดินทางถอดรองเท้า|ถอด|👟
+The referee allows the player to *leave* the field.|ผู้ตัดสินอนุญาตให้นักกีฬาออกจากสนาม|ออก|🟥
+The referee does not allow the player to *sit* on the bench.|ผู้ตัดสินไม่อนุญาตให้นักกีฬานั่งม้านั่งสำรอง|นั่ง|🪑
+The conductor allows the musicians to *play* softly.|วาทยกรอนุญาตให้นักดนตรีเล่นเบา ๆ|เล่น|🎻
+The conductor does not allow the musicians to *tune* the violins.|วาทยกรไม่อนุญาตให้นักดนตรีเทียบเสียงไวโอลิน|เทียบเสียง|🎼
+The foreman allows the workers to *wear* helmets.|หัวหน้าคนงานอนุญาตให้คนงานสวมหมวกนิรภัย|สวม|⛑️
+The foreman does not allow the workers to *work* in the rain.|หัวหน้าคนงานไม่อนุญาตให้คนงานทำงานกลางฝน|ทำงาน|🌧️
+The shopkeeper allows the boy to *carry* the boxes.|เจ้าของร้านอนุญาตให้เด็กชายยกกล่อง|ยก|📦
+The shopkeeper does not allow the boy to *touch* the goods.|เจ้าของร้านไม่อนุญาตให้เด็กชายแตะต้องสินค้า|แตะ|🛒
+The sergeant allows the soldiers to *stand* straight.|จ่าอนุญาตให้ทหารยืนตรง|ยืน|💂
+The sergeant does not allow the soldiers to *shout*.|จ่าไม่อนุญาตให้ทหารตะโกน|ตะโกน|📢
+The lawyer allows his assistant to *copy* the files.|ทนายอนุญาตให้ผู้ช่วยถ่ายเอกสาร|ถ่ายเอกสาร|📁
+The lawyer does not allow his assistant to *call* the client.|ทนายไม่อนุญาตให้ผู้ช่วยโทรหาลูกความ|โทร|📞
+The editor allows the writer to *shorten* the article.|บรรณาธิการอนุญาตให้นักเขียนย่อบทความ|ย่อ|📰
+The editor does not allow the writer to *publish* the draft.|บรรณาธิการไม่อนุญาตให้นักเขียนตีพิมพ์ฉบับร่าง|ตีพิมพ์|🖨️
+The farmer allows the workers to *plant* rice.|ชาวนาอนุญาตให้คนงานปลูกข้าว|ปลูก|🌾
+The farmer does not allow the workers to *burn* the straw.|ชาวนาไม่อนุญาตให้คนงานเผาฟาง|เผา|🔥
+The headmaster allows the teachers to *attend* the meeting.|ครูใหญ่อนุญาตให้ครูเข้าร่วมประชุม|เข้าร่วม|🏫
+The headmaster does not allow the teachers to *ignore* the complaints.|ครูใหญ่ไม่อนุญาตให้ครูเพิกเฉยต่อข้อร้องเรียน|เพิกเฉย|🙉
+The supervisor allows the interns to *file* the documents.|หัวหน้างานอนุญาตให้นักศึกษาฝึกงานจัดเก็บเอกสาร|จัดเก็บ|🗂️
+The supervisor does not allow the interns to *answer* the phone.|หัวหน้างานไม่อนุญาตให้นักศึกษาฝึกงานรับโทรศัพท์|รับสาย|☎️
+The dentist allows the patient to *rinse* his mouth.|ทันตแพทย์อนุญาตให้คนไข้บ้วนปาก|บ้วนปาก|🦷
+The dentist does not allow the patient to *eat* anything.|ทันตแพทย์ไม่อนุญาตให้คนไข้กินอะไรเลย|กิน|🍔
+The therapist allows the patient to *breathe* slowly.|นักบำบัดอนุญาตให้คนไข้หายใจช้า ๆ|หายใจ|🧘
+The therapist does not allow the patient to *skip* the session.|นักบำบัดไม่อนุญาตให้คนไข้ข้ามการนัดบำบัด|ข้าม|⏭️
+The lifeguard allows the swimmers to *get out* of the pool.|ไลฟ์การ์ดอนุญาตให้ผู้ว่ายน้ำขึ้นจากสระ|ขึ้น/ออก|🏊
+The lifeguard does not allow the swimmers to *dive* here.|ไลฟ์การ์ดไม่อนุญาตให้ผู้ว่ายน้ำดำน้ำตรงนี้|ดำน้ำ|🤿
+The flight attendant allows the passengers to *fasten* their seat belts.|พนักงานต้อนรับบนเครื่องอนุญาตให้ผู้โดยสารคาดเข็มขัดนิรภัย|คาด|💺
+The flight attendant does not allow the passengers to *stand* up.|พนักงานต้อนรับบนเครื่องไม่อนุญาตให้ผู้โดยสารลุกขึ้นยืน|ยืน|🧍
+The bus driver allows the kids to *move* to the back.|คนขับรถบัสอนุญาตให้เด็ก ๆ ไปนั่งข้างหลัง|ย้าย|🚌
+The bus driver does not allow the kids to *throw* trash on the floor.|คนขับรถบัสไม่อนุญาตให้เด็ก ๆ ทิ้งขยะบนพื้น|ทิ้ง|🚯
+The host allows the waiter to *bring* more drinks.|เจ้าภาพอนุญาตให้พนักงานเสิร์ฟนำเครื่องดื่มมาเพิ่ม|นำมา|🍹
+The host does not allow the waiter to *turn off* the music.|เจ้าภาพไม่อนุญาตให้พนักงานเสิร์ฟปิดเพลง|ปิด|🎶
+The commander allows the pilots to *take off*.|ผู้บัญชาการอนุญาตให้นักบินขึ้นบิน|ขึ้นบิน|🛩️
+The commander does not allow the pilots to *land* now.|ผู้บัญชาการไม่อนุญาตให้นักบินลงจอดตอนนี้|ลงจอด|🛬
+My mother allows me to *wash* the dishes.|แม่อนุญาตให้ฉันล้างจาน|ล้าง|🍽️
+My mother does not allow me to *throw away* the toys.|แม่ไม่อนุญาตให้ฉันทิ้งของเล่น|ทิ้ง|🧸
+The bank manager allows the clerk to *count* the cash.|ผู้จัดการธนาคารอนุญาตให้พนักงานนับเงินสด|นับ|💵
+The bank manager does not allow the clerk to *lock* the vault.|ผู้จัดการธนาคารไม่อนุญาตให้พนักงานล็อกห้องนิรภัย|ล็อก|🔒`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(allow(?:s)?)\b( .*?)(?= to \*)/,(x,v,o)=>`<span class="rm">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>

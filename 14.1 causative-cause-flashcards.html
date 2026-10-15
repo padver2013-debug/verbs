@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>6.19 Causative Verb: CAUSE + Someone + TO V1</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--ink:#1d2433;--mut:#667085;--red:#8b0000;--hl:#ffe08a;--to:#d6e8ff;--line:#dfe4ee;--acc:#2f5fd0;--back:#eef4ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12151c;--card:#1c212c;--ink:#e8ecf4;--mut:#9aa5b8;--red:#ff8a8a;--hl:#5a4a10;--to:#1f3a63;--line:#2d3546;--acc:#7ea2ff;--back:#1a2540}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI","Noto Sans Thai",Tahoma,sans-serif}
+header{padding:22px 16px 6px;text-align:center}
+h1{margin:0;font-size:1.35rem}.sub{color:var(--mut);font-size:.9rem;margin-top:6px}
+.formula{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:.95rem}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 10px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:.95rem}
+.tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tools{text-align:center;color:var(--mut);font-size:.85rem;padding:0 10px}
+.tools button{margin-left:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px;max-width:1200px;margin:0 auto;padding:16px}
+.card{perspective:900px;height:250px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:.75rem;color:var(--mut)}
+.pic{font-size:2.3rem;letter-spacing:.2rem;margin-bottom:8px}.pic i{font-style:normal;font-size:1.2rem;color:var(--mut)}
+.en{font-size:1.1rem;line-height:1.6}
+.th{font-size:1.35rem;line-height:1.6;font-weight:600}
+.en2{margin-top:12px;font-size:.95rem;color:var(--mut);line-height:1.5;padding-top:10px;border-top:1px dashed var(--line);width:100%}
+.rm{color:var(--red);font-weight:800;background:var(--hl);padding:0 4px;border-radius:5px}
+.to{background:var(--to);border-radius:5px;padding:0 4px;font-weight:700}
+.v{position:relative;color:var(--red);font-weight:800;border-bottom:2px dotted var(--red);cursor:help}
+.v::after{content:attr(data-m);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#8b0000;color:#fff;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:.15s;z-index:5}
+.v:hover::after{opacity:1}
+.sp{position:absolute;bottom:10px;right:10px;border:none;background:var(--acc);color:#fff;border-radius:99px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.hint{position:absolute;bottom:14px;left:14px;font-size:.72rem;color:var(--mut)}
+.ob{background:var(--obg);border-radius:5px;padding:0 4px;font-weight:700;color:var(--obc)}
+:root{--obg:#d8f3dc;--obc:#14532d}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obg:#1d4a2e;--obc:#b7f0c8}}:root[data-theme="dark"]{--obg:#1d4a2e;--obc:#b7f0c8}
+</style></head><body>
+<header><h1>6.19 Causative Verb: <span class="rm">CAUSE</span> + <span class="ob">Someone/Something</span> + <span class="to">TO V1</span></h1>
+<div class="sub">ฝึกอ่านและแปลประโยค • เอาเมาส์ชี้ที่ V1 เพื่อดูความหมาย • คลิกการ์ดเพื่อดูคำแปล</div>
+<div class="formula">Subject + <b class="rm">cause(s)</b> + <b class="ob">someone/something</b> + <b class="to">to V1</b></div></header>
+<div class="tabs" id="tabs"></div>
+<div class="tools">ความเร็วเสียง: <button id="slow">ปกติ</button></div>
+<div class="grid" id="grid"></div>
+<script>
+const D=`I cause him to *worry*.|ฉันทำให้เขากังวล|กังวล|😟
+I do not cause her to *worry*.|ฉันไม่ได้ทำให้เธอกังวล|กังวล|😟
+She causes me to *laugh*.|เธอทำให้ฉันหัวเราะ|หัวเราะ|😂
+She does not cause me to *cry*.|เธอไม่ได้ทำให้ฉันร้องไห้|ร้องไห้|😢
+He causes his son to *smile*.|เขาทำให้ลูกชายยิ้ม|ยิ้ม|😊
+He does not cause his son to *feel* afraid.|เขาไม่ได้ทำให้ลูกชายรู้สึกกลัว|รู้สึก|😨
+The joke causes everyone to *laugh*.|เรื่องตลกทำให้ทุกคนหัวเราะ|หัวเราะ|🤣
+The joke does not cause anyone to *feel* uncomfortable.|เรื่องตลกไม่ได้ทำให้ใครรู้สึกอึดอัด|รู้สึก|😬
+The noise causes the baby to *wake up*.|เสียงดังทำให้ทารกตื่น|ตื่น|👶
+The noise does not cause the baby to *cry*.|เสียงดังไม่ได้ทำให้ทารกร้องไห้|ร้องไห้|😭
+The teacher causes the students to *think* carefully.|ครูทำให้นักเรียนคิดอย่างรอบคอบ|คิด|🤔
+The teacher does not cause the students to *worry*.|ครูไม่ได้ทำให้นักเรียนกังวล|กังวล|😟
+The news causes people to *panic*.|ข่าวทำให้ผู้คนตื่นตระหนก|ตื่นตระหนก|😱
+The news does not cause people to *change* their plans.|ข่าวไม่ได้ทำให้ผู้คนเปลี่ยนแผน|เปลี่ยน|🔁
+The rain causes the roads to *flood*.|ฝนทำให้ถนนเกิดน้ำท่วม|ท่วม|🌧️
+The rain does not cause the river to *overflow*.|ฝนไม่ได้ทำให้แม่น้ำเอ่อล้น|เอ่อล้น|🌊
+The accident causes traffic to *stop*.|อุบัติเหตุทำให้การจราจรหยุดชะงัก|หยุด|🚧
+The accident does not cause the road to *close*.|อุบัติเหตุไม่ได้ทำให้ถนนปิด|ปิด|⛔
+The heat causes the ice to *melt*.|ความร้อนทำให้น้ำแข็งละลาย|ละลาย|🧊
+The heat does not cause the food to *spoil*.|ความร้อนไม่ได้ทำให้อาหารเสีย|เสีย|🥗
+The cold weather causes the lake to *freeze*.|อากาศหนาวทำให้ทะเลสาบกลายเป็นน้ำแข็ง|กลายเป็นน้ำแข็ง|🥶
+The cold weather does not cause the pipes to *burst*.|อากาศหนาวไม่ได้ทำให้ท่อแตก|แตก|🚰
+The medicine causes the patient to *sleep*.|ยาทำให้คนไข้นอนหลับ|นอนหลับ|💊
+The medicine does not cause the patient to *feel* dizzy.|ยาไม่ได้ทำให้คนไข้รู้สึกเวียนหัว|รู้สึก|😵
+The exercise causes the heart to *beat* faster.|การออกกำลังกายทำให้หัวใจเต้นเร็วขึ้น|เต้น|❤️
+The exercise does not cause the body to *feel* weak.|การออกกำลังกายไม่ได้ทำให้ร่างกายรู้สึกอ่อนแอ|รู้สึก|🏋️
+The strong wind causes the trees to *move*.|ลมแรงทำให้ต้นไม้เคลื่อนไหว|เคลื่อนไหว|🌬️
+The strong wind does not cause the windows to *break*.|ลมแรงไม่ได้ทำให้หน้าต่างแตก|แตก|🪟
+The loud music causes people to *dance*.|เพลงเสียงดังทำให้ผู้คนเต้น|เต้น|💃
+The loud music does not cause the neighbors to *complain*.|เพลงเสียงดังไม่ได้ทำให้เพื่อนบ้านร้องเรียน|ร้องเรียน|📢
+His kindness causes people to *trust* him.|ความใจดีของเขาทำให้ผู้คนไว้วางใจเขา|ไว้วางใจ|🤝
+His kindness does not cause people to *feel* uncomfortable.|ความใจดีของเขาไม่ได้ทำให้ผู้คนรู้สึกอึดอัด|รู้สึก|🙂
+The problem causes us to *think* of a solution.|ปัญหาทำให้เราคิดหาทางแก้ไข|คิด|💡
+The problem does not cause us to *give up*.|ปัญหาไม่ได้ทำให้เรายอมแพ้|ยอมแพ้|🏳️
+The delay causes passengers to *wait* longer.|ความล่าช้าทำให้ผู้โดยสารต้องรอนานขึ้น|รอ|⏳
+The delay does not cause passengers to *miss* the flight.|ความล่าช้าไม่ได้ทำให้ผู้โดยสารพลาดเที่ยวบิน|พลาด|✈️
+The bright light causes the plant to *grow* faster.|แสงสว่างจ้าทำให้ต้นไม้เติบโตเร็วขึ้น|เติบโต|🌱
+The bright light does not cause the plant to *die*.|แสงสว่างจ้าไม่ได้ทำให้ต้นไม้ตาย|ตาย|🥀
+The alarm causes me to *wake up* early.|นาฬิกาปลุกทำให้ฉันตื่นแต่เช้า|ตื่น|⏰
+The alarm does not cause me to *hurry*.|นาฬิกาปลุกไม่ได้ทำให้ฉันรีบ|รีบ|🏃
+The smoke causes people to *cough*.|ควันทำให้ผู้คนไอ|ไอ|😷
+The smoke does not cause the alarm to *ring*.|ควันไม่ได้ทำให้สัญญาณเตือนดัง|ดัง|🔔
+The spicy food causes him to *sweat*.|อาหารเผ็ดทำให้เขาเหงื่อออก|เหงื่อออก|💦
+The spicy food does not cause her to *choke*.|อาหารเผ็ดไม่ได้ทำให้เธอสำลัก|สำลัก|😣
+The storm causes the power to *fail*.|พายุทำให้ไฟฟ้าดับ|ขัดข้อง|⚡
+The storm does not cause the sea to *rise*.|พายุไม่ได้ทำให้ระดับน้ำทะเลสูงขึ้น|สูงขึ้น|🌊
+The earthquake causes buildings to *shake*.|แผ่นดินไหวทำให้อาคารสั่น|สั่น|🏢
+The earthquake does not cause the bridge to *fall*.|แผ่นดินไหวไม่ได้ทำให้สะพานถล่ม|ถล่ม|🌉
+The sun causes the flowers to *bloom*.|แสงแดดทำให้ดอกไม้บาน|บาน|🌸
+The sun does not cause the leaves to *fall*.|แสงแดดไม่ได้ทำให้ใบไม้ร่วง|ร่วง|🍂
+The sad movie causes the audience to *cry*.|หนังเศร้าทำให้ผู้ชมร้องไห้|ร้องไห้|🎬
+The sad movie does not cause the children to *scream*.|หนังเศร้าไม่ได้ทำให้เด็ก ๆ กรีดร้อง|กรีดร้อง|😱
+The speech causes the team to *believe* in themselves.|คำปราศรัยทำให้ทีมเชื่อมั่นในตัวเอง|เชื่อ|💪
+The speech does not cause the players to *argue*.|คำปราศรัยไม่ได้ทำให้นักกีฬาทะเลาะกัน|ทะเลาะ|🗯️
+The price increase causes customers to *complain*.|การขึ้นราคาทำให้ลูกค้าบ่น|บ่น|😠
+The price increase does not cause shops to *close*.|การขึ้นราคาไม่ได้ทำให้ร้านค้าปิด|ปิด|🏪
+The lack of sleep causes students to *feel* tired.|การนอนไม่พอทำให้นักเรียนรู้สึกเหนื่อย|รู้สึก|🥱
+The lack of sleep does not cause students to *fail*.|การนอนไม่พอไม่ได้ทำให้นักเรียนสอบตก|ตก/ล้มเหลว|📉
+The new rule causes drivers to *slow down*.|กฎใหม่ทำให้คนขับชะลอความเร็ว|ชะลอ|🐢
+The new rule does not cause the police to *stop* cars.|กฎใหม่ไม่ได้ทำให้ตำรวจหยุดรถ|หยุด|🚓
+The gift causes her to *blush*.|ของขวัญทำให้เธอหน้าแดง|หน้าแดง|🎁
+The gift does not cause him to *forget* the problem.|ของขวัญไม่ได้ทำให้เขาลืมปัญหา|ลืม|🙃
+The virus causes the computer to *crash*.|ไวรัสทำให้คอมพิวเตอร์ล่ม|ล่ม|💻
+The virus does not cause the data to *disappear*.|ไวรัสไม่ได้ทำให้ข้อมูลหายไป|หายไป|💾
+The fire causes the people to *run*.|ไฟไหม้ทำให้ผู้คนวิ่งหนี|วิ่ง|🔥
+The fire does not cause the building to *collapse*.|ไฟไหม้ไม่ได้ทำให้อาคารพังทลาย|พังทลาย|🏚️
+The speech causes the crowd to *cheer*.|คำปราศรัยทำให้ฝูงชนส่งเสียงเชียร์|เชียร์|📣
+The speech does not cause anyone to *leave*.|คำปราศรัยไม่ได้ทำให้ใครออกไป|ออกไป|🚪
+The perfume causes me to *remember* my mother.|น้ำหอมทำให้ฉันนึกถึงแม่|จำ/นึกถึง|🌸
+The perfume does not cause my eyes to *itch*.|น้ำหอมไม่ได้ทำให้ตาของฉันคัน|คัน|👁️
+The medicine causes the fever to *drop*.|ยาทำให้ไข้ลดลง|ลดลง|🌡️
+The medicine does not cause the pain to *increase*.|ยาไม่ได้ทำให้อาการปวดเพิ่มขึ้น|เพิ่ม|📈
+The wind causes the kite to *fly*.|ลมทำให้ว่าวลอย|บิน|🪁
+The wind does not cause the boat to *sink*.|ลมไม่ได้ทำให้เรือจม|จม|⛵
+The magnet causes the metal to *move*.|แม่เหล็กทำให้โลหะเคลื่อนที่|เคลื่อนที่|🧲
+The magnet does not cause the glass to *break*.|แม่เหล็กไม่ได้ทำให้แก้วแตก|แตก|🥛
+The praise causes the boy to *study* harder.|คำชมทำให้เด็กชายขยันเรียนขึ้น|เรียน|🏅
+The praise does not cause him to *brag*.|คำชมไม่ได้ทำให้เขาโอ้อวด|โอ้อวด|🗣️
+The coffee causes me to *stay* awake.|กาแฟทำให้ฉันตื่นอยู่|คงอยู่|☕
+The coffee does not cause me to *sleep* well.|กาแฟไม่ได้ทำให้ฉันหลับสบาย|นอนหลับ|😴
+The traffic jam causes workers to *arrive* late.|รถติดทำให้คนงานมาถึงสาย|มาถึง|🚗
+The traffic jam does not cause the meeting to *start* late.|รถติดไม่ได้ทำให้การประชุมเริ่มช้า|เริ่ม|🕘
+The sale causes shoppers to *rush* into the store.|การลดราคาทำให้ผู้ซื้อแห่เข้าร้าน|แห่/รีบ|🛍️
+The sale does not cause the staff to *panic*.|การลดราคาไม่ได้ทำให้พนักงานตื่นตระหนก|ตื่นตระหนก|😰
+The flood causes villagers to *leave* their homes.|น้ำท่วมทำให้ชาวบ้านทิ้งบ้านของตน|ทิ้ง/ออกจาก|🏠
+The flood does not cause the well to *dry up*.|น้ำท่วมไม่ได้ทำให้บ่อน้ำแห้ง|แห้ง|🏜️
+The bad smell causes guests to *cover* their noses.|กลิ่นเหม็นทำให้แขกปิดจมูก|ปิด|👃
+The bad smell does not cause the cook to *stop*.|กลิ่นเหม็นไม่ได้ทำให้พ่อครัวหยุด|หยุด|🍳
+The long walk causes my legs to *hurt*.|การเดินไกลทำให้ขาของฉันปวด|ปวด|🦵
+The long walk does not cause my feet to *swell*.|การเดินไกลไม่ได้ทำให้เท้าของฉันบวม|บวม|🦶
+The competition causes athletes to *train* harder.|การแข่งขันทำให้นักกีฬาฝึกซ้อมหนักขึ้น|ฝึก|🏆
+The competition does not cause them to *quit*.|การแข่งขันไม่ได้ทำให้พวกเขาเลิก|เลิก|🛑
+The project causes the team to *work* overtime.|โครงการทำให้ทีมทำงานล่วงเวลา|ทำงาน|🕒
+The project does not cause the manager to *resign*.|โครงการไม่ได้ทำให้ผู้จัดการลาออก|ลาออก|📤
+The good news causes the family to *celebrate*.|ข่าวดีทำให้ครอบครัวฉลอง|ฉลอง|🎉
+The good news does not cause them to *doubt* the report.|ข่าวดีไม่ได้ทำให้พวกเขาสงสัยรายงาน|สงสัย|🤨
+The warm milk causes the baby to *relax*.|นมอุ่นทำให้ทารกผ่อนคลาย|ผ่อนคลาย|🍼
+The warm milk does not cause the baby to *vomit*.|นมอุ่นไม่ได้ทำให้ทารกอาเจียน|อาเจียน|🤢
+The new law causes companies to *pay* more tax.|กฎหมายใหม่ทำให้บริษัทจ่ายภาษีมากขึ้น|จ่าย|⚖️
+The new law does not cause workers to *lose* their jobs.|กฎหมายใหม่ไม่ได้ทำให้คนงานสูญเสียงาน|สูญเสีย|📉`.split("\n").map(l=>l.split("|"));
+const TABS=5,PER=20;let cur=0,rate=.9;
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid");
+for(let i=0;i<TABS;i++){const b=document.createElement("button");b.className="tab";b.textContent=`Tab ${i+1} (${i*PER+1}–${(i+1)*PER})`;b.onclick=()=>{cur=i;render()};tabs.appendChild(b)}
+function hl(en,m){return en.replace(/\b(cause(?:s)?)\b( .*?)(?= to \*)/,(x,v,o)=>`<span class="rm">${v}</span> <span class="ob">${o.trim()}</span>`).replace(/to \*(.+?)\*/,`<span class="to">to <span class="v" data-m="${m}">$1</span></span>`)}
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));const pref=[/Natural/i,/Google US English/i,/Aria|Jenny|Guy/i,/Samantha|Ava|Allison/i,/Google UK English/i,/en-US/i];for(const p of pref){const v=vs.find(v=>p.test(v.name)||p.test(v.lang));if(v){voice=v;return}}voice=vs[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+document.getElementById("slow").onclick=e=>{rate=rate===.9?.65:.9;e.target.textContent=rate===.9?"ปกติ":"ช้า (ชัดมาก)"};
+function render(){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i===cur));grid.innerHTML="";
+D.slice(cur*PER,(cur+1)*PER).forEach((r,k)=>{const[en,th,m,em]=r,plain=en.replace(/\*/g,"");
+const c=document.createElement("div");c.className="card";
+c.innerHTML=`<div class="in"><div class="f"><span class="n">#${cur*PER+k+1}</span><div class="pic">🗣️<i>→</i>${em}</div><div class="en">${hl(en,m)}</div><span class="hint">คลิกเพื่อพลิกการ์ด</span><button class="sp" title="ฟังเสียง">🔊</button></div><div class="f b"><span class="n">#${cur*PER+k+1}</span><div class="th">${th}</div><div class="en2">${plain}</div><button class="sp" title="ฟังเสียง">🔊</button></div></div>`;
+c.onclick=()=>c.classList.toggle("flip");
+c.querySelectorAll(".sp").forEach(s=>s.onclick=e=>{e.stopPropagation();say(plain)});
+grid.appendChild(c)});window.scrollTo({top:0})}
+render();
+</script></body></html>
