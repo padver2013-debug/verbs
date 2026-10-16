@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>to + V1 / V-ing (meaning change)</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#ddd6c8;--ac:#1f5f8b;--hl:#fff1a8;--mv:#8b0000;--back:#e8f1f8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16181b;--card:#22262b;--tx:#eee;--mu:#9aa0a6;--bd:#3a4047;--ac:#6db3e0;--hl:#5a4a00;--mv:#ff6b6b;--back:#1d2f3d}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Calibri,Carlito,"Sarabun",sans-serif;padding:16px}
+h1{font-size:22px;margin:4px 0}p.s{color:var(--mu);margin:0 0 12px;font-size:14px}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:14px;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{height:280px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:12px;color:var(--mu)}
+.em{display:flex;gap:18px;margin-top:8px}.em div{font-size:40px;line-height:1}.em small{display:block;font-size:11px;color:var(--mu);margin-top:2px}
+.en{font-size:19px;font-weight:500}.th,td:nth-child(3),.v1:hover::after{font-family:"Sarabun","Noto Sans Thai",sans-serif}.th{font-size:20px;font-weight:600}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+.mv{color:var(--mv);font-weight:800}
+.v1{border-bottom:2px dotted var(--ac);cursor:help;position:relative;font-weight:600}
+.v1:hover::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:2px 9px;border-radius:6px;font-size:13px;white-space:nowrap;z-index:9;font-weight:400}
+.sp{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.bd{position:absolute;top:8px;right:12px;font-size:11px;background:var(--hl);border-radius:10px;padding:0 8px}.hint{font-size:11px;color:var(--mu)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:var(--back)}
+</style></head><body>
+<h1>Catenative Verbs + to + V1 หรือ V-ing (ความหมายเปลี่ยน) · ชุดที่ 4</h1>
+<p class="s">คลิกการ์ดเพื่อพลิกดูคำแปล · ชี้เมาส์ที่ V1 / V-ing เพื่อดูความหมาย · กด 🔊 เพื่อฟังเสียง</p>
+<div class="formula"><b class="mv">Catenative Verb</b> + <b>to + V1</b> หรือ <b>V-ing</b> (ความหมายเปลี่ยน)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="tw"><table><thead><tr><th>ข้อ</th><th>ประโยค</th><th>แปล</th><th>Catenative Verb + to + V1 / V-ing</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`I remembered to lock the door.|ฉันจำได้ว่าต้องล็อกประตู|remembered|lock|ล็อก|🧠,🔒
+I remember locking the door.|ฉันจำได้ว่าล็อกประตูแล้ว|remember|locking|ล็อก|🧠,🔒
+She remembered to call her mother.|เธอจำได้ว่าต้องโทรหาแม่|remembered|call|โทร|🧠,📞
+She remembers calling her mother.|เธอจำได้ว่าเคยโทรหาแม่แล้ว|remembers|calling|โทร|🧠,📞
+They forgot to bring their tickets.|พวกเขาลืมนำตั๋วมาด้วย|forgot|bring|นำมา|🤯,🎫
+They forgot bringing their tickets.|พวกเขาจำไม่ได้ว่าเคยนำตั๋วมาหรือไม่|forgot|bringing|นำมา|🤯,🎫
+We forgot to pay the bill.|พวกเราลืมจ่ายเงิน|forgot|pay|จ่าย|🤯,💵
+We forgot paying the bill yesterday.|พวกเราจำไม่ได้ว่าเมื่อวานได้จ่ายเงินแล้ว|forgot|paying|จ่าย|🤯,💵
+He regrets to inform you that you failed.|เขาเสียใจที่ต้องแจ้งว่าคุณสอบไม่ผ่าน|regrets|inform|แจ้ง|😔,📢
+I remembered to bring my passport.|ฉันจำได้ว่าต้องนำหนังสือเดินทางมา|remembered|bring|นำมา|🧠,🛂
+I remember bringing my passport.|ฉันจำได้ว่าได้นำหนังสือเดินทางมาแล้ว|remember|bringing|นำมา|🧠,🛂
+She forgot to lock the front door.|เธอลืมล็อกประตูหน้าบ้าน|forgot|lock|ล็อก|🤯,🔒
+She forgot locking the front door.|เธอจำไม่ได้ว่าได้ล็อกประตูหน้าบ้านแล้ว|forgot|locking|ล็อก|🤯,🔒
+They regret to announce the flight delay.|พวกเขาเสียใจที่ต้องประกาศว่าเที่ยวบินล่าช้า|regret|announce|ประกาศ|😔,✈️
+They regret announcing the decision too early.|พวกเขาเสียใจที่ประกาศการตัดสินใจเร็วเกินไป|regret|announcing|ประกาศ|😔,📢
+We stopped to buy some snacks.|พวกเราหยุดเพื่อซื้อของว่าง|stopped|buy|ซื้อ|✋,🛒
+We stopped buying bottled water.|พวกเราเลิกซื้อน้ำดื่มบรรจุขวด|stopped|buying|ซื้อ|✋,🧴
+He tried to solve the puzzle.|เขาพยายามแก้ปริศนา|tried|solve|แก้|💪,🧩
+He tried solving the puzzle another way.|เขาลองแก้ปริศนาด้วยอีกวิธีหนึ่ง|tried|solving|แก้|🧪,🧩
+I meant to call you yesterday.|ฉันตั้งใจจะโทรหาคุณเมื่อวาน|meant|call|โทร|🎯,📞
+Being a leader means making difficult decisions.|การเป็นผู้นำหมายถึงการตัดสินใจเรื่องยาก ๆ|means|making|ทำ/ตัดสิน|💭,⚖️
+She went on to study law.|ต่อมาเธอไปเรียนกฎหมาย|went on|study|เรียน|➡️,⚖️
+She went on studying until midnight.|เธอเรียนต่อจนถึงเที่ยงคืน|went on|studying|เรียน|➡️,📚
+The bicycle needs to be repaired.|จักรยานคันนี้ต้องถูกซ่อม|needs|repaired|ซ่อม|❗,🔧
+The bicycle needs repairing.|จักรยานคันนี้ต้องซ่อม|needs|repairing|ซ่อม|❗,🚲
+We remembered to turn off the air conditioner.|พวกเราจำได้ว่าต้องปิดเครื่องปรับอากาศ|remembered|turn|ปิด|🧠,❄️
+We remember turning off the air conditioner.|พวกเราจำได้ว่าปิดเครื่องปรับอากาศแล้ว|remember|turning|ปิด|🧠,❄️
+He forgot to print the document.|เขาลืมพิมพ์เอกสาร|forgot|print|พิมพ์|🤯,🖨️
+He forgot printing the document yesterday.|เขาจำไม่ได้ว่าเมื่อวานได้พิมพ์เอกสารแล้ว|forgot|printing|พิมพ์|🤯,🖨️
+I regret to inform you that your application was unsuccessful.|ฉันเสียใจที่ต้องแจ้งว่าการสมัครของคุณไม่ผ่าน|regret|inform|แจ้ง|😔,📩
+I regret wasting so much time.|ฉันเสียใจที่เสียเวลาไปมาก|regret|wasting|เสีย/สิ้นเปลือง|😔,⌛
+They stopped to rest after hiking.|พวกเขาหยุดเพื่อพักหลังเดินป่า|stopped|rest|พัก|✋,🛋️
+They stopped resting and continued walking.|พวกเขาหยุดพักแล้วเดินต่อ|stopped|resting|พัก|✋,🚶
+She tried to lift the heavy box.|เธอพยายามยกกล่องหนัก|tried|lift|ยก|💪,📦
+She tried lifting the box with both hands.|เธอลองยกกล่องด้วยสองมือ|tried|lifting|ยก|🧪,🙌
+We meant to arrive early.|พวกเราตั้งใจจะมาถึงแต่เช้า|meant|arrive|มาถึง|🎯,⏰
+Arriving late means losing points.|การมาสายหมายถึงการเสียคะแนน|means|losing|เสีย|💭,📉
+He went on to become a successful engineer.|ต่อมาเขากลายเป็นวิศวกรที่ประสบความสำเร็จ|went on|become|กลายเป็น|➡️,👷
+He went on talking despite the interruption.|เขาพูดต่อแม้จะถูกขัดจังหวะ|went on|talking|พูด|➡️,🗣️
+The windows need to be cleaned.|หน้าต่างต้องถูกทำความสะอาด|need|cleaned|ทำความสะอาด|❗,🧼
+The windows need cleaning.|หน้าต่างต้องทำความสะอาด|need|cleaning|ทำความสะอาด|❗,🪟
+She remembered to feed the cat.|เธอจำได้ว่าต้องให้อาหารแมว|remembered|feed|ให้อาหาร|🧠,🐱
+She remembers feeding the cat this morning.|เธอจำได้ว่าให้อาหารแมวเมื่อเช้านี้แล้ว|remembers|feeding|ให้อาหาร|🧠,🐱
+We forgot to book the hotel.|พวกเราลืมจองโรงแรม|forgot|book|จอง|🤯,🏨
+We forgot booking the hotel online.|พวกเราจำไม่ได้ว่าได้จองโรงแรมออนไลน์แล้ว|forgot|booking|จอง|🤯,💻
+They regret to cancel the event.|พวกเขาเสียใจที่ต้องยกเลิกงาน|regret|cancel|ยกเลิก|😔,❌
+They regret canceling the event last week.|พวกเขาเสียใจที่ยกเลิกงานเมื่อสัปดาห์ที่แล้ว|regret|canceling|ยกเลิก|😔,❌
+I stopped to answer the phone.|ฉันหยุดเพื่อรับโทรศัพท์|stopped|answer|รับ/ตอบ|✋,📱
+I stopped answering unknown numbers.|ฉันเลิกรับสายจากเบอร์ที่ไม่รู้จัก|stopped|answering|รับ/ตอบ|✋,☎️
+He tried to remember the password.|เขาพยายามจำรหัสผ่าน|tried|remember|จำ|💪,🔑
+He tried remembering the password by writing hints.|เขาลองนึกถึงรหัสผ่านโดยเขียนคำใบ้|tried|remembering|นึกถึง|🧪,📝
+She meant to send the email yesterday.|เธอตั้งใจจะส่งอีเมลเมื่อวาน|meant|send|ส่ง|🎯,📧
+Success means working consistently.|ความสำเร็จหมายถึงการทำงานอย่างสม่ำเสมอ|means|working|ทำงาน|💭,💼
+We went on to explain the next topic.|พวกเราอธิบายหัวข้อถัดไปต่อ|went on|explain|อธิบาย|➡️,🧑‍🏫
+We went on explaining until everyone understood.|พวกเราอธิบายต่อจนทุกคนเข้าใจ|went on|explaining|อธิบาย|➡️,💡
+This computer needs to be updated.|คอมพิวเตอร์เครื่องนี้ต้องได้รับการอัปเดต|needs|updated|อัปเดต|❗,🔄
+This computer needs updating.|คอมพิวเตอร์เครื่องนี้ต้องอัปเดต|needs|updating|อัปเดต|❗,💻
+They remembered to thank the volunteers.|พวกเขาจำได้ว่าต้องขอบคุณอาสาสมัคร|remembered|thank|ขอบคุณ|🧠,🙏
+They remember thanking the volunteers after the event.|พวกเขาจำได้ว่าได้ขอบคุณอาสาสมัครหลังงานแล้ว|remember|thanking|ขอบคุณ|🧠,🙏
+He regrets telling the secret.|เขาเสียใจที่บอกความลับ|regrets|telling|บอก|😔,🤫
+I regret to say that I can't come.|ฉันเสียใจที่ต้องบอกว่าฉันมาไม่ได้|regret|say|บอก|😔,💬
+I regret saying those words.|ฉันเสียใจที่พูดคำเหล่านั้น|regret|saying|พูด|😔,💬
+She stopped to drink some water.|เธอหยุดเพื่อดื่มน้ำ|stopped|drink|ดื่ม|✋,💧
+She stopped drinking coffee.|เธอเลิกดื่มกาแฟ|stopped|drinking|ดื่ม|✋,☕
+They stopped to rest for a while.|พวกเขาหยุดเพื่อพัก|stopped|rest|พัก|✋,🛋️
+They stopped resting and continued walking.|พวกเขาหยุดพักและเดินต่อ|stopped|resting|พัก|✋,🚶
+We tried to solve the problem.|พวกเราพยายามแก้ปัญหา|tried|solve|แก้|💪,🧩
+We tried solving the problem another way.|พวกเราลองแก้ปัญหาด้วยอีกวิธีหนึ่ง|tried|solving|แก้|🧪,🧩
+He tried to open the window.|เขาพยายามเปิดหน้าต่าง|tried|open|เปิด|💪,🪟
+He tried opening the window with a key.|เขาลองเปิดหน้าต่างด้วยกุญแจ|tried|opening|เปิด|🧪,🔑
+I didn't mean to hurt you.|ฉันไม่ได้ตั้งใจทำร้ายคุณ|mean|hurt|ทำร้าย|🎯,💔
+Being a doctor means working hard.|การเป็นหมอหมายถึงการทำงานหนัก|means|working|ทำงาน|💭,🩺
+She didn't mean to offend anyone.|เธอไม่ได้ตั้งใจทำให้ใครไม่พอใจ|mean|offend|ทำให้ไม่พอใจ|🎯,😠
+Success means studying regularly.|ความสำเร็จหมายถึงการเรียนอย่างสม่ำเสมอ|means|studying|เรียน|💭,📚
+They went on to explain the details.|พวกเขาอธิบายรายละเอียดต่อไป|went on|explain|อธิบาย|➡️,🧑‍🏫
+They went on explaining for an hour.|พวกเขาอธิบายต่อเนื่องเป็นเวลาหนึ่งชั่วโมง|went on|explaining|อธิบาย|➡️,⏱️
+We went on to discuss the budget.|พวกเราไปคุยเรื่องงบประมาณต่อ|went on|discuss|หารือ|➡️,💰
+We went on discussing the same issue.|พวกเราคุยเรื่องเดิมต่อไป|went on|discussing|หารือ|➡️,💬
+The car needs to be washed.|รถคันนี้ต้องถูกล้าง|needs|washed|ล้าง|❗,🚗
+The car needs washing.|รถคันนี้ต้องล้าง|needs|washing|ล้าง|❗,🚿
+The room needs to be cleaned.|ห้องนี้ต้องถูกทำความสะอาด|needs|cleaned|ทำความสะอาด|❗,🧹
+The room needs cleaning.|ห้องนี้ต้องทำความสะอาด|needs|cleaning|ทำความสะอาด|❗,🛏️
+I remembered to email my teacher.|ฉันจำได้ว่าต้องส่งอีเมลถึงครู|remembered|email|ส่งอีเมล|🧠,📧
+I remember emailing my teacher yesterday.|ฉันจำได้ว่าส่งอีเมลถึงครูเมื่อวานแล้ว|remember|emailing|ส่งอีเมล|🧠,📧
+She forgot to lock her bike.|เธอลืมล็อกจักรยาน|forgot|lock|ล็อก|🤯,🚲
+She forgot locking her bike.|เธอจำไม่ได้ว่าได้ล็อกจักรยานแล้ว|forgot|locking|ล็อก|🤯,🔒
+They regret to announce the cancellation.|พวกเขาเสียใจที่ต้องประกาศการยกเลิก|regret|announce|ประกาศ|😔,📢
+They regret buying that old car.|พวกเขาเสียใจที่ซื้อรถเก่าคันนั้น|regret|buying|ซื้อ|😔,🚙
+We stopped to eat lunch.|พวกเราหยุดเพื่อกินอาหารกลางวัน|stopped|eat|กิน|✋,🍽️
+We stopped eating junk food.|พวกเราเลิกกินอาหารขยะ|stopped|eating|กิน|✋,🍟
+He tried to remember her name.|เขาพยายามจำชื่อเธอ|tried|remember|จำ|💪,🧠
+He tried remembering her phone number.|เขาลองนึกเบอร์โทรของเธอ|tried|remembering|นึกถึง|🧪,📱
+I meant to help you.|ฉันตั้งใจจะช่วยคุณ|meant|help|ช่วย|🎯,🤲
+Helping others means caring for people.|การช่วยผู้อื่นหมายถึงการเอาใจใส่ผู้คน|means|caring|เอาใจใส่|💭,💖
+She went on to become a famous writer.|ต่อมาเธอกลายเป็นนักเขียนชื่อดัง|went on|become|กลายเป็น|➡️,✍️
+She went on talking until midnight.|เธอพูดต่อจนถึงเที่ยงคืน|went on|talking|พูด|➡️,🗣️
+This machine needs to be repaired.|เครื่องนี้ต้องถูกซ่อม|needs|repaired|ซ่อม|❗,🔧
+This machine needs repairing.|เครื่องนี้ต้องซ่อม|needs|repairing|ซ่อม|❗,⚙️
+We remembered to thank everyone.|พวกเราจำได้ว่าต้องขอบคุณทุกคน|remembered|thank|ขอบคุณ|🧠,🙏
+We remember thanking everyone after the event.|พวกเราจำได้ว่าได้ขอบคุณทุกคนหลังงานแล้ว|remember|thanking|ขอบคุณ|🧠,🙏`.split("\n").map((l,i)=>{const[e,t,c,v,vt,m]=l.split("|");return{i:i+1,e,t,c,v,vt,m:m.split(",")}});
+function pt(o){const e=o.e.toLowerCase(),c=o.c.toLowerCase(),v=o.v.toLowerCase();for(const p of[" to be "," to "])if(e.includes(c+p+v))return p;return" "}
+const NT={remember:["จำได้ว่า 'ต้องทำ' (ยังไม่ได้ทำ)","จำได้ว่า 'เคยทำไปแล้ว'"],forg:["ลืมทำ (จึงไม่ได้ทำ)","จำไม่ได้ว่าเคยทำไปแล้ว"],regret:["เสียใจที่ 'ต้องทำ' (แจ้งข่าวร้าย)","เสียใจที่ 'ทำไปแล้ว'"],stop:["หยุด 'เพื่อไปทำ' อย่างอื่น","เลิก/หยุดทำสิ่งนั้น"],tri:["พยายามทำ (อาจไม่สำเร็จ)","ลองทำดู (เป็นวิธีทดลอง)"],mean:["ตั้งใจจะทำ","หมายถึง / ส่งผลให้เป็น"],goon:["ทำสิ่งใหม่ต่อจากสิ่งก่อนหน้า","ทำสิ่งเดิมต่อเนื่องไป"],need:["ต้องถูกทำ (to be + V3)","ต้องถูกทำ (V-ing ความหมายเดียวกัน)"]};
+function nt(o){const c=o.c.toLowerCase(),k=c.startsWith("went on")?"goon":(c.match(/^(remember|forg|regret|stop|tri|mean|need)/)||[])[1],a=NT[k];if(!a)return"";return pt(o)==" "?a[1]:a[0]}
+function hl(o){const p=pt(o),k=o.c+p+o.v,x=o.e.toLowerCase().indexOf(k.toLowerCase());if(x<0)return o.e;
+return o.e.slice(0,x)+`<mark><span class="mv">${o.e.substr(x,o.c.length)}</span>${p}<span class="v1" data-t="${o.vt}">${o.v}</span></mark>`+o.e.slice(x+k.length)}
+let voice=null;function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang));
+const pref=[/natural/i,/google us english/i,/aria|jenny|guy/i,/samantha|ava|allison/i,/google/i,/en[-_]US/i];
+for(const p of pref){const f=vs.find(v=>p.test(v.name)||p.test(v.lang));if(f){voice=f;return}}voice=vs[0]||null}
+if("speechSynthesis"in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,ev){ev.stopPropagation();if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),tb=document.getElementById("tb");
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i==n));const L=D.slice(n*20,n*20+20);
+grid.innerHTML=L.map(o=>`<div class="fc" onclick="this.classList.toggle('flip')"><div class="in">
+<div class="f"><span class="n">#${o.i}</span><span class="bd">${pt(o)==" to "?"to + V1":pt(o)==" "?"V-ing":"to be + V3"}</span><div class="em"><div>${o.m[0]}<small>${o.c}</small></div><div>${o.m[1]}<small>${o.v}</small></div></div>
+<div class="en">${hl(o)}</div><div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button> <span class="hint">คลิกเพื่อพลิก</span></div></div>
+<div class="f b"><span class="n">#${o.i}</span><span class="bd">${pt(o)==" to "?"to + V1":pt(o)==" "?"V-ing":"to be + V3"}</span><div class="th" style="margin-top:22px">${o.t}</div><div class="hint" style="font-size:13px;color:var(--ac)">💡 ${nt(o)}</div>
+<div class="en" style="font-size:16px">${hl(o)}</div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button></div></div></div>`).join("");
+tb.innerHTML=L.map(o=>`<tr><td>${o.i}</td><td>${o.e}</td><td>${o.t}</td><td><mark><span class="mv">${o.c}</span>${pt(o)}<b>${o.v}</b></mark></td></tr>`).join("")}
+for(let i=0;i<5;i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);tabs.append(b)}
+show(0);
+</script></body></html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Verb + Object + to V1 Flashcards</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#ddd6c8;--ac:#1f5f8b;--hl:#fff1a8;--mv:#8b0000;--back:#e8f1f8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16181b;--card:#22262b;--tx:#eee;--mu:#9aa0a6;--bd:#3a4047;--ac:#6db3e0;--hl:#5a4a00;--mv:#ff6b6b;--back:#1d2f3d}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Calibri,Carlito,"Sarabun",sans-serif;padding:16px}
+h1{font-size:22px;margin:4px 0}p.s{color:var(--mu);margin:0 0 12px;font-size:14px}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:14px;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{height:280px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:12px;color:var(--mu)}
+.em{display:flex;gap:18px;margin-top:8px}.em div{font-size:40px;line-height:1}.em small{display:block;font-size:11px;color:var(--mu);margin-top:2px}
+.en{font-size:19px;font-weight:500}.th,td:nth-child(3),.v1:hover::after{font-family:"Sarabun","Noto Sans Thai",sans-serif}.th{font-size:20px;font-weight:600}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+.mv{color:var(--mv);font-weight:800}
+.v1{border-bottom:2px dotted var(--ac);cursor:help;position:relative;font-weight:600}
+.v1:hover::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:2px 9px;border-radius:6px;font-size:13px;white-space:nowrap;z-index:9;font-weight:400}
+.sp{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.bd{position:absolute;top:8px;right:12px;font-size:11px;background:var(--hl);border-radius:10px;padding:0 8px}.ob{color:var(--ac);font-weight:600}.hint{font-size:11px;color:var(--mu)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:var(--back)}
+</style></head><body>
+<h1>Catenative Verb + Object + to V1 · Flashcards ชุดที่ 5</h1>
+<p class="s">คลิกการ์ดเพื่อพลิกดูคำแปล · ชี้เมาส์ที่ V1 เพื่อดูความหมาย · กด 🔊 เพื่อฟังเสียง</p>
+<div class="formula"><b class="mv">Catenative Verb</b> + <b class="ob">Object</b> + <b>to V1</b></div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="tw"><table><thead><tr><th>ข้อ</th><th>ประโยค</th><th>แปล</th><th>Catenative Verb + Object + to + V1</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`I advised him to study harder.|ฉันแนะนำให้เขาเรียนให้หนักขึ้น|advised|study|เรียน|💡,📚
+She asked me to help her.|เธอขอให้ฉันช่วยเธอ|asked|help|ช่วย|🙋,🤲
+They encouraged us to join the club.|พวกเขาสนับสนุนให้พวกเราเข้าชมรม|encouraged|join|เข้าร่วม|💪,👥
+We invited them to attend the meeting.|พวกเราเชิญพวกเขาเข้าร่วมการประชุม|invited|attend|เข้าร่วม|💌,🎤
+He persuaded me to apply for the job.|เขาโน้มน้าวให้ฉันสมัครงาน|persuaded|apply|สมัคร|🗣️,📝
+I reminded her to call her mother.|ฉันเตือนเธอให้โทรหาแม่|reminded|call|โทร|⏰,📞
+She told him to wait outside.|เธอบอกให้เขารอข้างนอก|told|wait|รอ|📢,⏳
+They warned us to be careful.|พวกเขาเตือนให้พวกเราระมัดระวัง|warned|be|เป็น/ระวัง|⚠️,👀
+We expected him to arrive early.|พวกเราคาดหวังว่าเขาจะมาถึงแต่เช้า|expected|arrive|มาถึง|🔮,⏰
+The teacher allowed the students to leave early.|ครูอนุญาตให้นักเรียนกลับก่อน|allowed|leave|ออกไป|✅,🚪
+I advised my brother to wear a jacket.|ฉันแนะนำให้น้องชายสวมเสื้อแจ็กเก็ต|advised|wear|สวมใส่|💡,🧥
+She asked her friend to come early.|เธอขอให้เพื่อนมาถึงแต่เช้า|asked|come|มา|🙋,🚶
+They encouraged the children to read every day.|พวกเขาสนับสนุนให้เด็ก ๆ อ่านหนังสือทุกวัน|encouraged|read|อ่าน|💪,📖
+We invited our neighbors to join the party.|พวกเราเชิญเพื่อนบ้านมาร่วมงานเลี้ยง|invited|join|เข้าร่วม|💌,🎉
+He persuaded his wife to accept the offer.|เขาโน้มน้าวภรรยาให้ยอมรับข้อเสนอ|persuaded|accept|ยอมรับ|🗣️,🤝
+I reminded my father to take his medicine.|ฉันเตือนพ่อให้กินยา|reminded|take|กิน|⏰,💊
+She told her son to clean his room.|เธอบอกลูกชายให้ทำความสะอาดห้อง|told|clean|ทำความสะอาด|📢,🧹
+They warned the tourists to stay on the path.|พวกเขาเตือนนักท่องเที่ยวให้อยู่บนเส้นทาง|warned|stay|อยู่|⚠️,🥾
+We expected the guests to arrive before noon.|พวกเราคาดหวังว่าแขกจะมาถึงก่อนเที่ยง|expected|arrive|มาถึง|🔮,🛎️
+The coach allowed the players to rest for ten minutes.|โค้ชอนุญาตให้นักกีฬาพักสิบนาที|allowed|rest|พัก|✅,🛋️
+My parents encouraged me to pursue my dreams.|พ่อแม่สนับสนุนให้ฉันทำตามความฝัน|encouraged|pursue|ไล่ตาม|💪,🌟
+The manager ordered the workers to stop immediately.|ผู้จัดการสั่งให้คนงานหยุดทันที|ordered|stop|หยุด|🫡,🛑
+I invited my classmates to study together.|ฉันชวนเพื่อนร่วมชั้นมาอ่านหนังสือด้วยกัน|invited|study|เรียน|💌,📚
+She persuaded her parents to let her travel abroad.|เธอโน้มน้าวพ่อแม่ให้อนุญาตเธอไปต่างประเทศ|persuaded|let|อนุญาต|🗣️,✈️
+They advised us to avoid unnecessary risks.|พวกเขาแนะนำให้พวกเราหลีกเลี่ยงความเสี่ยงที่ไม่จำเป็น|advised|avoid|หลีกเลี่ยง|💡,🚫
+We reminded our guests to remove their shoes.|พวกเราเตือนแขกให้ถอดรองเท้า|reminded|remove|ถอด|⏰,👟
+He encouraged his daughter to participate in the contest.|เขาสนับสนุนลูกสาวให้เข้าร่วมการแข่งขัน|encouraged|participate|เข้าร่วม|💪,🏆
+I asked the receptionist to reserve a room.|ฉันขอให้พนักงานต้อนรับจองห้อง|asked|reserve|จอง|🙋,🏨
+She expected him to apologize.|เธอคาดหวังให้เขาขอโทษ|expected|apologize|ขอโทษ|🔮,🙇
+They forced the suspect to confess.|พวกเขาบังคับผู้ต้องสงสัยให้สารภาพ|forced|confess|สารภาพ|😤,🕵️
+We invited our relatives to celebrate the holiday.|พวกเราเชิญญาติมาฉลองวันหยุด|invited|celebrate|ฉลอง|💌,🎊
+The dentist advised me to brush my teeth twice a day.|ทันตแพทย์แนะนำให้ฉันแปรงฟันวันละสองครั้ง|advised|brush|แปรง|💡,🪥
+My supervisor told me to submit the report by Friday.|หัวหน้างานบอกให้ฉันส่งรายงานภายในวันศุกร์|told|submit|ส่ง|📢,📄
+She encouraged her team to cooperate.|เธอสนับสนุนให้ทีมของเธอร่วมมือกัน|encouraged|cooperate|ร่วมมือ|💪,🤝
+I reminded my roommate to turn off the lights.|ฉันเตือนเพื่อนร่วมห้องให้ปิดไฟ|reminded|turn|ปิด|⏰,💡
+They persuaded the customer to buy the product.|พวกเขาโน้มน้าวลูกค้าให้ซื้อสินค้า|persuaded|buy|ซื้อ|🗣️,🛍️
+We expected the bus to arrive soon.|พวกเราคาดหวังว่ารถประจำทางจะมาถึงเร็ว ๆ นี้|expected|arrive|มาถึง|🔮,🚌
+He asked his sister to lend him some money.|เขาขอให้น้องสาวยืมเงินให้|asked|lend|ให้ยืม|🙋,💵
+The teacher encouraged the students to think creatively.|ครูสนับสนุนให้นักเรียนคิดอย่างสร้างสรรค์|encouraged|think|คิด|💪,🧠
+The officer ordered everyone to evacuate the building.|เจ้าหน้าที่สั่งให้ทุกคนอพยพออกจากอาคาร|ordered|evacuate|อพยพ|🫡,🚨
+She allowed her guests to park in the driveway.|เธออนุญาตให้แขกจอดรถในทางเข้าบ้าน|allowed|park|จอดรถ|✅,🅿️
+I advised my colleague to speak more confidently.|ฉันแนะนำเพื่อนร่วมงานให้พูดอย่างมั่นใจมากขึ้น|advised|speak|พูด|💡,🗣️
+They warned the hikers to carry enough water.|พวกเขาเตือนนักเดินป่าให้นำน้ำไปให้เพียงพอ|warned|carry|นำไป|⚠️,💧
+We persuaded our friends to stay longer.|พวกเราโน้มน้าวเพื่อนให้อยู่ต่ออีกหน่อย|persuaded|stay|อยู่|🗣️,🕰️
+He reminded me to lock the windows.|เขาเตือนฉันให้ล็อกหน้าต่าง|reminded|lock|ล็อก|⏰,🔒
+The professor told the students to review the lesson.|ศาสตราจารย์บอกให้นักศึกษาทบทวนบทเรียน|told|review|ทบทวน|📢,📘
+I invited my aunt to visit us next weekend.|ฉันเชิญป้ามาเยี่ยมพวกเราในสุดสัปดาห์หน้า|invited|visit|เยี่ยม|💌,🏡
+She asked the mechanic to check the engine.|เธอขอให้ช่างตรวจสอบเครื่องยนต์|asked|check|ตรวจสอบ|🙋,🔧
+They expected their son to succeed.|พวกเขาคาดหวังให้ลูกชายประสบความสำเร็จ|expected|succeed|ประสบความสำเร็จ|🔮,🏅
+We encouraged each other to keep trying.|พวกเราให้กำลังใจกันให้พยายามต่อไป|encouraged|keep|ทำต่อไป|💪,🔁
+My father advised me to save for the future.|พ่อแนะนำให้ฉันเก็บออมเพื่ออนาคต|advised|save|เก็บออม|💡,🐷
+The tour guide told us to take plenty of photos.|ไกด์บอกให้พวกเราถ่ายรูปเยอะ ๆ|told|take|ถ่าย|📢,📸
+I reminded my classmates to complete the assignment.|ฉันเตือนเพื่อนร่วมชั้นให้ทำการบ้านให้เสร็จ|reminded|complete|ทำให้เสร็จ|⏰,📝
+She persuaded her boss to approve her proposal.|เธอโน้มน้าวหัวหน้าให้อนุมัติข้อเสนอของเธอ|persuaded|approve|อนุมัติ|🗣️,✅
+They asked us to remain seated.|พวกเขาขอให้พวกเรานั่งอยู่กับที่|asked|remain|คงอยู่|🙋,💺
+We allowed our children to choose their own clothes.|พวกเราอนุญาตให้ลูก ๆ เลือกเสื้อผ้าเอง|allowed|choose|เลือก|✅,👕
+The company expected all employees to attend the seminar.|บริษัทคาดหวังให้พนักงานทุกคนเข้าร่วมสัมมนา|expected|attend|เข้าร่วม|🔮,🎓
+The captain ordered the crew to prepare for departure.|กัปตันสั่งให้ลูกเรือเตรียมออกเดินทาง|ordered|prepare|เตรียม|🫡,⚓
+My grandmother encouraged me to be honest.|คุณย่าสนับสนุนให้ฉันเป็นคนซื่อสัตย์|encouraged|be|เป็น|💪,😇
+The principal asked every student to wear the school uniform.|ผู้อำนวยการขอให้นักเรียนทุกคนสวมเครื่องแบบโรงเรียน|asked|wear|สวมใส่|🙋,👔
+My parents encouraged me to learn English.|พ่อแม่สนับสนุนให้ฉันเรียนภาษาอังกฤษ|encouraged|learn|เรียนรู้|💪,🔤
+The manager ordered the staff to finish the work.|ผู้จัดการสั่งให้พนักงานทำงานให้เสร็จ|ordered|finish|ทำให้เสร็จ|🫡,✅
+I invited my friends to have dinner.|ฉันชวนเพื่อนมากินข้าวเย็น|invited|have|รับประทาน|💌,🍽️
+She persuaded her brother to exercise regularly.|เธอชักชวนให้น้องชายออกกำลังกายสม่ำเสมอ|persuaded|exercise|ออกกำลังกาย|🗣️,🏋️
+They advised us to save money.|พวกเขาแนะนำให้พวกเราเก็บเงิน|advised|save|เก็บออม|💡,🐷
+We reminded him to bring his passport.|พวกเราเตือนเขาให้นำหนังสือเดินทางมา|reminded|bring|นำมา|⏰,🛂
+He encouraged his son to try again.|เขาให้กำลังใจลูกชายให้ลองอีกครั้ง|encouraged|try|ลอง|💪,🔄
+I asked my teacher to explain the lesson.|ฉันขอให้ครูอธิบายบทเรียน|asked|explain|อธิบาย|🙋,🧑‍🏫
+She expected me to understand everything.|เธอคาดหวังให้ฉันเข้าใจทุกอย่าง|expected|understand|เข้าใจ|🔮,💡
+They forced him to leave the room.|พวกเขาบังคับให้เขาออกจากห้อง|forced|leave|ออกจาก|😤,🚪
+We invited everyone to celebrate with us.|พวกเราเชิญทุกคนมาฉลองกับเรา|invited|celebrate|ฉลอง|💌,🥳
+The doctor advised me to rest more.|หมอแนะนำให้ฉันพักผ่อนมากขึ้น|advised|rest|พักผ่อน|💡,😴
+My boss told me to finish the report today.|หัวหน้าบอกให้ฉันทำรายงานให้เสร็จวันนี้|told|finish|ทำให้เสร็จ|📢,📄
+She encouraged her students to ask questions.|เธอสนับสนุนให้นักเรียนถามคำถาม|encouraged|ask|ถาม|💪,🙋
+I reminded my sister to lock the door.|ฉันเตือนน้องสาวให้ล็อกประตู|reminded|lock|ล็อก|⏰,🔒
+They persuaded their parents to travel abroad.|พวกเขาโน้มน้าวพ่อแม่ให้ไปเที่ยวต่างประเทศ|persuaded|travel|เดินทาง|🗣️,🧳
+We expected the train to arrive on time.|พวกเราคาดหวังว่ารถไฟจะมาถึงตรงเวลา|expected|arrive|มาถึง|🔮,🚆
+He asked his friend to wait a moment.|เขาขอให้เพื่อนรอสักครู่|asked|wait|รอ|🙋,⏳
+The coach encouraged the players to practice harder.|โค้ชกระตุ้นให้นักกีฬาฝึกซ้อมหนักขึ้น|encouraged|practice|ฝึกซ้อม|💪,⚽
+The police ordered everyone to stay inside.|ตำรวจสั่งให้ทุกคนอยู่ข้างใน|ordered|stay|อยู่|🫡,🏠
+She allowed her children to play outside.|เธออนุญาตให้ลูก ๆ เล่นข้างนอก|allowed|play|เล่น|✅,🛝
+I advised my friend to change his plan.|ฉันแนะนำให้เพื่อนเปลี่ยนแผน|advised|change|เปลี่ยน|💡,🔄
+They warned us to avoid that road.|พวกเขาเตือนให้พวกเราหลีกเลี่ยงถนนเส้นนั้น|warned|avoid|หลีกเลี่ยง|⚠️,🚧
+We persuaded him to stay with us.|พวกเราโน้มน้าวให้เขาอยู่กับเรา|persuaded|stay|อยู่|🗣️,🏠
+He reminded me to study for the exam.|เขาเตือนฉันให้อ่านหนังสือสอบ|reminded|study|เรียน|⏰,📚
+The teacher told the class to listen carefully.|ครูบอกให้นักเรียนตั้งใจฟัง|told|listen|ฟัง|📢,👂
+I invited my cousin to visit my house.|ฉันชวนลูกพี่ลูกน้องมาเยี่ยมบ้าน|invited|visit|เยี่ยม|💌,🏡
+She asked the waiter to bring the menu.|เธอขอให้พนักงานเสิร์ฟนำเมนูมา|asked|bring|นำมา|🙋,📋
+They expected the children to behave politely.|พวกเขาคาดหวังให้เด็ก ๆ ประพฤติตัวสุภาพ|expected|behave|ประพฤติตัว|🔮,🙏
+We encouraged our team to win the game.|พวกเราให้กำลังใจทีมของเราให้ชนะการแข่งขัน|encouraged|win|ชนะ|💪,🏆
+My father advised me to drive carefully.|พ่อแนะนำให้ฉันขับรถอย่างระมัดระวัง|advised|drive|ขับรถ|💡,🚗
+The guide told us to follow him.|ไกด์บอกให้พวกเราตามเขามา|told|follow|ตาม|📢,👣
+I reminded everyone to arrive on time.|ฉันเตือนทุกคนให้มาถึงตรงเวลา|reminded|arrive|มาถึง|⏰,🕘
+She persuaded her husband to buy a new car.|เธอโน้มน้าวสามีให้ซื้อรถใหม่|persuaded|buy|ซื้อ|🗣️,🚙
+They asked me to join the project.|พวกเขาขอให้ฉันเข้าร่วมโครงการ|asked|join|เข้าร่วม|🙋,👥
+We allowed our guests to use the kitchen.|พวกเราอนุญาตให้แขกใช้ห้องครัว|allowed|use|ใช้|✅,🍳
+The company expected employees to follow the rules.|บริษัทคาดหวังให้พนักงานปฏิบัติตามกฎ|expected|follow|ปฏิบัติตาม|🔮,📜
+The officer ordered the soldiers to move forward.|นายทหารสั่งให้ทหารเคลื่อนที่ไปข้างหน้า|ordered|move|เคลื่อนที่|🫡,🪖
+My mother encouraged me to become a teacher.|แม่สนับสนุนให้ฉันเป็นครู|encouraged|become|เป็น|💪,👩‍🏫
+The principal asked the students to respect others.|ผู้อำนวยการขอให้นักเรียนเคารพผู้อื่น|asked|respect|เคารพ|🙋,🙏`.split("\n").map((l,i)=>{const[e,t,c,v,vt,m]=l.split("|");return{i:i+1,e,t,c,v,vt,m:m.split(",")}});
+function sp(o){const l=o.e.toLowerCase(),x=l.indexOf(o.c.toLowerCase()),y=l.indexOf(" to "+o.v.toLowerCase(),x);return x<0||y<0?null:{x,y,ob:o.e.slice(x+o.c.length,y)}}
+function hl(o){const s=sp(o);if(!s)return o.e;return o.e.slice(0,s.x)+`<mark><span class="mv">${o.e.substr(s.x,o.c.length)}</span><span class="ob">${s.ob}</span> to <span class="v1" data-t="${o.vt}">${o.v}</span></mark>`+o.e.slice(s.y+4+o.v.length)}
+function tc(o){const s=sp(o);return s?`<mark><span class="mv">${o.c}</span><span class="ob">${s.ob}</span> to <b>${o.v}</b></mark>`:""}
+const NT={advis:"แนะนำให้ (ใคร) ทำ",ask:"ขอให้ (ใคร) ทำ",encourag:"สนับสนุน/ให้กำลังใจให้ (ใคร) ทำ",invit:"เชิญ/ชวน (ใคร) ให้ทำ",persuad:"โน้มน้าวให้ (ใคร) ทำ",remind:"เตือนให้ (ใคร) ทำ",told:"บอกให้ (ใคร) ทำ",warn:"เตือนให้ (ใคร) ระวัง/ทำ",expect:"คาดหวังให้ (ใคร) ทำ",allow:"อนุญาตให้ (ใคร) ทำ",order:"สั่งให้ (ใคร) ทำ",forc:"บังคับให้ (ใคร) ทำ"};
+function nt(o){const m=o.c.toLowerCase().match(/^(advis|ask|encourag|invit|persuad|remind|told|warn|expect|allow|order|forc)/);return(m?NT[m[1]]+" · ":"")+"โครงสร้าง V + Object + to V1"}
+let voice=null;function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang));
+const pref=[/natural/i,/google us english/i,/aria|jenny|guy/i,/samantha|ava|allison/i,/google/i,/en[-_]US/i];
+for(const p of pref){const f=vs.find(v=>p.test(v.name)||p.test(v.lang));if(f){voice=f;return}}voice=vs[0]||null}
+if("speechSynthesis"in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,ev){ev.stopPropagation();if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),tb=document.getElementById("tb");
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i==n));const L=D.slice(n*20,n*20+20);
+grid.innerHTML=L.map(o=>`<div class="fc" onclick="this.classList.toggle('flip')"><div class="in">
+<div class="f"><span class="n">#${o.i}</span><span class="bd">V + O + to V1</span><div class="em"><div>${o.m[0]}<small>${o.c}</small></div><div>${o.m[1]}<small>${o.v}</small></div></div>
+<div class="en">${hl(o)}</div><div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button> <span class="hint">คลิกเพื่อพลิก</span></div></div>
+<div class="f b"><span class="n">#${o.i}</span><span class="bd">V + O + to V1</span><div class="th" style="margin-top:22px">${o.t}</div><div class="hint" style="font-size:13px;color:var(--ac)">💡 ${nt(o)}</div>
+<div class="en" style="font-size:16px">${hl(o)}</div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button></div></div></div>`).join("");
+tb.innerHTML=L.map(o=>`<tr><td>${o.i}</td><td>${o.e}</td><td>${o.t}</td><td>${tc(o)}</td></tr>`).join("")}
+for(let i=0;i<5;i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);tabs.append(b)}
+show(0);
+</script></body></html>

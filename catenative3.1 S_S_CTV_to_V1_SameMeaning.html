@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Verb + V-ing Flashcards</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#ddd6c8;--ac:#1f5f8b;--hl:#fff1a8;--mv:#8b0000;--back:#e8f1f8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16181b;--card:#22262b;--tx:#eee;--mu:#9aa0a6;--bd:#3a4047;--ac:#6db3e0;--hl:#5a4a00;--mv:#ff6b6b;--back:#1d2f3d}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Calibri,Carlito,"Sarabun",sans-serif;padding:16px}
+h1{font-size:22px;margin:4px 0}p.s{color:var(--mu);margin:0 0 12px;font-size:14px}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:14px;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:12px;color:var(--mu)}
+.em{display:flex;gap:18px;margin-top:8px}.em div{font-size:40px;line-height:1}.em small{display:block;font-size:11px;color:var(--mu);margin-top:2px}
+.en{font-size:19px;font-weight:500}.th,td:nth-child(3),.v1:hover::after{font-family:"Sarabun","Noto Sans Thai",sans-serif}.th{font-size:20px;font-weight:600}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+.mv{color:var(--mv);font-weight:800}
+.v1{border-bottom:2px dotted var(--ac);cursor:help;position:relative;font-weight:600}
+.v1:hover::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:2px 9px;border-radius:6px;font-size:13px;white-space:nowrap;z-index:9;font-weight:400}
+.sp{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.hint{font-size:11px;color:var(--mu)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:var(--back)}
+</style></head><body>
+<h1>Subject + Verb + V-ing · Flashcards (Gerund)</h1>
+<p class="s">คลิกการ์ดเพื่อพลิกดูคำแปล · ชี้เมาส์ที่ V-ing เพื่อดูความหมาย · กด 🔊 เพื่อฟังเสียง</p>
+<div class="formula">Subject + <b class="mv">Verb</b> + V-ing</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="tw"><table><thead><tr><th>ข้อ</th><th>ประโยค</th><th>แปล</th><th>Verb + V-ing</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`I enjoy reading books every evening.|ฉันชอบอ่านหนังสือทุกเย็น|enjoy|reading|อ่าน|😍,📖
+She likes cooking for her family.|เธอชอบทำอาหารให้ครอบครัว|likes|cooking|ทำอาหาร|👍,🍳
+They love traveling around Thailand.|พวกเขาชอบท่องเที่ยวรอบประเทศไทย|love|traveling|ท่องเที่ยว|❤️,🧳
+We prefer walking to school.|พวกเราชอบเดินไปโรงเรียนมากกว่า|prefer|walking|เดิน|⚖️,🚶
+He hates waiting in long lines.|เขาเกลียดการรอคิวยาว|hates|waiting|รอ|😠,⏳
+You should avoid eating too much sugar.|คุณควรหลีกเลี่ยงการกินน้ำตาลมากเกินไป|avoid|eating|กิน|🚫,🍬
+I keep practicing English every day.|ฉันฝึกภาษาอังกฤษต่อเนื่องทุกวัน|keep|practicing|ฝึก|🔁,🗣️
+She finished writing the report yesterday.|เธอเขียนรายงานเสร็จเมื่อวาน|finished|writing|เขียน|✅,✍️
+They started learning Japanese last month.|พวกเขาเริ่มเรียนภาษาญี่ปุ่นเดือนที่แล้ว|started|learning|เรียนรู้|▶️,🇯🇵
+We stopped talking during the movie.|พวกเราหยุดพูดระหว่างดูหนัง|stopped|talking|พูดคุย|⏹️,🤐
+He admitted making a mistake.|เขายอมรับว่าทำผิดพลาด|admitted|making|ทำ|🙋,😓
+I denied taking the money.|ฉันปฏิเสธว่าไม่ได้เอาเงินไป|denied|taking|เอาไป|🙅,💰
+She suggested going by train.|เธอแนะนำให้ไปโดยรถไฟ|suggested|going|ไป|💡,🚆
+They considered moving to another city.|พวกเขาพิจารณาย้ายไปอีกเมืองหนึ่ง|considered|moving|ย้าย|🤔,📦
+We discussed buying a new house.|พวกเราหารือกันเรื่องซื้อบ้านใหม่|discussed|buying|ซื้อ|💬,🏠
+He postponed meeting the client.|เขาเลื่อนการพบลูกค้า|postponed|meeting|พบ|📆,🤝
+I missed seeing my old friends.|ฉันคิดถึงการได้พบเพื่อนเก่า|missed|seeing|พบเห็น|🥺,👫
+She risked losing everything.|เธอเสี่ยงที่จะสูญเสียทุกอย่าง|risked|losing|สูญเสีย|⚠️,💸
+They quit smoking last year.|พวกเขาเลิกสูบบุหรี่ปีที่แล้ว|quit|smoking|สูบบุหรี่|🛑,🚬
+We resumed working after lunch.|พวกเรากลับมาทำงานต่อหลังอาหารกลางวัน|resumed|working|ทำงาน|⏯️,💼
+He continued studying until midnight.|เขาเรียนต่อจนถึงเที่ยงคืน|continued|studying|เรียน|➡️,📚
+I can't stand waiting for hours.|ฉันทนการรอหลายชั่วโมงไม่ได้|stand|waiting|รอ|😖,⏳
+She doesn't mind helping others.|เธอไม่รังเกียจที่จะช่วยเหลือผู้อื่น|mind|helping|ช่วยเหลือ|🙂,🤲
+They appreciate receiving your support.|พวกเขาซาบซึ้งที่ได้รับการสนับสนุนจากคุณ|appreciate|receiving|ได้รับ|🙏,🤝
+We recommend visiting this museum.|พวกเราแนะนำให้ไปเยี่ยมชมพิพิธภัณฑ์แห่งนี้|recommend|visiting|เยี่ยมชม|👍,🏛️
+He mentioned meeting the manager.|เขาพูดถึงการได้พบผู้จัดการ|mentioned|meeting|พบ|🗣️,🧑‍💼
+I imagine living by the sea.|ฉันจินตนาการถึงการใช้ชีวิตริมทะเล|imagine|living|อาศัยอยู่|💭,🏖️
+She enjoys dancing with her friends.|เธอชอบเต้นรำกับเพื่อน ๆ|enjoys|dancing|เต้นรำ|😍,💃
+They practice speaking English daily.|พวกเขาฝึกพูดภาษาอังกฤษทุกวัน|practice|speaking|พูด|🔁,🗣️
+We delayed making the decision.|พวกเราเลื่อนการตัดสินใจออกไป|delayed|making|ทำ/ตัดสิน|⏳,✅
+He completed building the bridge.|เขาสร้างสะพานเสร็จแล้ว|completed|building|สร้าง|✅,🌉
+I miss playing football.|ฉันคิดถึงการเล่นฟุตบอล|miss|playing|เล่น|🥺,⚽
+She resisted telling the secret.|เธออดกลั้นไม่บอกความลับ|resisted|telling|บอก|✋,🤫
+They recalled visiting this place before.|พวกเขาจำได้ว่าเคยมาเยือนที่นี่มาก่อน|recalled|visiting|มาเยือน|🧠,📍
+We regretted selling the old house.|พวกเราเสียใจที่ขายบ้านหลังเก่า|regretted|selling|ขาย|😔,🏚️
+He recalled meeting her years ago.|เขาจำได้ว่าเคยพบเธอเมื่อหลายปีก่อน|recalled|meeting|พบ|🧠,🤝
+I suggested taking a taxi.|ฉันแนะนำให้นั่งแท็กซี่|suggested|taking|นั่ง/ใช้|💡,🚕
+She avoided answering my question.|เธอหลีกเลี่ยงการตอบคำถามของฉัน|avoided|answering|ตอบ|🚫,❓
+They postponed holding the meeting.|พวกเขาเลื่อนการจัดประชุม|postponed|holding|จัด|📆,👥
+We denied breaking the window.|พวกเราปฏิเสธว่าไม่ได้ทำหน้าต่างแตก|denied|breaking|ทำแตก|🙅,🪟
+He enjoys listening to music.|เขาชอบฟังเพลง|enjoys|listening|ฟัง|😍,🎧
+I finished cleaning my room.|ฉันทำความสะอาดห้องเสร็จแล้ว|finished|cleaning|ทำความสะอาด|✅,🧹
+She kept smiling all day.|เธอยิ้มตลอดทั้งวัน|kept|smiling|ยิ้ม|🔁,😊
+They stopped laughing immediately.|พวกเขาหยุดหัวเราะทันที|stopped|laughing|หัวเราะ|⏹️,😂
+We love watching movies together.|พวกเราชอบดูหนังด้วยกัน|love|watching|ดู|❤️,🎬
+He dislikes getting up early.|เขาไม่ชอบการตื่นเช้า|dislikes|getting|ลุก/ตื่น|👎,⏰
+I recommend reading this novel.|ฉันแนะนำให้อ่านนวนิยายเล่มนี้|recommend|reading|อ่าน|👍,📖
+She enjoys swimming every weekend.|เธอชอบว่ายน้ำทุกสุดสัปดาห์|enjoys|swimming|ว่ายน้ำ|😍,🏊
+They continued discussing the project.|พวกเขาคุยเรื่องโครงการต่อ|continued|discussing|พูดคุย|➡️,💬
+We appreciate working with you.|พวกเราซาบซึ้งที่ได้ร่วมงานกับคุณ|appreciate|working|ทำงาน|🙏,🤝
+I enjoy learning new languages.|ฉันชอบเรียนรู้ภาษาใหม่ ๆ|enjoy|learning|เรียนรู้|😍,🌐
+She likes reading magazines before bed.|เธอชอบอ่านนิตยสารก่อนนอน|likes|reading|อ่าน|👍,📰
+They love hiking in the mountains.|พวกเขาชอบเดินป่าบนภูเขา|love|hiking|เดินป่า|❤️,🥾
+We prefer staying at small hotels.|พวกเราชอบพักโรงแรมขนาดเล็กมากกว่า|prefer|staying|พัก|⚖️,🏨
+He hates driving in heavy traffic.|เขาเกลียดการขับรถในช่วงรถติด|hates|driving|ขับรถ|😠,🚗
+You should avoid wasting time.|คุณควรหลีกเลี่ยงการเสียเวลา|avoid|wasting|เสีย/สิ้นเปลือง|🚫,⌛
+I keep studying even on weekends.|ฉันเรียนต่อเนื่องแม้ในวันหยุดสุดสัปดาห์|keep|studying|เรียน|🔁,📚
+She finished preparing dinner.|เธอเตรียมอาหารเย็นเสร็จแล้ว|finished|preparing|เตรียม|✅,🍽️
+They started building a new school.|พวกเขาเริ่มสร้างโรงเรียนใหม่|started|building|สร้าง|▶️,🏫
+We stopped arguing after the meeting.|พวกเราหยุดโต้เถียงหลังการประชุม|stopped|arguing|โต้เถียง|⏹️,😤
+He admitted stealing the wallet.|เขายอมรับว่าขโมยกระเป๋าเงิน|admitted|stealing|ขโมย|🙋,👛
+I denied cheating on the exam.|ฉันปฏิเสธว่าไม่ได้โกงข้อสอบ|denied|cheating|โกง|🙅,📝
+She suggested inviting everyone.|เธอแนะนำให้เชิญทุกคน|suggested|inviting|เชิญ|💡,💌
+They considered changing their plans.|พวกเขาพิจารณาเปลี่ยนแผน|considered|changing|เปลี่ยน|🤔,🔄
+We discussed improving our service.|พวกเราหารือกันเรื่องการปรับปรุงบริการ|discussed|improving|ปรับปรุง|💬,📈
+He postponed traveling until next month.|เขาเลื่อนการเดินทางไปเดือนหน้า|postponed|traveling|เดินทาง|📆,✈️
+I missed attending the conference.|ฉันพลาดการเข้าร่วมการประชุม|missed|attending|เข้าร่วม|😞,🎤
+She risked falling from the ladder.|เธอเสี่ยงที่จะตกจากบันได|risked|falling|ตก|⚠️,🪜
+They quit complaining about the weather.|พวกเขาเลิกบ่นเรื่องอากาศ|quit|complaining|บ่น|🛑,😒
+We resumed talking after dinner.|พวกเรากลับมาคุยกันต่อหลังอาหารเย็น|resumed|talking|พูดคุย|⏯️,🗣️
+He continued exercising despite the rain.|เขาออกกำลังกายต่อแม้ฝนจะตก|continued|exercising|ออกกำลังกาย|➡️,🏋️
+I can't stand listening to loud music.|ฉันทนฟังเพลงเสียงดังไม่ได้|stand|listening|ฟัง|😖,🔊
+She doesn't mind working overtime.|เธอไม่รังเกียจการทำงานล่วงเวลา|mind|working|ทำงาน|🙂,🌙
+They appreciate having supportive parents.|พวกเขาซาบซึ้งที่มีพ่อแม่คอยสนับสนุน|appreciate|having|มี|🙏,👨‍👩‍👦
+We recommend trying this restaurant.|พวกเราแนะนำให้ลองร้านอาหารนี้|recommend|trying|ลอง|👍,🍜
+He mentioned seeing you yesterday.|เขาพูดถึงการพบคุณเมื่อวาน|mentioned|seeing|พบเห็น|🗣️,👀
+I imagine becoming a successful teacher.|ฉันจินตนาการถึงการเป็นครูที่ประสบความสำเร็จ|imagine|becoming|เป็น|💭,👩‍🏫
+She practices speaking English every morning.|เธอฝึกพูดภาษาอังกฤษทุกเช้า|practices|speaking|พูด|🔁,🗣️
+They delayed opening the store.|พวกเขาเลื่อนการเปิดร้าน|delayed|opening|เปิด|⏳,🏪
+We completed decorating the classroom.|พวกเราตกแต่งห้องเรียนเสร็จแล้ว|completed|decorating|ตกแต่ง|✅,🎨
+He resisted accepting the offer.|เขาไม่ยอมรับข้อเสนอ|resisted|accepting|ยอมรับ|✋,🤝
+I recalled reading this article before.|ฉันจำได้ว่าเคยอ่านบทความนี้มาก่อน|recalled|reading|อ่าน|🧠,📄
+She regretted saying those words.|เธอเสียใจที่พูดคำเหล่านั้น|regretted|saying|พูด|😔,💬
+They avoided discussing politics.|พวกเขาหลีกเลี่ยงการพูดคุยเรื่องการเมือง|avoided|discussing|พูดคุย|🚫,🏛️
+We denied copying the answers.|พวกเราปฏิเสธว่าไม่ได้ลอกคำตอบ|denied|copying|ลอก|🙅,📋
+He enjoys fishing on weekends.|เขาชอบตกปลาในวันหยุดสุดสัปดาห์|enjoys|fishing|ตกปลา|😍,🎣
+I finished washing the dishes.|ฉันล้างจานเสร็จแล้ว|finished|washing|ล้าง|✅,🍽️
+She kept laughing at the joke.|เธอหัวเราะกับเรื่องตลกไม่หยุด|kept|laughing|หัวเราะ|🔁,🤣
+They stopped smoking two years ago.|พวกเขาเลิกสูบบุหรี่เมื่อสองปีก่อน|stopped|smoking|สูบบุหรี่|⏹️,🚭
+We love spending time together.|พวกเราชอบใช้เวลาร่วมกัน|love|spending|ใช้(เวลา)|❤️,🕰️
+He dislikes waiting for the bus.|เขาไม่ชอบการรอรถประจำทาง|dislikes|waiting|รอ|👎,🚌
+I recommend exercising every day.|ฉันแนะนำให้ออกกำลังกายทุกวัน|recommend|exercising|ออกกำลังกาย|👍,🏃
+She enjoys painting beautiful pictures.|เธอชอบวาดภาพสวย ๆ|enjoys|painting|วาดภาพ|😍,🖼️
+They continued improving the product.|พวกเขาปรับปรุงผลิตภัณฑ์ต่อไป|continued|improving|ปรับปรุง|➡️,📦
+We appreciate receiving your feedback.|พวกเราซาบซึ้งที่ได้รับความคิดเห็นของคุณ|appreciate|receiving|ได้รับ|🙏,💬
+He suggested meeting after work.|เขาแนะนำให้พบกันหลังเลิกงาน|suggested|meeting|พบกัน|💡,🕔
+I imagined flying over the ocean.|ฉันจินตนาการถึงการบินเหนือมหาสมุทร|imagined|flying|บิน|💭,🌊
+She avoided making the same mistake.|เธอหลีกเลี่ยงการทำผิดพลาดแบบเดิม|avoided|making|ทำ|🚫,😬
+They considered buying an electric car.|พวกเขาพิจารณาซื้อรถยนต์ไฟฟ้า|considered|buying|ซื้อ|🤔,⚡
+We enjoy helping other people.|พวกเราชอบช่วยเหลือผู้อื่น|enjoy|helping|ช่วยเหลือ|😍,🤲`.split("\n").map((l,i)=>{const[e,t,c,v,vt,m]=l.split("|");return{i:i+1,e,t,c,v,vt,m:m.split(",")}});
+function hl(o){const k=o.c+" "+o.v,x=o.e.toLowerCase().indexOf(k.toLowerCase());if(x<0)return o.e;
+return o.e.slice(0,x)+`<mark><span class="mv">${o.e.substr(x,o.c.length)}</span> <span class="v1" data-t="${o.vt}">${o.v}</span></mark>`+o.e.slice(x+k.length)}
+let voice=null;function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang));
+const pref=[/natural/i,/google us english/i,/aria|jenny|guy/i,/samantha|ava|allison/i,/google/i,/en[-_]US/i];
+for(const p of pref){const f=vs.find(v=>p.test(v.name)||p.test(v.lang));if(f){voice=f;return}}voice=vs[0]||null}
+if("speechSynthesis"in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,ev){ev.stopPropagation();if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),tb=document.getElementById("tb");
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i==n));const L=D.slice(n*20,n*20+20);
+grid.innerHTML=L.map(o=>`<div class="fc" onclick="this.classList.toggle('flip')"><div class="in">
+<div class="f"><span class="n">#${o.i}</span><div class="em"><div>${o.m[0]}<small>${o.c}</small></div><div>${o.m[1]}<small>${o.v}</small></div></div>
+<div class="en">${hl(o)}</div><div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button> <span class="hint">คลิกเพื่อพลิก</span></div></div>
+<div class="f b"><span class="n">#${o.i}</span><div class="th" style="margin-top:22px">${o.t}</div>
+<div class="en" style="font-size:16px">${hl(o)}</div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button></div></div></div>`).join("");
+tb.innerHTML=L.map(o=>`<tr><td>${o.i}</td><td>${o.e}</td><td>${o.t}</td><td><mark><span class="mv">${o.c}</span> <b>${o.v}</b></mark></td></tr>`).join("")}
+for(let i=0;i<5;i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);tabs.append(b)}
+show(0);
+</script></body></html>

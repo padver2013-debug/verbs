@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>to + V1 / V-ing Flashcards</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#ddd6c8;--ac:#1f5f8b;--hl:#fff1a8;--mv:#8b0000;--back:#e8f1f8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16181b;--card:#22262b;--tx:#eee;--mu:#9aa0a6;--bd:#3a4047;--ac:#6db3e0;--hl:#5a4a00;--mv:#ff6b6b;--back:#1d2f3d}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 Calibri,Carlito,"Sarabun",sans-serif;padding:16px}
+h1{font-size:22px;margin:4px 0}p.s{color:var(--mu);margin:0 0 12px;font-size:14px}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:14px;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:12px;color:var(--mu)}
+.em{display:flex;gap:18px;margin-top:8px}.em div{font-size:40px;line-height:1}.em small{display:block;font-size:11px;color:var(--mu);margin-top:2px}
+.en{font-size:19px;font-weight:500}.th,td:nth-child(3),.v1:hover::after{font-family:"Sarabun","Noto Sans Thai",sans-serif}.th{font-size:20px;font-weight:600}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+.mv{color:var(--mv);font-weight:800}
+.v1{border-bottom:2px dotted var(--ac);cursor:help;position:relative;font-weight:600}
+.v1:hover::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:2px 9px;border-radius:6px;font-size:13px;white-space:nowrap;z-index:9;font-weight:400}
+.sp{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.bd{position:absolute;top:8px;right:12px;font-size:11px;background:var(--hl);border-radius:10px;padding:0 8px}.hint{font-size:11px;color:var(--mu)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:var(--back)}
+</style></head><body>
+<h1>Catenative Verbs + to + V1 หรือ V-ing · Flashcards ชุดที่ 3</h1>
+<p class="s">คลิกการ์ดเพื่อพลิกดูคำแปล · ชี้เมาส์ที่ V1 / V-ing เพื่อดูความหมาย · กด 🔊 เพื่อฟังเสียง</p>
+<div class="formula"><b class="mv">Catenative Verb</b> + <b>to + V1</b> หรือ <b>V-ing</b> (ความหมายใกล้เคียงกัน)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="tw"><table><thead><tr><th>ข้อ</th><th>ประโยค</th><th>แปล</th><th>Catenative Verb + to + V1 / V-ing</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`I like to read before bed.|ฉันชอบอ่านหนังสือก่อนนอน|like|read|อ่าน|👍,📖
+She likes reading novels.|เธอชอบอ่านนวนิยาย|likes|reading|อ่าน|👍,📖
+They love to travel together.|พวกเขาชอบเดินทางด้วยกัน|love|travel|เดินทาง|❤️,🧳
+We love traveling around Asia.|พวกเราชอบท่องเที่ยวทั่วเอเชีย|love|traveling|ท่องเที่ยว|❤️,🧳
+He prefers to walk to work.|เขาชอบเดินไปทำงานมากกว่า|prefers|walk|เดิน|⚖️,🚶
+I prefer walking in the morning.|ฉันชอบเดินตอนเช้ามากกว่า|prefer|walking|เดิน|⚖️,🚶
+She hates to wait for anyone.|เธอเกลียดการรอใคร|hates|wait|รอ|😠,⏳
+They hate waiting in traffic.|พวกเขาเกลียดการรอรถติด|hate|waiting|รอ|😠,⏳
+We begin to study at 8 a.m.|พวกเราเริ่มเรียนเวลาแปดโมง|begin|study|เรียน|▶️,📚
+He began studying English yesterday.|เขาเริ่มเรียนภาษาอังกฤษเมื่อวาน|began|studying|เรียน|▶️,📚
+I started to work early.|ฉันเริ่มทำงานแต่เช้า|started|work|ทำงาน|▶️,💼
+She started working last week.|เธอเริ่มทำงานเมื่อสัปดาห์ที่แล้ว|started|working|ทำงาน|▶️,💼
+They continue to improve their skills.|พวกเขายังคงพัฒนาทักษะต่อไป|continue|improve|พัฒนา|➡️,📈
+We continue improving our service.|พวกเรายังคงพัฒนาการบริการ|continue|improving|พัฒนา|➡️,📈
+He intends to study medicine.|เขาตั้งใจจะเรียนแพทย์|intends|study|เรียน|🎯,⚕️
+I intend studying abroad next year.|ฉันตั้งใจจะไปเรียนต่างประเทศปีหน้า|intend|studying|เรียน|🎯,🎓
+She didn't bother to explain.|เธอไม่ใส่ใจที่จะอธิบาย|bother|explain|อธิบาย|🤷,🧑‍🏫
+They didn't bother explaining the rules.|พวกเขาไม่ใส่ใจอธิบายกฎ|bother|explaining|อธิบาย|🤷,🧑‍🏫
+We attempted to solve the problem.|พวกเราพยายามแก้ปัญหา|attempted|solve|แก้|💪,🧩
+He attempted solving it alone.|เขาลองพยายามแก้ปัญหาด้วยตัวเอง|attempted|solving|แก้|💪,🧩
+I deserve to know the truth.|ฉันสมควรรู้ความจริง|deserve|know|รู้|⭐,🧠
+She deserves knowing the facts.|เธอสมควรได้รับรู้ข้อเท็จจริง|deserves|knowing|รู้|⭐,🧠
+They fear to speak in public.|พวกเขากลัวการพูดต่อหน้าสาธารณะ|fear|speak|พูด|😨,🎤
+We fear speaking in large meetings.|พวกเรากลัวการพูดในที่ประชุมใหญ่|fear|speaking|พูด|😨,🎤
+He neglected to call his mother.|เขาละเลยที่จะโทรหาแม่|neglected|call|โทร|🙈,📞
+I neglected calling my friend.|ฉันละเลยการโทรหาเพื่อน|neglected|calling|โทร|🙈,📞
+She began to cry suddenly.|เธอเริ่มร้องไห้กะทันหัน|began|cry|ร้องไห้|▶️,😢
+They began crying after the movie.|พวกเขาเริ่มร้องไห้หลังหนังจบ|began|crying|ร้องไห้|▶️,😢
+We started to laugh together.|พวกเราเริ่มหัวเราะด้วยกัน|started|laugh|หัวเราะ|▶️,😂
+He started laughing loudly.|เขาเริ่มหัวเราะเสียงดัง|started|laughing|หัวเราะ|▶️,😂
+I continued to read the book.|ฉันอ่านหนังสือต่อ|continued|read|อ่าน|➡️,📖
+She continued reading quietly.|เธออ่านต่ออย่างเงียบ ๆ|continued|reading|อ่าน|➡️,📖
+They love to cook together.|พวกเขาชอบทำอาหารด้วยกัน|love|cook|ทำอาหาร|❤️,🍳
+We love cooking at home.|พวกเราชอบทำอาหารที่บ้าน|love|cooking|ทำอาหาร|❤️,🍳
+He likes to swim every morning.|เขาชอบว่ายน้ำทุกเช้า|likes|swim|ว่ายน้ำ|👍,🏊
+I like swimming in the sea.|ฉันชอบว่ายน้ำในทะเล|like|swimming|ว่ายน้ำ|👍,🏊
+She prefers to stay home.|เธอชอบอยู่บ้านมากกว่า|prefers|stay|อยู่|⚖️,🏠
+They prefer staying in hotels.|พวกเขาชอบพักโรงแรมมากกว่า|prefer|staying|พัก|⚖️,🏨
+We hate to lose games.|พวกเราเกลียดการแพ้|hate|lose|แพ้|😠,😞
+He hates losing competitions.|เขาเกลียดการแพ้การแข่งขัน|hates|losing|แพ้|😠,😞
+I love to help people.|ฉันชอบช่วยเหลือผู้คน|love|help|ช่วยเหลือ|❤️,🤲
+She loves helping children.|เธอชอบช่วยเหลือเด็ก ๆ|loves|helping|ช่วยเหลือ|❤️,🤲
+They began to understand the lesson.|พวกเขาเริ่มเข้าใจบทเรียน|began|understand|เข้าใจ|▶️,💡
+We began understanding the process.|พวกเราเริ่มเข้าใจกระบวนการ|began|understanding|เข้าใจ|▶️,💡
+He continued to practice every day.|เขาฝึกซ้อมต่อทุกวัน|continued|practice|ฝึก|➡️,🔁
+I continue practicing English daily.|ฉันฝึกภาษาอังกฤษทุกวันอย่างต่อเนื่อง|continue|practicing|ฝึก|➡️,🔁
+She started to smile happily.|เธอเริ่มยิ้มอย่างมีความสุข|started|smile|ยิ้ม|▶️,😊
+They started smiling at each other.|พวกเขาเริ่มยิ้มให้กัน|started|smiling|ยิ้ม|▶️,😊
+We like to learn new things.|พวกเราชอบเรียนรู้สิ่งใหม่ ๆ|like|learn|เรียนรู้|👍,🌱
+He likes learning history.|เขาชอบเรียนรู้ประวัติศาสตร์|likes|learning|เรียนรู้|👍,🌱
+I like to listen to classical music.|ฉันชอบฟังดนตรีคลาสสิก|like|listen|ฟัง|👍,🎧
+She likes listening to podcasts.|เธอชอบฟังพอดแคสต์|likes|listening|ฟัง|👍,🎧
+They love to sing together.|พวกเขาชอบร้องเพลงด้วยกัน|love|sing|ร้องเพลง|❤️,🎤
+We love singing at karaoke.|พวกเราชอบร้องคาราโอเกะ|love|singing|ร้องเพลง|❤️,🎤
+He prefers to exercise in the morning.|เขาชอบออกกำลังกายตอนเช้ามากกว่า|prefers|exercise|ออกกำลังกาย|⚖️,🏋️
+I prefer exercising after work.|ฉันชอบออกกำลังกายหลังเลิกงานมากกว่า|prefer|exercising|ออกกำลังกาย|⚖️,🏋️
+She hates to drive at night.|เธอเกลียดการขับรถตอนกลางคืน|hates|drive|ขับรถ|😠,🚗
+They hate driving in the rain.|พวกเขาเกลียดการขับรถตอนฝนตก|hate|driving|ขับรถ|😠,🚗
+We began to prepare for the exam.|พวกเราเริ่มเตรียมตัวสอบ|began|prepare|เตรียม|▶️,📝
+He began preparing the presentation.|เขาเริ่มเตรียมงานนำเสนอ|began|preparing|เตรียม|▶️,📝
+I started to write a diary.|ฉันเริ่มเขียนไดอารี|started|write|เขียน|▶️,✍️
+She started writing short stories.|เธอเริ่มเขียนเรื่องสั้น|started|writing|เขียน|▶️,✍️
+They continued to build the bridge.|พวกเขาสร้างสะพานต่อ|continued|build|สร้าง|➡️,🌉
+We continued building the new office.|พวกเราสร้างสำนักงานใหม่ต่อ|continued|building|สร้าง|➡️,🏢
+He likes to cook for his family.|เขาชอบทำอาหารให้ครอบครัว|likes|cook|ทำอาหาร|👍,🍳
+I like cooking Italian food.|ฉันชอบทำอาหารอิตาเลียน|like|cooking|ทำอาหาร|👍,🍝
+She loves to dance at parties.|เธอชอบเต้นรำในงานเลี้ยง|loves|dance|เต้นรำ|❤️,💃
+They love dancing together.|พวกเขาชอบเต้นรำด้วยกัน|love|dancing|เต้นรำ|❤️,💃
+We prefer to travel by train.|พวกเราชอบเดินทางโดยรถไฟมากกว่า|prefer|travel|เดินทาง|⚖️,🚆
+He prefers traveling alone.|เขาชอบเดินทางคนเดียวมากกว่า|prefers|traveling|เดินทาง|⚖️,🧳
+I hate to waste my time.|ฉันเกลียดการเสียเวลา|hate|waste|เสีย/สิ้นเปลือง|😠,⌛
+She hates wasting food.|เธอเกลียดการทิ้งอาหารให้เสียเปล่า|hates|wasting|ทิ้งขว้าง|😠,🗑️
+They started to laugh loudly.|พวกเขาเริ่มหัวเราะเสียงดัง|started|laugh|หัวเราะ|▶️,🤣
+We started laughing at the joke.|พวกเราเริ่มหัวเราะกับเรื่องตลก|started|laughing|หัวเราะ|▶️,🤣
+He began to speak slowly.|เขาเริ่มพูดช้า ๆ|began|speak|พูด|▶️,🗣️
+I began speaking English at school.|ฉันเริ่มพูดภาษาอังกฤษที่โรงเรียน|began|speaking|พูด|▶️,🗣️
+She continued to study after dinner.|เธอเรียนต่อหลังอาหารเย็น|continued|study|เรียน|➡️,📚
+They continued studying until midnight.|พวกเขาเรียนต่อจนถึงเที่ยงคืน|continued|studying|เรียน|➡️,🌙
+We like to watch documentaries.|พวกเราชอบดูสารคดี|like|watch|ดู|👍,📺
+He likes watching football matches.|เขาชอบดูการแข่งขันฟุตบอล|likes|watching|ดู|👍,⚽
+I love to help my neighbors.|ฉันชอบช่วยเหลือเพื่อนบ้าน|love|help|ช่วยเหลือ|❤️,🏘️
+She loves helping elderly people.|เธอชอบช่วยเหลือผู้สูงอายุ|loves|helping|ช่วยเหลือ|❤️,👵
+They prefer to stay at home.|พวกเขาชอบอยู่บ้านมากกว่า|prefer|stay|อยู่|⚖️,🏠
+We prefer staying near the beach.|พวกเราชอบพักใกล้ชายหาดมากกว่า|prefer|staying|พัก|⚖️,🏖️
+He hates to lose an argument.|เขาเกลียดการเป็นฝ่ายแพ้ในการโต้แย้ง|hates|lose|แพ้|😠,😤
+I hate losing my keys.|ฉันเกลียดการทำกุญแจหาย|hate|losing|ทำหาย|😠,🔑
+She began to smile at me.|เธอเริ่มยิ้มให้ฉัน|began|smile|ยิ้ม|▶️,😊
+They began smiling happily.|พวกเขาเริ่มยิ้มอย่างมีความสุข|began|smiling|ยิ้ม|▶️,😊
+We started to discuss the project.|พวกเราเริ่มอภิปรายโครงการ|started|discuss|อภิปราย|▶️,💬
+He started discussing the budget.|เขาเริ่มอภิปรายเรื่องงบประมาณ|started|discussing|อภิปราย|▶️,💬
+I continued to improve my English.|ฉันพัฒนาภาษาอังกฤษต่อไป|continued|improve|พัฒนา|➡️,📈
+She continued improving her skills.|เธอพัฒนาทักษะของเธอต่อไป|continued|improving|พัฒนา|➡️,📈
+They like to learn new technologies.|พวกเขาชอบเรียนรู้เทคโนโลยีใหม่ ๆ|like|learn|เรียนรู้|👍,🤖
+We like learning foreign languages.|พวกเราชอบเรียนรู้ภาษาต่างประเทศ|like|learning|เรียนรู้|👍,🌐
+He loves to read history books.|เขาชอบอ่านหนังสือประวัติศาสตร์|loves|read|อ่าน|❤️,📜
+I love reading science magazines.|ฉันชอบอ่านนิตยสารวิทยาศาสตร์|love|reading|อ่าน|❤️,🔬
+She prefers to work from home.|เธอชอบทำงานจากบ้านมากกว่า|prefers|work|ทำงาน|⚖️,🏡
+They prefer working in small teams.|พวกเขาชอบทำงานเป็นทีมเล็ก ๆ มากกว่า|prefer|working|ทำงาน|⚖️,👥
+We hate to interrupt the meeting.|พวกเราไม่ชอบการขัดจังหวะการประชุม|hate|interrupt|ขัดจังหวะ|😠,✋
+He hates interrupting other people.|เขาไม่ชอบการขัดจังหวะผู้อื่น|hates|interrupting|ขัดจังหวะ|😠,✋`.split("\n").map((l,i)=>{const[e,t,c,v,vt,m]=l.split("|");return{i:i+1,e,t,c,v,vt,m:m.split(",")}});
+function pt(o){return o.e.toLowerCase().includes((o.c+" to "+o.v).toLowerCase())?" to ":" "}
+function hl(o){const p=pt(o),k=o.c+p+o.v,x=o.e.toLowerCase().indexOf(k.toLowerCase());if(x<0)return o.e;
+return o.e.slice(0,x)+`<mark><span class="mv">${o.e.substr(x,o.c.length)}</span>${p}<span class="v1" data-t="${o.vt}">${o.v}</span></mark>`+o.e.slice(x+k.length)}
+let voice=null;function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang));
+const pref=[/natural/i,/google us english/i,/aria|jenny|guy/i,/samantha|ava|allison/i,/google/i,/en[-_]US/i];
+for(const p of pref){const f=vs.find(v=>p.test(v.name)||p.test(v.lang));if(f){voice=f;return}}voice=vs[0]||null}
+if("speechSynthesis"in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,ev){ev.stopPropagation();if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),tb=document.getElementById("tb");
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i==n));const L=D.slice(n*20,n*20+20);
+grid.innerHTML=L.map(o=>`<div class="fc" onclick="this.classList.toggle('flip')"><div class="in">
+<div class="f"><span class="n">#${o.i}</span><span class="bd">${pt(o)==" to "?"to + V1":"V-ing"}</span><div class="em"><div>${o.m[0]}<small>${o.c}</small></div><div>${o.m[1]}<small>${o.v}</small></div></div>
+<div class="en">${hl(o)}</div><div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button> <span class="hint">คลิกเพื่อพลิก</span></div></div>
+<div class="f b"><span class="n">#${o.i}</span><span class="bd">${pt(o)==" to "?"to + V1":"V-ing"}</span><div class="th" style="margin-top:22px">${o.t}</div>
+<div class="en" style="font-size:16px">${hl(o)}</div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button></div></div></div>`).join("");
+tb.innerHTML=L.map(o=>`<tr><td>${o.i}</td><td>${o.e}</td><td>${o.t}</td><td><mark><span class="mv">${o.c}</span>${pt(o)}<b>${o.v}</b></mark></td></tr>`).join("")}
+for(let i=0;i<5;i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);tabs.append(b)}
+show(0);
+</script></body></html>

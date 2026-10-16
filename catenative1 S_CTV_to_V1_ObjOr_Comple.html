@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Catenative Verbs Flashcards</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--tx:#1c1c1c;--mu:#6b6b6b;--bd:#ddd6c8;--ac:#1f5f8b;--hl:#fff1a8;--mv:#8b0000;--back:#e8f1f8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#16181b;--card:#22262b;--tx:#eee;--mu:#9aa0a6;--bd:#3a4047;--ac:#6db3e0;--hl:#5a4a00;--mv:#ff6b6b;--back:#1d2f3d}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,"Sarabun","Noto Sans Thai",sans-serif;padding:16px}
+h1{font-size:22px;margin:4px 0}p.s{color:var(--mu);margin:0 0 12px;font-size:14px}
+.formula{display:inline-block;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 10px;font-size:14px;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:14px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.f{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.b{transform:rotateY(180deg);background:var(--back)}
+.n{position:absolute;top:8px;left:12px;font-size:12px;color:var(--mu)}
+.em{display:flex;gap:18px;margin-top:8px}.em div{font-size:40px;line-height:1}.em small{display:block;font-size:11px;color:var(--mu);margin-top:2px}
+.en{font-size:19px;font-weight:500}.th{font-size:20px;font-weight:600}
+mark{background:var(--hl);color:inherit;border-radius:4px;padding:0 3px}
+.mv{color:var(--mv);font-weight:800}
+.v1{border-bottom:2px dotted var(--ac);cursor:help;position:relative;font-weight:600}
+.v1:hover::after{content:attr(data-t);position:absolute;bottom:130%;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:2px 9px;border-radius:6px;font-size:13px;white-space:nowrap;z-index:9;font-weight:400}
+.sp{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:4px 12px;cursor:pointer;font-size:13px}
+.hint{font-size:11px;color:var(--mu)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}th{background:var(--back)}
+</style></head><body>
+<h1>Catenative Verbs + to + V1 · Flashcards</h1>
+<p class="s">คลิกการ์ดเพื่อพลิกดูคำแปล · ชี้เมาส์ที่ V1 เพื่อดูความหมาย · กด 🔊 เพื่อฟังเสียง</p>
+<div class="formula">Subject + <b class="mv">Catenative Verb</b> + to + Verb 1 + Object/Complement</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="tw"><table><thead><tr><th>ข้อ</th><th>ประโยค</th><th>แปล</th><th>Catenative Verb + to + V1</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=`I want to eat breakfast now.|ฉันต้องการกินอาหารเช้าตอนนี้|want|eat|กิน|🙋,🍳
+We hope to visit Japan next year.|พวกเราหวังว่าจะไปเที่ยวญี่ปุ่นปีหน้า|hope|visit|เยี่ยมชม|🤞,🗾
+She plans to study abroad.|เธอวางแผนจะไปเรียนต่างประเทศ|plans|study|เรียน|📅,🎓
+They decided to buy a new car.|พวกเขาตัดสินใจซื้อรถคันใหม่|decided|buy|ซื้อ|🤔,🚗
+You need to finish your homework.|คุณจำเป็นต้องทำการบ้านให้เสร็จ|need|finish|ทำให้เสร็จ|❗,📚
+I expect to arrive before noon.|ฉันคาดว่าจะมาถึงก่อนเที่ยง|expect|arrive|มาถึง|⏰,🛬
+He agreed to help us.|เขาตกลงที่จะช่วยพวกเรา|agreed|help|ช่วย|🤝,🆘
+She promised to call me.|เธอสัญญาว่าจะโทรหาฉัน|promised|call|โทร|🤙,📞
+The student refused to answer the question.|นักเรียนปฏิเสธที่จะตอบคำถาม|refused|answer|ตอบ|🙅,💬
+My son learned to swim quickly.|ลูกชายของฉันเรียนว่ายน้ำได้อย่างรวดเร็ว|learned|swim|ว่ายน้ำ|📖,🏊
+We chose to stay at home.|พวกเราเลือกที่จะอยู่บ้าน|chose|stay|อยู่|👆,🏠
+He attempted to solve the problem.|เขาพยายามแก้ปัญหา|attempted|solve|แก้|💪,🧩
+She managed to pass the exam.|เธอสามารถสอบผ่านได้|managed|pass|สอบผ่าน|🏆,✅
+I failed to understand the lesson.|ฉันไม่สามารถเข้าใจบทเรียนได้|failed|understand|เข้าใจ|❌,💡
+He offered to carry my bag.|เขาเสนอที่จะถือกระเป๋าให้ฉัน|offered|carry|ถือ|🎁,🎒
+They prepared to leave early.|พวกเขาเตรียมตัวออกเดินทางแต่เช้า|prepared|leave|ออกเดินทาง|🧳,🚪
+She wishes to become a doctor.|เธอปรารถนาจะเป็นแพทย์|wishes|become|เป็น|🌠,👩‍⚕️
+I intend to apply for the job.|ฉันตั้งใจจะสมัครงานนี้|intend|apply|สมัคร|🎯,📝
+The child pretended to sleep.|เด็กแกล้งทำเป็นหลับ|pretended|sleep|นอน|🎭,😴
+We can afford to travel this summer.|พวกเรามีกำลังพอที่จะท่องเที่ยวในฤดูร้อนนี้|afford|travel|ท่องเที่ยว|💰,✈️
+Don't forget to lock the door.|อย่าลืมล็อกประตู|forget|lock|ล็อก|🤯,🔒
+Remember to bring your passport.|จำไว้ว่าต้องนำหนังสือเดินทางมาด้วย|Remember|bring|นำมา|🧠,🛂
+She deserves to win the prize.|เธอสมควรได้รับรางวัล|deserves|win|ชนะ|⭐,🏆
+Don't hesitate to ask questions.|อย่าลังเลที่จะถามคำถาม|hesitate|ask|ถาม|😬,🙋
+He volunteered to teach English.|เขาอาสาสอนภาษาอังกฤษ|volunteered|teach|สอน|🙌,👩‍🏫
+We arranged to meet tomorrow.|พวกเรานัดกันพบในวันพรุ่งนี้|arranged|meet|พบ|🗓️,🤝
+They continued to work hard.|พวกเขาทำงานหนักต่อไป|continued|work|ทำงาน|➡️,💼
+It started to rain suddenly.|ฝนเริ่มตกกะทันหัน|started|rain|ฝนตก|▶️,🌧️
+She began to sing beautifully.|เธอเริ่มร้องเพลงอย่างไพเราะ|began|sing|ร้องเพลง|🚦,🎤
+I love to read novels.|ฉันชอบอ่านนวนิยาย|love|read|อ่าน|❤️,📖
+My friends like to play football.|เพื่อนของฉันชอบเล่นฟุตบอล|like|play|เล่น|👍,⚽
+He hates to wait in line.|เขาเกลียดการรอคิว|hates|wait|รอ|😠,⏳
+I prefer to walk to school.|ฉันชอบเดินไปโรงเรียนมากกว่า|prefer|walk|เดิน|⚖️,🚶
+We intend to improve our English.|พวกเราตั้งใจจะพัฒนาภาษาอังกฤษ|intend|improve|พัฒนา|🎯,📈
+They seek to find a solution.|พวกเขาพยายามค้นหาวิธีแก้ปัญหา|seek|find|ค้นหา|🔍,💡
+She demanded to know the truth.|เธอเรียกร้องที่จะรู้ความจริง|demanded|know|รู้|📢,🧠
+He claimed to own the house.|เขาอ้างว่าเป็นเจ้าของบ้าน|claimed|own|เป็นเจ้าของ|🗣️,🏠
+Many animals struggle to survive.|สัตว์หลายชนิดดิ้นรนเพื่อความอยู่รอด|struggle|survive|อยู่รอด|😣,🦌
+I happened to see your brother yesterday.|ฉันบังเอิญเจอน้องชายของคุณเมื่อวาน|happened|see|เห็น|🍀,👀
+She appears to know the answer.|ดูเหมือนว่าเธอจะรู้คำตอบ|appears|know|รู้|👀,🧠
+They seem to enjoy the movie.|ดูเหมือนว่าพวกเขาจะสนุกกับภาพยนตร์|seem|enjoy|สนุกกับ|🤔,🎬
+I tend to forget names.|ฉันมักจะลืมชื่อคน|tend|forget|ลืม|📉,🤯
+He longs to return home.|เขาโหยหาที่จะกลับบ้าน|longs|return|กลับ|🥺,🏡
+She yearns to succeed in life.|เธอปรารถนาที่จะประสบความสำเร็จในชีวิต|yearns|succeed|ประสบความสำเร็จ|💖,🏅
+We strive to achieve our goals.|พวกเรามุ่งมั่นที่จะบรรลุเป้าหมาย|strive|achieve|บรรลุ|🧗,🎯
+He didn't dare to speak.|เขาไม่กล้าพูด|dare|speak|พูด|😨,🗣️
+She neglected to water the plants.|เธอละเลยที่จะรดน้ำต้นไม้|neglected|water|รดน้ำ|🙈,🪴
+He didn't bother to explain.|เขาไม่ใส่ใจที่จะอธิบาย|bother|explain|อธิบาย|🤷,🧑‍🏫
+The soldier swore to protect his country.|ทหารสาบานว่าจะปกป้องประเทศของตน|swore|protect|ปกป้อง|✋,🛡️
+I aim to become a successful engineer.|ฉันตั้งเป้าหมายที่จะเป็นวิศวกรที่ประสบความสำเร็จ|aim|become|เป็น|🎯,👷
+I attempt to improve my English every day.|ฉันพยายามพัฒนาภาษาอังกฤษทุกวัน|attempt|improve|พัฒนา|💪,📈
+She chose to remain silent.|เธอเลือกที่จะเงียบ|chose|remain|คงอยู่|👆,🤫
+We continue to learn new skills.|พวกเราเรียนรู้ทักษะใหม่ ๆ ต่อไป|continue|learn|เรียนรู้|➡️,🎓
+They decided to accept the offer.|พวกเขาตัดสินใจยอมรับข้อเสนอ|decided|accept|ยอมรับ|🤔,✅
+I expect to receive your email soon.|ฉันคาดว่าจะได้รับอีเมลของคุณเร็ว ๆ นี้|expect|receive|ได้รับ|⏰,📧
+He failed to keep his promise.|เขาไม่สามารถรักษาสัญญาได้|failed|keep|รักษา|❌,🤞
+She forgot to charge her phone.|เธอลืมชาร์จโทรศัพท์|forgot|charge|ชาร์จ|🤯,🔋
+My brother hopes to graduate this year.|พี่ชายของฉันหวังว่าจะสำเร็จการศึกษาปีนี้|hopes|graduate|สำเร็จการศึกษา|🤞,🎓
+We intend to save more money.|พวกเราตั้งใจจะเก็บเงินให้มากขึ้น|intend|save|เก็บออม|🎯,🐷
+She is learning to drive a car.|เธอกำลังเรียนขับรถยนต์|learning|drive|ขับ|📖,🚗
+They managed to solve the difficult problem.|พวกเขาสามารถแก้ปัญหาที่ยากได้|managed|solve|แก้|🏆,🧩
+You need to improve your pronunciation.|คุณจำเป็นต้องพัฒนาการออกเสียงของคุณ|need|improve|พัฒนา|❗,🗣️
+He offered to pay the bill.|เขาเสนอที่จะจ่ายค่าอาหาร|offered|pay|จ่าย|🎁,💵
+They plan to move to another city.|พวกเขาวางแผนจะย้ายไปอีกเมืองหนึ่ง|plan|move|ย้าย|📅,📦
+I prefer to stay at home tonight.|ฉันชอบอยู่บ้านคืนนี้มากกว่า|prefer|stay|อยู่|⚖️,🛋️
+The athletes prepared to compete.|นักกีฬาเตรียมตัวแข่งขัน|prepared|compete|แข่งขัน|🏃,🏅
+She promised to return the book.|เธอสัญญาว่าจะคืนหนังสือ|promised|return|คืน|🤙,📚
+The witness refused to cooperate.|พยานปฏิเสธที่จะให้ความร่วมมือ|refused|cooperate|ให้ความร่วมมือ|🙅,🤝
+Remember to thank your teacher.|อย่าลืมขอบคุณครูของคุณ|Remember|thank|ขอบคุณ|🧠,🙏
+He seems to understand everything.|ดูเหมือนว่าเขาจะเข้าใจทุกอย่าง|seems|understand|เข้าใจ|🤔,💡
+I started to feel better.|ฉันเริ่มรู้สึกดีขึ้น|started|feel|รู้สึก|▶️,😊
+She tends to wake up early.|เธอมักจะตื่นแต่เช้า|tends|wake|ตื่น|📉,⏰
+Please try to answer every question.|โปรดพยายามตอบทุกคำถาม|try|answer|ตอบ|💪,✍️
+The students volunteered to clean the park.|นักเรียนอาสาทำความสะอาดสวนสาธารณะ|volunteered|clean|ทำความสะอาด|🙌,🧹
+We are waiting to hear the results.|พวกเรากำลังรอฟังผล|waiting|hear|ได้ยิน|⏳,👂
+My daughter wants to become a pilot.|ลูกสาวของฉันอยากเป็นนักบิน|wants|become|เป็น|🙋,👩‍✈️
+I wish to improve my speaking skills.|ฉันปรารถนาจะพัฒนาทักษะการพูด|wish|improve|พัฒนา|🌠,🗣️
+They agreed to participate in the meeting.|พวกเขาตกลงที่จะเข้าร่วมการประชุม|agreed|participate|เข้าร่วม|🤝,👥
+We arranged to travel together.|พวกเราจัดการเดินทางด้วยกัน|arranged|travel|เดินทาง|🗓️,🧳
+You deserve to succeed.|คุณสมควรประสบความสำเร็จ|deserve|succeed|ประสบความสำเร็จ|⭐,🏅
+Don't hesitate to speak English.|อย่าลังเลที่จะพูดภาษาอังกฤษ|hesitate|speak|พูด|😬,🗣️
+He pretended to understand the lesson.|เขาแกล้งทำเป็นเข้าใจบทเรียน|pretended|understand|เข้าใจ|🎭,💡
+She struggled to finish the report.|เธอดิ้นรนเพื่อทำรายงานให้เสร็จ|struggled|finish|ทำให้เสร็จ|😣,📄
+We strive to improve our service.|พวกเรามุ่งมั่นที่จะพัฒนาการบริการ|strive|improve|พัฒนา|🧗,🛎️
+The witness swore to tell the truth.|พยานสาบานว่าจะพูดความจริง|swore|tell|บอก|✋,⚖️
+He threatened to leave the company.|เขาขู่ว่าจะลาออกจากบริษัท|threatened|leave|ออกจาก|⚠️,🏢
+She didn't dare to ask the teacher.|เธอไม่กล้าถามครู|dare|ask|ถาม|😨,🙋
+We can't afford to replace the machine.|พวกเราไม่มีกำลังพอที่จะเปลี่ยนเครื่องใหม่|afford|replace|เปลี่ยน|💸,⚙️
+He claimed to know the answer.|เขาอ้างว่ารู้คำตอบ|claimed|know|รู้|🗣️,🧠
+I happened to meet my old friend.|ฉันบังเอิญเจอเพื่อนเก่า|happened|meet|พบ|🍀,👋
+She appears to like the new job.|ดูเหมือนว่าเธอจะชอบงานใหม่|appears|like|ชอบ|👀,👍
+They long to travel around the world.|พวกเขาใฝ่ฝันที่จะเดินทางรอบโลก|long|travel|เดินทาง|🥺,🌍
+He yearns to see his family again.|เขาปรารถนาจะได้พบครอบครัวอีกครั้ง|yearns|see|พบ|💖,👨‍👩‍👧
+The company seeks to improve customer service.|บริษัทพยายามพัฒนาการบริการลูกค้า|seeks|improve|พัฒนา|🔍,📞
+She neglected to reply to my message.|เธอละเลยที่จะตอบข้อความของฉัน|neglected|reply|ตอบกลับ|🙈,💬
+He didn't bother to complain.|เขาไม่เสียเวลาที่จะบ่น|bother|complain|บ่น|🤷,😤
+The prisoner attempted to escape.|นักโทษพยายามหลบหนี|attempted|escape|หลบหนี|💪,🏃
+Our team aims to win the championship.|ทีมของเราตั้งเป้าจะคว้าแชมป์|aims|win|คว้าชัย|🎯,🏆
+They undertook to complete the project on time.|พวกเขารับปากว่าจะทำโครงการให้เสร็จตรงเวลา|undertook|complete|ทำให้เสร็จ|🤝,✅
+The organization undertook to support poor children.|องค์กรรับปากที่จะสนับสนุนเด็กยากจน|undertook|support|สนับสนุน|🤝,🧒`.split("\n").map((l,i)=>{const[e,t,c,v,vt,m]=l.split("|");return{i:i+1,e,t,c,v,vt,m:m.split(",")}});
+function hl(o){const k=o.c+" to "+o.v,x=o.e.toLowerCase().indexOf(k.toLowerCase());if(x<0)return o.e;
+return o.e.slice(0,x)+`<mark><span class="mv">${o.e.substr(x,o.c.length)}</span> to <span class="v1" data-t="${o.vt}">${o.v}</span></mark>`+o.e.slice(x+k.length)}
+let voice=null;function pick(){const vs=speechSynthesis.getVoices().filter(v=>/^en[-_]/i.test(v.lang));
+const pref=[/natural/i,/google us english/i,/aria|jenny|guy/i,/samantha|ava|allison/i,/google/i,/en[-_]US/i];
+for(const p of pref){const f=vs.find(v=>p.test(v.name)||p.test(v.lang));if(f){voice=f;return}}voice=vs[0]||null}
+if("speechSynthesis"in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,ev){ev.stopPropagation();if(!("speechSynthesis"in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+const tabs=document.getElementById("tabs"),grid=document.getElementById("grid"),tb=document.getElementById("tb");
+function show(n){[...tabs.children].forEach((b,i)=>b.classList.toggle("on",i==n));const L=D.slice(n*20,n*20+20);
+grid.innerHTML=L.map(o=>`<div class="fc" onclick="this.classList.toggle('flip')"><div class="in">
+<div class="f"><span class="n">#${o.i}</span><div class="em"><div>${o.m[0]}<small>${o.c}</small></div><div>${o.m[1]}<small>${o.v}</small></div></div>
+<div class="en">${hl(o)}</div><div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button> <span class="hint">คลิกเพื่อพลิก</span></div></div>
+<div class="f b"><span class="n">#${o.i}</span><div class="th" style="margin-top:22px">${o.t}</div>
+<div class="en" style="font-size:16px">${hl(o)}</div><button class="sp" onclick="say(${JSON.stringify(o.e).replace(/"/g,'&quot;')},event)">🔊 ฟัง</button></div></div></div>`).join("");
+tb.innerHTML=L.map(o=>`<tr><td>${o.i}</td><td>${o.e}</td><td>${o.t}</td><td><mark><span class="mv">${o.c}</span> to <b>${o.v}</b></mark></td></tr>`).join("")}
+for(let i=0;i<5;i++){const b=document.createElement("button");b.textContent=`Tab ${i+1} (${i*20+1}-${i*20+20})`;b.onclick=()=>show(i);tabs.append(b)}
+show(0);
+</script></body></html>
