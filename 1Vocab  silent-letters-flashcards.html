@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Silent Letters Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6fb;--sf:#fff;--tx:#2b2f3a;--mu:#6b7280;--ac:#e0457b;--bd:#e4e2ee;--hd:#f1eefb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#14161d;--sf:#1d2029;--tx:#eceef5;--mu:#9aa1b2;--ac:#ff7aa8;--bd:#313645;--hd:#262a38}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#14161d;--sf:#1d2029;--tx:#eceef5;--mu:#9aa1b2;--ac:#ff7aa8;--bd:#313645;--hd:#262a38}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif}
+.th{font-family:'Sarabun','Thai Saraban',Tahoma,sans-serif}
+header{padding:18px 14px 2px;text-align:center}
+h1{margin:0;font-size:24px}
+header p{margin:4px 0 0;color:var(--mu);font-size:14px}
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:12px 10px}
+.tab{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:6px 13px;border-radius:999px;cursor:pointer;font:600 14px Calibri,Carlito,Arial,sans-serif}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:1050px;margin:0 auto;padding:0 12px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px}
+.card{height:214px;perspective:800px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#2b2f3a;background:var(--p);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.back{transform:rotateY(180deg);background:var(--q)}
+.emo{font-size:40px;line-height:1}
+.w{font-size:28px;font-weight:700;line-height:1.1}
+.sl{color:#e0457b;background:rgba(255,255,255,.75);border-radius:6px;padding:0 3px;text-decoration:underline wavy}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:15px}
+.pos{font-size:13px;font-style:italic;opacity:.8}.pw{font-size:15px;opacity:.9}
+.sp{border:0;background:rgba(255,255,255,.85);color:#2b2f3a;border-radius:999px;padding:4px 11px;cursor:pointer;font-size:13px}
+.sp:hover{background:#fff}
+.mean{font-size:20px;font-weight:600}
+.en{font-size:14px}
+.st{font-size:13px;color:#4b5060}
+h2{font-size:19px;margin:28px 0 10px}
+.wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:16px;background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:8px 11px;border-bottom:1px solid var(--bd);text-align:left;font-size:15px}
+th{background:var(--hd);font-size:13px}
+td.e{font-family:Calibri,Carlito,Arial,sans-serif}
+td.t{font-family:'Sarabun','Thai Saraban',Tahoma,sans-serif}
+td .sl{background:#ffe3ee}
+.vw{font-weight:700;font-size:17px}
+.table-ipa{font-family:'Times New Roman',Times,serif;color:var(--mu);font-size:13px}
+.sp2{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:999px;padding:3px 10px;cursor:pointer}
+</style></head><body>
+<header><h1>Silent Letters Vocabulary</h1><p class="th">คลิกการ์ดเพื่อพลิกดูคำแปล · ตัวอักษรสีชมพูคือตัวที่ไม่ออกเสียง · กด 🔊 เพื่อฟัง (UK)</p></header>
+<div class="tabs" id="tabs"></div>
+<main><div class="grid" id="grid"></div>
+<h2 class="th">ตารางคำศัพท์</h2>
+<div class="wrap"><table><thead><tr><th>ข้อ</th><th>Vocabulary</th><th>Part of speech</th><th>ประโยค</th><th class="th">แปล</th><th>เสียง</th></tr></thead><tbody id="tb"></tbody></table></div>
+</main>
+<script>
+const RAW=`#B
+bom[b]|bɒm|💣|ระเบิด|The bomb was found early.|พบระเบิดตั้งแต่เนิ่น ๆ|n.
+clim[b]|klaɪm|🧗|ปีน|We climb the hill daily.|เราปีนเขาทุกวัน|v.
+com[b]|kəʊm|💇|หวี|Use a comb on wet hair.|ใช้หวีกับผมเปียก|n., v.
+crum[b]|krʌm|🍞|เศษขนมปัง|A crumb fell on the floor.|เศษขนมปังตกบนพื้น|n.
+de[b]t|det|💸|หนี้สิน|He paid off his debt.|เขาใช้หนี้หมดแล้ว|n.
+dou[b]t|daʊt|❓|สงสัย|I doubt he will come.|ฉันสงสัยว่าเขาจะมา|n., v.
+dum[b]|dʌm|🤐|โง่ / เป็นใบ้|That was a dumb idea.|นั่นเป็นความคิดที่โง่|adj.
+lam[b]|læm|🐑|ลูกแกะ|The lamb eats grass.|ลูกแกะกินหญ้า|n.
+lim[b]|lɪm|🦵|แขนขา|He broke a limb.|เขาแขนหรือขาหัก|n.
+num[b]|nʌm|🥶|ชา|My hand is numb.|มือของฉันชา|adj.
+plum[b]er|ˈplʌmər|🔧|ช่างประปา|The plumber fixed the pipe.|ช่างประปาซ่อมท่อ|n.
+su[b]tle|ˈsʌtl|🌫️|ละเอียดอ่อน|There is a subtle change.|มีการเปลี่ยนแปลงเล็กน้อย|adj.
+thum[b]|θʌm|👍|นิ้วหัวแม่มือ|She hurt her thumb.|เธอทำนิ้วหัวแม่มือเจ็บ|n.
+succum[b]|səˈkʌm|😵|ยอมจำนน|He did not succumb to fear.|เขาไม่ยอมแพ้ต่อความกลัว|v.
+#T
+bu[t]cher|ˈbʊtʃər|🥩|คนขายเนื้อ|The butcher cut the meat.|คนขายเนื้อหั่นเนื้อ|n.
+cas[t]le|ˈkæsl|🏰|ปราสาท|The castle is very old.|ปราสาทแห่งนี้เก่าแก่มาก|n.
+Chris[t]mas|ˈkrɪsməs|🎄|คริสต์มาส|We love Christmas.|เรารักเทศกาลคริสต์มาส|n.
+fas[t]en|ˈfæsn|🔗|คาด / ติดให้แน่น|Fasten your seat belt.|คาดเข็มขัดนิรภัยด้วย|v.
+hus[t]le|ˈhʌsl|🏃|เร่งรีบ / ผลักดัน|The city is full of hustle.|เมืองนี้เต็มไปด้วยความเร่งรีบ|v., n.
+lis[t]en|ˈlɪsn|👂|ฟัง|Listen to the teacher.|ฟังครูพูด|v.
+ma[t]ch|mætʃ|⚽|การแข่งขัน / จับคู่|We watched the match.|เราดูการแข่งขัน|n., v.
+mor[t]gage|ˈmɔːrɡɪdʒ|🏠|สินเชื่อบ้าน|They pay a mortgage monthly.|พวกเขาผ่อนบ้านทุกเดือน|n.
+nes[t]le|ˈnesl|🐣|ซุกตัว|The cat nestled in my lap.|แมวซุกตัวบนตักฉัน|v.
+of[t]en|ˈɔːftən|🔁|บ่อย ๆ|I often walk to school.|ฉันมักเดินไปโรงเรียน|adv.
+rus[t]le|ˈrʌsl|🍂|เสียงกรอบแกรบ|Leaves rustle in the wind.|ใบไม้ส่งเสียงกรอบแกรบตามลม|v., n.
+wi[t]ch|wɪtʃ|🧙|แม่มด|The witch rode a broom.|แม่มดขี่ไม้กวาด|n.
+sof[t]en|ˈsɔːfn|🧈|ทำให้นุ่ม|Heat will soften the butter.|ความร้อนทำให้เนยนุ่ม|v.
+wa[t]ch|wɑːtʃ|⌚|ดู / นาฬิกาข้อมือ|I watch TV at night.|ฉันดูทีวีตอนกลางคืน|v., n.
+#H
+g[h]ost|ɡəʊst|👻|ผี|The ghost scared him.|ผีทำให้เขากลัว|n.
+[h]onest|ˈɑːnɪst|😇|ซื่อสัตย์|She is an honest girl.|เธอเป็นเด็กซื่อสัตย์|adj.
+[h]our|ˈaʊər|⏰|ชั่วโมง|Wait for one hour.|รอหนึ่งชั่วโมง|n.
+mec[h]anic|məˈkænɪk|👨‍🔧|ช่างเครื่อง|The mechanic checked my car.|ช่างตรวจรถของฉัน|n.
+r[h]ythm|ˈrɪðəm|🥁|จังหวะ|I love the rhythm.|ฉันชอบจังหวะนี้|n.
+sc[h]eme|skiːm|🗂️|แผนการ|It is a clever scheme.|เป็นแผนการที่ฉลาด|n.
+sc[h]ool|skuːl|🏫|โรงเรียน|I go to school by bus.|ฉันไปโรงเรียนด้วยรถเมล์|n.
+w[h]at|wɒt|❔|อะไร|What is your name?|คุณชื่ออะไร|pron.
+w[h]en|wen|🕒|เมื่อไร|When do you wake up?|คุณตื่นกี่โมง|adv.
+w[h]ere|weə(r)|📍|ที่ไหน|Where do you live?|คุณอยู่ที่ไหน|adv.
+w[h]ether|ˈweðər|🤷|ไม่ว่าจะ / หรือไม่|I don’t know whether he left.|ฉันไม่รู้ว่าเขาไปหรือยัง|conj.
+w[h]ile|waɪl|⏳|ในขณะที่|Sing while you work.|ร้องเพลงขณะทำงาน|conj.
+w[h]ite|waɪt|⬜|สีขาว|She wore a white dress.|เธอใส่ชุดสีขาว|adj.
+w[h]y|waɪ|🙋|ทำไม|Why are you late?|ทำไมคุณมาสาย|adv.
+#K
+[k]nee|niː|🦵|หัวเข่า|He hurt his knee.|เขาเจ็บหัวเข่า|n.
+[k]new|nuː|💡|รู้ (อดีต)|I knew the answer.|ฉันรู้คำตอบ|v.
+[k]nickers|ˈnɪkərz|🩲|กางเกงชั้นในหญิง|She bought new knickers.|เธอซื้อกางเกงชั้นในตัวใหม่|n.
+[k]nife|naɪf|🔪|มีด|Cut it with a knife.|ใช้มีดตัดมัน|n.
+[k]night|naɪt|🛡️|อัศวิน|The knight rode a horse.|อัศวินขี่ม้า|n.
+[k]nit|nɪt|🧶|ถักไหมพรม|She can knit a scarf.|เธอถักผ้าพันคอได้|v.
+[k]nitting|ˈnɪtɪŋ|🧵|การถักไหมพรม|Knitting relaxes me.|การถักไหมพรมทำให้ฉันผ่อนคลาย|n.
+[k]nob|nɒb|🚪|ลูกบิด|Turn the door knob.|หมุนลูกบิดประตู|n.
+[k]nock|nɒk|✊|เคาะ|Please knock first.|กรุณาเคาะก่อน|v.
+[k]not|nɒt|🪢|ปม|Tie a strong knot.|ผูกปมให้แน่น|n.
+[k]now|nəʊ|🧠|รู้|I know your name.|ฉันรู้ชื่อคุณ|v.
+[k]nowledge|ˈnɒl.ɪdʒ|📚|ความรู้|Knowledge is power.|ความรู้คืออำนาจ|n.
+[k]nuckle|ˈnʌk.əl|👊|ข้อนิ้ว|He bruised a knuckle.|เขาข้อนิ้วช้ำ|n.
+[k]nack|næk|🎯|ความชำนาญ|She has a knack for art.|เธอมีพรสวรรค์ด้านศิลปะ|n.
+#W
+ans[w]er|ˈɑːn.sər / ˈæn.sɚ|✅|ตอบ / คำตอบ|Please answer the question.|กรุณาตอบคำถาม|n., v.
+s[w]ord|sɔːd|⚔️|ดาบ|The sword is sharp.|ดาบคมมาก|n.
+t[w]o|tuː|2️⃣|สอง|I have two cats.|ฉันมีแมวสองตัว|num.
+[w]hole|həʊl|🍕|ทั้งหมด|He ate the whole pizza.|เขากินพิซซ่าทั้งถาด|adj.
+[w]rack|ræk|🌊|ซากปรักหักพัง|The ship went to wrack and ruin.|เรือพังพินาศ|n.
+[w]rap|ræp|🎁|ห่อ|Wrap the gift nicely.|ห่อของขวัญให้สวย|v.
+[w]rist|rɪst|⌚|ข้อมือ|She wears a watch on her wrist.|เธอใส่นาฬิกาที่ข้อมือ|n.
+[w]rinkle|ˈrɪŋ.kəl|👵|รอยย่น|There is a wrinkle on the shirt.|เสื้อมีรอยย่น|n.
+[w]reck|rek|🚗|ซากรถ / ทำลาย|The car was a wreck.|รถกลายเป็นซาก|n., v.
+[w]ren|ren|🐦|นกกระจิบ|A wren sang in the tree.|นกกระจิบร้องบนต้นไม้|n.
+[w]rench|rentʃ|🔧|ประแจ|Use a wrench to tighten it.|ใช้ประแจขันให้แน่น|n.
+[w]restle|ˈres.əl|🤼|ปล้ำ|They wrestle on weekends.|พวกเขาปล้ำกันวันหยุด|v.
+[w]riting|ˈraɪ.tɪŋ|✍️|การเขียน|Her writing is neat.|งานเขียนของเธอเรียบร้อย|n.
+[w]riggle|ˈrɪɡ.əl|🪱|ดิ้นยุกยิก|The worm began to wriggle.|ไส้เดือนเริ่มดิ้นยุกยิก|v.
+[w]rote|rəʊt|📝|เขียน (อดีต)|He wrote a letter.|เขาเขียนจดหมาย|v.
+#G
+si[g]n|saɪn|🪧|ป้าย / เซ็นชื่อ|Please sign here.|กรุณาเซ็นชื่อตรงนี้|n., v.
+campai[g]n|kæmˈpeɪn|📣|การรณรงค์|They started a campaign.|พวกเขาเริ่มการรณรงค์|n.
+champa[g]ne|ʃæmˈpeɪn|🍾|แชมเปญ|We opened champagne.|เราเปิดแชมเปญ|n.
+colo[g]ne|kəˈləʊn|🧴|น้ำหอมโคโลญ|He wears cologne.|เขาใช้น้ำหอมโคโลญ|n.
+[g]nome|nəʊm|🧙‍♂️|คนแคระในนิทาน|A gnome lives in the garden.|คนแคระอาศัยอยู่ในสวน|n.
+desi[g]n|dɪˈzaɪn|📐|ออกแบบ|She will design a logo.|เธอจะออกแบบโลโก้|v., n.
+resi[g]n|rɪˈzaɪn|📄|ลาออก|He decided to resign.|เขาตัดสินใจลาออก|v.
+forei[g]ner|ˈfɒr.ə.nər|🌏|ชาวต่างชาติ|A foreigner asked for help.|ชาวต่างชาติขอความช่วยเหลือ|n.
+ali[g]n|əˈlaɪn|📏|จัดให้ตรงกัน|Align the text to the left.|จัดข้อความชิดซ้าย|v.
+assi[g]n|əˈsaɪn|📋|มอบหมาย|The boss will assign tasks.|เจ้านายจะมอบหมายงาน|v.
+#U
+g[u]ard|ɡɑːd|💂|ยาม / ป้องกัน|The guard opened the gate.|ยามเปิดประตู|n., v.
+bisc[u]it|ˈbɪs.kɪt|🍪|บิสกิต|I ate a biscuit.|ฉันกินบิสกิต|n.
+vog[u]e|vəʊɡ|👗|แฟชั่นที่กำลังนิยม|Hats are in vogue.|หมวกกำลังเป็นที่นิยม|n.
+b[u]ilding|ˈbɪl.dɪŋ|🏢|อาคาร|The building is tall.|อาคารหลังนี้สูง|n.
+ro[u]ge|ruːʒ|💄|ผัดแก้ม / ลิปสีแดง|She put on rouge.|เธอทาผัดแก้ม|n.
+tong[u]e|tʌŋ|👅|ลิ้น|Don’t bite your tongue.|อย่ากัดลิ้นตัวเอง|n.
+g[u]ilty|ˈɡɪl.ti|⚖️|รู้สึกผิด / มีความผิด|He felt guilty.|เขารู้สึกผิด|adj.
+g[u]itar|ɡɪˈtɑːr|🎸|กีตาร์|He plays the guitar.|เขาเล่นกีตาร์|n.
+g[u]ess|ɡes|🤔|เดา|Can you guess my age?|คุณเดาอายุฉันได้ไหม|v., n.
+g[u]est|ɡest|🛎️|แขก|We have a guest tonight.|คืนนี้เรามีแขก|n.
+#D
+Ba[d]ge|bædʒ|🏅|เข็มกลัด / ป้ายชื่อ|He wears a badge.|เขาติดป้ายชื่อ|n.
+e[d]ge|edʒ|📐|ขอบ|Stay off the edge.|อย่าเข้าไปใกล้ขอบ|n.
+han[d]some|ˈhæn.səm|🤵|หล่อ|He is very handsome.|เขาหล่อมาก|adj.
+he[d]ge|hedʒ|🌿|รั้วต้นไม้|Cut the hedge short.|ตัดแต่งรั้วต้นไม้ให้สั้น|n.
+san[d]wich|ˈsæn.wɪdʒ|🥪|แซนด์วิช|I made a sandwich.|ฉันทำแซนด์วิช|n.
+we[d]ge|wedʒ|🧀|ชิ้นรูปลิ่ม|Cut a wedge of cheese.|หั่นชีสเป็นชิ้นรูปลิ่ม|n.
+We[d]nesday|ˈwenz.deɪ|📆|วันพุธ|We meet on Wednesday.|เรานัดกันวันพุธ|n.
+#AL
+artistic[al]ly|ɑːˈtɪs.tɪ.kəl.i|🎨|อย่างมีศิลปะ|She paints artistically.|เธอวาดภาพอย่างมีศิลปะ|adv.
+logic[al]ly|ˈlɒdʒ.ɪ.kəl.i|🧩|อย่างมีเหตุผล|Think logically.|คิดอย่างมีเหตุผล|adv.
+music[al]ly|ˈmjuː.zɪ.kəl.i|🎵|ในทางดนตรี|He is musically gifted.|เขามีพรสวรรค์ทางดนตรี|adv.
+physic[al]ly|ˈfɪz.ɪ.kəl.i|🏋️|ทางร่างกาย|She is physically strong.|เธอแข็งแรงทางร่างกาย|adv.
+critic[al]ly|ˈkrɪt.ɪ.kəl.i / ˈkrɪt.ɪ.kli|🧐|อย่างวิพากษ์|Read critically.|อ่านอย่างวิพากษ์วิจารณ์|adv.
+#C
+cons[c]ience|ˈkɒn.ʃəns|😇|ความสำนึกผิดชอบ|He has a clear conscience.|เขามีมโนธรรมที่ปลอดโปร่ง|n.
+cons[c]ious|ˈkɒn.ʃəs|👁️|มีสติ|She is fully conscious.|เธอมีสติสมบูรณ์|adj.
+cres[c]ent|ˈkres.ənt|🌙|เสี้ยวพระจันทร์|A crescent moon rose.|พระจันทร์เสี้ยวขึ้นมา|n.
+des[c]end|dɪˈsend|⬇️|ลงมา|We descend the stairs.|เราเดินลงบันได|v.
+des[c]ent|dɪˈsent|🪂|การลงมา|The descent was quick.|การลงมาเร็วมาก|n.
+dis[c]iple|dɪˈsaɪ.pəl|🙏|สาวก|He is a loyal disciple.|เขาเป็นสาวกที่ภักดี|n.
+evanes[c]e|ˌiː.vəˈnes|🫥|ค่อย ๆ จางหาย|The fog will evanesce.|หมอกจะค่อย ๆ จางหาย|v.
+fas[c]inate|ˈfæs.ən.eɪt|🤩|ทำให้หลงใหล|Space can fascinate kids.|อวกาศทำให้เด็ก ๆ หลงใหล|v.
+fluores[c]ent|flɔːˈres.ənt|💡|เรืองแสง|A fluorescent light flickered.|หลอดฟลูออเรสเซนต์กะพริบ|adj.
+mus[c]le|ˈmʌs.əl|💪|กล้ามเนื้อ|He built strong muscles.|เขาสร้างกล้ามเนื้อแข็งแรง|n.
+#N
+autum[n]|ˈɔː.təm|🍁|ฤดูใบไม้ร่วง|Leaves fall in autumn.|ใบไม้ร่วงในฤดูใบไม้ร่วง|n.
+colum[n]|ˈkɒl.əm|🏛️|เสา / คอลัมน์|A column holds the roof.|เสาค้ำหลังคา|n.
+dam[n]|dæm|😖|ให้ตายสิ|Damn, I forgot my keys!|ให้ตายสิ ฉันลืมกุญแจ!|interj.
+hym[n]|hɪm|⛪|เพลงสวด|They sang a hymn.|พวกเขาร้องเพลงสวด|n.
+#E
+ag[e]|eɪdʒ|🎂|อายุ|What is your age?|คุณอายุเท่าไร|n.
+breath[e]|briːð|🌬️|หายใจ|Breathe deeply.|หายใจลึก ๆ|v.
+bridg[e]|brɪdʒ|🌉|สะพาน|We crossed the bridge.|เราข้ามสะพาน|n.
+chang[e]|tʃeɪndʒ|🔄|เปลี่ยนแปลง|People can change.|คนเราเปลี่ยนแปลงได้|v., n.
+cloth[e]s|kləʊðz|👕|เสื้อผ้า|Put on your clothes.|ใส่เสื้อผ้าซะ|n.
+gen[e]|dʒiːn|🧬|ยีน|Genes carry information.|ยีนเก็บข้อมูลทางพันธุกรรม|n.
+hat[e]|heɪt|😠|เกลียด|I hate waiting.|ฉันเกลียดการรอ|v.
+#S
+ai[s]le|aɪl|🛒|ทางเดิน|Walk down the aisle.|เดินไปตามทางเดิน|n.
+i[s]land|ˈaɪ.lənd|🏝️|เกาะ|We live on an island.|เราอาศัยอยู่บนเกาะ|n.
+#P
+cou[p]|kuː|⚡|รัฐประหาร / ความสำเร็จเหนือความคาดหมาย|The army staged a coup.|กองทัพทำรัฐประหาร|n.
+cu[p]board|ˈkʌb.əd|🗄️|ตู้เก็บของ|The plates are in the cupboard.|จานอยู่ในตู้|n.
+[p]neumonia|njuːˈməʊ.ni.ə|🫁|ปอดอักเสบ|He caught pneumonia.|เขาเป็นปอดอักเสบ|n.
+[p]seudo|ˈsjuː.dəʊ|🎭|เทียม / ปลอม|It is a pseudo name.|นั่นเป็นชื่อปลอม|adj.
+[p]sychiatrist|saɪˈkaɪə.trɪst / sɪˈkaɪə.trɪst|🩺|จิตแพทย์|She sees a psychiatrist.|เธอไปพบจิตแพทย์|n.
+[p]sychic|ˈsaɪ.kɪk|🔮|ผู้มีพลังจิต|The psychic read my palm.|หมอดูอ่านลายมือฉัน|n., adj.
+[p]sychology|saɪˈkɒl.ə.dʒi|🧠|จิตวิทยา|I study psychology.|ฉันเรียนจิตวิทยา|n.
+[p]sychotherapy|ˌsaɪ.kəʊˈθer.ə.pi|🛋️|จิตบำบัด|Psychotherapy can help.|จิตบำบัดช่วยได้|n.
+[p]sychotic|saɪˈkɒt.ɪk|🌀|เกี่ยวกับโรคจิต|He had a psychotic episode.|เขามีอาการทางจิต|adj.
+ras[p]berry|ˈrɑːz.bər.i|🍓|ราสเบอร์รี|I love raspberry jam.|ฉันชอบแยมราสเบอร์รี|n.
+#L
+a[l]mond|ˈɑː.mənd|🌰|อัลมอนด์|Almond milk is tasty.|นมอัลมอนด์อร่อย|n.
+ta[l]k|tɔːk|🗣️|พูดคุย|Let’s talk later.|ไว้คุยกันทีหลังนะ|v., n.
+ca[l]f|kɑːf|🐮|ลูกวัว / น่อง|The calf is sleeping.|ลูกวัวกำลังนอน|n.
+ca[l]m|kɑːm|😌|สงบ|Stay calm.|ใจเย็น ๆ|adj.
+cha[l]k|tʃɔːk|🖍️|ชอล์ก|Write with chalk.|เขียนด้วยชอล์ก|n.
+wa[l]k|wɔːk|🚶|เดิน|Let’s walk home.|เดินกลับบ้านกันเถอะ|v.
+fo[l]k|fəʊk|🪕|ชาวบ้าน / ดนตรีโฟล์ก|I like folk music.|ฉันชอบดนตรีโฟล์ก|n.
+ha[l]f|hɑːf|🌗|ครึ่ง|Cut it in half.|ตัดให้เป็นครึ่ง|n.
+pa[l]m|pɑːm|🌴|ฝ่ามือ / ต้นปาล์ม|She held it in her palm.|เธอถือมันไว้ในฝ่ามือ|n.
+sa[l]mon|ˈsæm.ən|🐟|ปลาแซลมอน|We had grilled salmon.|เรากินแซลมอนย่าง|n.`;
+const G=[];let cur=null;
+RAW.split("\n").forEach(l=>{if(l[0]==="#"){cur={n:"Silent "+l.slice(1),w:[]};G.push(cur)}else{const[w,i,e,t,s,st,p]=l.split("|");cur.w.push({w,i,e,t,s,st,p})}});
+const P=["#fde2e4","#e2ece9","#dfe7fd","#fff1e6","#e8e0f5","#d7f0ef","#fcefc7","#f4dcec"],Q=["#fff0f1","#f1f7f5","#eff3ff","#fff8f1","#f4f0fa","#ebf8f7","#fffaea","#faeef6"];
+const $=id=>document.getElementById(id);
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ const rank=x=>(/natural|online|google|premium|enhanced/i.test(x.name)?2:0)+(/daniel|serena|libby|sonia|ryan|kate|oliver/i.test(x.name)?1:0);
+ voice=vs.sort((a,b)=>rank(b)-rank(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,r){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=r||.85;speechSynthesis.speak(u)}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain=w=>w.replace(/[\[\]]/g,'');
+const hl=w=>esc(w).replace(/\[(.+?)\]/g,'<span class="sl">$1</span>');
+function show(n){
+ const g=G[n];
+ document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',i===n));
+ $('grid').innerHTML=g.w.map((d,k)=>`<div class="card" style="--p:${P[k%8]};--q:${Q[k%8]}"><div class="in">
+ <div class="face"><div class="emo">${d.e}</div><div class="w">${hl(d.w)}</div><div class="ipa">/${d.i}/</div><div class="pos">(${d.p})</div><div class="pw">${esc(plain(d.w))}</div><button class="sp" data-say="${esc(plain(d.w))}" data-r=".7">🔊</button></div>
+ <div class="face back"><div class="w" style="font-size:20px">${hl(d.w)}</div><div class="pos">(${d.p})</div><div class="mean th">${d.t}</div><div class="en">${esc(d.s)}</div><div class="st th">${d.st}</div><button class="sp" data-say="${esc(d.s)}">🔊 ประโยค</button></div></div></div>`).join('');
+ $('tb').innerHTML=g.w.map((d,k)=>`<tr><td>${k+1}</td><td><span class="vw">${hl(d.w)}</span> <button class="sp2" data-say="${esc(plain(d.w))}" data-r=".7">🔊</button><div class="table-ipa">/${d.i}/</div></td><td class="e"><i>${d.p}</i></td><td class="e">${esc(d.s)}</td><td class="t">${d.st}</td><td><button class="sp2" data-say="${esc(d.s)}">🔊</button></td></tr>`).join('');
+}
+$('tabs').innerHTML=G.map((g,i)=>`<button class="tab" data-n="${i}">${g.n}</button>`).join('');
+document.addEventListener('click',e=>{
+ const s=e.target.closest('[data-say]');if(s){e.stopPropagation();say(s.dataset.say,parseFloat(s.dataset.r));return}
+ const t=e.target.closest('.tab');if(t){show(+t.dataset.n);return}
+ const c=e.target.closest('.card');if(c)c.classList.toggle('flip');
+});
+show(0);
+</script></body></html>

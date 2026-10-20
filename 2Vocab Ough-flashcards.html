@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Words Containing -ough</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6fb;--sf:#fff;--tx:#2b2f3a;--mu:#6b7280;--ac:#e0457b;--bd:#e4e2ee;--hd:#f1eefb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#14161d;--sf:#1d2029;--tx:#eceef5;--mu:#9aa1b2;--ac:#ff7aa8;--bd:#313645;--hd:#262a38}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#14161d;--sf:#1d2029;--tx:#eceef5;--mu:#9aa1b2;--ac:#ff7aa8;--bd:#313645;--hd:#262a38}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',Arial,sans-serif}
+.th{font-family:'Sarabun','Thai Saraban',Tahoma,sans-serif}
+header{padding:18px 14px 2px;text-align:center}
+h1{margin:0;font-size:24px}
+header p{margin:4px 0 0;color:var(--mu);font-size:14px}
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:12px 10px}
+.tab{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:6px 13px;border-radius:999px;cursor:pointer;font:600 14px Calibri,Carlito,Arial,sans-serif}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:1050px;margin:0 auto;padding:0 12px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:12px}
+.card{height:214px;perspective:800px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#2b2f3a;background:var(--p);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.back{transform:rotateY(180deg);background:var(--q)}
+.emo{font-size:40px;line-height:1}
+.w{font-size:28px;font-weight:700;line-height:1.1}
+.sl{color:#e0457b;background:rgba(255,255,255,.75);border-radius:6px;padding:0 3px;text-decoration:underline wavy}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:15px}
+.pos{font-size:13px;font-style:italic;opacity:.8}.pw{font-size:15px;opacity:.9}
+.sp{border:0;background:rgba(255,255,255,.85);color:#2b2f3a;border-radius:999px;padding:4px 11px;cursor:pointer;font-size:13px}
+.sp:hover{background:#fff}
+.mean{font-size:20px;font-weight:600}
+.en{font-size:14px}
+.st{font-size:13px;color:#4b5060}
+h2{font-size:19px;margin:28px 0 10px}
+.wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:16px;background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:8px 11px;border-bottom:1px solid var(--bd);text-align:left;font-size:15px}
+th{background:var(--hd);font-size:13px}
+td.e{font-family:Calibri,Carlito,Arial,sans-serif}
+td.t{font-family:'Sarabun','Thai Saraban',Tahoma,sans-serif}
+td .sl{background:#ffe3ee}
+.vw{font-weight:700;font-size:17px}
+.table-ipa{font-family:'Times New Roman',Times,serif;color:var(--mu);font-size:13px}
+.sp2{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:999px;padding:3px 10px;cursor:pointer}
+</style></head><body>
+<header><h1>Words Containing “-ough”</h1><p class="th">คลิกการ์ดเพื่อพลิกดูคำแปล · ตัวอักษรสีชมพูคือ “ough” · กด 🔊 เพื่อฟัง (UK)</p></header>
+<div class="tabs" id="tabs"></div>
+<main><div class="grid" id="grid"></div>
+<h2 class="th">ตารางคำศัพท์</h2>
+<div class="wrap"><table><thead><tr><th>ข้อ</th><th>Vocabulary</th><th>Part of speech</th><th>ประโยค</th><th class="th">แปล</th><th>เสียง</th></tr></thead><tbody id="tb"></tbody></table></div>
+</main>
+<script>
+const RAW=`#Words Containing “-ough”
+alth[ough]|ɔːlˈðəʊ|🤝|แม้ว่า|Although it rained, we went out.|แม้ฝนตก เราก็ออกไปข้างนอก|conj.
+b[ough]|baʊ|🌳|กิ่งไม้ใหญ่|A bird sat on the bough.|นกเกาะอยู่บนกิ่งไม้ใหญ่|n.
+b[ough]t|bɔːt|🛍️|ซื้อ (อดีต)|I bought a new bag.|ฉันซื้อกระเป๋าใบใหม่|v.
+br[ough]t|brɔːt|🎒|นำมา (อดีต)|She brought her lunch.|เธอนำอาหารกลางวันมา|v.
+c[ough]|kɒf|🤧|ไอ|He has a bad cough.|เขาไอหนัก|n., v.
+d[ough]|dəʊ|🥟|แป้งโดว์|Knead the dough well.|นวดแป้งให้ดี|n.
+d[ough]nut|ˈdəʊnʌt|🍩|โดนัท|I ate a doughnut.|ฉันกินโดนัท|n.
+en[ough]|ɪˈnʌf|✅|พอเพียง|We have enough food.|เรามีอาหารพอ|adj., adv.
+f[ough]t|fɔːt|🥊|ต่อสู้ (อดีต)|They fought bravely.|พวกเขาต่อสู้อย่างกล้าหาญ|v.
+furl[ough]|ˈfɜːləʊ|🏖️|การให้หยุดงานชั่วคราว|He was on furlough.|เขาถูกให้หยุดงานชั่วคราว|n.
+hicc[ough]|ˈhɪkʌp|😮|สะอึก|I got the hiccough.|ฉันสะอึก|n., v.
+l[ough]|lɒk|🏞️|ทะเลสาบ (ไอร์แลนด์)|They fished in the lough.|พวกเขาตกปลาในทะเลสาบ|n.
+[ough]t|ɔːt|☝️|ควรจะ|You ought to rest.|คุณควรพักผ่อน|modal v.
+pl[ough]|plaʊ|🚜|คันไถ|The farmer used a plough.|ชาวนาใช้คันไถ|n., v.
+r[ough]|rʌf|🪨|หยาบ / ขรุขระ|The road is rough.|ถนนขรุขระ|adj.
+r[ough]age|ˈrʌfɪdʒ|🥦|อาหารที่มีกากใย|Fruit is good roughage.|ผลไม้เป็นอาหารกากใยที่ดี|n.
+r[ough]ly|ˈrʌfli|📏|ประมาณ|It costs roughly ten dollars.|ราคาประมาณสิบดอลลาร์|adv.
+sl[ough] (skin)|slʌf|🐍|ลอกคราบ|Snakes slough off old skin.|งูลอกคราบเก่า|v.
+sl[ough] (swamp)|slaʊ|🌾|หนองน้ำ|The frog lives in the slough.|กบอาศัยอยู่ในหนองน้ำ|n.
+s[ough]t|sɔːt|🔎|แสวงหา (อดีต)|He sought advice.|เขาขอคำแนะนำ|v.
+thor[ough]|ˈθʌrə|🧹|ละเอียดถี่ถ้วน|She did a thorough check.|เธอตรวจสอบอย่างละเอียด|adj.
+thor[ough]ly|ˈθʌrəli|🧼|อย่างถี่ถ้วน|Wash your hands thoroughly.|ล้างมืออย่างทั่วถึง|adv.
+thor[ough]fare|ˈθʌrəfeə|🛣️|ถนนสายหลัก|The thoroughfare was busy.|ถนนสายหลักคับคั่ง|n.
+th[ough]t|θɔːt|💭|ความคิด / คิด (อดีต)|I thought about it.|ฉันคิดเรื่องนั้น|n., v.
+th[ough]tful|ˈθɔːtfəl|🎁|ใส่ใจ|It was a thoughtful gift.|เป็นของขวัญที่ใส่ใจ|adj.
+th[ough]tless|ˈθɔːtləs|🙄|ไม่ไตร่ตรอง|That was a thoughtless remark.|นั่นเป็นคำพูดที่ไม่ไตร่ตรอง|adj.
+th[ough]tfulness|ˈθɔːtfəlnəs|💐|ความเอาใจใส่|Thank you for your thoughtfulness.|ขอบคุณที่เอาใจใส่|n.
+t[ough]|tʌf|💪|แกร่ง / เหนียว|The meat is tough.|เนื้อเหนียว|adj.
+t[ough]en|ˈtʌfən|🛡️|ทำให้แข็งแกร่ง|Exercise will toughen you.|การออกกำลังกายทำให้คุณแกร่งขึ้น|v.
+t[ough]ness|ˈtʌfnəs|🦾|ความแกร่ง|I admire her toughness.|ฉันชื่นชมความแกร่งของเธอ|n.
+t[ough]ly|ˈtʌfli|😠|อย่างแข็งกร้าว|He answered toughly.|เขาตอบอย่างแข็งกร้าว|adv.
+tr[ough]|trɒf|🐖|รางอาหารสัตว์|The pigs ate from the trough.|หมูกินจากราง|n.
+uncouth|ʌnˈkuːθ|🤪|หยาบคาย / ไม่สุภาพ|His manners are uncouth.|มารยาทของเขาหยาบคาย|adj.
+wr[ough]t|rɔːt|⚒️|ผ่านการตีขึ้นรูป|The gate is wrought iron.|ประตูทำจากเหล็กดัด|adj.`;
+const G=[];let cur=null;
+RAW.split("\n").forEach(l=>{if(l[0]==="#"){cur={n:l.slice(1),w:[]};G.push(cur)}else{const[w,i,e,t,s,st,p]=l.split("|");cur.w.push({w,i,e,t,s,st,p})}});
+const P=["#fde2e4","#e2ece9","#dfe7fd","#fff1e6","#e8e0f5","#d7f0ef","#fcefc7","#f4dcec"],Q=["#fff0f1","#f1f7f5","#eff3ff","#fff8f1","#f4f0fa","#ebf8f7","#fffaea","#faeef6"];
+const $=id=>document.getElementById(id);
+let voice=null;
+function pick(){const vs=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ const rank=x=>(/natural|online|google|premium|enhanced/i.test(x.name)?2:0)+(/daniel|serena|libby|sonia|ryan|kate|oliver/i.test(x.name)?1:0);
+ voice=vs.sort((a,b)=>rank(b)-rank(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,r){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=r||.85;speechSynthesis.speak(u)}
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain=w=>w.replace(/[\[\]]/g,'').replace(/\s*\(.*\)/,'');
+const hl=w=>esc(w).replace(/\[(.+?)\]/g,'<span class="sl">$1</span>');
+function show(n){
+ const g=G[n];
+ document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',i===n));
+ $('grid').innerHTML=g.w.map((d,k)=>`<div class="card" style="--p:${P[k%8]};--q:${Q[k%8]}"><div class="in">
+ <div class="face"><div class="emo">${d.e}</div><div class="w">${hl(d.w)}</div><div class="ipa">/${d.i}/</div><div class="pos">(${d.p})</div><div class="pw">${esc(plain(d.w))}</div><button class="sp" data-say="${esc(plain(d.w))}" data-r=".7">🔊</button></div>
+ <div class="face back"><div class="w" style="font-size:20px">${hl(d.w)}</div><div class="pos">(${d.p})</div><div class="mean th">${d.t}</div><div class="en">${esc(d.s)}</div><div class="st th">${d.st}</div><button class="sp" data-say="${esc(d.s)}">🔊 ประโยค</button></div></div></div>`).join('');
+ $('tb').innerHTML=g.w.map((d,k)=>`<tr><td>${k+1}</td><td><span class="vw">${hl(d.w)}</span> <button class="sp2" data-say="${esc(plain(d.w))}" data-r=".7">🔊</button><div class="table-ipa">/${d.i}/</div></td><td class="e"><i>${d.p}</i></td><td class="e">${esc(d.s)}</td><td class="t">${d.st}</td><td><button class="sp2" data-say="${esc(d.s)}">🔊</button></td></tr>`).join('');
+}
+$('tabs').innerHTML=G.map((g,i)=>`<button class="tab" data-n="${i}">${g.n}</button>`).join('');
+document.addEventListener('click',e=>{
+ const s=e.target.closest('[data-say]');if(s){e.stopPropagation();say(s.dataset.say,parseFloat(s.dataset.r));return}
+ const t=e.target.closest('.tab');if(t){show(+t.dataset.n);return}
+ const c=e.target.closest('.card');if(c)c.classList.toggle('flip');
+});
+show(0);
+</script></body></html>
