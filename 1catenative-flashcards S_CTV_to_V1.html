@@ -118,7 +118,7 @@ function show(n){
  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',i===n));
  if(!items.length){$('grid').innerHTML='<div class="empty th">แท็บนี้ยังไม่มีคำศัพท์ — ส่งคำศัพท์เพิ่มได้เลย</div>';$('tb').innerHTML='';return}
  $('grid').innerHTML=items.map((d,k)=>`<div class="card" data-k="${k}"><div class="in">
- <div class="face"><span class="no">${base+k+1}</span><div class="emo">${d.e}</div><div class="verb">${d.v}</div><div class="tov">to V1</div><div class="ipa">/${d.i}/</div><button class="sp" data-say="${esc(d.v)}" data-r=".7">🔊 ฟังเสียง</button><div class="hint th">คลิกเพื่อพลิกการ์ด</div></div>
+ <div class="face"><span class="no">${base+k+1}</span><div class="emo">${d.e}</div><div class="verb">${d.v}</div><div class="tov">to ${d.v1}</div><div class="ipa">/${d.i}/</div><button class="sp" data-say="${esc(d.v)}" data-r=".7">🔊 ฟังเสียง</button><div class="hint th">คลิกเพื่อพลิกการ์ด</div></div>
  <div class="face back"><div class="emo" style="font-size:40px">${d.e}</div><div class="mean th">${d.t}</div><div class="en">${esc(d.s)}</div><div class="th" style="color:var(--mu)">${d.st}</div><button class="sp" data-say="${esc(d.s)}">🔊 อ่านประโยค</button></div></div></div>`).join('');
  $('tb').innerHTML=items.map((d,k)=>`<tr><td>${base+k+1}</td><td class="e">${esc(d.s)}</td><td class="t">${d.st}</td><td class="e pat">${d.v} + to + ${d.v1}</td><td><button class="sp" data-say="${esc(d.s)}">🔊</button></td></tr>`).join('');
 }
