@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adverbs of Manner</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8ff;--tx:#3a3350;--sub:#6d6585;--bd:#e4dcf2;--tab:#fff;--act:#c9b8f0;--tbl:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1b2b;--tx:#ece8f7;--sub:#b4abd0;--bd:#3b3555;--tab:#2a2640;--act:#6a5aa8;--tbl:#262238}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,sans-serif;padding:16px}
+h1{font-size:1.35rem;text-align:center;margin:6px 0 2px;font-family:Calibri,Carlito,sans-serif}
+.sub{text-align:center;color:var(--sub);font-family:Saraban,Sarabun,sans-serif;font-size:.9rem;margin-bottom:14px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{border:1px solid var(--bd);background:var(--tab);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 .9rem Calibri,Carlito,sans-serif}
+.tabs button.on{background:var(--act);border-color:var(--act)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;max-width:1000px;margin:0 auto}
+.card{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#3a3350;box-shadow:0 3px 10px rgba(80,60,120,.15);box-sizing:border-box}
+.back{transform:rotateY(180deg);font-family:Saraban,Sarabun,sans-serif}
+.pic{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:8px}
+.w{font:700 1.5rem Calibri,Carlito,sans-serif}
+.ipa{font:1rem "Times New Roman",Times,serif;margin:2px 0 6px}
+.sp{border:0;background:rgba(255,255,255,.8);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:17px;color:#3a3350}
+.th{font-weight:600;font-size:1.25rem;margin-bottom:6px}
+.en{font:.95rem Calibri,Carlito,sans-serif;margin:2px 0}
+.tt{font-size:.88rem}
+.hint{font-size:.75rem;opacity:.65;margin-top:4px;font-family:Saraban,Sarabun,sans-serif}
+h2{max-width:1000px;margin:26px auto 8px;font-size:1.1rem}
+.wrap{max-width:1000px;margin:0 auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--tbl);border-radius:14px;overflow:hidden;font-family:Calibri,Carlito,sans-serif}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top;font-size:.92rem}
+th{background:var(--act)}
+td.i{font-family:"Times New Roman",Times,serif;white-space:nowrap}
+.t{font-family:Saraban,Sarabun,sans-serif;color:var(--sub);font-size:.85rem}
+td .sp{background:var(--act);width:32px;height:32px}
+</style></head><body>
+<h1>Adverbs of Manner</h1>
+<div class="sub">คลิกการ์ดเพื่อดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<h2 id="th2">Vocabulary Table</h2>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Example sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D0=[{n:"All",w:[["gently", "/ˈdʒent.li/", "🤲", "อย่างเบา ๆ, อย่างนุ่มนวล, อย่างอ่อนโยน", "She gently touched the baby.", "เธอสัมผัสทารกอย่างอ่อนโยน"], ["neatly", "/ˈniːt.li/", "🗂️", "อย่างเรียบร้อย", "He neatly folded his shirts.", "เขาพับเสื้ออย่างเรียบร้อย"], ["lightly", "/ˈlaɪt.li/", "🪶", "อย่างเบา ๆ", "Snow fell lightly on the roof.", "หิมะตกเบา ๆ บนหลังคา"], ["softly", "/ˈsɒft.li/", "🧸", "อย่างเบา ๆ, อย่างนุ่มนวล", "She spoke softly to the child.", "เธอพูดกับเด็กเบา ๆ"], ["gracefully", "/ˈɡreɪs.fəl.i/", "🦢", "อย่างสง่างาม", "The dancer moved gracefully.", "นักเต้นเคลื่อนไหวอย่างสง่างาม"], ["reluctantly", "/rɪˈlʌk.tənt.li/", "😕", "อย่างไม่เต็มใจ", "He reluctantly agreed to go.", "เขาตกลงไปอย่างไม่เต็มใจ"], ["quietly", "/ˈkwaɪ.ət.li/", "🤫", "อย่างเงียบ ๆ", "They quietly left the room.", "พวกเขาออกจากห้องอย่างเงียบ ๆ"], ["hesitantly", "/ˈhez.ɪ.tənt.li/", "🤔", "อย่างลังเล", "She hesitantly raised her hand.", "เธอยกมืออย่างลังเล"], ["carefully", "/ˈkeə.fəl.i/", "🧐", "อย่างระมัดระวัง", "Drive carefully in the rain.", "ขับรถอย่างระมัดระวังตอนฝนตก"], ["eagerly", "/ˈiː.ɡə.li/", "🤩", "อย่างกระตือรือร้น", "The kids eagerly opened the gifts.", "เด็ก ๆ เปิดของขวัญอย่างกระตือรือร้น"], ["moderately", "/ˈmɒd.ər.ət.li/", "⚖️", "อย่างพอประมาณ", "He exercises moderately.", "เขาออกกำลังกายอย่างพอประมาณ"], ["slowly", "/ˈsləʊ.li/", "🐢", "อย่างช้า ๆ", "Please speak slowly.", "กรุณาพูดช้า ๆ"], ["openly", "/ˈəʊ.pən.li/", "🗣️", "อย่างเปิดเผย", "She openly shared her ideas.", "เธอแบ่งปันความคิดอย่างเปิดเผย"], ["casually", "/ˈkæʒ.u.ə.li/", "👕", "อย่างสบาย ๆ, อย่างไม่เป็นทางการ", "He dressed casually for the party.", "เขาแต่งตัวสบาย ๆ ไปงานเลี้ยง"], ["calmly", "/ˈkɑːm.li/", "😌", "อย่างใจเย็น", "She calmly answered the question.", "เธอตอบคำถามอย่างใจเย็น"], ["clearly", "/ˈklɪə.li/", "🔍", "อย่างชัดเจน", "He explained the rule clearly.", "เขาอธิบายกฎอย่างชัดเจน"], ["normally", "/ˈnɔː.mə.li/", "📆", "ตามปกติ", "I normally get up at six.", "ปกติฉันตื่นหกโมงเช้า"], ["smoothly", "/ˈsmuːð.li/", "🛼", "อย่างราบรื่น", "The meeting went smoothly.", "การประชุมดำเนินไปอย่างราบรื่น"], ["sharply", "/ˈʃɑːp.li/", "📈", "อย่างเฉียบพลัน, อย่างคมชัด", "Prices rose sharply.", "ราคาพุ่งขึ้นอย่างฉับพลัน"], ["freely", "/ˈfriː.li/", "🕊️", "อย่างอิสระ", "Birds fly freely in the sky.", "นกบินอย่างอิสระบนท้องฟ้า"], ["politely", "/pəˈlaɪt.li/", "🙏", "อย่างสุภาพ", "He politely asked for help.", "เขาขอความช่วยเหลืออย่างสุภาพ"], ["hastily", "/ˈheɪ.stɪ.li/", "🏃", "อย่างเร่งรีบ", "She hastily packed her bag.", "เธอเก็บกระเป๋าอย่างเร่งรีบ"], ["vividly", "/ˈvɪv.ɪd.li/", "🎨", "อย่างชัดเจนและมีชีวิตชีวา", "I remember it vividly.", "ฉันจำมันได้อย่างชัดเจน"], ["firmly", "/ˈfɜːm.li/", "💪", "อย่างหนักแน่น", "He firmly refused the offer.", "เขาปฏิเสธข้อเสนออย่างหนักแน่น"], ["roughly", "/ˈrʌf.li/", "🪨", "อย่างรุนแรง, อย่างหยาบ ๆ", "Don’t handle it roughly.", "อย่าจับมันอย่างหยาบ ๆ"], ["forcefully", "/ˈfɔːs.fəl.i/", "🔨", "อย่างหนักแน่น, อย่างรุนแรง", "She forcefully pushed the door.", "เธอผลักประตูอย่างแรง"], ["boldly", "/ˈbəʊld.li/", "🦁", "อย่างกล้าหาญ", "He boldly spoke to the king.", "เขากล้าพูดกับพระราชาอย่างกล้าหาญ"], ["recklessly", "/ˈrek.ləs.li/", "🚗", "อย่างประมาท", "He drove recklessly.", "เขาขับรถอย่างประมาท"], ["passionately", "/ˈpæʃ.ən.ət.li/", "🔥", "อย่างมีอารมณ์รุนแรง, อย่างเร่าร้อน", "She passionately defended her idea.", "เธอปกป้องความคิดของเธออย่างเร่าร้อน"], ["quickly", "/ˈkwɪk.li/", "⚡", "อย่างรวดเร็ว", "Please come quickly.", "กรุณามาเร็ว ๆ"], ["fiercely", "/ˈfɪəs.li/", "🐯", "อย่างดุเดือด, อย่างรุนแรง", "The tigers fought fiercely.", "เสือต่อสู้กันอย่างดุเดือด"], ["intensely", "/ɪnˈtens.li/", "🎯", "อย่างเข้มข้น, อย่างแรงกล้า", "He studied intensely for the exam.", "เขาอ่านหนังสือสอบอย่างเข้มข้น"], ["strongly", "/ˈstrɒŋ.li/", "🏋️", "อย่างแข็งแรง, อย่างแรง", "I strongly agree with you.", "ฉันเห็นด้วยกับคุณอย่างยิ่ง"], ["madly", "/ˈmæd.li/", "🤪", "อย่างบ้าคลั่ง", "They are madly in love.", "พวกเขารักกันอย่างบ้าคลั่ง"], ["frantically", "/ˈfræn.tɪ.kəl.i/", "😰", "อย่างลนลาน", "She frantically searched for her keys.", "เธอลนลานหากุญแจ"], ["loudly", "/ˈlaʊd.li/", "📢", "อย่างเสียงดัง", "The children laughed loudly.", "เด็ก ๆ หัวเราะเสียงดัง"], ["brutally", "/ˈbruː.təl.i/", "🥊", "อย่างโหดร้าย", "The film shows war brutally.", "หนังเรื่องนี้แสดงสงครามอย่างโหดร้าย"], ["desperately", "/ˈdes.pər.ət.li/", "🆘", "อย่างสิ้นหวัง", "He desperately needed help.", "เขาต้องการความช่วยเหลืออย่างสิ้นหวัง"], ["savagely", "/ˈsæv.ɪdʒ.li/", "🐺", "อย่างป่าเถื่อน, อย่างโหดเหี้ยม", "The wolf attacked savagely.", "หมาป่าโจมตีอย่างโหดเหี้ยม"], ["aggressively", "/əˈɡres.ɪv.li/", "😤", "อย่างก้าวร้าว", "He argued aggressively.", "เขาเถียงอย่างก้าวร้าว"], ["angrily", "/ˈæŋ.ɡrɪ.li/", "😡", "อย่างโกรธเคือง", "She angrily slammed the door.", "เธอปิดประตูดังปังอย่างโกรธเคือง"], ["mercilessly", "/ˈmɜː.sɪ.ləs.li/", "⛈️", "อย่างไร้ความปรานี", "The sun beat down mercilessly.", "แสงแดดแผดเผาอย่างไร้ความปรานี"], ["violently", "/ˈvaɪ.ə.lənt.li/", "🌪️", "อย่างรุนแรงมาก, อย่างดุเดือด", "The storm shook the house violently.", "พายุเขย่าบ้านอย่างรุนแรง"]]}];
+const _f=D0.flatMap(t=>t.w);const D=[];for(let i=0;i<_f.length;i+=25)D.push({n:"Words "+(i+1)+"–"+Math.min(i+25,_f.length),w:_f.slice(i,i+25)});
+const C=["#ffd9e4","#d8ecff","#e0f5d8","#fff1c9","#e6dcff","#ffe2cf"];
+let cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;
+const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+const p=[/Natural|Online/i,/Google UK/i,/Libby|Sonia|Daniel|Serena|Kate/i];let b;
+for(const r of p){b=v.find(x=>r.test(x.name));if(b)break}
+u.voice=b||v[0]||null;speechSynthesis.speak(u)}catch(e){}}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+function render(){
+const tabs=document.getElementById("tabs");tabs.innerHTML="";
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.n+" ("+d.w.length+")";b.className=i==cur?"on":"";b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+const g=document.getElementById("grid");g.innerHTML="";
+D[cur].w.forEach((x,i)=>{const c=document.createElement("div");c.className="card";const bg=C[i%C.length];
+c.innerHTML=`<div class="in"><div class="face" style="background:${bg}"><div class="pic">${x[2]}</div><div class="w">${x[0]}</div><div class="ipa">${x[1]}</div><button class="sp" data-s="${x[0]}" title="Listen">🔊</button><div class="hint">คลิกเพื่อพลิกการ์ด</div></div><div class="face back" style="background:${bg}"><div class="th">${x[3]}</div><div class="en">${x[4]}</div><div class="tt">${x[5]}</div><button class="sp" style="margin-top:8px" data-s="${x[4]}" title="Listen">🔊</button></div></div>`;
+c.onclick=e=>{if(e.target.closest(".sp")){e.stopPropagation();speak(e.target.closest(".sp").dataset.s);return}c.classList.toggle("f")};
+g.appendChild(c)});
+document.getElementById("th2").textContent="Vocabulary Table – "+D[cur].n;
+const tb=document.getElementById("tb");tb.innerHTML="";
+D[cur].w.forEach((x,i)=>{const r=document.createElement("tr");
+r.innerHTML=`<td>${cur*25+i+1}</td><td><b>${x[0]}</b></td><td class="i">${x[1]}</td><td class="t">${x[3]}</td><td>${x[4]}<div class="t">${x[5]}</div></td><td><button class="sp" title="Listen">🔊</button></td>`;
+r.querySelector(".sp").onclick=()=>speak(x[4]);tb.appendChild(r)})}
+render();
+</script></body></html>

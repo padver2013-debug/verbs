@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adverbs of Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8ff;--tx:#3a3350;--sub:#6d6585;--bd:#e4dcf2;--tab:#fff;--act:#c9b8f0;--tbl:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1b2b;--tx:#ece8f7;--sub:#b4abd0;--bd:#3b3555;--tab:#2a2640;--act:#6a5aa8;--tbl:#262238}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,sans-serif;padding:16px}
+h1{font-size:1.35rem;text-align:center;margin:6px 0 2px;font-family:Calibri,Carlito,sans-serif}
+.sub{text-align:center;color:var(--sub);font-family:Saraban,Sarabun,sans-serif;font-size:.9rem;margin-bottom:14px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{border:1px solid var(--bd);background:var(--tab);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 .9rem Calibri,Carlito,sans-serif}
+.tabs button.on{background:var(--act);border-color:var(--act)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;max-width:1000px;margin:0 auto}
+.card{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#3a3350;box-shadow:0 3px 10px rgba(80,60,120,.15);box-sizing:border-box}
+.back{transform:rotateY(180deg);font-family:Saraban,Sarabun,sans-serif}
+.pic{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:8px}
+.w{font:700 1.5rem Calibri,Carlito,sans-serif}
+.ipa{font:1rem "Times New Roman",Times,serif;margin:2px 0 6px}
+.sp{border:0;background:rgba(255,255,255,.8);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:17px;color:#3a3350}
+.th{font-weight:600;font-size:1.25rem;margin-bottom:6px}
+.en{font:.95rem Calibri,Carlito,sans-serif;margin:2px 0}
+.tt{font-size:.88rem}
+.hint{font-size:.75rem;opacity:.65;margin-top:4px;font-family:Saraban,Sarabun,sans-serif}
+h2{max-width:1000px;margin:26px auto 8px;font-size:1.1rem}
+.wrap{max-width:1000px;margin:0 auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--tbl);border-radius:14px;overflow:hidden;font-family:Calibri,Carlito,sans-serif}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top;font-size:.92rem}
+th{background:var(--act)}
+td.i{font-family:"Times New Roman",Times,serif;white-space:nowrap}
+.t{font-family:Saraban,Sarabun,sans-serif;color:var(--sub);font-size:.85rem}
+td .sp{background:var(--act);width:32px;height:32px}
+</style></head><body>
+<h1>Adverbs of Time</h1>
+<div class="sub">คลิกการ์ดเพื่อดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<h2 id="th2">Vocabulary Table</h2>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Example sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D0=[{n:"All",w:[["afterward", "/ˈɑːf.tə.wəd/", "⏩", "หลังจากนั้น", "We ate, and afterward we went home.", "เรากินข้าว แล้วหลังจากนั้นก็กลับบ้าน"], ["already", "/ɔːlˈred.i/", "✅", "แล้ว, เรียบร้อยแล้ว", "I have already finished my homework.", "ฉันทำการบ้านเสร็จแล้ว"], ["always", "/ˈɔːl.weɪz/", "♾️", "เสมอ, ตลอดเวลา", "She always arrives on time.", "เธอมาตรงเวลาเสมอ"], ["before", "/bɪˈfɔː(r)/", "⏪", "ก่อน, มาก่อน", "I have seen this film before.", "ฉันเคยดูหนังเรื่องนี้มาก่อน"], ["beforehand", "/bɪˈfɔː.hænd/", "📝", "ล่วงหน้า, ก่อนหน้า", "Please tell me beforehand.", "กรุณาบอกฉันล่วงหน้า"], ["during", "/ˈdjʊə.rɪŋ/", "⏱️", "ในระหว่าง", "He slept during the movie.", "เขาหลับระหว่างดูหนัง"], ["during the day", "/ˈdjʊə.rɪŋ ðə deɪ/", "☀️", "ในตอนกลางวัน", "I work during the day.", "ฉันทำงานตอนกลางวัน"], ["during the night", "/ˈdjʊə.rɪŋ ðə naɪt/", "🌙", "ในตอนกลางคืน", "Owls hunt during the night.", "นกฮูกล่าเหยื่อตอนกลางคืน"], ["henceforth", "/ˌhensˈfɔːθ/", "📜", "ต่อจากนี้ไป (ทางการ)", "Henceforth, all staff must wear badges.", "ต่อจากนี้ พนักงานทุกคนต้องติดป้ายชื่อ"], ["in the meantime", "/ɪn ðə ˈmiːn.taɪm/", "🕰️", "ระหว่างนี้", "In the meantime, please take a seat.", "ระหว่างนี้ กรุณานั่งรอก่อน"], ["in the past", "/ɪn ðə pɑːst/", "📼", "ในอดีต", "In the past, people wrote letters.", "ในอดีตผู้คนเขียนจดหมายกัน"], ["later", "/ˈleɪ.tə(r)/", "🕓", "ทีหลัง, ภายหลัง", "I’ll call you later.", "เดี๋ยวฉันโทรหาคุณทีหลัง"], ["later on", "/ˌleɪ.tər ˈɒn/", "⏭️", "ต่อมา, ภายหลังจากนั้น", "Later on, he became a doctor.", "ต่อมาเขากลายเป็นหมอ"], ["meanwhile", "/ˈmiːn.waɪl/", "🔀", "ในขณะเดียวกัน", "Meanwhile, she was cooking dinner.", "ในขณะเดียวกันเธอกำลังทำอาหารเย็น"], ["monthly", "/ˈmʌnθ.li/", "🗓️", "รายเดือน, ทุกเดือน", "We pay the rent monthly.", "เราจ่ายค่าเช่าทุกเดือน"], ["never", "/ˈnev.ə(r)/", "🚫", "ไม่เคย", "I have never been to Japan.", "ฉันไม่เคยไปญี่ปุ่น"], ["now", "/naʊ/", "📍", "ตอนนี้", "I am busy now.", "ตอนนี้ฉันไม่ว่าง"], ["now and then", "/ˌnaʊ ən ˈðen/", "🌦️", "นาน ๆ ครั้ง, เป็นบางครั้ง", "I visit him now and then.", "ฉันไปเยี่ยมเขานาน ๆ ครั้ง"], ["often", "/ˈɒf.ən/", "🔁", "บ่อย ๆ", "We often eat out on Fridays.", "เรามักกินข้าวนอกบ้านวันศุกร์"], ["rarely", "/ˈreə.li/", "🌫️", "นาน ๆ ครั้ง, แทบไม่เคย", "He rarely watches TV.", "เขาแทบไม่ดูทีวี"], ["seldom", "/ˈsel.dəm/", "🐌", "ไม่ค่อยบ่อย", "She seldom eats sweets.", "เธอไม่ค่อยกินของหวาน"], ["since", "/sɪns/", "📅", "ตั้งแต่ (ตอนนั้น)", "I have lived here since 2020.", "ฉันอาศัยอยู่ที่นี่ตั้งแต่ปี 2020"], ["sometimes", "/ˈsʌm.taɪmz/", "🎲", "บางครั้ง", "Sometimes I walk to work.", "บางครั้งฉันเดินไปทำงาน"], ["soon", "/suːn/", "🔜", "เร็ว ๆ นี้, อีกไม่นาน", "The bus will come soon.", "รถบัสจะมาอีกไม่นาน"], ["today", "/təˈdeɪ/", "📆", "วันนี้", "It is sunny today.", "วันนี้แดดออก"], ["tomorrow", "/təˈmɒr.əʊ/", "🌅", "พรุ่งนี้", "I will see you tomorrow.", "พรุ่งนี้เจอกันนะ"], ["twice", "/twaɪs/", "✌️", "สองครั้ง", "I brush my teeth twice a day.", "ฉันแปรงฟันวันละสองครั้ง"], ["yearly", "/ˈjɪə.li/", "🎆", "รายปี, ทุกปี", "The festival is held yearly.", "เทศกาลนี้จัดขึ้นทุกปี"], ["yesterday", "/ˈjes.tə.deɪ/", "🔙", "เมื่อวาน", "I met her yesterday.", "ฉันพบเธอเมื่อวาน"], ["yet", "/jet/", "❓", "ยัง, (ยัง)ไม่...", "Have you eaten yet?", "คุณกินข้าวหรือยัง"]]}];
+const _f=D0.flatMap(t=>t.w);const D=[];for(let i=0;i<_f.length;i+=25)D.push({n:"Words "+(i+1)+"–"+Math.min(i+25,_f.length),w:_f.slice(i,i+25)});
+const C=["#ffd9e4","#d8ecff","#e0f5d8","#fff1c9","#e6dcff","#ffe2cf"];
+let cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;
+const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+const p=[/Natural|Online/i,/Google UK/i,/Libby|Sonia|Daniel|Serena|Kate/i];let b;
+for(const r of p){b=v.find(x=>r.test(x.name));if(b)break}
+u.voice=b||v[0]||null;speechSynthesis.speak(u)}catch(e){}}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+function render(){
+const tabs=document.getElementById("tabs");tabs.innerHTML="";
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.n+" ("+d.w.length+")";b.className=i==cur?"on":"";b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+const g=document.getElementById("grid");g.innerHTML="";
+D[cur].w.forEach((x,i)=>{const c=document.createElement("div");c.className="card";const bg=C[i%C.length];
+c.innerHTML=`<div class="in"><div class="face" style="background:${bg}"><div class="pic">${x[2]}</div><div class="w">${x[0]}</div><div class="ipa">${x[1]}</div><button class="sp" data-s="${x[0]}" title="Listen">🔊</button><div class="hint">คลิกเพื่อพลิกการ์ด</div></div><div class="face back" style="background:${bg}"><div class="th">${x[3]}</div><div class="en">${x[4]}</div><div class="tt">${x[5]}</div><button class="sp" style="margin-top:8px" data-s="${x[4]}" title="Listen">🔊</button></div></div>`;
+c.onclick=e=>{if(e.target.closest(".sp")){e.stopPropagation();speak(e.target.closest(".sp").dataset.s);return}c.classList.toggle("f")};
+g.appendChild(c)});
+document.getElementById("th2").textContent="Vocabulary Table – "+D[cur].n;
+const tb=document.getElementById("tb");tb.innerHTML="";
+D[cur].w.forEach((x,i)=>{const r=document.createElement("tr");
+r.innerHTML=`<td>${cur*25+i+1}</td><td><b>${x[0]}</b></td><td class="i">${x[1]}</td><td class="t">${x[3]}</td><td>${x[4]}<div class="t">${x[5]}</div></td><td><button class="sp" title="Listen">🔊</button></td>`;
+r.querySelector(".sp").onclick=()=>speak(x[4]);tb.appendChild(r)})}
+render();
+</script></body></html>
