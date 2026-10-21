@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>State Verbs: Thoughts &amp; Opinions</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8ff;--tx:#3a3350;--sub:#6d6585;--bd:#e4dcf2;--tab:#fff;--act:#c9b8f0;--tbl:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1b2b;--tx:#ece8f7;--sub:#b4abd0;--bd:#3b3555;--tab:#2a2640;--act:#6a5aa8;--tbl:#262238}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,sans-serif;padding:16px}
+h1{font-size:1.35rem;text-align:center;margin:6px 0 2px;font-family:Calibri,Carlito,sans-serif}
+.sub{text-align:center;color:var(--sub);font-family:Saraban,Sarabun,sans-serif;font-size:.9rem;margin-bottom:14px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{border:1px solid var(--bd);background:var(--tab);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 .9rem Calibri,Carlito,sans-serif}
+.tabs button.on{background:var(--act);border-color:var(--act)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;max-width:1000px;margin:0 auto}
+.card{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#3a3350;box-shadow:0 3px 10px rgba(80,60,120,.15);box-sizing:border-box}
+.back{transform:rotateY(180deg);font-family:Saraban,Sarabun,sans-serif}
+.pic{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:8px}
+.w{font:700 1.5rem Calibri,Carlito,sans-serif}
+.ipa{font:1rem "Times New Roman",Times,serif;margin:2px 0 6px}
+.sp{border:0;background:rgba(255,255,255,.8);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:17px;color:#3a3350}
+.th{font-weight:600;font-size:1.25rem;margin-bottom:6px}
+.en{font:.95rem Calibri,Carlito,sans-serif;margin:2px 0}
+.tt{font-size:.88rem}
+.hint{font-size:.75rem;opacity:.65;margin-top:4px;font-family:Saraban,Sarabun,sans-serif}
+h2{max-width:1000px;margin:26px auto 8px;font-size:1.1rem}
+.wrap{max-width:1000px;margin:0 auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--tbl);border-radius:14px;overflow:hidden;font-family:Calibri,Carlito,sans-serif}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top;font-size:.92rem}
+th{background:var(--act)}
+td.i{font-family:"Times New Roman",Times,serif;white-space:nowrap}
+.t{font-family:Saraban,Sarabun,sans-serif;color:var(--sub);font-size:.85rem}
+td .sp{background:var(--act);width:32px;height:32px}
+</style></head><body>
+<h1>State Verbs related to Thoughts &amp; Opinions</h1>
+<div class="sub">คลิกการ์ดเพื่อดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<h2 id="th2">Vocabulary Table</h2>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Example sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D0=[
+{n:"Belief & Thinking",w:[
+["believe","/bɪˈliːv/","🙏","เชื่อ","I believe you are right.","ฉันเชื่อว่าคุณพูดถูก"],
+["think","/θɪŋk/","🤔","คิด, เห็นว่า","I think this plan is good.","ฉันคิดว่าแผนนี้ดี"],
+["suppose","/səˈpəʊz/","💭","สมมติ, คาดว่า","I suppose he is at home.","ฉันคาดว่าเขาอยู่บ้าน"],
+["assume","/əˈsjuːm/","📌","สันนิษฐาน","Don’t assume everyone agrees.","อย่าคิดไปเองว่าทุกคนเห็นด้วย"],
+["consider","/kənˈsɪ.də(r)/","🧐","พิจารณา, เห็นว่า","I consider him a good friend.","ฉันถือว่าเขาเป็นเพื่อนที่ดี"],
+["guess","/ɡes/","🎲","เดา","I guess she is late.","ฉันเดาว่าเธอมาสาย"],
+["imagine","/ɪˈmæ.dʒɪn/","🌈","จินตนาการ","Imagine you are on a beach.","ลองจินตนาการว่าคุณอยู่บนชายหาด"],
+["suspect","/səˈspekt/","🕵️","สงสัย, เดาว่า","I suspect he knows the truth.","ฉันสงสัยว่าเขารู้ความจริง"],
+["expect","/ɪkˈspekt/","⏳","คาดหวัง","We expect rain tomorrow.","เราคาดว่าพรุ่งนี้ฝนจะตก"],
+["doubt","/daʊt/","🤨","สงสัย, ไม่แน่ใจ","I doubt that he will come.","ฉันสงสัยว่าเขาจะมา"],
+["trust","/trʌst/","🤝","ไว้ใจ, เชื่อใจ","I trust my teacher.","ฉันไว้ใจครูของฉัน"]]},
+{n:"Knowledge & Memory",w:[
+["know","/nəʊ/","🧠","รู้","I know the answer.","ฉันรู้คำตอบ"],
+["understand","/ˌʌn.dəˈstænd/","💡","เข้าใจ","I understand the question.","ฉันเข้าใจคำถาม"],
+["mean","/miːn/","🗨️","หมายถึง","What does this word mean?","คำนี้หมายความว่าอะไร"],
+["realize","/ˈrɪəl.aɪz/","😲","ตระหนักได้","I realize I made a mistake.","ฉันตระหนักว่าฉันทำผิดพลาด"],
+["recognize","/ˈrek.əɡ.naɪz/","👀","จำได้, จำแนกได้","I recognize that voice.","ฉันจำเสียงนั้นได้"],
+["notice","/ˈnəʊ.tɪs/","🔍","สังเกตเห็น","Did you notice the sign?","คุณสังเกตเห็นป้ายไหม"],
+["perceive","/pəˈsiːv/","👁️","รับรู้, มองเห็นว่า","Many people perceive him as kind.","หลายคนมองว่าเขาใจดี"],
+["acknowledge","/əkˈnɒl.ɪdʒ/","🙌","ยอมรับ, รับทราบ","He acknowledged his error.","เขายอมรับความผิดพลาดของเขา"],
+["remember","/rɪˈmem.bə(r)/","🧩","จำได้, นึกออก","I remember your name.","ฉันจำชื่อคุณได้"],
+["forget","/fəˈɡet/","🫥","ลืม","Don’t forget your keys.","อย่าลืมกุญแจของคุณ"],
+["recall","/rɪˈkɔːl/","📼","ระลึกได้, นึกออก","I can’t recall his address.","ฉันนึกที่อยู่ของเขาไม่ออก"]]},
+{n:"Opinions & Judgement",w:[
+["agree","/əˈɡriː/","👍","เห็นด้วย","I agree with you.","ฉันเห็นด้วยกับคุณ"],
+["disagree","/ˌdɪs.əˈɡriː/","👎","ไม่เห็นด้วย","I disagree with that idea.","ฉันไม่เห็นด้วยกับความคิดนั้น"],
+["deny","/dɪˈnaɪ/","🙅","ปฏิเสธ","He denied the story.","เขาปฏิเสธเรื่องนั้น"],
+["evaluate","/ɪˈvæl.juː.eɪt/","📊","ประเมินผล","We evaluate every project.","เราประเมินทุกโครงการ"],
+["judge","/dʒʌdʒ/","⚖️","ตัดสิน","Don’t judge a book by its cover.","อย่าตัดสินจากรูปลักษณ์ภายนอก"],
+["value","/ˈvæl.juː/","💎","เห็นคุณค่า","I value your advice.","ฉันเห็นคุณค่าของคำแนะนำคุณ"],
+["feel","/fiːl/","💗","รู้สึก, เห็นว่า","I feel this is wrong.","ฉันรู้สึกว่าเรื่องนี้ไม่ถูกต้อง"],
+["mind","/maɪnd/","🤷","ถือสา, รังเกียจ","I don’t mind waiting.","ฉันไม่ถือสาที่ต้องรอ"],
+["decide","/dɪˈsaɪd/","✅","ตัดสินใจ","I decided to stay.","ฉันตัดสินใจอยู่ต่อ"]]},
+{n:"Feelings & Wants",w:[
+["prefer","/prɪˈfɜː(r)/","⭐","ชอบมากกว่า","I prefer tea to coffee.","ฉันชอบชามากกว่ากาแฟ"],
+["hate","/heɪt/","😡","เกลียด","I hate waiting in line.","ฉันเกลียดการต่อแถว"],
+["like","/laɪk/","😊","ชอบ","I like this song.","ฉันชอบเพลงนี้"],
+["love","/lʌv/","❤️","รัก","I love my family.","ฉันรักครอบครัวของฉัน"],
+["need","/niːd/","🆘","ต้องการ, จำเป็น","I need some help.","ฉันต้องการความช่วยเหลือ"],
+["want","/wɒnt/","🛍️","อยากได้","I want a new phone.","ฉันอยากได้โทรศัพท์เครื่องใหม่"],
+["wish","/wɪʃ/","🌠","ปรารถนา","I wish you good luck.","ฉันขออวยพรให้คุณโชคดี"],
+["hope","/həʊp/","🤞","หวัง","I hope it works.","ฉันหวังว่ามันจะได้ผล"],
+["care","/keə(r)/","🤲","ใส่ใจ","I care about my friends.","ฉันใส่ใจเพื่อน ๆ"],
+["promise","/ˈprɒm.ɪs/","🤙","สัญญา","I promise to call you.","ฉันสัญญาว่าจะโทรหาคุณ"]]}
+];
+const _f=D0.flatMap(t=>t.w);const D=[];for(let i=0;i<_f.length;i+=25)D.push({n:"Words "+(i+1)+"–"+Math.min(i+25,_f.length),w:_f.slice(i,i+25)});
+const C=["#ffd9e4","#d8ecff","#e0f5d8","#fff1c9","#e6dcff","#ffe2cf"];
+let cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;
+const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+const p=[/Natural|Online/i,/Google UK/i,/Libby|Sonia|Daniel|Serena|Kate/i];let b;
+for(const r of p){b=v.find(x=>r.test(x.name));if(b)break}
+u.voice=b||v[0]||null;speechSynthesis.speak(u)}catch(e){}}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+function render(){
+const tabs=document.getElementById("tabs");tabs.innerHTML="";
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.n+" ("+d.w.length+")";b.className=i==cur?"on":"";b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+const g=document.getElementById("grid");g.innerHTML="";
+D[cur].w.forEach((x,i)=>{const c=document.createElement("div");c.className="card";const bg=C[i%C.length];
+c.innerHTML=`<div class="in"><div class="face" style="background:${bg}"><div class="pic">${x[2]}</div><div class="w">${x[0]}</div><div class="ipa">${x[1]}</div><button class="sp" data-s="${x[0]}" title="Listen">🔊</button><div class="hint">คลิกเพื่อพลิกการ์ด</div></div><div class="face back" style="background:${bg}"><div class="th">${x[3]}</div><div class="en">${x[4]}</div><div class="tt">${x[5]}</div><button class="sp" style="margin-top:8px" data-s="${x[4]}" title="Listen">🔊</button></div></div>`;
+c.onclick=e=>{if(e.target.closest(".sp")){e.stopPropagation();speak(e.target.closest(".sp").dataset.s);return}c.classList.toggle("f")};
+g.appendChild(c)});
+document.getElementById("th2").textContent="Vocabulary Table – "+D[cur].n;
+const tb=document.getElementById("tb");tb.innerHTML="";
+D[cur].w.forEach((x,i)=>{const r=document.createElement("tr");
+r.innerHTML=`<td>${cur*25+i+1}</td><td><b>${x[0]}</b></td><td class="i">${x[1]}</td><td class="t">${x[3]}</td><td>${x[4]}<div class="t">${x[5]}</div></td><td><button class="sp" title="Listen">🔊</button></td>`;
+r.querySelector(".sp").onclick=()=>speak(x[4]);tb.appendChild(r)})}
+render();
+</script></body></html>

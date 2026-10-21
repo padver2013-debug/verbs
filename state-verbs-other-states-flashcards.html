@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>State Verbs: Other States / Qualities</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8ff;--tx:#3a3350;--sub:#6d6585;--bd:#e4dcf2;--tab:#fff;--act:#c9b8f0;--tbl:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1b2b;--tx:#ece8f7;--sub:#b4abd0;--bd:#3b3555;--tab:#2a2640;--act:#6a5aa8;--tbl:#262238}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,sans-serif;padding:16px}
+h1{font-size:1.35rem;text-align:center;margin:6px 0 2px;font-family:Calibri,Carlito,sans-serif}
+.sub{text-align:center;color:var(--sub);font-family:Saraban,Sarabun,sans-serif;font-size:.9rem;margin-bottom:14px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{border:1px solid var(--bd);background:var(--tab);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 .9rem Calibri,Carlito,sans-serif}
+.tabs button.on{background:var(--act);border-color:var(--act)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;max-width:1000px;margin:0 auto}
+.card{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#3a3350;box-shadow:0 3px 10px rgba(80,60,120,.15);box-sizing:border-box}
+.back{transform:rotateY(180deg);font-family:Saraban,Sarabun,sans-serif}
+.pic{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:8px}
+.w{font:700 1.5rem Calibri,Carlito,sans-serif}
+.ipa{font:1rem "Times New Roman",Times,serif;margin:2px 0 6px}
+.sp{border:0;background:rgba(255,255,255,.8);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:17px;color:#3a3350}
+.th{font-weight:600;font-size:1.25rem;margin-bottom:6px}
+.en{font:.95rem Calibri,Carlito,sans-serif;margin:2px 0}
+.tt{font-size:.88rem}
+.hint{font-size:.75rem;opacity:.65;margin-top:4px;font-family:Saraban,Sarabun,sans-serif}
+h2{max-width:1000px;margin:26px auto 8px;font-size:1.1rem}
+.wrap{max-width:1000px;margin:0 auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--tbl);border-radius:14px;overflow:hidden;font-family:Calibri,Carlito,sans-serif}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top;font-size:.92rem}
+th{background:var(--act)}
+td.i{font-family:"Times New Roman",Times,serif;white-space:nowrap}
+.t{font-family:Saraban,Sarabun,sans-serif;color:var(--sub);font-size:.85rem}
+td .sp{background:var(--act);width:32px;height:32px}
+</style></head><body>
+<h1>State Verbs related to Other States / Qualities</h1>
+<div class="sub">คลิกการ์ดเพื่อดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<h2 id="th2">Vocabulary Table</h2>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Example sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D0=[
+{n:"Existence & Change",w:[
+["exist","/ɪɡˈzɪst/","🌍","มีอยู่, ดำรงอยู่","Dinosaurs no longer exist.","ไดโนเสาร์ไม่มีอยู่แล้ว"],
+["remain","/rɪˈmeɪn/","🏛️","คงอยู่, ยังเหลืออยู่","Please remain seated.","กรุณานั่งอยู่กับที่"],
+["stay","/steɪ/","🏠","อยู่, พัก","I stay at home on Sundays.","ฉันอยู่บ้านในวันอาทิตย์"],
+["become","/bɪˈkʌm/","🦋","กลายเป็น","She became a doctor.","เธอกลายเป็นหมอ"],
+["turn","/tɜː(r)n/","🍂","กลายเป็น, หมุน","Leaves turn red in autumn.","ใบไม้กลายเป็นสีแดงในฤดูใบไม้ร่วง"],
+["seem","/siːm/","🤔","ดูเหมือน","He seems tired today.","วันนี้เขาดูเหนื่อย"],
+["appear","/əˈpɪə(r)/","🌈","ปรากฏ, ดูเหมือน","A rainbow appeared.","สายรุ้งปรากฏขึ้น"],
+["happen","/ˈhæp.ən/","🎬","เกิดขึ้น","What happened?","เกิดอะไรขึ้น"],
+["occur","/əˈkɜː(r)/","📅","เกิดขึ้น, บังเกิด","Accidents occur every day.","อุบัติเหตุเกิดขึ้นทุกวัน"],
+["arise","/əˈraɪz/","🌅","เกิดขึ้น, อุบัติขึ้น","A problem arose suddenly.","ปัญหาเกิดขึ้นอย่างกะทันหัน"],
+["cease","/siːs/","🛑","หยุด, สิ้นสุด","The rain ceased at noon.","ฝนหยุดตกตอนเที่ยง"],
+["continue","/kənˈtɪ.njuː/","▶️","ดำเนินต่อไป","Please continue reading.","กรุณาอ่านต่อไป"],
+["last","/lɑːst/","⏳","คงอยู่, ยืนยาว","The battery lasts all day.","แบตเตอรี่อยู่ได้ทั้งวัน"],
+["live","/lɪv/","🏡","อาศัยอยู่, มีชีวิต","I live in Bangkok.","ฉันอาศัยอยู่ในกรุงเทพฯ"]]},
+{n:"Possession",w:[
+["have","/hæv/","🎒","มี","I have two brothers.","ฉันมีพี่น้องชายสองคน"],
+["own","/əʊn/","🚗","เป็นเจ้าของ","She owns a small shop.","เธอเป็นเจ้าของร้านเล็ก ๆ"],
+["possess","/pəˈzes/","💼","ครอบครอง","He possesses great talent.","เขามีพรสวรรค์อย่างมาก"],
+["owe","/əʊ/","💸","เป็นหนี้","I owe you ten dollars.","ฉันเป็นหนี้คุณสิบดอลลาร์"],
+["belong","/bɪˈlɒŋ/","🔑","เป็นของ, อยู่ในกลุ่ม","This book belongs to me.","หนังสือเล่มนี้เป็นของฉัน"],
+["lack","/læk/","🕳️","ขาด, ไม่มี","They lack experience.","พวกเขาขาดประสบการณ์"],
+["keep","/kiːp/","🗝️","เก็บไว้, รักษา","Keep the receipt.","เก็บใบเสร็จไว้"],
+["leave","/liːv/","🚪","ทิ้งไว้, จากไป","Leave your bag here.","วางกระเป๋าของคุณไว้ที่นี่"],
+["offer","/ˈɒf.ə(r)/","🎁","เสนอ, ให้","They offer free Wi-Fi.","พวกเขามี Wi-Fi ให้ฟรี"],
+["afford","/əˈfɔːd/","💰","มีกำลังซื้อ","I can’t afford a new car.","ฉันซื้อรถคันใหม่ไม่ไหว"],
+["pay","/peɪ/","💳","จ่าย","I will pay the bill.","ฉันจะจ่ายค่าบิลเอง"]]},
+{n:"Containing & Fitting",w:[
+["contain","/kənˈteɪn/","📦","บรรจุ, มีอยู่ภายใน","This box contains books.","กล่องนี้บรรจุหนังสือ"],
+["include","/ɪnˈkluːd/","➕","รวมถึง","The price includes breakfast.","ราคานี้รวมอาหารเช้า"],
+["involve","/ɪnˈvɒlv/","🎯","เกี่ยวข้อง, ต้องมี","The job involves travel.","งานนี้ต้องเดินทาง"],
+["consist","/kənˈsɪst/","🧩","ประกอบด้วย","The team consists of five people.","ทีมประกอบด้วยห้าคน"],
+["accommodate","/əˈkɒm.ə.deɪt/","🏨","รองรับ, จัดที่พักให้","The hotel accommodates 200 guests.","โรงแรมรองรับแขกได้ 200 คน"],
+["fit","/fɪt/","👟","พอดี, เหมาะ","These shoes fit me.","รองเท้าคู่นี้พอดีกับฉัน"]]},
+{n:"Relations & Effects",w:[
+["resemble","/rɪˈzem.bəl/","👯","คล้าย, เหมือน","She resembles her mother.","เธอหน้าเหมือนแม่"],
+["differ","/ˈdɪf.ə(r)/","🔀","แตกต่าง","Our opinions differ.","ความเห็นของเราต่างกัน"],
+["depend","/dɪˈpend/","🔗","ขึ้นอยู่กับ","It depends on the weather.","มันขึ้นอยู่กับสภาพอากาศ"],
+["affect","/əˈfekt/","🌀","ส่งผลกระทบ","Stress affects your health.","ความเครียดส่งผลต่อสุขภาพ"],
+["matter","/ˈmæt.ə(r)/","❗","สำคัญ, มีความหมาย","Your opinion matters.","ความเห็นของคุณสำคัญ"],
+["imply","/ɪmˈplaɪ/","💬","บ่งบอกเป็นนัย","His silence implies agreement.","ความเงียบของเขาบ่งบอกว่าเห็นด้วย"],
+["lead","/liːd/","🧭","นำไปสู่, นำทาง","This road leads to the beach.","ถนนเส้นนี้นำไปสู่ชายหาด"],
+["follow","/ˈfɒl.əʊ/","👣","ตาม, ตามมา","Night follows day.","กลางคืนตามกลางวัน"],
+["meet","/miːt/","🤝","พบ, ตรงตาม","This meets our needs.","สิ่งนี้ตรงตามความต้องการของเรา"],
+["dominate","/ˈdɒm.ɪ.neɪt/","👑","ครอบงำ, มีอิทธิพลเหนือ","One company dominates the market.","บริษัทหนึ่งครองตลาด"],
+["lean","/liːn/","🪜","เอน, พิง","The ladder leans on the wall.","บันไดพิงกำแพง"],
+["lie","/laɪ/","🛏️","นอน, ตั้งอยู่","The village lies in a valley.","หมู่บ้านตั้งอยู่ในหุบเขา"]]},
+{n:"Senses & Measures",w:[
+["smell","/smel/","👃","มีกลิ่น, ได้กลิ่น","The soup smells delicious.","ซุปนี้หอมน่ากิน"],
+["sound","/saʊnd/","🔊","ฟังดู","That sounds great.","ฟังดูดีมาก"],
+["taste","/teɪst/","👅","มีรส, ชิม","This tea tastes sweet.","ชานี้มีรสหวาน"],
+["look","/lʊk/","👀","ดูเหมือน","You look happy.","คุณดูมีความสุข"],
+["weigh","/weɪ/","⚖️","มีน้ำหนัก, ชั่ง","The bag weighs five kilos.","กระเป๋าหนักห้ากิโลกรัม"],
+["measure","/ˈmeʒ.ə(r)/","📏","วัด, มีขนาด","The room measures four metres.","ห้องนี้กว้างสี่เมตร"]]},
+{n:"Thoughts & Wants",w:[
+["need","/niːd/","🆘","ต้องการ, จำเป็น","I need some help.","ฉันต้องการความช่วยเหลือ"],
+["want","/wɒnt/","🛍️","อยากได้","I want a new phone.","ฉันอยากได้โทรศัพท์เครื่องใหม่"],
+["require","/rɪˈkwaɪə(r)/","📋","ต้องการ, กำหนดให้","This job requires patience.","งานนี้ต้องใช้ความอดทน"],
+["prefer","/prɪˈfɜː(r)/","⭐","ชอบมากกว่า","I prefer tea to coffee.","ฉันชอบชามากกว่ากาแฟ"],
+["dislike","/dɪsˈlaɪk/","😒","ไม่ชอบ","I dislike loud noise.","ฉันไม่ชอบเสียงดัง"],
+["doubt","/daʊt/","🤨","สงสัย, ไม่แน่ใจ","I doubt that he will come.","ฉันสงสัยว่าเขาจะมา"],
+["think","/θɪŋk/","💭","คิด","I think this plan is good.","ฉันคิดว่าแผนนี้ดี"],
+["understand","/ˌʌn.dəˈstænd/","💡","เข้าใจ","I understand the question.","ฉันเข้าใจคำถาม"],
+["realize","/ˈriː.ə.laɪz/","😲","ตระหนักได้","I realize I made a mistake.","ฉันตระหนักว่าฉันทำผิดพลาด"],
+["assume","/əˈsjuːm/","📌","สันนิษฐาน","Don’t assume everyone agrees.","อย่าคิดไปเองว่าทุกคนเห็นด้วย"],
+["wonder","/ˈwʌn.də(r)/","🌠","สงสัย, อยากรู้","I wonder where he is.","ฉันสงสัยว่าเขาอยู่ที่ไหน"],
+["mean","/miːn/","🗨️","หมายถึง","What does this word mean?","คำนี้หมายความว่าอะไร"],
+["mind","/maɪnd/","🤷","ถือสา, รังเกียจ","I don’t mind waiting.","ฉันไม่ถือสาที่ต้องรอ"]]},
+{n:"Behaviour & Actions",w:[
+["behave","/bɪˈheɪv/","😇","ประพฤติ, ปฏิบัติตัว","Please behave politely.","กรุณาประพฤติตัวสุภาพ"],
+["agree","/əˈɡriː/","👍","เห็นด้วย","I agree with you.","ฉันเห็นด้วยกับคุณ"],
+["argue","/ˈɑː.ɡjuː/","🗣️","โต้แย้ง, เถียง","They argue about money.","พวกเขาเถียงกันเรื่องเงิน"],
+["fail","/feɪl/","❌","ล้มเหลว, สอบตก","He failed the test.","เขาสอบตก"],
+["wait","/weɪt/","⌛","รอ","Please wait here.","กรุณารอที่นี่"],
+["work","/wɜːk/","🛠️","ทำงาน, ใช้ได้ผล","This machine works well.","เครื่องนี้ใช้งานได้ดี"],
+["suffer","/ˈsʌf.ə(r)/","🤕","ทุกข์ทรมาน","He suffers from stress.","เขาทุกข์ทรมานจากความเครียด"],
+["worry","/ˈwʌ.ri/","😟","กังวล","Don’t worry about me.","อย่ากังวลเรื่องฉัน"],
+["satisfy","/ˈsæt.ɪs.faɪ/","😌","ทำให้พอใจ","The result satisfies me.","ผลลัพธ์นี้ทำให้ฉันพอใจ"]]}
+];
+const _f=D0.flatMap(t=>t.w);const D=[];for(let i=0;i<_f.length;i+=25)D.push({n:"Words "+(i+1)+"–"+Math.min(i+25,_f.length),w:_f.slice(i,i+25)});
+const C=["#ffd9e4","#d8ecff","#e0f5d8","#fff1c9","#e6dcff","#ffe2cf"];
+let cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;
+const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+const p=[/Natural|Online/i,/Google UK/i,/Libby|Sonia|Daniel|Serena|Kate/i];let b;
+for(const r of p){b=v.find(x=>r.test(x.name));if(b)break}
+u.voice=b||v[0]||null;speechSynthesis.speak(u)}catch(e){}}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+function render(){
+const tabs=document.getElementById("tabs");tabs.innerHTML="";
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.n+" ("+d.w.length+")";b.className=i==cur?"on":"";b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+const g=document.getElementById("grid");g.innerHTML="";
+D[cur].w.forEach((x,i)=>{const c=document.createElement("div");c.className="card";const bg=C[i%C.length];
+c.innerHTML=`<div class="in"><div class="face" style="background:${bg}"><div class="pic">${x[2]}</div><div class="w">${x[0]}</div><div class="ipa">${x[1]}</div><button class="sp" data-s="${x[0]}" title="Listen">🔊</button><div class="hint">คลิกเพื่อพลิกการ์ด</div></div><div class="face back" style="background:${bg}"><div class="th">${x[3]}</div><div class="en">${x[4]}</div><div class="tt">${x[5]}</div><button class="sp" style="margin-top:8px" data-s="${x[4]}" title="Listen">🔊</button></div></div>`;
+c.onclick=e=>{if(e.target.closest(".sp")){e.stopPropagation();speak(e.target.closest(".sp").dataset.s);return}c.classList.toggle("f")};
+g.appendChild(c)});
+document.getElementById("th2").textContent="Vocabulary Table – "+D[cur].n;
+const tb=document.getElementById("tb");tb.innerHTML="";
+D[cur].w.forEach((x,i)=>{const r=document.createElement("tr");
+r.innerHTML=`<td>${cur*25+i+1}</td><td><b>${x[0]}</b></td><td class="i">${x[1]}</td><td class="t">${x[3]}</td><td>${x[4]}<div class="t">${x[5]}</div></td><td><button class="sp" title="Listen">🔊</button></td>`;
+r.querySelector(".sp").onclick=()=>speak(x[4]);tb.appendChild(r)})}
+render();
+</script></body></html>

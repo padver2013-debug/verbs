@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>State Verbs: Senses &amp; Perceptions</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&family=Carlito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8ff;--tx:#3a3350;--sub:#6d6585;--bd:#e4dcf2;--tab:#fff;--act:#c9b8f0;--tbl:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1b2b;--tx:#ece8f7;--sub:#b4abd0;--bd:#3b3555;--tab:#2a2640;--act:#6a5aa8;--tbl:#262238}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,sans-serif;padding:16px}
+h1{font-size:1.35rem;text-align:center;margin:6px 0 2px;font-family:Calibri,Carlito,sans-serif}
+.sub{text-align:center;color:var(--sub);font-family:Saraban,Sarabun,sans-serif;font-size:.9rem;margin-bottom:14px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.tabs button{border:1px solid var(--bd);background:var(--tab);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:600 .9rem Calibri,Carlito,sans-serif}
+.tabs button.on{background:var(--act);border-color:var(--act)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;max-width:1000px;margin:0 auto}
+.card{height:250px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;color:#3a3350;box-shadow:0 3px 10px rgba(80,60,120,.15);box-sizing:border-box}
+.back{transform:rotateY(180deg);font-family:Saraban,Sarabun,sans-serif}
+.pic{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.65);display:flex;align-items:center;justify-content:center;font-size:46px;margin-bottom:8px}
+.w{font:700 1.5rem Calibri,Carlito,sans-serif}
+.ipa{font:1rem "Times New Roman",Times,serif;margin:2px 0 6px}
+.sp{border:0;background:rgba(255,255,255,.8);border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:17px;color:#3a3350}
+.th{font-weight:600;font-size:1.25rem;margin-bottom:6px}
+.en{font:.95rem Calibri,Carlito,sans-serif;margin:2px 0}
+.tt{font-size:.88rem}
+.hint{font-size:.75rem;opacity:.65;margin-top:4px;font-family:Saraban,Sarabun,sans-serif}
+h2{max-width:1000px;margin:26px auto 8px;font-size:1.1rem}
+.wrap{max-width:1000px;margin:0 auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--tbl);border-radius:14px;overflow:hidden;font-family:Calibri,Carlito,sans-serif}
+th,td{padding:9px 10px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top;font-size:.92rem}
+th{background:var(--act)}
+td.i{font-family:"Times New Roman",Times,serif;white-space:nowrap}
+.t{font-family:Saraban,Sarabun,sans-serif;color:var(--sub);font-size:.85rem}
+td .sp{background:var(--act);width:32px;height:32px}
+</style></head><body>
+<h1>State Verbs related to Senses &amp; Perceptions</h1>
+<div class="sub">คลิกการ์ดเพื่อดูคำแปล • กดปุ่ม 🔊 เพื่อฟังเสียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<h2 id="th2">Vocabulary Table</h2>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Example sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D0=[
+{n:"Five Senses",w:[
+["see","/siː/","👁️","เห็น","I can see a bird.","ฉันมองเห็นนกตัวหนึ่ง"],
+["hear","/hɪə(r)/","👂","ได้ยิน","I can hear music.","ฉันได้ยินเสียงเพลง"],
+["smell","/smel/","👃","ได้กลิ่น","I smell fresh bread.","ฉันได้กลิ่นขนมปังสด"],
+["taste","/teɪst/","👅","รู้รส, ชิม","This soup tastes salty.","ซุปนี้มีรสเค็ม"],
+["touch","/tʌtʃ/","✋","สัมผัส, แตะ","Don’t touch the hot pan.","อย่าแตะกระทะที่ร้อน"],
+["feel","/fiːl/","🤲","รู้สึก, สัมผัสได้","The cloth feels soft.","ผ้านี้สัมผัสนุ่ม"],
+["sense","/sens/","📡","รู้สึกได้, สัมผัสได้","I sense danger.","ฉันรู้สึกได้ถึงอันตราย"],
+["listen","/ˈlɪs(ə)n/","🎧","ฟัง","Please listen carefully.","กรุณาฟังอย่างตั้งใจ"],
+["overhear","/ˌəʊ.vəˈhɪə(r)/","🕵️","แอบได้ยิน","I overheard their talk.","ฉันแอบได้ยินที่พวกเขาคุยกัน"],
+["sniff","/snɪf/","🐕","สูดดม, ดมกลิ่น","The dog sniffed the bag.","สุนัขดมกระเป๋า"],
+["inhale","/ɪnˈheɪl/","🌬️","หายใจเข้า, สูดเข้า","Inhale deeply through your nose.","หายใจเข้าลึก ๆ ทางจมูก"],
+["exhale","/eksˈheɪl/","💨","หายใจออก","Exhale slowly.","หายใจออกช้า ๆ"]]},
+{n:"Looking & Seeing",w:[
+["look","/lʊk/","👀","มอง","Look at the sky.","มองดูท้องฟ้าสิ"],
+["watch","/wɒtʃ/","📺","ดู, เฝ้าดู","I watch TV at night.","ฉันดูทีวีตอนกลางคืน"],
+["glance","/ɡlɑːns/","⚡","เหลือบมอง","She glanced at her watch.","เธอเหลือบมองนาฬิกา"],
+["stare","/steə(r)/","😳","จ้อง","Don’t stare at people.","อย่าจ้องมองผู้คน"],
+["glimpse","/ɡlɪmps/","🦌","เห็นแวบเดียว","I glimpsed a deer.","ฉันเห็นกวางแวบหนึ่ง"],
+["gaze","/ɡeɪz/","🌌","จ้องมองอย่างเพลิดเพลิน","We gazed at the stars.","เรานั่งจ้องมองดวงดาว"],
+["peek","/piːk/","🫣","แอบมอง","He peeked through the door.","เขาแอบมองผ่านประตู"],
+["peer","/pɪə(r)/","🔎","เพ่งมอง","She peered into the dark.","เธอเพ่งมองเข้าไปในความมืด"],
+["squint","/skwɪnt/","😑","หรี่ตามอง","He squinted in the sun.","เขาหรี่ตาในแสงแดด"],
+["blink","/blɪŋk/","😉","กะพริบตา","Try not to blink.","พยายามอย่ากะพริบตา"],
+["view","/vjuː/","🏞️","ชม, มองเห็น","We viewed the city from above.","เราชมเมืองจากที่สูง"],
+["behold","/bɪˈhəʊld/","🌄","เห็น, ตระหนักถึง (ทางการ)","Behold the beautiful sunrise!","จงดูพระอาทิตย์ขึ้นอันงดงามนั่นสิ!"],
+["scan","/skæn/","📄","กวาดตามอง, สแกน","I scanned the list quickly.","ฉันกวาดตาดูรายการอย่างรวดเร็ว"]]},
+{n:"Noticing & Understanding",w:[
+["notice","/ˈnəʊ.tɪs/","🔍","สังเกตเห็น","Did you notice the sign?","คุณสังเกตเห็นป้ายไหม"],
+["observe","/əbˈzɜːv/","🔭","สังเกตการณ์","Scientists observe the stars.","นักวิทยาศาสตร์สังเกตการณ์ดวงดาว"],
+["examine","/ɪɡˈzæ.mɪn/","🔬","ตรวจสอบ","The doctor examined him.","หมอตรวจร่างกายเขา"],
+["focus","/ˈfəʊ.kəs/","🎯","โฟกัส, จดจ่อ","Focus on the board.","จดจ่อที่กระดาน"],
+["detect","/dɪˈtekt/","🚨","ตรวจพบ","The alarm detects smoke.","สัญญาณเตือนตรวจจับควันได้"],
+["perceive","/pəˈsiːv/","🧠","รับรู้","Many perceive him as kind.","หลายคนมองว่าเขาใจดี"],
+["recognize","/ˈrek.əɡ.naɪz/","🙋","จำได้","I recognize that voice.","ฉันจำเสียงนั้นได้"],
+["identify","/aɪˈden.tɪ.faɪ/","🪪","ระบุ, แยกแยะ","Can you identify this bird?","คุณระบุได้ไหมว่านี่นกอะไร"],
+["discern","/dɪˈsɜːn/","🌫️","สังเกตเห็นได้ยาก","I could discern a faint light.","ฉันเห็นแสงริบหรี่ ๆ"],
+["witness","/ˈwɪt.nəs/","🧍","เป็นประจักษ์พยาน","She witnessed the accident.","เธอเห็นเหตุการณ์อุบัติเหตุกับตา"],
+["register","/ˈredʒ.ɪs.tə(r)/","📝","รับรู้, ตระหนัก","The sound didn’t register.","ฉันไม่ทันรับรู้เสียงนั้น"],
+["react","/riˈækt/","😮","ตอบสนอง","He reacted to the noise.","เขาตอบสนองต่อเสียงนั้น"]]},
+{n:"Appearance, Light & Sound",w:[
+["appear","/əˈpɪə(r)/","🌈","ปรากฏ, ดูเหมือน","A rainbow appeared.","สายรุ้งปรากฏขึ้น"],
+["resemble","/rɪˈzem.bəl/","👯","คล้าย, เหมือน","She resembles her mother.","เธอหน้าเหมือนแม่"],
+["sound","/saʊnd/","🔊","ฟังดู, เสียง","That sounds great.","ฟังดูดีมาก"],
+["echo","/ˈek.əʊ/","🏔️","ก้อง, สะท้อน","Her voice echoed in the hall.","เสียงของเธอก้องในห้องโถง"],
+["glow","/ɡləʊ/","💡","เรืองแสง","The lamp glows softly.","โคมไฟเรืองแสงนุ่ม ๆ"],
+["flicker","/ˈflɪk.ə(r)/","🕯️","กะพริบ, ริบหรี่","The candle flickered.","เทียนไขริบหรี่"],
+["radiate","/ˈreɪ.di.eɪt/","☀️","แผ่รังสี, เปล่งประกาย","The sun radiates heat.","ดวงอาทิตย์แผ่ความร้อน"],
+["illuminate","/ɪˈluː.mɪ.neɪt/","🔦","ส่องสว่าง","Lights illuminate the street.","ไฟส่องสว่างถนน"],
+["vibrate","/ˈvaɪ.breɪt/","📳","สั่นสะเทือน","My phone is vibrating.","โทรศัพท์ของฉันสั่นอยู่"],
+["shiver","/ˈʃɪ.və(r)/","🥶","ตัวสั่น","I shiver in the cold.","ฉันตัวสั่นในอากาศหนาว"],
+["hallucinate","/həˈluː.sɪ.neɪt/","🌀","เห็นภาพหลอน","He began to hallucinate.","เขาเริ่มเห็นภาพหลอน"]]}
+];
+const _f=D0.flatMap(t=>t.w);const D=[];for(let i=0;i<_f.length;i+=25)D.push({n:"Words "+(i+1)+"–"+Math.min(i+25,_f.length),w:_f.slice(i,i+25)});
+const C=["#ffd9e4","#d8ecff","#e0f5d8","#fff1c9","#e6dcff","#ffe2cf"];
+let cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";u.rate=.85;
+const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+const p=[/Natural|Online/i,/Google UK/i,/Libby|Sonia|Daniel|Serena|Kate/i];let b;
+for(const r of p){b=v.find(x=>r.test(x.name));if(b)break}
+u.voice=b||v[0]||null;speechSynthesis.speak(u)}catch(e){}}
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=()=>{};
+function render(){
+const tabs=document.getElementById("tabs");tabs.innerHTML="";
+D.forEach((d,i)=>{const b=document.createElement("button");b.textContent=d.n+" ("+d.w.length+")";b.className=i==cur?"on":"";b.onclick=()=>{cur=i;render()};tabs.appendChild(b)});
+const g=document.getElementById("grid");g.innerHTML="";
+D[cur].w.forEach((x,i)=>{const c=document.createElement("div");c.className="card";const bg=C[i%C.length];
+c.innerHTML=`<div class="in"><div class="face" style="background:${bg}"><div class="pic">${x[2]}</div><div class="w">${x[0]}</div><div class="ipa">${x[1]}</div><button class="sp" data-s="${x[0]}" title="Listen">🔊</button><div class="hint">คลิกเพื่อพลิกการ์ด</div></div><div class="face back" style="background:${bg}"><div class="th">${x[3]}</div><div class="en">${x[4]}</div><div class="tt">${x[5]}</div><button class="sp" style="margin-top:8px" data-s="${x[4]}" title="Listen">🔊</button></div></div>`;
+c.onclick=e=>{if(e.target.closest(".sp")){e.stopPropagation();speak(e.target.closest(".sp").dataset.s);return}c.classList.toggle("f")};
+g.appendChild(c)});
+document.getElementById("th2").textContent="Vocabulary Table – "+D[cur].n;
+const tb=document.getElementById("tb");tb.innerHTML="";
+D[cur].w.forEach((x,i)=>{const r=document.createElement("tr");
+r.innerHTML=`<td>${cur*25+i+1}</td><td><b>${x[0]}</b></td><td class="i">${x[1]}</td><td class="t">${x[3]}</td><td>${x[4]}<div class="t">${x[5]}</div></td><td><button class="sp" title="Listen">🔊</button></td>`;
+r.querySelector(".sp").onclick=()=>speak(x[4]);tb.appendChild(r)})}
+render();
+</script></body></html>
