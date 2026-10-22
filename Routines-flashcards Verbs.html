@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Routines Verbs – Talking About Routines</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;--ob:#1d4ed8;--tm:#7b3f00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750;--ob:#8ab4ff;--tm:#e0a96d}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+.scene{height:270px;perspective:900px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10.5px;opacity:.75;line-height:1.3}
+.emoji{font-size:60px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:26px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:17px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:21px;font-weight:600}
+.sen{font-size:15px;line-height:1.35}
+.sth{font-size:13px;opacity:.85;line-height:1.4}
+.face .ob{color:#1d4ed8}.face .tm{color:#7b3f00}
+.spk{border:0;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:700px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif;font-size:14px}
+.ob{color:var(--ob)}.tm{color:var(--tm)}
+td .spk{background:#e4d8f7;width:32px;height:32px;font-size:15px}
+.legend{text-align:center;font-size:13px;margin:0 0 12px;opacity:.9}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>Sentences: Talking About Routines</h1>
+<p class="legend"><b>verb</b> · <span class="ob">object / complement</span> · <span class="tm">time expression</span></p>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Verb (V1)</th><th>Object / Complement</th><th>Time Expression</th><th>Complete Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={P:["🙋 I & You","#d9e8fb"],H:["🧑 He & She","#fdf0c9"],T:["📱 It: Things & Devices","#d8f2e2"],G:["👥 We & They","#fbd9e6"],O:["🏫 Family, School & People","#e3dbf7"]};
+const B={wake:["weɪk","ตื่น","⏰"],brush:["brʌʃ","แปรง","🪥"],drink:["drɪŋk","ดื่ม","🥤"],read:["riːd","อ่าน","📖"],exercise:["ˈek.sə.saɪz","ออกกำลังกาย","🏃"],go:["ɡəʊ","ไป","🚌"],check:["tʃek","ตรวจ / เช็ก","✅"],cook:["kʊk","ทำอาหาร","🍳"],study:["ˈstʌd.i","เรียน","✏️"],visit:["ˈvɪz.ɪt","ไปเยี่ยม","🏡"],play:["pleɪ","เล่น","⚽"],drive:["draɪv","ขับรถ","🚗"],call:["kɔːl","โทร","📞"],walk:["wɔːk","เดิน / พาเดิน","🚶"],water:["ˈwɔː.tə","รดน้ำ","🪴"],write:["raɪt","เขียน","✍️"],practice:["ˈpræk.tɪs","ฝึก","🎹"],help:["help","ช่วย","🤝"],ring:["rɪŋ","ดัง (กริ่ง)","🔔"],start:["stɑːt","เริ่ม","▶️"],save:["seɪv","บันทึก / ออม","💾"],show:["ʃəʊ","แสดง","🕒"],work:["wɜːk","ทำงาน","⚙️"],eat:["iːt","กิน","🍽️"],clean:["kliːn","ทำความสะอาด","🧹"],watch:["wɒtʃ","ดู","🎬"],volunteer:["ˌvɒl.ənˈtɪə","เป็นอาสาสมัคร","🙋"],attend:["əˈtend","เข้าร่วม","🎫"],have:["hæv","ทาน / มี","🍲"],review:["rɪˈvjuː","ทบทวน","🔁"],listen:["ˈlɪs.ən","ฟัง","🎧"],take:["teɪk","นั่ง / เอา / จด","🚆"],wear:["weə","สวมใส่","👔"],charge:["tʃɑːdʒ","ชาร์จ","🔋"],recycle:["ˌriːˈsaɪ.kəl","รีไซเคิล","♻️"],arrive:["əˈraɪv","มาถึง","📍"],explain:["ɪkˈspleɪn","อธิบาย","🧑‍🏫"],complete:["kəmˈpliːt","ทำให้เสร็จ","☑️"],use:["juːz","ใช้","📱"],learn:["lɜːn","เรียนรู้","🎓"],make:["meɪk","ทำ / ชง","🛏️"],pack:["pæk","จัด (กระเป๋า)","🎒"],answer:["ˈɑːn.sə","ตอบ","📧"],stretch:["stretʃ","ยืด","🤸"],carry:["ˈkær.i","พก","👜"],reply:["rɪˈplaɪ","ตอบกลับ","💬"],wash:["wɒʃ","ล้าง","🧼"],feed:["fiːd","ให้อาหาร","🐈"],repair:["rɪˈpeə","ซ่อม","🔧"],comb:["kəʊm","หวี","💇"],prepare:["prɪˈpeə","เตรียม","🥗"],shop:["ʃɒp","ซื้อของ","🛒"],open:["ˈəʊ.pən","เปิด","🚪"],lock:["lɒk","ล็อก","🔒"],update:["ʌpˈdeɪt","อัปเดต","🔄"],print:["prɪnt","พิมพ์","🖨️"],record:["rɪˈkɔːd","บันทึก","🎥"],share:["ʃeə","แบ่งปัน","🔗"],support:["səˈpɔːt","สนับสนุน","🫶"],meet:["miːt","พบ","☕"],plan:["plæn","วางแผน","🗓️"],protect:["prəˈtekt","ปกป้อง","🛡️"],bring:["brɪŋ","นำมา","🧴"],donate:["dəʊˈneɪt","บริจาค","📚"],greet:["ɡriːt","ทักทาย","👋"],ask:["ɑːsk","ถาม","❓"],encourage:["ɪnˈkʌr.ɪdʒ","ให้กำลังใจ","💪"],turn:["tɜːn","ปิด / เปิด","💡"],fill:["fɪl","เติม","🚰"],set:["set","ตั้ง","⏲️"],organize:["ˈɔː.ɡən.aɪz","จัดระเบียบ","🗂️"],polish:["ˈpɒl.ɪʃ","ขัด","👞"],shave:["ʃeɪv","โกนหนวด","🪒"],store:["stɔː","เก็บ","🗄️"],iron:["ˈaɪən","รีด","👕"],arrange:["əˈreɪndʒ","จัด","💐"],send:["send","ส่ง","📮"],scan:["skæn","สแกน","🦠"],sync:["sɪŋk","ซิงค์","🔄"],filter:["ˈfɪl.tə","กรอง","🌬️"],adjust:["əˈdʒʌst","ปรับ","🌡️"],remind:["rɪˈmaɪnd","เตือน","🔔"],divide:["dɪˈvaɪd","แบ่ง","➗"],exchange:["ɪksˈtʃeɪndʒ","แลกเปลี่ยน","💡"],keep:["kiːp","รักษา / เก็บไว้","🧽"],deliver:["dɪˈlɪv.ə","ส่งมอบ","📦"],serve:["sɜːv","บริการ","🛎️"],hold:["həʊld","จัด (ประชุม)","🪑"],inspect:["ɪnˈspekt","ตรวจสอบ","🔍"],refill:["ˌriːˈfɪl","เติมใหม่","☕"],follow:["ˈfɒl.əʊ","ปฏิบัติตาม","📏"],collect:["kəˈlekt","สะสม","🪙"],respect:["rɪˈspekt","เคารพ","🚦"],return:["rɪˈtɜːn","คืน","🔙"],connect:["kəˈnekt","เชื่อมต่อ","📶"],back:["bæk","สำรอง","💽"],display:["dɪˈspleɪ","แสดง","🖥️"],measure:["ˈmeʒ.ə","วัด","📏"],detect:["dɪˈtekt","ตรวจจับ","📡"],smile:["smaɪl","ยิ้ม","😊"],pray:["preɪ","สวดมนต์","🙏"]};
+const PT={to:"tuː",up:"ʌp",off:"ɒf",for:"fɔː"};
+const D=`I|wake up|at 6:00 a.m.|every morning|ฉันตื่นนอนตอน 6:00 น. ทุกเช้า
+I|brush|my teeth|twice a day|ฉันแปรงฟันวันละสองครั้ง
+I|drink|a glass of water|every morning|ฉันดื่มน้ำหนึ่งแก้วทุกเช้า
+I|read|English books|every evening|ฉันอ่านหนังสือภาษาอังกฤษทุกเย็น
+I|exercise|at the park|three times a week|ฉันออกกำลังกายที่สวนสาธารณะสัปดาห์ละสามครั้ง
+You|go|to work by bus|on weekdays|คุณไปทำงานด้วยรถเมล์ในวันธรรมดา
+You|check|your email|every morning|คุณเช็กอีเมลทุกเช้า
+You|cook|dinner for your family|every evening|คุณทำอาหารเย็นให้ครอบครัวทุกเย็น
+You|study|English online|every night|คุณเรียนภาษาอังกฤษออนไลน์ทุกคืน
+You|visit|your grandparents|once a month|คุณไปเยี่ยมปู่ย่าตายายเดือนละครั้ง
+He|plays|football|every Saturday|เขาเล่นฟุตบอลทุกวันเสาร์
+He|drinks|coffee before work|every morning|เขาดื่มกาแฟก่อนทำงานทุกเช้า
+He|reads|the newspaper|every day|เขาอ่านหนังสือพิมพ์ทุกวัน
+He|drives|to the office|on weekdays|เขาขับรถไปที่ทำงานในวันธรรมดา
+He|calls|his parents|every Sunday|เขาโทรหาพ่อแม่ทุกวันอาทิตย์
+She|walks|her dog|every morning|เธอพาสุนัขเดินเล่นทุกเช้า
+She|waters|the plants|every evening|เธอรดน้ำต้นไม้ทุกเย็น
+She|writes|in her diary|before bedtime|เธอเขียนไดอารี่ก่อนนอน
+She|practices|the piano|every day|เธอฝึกเปียโนทุกวัน
+She|helps|her younger brother|after school|เธอช่วยน้องชายหลังเลิกเรียน
+It|rings|at seven o’clock|every morning|มันดังตอนเจ็ดโมงทุกเช้า
+It|starts|automatically|every morning|มันเริ่มทำงานอัตโนมัติทุกเช้า
+It|saves|your work|every five minutes|มันบันทึกงานของคุณทุกห้านาที
+It|shows|the correct time|always|มันแสดงเวลาที่ถูกต้องเสมอ
+It|works|efficiently|every day|มันทำงานได้อย่างมีประสิทธิภาพทุกวัน
+We|eat|lunch together|every Friday|เรากินข้าวกลางวันด้วยกันทุกวันศุกร์
+We|study|English together|every weekend|เราเรียนภาษาอังกฤษด้วยกันทุกสุดสัปดาห์
+We|clean|the house|every Saturday|เราทำความสะอาดบ้านทุกวันเสาร์
+We|watch|movies together|on weekends|เราดูหนังด้วยกันในวันหยุดสุดสัปดาห์
+We|visit|our relatives|during holidays|เราไปเยี่ยมญาติในช่วงวันหยุด
+They|go|jogging together|every morning|พวกเขาไปวิ่งจ๊อกกิ้งด้วยกันทุกเช้า
+They|play|badminton|every Wednesday|พวกเขาเล่นแบดมินตันทุกวันพุธ
+They|volunteer|at the community center|once a month|พวกเขาเป็นอาสาสมัครที่ศูนย์ชุมชนเดือนละครั้ง
+They|attend|English classes|twice a week|พวกเขาเรียนภาษาอังกฤษสัปดาห์ละสองครั้ง
+They|have|dinner together|every night|พวกเขาทานอาหารเย็นด้วยกันทุกคืน
+I|review|my lessons|before bedtime|ฉันทบทวนบทเรียนก่อนนอน
+You|listen to|podcasts|on your way to work|คุณฟังพอดแคสต์ระหว่างเดินทางไปทำงาน
+He|takes|the train to work|every weekday|เขานั่งรถไฟไปทำงานทุกวันทำงาน
+She|wears|a school uniform|every school day|เธอใส่ชุดนักเรียนทุกวันที่ไปโรงเรียน
+It|charges|its battery|every night|มันชาร์จแบตเตอรี่ทุกคืน
+We|practice|speaking English|every Tuesday|เราฝึกพูดภาษาอังกฤษทุกวันอังคาร
+They|recycle|plastic bottles|every week|พวกเขารีไซเคิลขวดพลาสติกทุกสัปดาห์
+Everyone|arrives|on time|every morning|ทุกคนมาถึงตรงเวลาทุกเช้า
+My family|eats|breakfast together|every Sunday|ครอบครัวของฉันกินอาหารเช้าด้วยกันทุกวันอาทิตย์
+The teacher|explains|new lessons clearly|every day|ครูอธิบายบทเรียนใหม่อย่างชัดเจนทุกวัน
+The students|complete|their homework|every evening|นักเรียนทำการบ้านให้เสร็จทุกเย็น
+My brother|plays|video games|sometimes|พี่ชายของฉันเล่นวิดีโอเกมบางครั้ง
+My sister|helps|our mother in the kitchen|every weekend|น้องสาวของฉันช่วยแม่ในครัวทุกสุดสัปดาห์
+People|use|smartphones every day|for communication|ผู้คนใช้สมาร์ทโฟนทุกวันเพื่อการสื่อสาร
+Children|learn|new things at school|every day|เด็กๆ เรียนรู้สิ่งใหม่ๆ ที่โรงเรียนทุกวัน
+I|make|my bed|every morning|ฉันปูที่นอนทุกเช้า
+I|pack|my school bag|every night|ฉันจัดกระเป๋านักเรียนทุกคืน
+I|answer|my emails|every afternoon|ฉันตอบอีเมลทุกบ่าย
+I|save|money in my savings account|every month|ฉันออมเงินในบัญชีออมทรัพย์ทุกเดือน
+I|review|new vocabulary|before bedtime|ฉันทบทวนคำศัพท์ใหม่ก่อนนอน
+You|stretch|your muscles|every morning|คุณยืดกล้ามเนื้อทุกเช้า
+You|carry|a water bottle|every day|คุณพกขวดน้ำทุกวัน
+You|reply to|messages quickly|usually|คุณตอบข้อความอย่างรวดเร็วเป็นปกติ
+You|wash|your hands before meals|always|คุณล้างมือก่อนอาหารเสมอ
+You|review|your notes|after class|คุณทบทวนโน้ตหลังเลิกเรียน
+He|feeds|his cat|every morning|เขาให้อาหารแมวทุกเช้า
+He|checks|the weather forecast|every morning|เขาเช็กพยากรณ์อากาศทุกเช้า
+He|wears|a suit to work|on weekdays|เขาใส่สูทไปทำงานในวันธรรมดา
+He|repairs|household items|on weekends|เขาซ่อมของใช้ในบ้านในวันหยุดสุดสัปดาห์
+He|reads|to his children|every night|เขาอ่านหนังสือให้ลูกฟังทุกคืน
+She|combs|her hair|every morning|เธอหวีผมทุกเช้า
+She|prepares|healthy lunches|every weekday|เธอเตรียมอาหารกลางวันเพื่อสุขภาพทุกวันทำงาน
+She|shops for|groceries|every Saturday|เธอซื้อของชำทุกวันเสาร์
+She|calls|her grandparents|every Sunday|เธอโทรหาปู่ย่าตายายทุกวันอาทิตย์
+She|recycles|paper and plastic|every week|เธอรีไซเคิลกระดาษและพลาสติกทุกสัปดาห์
+It|opens|automatically|every morning|มันเปิดอัตโนมัติทุกเช้า
+It|locks|itself|every night|มันล็อกตัวเองทุกคืน
+It|updates|the software|every week|มันอัปเดตซอฟต์แวร์ทุกสัปดาห์
+It|prints|reports|every afternoon|มันพิมพ์รายงานทุกบ่าย
+It|records|security videos|all day|มันบันทึกวิดีโอรักษาความปลอดภัยตลอดวัน
+We|share|our ideas|during meetings|เราแบ่งปันความคิดระหว่างประชุม
+We|prepare|our lessons together|every Tuesday|เราเตรียมบทเรียนด้วยกันทุกวันอังคาร
+We|practice|yoga|every Saturday morning|เราฝึกโยคะทุกเช้าวันเสาร์
+We|cook|together|on weekends|เราทำอาหารด้วยกันในวันหยุดสุดสัปดาห์
+We|support|each other|every day|เราสนับสนุนกันและกันทุกวัน
+They|meet|their clients|every Monday|พวกเขาพบลูกค้าทุกวันจันทร์
+They|exercise|at the gym|three times a week|พวกเขาออกกำลังกายที่ฟิตเนสสัปดาห์ละสามครั้ง
+They|practice|their presentation|before meetings|พวกเขาซ้อมการนำเสนอก่อนประชุม
+They|drive|their children to school|every morning|พวกเขาขับรถไปส่งลูกที่โรงเรียนทุกเช้า
+They|walk|around the neighborhood|every evening|พวกเขาเดินเล่นรอบละแวกบ้านทุกเย็น
+I|plan|my schedule|every Sunday evening|ฉันวางแผนตารางงานทุกเย็นวันอาทิตย์
+You|practice|speaking English with friends|every weekend|คุณฝึกพูดภาษาอังกฤษกับเพื่อนทุกสุดสัปดาห์
+He|listens to|the radio on his way to work|every weekday|เขาฟังวิทยุระหว่างเดินทางไปทำงานทุกวันทำงาน
+She|checks|her calendar|every morning|เธอเช็กปฏิทินทุกเช้า
+It|protects|your files with a password|always|มันปกป้องไฟล์ของคุณด้วยรหัสผ่านเสมอ
+We|bring|our own water bottles|every day|เรานำขวดน้ำของตัวเองมาทุกวัน
+They|donate|books to the library|once a year|พวกเขาบริจาคหนังสือให้ห้องสมุดปีละครั้ง
+Everyone|greets|the teacher politely|every morning|ทุกคนทักทายครูอย่างสุภาพทุกเช้า
+My family|takes|a walk after dinner|every evening|ครอบครัวของฉันเดินเล่นหลังอาหารเย็นทุกเย็น
+The students|ask|questions during class|often|นักเรียนถามคำถามระหว่างเรียนบ่อยๆ
+The teacher|encourages|students to read more|every week|ครูส่งเสริมให้นักเรียนอ่านมากขึ้นทุกสัปดาห์
+My brother|washes|his bicycle|every Saturday|พี่ชายของฉันล้างจักรยานทุกวันเสาร์
+My sister|studies|Japanese online|every evening|น้องสาวของฉันเรียนภาษาญี่ปุ่นออนไลน์ทุกเย็น
+People|use|public transportation|every day|ผู้คนใช้ขนส่งสาธารณะทุกวัน
+Children|play|outdoor games after school|every afternoon|เด็กๆ เล่นเกมกลางแจ้งหลังเลิกเรียนทุกบ่าย
+I|check|my calendar before work|every morning|ฉันเช็กปฏิทินก่อนทำงานทุกเช้า
+I|prepare|my lunch at home|every weekday|ฉันเตรียมอาหารกลางวันที่บ้านทุกวันทำงาน
+I|practice|typing in English|every evening|ฉันฝึกพิมพ์ภาษาอังกฤษทุกเย็น
+I|write|a to-do list|every night|ฉันเขียนรายการสิ่งที่ต้องทำทุกคืน
+I|listen to|classical music while studying|^often|ฉันมักฟังเพลงคลาสสิกขณะเรียน
+You|review|your daily goals|every morning|คุณทบทวนเป้าหมายประจำวันทุกเช้า
+You|drink|green tea after lunch|^usually|คุณมักดื่มชาเขียวหลังอาหารกลางวัน
+You|read|the news online|every day|คุณอ่านข่าวออนไลน์ทุกวัน
+You|exercise|before breakfast|three times a week|คุณออกกำลังกายก่อนอาหารเช้าสัปดาห์ละสามครั้ง
+You|turn off|the lights before leaving|^always|คุณปิดไฟก่อนออกไปเสมอ
+He|makes|coffee for his wife|every morning|เขาชงกาแฟให้ภรรยาทุกเช้า
+He|checks|his phone after waking up|every day|เขาเช็กโทรศัพท์หลังตื่นนอนทุกวัน
+He|takes|a short walk after lunch|every weekday|เขาเดินเล่นสั้นๆ หลังอาหารกลางวันทุกวันทำงาน
+He|studies|new computer skills|every weekend|เขาเรียนทักษะคอมพิวเตอร์ใหม่ๆ ทุกสุดสัปดาห์
+He|locks|the front door before bed|every night|เขาล็อกประตูหน้าก่อนนอนทุกคืน
+She|answers|customer emails|every morning|เธอตอบอีเมลลูกค้าทุกเช้า
+She|wears|comfortable shoes to work|every day|เธอใส่รองเท้าสบายๆ ไปทำงานทุกวัน
+She|packs|healthy snacks|every morning|เธอจัดขนมเพื่อสุขภาพทุกเช้า
+She|learns|new recipes online|^often|เธอมักเรียนสูตรอาหารใหม่ๆ ออนไลน์
+She|cleans|the kitchen after dinner|every evening|เธอทำความสะอาดครัวหลังอาหารเย็นทุกเย็น
+It|connects|to Wi-Fi automatically|every morning|มันเชื่อมต่อ Wi-Fi อัตโนมัติทุกเช้า
+It|backs up|your files|every night|มันสำรองไฟล์ของคุณทุกคืน
+It|displays|notifications on the screen|every hour|มันแสดงการแจ้งเตือนบนหน้าจอทุกชั่วโมง
+It|measures|the room temperature|continuously|มันวัดอุณหภูมิห้องอย่างต่อเนื่อง
+It|detects|motion in the hallway|at night|มันตรวจจับการเคลื่อนไหวในโถงทางเดินตอนกลางคืน
+We|meet|for coffee after work|every Friday|เราพบกันดื่มกาแฟหลังเลิกงานทุกวันศุกร์
+We|review|our weekly progress|every Monday|เราทบทวนความคืบหน้ารายสัปดาห์ทุกวันจันทร์
+We|cook|healthy meals together|on weekends|เราทำอาหารเพื่อสุขภาพด้วยกันในวันหยุดสุดสัปดาห์
+We|share|household chores|every day|เราแบ่งงานบ้านกันทุกวัน
+We|practice|our presentation|before every meeting|เราซ้อมการนำเสนอก่อนการประชุมทุกครั้ง
+They|arrive|at the office early|every weekday|พวกเขามาถึงที่ทำงานแต่เช้าทุกวันทำงาน
+They|organize|their files carefully|every month|พวกเขาจัดระเบียบไฟล์อย่างรอบคอบทุกเดือน
+They|attend|training sessions|twice a month|พวกเขาเข้าอบรมเดือนละสองครั้ง
+They|encourage|each other to improve|every day|พวกเขาให้กำลังใจกันให้พัฒนาตัวเองทุกวัน
+They|recycle|glass bottles|every week|พวกเขารีไซเคิลขวดแก้วทุกสัปดาห์
+I|record|new vocabulary in a notebook|every evening|ฉันจดคำศัพท์ใหม่ลงสมุดทุกเย็น
+You|practice|public speaking|once a week|คุณฝึกพูดในที่สาธารณะสัปดาห์ละครั้ง
+He|waters|the vegetable garden|every morning|เขารดน้ำสวนผักทุกเช้า
+She|visits|the local market|every Saturday|เธอไปตลาดท้องถิ่นทุกวันเสาร์
+It|sends|automatic reminders|every afternoon|มันส่งการแจ้งเตือนอัตโนมัติทุกบ่าย
+We|learn|something new together|every week|เราเรียนรู้สิ่งใหม่ๆ ด้วยกันทุกสัปดาห์
+They|save|electricity by turning off unused devices|every day|พวกเขาประหยัดไฟโดยปิดอุปกรณ์ที่ไม่ใช้ทุกวัน
+Everyone|smiles|at each other|every morning|ทุกคนยิ้มให้กันทุกเช้า
+My family|prays|before dinner|every evening|ครอบครัวของฉันสวดมนต์ก่อนอาหารเย็นทุกเย็น
+The teacher|checks|students’ homework|every day|ครูตรวจการบ้านนักเรียนทุกวัน
+The students|work|in small groups|during English class|นักเรียนทำงานเป็นกลุ่มเล็กระหว่างเรียนภาษาอังกฤษ
+My brother|practices|the guitar|every evening|พี่ชายของฉันฝึกกีตาร์ทุกเย็น
+My sister|reviews|her lessons before exams|^always|น้องสาวของฉันทบทวนบทเรียนก่อนสอบเสมอ
+People|carry|reusable shopping bags|^often|ผู้คนมักพกถุงช้อปปิ้งใช้ซ้ำ
+Children|help|their parents with simple chores|after school|เด็กๆ ช่วยพ่อแม่ทำงานบ้านง่ายๆ หลังเลิกเรียน
+I|set|my alarm for 6:00 a.m.|every night|ฉันตั้งนาฬิกาปลุกเวลา 6:00 น. ทุกคืน
+I|check|my bank account|every Friday|ฉันเช็กบัญชีธนาคารทุกวันศุกร์
+I|fill|my water bottle|every morning|ฉันเติมน้ำใส่ขวดทุกเช้า
+I|take|notes during meetings|every weekday|ฉันจดบันทึกระหว่างประชุมทุกวันทำงาน
+I|practice|deep breathing|before bedtime|ฉันฝึกหายใจลึกๆ ก่อนนอน
+You|organize|your workspace|every Monday|คุณจัดระเบียบพื้นที่ทำงานทุกวันจันทร์
+You|charge|your phone|every night|คุณชาร์จโทรศัพท์ทุกคืน
+You|review|your monthly budget|every month|คุณทบทวนงบประมาณรายเดือนทุกเดือน
+You|bring|a notebook to class|every day|คุณนำสมุดจดมาเรียนทุกวัน
+You|greet|your coworkers politely|every morning|คุณทักทายเพื่อนร่วมงานอย่างสุภาพทุกเช้า
+He|polishes|his shoes|every Sunday|เขาขัดรองเท้าทุกวันอาทิตย์
+He|shaves|before work|every morning|เขาโกนหนวดก่อนทำงานทุกเช้า
+He|reviews|his sales reports|every Friday|เขาทบทวนรายงานการขายทุกวันศุกร์
+He|calls|his grandparents|every weekend|เขาโทรหาปู่ย่าตายายทุกสุดสัปดาห์
+He|stores|important documents safely|^always|เขาเก็บเอกสารสำคัญอย่างปลอดภัยเสมอ
+She|irons|her clothes|every Sunday evening|เธอรีดผ้าทุกเย็นวันอาทิตย์
+She|arranges|fresh flowers in the living room|every week|เธอจัดดอกไม้สดในห้องนั่งเล่นทุกสัปดาห์
+She|checks|the family calendar|every morning|เธอเช็กปฏิทินครอบครัวทุกเช้า
+She|sends|birthday cards to relatives|every year|เธอส่งการ์ดวันเกิดให้ญาติทุกปี
+She|packs|her gym bag|before work|เธอจัดกระเป๋าออกกำลังกายก่อนไปทำงาน
+It|scans|for viruses|every day|มันสแกนหาไวรัสทุกวัน
+It|syncs|your data automatically|every hour|มันซิงค์ข้อมูลของคุณอัตโนมัติทุกชั่วโมง
+It|filters|the air|all day|มันกรองอากาศตลอดวัน
+It|adjusts|the room temperature|automatically|มันปรับอุณหภูมิห้องโดยอัตโนมัติ
+It|reminds|you about appointments|every morning|มันเตือนคุณเรื่องนัดหมายทุกเช้า
+We|divide|the household chores|every weekend|เราแบ่งงานบ้านกันทุกสุดสัปดาห์
+We|exchange|ideas during discussions|every meeting|เราแลกเปลี่ยนความคิดระหว่างการอภิปรายทุกครั้งที่ประชุม
+We|visit|our neighbors|once a month|เราไปเยี่ยมเพื่อนบ้านเดือนละครั้ง
+We|practice|teamwork skills|every Friday|เราฝึกทักษะการทำงานเป็นทีมทุกวันศุกร์
+We|keep|our classroom clean|every day|เรารักษาห้องเรียนให้สะอาดทุกวัน
+They|deliver|packages on time|every day|พวกเขาส่งพัสดุตรงเวลาทุกวัน
+They|serve|customers politely|every morning|พวกเขาให้บริการลูกค้าอย่างสุภาพทุกเช้า
+They|update|their website|every week|พวกเขาอัปเดตเว็บไซต์ทุกสัปดาห์
+They|hold|staff meetings|every Monday|พวกเขาจัดประชุมพนักงานทุกวันจันทร์
+They|inspect|the equipment carefully|every month|พวกเขาตรวจสอบอุปกรณ์อย่างละเอียดทุกเดือน
+I|clean|my computer screen|every weekend|ฉันทำความสะอาดหน้าจอคอมพิวเตอร์ทุกสุดสัปดาห์
+You|record|your expenses|every evening|คุณบันทึกค่าใช้จ่ายทุกเย็น
+He|refills|the coffee machine|every morning|เขาเติมเครื่องชงกาแฟทุกเช้า
+She|volunteers|at the animal shelter|twice a month|เธอเป็นอาสาสมัครที่ศูนย์พักพิงสัตว์เดือนละสองครั้ง
+It|checks|for software updates|every night|มันตรวจหาการอัปเดตซอฟต์แวร์ทุกคืน
+We|encourage|each other to stay healthy|every day|เราให้กำลังใจกันให้รักษาสุขภาพทุกวัน
+They|practice|emergency procedures|every six months|พวกเขาฝึกขั้นตอนฉุกเฉินทุกหกเดือน
+Everyone|follows|the classroom rules|every day|ทุกคนปฏิบัติตามกฎของห้องเรียนทุกวัน
+My family|shares|stories at dinner|every evening|ครอบครัวของฉันแบ่งปันเรื่องราวตอนอาหารเย็นทุกเย็น
+The teacher|prepares|lesson plans|every weekend|ครูเตรียมแผนการสอนทุกสุดสัปดาห์
+The students|review|their vocabulary|every morning|นักเรียนทบทวนคำศัพท์ทุกเช้า
+My brother|collects|coins from different countries|as a hobby|พี่ชายของฉันสะสมเหรียญจากประเทศต่างๆ เป็นงานอดิเรก
+My sister|practices|Taekwondo|three times a week|น้องสาวของฉันฝึกเทควันโดสัปดาห์ละสามครั้ง
+People|respect|traffic rules|every day|ผู้คนเคารพกฎจราจรทุกวัน
+Children|return|library books on time|every month|เด็กๆ คืนหนังสือห้องสมุดตรงเวลาทุกเดือน`.split("\n").map(l=>{const a=l.split("|"),h=a[1].split(" ")[0],rest=a[1].split(" ").slice(1).join(" ");
+let b=B[h]?h:null;if(!b){const c=[];if(h.endsWith("ies"))c.push(h.slice(0,-3)+"y");if(h.endsWith("es"))c.push(h.slice(0,-2),h.slice(0,-1));if(h.endsWith("s"))c.push(h.slice(0,-1));b=c.find(x=>B[x])}
+let ip=B[b][0];if(b!=h){const z=ip.slice(-1);ip+=/[szʃʒ]/.test(z)?"ɪz":/[ptkfθ]/.test(z)?"s":"z"}
+if(rest)ip+=" "+(PT[rest]||"")+(PT[rest]?"":"");
+const pre=a[3][0]=="^";
+return{c:"IY".includes(a[0])||a[0]=="You"?"P":a[0]=="He"||a[0]=="She"?"H":a[0]=="It"?"T":a[0]=="We"||a[0]=="They"?"G":"O",sb:a[0],v:a[1],o:a[2],t:pre?a[3].slice(1):a[3],pre,ipa:"/"+ip.trim()+"/",e:B[b][2],vt:B[b][1],st:a[4]}});
+D.forEach(d=>{d.s=d.pre?`${d.sb} ${d.t} ${d.v} ${d.o}.`:`${d.sb} ${d.v} ${d.o} ${d.t}.`;d.h=d.pre?`${d.sb} <span class="tm">${d.t}</span> <b>${d.v}</b> <span class="ob">${d.o}</span>.`:`${d.sb} <b>${d.v}</b> <span class="ob">${d.o}</span> <span class="tm">${d.t}</span>.`});
+const K=Object.keys(CATS),TABS=[];K.forEach(k=>{const n=D.filter(x=>x.c==k).length;for(let s=0;s<n;s+=25)TABS.push({c:k,s,n:n,i:s/25+1})});let tab=0,list=[];
+const $=id=>document.getElementById(id);
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==TABS[tab].c).slice(TABS[tab].s,TABS[tab].s+25);
+ $("grid").innerHTML=list.map(([d,g])=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">Words Containing “Routines Verbs”</div><div class="emoji">${d.e}</div><div class="word">${d.v}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].v)">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.vt}</div><div class="sen">${d.h}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${TABS[tab].s+k+1}</td><td class="v">${x.v}</td><td class="ob">${x.o}</td><td class="tm">${x.t}</td><td>${x.h}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=TABS.map((t,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[t.c][0]}${t.n>25?" "+t.i:""} (${Math.min(25,t.n-t.s)})</button>`).join("");
+setTab(0);
+</script></body></html>
