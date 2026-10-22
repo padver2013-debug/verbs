@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive with “to” – Main</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--sub:#6b6780;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--sub:#b3aec7;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:20px 16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:26px;text-align:center;margin:8px 0 4px}
+.sub{text-align:center;color:var(--sub);font-family:Sarabun,"Thai Saraban",sans-serif;margin:0 0 22px;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.grid{grid-template-columns:1fr}}
+a.card{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:22px;text-decoration:none;color:#33304a;box-shadow:0 6px 16px rgba(120,100,160,.16);transition:transform .15s}
+a.card:hover{transform:translateY(-3px)}
+.n{font-size:13px;font-weight:700;opacity:.7;letter-spacing:.5px}
+.e{font-size:42px;line-height:1.1}
+.t{font-size:17px;font-weight:700;line-height:1.25}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif;font-size:14px;line-height:1.35}
+.eg{font-family:"Times New Roman",Times,serif;font-style:italic;font-size:13px;opacity:.85}
+.meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding-top:6px}
+.go{background:rgba(255,255,255,.75);border-radius:999px;padding:4px 12px;font-weight:700}
+.foot{text-align:center;margin-top:22px;color:var(--sub);font-size:13px;font-family:Sarabun,"Thai Saraban",sans-serif}
+</style></head><body><div class="wrap">
+<h1>Infinitive with “to” – Flashcards</h1>
+<p class="sub">เลือกหัวข้อเพื่อเปิดแฟลชการ์ด · ทั้งหมด <span id="tot"></span> การ์ด ใน 8 หัวข้อ</p>
+<div class="grid" id="g"></div>
+<p class="foot">เก็บไฟล์ทั้ง 9 ไฟล์ไว้ในโฟลเดอร์เดียวกัน ลิงก์จึงจะทำงาน</p>
+</div>
+<script>
+const S=[
+["infinitive-flashcards.html","🎯","1. As the subject of a sentence","เป็นประธานของประโยค","To learn a new language takes patience.",61,"#d9e8fb"],
+["infinitive-flashcards-2.html","🤝","2. As the object of verbs","เป็นกรรมของกริยา","I promise to help you.",61,"#fdf0c9"],
+["infinitive-flashcards-3.html","😊","3. After adjectives","ตามหลังคำคุณศัพท์","I am glad to hear that.",105,"#d8f2e2"],
+["infinitive-flashcards-4.html","💌","4. After nouns","ตามหลังคำนาม","I have a plan to visit Paris.",55,"#fbd9e6"],
+["infinitive-flashcards-5.html","🛍️","5. To express purpose","บอกจุดประสงค์","I went to buy vegetables.",95,"#e3dbf7"],
+["infinitive-flashcards-6.html","👀","6. After verbs of perception","ตามหลังกริยาประสาทสัมผัส","I heard him to speak.",96,"#d9e8fb"],
+["infinitive-flashcards-7.html","⚖️","7. With “too” and “enough”","ใช้กับ too และ enough","too hot to drink · strong enough to lift",163,"#fdf0c9"],
+["infinitive-flashcards-8.html","❓","8. In questions and negatives","ในประโยคคำถามและปฏิเสธ","Do you want to go? · I decided not to go.",146,"#d8f2e2"]];
+document.getElementById("tot").textContent=S.reduce((a,x)=>a+x[5],0);
+document.getElementById("g").innerHTML=S.map(x=>`<a class="card" href="${x[0]}" style="background:${x[6]}"><div class="n">UNIT ${x[2][0]}</div><div class="e">${x[1]}</div><div class="t">${x[2].slice(3)}</div><div class="th">${x[3]}</div><div class="eg">${x[4]}</div><div class="meta"><span>${x[5]} การ์ด</span><span class="go">เปิด ▶</span></div></a>`).join("");
+</script></body></html>

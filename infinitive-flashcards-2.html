@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive Flashcards 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}.scene{height:250px;perspective:800px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10px;opacity:.75;line-height:1.3}
+.emoji{font-size:50px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:20px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:15px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:20px;font-weight:600}
+.sen{font-size:13px;line-height:1.35}
+.sth{font-size:12.5px;opacity:.85;line-height:1.4}
+.spk{border:0;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.nav{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 20px}
+.nav button{border:0;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer;background:#cdb8f0;color:#2b2340}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+tr.cur td{background:rgba(205,184,240,.28)}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif}
+td .spk{background:#e4d8f7;width:34px;height:34px;font-size:16px}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>2. Infinitive with “to” — as the object of verbs of a sentence</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={P:["🗓️ Plans & Decisions","#d9e8fb"],W:["💭 Wants & Hopes","#fdf0c9"],R:["🙋 Requests & Offers","#d8f2e2"],A:["🤝 Promises & Refusals","#fbd9e6"],E:["🛠️ Effort & Results","#e3dbf7"]};
+const D=`W|wants to go|wɒnts tə ɡəʊ|🚶|อยากไป|She wants to go to Japan next year.|เธออยากไปญี่ปุ่นปีหน้า
+P|decide to study|dɪˈsaɪd tə ˈstʌd.i|🎓|ตัดสินใจเรียน|He decided to study medicine.|เขาตัดสินใจเรียนแพทย์
+P|plan to visit|plæn tə ˈvɪz.ɪt|🗓️|วางแผนไปเยี่ยม|We plan to visit our grandparents in May.|เราวางแผนไปเยี่ยมปู่ย่าตายายในเดือนพฤษภาคม
+A|promise to help|ˈprɒm.ɪs tə help|🤞|สัญญาว่าจะช่วย|I promise to help you with your homework.|ฉันสัญญาว่าจะช่วยเธอทำการบ้าน
+W|hope to finish|həʊp tə ˈfɪn.ɪʃ|🏁|หวังว่าจะเสร็จ|They hope to finish the work by Friday.|พวกเขาหวังว่าจะทำงานเสร็จภายในวันศุกร์
+W|need to call|niːd tə kɔːl|📞|ต้องโทร|I need to call my mother tonight.|ฉันต้องโทรหาแม่คืนนี้
+E|forget to bring|fəˈɡet tə brɪŋ|🎒|ลืมนำมา|He forgot to bring his umbrella.|เขาลืมนำร่มมา
+R|ask to speak|ɑːsk tə spiːk|🗣️|ขอพูดคุย|She asked to speak to the manager.|เธอขอพูดกับผู้จัดการ
+P|intend to leave|ɪnˈtend tə liːv|🚪|ตั้งใจจะออกไป|He intends to leave the company soon.|เขาตั้งใจจะลาออกจากบริษัทในเร็วๆ นี้
+R|offer to help|ˈɒf.ə tə help|🙌|เสนอที่จะช่วย|She offered to help me move house.|เธอเสนอที่จะช่วยฉันย้ายบ้าน
+W|would like to meet|wʊd laɪk tə miːt|🤝|อยากพบ|I would like to meet the new director.|ฉันอยากพบผู้อำนวยการคนใหม่
+A|refuse to cooperate|rɪˈfjuːz tə kəʊˈɒp.ər.eɪt|🙅|ปฏิเสธที่จะร่วมมือ|The witness refused to cooperate.|พยานปฏิเสธที่จะให้ความร่วมมือ
+A|agree to help|əˈɡriː tə help|👍|ตกลงช่วย|My brother agreed to help us paint the room.|พี่ชายตกลงช่วยเราทาสีห้อง
+E|try to solve|traɪ tə sɒlv|🧩|พยายามแก้|Students try to solve the puzzle together.|นักเรียนพยายามแก้ปริศนาด้วยกัน
+A|promise to be|ˈprɒm.ɪs tə biː|😇|สัญญาว่าจะเป็น|He promised to be on time.|เขาสัญญาว่าจะมาตรงเวลา
+W|hope to see|həʊp tə siː|👋|หวังว่าจะได้พบ|I hope to see you again soon.|ฉันหวังว่าจะได้พบคุณอีกในเร็วๆ นี้
+E|fail to meet|feɪl tə miːt|📉|ทำไม่ถึงเกณฑ์|The team failed to meet the deadline.|ทีมไม่สามารถทำตามกำหนดเวลาได้
+P|decide to take|dɪˈsaɪd tə teɪk|🚌|ตัดสินใจนั่ง|We decided to take the bus.|เราตัดสินใจนั่งรถบัส
+E|manage to finish|ˈmæn.ɪdʒ tə ˈfɪn.ɪʃ|💪|ทำจนสำเร็จ|She managed to finish the report before noon.|เธอทำรายงานเสร็จได้ก่อนเที่ยง
+R|ask to leave|ɑːsk tə liːv|🙋|ขอไป|He asked to leave early.|เขาขอกลับก่อน
+E|forget to reply|fəˈɡet tə rɪˈplaɪ|✉️|ลืมตอบ|I forgot to reply to her email.|ฉันลืมตอบอีเมลของเธอ
+P|plan to renovate|plæn tə ˈren.ə.veɪt|🏠|วางแผนปรับปรุง|They plan to renovate the kitchen.|พวกเขาวางแผนปรับปรุงห้องครัว
+R|invite to join|ɪnˈvaɪt tə dʒɔɪn|🎉|เชิญเข้าร่วม|They invited me to join the club.|พวกเขาเชิญฉันเข้าร่วมชมรม
+A|refuse to accept|rɪˈfjuːz tə əkˈsept|✋|ปฏิเสธที่จะรับ|She refused to accept the gift.|เธอปฏิเสธที่จะรับของขวัญ
+R|offer to pay|ˈɒf.ə tə peɪ|💳|เสนอที่จะจ่าย|He offered to pay for dinner.|เขาเสนอที่จะจ่ายค่าอาหารเย็น
+W|would like to travel|wʊd laɪk tə ˈtræv.əl|🧳|อยากเดินทาง|I would like to travel around Europe.|ฉันอยากเดินทางท่องเที่ยวยุโรป
+R|suggest to take|səˈdʒest tə teɪk|💡|แนะนำให้ไป/ใช้|The guide suggested to take the early train.|ไกด์แนะนำให้นั่งรถไฟเที่ยวเช้า
+W|want to learn|wɒnt tə lɜːn|📚|อยากเรียนรู้|I want to learn how to swim.|ฉันอยากเรียนว่ายน้ำ
+W|hope to get|həʊp tə ɡet|🎯|หวังว่าจะได้|She hopes to get a scholarship.|เธอหวังว่าจะได้รับทุนการศึกษา
+E|try to explain|traɪ tə ɪkˈspleɪn|🧑‍🏫|พยายามอธิบาย|The teacher tried to explain the rule again.|ครูพยายามอธิบายกฎอีกครั้ง
+P|plan to attend|plæn tə əˈtend|🏛️|วางแผนเข้าร่วม|We plan to attend the conference.|เราวางแผนเข้าร่วมการประชุมสัมมนา
+P|decide to leave|dɪˈsaɪd tə liːv|👣|ตัดสินใจจากไป|She decided to leave the city.|เธอตัดสินใจย้ายออกจากเมือง
+W|need to find|niːd tə faɪnd|🔎|ต้องหา|I need to find my keys.|ฉันต้องหากุญแจของฉัน
+W|want to travel|wɒnt tə ˈtræv.əl|✈️|อยากเดินทาง|He wants to travel by plane.|เขาอยากเดินทางโดยเครื่องบิน
+A|refuse to participate|rɪˈfjuːz tə pɑːˈtɪs.ɪ.peɪt|🚫|ปฏิเสธที่จะเข้าร่วม|Some students refused to participate in the test.|นักเรียนบางคนปฏิเสธที่จะเข้าร่วมการสอบ
+W|hope to learn|həʊp tə lɜːn|🌟|หวังว่าจะได้เรียน|He hopes to learn French next year.|เขาหวังว่าจะได้เรียนภาษาฝรั่งเศสปีหน้า
+P|plan to visit|plæn tə ˈvɪz.ɪt|🗼|วางแผนไปเยือน|They plan to visit Paris this summer.|พวกเขาวางแผนไปเยือนปารีสในฤดูร้อนนี้
+R|ask to join|ɑːsk tə dʒɔɪn|🙏|ขอเข้าร่วม|She asked to join our team.|เธอขอเข้าร่วมทีมของเรา
+A|promise to finish|ˈprɒm.ɪs tə ˈfɪn.ɪʃ|📝|สัญญาว่าจะทำให้เสร็จ|He promised to finish the essay tonight.|เขาสัญญาว่าจะเขียนเรียงความให้เสร็จคืนนี้
+E|forget to buy|fəˈɡet tə baɪ|🛒|ลืมซื้อ|I forgot to buy milk.|ฉันลืมซื้อนม
+E|try to fix|traɪ tə fɪks|🔧|พยายามซ่อม|He tried to fix the broken bike.|เขาพยายามซ่อมจักรยานที่พัง
+A|agree to help|əˈɡriː tə help|🧹|ตกลงช่วย|Everyone agreed to help clean the park.|ทุกคนตกลงช่วยทำความสะอาดสวนสาธารณะ
+R|offer to drive|ˈɒf.ə tə draɪv|🚗|เสนอที่จะขับรถ|She offered to drive us to the airport.|เธอเสนอที่จะขับรถไปส่งเราที่สนามบิน
+R|invite to the party|ɪnˈvaɪt tə ðə ˈpɑː.ti|🎈|เชิญไปงานปาร์ตี้|We invited her to the party.|เราเชิญเธอไปงานปาร์ตี้
+W|would like to start|wʊd laɪk tə stɑːt|🚀|อยากเริ่ม|I would like to start the meeting now.|ฉันอยากเริ่มการประชุมตอนนี้
+W|hope to receive|həʊp tə rɪˈsiːv|📬|หวังว่าจะได้รับ|We hope to receive your reply soon.|เราหวังว่าจะได้รับคำตอบจากคุณเร็วๆ นี้
+E|forget to bring|fəˈɡet tə brɪŋ|📓|ลืมนำมา|She forgot to bring her notebook.|เธอลืมนำสมุดจดมา
+R|invite to their wedding|ɪnˈvaɪt tə ðeə ˈwed.ɪŋ|💒|เชิญไปงานแต่งงาน|They invited us to their wedding.|พวกเขาเชิญเราไปงานแต่งงานของพวกเขา
+W|need to see|niːd tə siː|🩺|ต้องไปพบ|You need to see a doctor.|คุณต้องไปพบแพทย์
+P|plan to go|plæn tə ɡəʊ|🏖️|วางแผนไป|We plan to go to the beach on Sunday.|เราวางแผนไปทะเลวันอาทิตย์
+A|refuse to work|rɪˈfjuːz tə wɜːk|😤|ปฏิเสธที่จะทำงาน|The old printer refuses to work today.|เครื่องพิมพ์เก่าไม่ยอมทำงานวันนี้
+P|decide to leave|dɪˈsaɪd tə liːv|🚦|ตัดสินใจออกเดินทาง|He decided to leave early to avoid traffic.|เขาตัดสินใจออกเดินทางแต่เช้าเพื่อเลี่ยงรถติด
+R|tell to stay|tel tə steɪ|🛑|บอกให้อยู่|The nurse told him to stay in bed.|พยาบาลบอกให้เขาอยู่บนเตียง
+W|want to learn|wɒnt tə lɜːn|🧠|อยากเรียนรู้|They want to learn to cook Thai food.|พวกเขาอยากเรียนทำอาหารไทย
+A|agree to give|əˈɡriː tə ɡɪv|🎁|ตกลงให้|The company agreed to give a refund.|บริษัทตกลงคืนเงินให้
+E|manage to find|ˈmæn.ɪdʒ tə faɪnd|🔍|หามาได้สำเร็จ|We managed to find a cheap hotel.|เราหาโรงแรมราคาถูกได้สำเร็จ
+R|offer to pick|ˈɒf.ə tə pɪk|🚕|เสนอที่จะไปรับ|He offered to pick me up at six.|เขาเสนอที่จะไปรับฉันตอนหกโมง
+R|suggest to change|səˈdʒest tə tʃeɪndʒ|🔄|แนะนำให้เปลี่ยน|She suggested to change the meeting time.|เธอแนะนำให้เปลี่ยนเวลาประชุม
+E|fail to meet|feɪl tə miːt|⏰|ทำไม่ถึงเกณฑ์|Some students fail to meet the requirements.|นักเรียนบางคนไม่ผ่านเกณฑ์ที่กำหนด
+P|decide to take|dɪˈsaɪd tə teɪk|💼|ตัดสินใจรับ|He decided to take the job offer.|เขาตัดสินใจรับข้อเสนองาน
+P|plan to visit|plæn tə ˈvɪz.ɪt|🏯|วางแผนไปเยี่ยมชม|I plan to visit the museum tomorrow.|ฉันวางแผนไปพิพิธภัณฑ์พรุ่งนี้`.split("\n").map(l=>{const a=l.split("|");return{c:a[0],w:a[1],ipa:"/"+a[2]+"/",e:a[3],th:a[4],s:a[5],st:a[6]}});
+const K=Object.keys(CATS);let tab=0,list=[];
+const $=id=>document.getElementById(id);
+// speech: pick the best en-GB voice available
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==K[tab]);
+ $("grid").innerHTML=list.map(([d,g],k)=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">2. Infinitive with “to” as the object of verbs</div><div class="emoji">${d.e}</div><div class="word">${d.w}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].w.toLowerCase())">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.th}</div><div class="sen">${d.s}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${k+1}</td><td class="v">${x.w}</td><td class="t">${x.th}</td><td>${x.s}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=K.map((k,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[k][0]} (${D.filter(x=>x.c==k).length})</button>`).join("");
+setTab(0);
+</script></body></html>

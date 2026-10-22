@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive Flashcards 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}.scene{height:250px;perspective:800px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10px;opacity:.75;line-height:1.3}
+.emoji{font-size:60px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:20px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:15px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:20px;font-weight:600}
+.sen{font-size:13px;line-height:1.35}
+.sth{font-size:12.5px;opacity:.85;line-height:1.4}
+.spk{border:0;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.nav{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 20px}
+.nav button{border:0;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer;background:#cdb8f0;color:#2b2340}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+tr.cur td{background:rgba(205,184,240,.28)}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif}
+td .spk{background:#e4d8f7;width:34px;height:34px;font-size:16px}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>5. Infinitive with “to” to express purpose</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={S:["🛍️ Money & Shopping","#fdf0c9"],L:["📚 Study & Skills","#d9e8fb"],H:["🧘 Health & Relax","#d8f2e2"],C:["🤝 Social & Communication","#fbd9e6"],T:["🧭 Travel & Daily Life","#e3dbf7"]};
+const MV={went:["went","ไป"],studying:["ˈstʌd.i.ɪŋ","เรียน"],took:["tʊk","ทำ/ใช้"],traveled:["ˈtræv.əld","เดินทาง"],exercised:["ˈek.sə.saɪzd","ออกกำลังกาย"],worked:["wɜːkt","ทำงาน"],saving:["ˈseɪ.vɪŋ","เก็บออม"],studied:["ˈstʌd.id","เรียน"],called:["kɔːld","โทร"],moved:["muːvd","ย้าย"],writing:["ˈraɪ.tɪŋ","เขียน"],joined:["dʒɔɪnd","เข้าร่วม"],brought:["brɔːt","นำมา"],booked:["bʊkt","จอง"],ran:["ræn","วิ่ง"],painted:["ˈpeɪn.tɪd","ทาสี"],stayed:["steɪd","อยู่"],asked:["ɑːskt","ขอ"],gave:["ɡeɪv","ให้"],learning:["ˈlɜː.nɪŋ","เรียนรู้"],applied:["əˈplaɪd","สมัคร"],walked:["wɔːkt","เดิน"],saved:["seɪvd","เก็บออม"],bought:["bɔːt","ซื้อ"],practiced:["ˈpræk.tɪst","ฝึก"],attended:["əˈten.dɪd","เข้าร่วม"],exercising:["ˈek.sə.saɪ.zɪŋ","ออกกำลังกาย"],adopted:["əˈdɒp.tɪd","นำมาใช้"],volunteered:["ˌvɒl.ənˈtɪəd","อาสา"],left:["left","ออกไป"],emailed:["ˈiː.meɪld","ส่งอีเมล"],stopped:["stɒpt","แวะ"],arrived:["əˈraɪvd","มาถึง"],made:["meɪd","ทำ"],trained:["treɪnd","ฝึกซ้อม"],started:["ˈstɑː.tɪd","เริ่ม"],wrote:["rəʊt","เขียน"],changed:["tʃeɪndʒd","เปลี่ยน"],organized:["ˈɔː.ɡən.aɪzd","จัด"],planned:["plænd","วางแผน"]};
+const V={be:["biː","อยู่","🧍","C"],buy:["baɪ","ซื้อ","🛍️","S"],pass:["pɑːs","สอบผ่าน","✅","L"],rest:["rest","พักผ่อน","🛌","H"],visit:["ˈvɪz.ɪt","เยี่ยม","🏡","C"],stay:["steɪ","คงสภาพ","💪","H"],finish:["ˈfɪn.ɪʃ","ทำให้เสร็จ","🏁","L"],enjoy:["ɪnˈdʒɔɪ","เพลิดเพลิน","😊","H"],prepare:["prɪˈpeə","เตรียม","📝","L"],gain:["ɡeɪn","ได้รับ","📈","L"],apologize:["əˈpɒl.ə.dʒaɪz","ขอโทษ","🙇","C"],have:["hæv","มี","🏠","S"],ask:["ɑːsk","ถาม","❓","C"],lose:["luːz","ลด","⚖️","H"],share:["ʃeə","แบ่งปัน","🔗","C"],read:["riːd","อ่าน","📖","L"],earn:["ɜːn","หารายได้","💰","S"],relax:["rɪˈlæks","ผ่อนคลาย","🧘","H"],avoid:["əˈvɔɪd","หลีกเลี่ยง","🚧","H"],calm:["kɑːm","ทำให้สงบ","😌","H"],make:["meɪk","ทำ","🔨","T"],save:["seɪv","ประหยัด","🐷","S"],remember:["rɪˈmem.bə","จดจำ","🧠","T"],help:["help","ช่วย","🙌","C"],swim:["swɪm","ว่ายน้ำ","🏊","H"],communicate:["kəˈmjuː.nɪ.keɪt","สื่อสาร","💬","C"],start:["stɑːt","เริ่ม","🚀","T"],improve:["ɪmˈpruːv","ปรับปรุง","🛠️","L"],advance:["ədˈvɑːns","ก้าวหน้า","🪜","L"],play:["pleɪ","เล่น","⚽","T"],learn:["lɜːn","เรียนรู้","🎓","L"],feel:["fiːl","รู้สึก","💖","H"],grab:["ɡræb","คว้า","🥪","T"],travel:["ˈtræv.əl","เดินทาง","✈️","T"],catch:["kætʃ","ให้ทัน","🚆","T"],give:["ɡɪv","มอบให้","🎁","S"],find:["faɪnd","หา","🔎","T"],get:["ɡet","ได้รับ","🎯","T"],achieve:["əˈtʃiːv","บรรลุ","🏆","L"],check:["tʃek","ตรวจสอบ","☑️","C"],expand:["ɪkˈspænd","ขยาย","📊","S"],meet:["miːt","พบ","🤝","C"],escape:["ɪˈskeɪp","หลบหนี","🌴","T"],confirm:["kənˈfɜːm","ยืนยัน","✔️","C"],experience:["ɪkˈspɪə.ri.əns","สัมผัสประสบการณ์","🌍","T"],study:["ˈstʌd.i","เรียน","✏️","L"],develop:["dɪˈvel.əp","พัฒนา","🌱","L"],"pick up":["pɪk ʌp","ไปรับ","🚗","T"],ensure:["ɪnˈʃɔː","ให้แน่ใจ","🛡️","C"],discuss:["dɪˈskʌs","หารือ","🗨️","C"],remind:["rɪˈmaɪnd","เตือน","⏰","C"],qualify:["ˈkwɒl.ɪ.faɪ","มีคุณสมบัติ","🎖️","L"],recover:["rɪˈkʌv.ə","ฟื้นตัว","🩹","H"],complete:["kəmˈpliːt","ทำให้สำเร็จ","📦","L"],schedule:["ˈʃed.juːl","นัดหมาย","📅","C"],explore:["ɪkˈsplɔː","สำรวจ","🧭","T"],celebrate:["ˈsel.ə.breɪt","ฉลอง","🎉","H"],replace:["rɪˈpleɪs","เปลี่ยนใหม่","🔄","S"],accommodate:["əˈkɒm.ə.deɪt","รองรับ","🧩","T"],wear:["weə","สวมใส่","👗","S"],guarantee:["ˌɡær.ənˈtiː","รับประกัน","🔒","T"],enhance:["ɪnˈhɑːns","เพิ่มพูน","✨","L"],"catch up":["kætʃ ʌp","ตามให้ทัน","🏃","C"]};
+const D=`went|buy|I went to the market to buy fresh vegetables.|ฉันไปตลาดเพื่อซื้อผักสด
+studying|pass|She is studying hard to pass the exam.|เธอกำลังตั้งใจเรียนเพื่อสอบให้ผ่าน
+took|rest|He took a day off to rest.|เขาลาหนึ่งวันเพื่อพักผ่อน
+traveled|visit|We traveled to Chiang Mai to visit relatives.|เราเดินทางไปเชียงใหม่เพื่อเยี่ยมญาติ
+exercised|stay|She exercised daily to stay fit.|เธอออกกำลังกายทุกวันเพื่อให้ร่างกายฟิต
+worked|finish|They worked late to finish the project.|พวกเขาทำงานดึกเพื่อทำโครงการให้เสร็จ
+saving|buy|He is saving money to buy a car.|เขากำลังเก็บเงินเพื่อซื้อรถ
+went|enjoy|We went to the beach to enjoy the sunset.|เราไปที่ชายหาดเพื่อชมพระอาทิตย์ตก
+studied|prepare|I studied all night to prepare for the test.|ฉันอ่านหนังสือทั้งคืนเพื่อเตรียมสอบ
+took|gain|She took a course to gain new skills.|เธอเรียนคอร์สเพื่อเพิ่มทักษะใหม่
+called|apologize|He called her to apologize.|เขาโทรหาเธอเพื่อขอโทษ
+moved|have|They moved to the countryside to have a quiet life.|พวกเขาย้ายไปต่างจังหวัดเพื่อใช้ชีวิตสงบ
+writing|ask|I am writing to ask about the job.|ฉันเขียนมาเพื่อสอบถามเรื่องงาน
+joined|lose|He joined a gym to lose weight.|เขาสมัครฟิตเนสเพื่อลดน้ำหนัก
+brought|share|She brought snacks to share with everyone.|เธอนำขนมมาเพื่อแบ่งกันทุกคน
+went|read|I went to the library to read in peace.|ฉันไปห้องสมุดเพื่ออ่านหนังสืออย่างสงบ
+worked|earn|He worked part-time to earn extra money.|เขาทำงานพาร์ทไทม์เพื่อหารายได้เสริม
+booked|relax|They booked a spa day to relax.|พวกเขาจองสปาเพื่อผ่อนคลาย
+ran|avoid|She ran fast to avoid the rain.|เธอวิ่งเร็วเพื่อหลบฝน
+took|calm|He took a deep breath to calm down.|เขาหายใจลึกๆ เพื่อให้ใจสงบ
+painted|make|We painted the room to make it brighter.|เราทาสีห้องเพื่อให้สว่างขึ้น
+stayed|save|She stayed home to save money.|เธออยู่บ้านเพื่อประหยัดเงิน
+went|make|He went to the kitchen to make coffee.|เขาไปที่ห้องครัวเพื่อชงกาแฟ
+took|remember|I took notes to remember the details.|ฉันจดบันทึกเพื่อจำรายละเอียด
+asked|help|She asked a friend to help her.|เธอขอให้เพื่อนช่วยเธอ
+went|swim|We went to the pool to swim.|เราไปสระน้ำเพื่อว่ายน้ำ
+gave|save|The shop gave a discount to save customers money.|ร้านลดราคาเพื่อช่วยลูกค้าประหยัดเงิน
+learning|communicate|She is learning English to communicate with tourists.|เธอเรียนภาษาอังกฤษเพื่อสื่อสารกับนักท่องเที่ยว
+moved|start|He moved to Bangkok to start a new job.|เขาย้ายมากรุงเทพฯ เพื่อเริ่มงานใหม่
+asked|improve|The manager asked for feedback to improve service.|ผู้จัดการขอความคิดเห็นเพื่อปรับปรุงการบริการ
+applied|advance|She applied for a promotion to advance her career.|เธอสมัครเลื่อนตำแหน่งเพื่อก้าวหน้าในอาชีพ
+went|play|The kids went to the park to play.|เด็กๆ ไปสวนสาธารณะเพื่อเล่น
+joined|learn|I joined a class to learn painting.|ฉันเข้าร่วมคลาสเพื่อเรียนวาดภาพ
+took|feel|She took a walk to feel better.|เธอเดินเล่นเพื่อให้รู้สึกดีขึ้น
+walked|grab|He walked to the cafe to grab a sandwich.|เขาเดินไปร้านกาแฟเพื่อซื้อแซนด์วิชกิน
+saved|travel|They saved for years to travel the world.|พวกเขาเก็บเงินหลายปีเพื่อเดินทางรอบโลก
+ran|catch|I ran to the station to catch the train.|ฉันวิ่งไปสถานีเพื่อให้ทันรถไฟ
+bought|give|She bought flowers to give her mother.|เธอซื้อดอกไม้เพื่อมอบให้แม่
+took|relax|We took a long bath to relax.|เราแช่น้ำนานๆ เพื่อผ่อนคลาย
+moved|find|He moved abroad to find better opportunities.|เขาย้ายไปต่างประเทศเพื่อหาโอกาสที่ดีกว่า
+practiced|improve|She practiced daily to improve her piano skills.|เธอฝึกทุกวันเพื่อพัฒนาทักษะเปียโน
+attended|gain|He attended workshops to gain experience.|เขาเข้าร่วมเวิร์กช็อปเพื่อหาประสบการณ์
+exercising|get|I am exercising to get stronger.|ฉันกำลังออกกำลังกายเพื่อให้แข็งแรงขึ้น
+stayed|finish|He stayed at the office to finish the report.|เขาอยู่ที่ออฟฟิศเพื่อทำรายงานให้เสร็จ
+went|prepare|She went home early to prepare dinner.|เธอกลับบ้านเร็วเพื่อเตรียมอาหารเย็น
+adopted|expand|The company adopted new tools to expand its business.|บริษัทนำเครื่องมือใหม่มาใช้เพื่อขยายธุรกิจ
+studied|achieve|He studied hard to achieve his dream.|เขาตั้งใจเรียนเพื่อบรรลุความฝัน
+called|check|I called the hotel to check my booking.|ฉันโทรหาโรงแรมเพื่อตรวจสอบการจอง
+stayed|enjoy|We stayed longer to enjoy the music.|เราอยู่นานขึ้นเพื่อเพลิดเพลินกับดนตรี
+volunteered|help|She volunteered at the shelter to help animals.|เธออาสาที่ศูนย์พักพิงเพื่อช่วยสัตว์
+went|get|He went to the bank to get a loan.|เขาไปธนาคารเพื่อขอสินเชื่อ
+left|avoid|We left early to avoid the traffic.|เราออกเดินทางเช้าเพื่อเลี่ยงรถติด
+took|get|She took a taxi to get there on time.|เธอนั่งแท็กซี่เพื่อไปให้ทันเวลา
+joined|meet|I joined the club to meet new people.|ฉันเข้าชมรมเพื่อพบปะคนใหม่ๆ
+traveled|escape|They traveled to an island to escape the city.|พวกเขาเดินทางไปเกาะเพื่อหนีความวุ่นวายของเมือง
+took|improve|He took extra lessons to improve his English.|เขาเรียนพิเศษเพื่อพัฒนาภาษาอังกฤษ
+emailed|confirm|I emailed the client to confirm the meeting.|ฉันส่งอีเมลหาลูกค้าเพื่อยืนยันการประชุม
+stopped|buy|She stopped at the store to buy milk.|เธอแวะที่ร้านเพื่อซื้อนม
+studied|experience|He studied abroad to experience a new culture.|เขาไปเรียนต่างประเทศเพื่อสัมผัสวัฒนธรรมใหม่
+went|study|She went to Japan to study art.|เธอไปญี่ปุ่นเพื่อเรียนศิลปะ
+bought|improve|They bought new software to improve efficiency.|พวกเขาซื้อซอฟต์แวร์ใหม่เพื่อเพิ่มประสิทธิภาพ
+attended|learn|I attended a seminar to learn about marketing.|ฉันเข้าสัมมนาเพื่อเรียนรู้เรื่องการตลาด
+arrived|get|We arrived early to get good seats.|เรามาถึงเร็วเพื่อได้ที่นั่งดีๆ
+joined|develop|He joined the program to develop his leadership.|เขาเข้าโครงการเพื่อพัฒนาความเป็นผู้นำ
+went|pick up|I went to the airport to pick up my friend.|ฉันไปสนามบินเพื่อไปรับเพื่อน
+made|ensure|The team made a checklist to ensure quality.|ทีมทำเช็กลิสต์เพื่อให้แน่ใจว่างานมีคุณภาพ
+went|stay|They went to a hotel to stay overnight.|พวกเขาไปโรงแรมเพื่อค้างคืน
+attended|discuss|She attended the meeting to discuss the budget.|เธอเข้าประชุมเพื่อหารือเรื่องงบประมาณ
+called|remind|He called me to remind me about the appointment.|เขาโทรมาเพื่อเตือนเรื่องนัดหมาย
+went|lose|He went jogging to lose weight.|เขาไปวิ่งจ๊อกกิ้งเพื่อลดน้ำหนัก
+trained|qualify|The athletes trained hard to qualify for the final.|นักกีฬาฝึกซ้อมอย่างหนักเพื่อผ่านเข้ารอบชิง
+went|relax|We went to the mountains to relax.|เราไปภูเขาเพื่อพักผ่อน
+stayed|recover|He stayed in bed to recover from the flu.|เขานอนพักเพื่อฟื้นจากไข้หวัด
+bought|have|They bought a house to have more space.|พวกเขาซื้อบ้านเพื่อมีพื้นที่มากขึ้น
+worked|complete|She worked overtime to complete the order.|เธอทำงานล่วงเวลาเพื่อทำออเดอร์ให้เสร็จ
+studied|pass|He studied every night to pass the test.|เขาเรียนทุกคืนเพื่อสอบให้ผ่าน
+called|schedule|I called the clinic to schedule an appointment.|ฉันโทรหาคลินิกเพื่อนัดหมาย
+went|explore|We went downtown to explore the night market.|เราไปในเมืองเพื่อสำรวจตลาดกลางคืน
+took|learn|She took a cooking class to learn Thai recipes.|เธอเรียนคลาสทำอาหารเพื่อเรียนสูตรอาหารไทย
+started|share|He started a blog to share his travel stories.|เขาเริ่มทำบล็อกเพื่อแบ่งปันเรื่องราวการเดินทาง
+joined|get|They joined the line to get tickets.|พวกเขาเข้าแถวเพื่อซื้อตั๋ว
+moved|be|She moved closer to be near her family.|เธอย้ายมาใกล้ๆ เพื่ออยู่ใกล้ครอบครัว
+wrote|confirm|I wrote an email to confirm the date.|ฉันเขียนอีเมลเพื่อยืนยันวันที่
+took|celebrate|We took her out to celebrate her birthday.|เราพาเธอออกไปฉลองวันเกิด
+bought|replace|He bought a new phone to replace the old one.|เขาซื้อมือถือเครื่องใหม่เพื่อมาแทนเครื่องเก่า
+went|learn|She went to Spain to learn Spanish.|เธอไปสเปนเพื่อเรียนภาษาสเปน
+took|avoid|I took the back road to avoid the crowd.|ฉันใช้ทางลัดเพื่อเลี่ยงฝูงชน
+changed|accommodate|The school changed its schedule to accommodate everyone.|โรงเรียนเปลี่ยนตารางเรียนเพื่อรองรับทุกคน
+bought|wear|She bought a dress to wear at the party.|เธอซื้อชุดเพื่อใส่ไปงานปาร์ตี้
+organized|make|We organized the files to make work easier.|เราจัดระเบียบไฟล์เพื่อให้ทำงานง่ายขึ้น
+booked|guarantee|He booked early to guarantee a seat.|เขาจองล่วงหน้าเพื่อให้แน่ใจว่าได้ที่นั่ง
+took|enhance|She took online courses to enhance her skills.|เธอเรียนออนไลน์เพื่อเพิ่มพูนทักษะ
+stayed|catch up|I stayed up late to catch up on work.|ฉันนอนดึกเพื่อตามงานให้ทัน
+planned|enjoy|They planned a trip to enjoy the holidays.|พวกเขาวางแผนเที่ยวเพื่อเพลิดเพลินกับวันหยุด
+practiced|stay|He practiced yoga to stay calm.|เขาฝึกโยคะเพื่อให้ใจสงบ`.split("\n").map(l=>{const a=l.split("|"),m=MV[a[0]],v=V[a[1]];return{c:v[3],w:a[0]+" to "+a[1],ipa:"/"+m[0]+" tə "+v[0]+"/",e:v[2],th:m[1]+"เพื่อ"+v[1],s:a[2],st:a[3]}});
+const K=Object.keys(CATS),TABS=[];K.forEach(k=>{const n=D.filter(x=>x.c==k).length;for(let s=0;s<n;s+=20)TABS.push({c:k,s,n:n,i:s/20+1})});let tab=0,list=[];
+const $=id=>document.getElementById(id);
+// speech: pick the best en-GB voice available
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==TABS[tab].c).slice(TABS[tab].s,TABS[tab].s+20);
+ $("grid").innerHTML=list.map(([d,g],k)=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">5. Infinitive with “to” to express purpose</div><div class="emoji">${d.e}</div><div class="word">${d.w}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].w.toLowerCase())">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.th}</div><div class="sen">${d.s}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${TABS[tab].s+k+1}</td><td class="v">${x.w}</td><td class="t">${x.th}</td><td>${x.s}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=TABS.map((t,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[t.c][0]}${t.n>20?" "+t.i:""} (${Math.min(20,t.n-t.s)})</button>`).join("");
+setTab(0);
+</script></body></html>

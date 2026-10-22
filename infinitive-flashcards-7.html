@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive Flashcards 7</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}.scene{height:250px;perspective:800px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10px;opacity:.75;line-height:1.3}
+.emoji{font-size:60px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:20px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:15px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:20px;font-weight:600}
+.sen{font-size:13px;line-height:1.35}
+.sth{font-size:12.5px;opacity:.85;line-height:1.4}
+.spk{border:0;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.nav{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 20px}
+.nav button{border:0;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer;background:#cdb8f0;color:#2b2340}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+tr.cur td{background:rgba(205,184,240,.28)}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif}
+td .spk{background:#e4d8f7;width:34px;height:34px;font-size:16px}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>7. Infinitive with “to” with “too” and “enough”</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={tP:["😮‍💨 too: People & Feelings","#fbd9e6"],tO:["🏠 too: Things & Places","#d9e8fb"],tD:["🧩 too: Difficulty & Time","#fdf0c9"],eP:["💪 adj + enough: People","#d8f2e2"],eO:["📦 adj + enough: Things","#e3dbf7"],eN:["🧮 enough + noun","#fde2d0"]};
+const EP=new Set("motivated strong rich brave smart experienced talented healthy determined organized patient skilled kind confident young old busy".split(" "));
+const AJ={hot:["hɒt","ร้อน","🔥","O"],tired:["ˈtaɪəd","เหนื่อย","😴","P"],heavy:["ˈhev.i","หนัก","🏋️","O"],loud:["laʊd","ดัง","🔊","O"],early:["ˈɜː.li","เช้า","⏰","D"],busy:["ˈbɪz.i","ยุ่ง","📅","P"],slippery:["ˈslɪp.ər.i","ลื่น","🧼","O"],nervous:["ˈnɜː.vəs","ประหม่า","😰","P"],expensive:["ɪkˈspen.sɪv","แพง","💸","O"],far:["fɑː","ไกล","🛣️","O"],young:["jʌŋ","อายุน้อย","👶","P"],complicated:["ˈkɒm.plɪ.keɪ.tɪd","ซับซ้อน","🧩","D"],dark:["dɑːk","มืด","🌑","O"],shy:["ʃaɪ","ขี้อาย","🙈","P"],strong:["strɒŋ","แข็งแรง/เข้มข้น","💪","O"],scared:["skeəd","กลัว","😱","P"],difficult:["ˈdɪf.ɪ.kəlt","ยาก","😓","D"],old:["əʊld","แก่/เก่า","👴","P"],crowded:["ˈkraʊ.dɪd","แออัด","👥","O"],cold:["kəʊld","หนาว/เย็น","🥶","O"],interesting:["ˈɪn.trɪ.stɪŋ","น่าสนใจ","🧐","D"],high:["haɪ","สูง","⛰️","O"],small:["smɔːl","เล็ก","📏","O"],late:["leɪt","สาย","🕙","D"],sick:["sɪk","ป่วย","🤒","P"],easy:["ˈiː.zi","ง่าย","😌","D"],shallow:["ˈʃæl.əʊ","ตื้น","🏊","O"],uncomfortable:["ʌnˈkʌm.fə.tə.bəl","ไม่สบาย","🪑","O"],advanced:["ədˈvɑːnst","ขั้นสูง","🎓","D"],vague:["veɪɡ","คลุมเครือ","🌫️","D"],spicy:["ˈspaɪ.si","เผ็ด","🌶️","O"],distracted:["dɪˈstræk.tɪd","วอกแวก","🤹","P"],excited:["ɪkˈsaɪ.tɪd","ตื่นเต้น","🤩","P"],complex:["ˈkɒm.pleks","ซับซ้อน","🧠","D"],dangerous:["ˈdeɪn.dʒər.əs","อันตราย","⚠️","D"],steep:["stiːp","ชัน","🧗","O"],long:["lɒŋ","ยาว","📜","D"],noisy:["ˈnɔɪ.zi","เสียงดัง","📢","O"],slow:["sləʊ","ช้า","🐢","P"],boring:["ˈbɔː.rɪŋ","น่าเบื่อ","🥱","D"],tight:["taɪt","คับ","👟","O"],salty:["ˈsɒl.ti","เค็ม","🧂","O"],serious:["ˈsɪə.ri.əs","ร้ายแรง","😐","D"],big:["bɪɡ","ใหญ่","🐘","O"],strict:["strɪkt","เข้มงวด","📋","D"],short:["ʃɔːt","สั้น","✂️","D"],sweet:["swiːt","หวาน","🍰","O"],simple:["ˈsɪm.pəl","ง่าย","🔰","D"],messy:["ˈmes.i","รก","🗑️","O"],risky:["ˈrɪs.ki","เสี่ยง","🎲","D"],impatient:["ɪmˈpeɪ.ʃənt","ใจร้อน","😤","P"],cloudy:["ˈklaʊ.di","มีเมฆมาก","☁️","O"],motivated:["ˈməʊ.tɪ.veɪ.tɪd","มีแรงจูงใจ","🏃","P"],clear:["klɪə","ชัดเจน","🔍","D"],warm:["wɔːm","อุ่น","♨️","O"],rich:["rɪtʃ","รวย","💰","P"],brave:["breɪv","กล้าหาญ","🦁","P"],funny:["ˈfʌn.i","ตลก","😂","O"],smart:["smɑːt","ฉลาด","🧠","P"],fast:["fɑːst","เร็ว","🏎️","O"],experienced:["ɪkˈspɪə.ri.ənst","มีประสบการณ์","🎖️","P"],quiet:["ˈkwaɪ.ət","เงียบ","🤫","O"],good:["ɡʊd","ดี/เก่ง","👍","O"],talented:["ˈtæl.ən.tɪd","มีพรสวรรค์","🌟","P"],healthy:["ˈhel.θi","แข็งแรง","🥦","P"],determined:["dɪˈtɜː.mɪnd","มุ่งมั่น","🎯","P"],delicious:["dɪˈlɪʃ.əs","อร่อย","😋","O"],large:["lɑːdʒ","ใหญ่","🏟️","O"],nice:["naɪs","ดี","🌤️","O"],clean:["kliːn","สะอาด","🚰","O"],exciting:["ɪkˈsaɪ.tɪŋ","น่าตื่นเต้น","🎢","O"],close:["kləʊs","ใกล้","📍","O"],fresh:["freʃ","สด","🥬","O"],luxurious:["lʌɡˈʒʊə.ri.əs","หรูหรา","🏨","O"],powerful:["ˈpaʊə.fəl","ทรงพลัง","⚡","O"],comfortable:["ˈkʌm.fə.tə.bəl","สบาย","🛋️","O"],organized:["ˈɔː.ɡən.aɪzd","เป็นระเบียบ","🗂️","P"],patient:["ˈpeɪ.ʃənt","อดทน","🧘","P"],skilled:["skɪld","ชำนาญ","🛠️","P"],kind:["kaɪnd","ใจดี","💛","P"],confident:["ˈkɒn.fɪ.dənt","มั่นใจ","😎","P"],detailed:["ˈdiː.teɪld","ละเอียด","📝","O"],reliable:["rɪˈlaɪ.ə.bəl","เชื่อถือได้","🚙","O"],successful:["səkˈses.fəl","ประสบความสำเร็จ","🏅","O"]};
+const NN={time:["taɪm","เวลา","⏳"],food:["fuːd","อาหาร","🍲"],information:["ˌɪn.fəˈmeɪ.ʃən","ข้อมูล","ℹ️"],evidence:["ˈev.ɪ.dəns","หลักฐาน","🕵️"],supplies:["səˈplaɪz","เสบียง","📦"],ingredients:["ɪnˈɡriː.di.ənts","ส่วนผสม","🥕"],people:["ˈpiː.pəl","คน","👥"],resources:["rɪˈzɔː.sɪz","ทรัพยากร","🧰"],experience:["ɪkˈspɪə.ri.əns","ประสบการณ์","📚"]};
+const V={"go out":["ɡəʊ aʊt","ออกไปข้างนอก"],pay:["peɪ","ใส่ใจ/จ่าย"],have:["hæv","กิน/มี"],confront:["kənˈfrʌnt","เผชิญหน้า"],drink:["drɪŋk","ดื่ม"],finish:["ˈfɪn.ɪʃ","ทำให้เสร็จ"],lift:["lɪft","ยก"],concentrate:["ˈkɒn.sən.treɪt","จดจ่อ"],"wake up":["weɪk ʌp","ตื่น"],attend:["əˈtend","เข้าร่วม"],drive:["draɪv","ขับ"],speak:["spiːk","พูด"],buy:["baɪ","ซื้อ"],walk:["wɔːk","เดิน"],understand:["ˌʌn.dəˈstænd","เข้าใจ"],follow:["ˈfɒl.əʊ","ทำตาม"],read:["riːd","อ่าน"],ask:["ɑːsk","ขอ"],go:["ɡəʊ","ไป"],be:["biː","เป็น"],enjoy:["ɪnˈdʒɔɪ","เพลิดเพลิน"],"put down":["pʊt daʊn","วางลง"],climb:["klaɪm","ปีน"],fit:["fɪt","ใส่พอดี"],cancel:["ˈkæn.səl","ยกเลิก"],fail:["feɪl","ตก"],swim:["swɪm","ว่ายน้ำ"],sit:["sɪt","นั่ง"],eat:["iːt","กิน"],introduce:["ˌɪn.trəˈdjuːs","แนะนำตัว"],"be understood":["biː ˌʌn.dəˈstʊd","ถูกเข้าใจ"],tell:["tel","บอก"],"sit still":["sɪt stɪl","นั่งนิ่ง"],grasp:["ɡrɑːsp","เข้าใจ"],hike:["haɪk","เดินป่า"],find:["faɪnd","หา"],make:["meɪk","ทำ/ตัดสินใจ"],wait:["weɪt","รอ"],wear:["weə","สวมใส่"],continue:["kənˈtɪn.juː","ทำต่อ"],ignore:["ɪɡˈnɔː","เพิกเฉย"],move:["muːv","เคลื่อนไหว"],solve:["sɒlv","แก้"],stay:["steɪ","คงอยู่"],focus:["ˈfəʊ.kəs","มีสมาธิ"],see:["siː","เห็น"],justify:["ˈdʒʌs.tɪ.faɪ","แก้ต่าง/ทำให้สมเหตุผล"],bathe:["beɪð","อาบน้ำ"],watch:["wɒtʃ","ดู"],carry:["ˈkær.i","แบก"],clean:["kliːn","ทำความสะอาด"],invest:["ɪnˈvest","ลงทุน"],work:["wɜːk","ทำงาน"],catch:["kætʃ","ให้ทัน"],win:["wɪn","ชนะ"],complete:["kəmˈpliːt","ทำให้สำเร็จ"],"stand up":["stænd ʌp","ลุกขึ้นสู้"],face:["feɪs","เผชิญหน้า"],keep:["kiːp","ทำให้อยู่"],handle:["ˈhæn.dəl","จัดการ"],forget:["fəˈɡet","ลืม"],play:["pleɪ","เล่น"],get:["ɡet","ได้"],run:["rʌn","วิ่ง"],live:["lɪv","อยู่อาศัย"],achieve:["əˈtʃiːv","บรรลุ"],accommodate:["əˈkɒm.ə.deɪt","รองรับ"],study:["ˈstʌd.i","เรียน"],last:["lɑːst","อยู่ได้"],host:["həʊst","ต้อนรับ"],pass:["pɑːs","สอบผ่าน"],manage:["ˈmæn.ɪdʒ","จัดการ"],explain:["ɪkˈspleɪn","อธิบาย"],fix:["fɪks","ซ่อม"],help:["help","ช่วย"],accept:["əkˈsept","ตอบรับ"],start:["stɑːt","เริ่ม"],succeed:["səkˈsiːd","ประสบความสำเร็จ"],avoid:["əˈvɔɪd","หลีกเลี่ยง"],hold:["həʊld","บรรจุ/วาง"],expand:["ɪkˈspænd","ขยาย"],join:["dʒɔɪn","เข้าร่วม"],offer:["ˈɒf.ə","เสนอ"],present:["prɪˈzent","นำเสนอ"],execute:["ˈek.sɪ.kjuːt","ลงมือทำ"],afford:["əˈfɔːd","จ่ายไหว"],feed:["fiːd","เลี้ยง"],"not have":["nɒt hæv","ไม่มี"]};
+const D=`T|hot|drink|The soup is too hot to drink right now.|ซุปร้อนเกินกว่าจะดื่มตอนนี้
+T|tired|finish|She was too tired to finish the project.|เธอเหนื่อยเกินกว่าจะทำโครงการให้เสร็จ
+T|heavy|lift|The box is too heavy to lift alone.|กล่องหนักเกินกว่าจะยกคนเดียว
+T|loud|concentrate|The music was too loud to concentrate.|เสียงเพลงดังเกินกว่าจะจดจ่อได้
+T|early|wake up|It’s too early to wake up.|เช้าเกินกว่าจะตื่น
+T|busy|attend|He’s too busy to attend the meeting.|เขายุ่งเกินกว่าจะเข้าประชุม
+T|slippery|drive|The road is too slippery to drive on.|ถนนลื่นเกินกว่าจะขับได้
+T|nervous|speak|She was too nervous to speak in front of the crowd.|เธอประหม่าเกินกว่าจะพูดต่อหน้าฝูงชน
+T|expensive|buy|The dress is too expensive to buy.|ชุดนี้แพงเกินกว่าจะซื้อ
+T|far|walk|It’s too far to walk from here.|ไกลเกินกว่าจะเดินจากที่นี่
+T|young|understand|He’s too young to understand this concept.|เขาเด็กเกินกว่าจะเข้าใจแนวคิดนี้
+T|complicated|follow|The instructions are too complicated to follow.|คำแนะนำซับซ้อนเกินกว่าจะทำตาม
+T|dark|read|It was too dark to read the book.|มืดเกินกว่าจะอ่านหนังสือ
+T|shy|ask|She’s too shy to ask for help.|เธอขี้อายเกินกว่าจะขอความช่วยเหลือ
+T|strong|drink|The coffee is too strong to drink.|กาแฟเข้มเกินกว่าจะดื่ม
+T|scared|go|I was too scared to go into the haunted house.|ฉันกลัวเกินกว่าจะเข้าไปในบ้านผีสิง
+T|difficult|finish|The test was too difficult to finish in one hour.|ข้อสอบยากเกินกว่าจะทำเสร็จในหนึ่งชั่วโมง
+T|old|be|He’s too old to be playing video games all day.|เขาแก่เกินกว่าจะมานั่งเล่นเกมทั้งวัน
+T|crowded|enjoy|The party was too crowded to enjoy.|งานเลี้ยงแออัดเกินกว่าจะเพลิดเพลิน
+T|cold|go|The weather is too cold to go outside without a jacket.|อากาศหนาวเกินกว่าจะออกไปข้างนอกโดยไม่ใส่แจ็คเก็ต
+T|interesting|put down|The book is too interesting to put down.|หนังสือน่าสนใจเกินกว่าจะวางลง
+T|young|drive|She’s too young to drive a car.|เธออายุน้อยเกินกว่าจะขับรถ
+T|high|climb|The mountain is too high to climb without preparation.|ภูเขาสูงเกินกว่าจะปีนโดยไม่เตรียมตัว
+T|small|fit|The jacket is too small to fit me.|แจ็คเก็ตเล็กเกินกว่าจะใส่พอดี
+T|late|cancel|It’s too late to cancel the meeting now.|สายเกินกว่าจะยกเลิกการประชุมแล้ว
+T|sick|go|He was too sick to go to work today.|วันนี้เขาป่วยเกินกว่าจะไปทำงาน
+T|easy|fail|The exam was too easy to fail.|ข้อสอบง่ายเกินกว่าจะสอบตก
+T|shallow|swim|The water is too shallow to swim in.|น้ำตื้นเกินกว่าจะว่ายได้
+T|uncomfortable|sit|The chair is too uncomfortable to sit in for hours.|เก้าอี้ไม่สบายเกินกว่าจะนั่งเป็นชั่วโมง
+T|hot|eat|It’s too hot to eat soup right now.|ร้อนเกินกว่าจะกินซุปตอนนี้
+T|shy|introduce|She is too shy to introduce herself to strangers.|เธอขี้อายเกินกว่าจะแนะนำตัวกับคนแปลกหน้า
+T|advanced|be understood|The book is too advanced to be understood by a beginner.|หนังสือขั้นสูงเกินกว่าผู้เริ่มต้นจะเข้าใจ
+T|vague|understand|The message was too vague to understand.|ข้อความคลุมเครือเกินกว่าจะเข้าใจ
+T|scared|tell|He’s too scared to tell her how he feels.|เขากลัวเกินกว่าจะบอกเธอว่ารู้สึกอย่างไร
+T|spicy|eat|The food is too spicy to eat for some people.|อาหารเผ็ดเกินกว่าบางคนจะกินได้
+T|distracted|finish|They were too distracted to finish the task.|พวกเขาวอกแวกเกินกว่าจะทำงานให้เสร็จ
+T|excited|sit still|She was too excited to sit still.|เธอตื่นเต้นเกินกว่าจะนั่งนิ่งๆ
+T|complex|grasp|The lesson was too complex to grasp in one sitting.|บทเรียนซับซ้อนเกินกว่าจะเข้าใจในครั้งเดียว
+T|dangerous|hike|It’s too dangerous to hike without a guide.|อันตรายเกินกว่าจะเดินป่าโดยไม่มีไกด์
+T|dark|find|The room was too dark to find the light switch.|ห้องมืดเกินกว่าจะหาสวิตช์ไฟเจอ
+T|steep|climb|The mountain is too steep to climb without proper gear.|ภูเขาชันเกินกว่าจะปีนโดยไม่มีอุปกรณ์ที่เหมาะสม
+T|old|drive|The car is too old to drive long distances.|รถเก่าเกินกว่าจะขับระยะไกล
+T|early|make|It’s too early to make a decision about the project.|เร็วเกินกว่าจะตัดสินใจเรื่องโครงการ
+T|excited|wait|She was too excited to wait for the surprise.|เธอตื่นเต้นเกินกว่าจะรอเซอร์ไพรส์
+T|complicated|finish|The task is too complicated to finish in one hour.|งานซับซ้อนเกินกว่าจะทำเสร็จในหนึ่งชั่วโมง
+T|cold|swim|The water is too cold to swim in today.|วันนี้น้ำเย็นเกินกว่าจะว่าย
+T|dangerous|walk|It’s too dangerous to walk alone at night.|อันตรายเกินกว่าจะเดินคนเดียวตอนกลางคืน
+T|long|finish|The book is too long to finish in one sitting.|หนังสือยาวเกินกว่าจะอ่านจบในครั้งเดียว
+T|tired|go out|I’m too tired to go out tonight.|ฉันเหนื่อยเกินกว่าจะออกไปข้างนอกคืนนี้
+T|noisy|concentrate|The room was too noisy to concentrate.|ห้องเสียงดังเกินกว่าจะจดจ่อ
+T|slow|catch|They were too slow to catch the bus.|พวกเขาช้าเกินกว่าจะขึ้นรถบัสทัน
+T|boring|continue|The movie was too boring to continue watching.|หนังน่าเบื่อเกินกว่าจะดูต่อ
+T|tight|wear|The shoes are too tight to wear for a whole day.|รองเท้าคับเกินกว่าจะใส่ทั้งวัน
+T|salty|eat|The food is too salty to eat.|อาหารเค็มเกินกว่าจะกิน
+T|shy|speak|She is too shy to speak in front of a crowd.|เธอขี้อายเกินกว่าจะพูดต่อหน้าฝูงชน
+T|serious|ignore|The situation is too serious to ignore.|สถานการณ์ร้ายแรงเกินกว่าจะเพิกเฉย
+T|big|fit|The dress is too big to fit her.|ชุดใหญ่เกินกว่าจะใส่พอดีกับเธอ
+T|crowded|find|The class was too crowded to find a seat.|ห้องเรียนแออัดเกินกว่าจะหาที่นั่งได้
+T|strict|follow|The rules are too strict to follow without breaking them.|กฎเข้มงวดเกินกว่าจะทำตามโดยไม่ฝ่าฝืน
+T|short|make|The movie was too short to make an impact.|หนังสั้นเกินกว่าจะสร้างผลกระทบ
+T|sweet|eat|The cake is too sweet to eat more than one piece.|เค้กหวานเกินกว่าจะกินมากกว่าหนึ่งชิ้น
+T|busy|help|He was too busy to help with the preparations.|เขายุ่งเกินกว่าจะช่วยเตรียมงาน
+T|complicated|solve|The puzzle was too complicated to solve quickly.|ปริศนาซับซ้อนเกินกว่าจะแก้ได้เร็ว
+T|long|wait|The line was too long to wait in.|แถวยาวเกินกว่าจะรอ
+T|spicy|enjoy|The food was too spicy to enjoy.|อาหารเผ็ดเกินกว่าจะเพลิดเพลิน
+T|boring|pay|The lecture was too boring to pay attention.|การบรรยายน่าเบื่อเกินกว่าจะตั้งใจฟัง
+T|crowded|move|The party was too crowded to move around easily.|งานเลี้ยงแออัดเกินกว่าจะเดินไปมาได้ง่าย
+T|tired|work|I am too tired to work any longer today.|วันนี้ฉันเหนื่อยเกินกว่าจะทำงานต่อ
+T|heavy|carry|The box is too heavy to carry by yourself.|กล่องหนักเกินกว่าจะแบกคนเดียว
+T|simple|be|The answer was too simple to be the right one.|คำตอบง่ายเกินกว่าจะเป็นคำตอบที่ถูก
+T|messy|clean|The room is too messy to clean in one go.|ห้องรกเกินกว่าจะทำความสะอาดจบในครั้งเดียว
+T|risky|invest|It’s too risky to invest in that stock.|เสี่ยงเกินกว่าจะลงทุนในหุ้นตัวนั้น
+T|loud|enjoy|The concert was too loud to enjoy.|คอนเสิร์ตเสียงดังเกินกว่าจะเพลิดเพลิน
+T|tired|go|She was too tired to go for a run.|เธอเหนื่อยเกินกว่าจะไปวิ่ง
+T|difficult|solve|The math problem was too difficult to solve without a calculator.|โจทย์คณิตศาสตร์ยากเกินกว่าจะแก้โดยไม่มีเครื่องคิดเลข
+T|impatient|wait|He was too impatient to wait for the results.|เขาใจร้อนเกินกว่าจะรอผล
+T|long|stay|The meeting was too long to stay focused.|ประชุมยาวเกินกว่าจะมีสมาธิได้ตลอด
+T|dark|see|It was too dark to see anything clearly.|มืดเกินกว่าจะเห็นอะไรชัดเจน
+T|high|justify|The price is too high to justify purchasing it.|ราคาสูงเกินกว่าจะซื้ออย่างสมเหตุผล
+T|hot|bathe|The water is too hot to bathe in right now.|น้ำร้อนเกินกว่าจะอาบตอนนี้
+T|long|watch|The movie was too long to watch in one sitting.|หนังยาวเกินกว่าจะดูจบในครั้งเดียว
+T|excited|focus|She was too excited to focus on anything else.|เธอตื่นเต้นเกินกว่าจะมีสมาธิกับอย่างอื่น
+T|cloudy|see|The sky was too cloudy to see the stars.|ท้องฟ้ามีเมฆมากเกินกว่าจะเห็นดาว
+T|sweet|have|The cake is too sweet to have another slice.|เค้กหวานเกินกว่าจะกินอีกชิ้น
+E|motivated|complete|She is motivated enough to complete the marathon.|เธอมีแรงจูงใจมากพอที่จะวิ่งมาราธอนให้จบ
+E|clear|follow|The instructions are clear enough to follow.|คำแนะนำชัดเจนพอที่จะทำตามได้
+E|strong|lift|He’s strong enough to lift the box on his own.|เขาแข็งแรงพอที่จะยกกล่องด้วยตัวเอง
+N|time|catch|We have enough time to catch the train.|เรามีเวลาพอที่จะขึ้นรถไฟทัน
+E|warm|swim|The water is warm enough to swim in.|น้ำอุ่นพอที่จะว่ายได้
+E|rich|buy|She’s rich enough to buy anything she wants.|เธอรวยพอที่จะซื้ออะไรก็ได้ที่ต้องการ
+E|brave|speak|He is brave enough to speak his mind.|เขากล้าพอที่จะพูดในสิ่งที่คิด
+E|funny|make|The movie was funny enough to make us laugh throughout.|หนังตลกพอที่จะทำให้เราหัวเราะตลอดเรื่อง
+E|smart|solve|I’m smart enough to solve this puzzle.|ฉันฉลาดพอที่จะแก้ปริศนานี้
+N|food|feed|They have enough food to feed the entire group.|พวกเขามีอาหารพอที่จะเลี้ยงทั้งกลุ่ม
+E|fast|win|The car is fast enough to win the race.|รถเร็วพอที่จะชนะการแข่งขัน
+E|experienced|handle|We are experienced enough to handle the situation.|เรามีประสบการณ์พอที่จะรับมือสถานการณ์
+E|quiet|study|The room is quiet enough to study in.|ห้องเงียบพอที่จะอ่านหนังสือ
+E|busy|forget|I’m busy enough to forget about dinner tonight.|ฉันยุ่งพอที่จะลืมมื้อเย็นคืนนี้
+E|good|play|He is good enough to play in the championship.|เขาเก่งพอที่จะเล่นในการแข่งขันชิงแชมป์
+N|information|make|We have enough information to make a decision.|เรามีข้อมูลพอที่จะตัดสินใจ
+E|talented|get|She is talented enough to get the job.|เธอมีพรสวรรค์พอที่จะได้งาน
+E|healthy|run|I’m healthy enough to run every day.|ฉันแข็งแรงพอที่จะวิ่งทุกวัน
+E|rich|live|They are rich enough to live anywhere they want.|พวกเขารวยพอที่จะอยู่ที่ไหนก็ได้ตามต้องการ
+E|determined|achieve|He is determined enough to achieve his goals.|เขามุ่งมั่นพอที่จะบรรลุเป้าหมาย
+E|delicious|eat|The cookies are delicious enough to eat in one sitting.|คุกกี้อร่อยพอที่จะกินหมดในรอบเดียว
+E|big|carry|The bag is big enough to carry all your books.|กระเป๋าใหญ่พอที่จะใส่หนังสือทั้งหมดของคุณ
+E|brave|face|She is brave enough to face her fears.|เธอกล้าพอที่จะเผชิญหน้ากับความกลัว
+E|nice|go|The weather is nice enough to go for a walk.|อากาศดีพอที่จะออกไปเดินเล่น
+E|easy|complete|The test was easy enough to complete in 30 minutes.|ข้อสอบง่ายพอที่จะทำเสร็จใน 30 นาที
+E|strong|carry|He’s strong enough to carry that heavy box.|เขาแข็งแรงพอที่จะแบกกล่องหนักนั้น
+E|clean|drink|The water is clean enough to drink.|น้ำสะอาดพอที่จะดื่ม
+N|evidence|win|We have enough evidence to win the case.|เรามีหลักฐานพอที่จะชนะคดี
+E|good|watch|The movie was good enough to watch again.|หนังดีพอที่จะดูซ้ำ
+E|fast|catch|I’m fast enough to catch the train if I run.|ฉันเร็วพอที่จะขึ้นรถไฟทันถ้าวิ่ง
+E|exciting|keep|The story is exciting enough to keep you on the edge of your seat.|เรื่องราวน่าตื่นเต้นพอที่จะทำให้คุณลุ้นจนต้องจับขอบเก้าอี้
+E|close|walk|The restaurant is close enough to walk there.|ร้านอาหารอยู่ใกล้พอที่จะเดินไป
+E|large|accommodate|The room is large enough to accommodate all the guests.|ห้องใหญ่พอที่จะรองรับแขกทั้งหมด
+E|fresh|eat|The food was fresh enough to eat without any preparation.|อาหารสดพอที่จะกินได้โดยไม่ต้องเตรียม
+N|supplies|last|We have enough supplies to last through the winter.|เรามีเสบียงพอที่จะอยู่ได้ตลอดฤดูหนาว
+E|talented|play|He is talented enough to play in the national team.|เขามีพรสวรรค์พอที่จะเล่นในทีมชาติ
+E|luxurious|host|The hotel is luxurious enough to host VIP guests.|โรงแรมหรูหราพอที่จะต้อนรับแขกวีไอพี
+E|powerful|handle|The computer is powerful enough to handle large files.|คอมพิวเตอร์ทรงพลังพอที่จะจัดการไฟล์ขนาดใหญ่
+N|ingredients|make|The ingredients are enough to make dinner for everyone.|ส่วนผสมมีพอที่จะทำอาหารเย็นให้ทุกคน
+E|brave|stand up|She is brave enough to stand up for herself.|เธอกล้าพอที่จะลุกขึ้นสู้เพื่อตัวเอง
+E|comfortable|sit|The chair is comfortable enough to sit in all day.|เก้าอี้สบายพอที่จะนั่งได้ทั้งวัน
+E|easy|pass|The exam was easy enough to pass without studying.|ข้อสอบง่ายพอที่จะสอบผ่านโดยไม่ต้องอ่านหนังสือ
+N|time|finish|We have enough time to finish the project by the deadline.|เรามีเวลาพอที่จะทำโครงการให้เสร็จทันกำหนด
+E|strong|win|The team is strong enough to win the championship.|ทีมแข็งแกร่งพอที่จะชนะการแข่งขันชิงแชมป์
+E|hot|drink|The soup is hot enough to drink now.|ซุปร้อนพอที่จะดื่มได้แล้ว
+E|rich|afford|They are rich enough to afford a luxury vacation.|พวกเขารวยพอที่จะจ่ายค่าพักผ่อนสุดหรูได้
+E|organized|manage|I’m organized enough to manage the event smoothly.|ฉันเป็นระเบียบพอที่จะจัดงานให้ราบรื่น
+E|patient|explain|The teacher was patient enough to explain the concept again.|ครูอดทนพอที่จะอธิบายแนวคิดซ้ำอีกครั้ง
+E|skilled|fix|He was skilled enough to fix the car by himself.|เขาชำนาญพอที่จะซ่อมรถด้วยตัวเอง
+E|kind|help|She is kind enough to help with the charity event.|เธอใจดีพอที่จะช่วยงานการกุศล
+N|people|finish|We have enough people to finish the work on time.|เรามีคนพอที่จะทำงานเสร็จตรงเวลา
+E|determined|succeed|I am determined enough to succeed in this field.|ฉันมุ่งมั่นพอที่จะประสบความสำเร็จในสายงานนี้
+E|good|accept|The offer was good enough to accept immediately.|ข้อเสนอดีพอที่จะตอบรับทันที
+E|young|start|He is young enough to start a new career.|เขายังหนุ่มพอที่จะเริ่มอาชีพใหม่
+E|clear|understand|The lesson was clear enough to understand without any questions.|บทเรียนชัดเจนพอที่จะเข้าใจโดยไม่ต้องถามอะไร
+E|big|fit|The room is big enough to fit all the furniture.|ห้องใหญ่พอที่จะใส่เฟอร์นิเจอร์ได้ทั้งหมด
+E|brave|confront|She was brave enough to confront the situation.|เธอกล้าพอที่จะเผชิญหน้ากับสถานการณ์
+E|interesting|finish|The book was interesting enough to finish in one sitting.|หนังสือน่าสนใจพอที่จะอ่านจบในครั้งเดียว
+E|confident|speak|He was confident enough to speak in front of the audience.|เขามั่นใจพอที่จะพูดต่อหน้าผู้ชม
+E|large|hold|The desk is large enough to hold all of my books and papers.|โต๊ะใหญ่พอที่จะวางหนังสือและเอกสารทั้งหมดของฉัน
+E|warm|wear|The coat is warm enough to wear during the winter.|เสื้อโค้ทอุ่นพอที่จะใส่ในฤดูหนาว
+E|detailed|avoid|The plan is detailed enough to avoid mistakes.|แผนละเอียดพอที่จะหลีกเลี่ยงข้อผิดพลาด
+N|resources|complete|They have enough resources to complete the project on time.|พวกเขามีทรัพยากรพอที่จะทำโครงการเสร็จตรงเวลา
+E|reliable|drive|The car is reliable enough to drive long distances.|รถเชื่อถือได้พอที่จะขับระยะไกล
+N|experience|get|I have enough experience to get the job.|ฉันมีประสบการณ์พอที่จะได้งาน
+E|successful|make|The event was successful enough to make an impact.|งานประสบความสำเร็จพอที่จะสร้างผลกระทบ
+E|young|join|She is young enough to join the team.|เธอยังเด็กพอที่จะเข้าร่วมทีม
+E|simple|understand|The problem is simple enough to understand in one explanation.|ปัญหาง่ายพอที่จะเข้าใจได้ในคำอธิบายเดียว
+E|kind|offer|They were kind enough to offer help with the event.|พวกเขาใจดีพอที่จะเสนอช่วยงาน
+E|good|go|The weather is good enough to go for a hike.|อากาศดีพอที่จะไปเดินป่า
+E|old|make|I’m old enough to make my own decisions.|ฉันโตพอที่จะตัดสินใจเอง
+E|strong|wake up|The coffee is strong enough to wake me up in the morning.|กาแฟเข้มพอที่จะทำให้ฉันตื่นตอนเช้า
+E|skilled|win|The team is skilled enough to win the championship.|ทีมมีฝีมือพอที่จะชนะการแข่งขันชิงแชมป์
+N|people|complete|We have enough people to complete the task.|เรามีคนพอที่จะทำงานให้เสร็จ
+E|confident|present|He’s confident enough to present his ideas.|เขามั่นใจพอที่จะนำเสนอความคิด
+E|large|fit|The house is large enough to fit all of our belongings.|บ้านใหญ่พอที่จะใส่ข้าวของทั้งหมดของเรา
+E|busy|not have|I’m busy enough to not have time for any more appointments.|ฉันยุ่งพอจนไม่มีเวลานัดหมายเพิ่ม
+E|good|execute|The plan is good enough to execute right away.|แผนดีพอที่จะลงมือทำได้ทันที
+N|resources|expand|The company has enough resources to expand to new markets.|บริษัทมีทรัพยากรพอที่จะขยายไปตลาดใหม่`.split("\n").map(l=>{const a=l.split("|"),t=a[0];let w,ipa,th,c,e,j,n;const v=V[a[2]];
+if(t=="T"){j=AJ[a[1]];w="too "+a[1]+" to "+a[2];ipa="/tuː "+j[0]+" tə "+v[0]+"/";th=j[1]+"เกินไปที่จะ"+v[1];c="t"+j[3];e=j[2]}
+else if(t=="E"){j=AJ[a[1]];w=a[1]+" enough to "+a[2];ipa="/"+j[0]+" ɪˈnʌf tə "+v[0]+"/";th=j[1]+"พอที่จะ"+v[1];c=EP.has(a[1])?"eP":"eO";e=j[2]}
+else{n=NN[a[1]];w="enough "+a[1]+" to "+a[2];ipa="/ɪˈnʌf "+n[0]+" tə "+v[0]+"/";th="มี"+n[1]+"เพียงพอที่จะ"+v[1];c="eN";e=n[2]}
+return{c,w,ipa,e,th,s:a[3],st:a[4]}});
+const K=Object.keys(CATS),TABS=[];K.forEach(k=>{const n=D.filter(x=>x.c==k).length;for(let s=0;s<n;s+=20)TABS.push({c:k,s,n:n,i:s/20+1})});let tab=0,list=[];
+const $=id=>document.getElementById(id);
+// speech: pick the best en-GB voice available
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==TABS[tab].c).slice(TABS[tab].s,TABS[tab].s+20);
+ $("grid").innerHTML=list.map(([d,g],k)=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">7. Infinitive with “to” with “too” and “enough”</div><div class="emoji">${d.e}</div><div class="word">${d.w}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].w.toLowerCase())">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.th}</div><div class="sen">${d.s}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${TABS[tab].s+k+1}</td><td class="v">${x.w}</td><td class="t">${x.th}</td><td>${x.s}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=TABS.map((t,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[t.c][0]}${t.n>20?" "+t.i:""} (${Math.min(20,t.n-t.s)})</button>`).join("");
+setTab(0);
+</script></body></html>

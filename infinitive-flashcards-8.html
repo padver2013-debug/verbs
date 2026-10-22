@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive Flashcards 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}.scene{height:250px;perspective:800px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10px;opacity:.75;line-height:1.3}
+.emoji{font-size:60px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:20px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:15px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:20px;font-weight:600}
+.sen{font-size:13px;line-height:1.35}
+.sth{font-size:12.5px;opacity:.85;line-height:1.4}
+.spk{border:0;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.nav{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 20px}
+.nav button{border:0;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer;background:#cdb8f0;color:#2b2340}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+tr.cur td{background:rgba(205,184,240,.28)}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif}
+td .spk{background:#e4d8f7;width:34px;height:34px;font-size:16px}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>8. Infinitive with “to” in questions and negative sentences</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={qA:["💭 Questions: Wants & Plans","#fdf0c9"],qB:["🙋 Questions: Ability & Need","#d9e8fb"],nA:["📢 Not to: Telling & Advising","#d8f2e2"],nB:["🚫 Not to: Decisions & Promises","#fbd9e6"]};
+const QA=new Set("want,would like,plan,be planning,be going,hope,expect,decide,choose,prefer".split(","));
+const NA=new Set("tell,warn,ask,advise,order,remind,beg,instruct,be told,suggest".split(","));
+const MV={want:["wɒnt","อยาก"],"be ready":["biː ˈred.i","พร้อม"],afford:["əˈfɔːd","มีกำลังจ่าย"],"would like":["wʊd laɪk","อยาก"],hope:["həʊp","หวัง"],"be planning":["biː ˈplæn.ɪŋ","กำลังวางแผน"],forget:["fəˈɡet","ลืม"],"be trying":["biː ˈtraɪ.ɪŋ","กำลังพยายาม"],refuse:["rɪˈfjuːz","ปฏิเสธ"],"be willing":["biː ˈwɪl.ɪŋ","เต็มใจ"],decide:["dɪˈsaɪd","ตัดสินใจ"],expect:["ɪkˈspekt","คาดว่า"],teach:["tiːtʃ","สอน"],choose:["tʃuːz","เลือก"],"be necessary":["biː ˈnes.ə.sər.i","จำเป็น"],"be allowed":["biː əˈlaʊd","ได้รับอนุญาต"],need:["niːd","ต้อง"],plan:["plæn","วางแผน"],take:["teɪk","ใช้เวลา"],"be going":["biː ˈɡəʊ.ɪŋ","กำลังจะ"],prefer:["prɪˈfɜː","ชอบมากกว่า"],manage:["ˈmæn.ɪdʒ","ทำสำเร็จ"],promise:["ˈprɒm.ɪs","สัญญา"],"be able":["biː ˈeɪ.bəl","สามารถ"],"be prepared":["biː prɪˈpeəd","เตรียมพร้อม"],know:["nəʊ","รู้"],remember:["rɪˈmem.bə","จำได้"],show:["ʃəʊ","แสดง"],"be capable":["biː ˈkeɪ.pə.bəl","มีความสามารถ"],"be comfortable":["biː ˈkʌm.fə.tə.bəl","สบายใจ"],"figure out":["ˈfɪɡ.ər aʊt","หาวิธี"],tell:["tel","บอก"],warn:["wɔːn","เตือน"],try:["traɪ","พยายาม"],ask:["ɑːsk","ขอ"],"be told":["biː təʊld","ถูกบอก"],learn:["lɜːn","เรียนรู้"],advise:["ədˈvaɪz","แนะนำ"],order:["ˈɔː.də","สั่ง"],remind:["rɪˈmaɪnd","เตือน"],"be better":["biː ˈbet.ə","ดีกว่า"],agree:["əˈɡriː","ตกลง"],suggest:["səˈdʒest","แนะนำ"],beg:["beɡ","อ้อนวอน"],instruct:["ɪnˈstrʌkt","สั่งการ"]};
+const OB={me:["miː","ฉัน"],us:["ʌs","เรา"],them:["ðem","พวกเขา"],him:["hɪm","เขา"],her:["hɜː","เธอ"],you:["juː","คุณ"]};
+const V={go:["ɡəʊ","ไป","🚶"],start:["stɑːt","เริ่ม","🚀"],buy:["baɪ","ซื้อ","🛍️"],come:["kʌm","มา","👋"],win:["wɪn","ชนะ","🏆"],travel:["ˈtræv.əl","เดินทาง","✈️"],lock:["lɒk","ล็อก","🔒"],fix:["fɪks","แก้ไข","🔧"],help:["help","ช่วย","🤝"],learn:["lɜːn","เรียนรู้","🎓"],leave:["liːv","ออกไป","🚪"],finish:["ˈfɪn.ɪʃ","ทำให้เสร็จ","🏁"],drive:["draɪv","ขับรถ","🚗"],move:["muːv","ย้าย","📦"],repeat:["rɪˈpiːt","พูดซ้ำ","🔁"],enter:["ˈen.tə","เข้า","🚪"],join:["dʒɔɪn","เข้าร่วม","🙋"],complete:["kəmˈpliːt","ทำให้สำเร็จ","☑️"],call:["kɔːl","โทร","📞"],repair:["rɪˈpeə","ซ่อม","🛠️"],visit:["ˈvɪz.ɪt","เยี่ยมชม","🏛️"],"eat out":["iːt aʊt","กินข้าวนอกบ้าน","🍽️"],do:["duː","ทำ","✅"],study:["ˈstʌd.i","เรียน","📚"],stay:["steɪ","อยู่","🏠"],take:["teɪk","หยุด/ใช้","☕"],talk:["tɔːk","คุย","💬"],attend:["əˈtend","เข้าร่วม","🎫"],arrive:["əˈraɪv","มาถึง","📍"],organize:["ˈɔː.ɡən.aɪz","จัด","🗂️"],use:["juːz","ใช้","🖥️"],solve:["sɒlv","แก้","🧩"],work:["wɜːk","ทำงาน","💼"],get:["ɡet","ไป","🧭"],participate:["pɑːˈtɪs.ɪ.peɪt","เข้าร่วม","🏅"],handle:["ˈhæn.dəl","รับมือ","🤲"],speak:["spiːk","พูด","🎤"],try:["traɪ","ลอง","🍜"],bring:["brɪŋ","นำมา","🎒"],meet:["miːt","พบ","🤝"],hear:["hɪə","ได้ยิน","👂"],contact:["kənˈtækt","ติดต่อ","📱"],worry:["ˈwʌr.i","กังวล","😟"],touch:["tʌtʃ","แตะ","✋"],make:["meɪk","ทำ","🔨"],tell:["tel","บอก","🗣️"],be:["biː","เป็น","🧍"],panic:["ˈpæn.ɪk","ตื่นตระหนก","😱"],interrupt:["ˌɪn.təˈrʌpt","ขัดจังหวะ","✋"],rush:["rʌʃ","รีบ","🏃"],lift:["lɪft","ยก","🏋️"],smoke:["sməʊk","สูบบุหรี่","🚭"],argue:["ˈɑː.ɡjuː","เถียง","💢"],cooperate:["kəʊˈɒp.ər.eɪt","ร่วมมือ","🤝"],mention:["ˈmen.ʃən","พูดถึง","💬"],park:["pɑːk","จอดรถ","🅿️"],"go back":["ɡəʊ bæk","กลับไป","↩️"],encounter:["ɪnˈkaʊn.tə","เจอ","🚦"],cheat:["tʃiːt","โกง","🃏"],discuss:["dɪˈskʌs","หารือ","🗨️"],respond:["rɪˈspɒnd","ตอบสนอง","📩"],engage:["ɪnˈɡeɪdʒ","ตอบโต้","⚔️"],disturb:["dɪˈstɜːb","รบกวน","🔕"],share:["ʃeə","แบ่งปัน","🔗"],reply:["rɪˈplaɪ","ตอบ","✉️"],change:["tʃeɪndʒ","เปลี่ยน","🔄"],ask:["ɑːsk","ขอ","🙏"],"be disturbed":["biː dɪˈstɜːbd","ถูกรบกวน","🔕"],forget:["fəˈɡet","ลืม","🤦"],do2:["duː","ทำ","✅"]};
+const D=`Q|want|-|go|to the park^tə ðə pɑːk^สวนสาธารณะ|Do you want to go to the park?|คุณอยากไปสวนสาธารณะไหม
+Q|be ready|-|start|the project^ðə ˈprɒdʒ.ekt^โครงการ|Are you ready to start the project?|คุณพร้อมที่จะเริ่มโครงการหรือยัง
+Q|afford|-|buy|a new car^ə njuː kɑː^รถคันใหม่|Can she afford to buy a new car?|เธอซื้อรถคันใหม่ไหวไหม
+Q|would like|-|come|with us^wɪð ʌs^กับเรา|Would you like to come with us?|คุณอยากไปกับเราไหม
+Q|hope|-|win|the game^ðə ɡeɪm^เกม|Do they hope to win the game?|พวกเขาหวังว่าจะชนะเกมไหม
+Q|be planning|-|travel|abroad^əˈbrɔːd^ต่างประเทศ|Is he planning to travel abroad?|เขากำลังวางแผนไปต่างประเทศหรือเปล่า
+Q|forget|-|lock|the door^ðə dɔː^ประตู|Did you forget to lock the door?|คุณลืมล็อกประตูหรือเปล่า
+Q|be trying|-|fix|the problem^ðə ˈprɒb.ləm^ปัญหา|Are you trying to fix the problem?|คุณกำลังพยายามแก้ปัญหาอยู่หรือ
+Q|refuse|-|help|you^juː^คุณ|Did he refuse to help you?|เขาปฏิเสธที่จะช่วยคุณหรือ
+Q|be willing|-|learn|new skills^njuː skɪlz^ทักษะใหม่|Is she willing to learn new skills?|เธอเต็มใจเรียนทักษะใหม่ไหม
+Q|decide|-|leave|early^ˈɜː.li^เร็ว|What made you decide to leave early?|อะไรทำให้คุณตัดสินใจออกเร็ว
+Q|expect|-|finish|the report^ðə rɪˈpɔːt^รายงาน|When do you expect to finish the report?|คุณคาดว่าจะทำรายงานเสร็จเมื่อไหร่
+Q|teach|you|drive|-|Who taught you to drive?|ใครสอนคุณขับรถ
+Q|choose|-|move|away^əˈweɪ^ไปที่อื่น|Why did they choose to move away?|ทำไมพวกเขาเลือกย้ายไปที่อื่น
+Q|be necessary|-|repeat|the instructions^ði ɪnˈstrʌk.ʃənz^คำแนะนำ|Is it necessary to repeat the instructions?|จำเป็นต้องพูดคำแนะนำซ้ำไหม
+Q|be allowed|-|enter|the building^ðə ˈbɪl.dɪŋ^อาคาร|Are they allowed to enter the building?|พวกเขาได้รับอนุญาตให้เข้าอาคารไหม
+Q|want|-|join|the club^ðə klʌb^ชมรม|Who wants to join the club?|ใครอยากเข้าร่วมชมรมบ้าง
+Q|need|-|complete|the task^ðə tɑːsk^งาน|What do you need to complete the task?|คุณต้องการอะไรเพื่อทำงานให้เสร็จ
+Q|plan|-|call|them^ðem^พวกเขา|When do you plan to call them?|คุณวางแผนจะโทรหาพวกเขาเมื่อไหร่
+Q|take|-|repair|the car^ðə kɑː^รถ|How long will it take to repair the car?|การซ่อมรถจะใช้เวลานานแค่ไหน
+Q|plan|-|visit|the museum^ðə mjuˈziː.əm^พิพิธภัณฑ์|Do you plan to visit the museum this weekend?|คุณวางแผนจะไปพิพิธภัณฑ์สุดสัปดาห์นี้ไหม
+Q|afford|-|eat out|-|Can you afford to eat out every day?|คุณไหวไหมที่จะกินข้าวนอกบ้านทุกวัน
+Q|want|-|do|-|What do you want to do this summer?|คุณอยากทำอะไรในฤดูร้อนนี้
+Q|be going|-|study|abroad^əˈbrɔːd^ต่างประเทศ|Is he going to study abroad next year?|เขาจะไปเรียนต่อต่างประเทศปีหน้าไหม
+Q|would like|-|join|us^ʌs^เรา|Would you like to join us for dinner?|คุณอยากร่วมทานอาหารเย็นกับเราไหม
+Q|be going|-|start|a new job^ə njuː dʒɒb^งานใหม่|When are you going to start your new job?|คุณจะเริ่มงานใหม่เมื่อไหร่
+Q|decide|-|move|to a new city^tə ə njuː ˈsɪt.i^ไปเมืองใหม่|Did they decide to move to a new city?|พวกเขาตัดสินใจย้ายไปเมืองใหม่หรือเปล่า
+Q|choose|-|leave|the company^ðə ˈkʌm.pə.ni^บริษัท|Why did she choose to leave the company?|ทำไมเธอเลือกออกจากบริษัท
+Q|be ready|-|help|with the project^wɪð ðə ˈprɒdʒ.ekt^โครงการ|Are you ready to help with the project?|คุณพร้อมช่วยโครงการนี้หรือยัง
+Q|expect|-|stay|at the party^æt ðə ˈpɑː.ti^ที่งานเลี้ยง|How long do you expect to stay at the party?|คุณคาดว่าจะอยู่ที่งานเลี้ยงนานแค่ไหน
+Q|prefer|-|stay|home^həʊm^บ้าน|Would you prefer to stay home or go out?|คุณอยากอยู่บ้านหรือออกไปข้างนอกมากกว่า
+Q|be allowed|-|take|a break^ə breɪk^พัก|Are we allowed to take a break now?|ตอนนี้เราพักได้ไหม
+Q|need|-|talk|to the manager^tə ðə ˈmæn.ɪ.dʒə^กับผู้จัดการ|Do you need to talk to the manager?|คุณต้องคุยกับผู้จัดการไหม
+Q|manage|-|finish|the work^ðə wɜːk^งาน|How did they manage to finish the work so quickly?|พวกเขาทำงานเสร็จเร็วขนาดนี้ได้อย่างไร
+Q|promise|-|attend|the meeting^ðə ˈmiː.tɪŋ^การประชุม|Can she promise to attend the meeting?|เธอสัญญาได้ไหมว่าจะเข้าประชุม
+Q|want|-|attend|the event^ði ɪˈvent^งานอีเวนต์|Why didn’t you want to attend the event?|ทำไมคุณไม่อยากไปงานอีเวนต์
+Q|decide|-|join|the team^ðə tiːm^ทีม|Have you decided to join the team yet?|คุณตัดสินใจเข้าร่วมทีมหรือยัง
+Q|be able|-|arrive|on time^ɒn taɪm^ตรงเวลา|Will they be able to arrive on time?|พวกเขาจะมาถึงตรงเวลาได้ไหม
+Q|want|-|leave|the house^ðə haʊs^บ้าน|What made you want to leave the house so early?|อะไรทำให้คุณอยากออกจากบ้านแต่เช้า
+Q|be going|-|organize|the party^ðə ˈpɑː.ti^งานเลี้ยง|Who is going to organize the party?|ใครจะเป็นคนจัดงานเลี้ยง
+Q|plan|-|attend|the conference^ðə ˈkɒn.fər.əns^การประชุมสัมมนา|Do you plan to attend the conference next month?|คุณวางแผนจะไปการประชุมสัมมนาเดือนหน้าไหม
+Q|be going|-|buy|a new phone^ə njuː fəʊn^โทรศัพท์เครื่องใหม่|Is she going to buy a new phone?|เธอจะซื้อโทรศัพท์เครื่องใหม่ไหม
+Q|be prepared|-|leave|the city^ðə ˈsɪt.i^เมือง|Are you prepared to leave the city tomorrow?|คุณพร้อมออกจากเมืองพรุ่งนี้ไหม
+Q|want|-|talk|to me^tə miː^กับฉัน|Did you want to talk to me about something?|คุณอยากคุยกับฉันเรื่องอะไรหรือเปล่า
+Q|show|me|how use|this software^ðɪs ˈsɒft.weə^ซอฟต์แวร์นี้|Can you show me how to use this software?|คุณสอนฉันใช้ซอฟต์แวร์นี้ได้ไหม
+Q|expect|-|finish|the assignment^ði əˈsaɪn.mənt^งานที่ได้รับมอบหมาย|When do you expect to finish the assignment?|คุณคาดว่าจะทำงานที่ได้รับมอบหมายเสร็จเมื่อไหร่
+Q|be able|-|help|me^miː^ฉัน|Will you be able to help me with this project?|คุณช่วยฉันกับโครงการนี้ได้ไหม
+Q|plan|-|arrive|-|What time do you plan to arrive?|คุณวางแผนจะมาถึงกี่โมง
+Q|know|-|how solve|this issue^ðɪs ˈɪʃ.uː^ปัญหานี้|Do they know how to solve this issue?|พวกเขารู้วิธีแก้ปัญหานี้ไหม
+Q|take|-|learn|the new language^ðə njuː ˈlæŋ.ɡwɪdʒ^ภาษาใหม่|How long did it take to learn the new language?|ใช้เวลานานแค่ไหนในการเรียนภาษาใหม่
+Q|be willing|-|work|overtime^ˈəʊ.və.taɪm^ล่วงเวลา|Are you willing to work overtime next week?|คุณเต็มใจทำงานล่วงเวลาสัปดาห์หน้าไหม
+Q|need|-|buy|for the party^fə ðə ˈpɑː.ti^สำหรับงานเลี้ยง|What do you need to buy for the party?|คุณต้องซื้ออะไรสำหรับงานเลี้ยง
+Q|tell|me|how get|to the nearest bus stop^tə ðə ˈnɪə.rɪst bʌs stɒp^ไปป้ายรถเมล์ที่ใกล้ที่สุด|Can you tell me how to get to the nearest bus stop?|คุณบอกทางไปป้ายรถเมล์ที่ใกล้ที่สุดได้ไหม
+Q|would like|-|participate|in the event^ɪn ði ɪˈvent^ในงาน|Would you like to participate in the event?|คุณอยากเข้าร่วมงานนี้ไหม
+Q|be capable|-|handle|the responsibility^ðə rɪˌspɒn.səˈbɪl.ə.ti^ความรับผิดชอบ|Is he capable to handle the responsibility?|เขามีความสามารถรับผิดชอบหน้าที่นี้ไหม
+Q|manage|-|complete|the task^ðə tɑːsk^งาน|How did you manage to complete the task so quickly?|คุณทำงานเสร็จเร็วขนาดนี้ได้อย่างไร
+Q|know|-|what do|in an emergency^ɪn ən ɪˈmɜː.dʒən.si^ในเหตุฉุกเฉิน|Do you know what to do in case of an emergency?|คุณรู้ไหมว่าต้องทำอย่างไรในกรณีฉุกเฉิน
+Q|be comfortable|-|speak|in front of an audience^ɪn frʌnt əv ən ˈɔː.di.əns^ต่อหน้าผู้ชม|Are you comfortable to speak in front of a large audience?|คุณสบายใจที่จะพูดต่อหน้าผู้ชมจำนวนมากไหม
+Q|plan|-|move|into the new house^ˈɪn.tuː ðə njuː haʊs^เข้าบ้านใหม่|When do you plan to move into the new house?|คุณวางแผนจะย้ายเข้าบ้านใหม่เมื่อไหร่
+Q|want|-|go|for a walk^fər ə wɔːk^เดินเล่น|Do you want to go for a walk this evening?|คุณอยากไปเดินเล่นเย็นนี้ไหม
+Q|afford|-|travel|abroad^əˈbrɔːd^ต่างประเทศ|Can she afford to travel abroad this summer?|เธอไหวไหมที่จะไปต่างประเทศช่วงฤดูร้อนนี้
+Q|expect|-|arrive|at the party^æt ðə ˈpɑː.ti^ที่งานเลี้ยง|What time do you expect to arrive at the party?|คุณคาดว่าจะไปถึงงานเลี้ยงกี่โมง
+Q|would like|-|try|this new restaurant^ðɪs njuː ˈres.trɒnt^ร้านอาหารใหม่นี้|Would you like to try this new restaurant?|คุณอยากลองร้านอาหารใหม่นี้ไหม
+Q|be planning|-|attend|the conference^ðə ˈkɒn.fər.əns^การประชุมสัมมนา|Are you planning to attend the conference next week?|คุณกำลังวางแผนไปการประชุมสัมมนาสัปดาห์หน้าหรือ
+Q|take|-|finish|the project^ðə ˈprɒdʒ.ekt^โครงการ|How long did it take to finish the project?|ใช้เวลานานแค่ไหนกว่าจะทำโครงการเสร็จ
+Q|be ready|-|leave|for the meeting^fə ðə ˈmiː.tɪŋ^ไปประชุม|Is he ready to leave for the meeting?|เขาพร้อมออกไปประชุมหรือยัง
+Q|remember|-|bring|the documents^ðə ˈdɒk.jə.mənts^เอกสาร|Did you remember to bring the documents?|คุณจำได้ไหมว่าต้องนำเอกสารมา
+Q|figure out|-|how solve|the problem^ðə ˈprɒb.ləm^ปัญหา|Can I help you figure out how to solve the problem?|ให้ฉันช่วยหาวิธีแก้ปัญหาไหม
+Q|decide|-|buy|the new phone^ðə njuː fəʊn^โทรศัพท์เครื่องใหม่|Have you decided to buy the new phone?|คุณตัดสินใจซื้อโทรศัพท์เครื่องใหม่หรือยัง
+Q|be allowed|-|bring|guests^ɡests^แขก|Are we allowed to bring guests to the event?|เรานำแขกมางานได้ไหม
+Q|know|-|contact|you^juː^คุณ|Do they know to contact you in case of an emergency?|พวกเขารู้ไหมว่าต้องติดต่อคุณเมื่อฉุกเฉิน
+Q|plan|-|start|the new course^ðə njuː kɔːs^คอร์สใหม่|When do you plan to start the new course?|คุณวางแผนจะเริ่มคอร์สใหม่เมื่อไหร่
+Q|need|-|speak|to the manager^tə ðə ˈmæn.ɪ.dʒə^กับผู้จัดการ|Do you need to speak to the manager?|คุณต้องพูดกับผู้จัดการไหม
+Q|be going|-|finish|the report^ðə rɪˈpɔːt^รายงาน|Are you going to finish the report by tomorrow?|คุณจะทำรายงานเสร็จภายในพรุ่งนี้ไหม
+Q|choose|-|work|from home^frəm həʊm^จากที่บ้าน|What made you choose to work from home today?|อะไรทำให้คุณเลือกทำงานที่บ้านวันนี้
+Q|be able|-|meet|us^ʌs^เรา|Will you be able to meet us later?|คุณจะพบเราทีหลังได้ไหม
+Q|expect|-|hear|from you^frəm juː^จากคุณ|How soon can I expect to hear from you?|ฉันคาดหวังว่าจะได้ยินจากคุณเร็วที่สุดเมื่อไหร่
+Q|need|-|do|before the meeting starts^bɪˈfɔː ðə ˈmiː.tɪŋ stɑːts^ก่อนการประชุมเริ่ม|What do you need to do before the meeting starts?|คุณต้องทำอะไรก่อนการประชุมเริ่ม
+N|decide|-|go|-|I decided not to go to the party.|ฉันตัดสินใจไม่ไปงานเลี้ยง
+N|tell|me|worry|-|She told me not to worry about it.|เธอบอกฉันว่าไม่ต้องกังวลเรื่องนั้น
+N|warn|us|touch|-|They warned us not to touch the wires.|พวกเขาเตือนเราว่าอย่าแตะสายไฟ
+N|choose|-|participate|-|He chose not to participate.|เขาเลือกที่จะไม่เข้าร่วม
+N|try|-|make|-|We tried not to make any noise.|เราพยายามไม่ส่งเสียงดัง
+N|ask|me|tell|-|She asked me not to tell anyone.|เธอขอให้ฉันอย่าบอกใคร
+N|promise|-|be|-|I promised not to be late.|ฉันสัญญาว่าจะไม่มาสาย
+N|be told|-|speak|-|He was told not to speak during the meeting.|เขาถูกบอกให้อย่าพูดระหว่างประชุม
+N|need|-|panic|-|You need not to panic.|คุณไม่จำเป็นต้องตื่นตระหนก
+N|prefer|-|drive|-|They preferred not to drive at night.|พวกเขาไม่อยากขับรถตอนกลางคืน
+N|learn|-|interrupt|-|I learned not to interrupt people.|ฉันเรียนรู้ที่จะไม่ขัดจังหวะผู้อื่น
+N|advise|him|rush|-|She advised him not to rush.|เธอแนะนำเขาว่าอย่ารีบ
+N|plan|-|take|-|We planned not to take the highway.|เราวางแผนว่าจะไม่ใช้ทางหลวง
+N|manage|-|get|-|He managed not to get upset.|เขาทำได้โดยไม่โมโห
+N|try|-|be|-|Please try not to be rude.|กรุณาพยายามอย่าหยาบคาย
+N|order|us|enter|-|They ordered us not to enter the room.|พวกเขาสั่งไม่ให้เราเข้าห้อง
+N|tell|me|lift|-|The doctor told me not to lift anything heavy.|หมอบอกฉันว่าอย่ายกของหนัก
+N|remind|her|forget|-|He reminded her not to forget her keys.|เขาเตือนเธออย่าลืมกุญแจ
+N|ask|them|smoke|-|I asked them not to smoke here.|ฉันขอให้พวกเขาอย่าสูบบุหรี่ที่นี่
+N|be better|-|argue|-|It’s better not to argue over small things.|ไม่เถียงกันเรื่องเล็กน้อยจะดีกว่า
+N|promise|-|forget|-|He promised not to forget your birthday.|เขาสัญญาว่าจะไม่ลืมวันเกิดของคุณ
+N|advise|me|drive|-|She advised me not to drive in the snowstorm.|เธอแนะนำฉันว่าอย่าขับรถตอนพายุหิมะ
+N|ask|-|be disturbed|-|They asked not to be disturbed during the meeting.|พวกเขาขอไม่ให้ถูกรบกวนระหว่างประชุม
+N|refuse|-|cooperate|-|She refused not to cooperate with the team.|เธอปฏิเสธที่จะไม่ให้ความร่วมมือกับทีม
+N|tell|them|leave|-|I told them not to leave until I arrived.|ฉันบอกพวกเขาว่าอย่าไปจนกว่าฉันจะมาถึง
+N|agree|-|mention|-|We agreed not to mention the surprise to anyone.|เราตกลงว่าจะไม่พูดถึงเซอร์ไพรส์กับใคร
+N|suggest|-|park|-|They suggested not to park in the reserved spots.|พวกเขาแนะนำว่าอย่าจอดในที่จอดสำรอง
+N|beg|me|tell|-|He begged me not to tell anyone the secret.|เขาอ้อนวอนให้ฉันอย่าบอกความลับกับใคร
+N|tell|me|rush|-|She told me not to rush through the process.|เธอบอกฉันว่าอย่ารีบทำขั้นตอนนี้
+N|advise|them|take|-|We advised them not to take that route.|เราแนะนำพวกเขาว่าอย่าใช้เส้นทางนั้น
+N|remind|me|forget|-|He reminded me not to forget to send the email.|เขาเตือนฉันอย่าลืมส่งอีเมล
+N|beg|him|go back|-|She begged him not to go back to work too soon.|เธอขอร้องเขาอย่ากลับไปทำงานเร็วเกินไป
+N|warn|us|leave|-|They warned us not to leave valuables in the car.|พวกเขาเตือนเราอย่าทิ้งของมีค่าไว้ในรถ
+N|tell|them|make|-|I told them not to make any noise during the movie.|ฉันบอกพวกเขาว่าอย่าส่งเสียงดังระหว่างหนัง
+N|hope|-|encounter|-|We hoped not to encounter any traffic on the way.|เราหวังว่าจะไม่เจอรถติดระหว่างทาง
+N|decide|-|join|-|I decided not to join the team for the trip.|ฉันตัดสินใจไม่ร่วมทีมไปเที่ยว
+N|promise|-|cheat|-|He promised not to cheat during the exam.|เขาสัญญาว่าจะไม่โกงข้อสอบ
+N|advise|me|take|-|They advised me not to take the highway.|พวกเขาแนะนำฉันว่าอย่าใช้ทางหลวง
+N|plan|-|leave|-|We planned not to leave until the event ended.|เราวางแผนว่าจะไม่ออกไปจนกว่างานจะจบ
+N|tell|me|park|-|He told me not to park in the reserved spot.|เขาบอกฉันว่าอย่าจอดในที่จอดสำรอง
+N|tell|us|bring|-|They told us not to bring food into the cinema.|พวกเขาบอกเราว่าอย่านำอาหารเข้าโรงหนัง
+N|remind|him|speak|-|I reminded him not to speak too loudly in public.|ฉันเตือนเขาอย่าพูดเสียงดังในที่สาธารณะ
+N|agree|-|discuss|-|We agreed not to discuss the issue further.|เราตกลงว่าจะไม่หารือเรื่องนี้ต่อ
+N|ask|me|call|-|She asked me not to call her during work hours.|เธอขอให้ฉันอย่าโทรหาในเวลางาน
+N|tell|him|go|-|I told him not to go to the store without a shopping list.|ฉันบอกเขาว่าอย่าไปร้านโดยไม่มีรายการซื้อของ
+N|refuse|-|speak|-|He refused not to speak to her about the problem.|เขาปฏิเสธที่จะไม่พูดกับเธอเรื่องปัญหา
+N|warn|them|leave|-|We warned them not to leave their belongings unattended.|เราเตือนพวกเขาอย่าทิ้งข้าวของไว้โดยไม่มีคนดู
+N|choose|-|respond|-|I chose not to respond to the rude comment.|ฉันเลือกที่จะไม่ตอบความคิดเห็นหยาบคาย
+N|advise|us|engage|-|They advised us not to engage with the trolls online.|พวกเขาแนะนำเราอย่าโต้ตอบกับพวกก่อกวนออนไลน์
+N|decide|-|make|-|We decided not to make any changes without consulting you.|เราตัดสินใจไม่เปลี่ยนแปลงอะไรโดยไม่ปรึกษาคุณ
+N|ask|us|interrupt|-|She asked us not to interrupt her while she’s speaking.|เธอขอให้เราอย่าขัดจังหวะขณะเธอพูด
+N|agree|-|tell|-|They agreed not to tell anyone about the surprise.|พวกเขาตกลงว่าจะไม่บอกใครเรื่องเซอร์ไพรส์
+N|ask|us|enter|-|They asked us not to enter the building without permission.|พวกเขาขอให้เราอย่าเข้าอาคารโดยไม่ได้รับอนุญาต
+N|refuse|-|respond|-|I refused not to respond to their invitation.|ฉันปฏิเสธที่จะไม่ตอบคำเชิญของพวกเขา
+N|agree|-|make|-|We agreed not to make any changes to the plan.|เราตกลงว่าจะไม่เปลี่ยนแผน
+N|choose|-|attend|-|He chose not to attend the lecture today.|วันนี้เขาเลือกที่จะไม่เข้าเรียน
+N|remind|me|speak|-|She reminded me not to speak too loudly in the library.|เธอเตือนฉันอย่าพูดเสียงดังในห้องสมุด
+N|tell|them|bring|-|I told them not to bring any more food to the party.|ฉันบอกพวกเขาว่าอย่านำอาหารมาเพิ่มที่งานเลี้ยง
+N|promise|-|disturb|-|We promised not to disturb them during the meeting.|เราสัญญาว่าจะไม่รบกวนพวกเขาระหว่างประชุม
+N|advise|him|stay|-|I advised him not to stay out too late before the exam.|ฉันแนะนำเขาอย่าอยู่ข้างนอกดึกก่อนสอบ
+N|warn|me|park|-|They warned me not to park in the restricted area.|พวกเขาเตือนฉันอย่าจอดในเขตหวงห้าม
+N|refuse|-|participate|-|He refused not to participate in the event.|เขาปฏิเสธที่จะไม่เข้าร่วมกิจกรรม
+N|tell|us|leave|-|They told us not to leave the house until they came back.|พวกเขาบอกเราอย่าออกจากบ้านจนกว่าจะกลับมา
+N|choose|-|reply|-|I chose not to reply to the offensive comment.|ฉันเลือกที่จะไม่ตอบความคิดเห็นที่ไม่เหมาะสม
+N|promise|-|change|-|We promised not to change the schedule without consulting you.|เราสัญญาว่าจะไม่เปลี่ยนตารางโดยไม่ปรึกษาคุณ
+N|beg|me|share|-|He begged me not to share the news with anyone yet.|เขาอ้อนวอนฉันอย่าแชร์ข่าวกับใครตอนนี้
+N|decide|-|ask|-|I decided not to ask for help this time.|ครั้งนี้ฉันตัดสินใจไม่ขอความช่วยเหลือ
+N|instruct|us|speak|-|They instructed us not to speak during the presentation.|พวกเขาสั่งเราอย่าพูดระหว่างการนำเสนอ`.split("\n").map(l=>{const a=l.split("|"),t=a[0],m=MV[a[1]],o=a[2]=="-"?null:OB[a[2]];let v1=a[3],pre="";
+if(v1.startsWith("how ")){pre="how";v1=v1.slice(4)}else if(v1.startsWith("what ")){pre="what";v1=v1.slice(5)}
+const v=V[v1],cp=a[4]=="-"?null:a[4].split("^");
+const w=a[1]+(o?" "+a[2]:"")+(t=="N"?" not":"")+" "+(pre?pre+" ":"")+"to "+v1+(cp?" "+cp[0]:"");
+const ipa=[m[0],o&&o[0],t=="N"?"nɒt":"",pre=="how"?"haʊ":pre=="what"?"wɒt":"","tə",v[0],cp&&cp[1]].filter(Boolean).join(" ");
+const th=m[1]+(o?o[1]:"")+(t=="N"?(o?"ไม่ให้":"ที่จะไม่"):pre=="how"?"วิธีที่จะ":pre=="what"?"สิ่งที่ต้อง":"ที่จะ")+v[1]+(cp?cp[2]:"");
+const g=t=="Q"?(QA.has(a[1])?"qA":"qB"):(NA.has(a[1])?"nA":"nB");
+return{c:g,w,ipa:"/"+ipa+"/",e:(t=="N"?"🚫":"")+v[2],th,s:a[5],st:a[6]}});
+const K=Object.keys(CATS),TABS=[];K.forEach(k=>{const n=D.filter(x=>x.c==k).length;for(let s=0;s<n;s+=20)TABS.push({c:k,s,n:n,i:s/20+1})});let tab=0,list=[];
+const $=id=>document.getElementById(id);
+// speech: pick the best en-GB voice available
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==TABS[tab].c).slice(TABS[tab].s,TABS[tab].s+20);
+ $("grid").innerHTML=list.map(([d,g],k)=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">8. Infinitive with “to” in questions and negative sentences</div><div class="emoji">${d.e}</div><div class="word">${d.w}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].w.toLowerCase())">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.th}</div><div class="sen">${d.s}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${TABS[tab].s+k+1}</td><td class="v">${x.w}</td><td class="t">${x.th}</td><td>${x.s}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=TABS.map((t,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[t.c][0]}${t.n>20?" "+t.i:""} (${Math.min(20,t.n-t.s)})</button>`).join("");
+setTab(0);
+</script></body></html>

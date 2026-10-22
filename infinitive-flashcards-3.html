@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinitive Flashcards 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7ff;--tx:#3d3a4f;--card:#fff;--line:#e6e0f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1c27;--tx:#ece9f5;--card:#2a2736;--line:#3b3750}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,"Segoe UI",sans-serif;padding:16px}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:19px;text-align:center;margin:4px 0 12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:0;border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;background:var(--card);color:var(--tx);border:1px solid var(--line)}
+.tab.on{background:#cdb8f0;color:#2b2340;border-color:#cdb8f0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}.scene{height:250px;perspective:800px}
+.card{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d;cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:4px;color:#33304a;box-shadow:0 6px 18px rgba(120,100,160,.18)}
+.back{transform:rotateY(180deg)}
+.hint{font-size:10px;opacity:.75;line-height:1.3}
+.emoji{font-size:50px;line-height:1.1}
+.word{font-family:Calibri,Carlito,sans-serif;font-size:20px;font-weight:700}
+.ipa{font-family:"Times New Roman",Times,serif;font-size:15px}
+.th{font-family:Sarabun,"Thai Saraban",sans-serif}
+.thw{font-size:20px;font-weight:600}
+.sen{font-size:13px;line-height:1.35}
+.sth{font-size:12.5px;opacity:.85;line-height:1.4}
+.spk{border:0;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;background:rgba(255,255,255,.75);flex:none}
+.spk:active{transform:scale(.92)}
+.nav{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 20px}
+.nav button{border:0;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer;background:#cdb8f0;color:#2b2340}
+.tblbox{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
+th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13px;opacity:.8}
+tr.cur td{background:rgba(205,184,240,.28)}
+td.v{font-weight:700;white-space:nowrap}
+td.t{font-family:Sarabun,"Thai Saraban",sans-serif}
+td .spk{background:#e4d8f7;width:34px;height:34px;font-size:16px}
+</style></head><body><div class="wrap">
+<a href="infinitive-main.html" style="display:inline-block;margin-bottom:6px;font-size:14px;color:inherit;opacity:.75;text-decoration:none">◀ กลับหน้าหลัก</a>
+<h1>3. Infinitive with “to” after adjectives of a sentence</h1>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<div class="tblbox"><table><thead><tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>ไทย</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const CATS={H:["😊 Happy & Proud","#fdf0c9"],E:["🤩 Eager & Excited","#d9e8fb"],S:["😲 Surprise & Sadness","#fbd9e6"],D:["🧗 Difficulty & Limits","#d8f2e2"]};
+const BE={is:"ɪz",was:"wɒz",are:"ɑː",were:"wɜː",am:"æm",felt:"felt"};
+const AJ={ready:["ˈred.i","พร้อม","🏁","E"],happy:["ˈhæp.i","ดีใจ","😊","H"],eager:["ˈiː.ɡə","กระตือรือร้น","🙌","E"],excited:["ɪkˈsaɪ.tɪd","ตื่นเต้น","🤩","E"],interesting:["ˈɪn.trɪ.stɪŋ","น่าสนใจ","🧐","S"],surprised:["səˈpraɪzd","แปลกใจ","😲","S"],determined:["dɪˈtɜː.mɪnd","มุ่งมั่น","💪","E"],willing:["ˈwɪl.ɪŋ","เต็มใจ","🙂","E"],"too tired":["tuː ˈtaɪəd","เหนื่อยเกินไป","😴","D"],"too cold":["tuː kəʊld","หนาวเกินไป","🥶","D"],difficult:["ˈdɪf.ɪ.kəlt","ยาก","😓","D"],afraid:["əˈfreɪd","กลัว","😨","S"],proud:["praʊd","ภูมิใจ","🏅","H"],anxious:["ˈæŋk.ʃəs","กระวนกระวาย","😬","E"],nice:["naɪs","ยินดี","🌼","H"],glad:["ɡlæd","ดีใจ","😄","H"],sad:["sæd","เศร้า","😢","S"],interested:["ˈɪn.trə.stɪd","สนใจ","🤔","E"],impossible:["ɪmˈpɒs.ə.bəl","เป็นไปไม่ได้","🚫","D"],"too challenging":["tuː ˈtʃæl.ɪn.dʒɪŋ","ท้าทายเกินไป","🧗","D"],fortunate:["ˈfɔː.tʃən.ət","โชคดี","🍀","H"],sorry:["ˈsɒr.i","เสียใจ","😔","S"],nervous:["ˈnɜː.vəs","ประหม่า","😰","S"],pleased:["pliːzd","พอใจ","😌","H"],"too young":["tuː jʌŋ","เด็กเกินไป","👶","D"],ashamed:["əˈʃeɪmd","อาย","😳","S"],disappointed:["ˌdɪs.əˈpɔɪn.tɪd","ผิดหวัง","😞","S"],unnecessary:["ʌnˈnes.ə.sər.i","ไม่จำเป็น","🙅","D"],hard:["hɑːd","ยาก","🪨","D"],grateful:["ˈɡreɪt.fəl","ซาบซึ้ง","🙏","H"],unbelievable:["ˌʌn.bɪˈliː.və.bəl","เหลือเชื่อ","🤯","S"],relieved:["rɪˈliːvd","โล่งใจ","😮‍💨","H"],"too crowded":["tuː ˈkraʊ.dɪd","แออัดเกินไป","👥","D"],delighted:["dɪˈlaɪ.tɪd","ยินดีอย่างยิ่ง","🥳","H"],important:["ɪmˈpɔː.tənt","สำคัญ","⭐","D"],curious:["ˈkjʊə.ri.əs","อยากรู้","🔍","E"],"too busy":["tuː ˈbɪz.i","ยุ่งเกินไป","📅","D"],shocking:["ˈʃɒk.ɪŋ","น่าตกใจ","⚡","S"],"too nervous":["tuː ˈnɜː.vəs","ประหม่าเกินไป","😰","D"],"too afraid":["tuː əˈfreɪd","กลัวเกินไป","🙈","D"],unwilling:["ʌnˈwɪl.ɪŋ","ไม่เต็มใจ","🙄","D"],necessary:["ˈnes.ə.sər.i","จำเป็น","✔️","D"]};
+const V={leave:["liːv","ออกไป","🚪"],help:["help","ช่วย","🤝"],start:["stɑːt","เริ่ม","🚀"],meet:["miːt","พบ","👋"],watch:["wɒtʃ","ดู","📺"],hear:["hɪə","ได้ยิน","👂"],succeed:["səkˈsiːd","ประสบความสำเร็จ","🏆"],assist:["əˈsɪst","ช่วยเหลือ","🛟"],continue:["kənˈtɪn.juː","ทำต่อ","▶️"],go:["ɡəʊ","ไป","🚶"],explain:["ɪkˈspleɪn","อธิบาย","🧑‍🏫"],speak:["spiːk","พูด","🎤"],accept:["əkˈsept","ยอมรับ","✅"],play:["pleɪ","เล่น","⚽"],begin:["bɪˈɡɪn","เริ่มต้น","🔰"],see:["siː","เห็น","👀"],learn:["lɜːn","เรียนรู้","📚"],finish:["ˈfɪn.ɪʃ","ทำให้เสร็จ","🏁"],complete:["kəmˈpliːt","ทำให้สำเร็จ","☑️"],have:["hæv","มี","🎁"],know:["nəʊ","รู้","🧠"],understand:["ˌʌn.dəˈstænd","เข้าใจ","💡"],give:["ɡɪv","กล่าว (ให้)","🎙️"],receive:["rɪˈsiːv","ได้รับ","📬"],be:["biː","เป็น","🧍"],drive:["draɪv","ขับรถ","🚗"],ask:["ɑːsk","ขอ / ถาม","❓"],travel:["ˈtræv.əl","เดินทาง","🧳"],listen:["ˈlɪs.ən","ฟัง","🎧"],believe:["bɪˈliːv","เชื่อ","🤞"],stay:["steɪ","อยู่ / คงอยู่","🏠"],represent:["ˌrep.rɪˈzent","เป็นตัวแทน","🚩"],take:["teɪk","เข้า / รับ","📝"],find:["faɪnd","หา","🔎"],worry:["ˈwʌr.i","กังวล","😟"],"find out":["faɪnd aʊt","ทราบ / ค้นหาความจริง","🕵️"],explore:["ɪkˈsplɔː","สำรวจ","🧭"],join:["dʒɔɪn","เข้าร่วม","🙋"],tackle:["ˈtæk.əl","รับมือ","🛠️"],try:["traɪ","ลอง","🧪"],share:["ʃeə","แบ่งปัน","🔗"],face:["feɪs","เผชิญหน้า","🛡️"],make:["meɪk","ทำให้","🔨"],move:["muːv","ย้าย","📦"],study:["ˈstʌd.i","เรียน","✏️"],maintain:["meɪnˈteɪn","รักษา","♻️"],attend:["əˈtend","เข้าร่วม","🏫"],achieve:["əˈtʃiːv","บรรลุ","🥇"],"go out":["ɡəʊ aʊt","ออกไปข้างนอก","🌃"],visit:["ˈvɪz.ɪt","เยือน","🏯"]};
+const D=`is|ready|leave|He is ready to leave for the airport.|เขาพร้อมออกเดินทางไปสนามบินแล้ว
+was|happy|help|She was happy to help her neighbour.|เธอดีใจที่ได้ช่วยเพื่อนบ้าน
+are|eager|start|We are eager to start the project.|เรากระตือรือร้นที่จะเริ่มโครงการ
+am|excited|meet|I am excited to meet my new teacher.|ฉันตื่นเต้นที่จะได้พบครูคนใหม่
+was|interesting|watch|The film was interesting to watch.|ภาพยนตร์เรื่องนี้น่าดูมาก
+was|surprised|hear|I was surprised to hear the news.|ฉันแปลกใจที่ได้ยินข่าวนี้
+is|determined|succeed|She is determined to succeed.|เธอมุ่งมั่นที่จะประสบความสำเร็จ
+am|willing|assist|I am willing to assist you.|ฉันเต็มใจช่วยเหลือคุณ
+is|too tired|continue|He is too tired to continue.|เขาเหนื่อยเกินกว่าจะทำต่อ
+was|too cold|go|It was too cold to go outside.|อากาศหนาวเกินกว่าจะออกไปข้างนอก
+is|difficult|explain|This idea is difficult to explain.|ความคิดนี้ยากที่จะอธิบาย
+are|afraid|speak|They are afraid to speak in public.|พวกเขากลัวที่จะพูดต่อหน้าสาธารณชน
+was|proud|accept|He was proud to accept the award.|เขาภูมิใจที่ได้รับรางวัล
+were|excited|play|The kids were excited to play outside.|เด็กๆ ตื่นเต้นที่จะได้ออกไปเล่นข้างนอก
+is|anxious|begin|She is anxious to begin her new job.|เธอกระวนกระวายที่จะเริ่มงานใหม่
+was|nice|see|It was nice to see you again.|ดีใจที่ได้เจอคุณอีกครั้ง
+am|glad|hear|I am glad to hear that.|ฉันดีใจที่ได้ยินอย่างนั้น
+was|sad|leave|He was sad to leave his hometown.|เขาเศร้าที่ต้องจากบ้านเกิด
+is|interested|learn|She is interested to learn Chinese.|เธอสนใจที่จะเรียนภาษาจีน
+was|impossible|finish|It was impossible to finish in one day.|เป็นไปไม่ได้ที่จะทำให้เสร็จภายในวันเดียว
+was|too challenging|complete|The test was too challenging to complete.|ข้อสอบท้าทายเกินกว่าจะทำให้เสร็จ
+felt|fortunate|have|She felt fortunate to have good friends.|เธอรู้สึกโชคดีที่มีเพื่อนดีๆ
+was|sorry|hear|I was sorry to hear about your loss.|ฉันเสียใจที่ได้ยินเรื่องการสูญเสียของคุณ
+am|fortunate|have|I am fortunate to have a supportive family.|ฉันโชคดีที่มีครอบครัวที่คอยสนับสนุน
+are|anxious|know|We are anxious to know the result.|เรากระวนกระวายอยากรู้ผล
+was|difficult|understand|The lesson was difficult to understand.|บทเรียนนี้เข้าใจยาก
+was|nervous|give|He was nervous to give a speech.|เขาประหม่าที่ต้องกล่าวสุนทรพจน์
+were|happy|receive|They were happy to receive the gift.|พวกเขาดีใจที่ได้รับของขวัญ
+is|proud|be|He is proud to be a teacher.|เขาภูมิใจที่เป็นครู
+was|surprised|see|She was surprised to see him there.|เธอแปลกใจที่เห็นเขาอยู่ที่นั่น
+am|pleased|hear|I am pleased to hear your good news.|ฉันพอใจที่ได้ยินข่าวดีของคุณ
+is|ready|start|The team is ready to start.|ทีมพร้อมที่จะเริ่มแล้ว
+is|too young|drive|He is too young to drive.|เขาอายุน้อยเกินกว่าจะขับรถ
+felt|ashamed|ask|She felt ashamed to ask for help.|เธออายที่จะขอความช่วยเหลือ
+were|excited|travel|We were excited to travel abroad.|เราตื่นเต้นที่จะเดินทางไปต่างประเทศ
+am|pleased|meet|I am pleased to meet you.|ยินดีที่ได้พบคุณ
+was|difficult|complete|It was difficult to complete the form.|ยากที่จะกรอกแบบฟอร์มให้เสร็จ
+is|happy|help|She is happy to help anyone.|เธอยินดีช่วยเหลือทุกคน
+were|disappointed|hear|They were disappointed to hear the result.|พวกเขาผิดหวังที่ได้ยินผล
+is|unnecessary|listen|It is unnecessary to listen to rumours.|ไม่จำเป็นที่จะฟังข่าวลือ
+is|eager|learn|My son is eager to learn.|ลูกชายของฉันกระตือรือร้นที่จะเรียนรู้
+am|determined|finish|I am determined to finish this book.|ฉันตั้งใจแน่วแน่ที่จะอ่านหนังสือเล่มนี้ให้จบ
+is|hard|believe|It is hard to believe his story.|ยากที่จะเชื่อเรื่องของเขา
+was|too tired|stay|She was too tired to stay awake.|เธอเหนื่อยเกินกว่าจะตื่นอยู่ได้
+am|sorry|hear|I am sorry to hear that you are sick.|ฉันเสียใจที่ได้ยินว่าคุณไม่สบาย
+were|grateful|have|We were grateful to have your support.|เราขอบคุณที่ได้รับการสนับสนุนจากคุณ
+was|proud|represent|He was proud to represent his country.|เขาภูมิใจที่ได้เป็นตัวแทนประเทศ
+was|unbelievable|see|It was unbelievable to see the view.|ได้เห็นวิวนั้นแล้วเหลือเชื่อมาก
+felt|relieved|have|She felt relieved to have passed the exam.|เธอโล่งใจที่สอบผ่าน
+is|ready|take|He is ready to take the exam.|เขาพร้อมที่จะเข้าสอบ
+was|too crowded|find|The market was too crowded to find a seat.|ตลาดแออัดเกินกว่าจะหาที่นั่งได้
+am|eager|meet|I am eager to meet her family.|ฉันอยากพบครอบครัวของเธอมาก
+was|delighted|be|She was delighted to be invited.|เธอยินดีอย่างยิ่งที่ได้รับเชิญ
+is|unnecessary|worry|It is unnecessary to worry about small things.|ไม่จำเป็นต้องกังวลเรื่องเล็กน้อย
+are|curious|know|The kids are curious to know everything.|เด็กๆ อยากรู้ทุกเรื่อง
+is|important|stay|It is important to stay healthy.|การรักษาสุขภาพให้แข็งแรงเป็นสิ่งสำคัญ
+is|anxious|find out|He is anxious to find out the truth.|เขากระวนกระวายที่จะทราบความจริง
+was|happy|assist|She was happy to assist the guests.|เธอยินดีช่วยเหลือแขก
+is|eager|explore|He is eager to explore the old town.|เขาอยากสำรวจเมืองเก่า
+am|too busy|join|I am too busy to join the party.|ฉันยุ่งเกินกว่าจะเข้าร่วมงานเลี้ยง
+was|excited|start|She was excited to start school.|เธอตื่นเต้นที่จะเริ่มไปโรงเรียน
+were|happy|help|We were happy to help.|เรายินดีที่ได้ช่วย
+felt|sorry|hear|I felt sorry to hear that.|ฉันรู้สึกเสียใจที่ได้ยินเช่นนั้น
+is|proud|see|Mom is proud to see my progress.|แม่ภูมิใจที่เห็นความก้าวหน้าของฉัน
+is|ready|tackle|She is ready to tackle any problem.|เธอพร้อมรับมือกับทุกปัญหา
+was|relieved|hear|He was relieved to hear the good news.|เขาโล่งใจที่ได้ยินข่าวดี
+are|excited|try|They are excited to try new food.|พวกเขาตื่นเต้นที่จะลองอาหารใหม่ๆ
+is|difficult|understand|Math is difficult to understand.|คณิตศาสตร์เข้าใจยาก
+were|too tired|continue|The runners were too tired to continue.|นักวิ่งเหนื่อยเกินกว่าจะวิ่งต่อ
+am|happy|share|I am happy to share my story.|ฉันยินดีที่จะแบ่งปันเรื่องราวของฉัน
+is|curious|learn|She is curious to learn how it works.|เธออยากเรียนรู้ว่ามันทำงานอย่างไร
+was|shocking|hear|It was shocking to hear the news.|น่าตกใจที่ได้ยินข่าวนั้น
+was|too nervous|speak|He was too nervous to speak.|เขาประหม่าเกินกว่าจะพูด
+is|too afraid|face|She is too afraid to face him.|เธอกลัวเกินกว่าจะเผชิญหน้ากับเขา
+was|delighted|receive|He was delighted to receive the letter.|เขายินดีอย่างยิ่งที่ได้รับจดหมาย
+are|eager|begin|The students are eager to begin.|นักเรียนกระตือรือร้นที่จะเริ่ม
+is|unwilling|accept|He is unwilling to accept the offer.|เขาไม่เต็มใจรับข้อเสนอ
+was|grateful|have|I was grateful to have a helpful teacher.|ฉันขอบคุณที่มีครูที่ช่วยเหลือดี
+am|sorry|make|I am sorry to make you wait.|ขอโทษที่ทำให้คุณต้องรอ
+is|excited|move|She is excited to move to a new city.|เธอตื่นเต้นที่จะย้ายไปเมืองใหม่
+is|necessary|study|It is necessary to study every day.|จำเป็นต้องเรียนทุกวัน
+is|excited|start|He is excited to start his journey.|เขาตื่นเต้นที่จะเริ่มการเดินทาง
+am|proud|be|I am proud to be your friend.|ฉันภูมิใจที่เป็นเพื่อนของคุณ
+were|surprised|see|We were surprised to see snow.|เราแปลกใจที่เห็นหิมะ
+is|important|maintain|It is important to maintain good habits.|การรักษานิสัยที่ดีเป็นสิ่งสำคัญ
+was|too busy|attend|He was too busy to attend the meeting.|เขายุ่งเกินกว่าจะเข้าประชุม
+are|ready|begin|We are ready to begin the lesson.|เราพร้อมเริ่มบทเรียนแล้ว
+felt|relieved|find|She felt relieved to find her phone.|เธอโล่งใจที่เจอโทรศัพท์ของเธอ
+is|anxious|meet|He is anxious to meet his idol.|เขากระวนกระวายที่จะได้พบไอดอล
+is|impossible|finish|It is impossible to finish it today.|เป็นไปไม่ได้ที่จะทำให้เสร็จวันนี้
+am|curious|know|I am curious to know your opinion.|ฉันอยากรู้ความคิดเห็นของคุณ
+is|eager|start|She is eager to start work.|เธอกระตือรือร้นที่จะเริ่มงาน
+is|determined|achieve|He is determined to achieve his goal.|เขามุ่งมั่นที่จะบรรลุเป้าหมาย
+are|too young|understand|The children are too young to understand.|เด็กๆ ยังเล็กเกินกว่าจะเข้าใจ
+was|glad|help|I was glad to help.|ฉันดีใจที่ได้ช่วย
+is|important|be|It is important to be honest.|การซื่อสัตย์เป็นสิ่งสำคัญ
+am|too busy|go out|I am too busy to go out tonight.|ฉันยุ่งเกินกว่าจะออกไปข้างนอกคืนนี้
+are|interested|learn|They are interested to learn English.|พวกเขาสนใจที่จะเรียนภาษาอังกฤษ
+is|proud|represent|She is proud to represent the school.|เธอภูมิใจที่เป็นตัวแทนโรงเรียน
+was|shocking|see|It was shocking to see the damage.|น่าตกใจที่ได้เห็นความเสียหาย
+is|too afraid|speak|He is too afraid to speak up.|เขากลัวเกินกว่าจะพูดออกมา
+am|happy|assist|I am happy to assist you.|ฉันยินดีช่วยเหลือคุณ
+is|ready|make|She is ready to make a decision.|เธอพร้อมที่จะตัดสินใจ
+are|excited|visit|We are excited to visit Kyoto.|เราตื่นเต้นที่จะไปเยือนเกียวโต
+is|nice|meet|It is nice to meet you.|ยินดีที่ได้พบคุณ`.split("\n").map(l=>{const a=l.split("|"),j=AJ[a[1]],v=V[a[2]];return{c:j[3],w:a[0]+" "+a[1]+" to "+a[2],ipa:"/"+BE[a[0]]+" "+j[0]+" tə "+v[0]+"/",e:j[2]+v[2],th:j[1]+"ที่จะ"+v[1],s:a[3],st:a[4]}});
+const K=Object.keys(CATS),TABS=[];K.forEach(k=>{const n=D.filter(x=>x.c==k).length;for(let s=0;s<n;s+=20)TABS.push({c:k,s,n:n,i:s/20+1})});let tab=0,list=[];
+const $=id=>document.getElementById(id);
+// speech: pick the best en-GB voice available
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/en[-_]GB/i.test(x.lang));
+ const sc=x=>(/natural|online|neural/i.test(x.name)?4:0)+(/google/i.test(x.name)?3:0)+(/sonia|libby|ryan|daniel|serena|kate/i.test(x.name)?2:0);
+ voice=v.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if("speechSynthesis" in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-GB";if(voice)u.voice=voice;u.rate=.88;speechSynthesis.speak(u)}
+function render(){
+ list=D.map((x,n)=>[x,n]).filter(a=>a[0].c==TABS[tab].c).slice(TABS[tab].s,TABS[tab].s+20);
+ $("grid").innerHTML=list.map(([d,g],k)=>{const c=CATS[d.c][1];return `<div class="scene"><div class="card" onclick="this.classList.toggle('flip')"><div class="face" style="background:${c}"><div class="hint">3. Infinitive with “to” after adjectives</div><div class="emoji">${d.e}</div><div class="word">${d.w}</div><div class="ipa">${d.ipa}</div><button class="spk" title="ฟังเสียง" onclick="event.stopPropagation();say(D[${g}].w.toLowerCase())">🔊</button></div><div class="face back" style="background:${c}"><div class="th thw">${d.th}</div><div class="sen">${d.s}</div><button class="spk" title="ฟังประโยค" onclick="event.stopPropagation();say(D[${g}].s)">🔊</button><div class="th sth">${d.st}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=list.map(([x,g],k)=>`<tr><td>${TABS[tab].s+k+1}</td><td class="v">${x.w}</td><td class="t">${x.th}</td><td>${x.s}</td><td class="t">${x.st}</td><td><button class="spk" onclick="say(D[${g}].s)">🔊</button></td></tr>`).join("");
+ document.querySelectorAll(".tab").forEach((b,n)=>b.classList.toggle("on",n==tab));
+}
+function setTab(n){tab=n;render()}
+$("tabs").innerHTML=TABS.map((t,n)=>`<button class="tab" onclick="setTab(${n})">${CATS[t.c][0]}${t.n>20?" "+t.i:""} (${Math.min(20,t.n-t.s)})</button>`).join("");
+setTab(0);
+</script></body></html>
