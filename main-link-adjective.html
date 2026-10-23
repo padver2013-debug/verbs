@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>All Types of Adjectives – Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:900px;margin:0 auto;padding:20px 14px 40px}
+h1{font-size:1.6rem;text-align:center;margin:8px 0 4px}
+.sub{text-align:center;font-family:Sarabun,sans-serif;opacity:.8;margin-bottom:6px}
+.tot{text-align:center;font-size:.9rem;opacity:.7;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+a.c{display:block;text-decoration:none;color:#3b3340;border-radius:22px;padding:16px;box-shadow:0 2px 8px #0002;transition:transform .15s}
+a.c:hover,a.c:focus-visible{transform:translateY(-3px)}
+.top{display:flex;align-items:center;justify-content:space-between}
+.no{font-weight:700;font-size:.85rem;background:#fff9;border-radius:12px;padding:2px 10px}
+.em{font-size:2rem}
+.t{font-size:1.2rem;font-weight:700;margin:6px 0 0}
+.th{font-family:Sarabun,sans-serif;font-size:.95rem;font-weight:600}
+.d{font-family:Sarabun,sans-serif;font-size:.82rem;margin:6px 0}
+.ex{font-size:.85rem;font-style:italic}
+.ex b{color:#c2185b}
+.n{margin-top:8px;font-size:.8rem;font-weight:700}
+footer{text-align:center;font-family:Sarabun,sans-serif;font-size:.8rem;opacity:.65;margin-top:22px}
+</style></head><body><div class="w">
+<h1>All Types of Adjectives</h1>
+<div class="sub">ชุด Flashcard ฝึกอ่านและแปลคำคุณศัพท์ 8 ประเภท</div>
+<div class="tot" id="tot"></div>
+<div class="grid" id="g"></div>
+<footer>เก็บไฟล์ทั้งหมดไว้ในโฟลเดอร์เดียวกัน เพื่อให้ลิงก์ทำงานได้</footer>
+</div>
+<script>
+const T=[
+["adjective-flashcards.html","1","🎨","Descriptive Adjectives","คำคุณศัพท์บอกลักษณะ","บอกลักษณะ ขนาด สี ความรู้สึก","She is a <b>beautiful</b> girl.",119,"4 แท็บ"],
+["quantitative-adjectives-flashcards.html","2","🔢","Quantitative Adjectives","คำคุณศัพท์บอกจำนวน","บอกจำนวนหรือปริมาณ","I have <b>some</b> questions.",53,"4 แท็บ"],
+["demonstrative-adjectives-flashcards.html","3","👉","Demonstrative Adjectives","คำคุณศัพท์ชี้เฉพาะ","this, that, these, those","<b>This</b> pen writes smoothly.",50,"4 แท็บ"],
+["possessive-adjectives-flashcards.html","4","🎒","Possessive Adjectives","คำคุณศัพท์แสดงความเป็นเจ้าของ","my, your, his, her, its, our, their","I love <b>my</b> dog.",121,"7 แท็บ"],
+["interrogative-adjectives-flashcards.html","5","❓","Interrogative Adjectives","คำคุณศัพท์คำถาม","what, which, whose","<b>Which</b> shirt should I wear?",116,"3 แท็บ"],
+["indefinite-adjectives-flashcards.html","6","🌫️","Indefinite Adjectives","คำคุณศัพท์ไม่เจาะจง","some, any, many, few, all, both ...","There is <b>no</b> milk in the fridge.",136,"4 แท็บ"],
+["distributive-adjectives-flashcards.html","7","🧩","Distributive Adjectives","คำคุณศัพท์แยกแจก","each, every, either, neither, any","<b>Every</b> student must wear a uniform.",81,"5 แท็บ"],
+["proper-adjectives-flashcards.html","8","🌏","Proper Adjectives","คำคุณศัพท์เฉพาะ","คำที่มาจากชื่อเฉพาะ เช่น ประเทศ","I enjoy <b>Thai</b> food.",50,"4 แท็บ"]];
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4','#ffe5d0','#e0f0fa'];
+document.getElementById('g').innerHTML=T.map((t,i)=>`<a class="c" style="background:${P[i]}" href="${t[0]}">
+<div class="top"><span class="em">${t[2]}</span><span class="no">Type ${t[1]}</span></div>
+<div class="t">${t[3]}</div><div class="th">${t[4]}</div><div class="d">${t[5]}</div>
+<div class="ex">${t[6]}</div><div class="n">${t[7]} การ์ด · ${t[8]}</div></a>`).join('');
+document.getElementById('tot').textContent='รวมทั้งหมด '+T.reduce((s,t)=>s+t[7],0)+' การ์ด';
+</script></body></html>
