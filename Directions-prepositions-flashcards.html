@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Preposition + Complement Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8f5;--tx:#3b3b4f;--sf:#fff;--bd:#e6dfe8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}}
+:root[data-theme="dark"]{--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,'Segoe UI',Arial,sans-serif;padding:16px;max-width:980px;margin:auto}
+h1{font-size:1.4rem;text-align:center;margin:8px 0 2px}
+.sub{text-align:center;font-family:'Sarabun',sans-serif;opacity:.7;margin-bottom:14px;font-size:.9rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.tab{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:7px 14px;border-radius:20px;cursor:pointer;font:inherit}
+.tab.on{background:#cfd8ff;color:#2d3561;border-color:#b3c0ff;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{perspective:800px;height:190px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#33334a;box-shadow:0 2px 8px #0002;overflow:hidden}
+.back{transform:rotateY(180deg)}
+.pic{font-size:2.3rem;line-height:1}
+.w{font-family:Calibri,Arial,sans-serif;font-size:1.25rem;font-weight:700;margin-top:4px}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:1rem;opacity:.85}
+.spk{border:0;background:#ffffffaa;border-radius:50%;width:32px;height:32px;cursor:pointer;margin-top:6px;font-size:1rem}
+.th{font-family:'Sarabun',sans-serif;font-size:1.1rem;font-weight:700}
+.en{font-size:.88rem;margin-top:6px}.tt{font-family:'Sarabun',sans-serif;font-size:.8rem;margin-top:3px;opacity:.85}
+.v{color:#0b3fd1;font-weight:700}.t{color:#5a2d0c;font-weight:700}
+.wrap{overflow-x:auto;margin-top:22px}
+table{border-collapse:collapse;width:100%;min-width:640px;background:var(--sf);border-radius:12px}
+th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;font-size:.92rem}
+th{background:#e8e2f7;color:#33334a}
+td.th2{font-family:'Sarabun',sans-serif}
+td .spk{margin:0 6px 0 0;width:28px;height:28px;background:#e8e2f7}
+@media(max-width:560px){.grid{gap:8px}.card{height:175px}.w{font-size:1.05rem}.en{font-size:.78rem}}
+</style></head><body>
+<h1>🧭 Directions: Preposition + Complement</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยค · กดปุ่ม 🔊 เพื่อฟังเสียง</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ไทย</th><th>Sentence</th><th>คำแปลประโยค</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+// [category, word, IPA, emoji, thai word, sentence (*verb*, ~time~), thai sentence]
+const D=[
+["Movement / การเคลื่อนที่","along the street","əˈlɒŋ ðə striːt","🛣️","ไปตามถนน","I *walk* ~along the street~ to the shopping mall.","ฉันเดินไปตามถนนสู่ห้างสรรพสินค้า"],
+["Movement / การเคลื่อนที่","across the bridge","əˈkrɒs ðə brɪdʒ","🌉","ข้ามสะพาน","You *walk* ~across the bridge~.","คุณเดินข้ามสะพาน"],
+["Movement / การเคลื่อนที่","through the park","θruː ðə pɑːk","🌳","ผ่านสวนสาธารณะ","He *walks* ~through the park~ to get home.","เขาเดินผ่านสวนสาธารณะกลับบ้าน"],
+["Movement / การเคลื่อนที่","past the school","pɑːst ðə skuːl","🏫","ผ่านโรงเรียน","You *walk* ~past the school~ to reach the library.","คุณเดินผ่านโรงเรียนไปห้องสมุด"],
+["Movement / การเคลื่อนที่","around the lake","əˈraʊnd ðə leɪk","🏞️","รอบทะเลสาบ","You *walk* ~around the lake~.","คุณเดินรอบทะเลสาบ"],
+["Movement / การเคลื่อนที่","towards the station","təˈwɔːdz ðə ˈsteɪʃn","🚉","มุ่งหน้าไปสถานี","He *walks* ~towards the station~ every morning.","เขาเดินไปทางสถานีทุกเช้า"],
+["Movement / การเคลื่อนที่","toward the river","təˈwɔːd ðə ˈrɪvə","🌊","ไปทางแม่น้ำ","You *walk* ~toward the river~.","คุณเดินไปทางแม่น้ำ"],
+["Movement / การเคลื่อนที่","down the road","daʊn ðə rəʊd","⬇️","ไปตามถนน","He *goes* ~down the road~ to the shopping center.","เขาเดินไปตามถนนสู่ศูนย์การค้า"],
+["Movement / การเคลื่อนที่","up the hill","ʌp ðə hɪl","⛰️","ขึ้นเนิน","You *go* ~up the hill~.","คุณเดินขึ้นเนิน"],
+["Movement / การเคลื่อนที่","down the hill","daʊn ðə hɪl","🏔️","ลงเนิน","You *go* ~down the hill~.","คุณเดินลงเนิน"],
+["Movement / การเคลื่อนที่","through the tunnel","θruː ðə ˈtʌnl","🚇","ผ่านอุโมงค์","You *go* ~through the tunnel~.","คุณผ่านอุโมงค์ไป"],
+["Movement / การเคลื่อนที่","under the mountain","ˈʌndə ðə ˈmaʊntɪn","🗻","ใต้ภูเขา","The tunnel *runs* ~under the mountain~.","อุโมงค์ลอดผ่านใต้ภูเขา"],
+["Movement / การเคลื่อนที่","through the forest","θruː ðə ˈfɒrɪst","🌲","ผ่านป่า","The path *goes* ~through the forest~.","ทางเดินผ่านป่าไป"],
+["Movement / การเคลื่อนที่","along the highway","əˈlɒŋ ðə ˈhaɪweɪ","🛤️","ไปตามทางหลวง","You *drive* ~along the highway~.","คุณขับรถไปตามทางหลวง"],
+["Movement / การเคลื่อนที่","along the river","əˈlɒŋ ðə ˈrɪvə","🏞️","ไปตามแม่น้ำ","You *drive* ~along the river~.","คุณขับรถเลียบแม่น้ำ"],
+["Movement / การเคลื่อนที่","through the city center","θruː ðə ˈsɪti ˈsentə","🏙️","ผ่านใจกลางเมือง","You *ride* ~through the city center~.","คุณขี่ผ่านใจกลางเมือง"],
+["Movement / การเคลื่อนที่","across the city","əˈkrɒs ðə ˈsɪti","🚌","ข้ามเมือง","You *ride* ~across the city~ by bus.","คุณนั่งรถเมล์ข้ามเมือง"],
+["Movement / การเคลื่อนที่","to the airport","tə ði ˈeəpɔːt","✈️","ไปสนามบิน","This road *leads* ~to the airport~.","ถนนเส้นนี้นำไปสู่สนามบิน"],
+["Movement / การเคลื่อนที่","until the bridge","ənˈtɪl ðə brɪdʒ","⏩","จนถึงสะพาน","You *keep* walking ~until the bridge~.","คุณเดินต่อไปจนถึงสะพาน"],
+["Movement / การเคลื่อนที่","for two blocks","fə tuː blɒks","2️⃣","เป็นระยะสองช่วงตึก","You *go* straight ahead ~for two blocks~.","คุณเดินตรงไปสองช่วงตึก"],
+["Movement / การเคลื่อนที่","for one kilometer","fə wʌn ˈkɪləmiːtə","📏","เป็นระยะหนึ่งกิโลเมตร","You *follow* this road ~for one kilometer~.","คุณขับตามถนนนี้ไปหนึ่งกิโลเมตร"],
+["Movement / การเคลื่อนที่","from the front","frəm ðə frʌnt","🚪","จากทางด้านหน้า","You *enter* the building ~from the front~.","คุณเข้าอาคารจากด้านหน้า"],
+["Movement / การเคลื่อนที่","through the side door","θruː ðə saɪd dɔː","🚶","ผ่านประตูข้าง","You *leave* ~through the side door~.","คุณออกทางประตูข้าง"],
+["Movement / การเคลื่อนที่","by subway","baɪ ˈsʌbweɪ","🚇","โดยรถไฟใต้ดิน","You *travel* ~by subway~ to the museum.","คุณเดินทางด้วยรถไฟใต้ดินไปพิพิธภัณฑ์"],
+["Movement / การเคลื่อนที่","on the main street","ɒn ðə meɪn striːt","🛣️","บนถนนสายหลัก","My family *travels* ~on the main street~ during holidays.","ครอบครัวฉันเดินทางบนถนนสายหลักช่วงวันหยุด"],
+["Turning Points / จุดเลี้ยว","at the traffic light","æt ðə ˈtræfɪk laɪt","🚦","ที่ไฟจราจร","You *turn* left ~at the traffic light~.","คุณเลี้ยวซ้ายที่ไฟจราจร"],
+["Turning Points / จุดเลี้ยว","after the bridge","ˈɑːftə ðə brɪdʒ","🌉","หลังสะพาน","You *take* the first right ~after the bridge~.","คุณเลี้ยวขวาแรกหลังสะพาน"],
+["Turning Points / จุดเลี้ยว","before the supermarket","bɪˈfɔː ðə ˈsuːpəmɑːkɪt","🛒","ก่อนถึงซูเปอร์มาร์เก็ต","He *turns* right ~before the supermarket~.","เขาเลี้ยวขวาก่อนถึงซูเปอร์มาร์เก็ต"],
+["Turning Points / จุดเลี้ยว","at the roundabout","æt ðə ˈraʊndəbaʊt","🔄","ที่วงเวียน","She *turns* left ~at the roundabout~.","เธอเลี้ยวซ้ายที่วงเวียน"],
+["Turning Points / จุดเลี้ยว","at the corner","æt ðə ˈkɔːnə","📐","ที่หัวมุม","You *turn* right ~at the corner~.","คุณเลี้ยวขวาที่หัวมุม"],
+["Turning Points / จุดเลี้ยว","at the intersection","æt ði ˌɪntəˈsekʃn","✖️","ที่สี่แยก","I *turn* right ~at the intersection~ to reach the market.","ฉันเลี้ยวขวาที่สี่แยกเพื่อไปตลาด"],
+["Turning Points / จุดเลี้ยว","at the crosswalk","æt ðə ˈkrɒswɔːk","🚸","ที่ทางม้าลาย","You *cross* the street ~at the crosswalk~.","คุณข้ามถนนที่ทางม้าลาย"],
+["Turning Points / จุดเลี้ยว","after the traffic light","ˈɑːftə ðə ˈtræfɪk laɪt","🟢","หลังไฟจราจร","We *turn* left ~after the traffic light~.","เราเลี้ยวซ้ายหลังไฟจราจร"],
+["Turning Points / จุดเลี้ยว","near the market","nɪə ðə ˈmɑːkɪt","🥬","ใกล้ตลาด","They *turn* right ~near the market~.","พวกเขาเลี้ยวขวาใกล้ตลาด"],
+["Turning Points / จุดเลี้ยว","at the bridge","æt ðə brɪdʒ","🌁","ที่สะพาน","They *turn* left ~at the bridge~ to reach the village.","พวกเขาเลี้ยวซ้ายที่สะพานเพื่อไปหมู่บ้าน"],
+["Turning Points / จุดเลี้ยว","before the school","bɪˈfɔː ðə skuːl","🏫","ก่อนถึงโรงเรียน","You *turn* left ~before the school~.","คุณเลี้ยวซ้ายก่อนถึงโรงเรียน"],
+["Turning Points / จุดเลี้ยว","after the bank","ˈɑːftə ðə bæŋk","🏦","หลังธนาคาร","You *turn* right ~after the bank~.","คุณเลี้ยวขวาหลังธนาคาร"],
+["Turning Points / จุดเลี้ยว","after the gas station","ˈɑːftə ðə ˈɡæs ˌsteɪʃn","⛽","หลังปั๊มน้ำมัน","You *take* the second left ~after the gas station~.","คุณเลี้ยวซ้ายที่สองหลังปั๊มน้ำมัน"],
+["Turning Points / จุดเลี้ยว","beside the park","bɪˈsaɪd ðə pɑːk","🌳","ข้างสวนสาธารณะ","She *turns* right ~beside the park~.","เธอเลี้ยวขวาข้างสวนสาธารณะ"],
+["Turning Points / จุดเลี้ยว","before the bridge","bɪˈfɔː ðə brɪdʒ","🛑","ก่อนถึงสะพาน","We *turn* right ~before the bridge~.","เราเลี้ยวขวาก่อนถึงสะพาน"],
+["Position / ตำแหน่ง","next to the supermarket","nekst tə ðə ˈsuːpəmɑːkɪt","🍽️","ติดกับซูเปอร์มาร์เก็ต","The restaurant *is* ~next to the supermarket~.","ร้านอาหารอยู่ติดกับซูเปอร์มาร์เก็ต"],
+["Position / ตำแหน่ง","opposite the post office","ˈɒpəzɪt ðə ˈpəʊst ɒfɪs","📮","ตรงข้ามไปรษณีย์","The bank *is* ~opposite the post office~.","ธนาคารอยู่ตรงข้ามที่ทำการไปรษณีย์"],
+["Position / ตำแหน่ง","between the park and the library","bɪˈtwiːn ðə pɑːk ənd ðə ˈlaɪbrəri","📖","ระหว่างสวนกับห้องสมุด","The school *is* ~between the park and the library~.","โรงเรียนอยู่ระหว่างสวนสาธารณะกับห้องสมุด"],
+["Position / ตำแหน่ง","near the bus station","nɪə ðə ˈbʌs ˌsteɪʃn","🚌","ใกล้สถานีขนส่ง","The hospital *is* ~near the bus station~.","โรงพยาบาลอยู่ใกล้สถานีขนส่ง"],
+["Position / ตำแหน่ง","behind the shopping mall","bɪˈhaɪnd ðə ˈʃɒpɪŋ mɔːl","🏨","หลังห้างสรรพสินค้า","The hotel *is* ~behind the shopping mall~.","โรงแรมอยู่ด้านหลังห้างสรรพสินค้า"],
+["Position / ตำแหน่ง","in front of the school","ɪn frʌnt əv ðə skuːl","🚏","หน้าโรงเรียน","The bus stop *is* ~in front of the school~.","ป้ายรถเมล์อยู่หน้าโรงเรียน"],
+["Position / ตำแหน่ง","across from the hospital","əˈkrɒs frəm ðə ˈhɒspɪtl","🏥","ฝั่งตรงข้ามโรงพยาบาล","The bank *is* ~across from the hospital~.","ธนาคารอยู่ฝั่งตรงข้ามโรงพยาบาล"],
+["Position / ตำแหน่ง","on the left side of the road","ɒn ðə left saɪd əv ðə rəʊd","◀️","ด้านซ้ายของถนน","The hotel *stands* ~on the left side of the road~.","โรงแรมตั้งอยู่ทางซ้ายของถนน"],
+["Position / ตำแหน่ง","on the right side of the street","ɒn ðə raɪt saɪd əv ðə striːt","▶️","ด้านขวาของถนน","The bank *is* located ~on the right side of the street~.","ธนาคารตั้งอยู่ทางขวาของถนน"],
+["Position / ตำแหน่ง","on your right","ɒn jɔː raɪt","👉","ทางขวามือคุณ","The bus stop *is* ~on your right~.","ป้ายรถเมล์อยู่ทางขวามือคุณ"],
+["Position / ตำแหน่ง","at the end of the street","æt ði end əv ðə striːt","🔚","สุดถนน","The station *is* ~at the end of the street~.","สถานีอยู่สุดถนน"],
+["Position / ตำแหน่ง","at the top of the hill","æt ðə tɒp əv ðə hɪl","⛪","บนยอดเนิน","The church *is* ~at the top of the hill~.","โบสถ์อยู่บนยอดเนิน"],
+["Position / ตำแหน่ง","around the corner","əˈraʊnd ðə ˈkɔːnə","↪️","ถัดไปตรงหัวมุม","The restaurant *is* ~around the corner~.","ร้านอาหารอยู่ถัดไปตรงหัวมุม"],
+["Position / ตำแหน่ง","beside the bank","bɪˈsaɪd ðə bæŋk","💊","ข้างธนาคาร","The pharmacy *is* ~beside the bank~.","ร้านขายยาอยู่ข้างธนาคาร"],
+["Position / ตำแหน่ง","inside the building","ɪnˈsaɪd ðə ˈbɪldɪŋ","🏢","ภายในอาคาร","The office *is* ~inside the building~.","สำนักงานอยู่ภายในอาคาร"],
+["Position / ตำแหน่ง","outside the station","ˌaʊtˈsaɪd ðə ˈsteɪʃn","🚕","นอกสถานี","The taxi stand *is* ~outside the station~.","ที่จอดแท็กซี่อยู่นอกสถานี"],
+["Position / ตำแหน่ง","close to the train station","kləʊs tə ðə treɪn ˈsteɪʃn","🛍️","ใกล้สถานีรถไฟ","The shopping mall *is* ~close to the train station~.","ห้างสรรพสินค้าอยู่ใกล้สถานีรถไฟ"],
+["Position / ตำแหน่ง","on the second floor","ɒn ðə ˈsekənd flɔː","🚻","ชั้นสอง","The restroom *is* ~on the second floor~.","ห้องน้ำอยู่ชั้นสอง"],
+["Position / ตำแหน่ง","on the corner","ɒn ðə ˈkɔːnə","☕","ตรงหัวมุม","The café *is* ~on the corner~.","ร้านกาแฟอยู่ตรงหัวมุม"],
+["Position / ตำแหน่ง","across the street","əˈkrɒs ðə striːt","🏫","อีกฝั่งถนน","The school *is* ~across the street~.","โรงเรียนอยู่อีกฝั่งถนน"],
+["Position / ตำแหน่ง","beside the river","bɪˈsaɪd ðə ˈrɪvə","🍴","ข้างแม่น้ำ","The restaurant *is* ~beside the river~.","ร้านอาหารอยู่ข้างแม่น้ำ"],
+["Position / ตำแหน่ง","behind the building","bɪˈhaɪnd ðə ˈbɪldɪŋ","🅿️","หลังอาคาร","You *park* ~behind the building~.","คุณจอดรถหลังอาคาร"],
+["Position / ตำแหน่ง","near the entrance","nɪə ði ˈentrəns","🎫","ใกล้ทางเข้า","The ticket office *is* ~near the entrance~.","ห้องจำหน่ายตั๋วอยู่ใกล้ทางเข้า"],
+["Position / ตำแหน่ง","opposite the elevator","ˈɒpəzɪt ði ˈelɪveɪtə","ℹ️","ตรงข้ามลิฟต์","The information desk *is* ~opposite the elevator~.","เคาน์เตอร์สอบถามอยู่ตรงข้ามลิฟต์"],
+["Position / ตำแหน่ง","next to the stairs","nekst tə ðə steəz","🛗","ข้างบันได","The elevator *is* ~next to the stairs~.","ลิฟต์อยู่ข้างบันได"]
+];
+const P=["#ffd9e2","#d6ecff","#e2f5d3","#fff1c9","#e6dcff","#ffe0cc","#d3f3ee"];
+const cats=[...new Set(D.map(d=>d[0]))];
+const tabs=[];cats.forEach(c=>{const r=D.filter(d=>d[0]===c);for(let i=0;i<r.length;i+=25)tabs.push({n:c+(r.length>25?" "+(i/25+1):""),r:r.slice(i,i+25)})});
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class="v">$1</span>').replace(/~(.+?)~/g,'<span class="t">$1</span>');
+const plain=s=>s.replace(/[*~]/g,"");
+function say(txt,e){e&&e.stopPropagation();try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang="en-GB";u.rate=.85;const vs=speechSynthesis.getVoices(),v=vs.find(v=>/en-GB/i.test(v.lang)&&/(google|natural|premium|enhanced)/i.test(v.name))||vs.find(v=>/en-GB/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(x){}}
+function show(k){
+ document.getElementById("tabs").innerHTML=tabs.map((t,i)=>`<button class="tab${i===k?" on":""}" data-i="${i}">${t.n}</button>`).join("");
+ document.getElementById("grid").innerHTML=tabs[k].r.map((d,i)=>`<div class="card"><div class="in"><div class="face" style="background:${P[i%7]}"><div class="pic">${d[3]}</div><div class="w">${d[1]}</div><div class="ipa">/${d[2]}/</div><button class="spk" data-s="${i}" aria-label="Play">🔊</button></div><div class="face back" style="background:${P[(i+3)%7]}"><div class="th">${d[4]}</div><div class="en">${fmt(d[5])}</div><div class="tt">${d[6]}</div></div></div></div>`).join("");
+ document.getElementById("tb").innerHTML=tabs[k].r.map((d,i)=>`<tr><td>${i+1}</td><td><b>${d[1]}</b></td><td style="font-family:'Times New Roman',serif">/${d[2]}/</td><td class="th2">${d[4]}</td><td><button class="spk" data-s="${i}" aria-label="Play">🔊</button>${fmt(d[5])}</td><td class="th2">${d[6]}</td></tr>`).join("");
+ window.cur=k;
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".spk");
+ if(b){const d=tabs[cur].r[+b.dataset.s];say(b.closest(".face")?d[1]:plain(d[5]),e);return}
+ const t=e.target.closest(".tab");if(t){show(+t.dataset.i);return}
+ const c=e.target.closest(".card");if(c)c.classList.toggle("f");
+});
+show(0);
+</script></body></html>

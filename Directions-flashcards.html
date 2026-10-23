@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Directions Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8f5;--tx:#3b3b4f;--sf:#fff;--bd:#e6dfe8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}}
+:root[data-theme="dark"]{--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,'Segoe UI',Arial,sans-serif;padding:16px;max-width:980px;margin:auto}
+h1{font-size:1.4rem;text-align:center;margin:8px 0 2px}
+.sub{text-align:center;font-family:'Sarabun',sans-serif;opacity:.7;margin-bottom:14px;font-size:.9rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.tab{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:7px 14px;border-radius:20px;cursor:pointer;font:inherit}
+.tab.on{background:#cfd8ff;color:#2d3561;border-color:#b3c0ff;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{perspective:800px;height:190px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#33334a;box-shadow:0 2px 8px #0002;overflow:hidden}
+.back{transform:rotateY(180deg)}
+.pic{font-size:2.3rem;line-height:1}
+.w{font-family:Calibri,Arial,sans-serif;font-size:1.25rem;font-weight:700;margin-top:4px}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:1rem;opacity:.85}
+.spk{border:0;background:#ffffffaa;border-radius:50%;width:32px;height:32px;cursor:pointer;margin-top:6px;font-size:1rem}
+.th{font-family:'Sarabun',sans-serif;font-size:1.1rem;font-weight:700}
+.en{font-size:.88rem;margin-top:6px}.tt{font-family:'Sarabun',sans-serif;font-size:.8rem;margin-top:3px;opacity:.85}
+.v{color:#0b3fd1;font-weight:700}.t{color:#5a2d0c;font-weight:700}
+.wrap{overflow-x:auto;margin-top:22px}
+table{border-collapse:collapse;width:100%;min-width:640px;background:var(--sf);border-radius:12px}
+th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;font-size:.92rem}
+th{background:#e8e2f7;color:#33334a}
+td.th2{font-family:'Sarabun',sans-serif}
+td .spk{margin:0 6px 0 0;width:28px;height:28px;background:#e8e2f7}
+@media(max-width:560px){.grid{gap:8px}.card{height:175px}.w{font-size:1.05rem}.en{font-size:.78rem}}
+</style></head><body>
+<h1>🧭 Affirmative Sentences: Directions</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยค · กดปุ่ม 🔊 เพื่อฟังเสียง</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ไทย</th><th>Sentence</th><th>คำแปลประโยค</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+// [category, word, IPA, emoji, thai word, sentence (*verb*, ~time~), thai sentence]
+const D=[
+["I / ฉัน","straight","streɪt","⬆️","ตรงไป","I *go* ~straight~ for two blocks to find the bank.","ฉันเดินตรงไปสองช่วงตึกเพื่อหาธนาคาร"],
+["I / ฉัน","turn left","tɜːn left","⬅️","เลี้ยวซ้าย","I *turn* ~left~ at the traffic light near my house.","ฉันเลี้ยวซ้ายที่ไฟจราจรใกล้บ้านของฉัน"],
+["I / ฉัน","turn right","tɜːn raɪt","➡️","เลี้ยวขวา","I *turn* ~right after the bridge~.","ฉันเลี้ยวขวาหลังข้ามสะพาน"],
+["I / ฉัน","along","əˈlɒŋ","🛣️","ไปตาม","I *walk* ~along~ the street to the shopping mall.","ฉันเดินไปตามถนนเพื่อไปห้างสรรพสินค้า"],
+["I / ฉัน","crosswalk","ˈkrɒswɔːk","🚸","ทางม้าลาย","I *cross* the street at the ~crosswalk~.","ฉันข้ามถนนที่ทางม้าลาย"],
+["I / ฉัน","intersection","ˌɪntəˈsekʃn","✖️","สี่แยก","I *turn* ~right at the intersection~ to reach the market.","ฉันเลี้ยวขวาที่สี่แยกเพื่อไปตลาด"],
+["You / คุณ","straight ahead","streɪt əˈhed","🏥","ตรงไปข้างหน้า","You *go* ~straight ahead~ until you see the hospital.","คุณเดินตรงไปข้างหน้าจนเห็นโรงพยาบาล"],
+["You / คุณ","first left","fɜːst left","1️⃣","ซ้ายแรก","You *take* ~the first left~ after the restaurant.","คุณเลี้ยวซ้ายที่แยกแรกหลังร้านอาหาร"],
+["You / คุณ","second right","ˈsekənd raɪt","2️⃣","ขวาที่สอง","You *take* ~the second right~ near the park.","คุณเลี้ยวขวาที่แยกที่สองใกล้สวนสาธารณะ"],
+["You / คุณ","follow","ˈfɒləʊ","🛤️","ตาม","You *follow* ~the road~ to the city center.","คุณขับตามถนนไปยังใจกลางเมือง"],
+["You / คุณ","past","pɑːst","🚶","ผ่าน","You *walk* ~past~ the school to reach the library.","คุณเดินผ่านโรงเรียนเพื่อไปห้องสมุด"],
+["You / คุณ","towards","təˈwɔːdz","🔵","มุ่งหน้าไป","You *walk* ~towards~ the building with the blue sign.","คุณเดินมุ่งหน้าไปยังอาคารที่มีป้ายสีน้ำเงิน"],
+["You / คุณ","up the hill","ʌp ðə hɪl","⛰️","ขึ้นเนิน","You *go* ~up the hill~.","คุณเดินขึ้นเนินไป"],
+["You / คุณ","tunnel","ˈtʌnl","🚇","อุโมงค์","You *go* ~through the tunnel~.","คุณผ่านอุโมงค์ไป"],
+["He / She","corner","ˈkɔːnə","📐","หัวมุม","He *turns* ~left at the corner~.","เขาเลี้ยวซ้ายที่หัวมุม"],
+["He / She","supermarket","ˈsuːpəmɑːkɪt","🛒","ซูเปอร์มาร์เก็ต","He *turns* ~right before the supermarket~.","เขาเลี้ยวขวาก่อนถึงซูเปอร์มาร์เก็ต"],
+["He / She","carefully","ˈkeəfəli","🚦","ระมัดระวัง","He *crosses* ~the road~ carefully.","เขาข้ามถนนอย่างระมัดระวัง"],
+["He / She","through","θruː","🌳","ผ่าน/ทะลุ","He *walks* ~through~ the park to get home.","เขาเดินผ่านสวนสาธารณะกลับบ้าน"],
+["He / She","bus stop","ˈbʌs stɒp","🚏","ป้ายรถเมล์","She *goes* ~straight~ to the bus stop.","เธอเดินตรงไปที่ป้ายรถเมล์"],
+["He / She","signs","saɪnz","🪧","ป้ายบอกทาง","She *follows* ~the signs~ to the airport.","เธอตามป้ายบอกทางไปสนามบิน"],
+["He / She","beside","bɪˈsaɪd","🏞️","ข้าง ๆ","She *walks* ~beside~ the river to the museum.","เธอเดินเลียบแม่น้ำไปพิพิธภัณฑ์"],
+["We / They","roundabout","ˈraʊndəbaʊt","🔄","วงเวียน","We *turn* ~right at the roundabout~.","เราเลี้ยวขวาที่วงเวียน"],
+["We / They","bridge","brɪdʒ","🌉","สะพาน","We *cross* ~the bridge~ to reach the village.","เราข้ามสะพานเพื่อไปหมู่บ้าน"],
+["We / They","beach","biːtʃ","🏖️","ชายหาด","We *walk* ~along the road~ to the beach.","เราเดินไปตามถนนสู่ชายหาด"],
+["We / They","map","mæp","🗺️","แผนที่","They *follow* ~the map~ to find the hotel.","พวกเขาดูแผนที่เพื่อหาโรงแรม"],
+["We / They","station","ˈsteɪʃn","🚉","สถานี","They *walk* ~past~ the station to the park.","พวกเขาเดินผ่านสถานีไปสวนสาธารณะ"],
+["Places & Locations / สถานที่","next to","ˈnekst tuː","🍽️","ติดกับ","The restaurant *is* ~next to~ the supermarket.","ร้านอาหารอยู่ติดกับซูเปอร์มาร์เก็ต"],
+["Places & Locations / สถานที่","opposite","ˈɒpəzɪt","🏦","ตรงข้าม","The bank *is* ~opposite~ the post office.","ธนาคารอยู่ตรงข้ามที่ทำการไปรษณีย์"],
+["Places & Locations / สถานที่","between","bɪˈtwiːn","🏫","ระหว่าง","The school *is* ~between~ the park and the library.","โรงเรียนอยู่ระหว่างสวนสาธารณะกับห้องสมุด"],
+["Places & Locations / สถานที่","near","nɪə","🚌","ใกล้","The hospital *is* ~near~ the bus station.","โรงพยาบาลอยู่ใกล้สถานีขนส่ง"],
+["Places & Locations / สถานที่","behind","bɪˈhaɪnd","🏨","ข้างหลัง","The hotel *is* ~behind~ the shopping mall.","โรงแรมอยู่ด้านหลังห้างสรรพสินค้า"],
+["Places & Locations / สถานที่","in front of","ɪn frʌnt ɒv","🚏","ด้านหน้า","The bus stop *is* ~in front of~ the school.","ป้ายรถเมล์อยู่หน้าโรงเรียน"],
+["Places & Locations / สถานที่","left side","left saɪd","◀️","ด้านซ้าย","The restaurant *is* located ~on the left side~ of the road.","ร้านอาหารตั้งอยู่ทางด้านซ้ายของถนน"],
+["Places & Locations / สถานที่","around the corner","əˈraʊnd ðə ˈkɔːnə","↪️","ถัดไปตรงหัวมุม","The restaurant *is* ~around the corner~.","ร้านอาหารอยู่ถัดไปตรงหัวมุม"],
+["Places & Locations / สถานที่","away","əˈweɪ","✈️","ห่างออกไป","The airport *is* ~about ten kilometers away~.","สนามบินอยู่ห่างออกไปประมาณสิบกิโลเมตร"],
+["Family & People / ครอบครัวและผู้คน","drive","draɪv","🚗","ขับรถ","My father *drives* ~straight~ to the office.","พ่อขับรถตรงไปที่ออฟฟิศ"],
+["Family & People / ครอบครัวและผู้คน","market","ˈmɑːkɪt","🥬","ตลาด","My mother *turns* ~left near the market~.","แม่เลี้ยวซ้ายใกล้ตลาด"],
+["Family & People / ครอบครัวและผู้คน","highway","ˈhaɪweɪ","🛣️","ทางหลวง","My family *travels* ~along the highway~ during vacations.","ครอบครัวของฉันเดินทางไปตามทางหลวงช่วงวันหยุดพักผ่อน"],
+["Family & People / ครอบครัวและผู้คน","tourist","ˈtʊərɪst","🧳","นักท่องเที่ยว","The tourist *goes* ~straight~ to the temple.","นักท่องเที่ยวไปที่วัดโดยตรง"],
+["Family & People / ครอบครัวและผู้คน","GPS","ˌdʒiː piː ˈes","📍","จีพีเอส","The driver *follows* the GPS to ~the destination~.","คนขับรถตามจีพีเอสไปยังจุดหมายปลายทาง"],
+["Family & People / ครอบครัวและผู้คน","guide","ɡaɪd","🧭","ไกด์","The guide *shows* ~the direction~ to the tourists.","ไกด์บอกทิศทางให้นักท่องเที่ยว"],
+["Family & People / ครอบครัวและผู้คน","sign","saɪn","🪧","ป้าย","The sign *shows* ~the way~ to the airport.","ป้ายบอกเส้นทางไปสนามบิน"],
+["I / ฉัน","bookstore","ˈbʊkstɔː","📚","ร้านหนังสือ","I *go* ~past~ the bank and find the bookstore.","ฉันเดินผ่านธนาคารแล้วเจอร้านหนังสือ"],
+["I / ฉัน","down","daʊn","⬇️","ลงไปตาม","I *walk* ~straight down~ the street to the coffee shop.","ฉันเดินตรงไปตามถนนจนถึงร้านกาแฟ"],
+["You / คุณ","across","əˈkrɒs","↔️","ข้าม","You *walk* ~across~ the bridge to the park.","คุณเดินข้ามสะพานไปสวนสาธารณะ"],
+["You / คุณ","next left","nekst left","⏭️","ซ้ายถัดไป","You *take* ~the next left~ after the station.","คุณเลี้ยวซ้ายที่แยกถัดไปหลังสถานี"],
+["You / คุณ","third right","θɜːd raɪt","3️⃣","ขวาที่สาม","You *take* ~the third right~ near the hotel.","คุณเลี้ยวขวาที่แยกที่สามใกล้โรงแรม"],
+["You / คุณ","around","əˈraʊnd","🔃","อ้อมไป","You *go* ~around the corner~ to find the restaurant.","คุณเดินอ้อมหัวมุมไปเจอร้านอาหาร"],
+["You / คุณ","keep walking","kiːp ˈwɔːkɪŋ","🚶‍♂️","เดินต่อไป","You *keep* walking ~until the bridge~.","คุณเดินต่อไปจนถึงสะพาน"],
+["You / คุณ","head toward","hed təˈwɔːd","🏙️","มุ่งหน้าไป","You *head* ~toward~ the city center.","คุณมุ่งหน้าไปยังใจกลางเมือง"],
+["You / คุณ","meters","ˈmiːtəz","📏","เมตร","You *continue* ~down this street for 500 meters~.","คุณเดินต่อไปตามถนนนี้อีก 500 เมตร"],
+["You / คุณ","stay","steɪ","📍","อยู่ต่อ","You *stay* ~on this road until the roundabout~.","คุณอยู่บนถนนเส้นนี้จนถึงวงเวียน"],
+["You / คุณ","lake","leɪk","🏞️","ทะเลสาบ","You *walk* ~around~ the lake.","คุณเดินรอบทะเลสาบ"],
+["You / คุณ","stop","stɒp","🛑","หยุด","You *stop* ~at the traffic light~.","คุณหยุดที่ไฟจราจร"],
+["He / She","reach","riːtʃ","🎯","ถึง","He *passes* the bookstore and *reaches* the school.","เขาเดินผ่านร้านหนังสือแล้วถึงโรงเรียน"],
+["He / She","main road","meɪn rəʊd","🛣️","ถนนสายหลัก","She *goes* ~along the main road~ to the market.","เธอเดินไปตามถนนสายหลักสู่ตลาด"],
+["He / She","neighborhood","ˈneɪbəhʊd","🏘️","ย่านที่อยู่อาศัย","She *walks* ~through~ the neighborhood to visit her friend.","เธอเดินผ่านย่านบ้านไปเยี่ยมเพื่อน"],
+["He / She","shopping center","ˈʃɒpɪŋ ˈsentə","🏬","ศูนย์การค้า","He *goes* ~down the road~ to the shopping center.","เขาเดินไปตามถนนสู่ศูนย์การค้า"],
+["We / They","buildings","ˈbɪldɪŋz","🏢","อาคาร","We *walk* ~between~ the buildings to find the entrance.","เราเดินระหว่างอาคารเพื่อหาทางเข้า"],
+["We / They","village","ˈvɪlɪdʒ","🏡","หมู่บ้าน","They *turn* ~left at the bridge~ to reach the village.","พวกเขาเลี้ยวซ้ายที่สะพานเพื่อไปหมู่บ้าน"],
+["We / They","street signs","striːt saɪnz","🪧","ป้ายชื่อถนน","They *follow* ~the street signs~ to the museum.","พวกเขาตามป้ายถนนไปพิพิธภัณฑ์"],
+["Family & People / ครอบครัวและผู้คน","bicycle","ˈbaɪsɪkl","🚲","จักรยาน","My brother *rides* his bicycle ~towards~ the park.","น้องชายปั่นจักรยานมุ่งหน้าไปสวนสาธารณะ"],
+["Family & People / ครอบครัวและผู้คน","directions","dəˈrekʃnz","🧭","การบอกทาง","My sister *follows* the directions to the library.","พี่สาวทำตามเส้นทางที่บอกไปห้องสมุด"],
+["Family & People / ครอบครัวและผู้คน","temple","ˈtempl","🛕","วัด","The tourist *asks* for directions to the temple.","นักท่องเที่ยวถามทางไปวัด"],
+["Family & People / ครอบครัวและผู้คน","route","ruːt","🛤️","เส้นทาง","The guide *explains* the route to the visitors.","ไกด์อธิบายเส้นทางให้ผู้มาเยือน"],
+["Family & People / ครอบครัวและผู้คน","main gate","meɪn ɡeɪt","⛩️","ประตูหลัก","The visitor *finds* the entrance ~near~ the main gate.","ผู้มาเยือนพบทางเข้าใกล้ประตูหลัก"],
+["Family & People / ครอบครัวและผู้คน","classroom","ˈklɑːsruːm","🏫","ห้องเรียน","The student *walks* to the classroom using the signs.","นักเรียนเดินไปห้องเรียนโดยดูป้ายบอกทาง"],
+["Family & People / ครอบครัวและผู้คน","know","nəʊ","💡","รู้","Everyone *knows* the way to the city center.","ทุกคนรู้ทางไปใจกลางเมือง"],
+["Family & People / ครอบครัวและผู้คน","ask","ɑːsk","🙋","ถาม","Many people *ask* for directions when they visit new places.","หลายคนถามทางเมื่อไปสถานที่ใหม่"],
+["Family & People / ครอบครัวและผู้คน","shortest","ˈʃɔːtɪst","📐","สั้นที่สุด","The map *shows* the shortest route.","แผนที่แสดงเส้นทางที่สั้นที่สุด"],
+["Places & Locations / สถานที่","post office","ˈpəʊst ɒfɪs","📮","ที่ทำการไปรษณีย์","The library *is* ~next to~ the post office.","ห้องสมุดอยู่ติดกับที่ทำการไปรษณีย์"],
+["Places & Locations / สถานที่","pharmacy","ˈfɑːməsi","💊","ร้านขายยา","The supermarket *is* ~between~ the bakery and the pharmacy.","ซูเปอร์มาร์เก็ตอยู่ระหว่างร้านเบเกอรี่กับร้านขายยา"],
+["Places & Locations / สถานที่","at the end","æt ði end","🔚","ตรงปลาย","The station *is* ~at the end of the street~.","สถานีอยู่ตรงสุดถนน"],
+["Places & Locations / สถานที่","on your right","ɒn jɔː raɪt","👉","ทางขวามือคุณ","The bus stop *is* ~on your right~.","ป้ายรถเมล์อยู่ทางขวามือคุณ"],
+["Places & Locations / สถานที่","on your left","ɒn jɔː left","👈","ทางซ้ายมือคุณ","The bookstore *is* ~on your left~.","ร้านหนังสืออยู่ทางซ้ายมือคุณ"],
+["Places & Locations / สถานที่","lie","laɪ","🌳","ตั้งอยู่","The park *lies* ~across the road~.","สวนสาธารณะอยู่ฝั่งตรงข้ามถนน"],
+["Places & Locations / สถานที่","close to","kləʊs tuː","🛍️","ใกล้กับ","The shopping mall *is* ~close to~ the train station.","ห้างสรรพสินค้าอยู่ใกล้สถานีรถไฟ"],
+["Places & Locations / สถานที่","top","tɒp","⛪","ยอด","The church *is* ~at the top of the hill~.","โบสถ์อยู่บนยอดเนิน"],
+["Places & Locations / สถานที่","path","pɑːθ","🥾","ทางเดิน","The path *leads* ~to~ the lake.","ทางเดินนำไปสู่ทะเลสาบ"],
+["Places & Locations / สถานที่","connect","kəˈnekt","🔗","เชื่อมต่อ","This road *connects* the two towns.","ถนนเส้นนี้เชื่อมสองเมืองเข้าด้วยกัน"],
+["Places & Locations / สถานที่","curve","kɜːv","↰","โค้ง","The road *curves* ~to the left~.","ถนนโค้งไปทางซ้าย"],
+["Places & Locations / สถานที่","police station","pəˈliːs ˈsteɪʃn","🚓","สถานีตำรวจ","The police station *is* ~behind~ the post office.","สถานีตำรวจอยู่ด้านหลังที่ทำการไปรษณีย์"],
+["Places & Locations / สถานที่","parking lot","ˈpɑːkɪŋ lɒt","🅿️","ลานจอดรถ","The parking lot *is* ~behind~ the shopping mall.","ลานจอดรถอยู่ด้านหลังห้างสรรพสินค้า"],
+["Buildings & Indoors / ในอาคาร","entrance","ˈentrəns","🚪","ทางเข้า","You *enter* ~through~ the main entrance.","คุณเข้าทางประตูหลัก"],
+["Buildings & Indoors / ในอาคาร","exit","ˈeksɪt","🏃","ทางออก","You *exit* ~through~ the back door.","คุณออกทางประตูหลัง"],
+["Buildings & Indoors / ในอาคาร","elevator","ˈelɪveɪtə","🛗","ลิฟต์","You *take* the elevator ~to the third floor~.","คุณขึ้นลิฟต์ไปชั้นสาม"],
+["Buildings & Indoors / ในอาคาร","stairs","steəz","🪜","บันได","You *use* the stairs ~to the second floor~.","คุณใช้บันไดขึ้นไปชั้นสอง"],
+["Buildings & Indoors / ในอาคาร","inside","ɪnˈsaɪd","🏢","ข้างใน","The office *is* ~inside~ the building.","สำนักงานอยู่ภายในอาคาร"],
+["Buildings & Indoors / ในอาคาร","outside","ˌaʊtˈsaɪd","🚕","ข้างนอก","The taxi stand *is* ~outside~ the station.","ที่จอดแท็กซี่อยู่นอกสถานี"],
+["Buildings & Indoors / ในอาคาร","restroom","ˈrestruːm","🚻","ห้องน้ำ","The restroom *is* ~on the second floor~.","ห้องน้ำอยู่ชั้นสอง"],
+["Buildings & Indoors / ในอาคาร","ticket office","ˈtɪkɪt ˈɒfɪs","🎫","ห้องจำหน่ายตั๋ว","The ticket office *is* ~near~ the entrance.","ห้องจำหน่ายตั๋วอยู่ใกล้ทางเข้า"],
+["Buildings & Indoors / ในอาคาร","information desk","ˌɪnfəˈmeɪʃn desk","ℹ️","เคาน์เตอร์สอบถาม","The information desk *is* ~opposite~ the elevator.","เคาน์เตอร์สอบถามอยู่ตรงข้ามลิฟต์"],
+["Transport / การเดินทาง","park","pɑːk","🅿️","จอดรถ","You *park* ~behind~ the building.","คุณจอดรถด้านหลังอาคาร"],
+["Transport / การเดินทาง","ride","raɪd","🚌","นั่ง/ขี่","You *ride* ~across~ the city by bus.","คุณนั่งรถเมล์ข้ามเมือง"],
+["Transport / การเดินทาง","subway","ˈsʌbweɪ","🚇","รถไฟใต้ดิน","You *travel* by subway to the museum.","คุณเดินทางด้วยรถไฟใต้ดินไปพิพิธภัณฑ์"],
+["Transport / การเดินทาง","fastest","ˈfɑːstɪst","⚡","เร็วที่สุด","The GPS *shows* the fastest route to the destination.","จีพีเอสแสดงเส้นทางที่เร็วที่สุดไปยังจุดหมาย"],
+["I / ฉัน","road signs","rəʊd saɪnz","🪧","ป้ายจราจร","I *follow* ~the road signs~ to the airport.","ฉันตามป้ายจราจรไปสนามบิน"],
+["I / ฉัน","near the school","nɪə ðə skuːl","📍","ใกล้โรงเรียน","I *turn* ~left at the corner near~ the school.","ฉันเลี้ยวซ้ายที่หัวมุมใกล้โรงเรียน"],
+["You / คุณ","river","ˈrɪvə","🌊","แม่น้ำ","You *walk* ~toward~ the river.","คุณเดินไปทางแม่น้ำ"],
+["You / คุณ","drive along","draɪv əˈlɒŋ","🚗","ขับไปตาม","You *drive* ~along the highway~.","คุณขับรถไปตามทางหลวง"],
+["You / คุณ","pass","pɑːs","🚶","ผ่าน","You *pass* the supermarket ~before~ you reach the station.","คุณผ่านซูเปอร์มาร์เก็ตก่อนจะถึงสถานี"],
+["You / คุณ","hospital","ˈhɒspɪtl","🏥","โรงพยาบาล","You *walk* ~past~ the hospital and *turn* ~left~.","คุณเดินผ่านโรงพยาบาลแล้วเลี้ยวซ้าย"],
+["You / คุณ","next intersection","nekst ˌɪntəˈsekʃn","🔀","สี่แยกถัดไป","You *continue* ~to the next intersection~.","คุณเดินต่อไปถึงสี่แยกถัดไป"],
+["You / คุณ","kilometer","ˈkɪləmiːtə","📏","กิโลเมตร","You *follow* this road ~for one kilometer~.","คุณขับตามถนนนี้ไปหนึ่งกิโลเมตร"],
+["You / คุณ","until","ənˈtɪl","⏩","จนกระทั่ง","You *stay* ~on the main road until the traffic light~.","คุณอยู่บนถนนสายหลักจนถึงไฟจราจร"],
+["You / คุณ","after","ˈɑːftə","➡️","หลังจาก","You *turn* ~right after~ the bank.","คุณเลี้ยวขวาหลังธนาคาร"],
+["You / คุณ","before","bɪˈfɔː","⬅️","ก่อนถึง","You *turn* ~left before~ the school.","คุณเลี้ยวซ้ายก่อนถึงโรงเรียน"],
+["You / คุณ","save time","seɪv taɪm","⏱️","ประหยัดเวลา","You *go* ~through the park~ to save time.","คุณเดินตัดผ่านสวนสาธารณะเพื่อประหยัดเวลา"],
+["You / คุณ","gas station","ˈɡæs ˌsteɪʃn","⛽","ปั๊มน้ำมัน","You *take* ~the second left after~ the gas station.","คุณเลี้ยวซ้ายที่สองหลังปั๊มน้ำมัน"],
+["You / คุณ","front","frʌnt","🏛️","ด้านหน้า","You *enter* the building ~from the front~.","คุณเข้าอาคารจากด้านหน้า"],
+["You / คุณ","side door","saɪd dɔː","🚪","ประตูข้าง","You *leave* ~through the side door~.","คุณออกทางประตูข้าง"],
+["You / คุณ","block","blɒk","🧱","ช่วงตึก","You *go* ~straight ahead~ for two blocks.","คุณเดินตรงไปสองช่วงตึก"],
+["You / คุณ","traffic light","ˈtræfɪk laɪt","🚦","ไฟจราจร","You *turn* ~left at~ the traffic light.","คุณเลี้ยวซ้ายที่ไฟจราจร"],
+["You / คุณ","see","siː","👀","เห็น","You *walk* ~along the road~ until you see the bank.","คุณเดินไปตามถนนจนเห็นธนาคาร"],
+["He / She","train station","treɪn ˈsteɪʃn","🚉","สถานีรถไฟ","He *goes* ~straight~ to the train station.","เขาเดินตรงไปสถานีรถไฟ"],
+["He / She","second street","ˈsekənd striːt","2️⃣","ถนนสายที่สอง","She *turns* ~left at the second street~.","เธอเลี้ยวซ้ายที่ถนนสายที่สอง"],
+["He / She","street","striːt","🏙️","ถนน","She *crosses* the street ~near~ the school.","เธอข้ามถนนใกล้โรงเรียน"],
+["He / She","every morning","ˈevri ˈmɔːnɪŋ","🌅","ทุกเช้า","He *walks* ~towards the station~ every morning.","เขาเดินไปทางสถานีทุกเช้า"],
+["We / They","city center","ˈsɪti ˈsentə","🏙️","ใจกลางเมือง","We *go* ~straight~ to the city center.","เราไปใจกลางเมืองโดยตรง"],
+["We / They","turn","tɜːn","↩️","เลี้ยว","We *turn* ~left after~ the traffic light.","เราเลี้ยวซ้ายหลังไฟจราจร"],
+["We / They","museum","mjuˈziːəm","🏛️","พิพิธภัณฑ์","We *walk* ~straight ahead~ to the museum entrance.","เราเดินตรงไปที่ทางเข้าพิพิธภัณฑ์"],
+["We / They","shop","ʃɒp","🏪","ร้านค้า","We *turn* ~left after~ the shop.","เราเลี้ยวซ้ายหลังร้านค้า"],
+["We / They","map directions","mæp dəˈrekʃnz","🗺️","เส้นทางตามแผนที่","We *follow* the map directions to the hotel.","เราทำตามเส้นทางในแผนที่ไปโรงแรม"],
+["We / They","first right","fɜːst raɪt","1️⃣","ขวาแรก","They *take* ~the first right after~ the school.","พวกเขาเลี้ยวขวาแรกหลังโรงเรียน"],
+["We / They","second left","ˈsekənd left","2️⃣","ซ้ายที่สอง","They *take* ~the second left near~ the market.","พวกเขาเลี้ยวซ้ายที่สองใกล้ตลาด"],
+["Family & People / ครอบครัวและผู้คน","take","teɪk","👦","เลี้ยว/ใช้","My brother *takes* ~the first right~ to his school.","น้องชายเลี้ยวขวาแรกไปโรงเรียน"],
+["Family & People / ครอบครัวและผู้คน","road","rəʊd","🛣️","ถนน","My sister *follows* ~the road~ to the library.","พี่สาวตามถนนไปห้องสมุด"],
+["Family & People / ครอบครัวและผู้คน","visitor","ˈvɪzɪtə","🧑‍💼","ผู้มาเยือน","The visitor *turns* ~right at the entrance~.","ผู้มาเยือนเลี้ยวขวาที่ทางเข้า"],
+["Family & People / ครอบครัวและผู้คน","maps","mæps","🗺️","แผนที่ (หลายฉบับ)","People *use* maps to find directions.","ผู้คนใช้แผนที่เพื่อหาทิศทาง"],
+["Family & People / ครอบครัวและผู้คน","traveling","ˈtrævəlɪŋ","🧳","การเดินทาง","Everyone *follows* road signs when traveling.","ทุกคนทำตามป้ายจราจรเมื่อเดินทาง"],
+["Family & People / ครอบครัวและผู้คน","provide","prəˈvaɪd","📲","ให้ (ข้อมูล)","The GPS *provides* directions to drivers.","จีพีเอสให้ข้อมูลเส้นทางแก่คนขับรถ"],
+["Family & People / ครอบครัวและผู้คน","clear","klɪə","✨","ชัดเจน","The map *provides* clear directions to travelers.","แผนที่ให้เส้นทางที่ชัดเจนแก่นักเดินทาง"],
+["Family & People / ครอบครัวและผู้คน","travelers","ˈtrævələz","🎒","นักเดินทาง","Many travelers *follow* road signs ~on the highway~.","นักเดินทางหลายคนตามป้ายบนทางหลวง"],
+["Family & People / ครอบครัวและผู้คน","officer","ˈɒfɪsə","👮","เจ้าหน้าที่","The officer *gives* clear directions.","เจ้าหน้าที่บอกทางอย่างชัดเจน"],
+["Family & People / ครอบครัวและผู้คน","clearly","ˈklɪəli","🔍","อย่างชัดเจน","The guide *explains* ~the way~ clearly.","ไกด์อธิบายเส้นทางอย่างชัดเจน"],
+["Family & People / ครอบครัวและผู้คน","destination","ˌdestɪˈneɪʃn","🏁","จุดหมายปลายทาง","The GPS *guides* us to the destination.","จีพีเอสนำทางเราไปยังจุดหมาย"],
+["Family & People / ครอบครัวและผู้คน","suggest","səˈdʒest","💡","แนะนำ","The GPS *suggests* the fastest route.","จีพีเอสแนะนำเส้นทางที่เร็วที่สุด"],
+["Family & People / ครอบครัวและผู้คน","alternative","ɔːlˈtɜːnətɪv","🔀","ทางเลือกอื่น","The map *shows* an alternative route.","แผนที่แสดงเส้นทางทางเลือกอื่น"],
+["Family & People / ครอบครัวและผู้คน","minutes","ˈmɪnɪts","⏱️","นาที","The route *takes* about fifteen minutes.","เส้นทางนี้ใช้เวลาประมาณสิบห้านาที"],
+["Family & People / ครอบครัวและผู้คน","holidays","ˈhɒlədeɪz","🎉","วันหยุด","My family *travels* ~on the main street~ during holidays.","ครอบครัวของฉันเดินทางบนถนนสายหลักช่วงวันหยุด"],
+["Places & Locations / สถานที่","located","ləʊˈkeɪtɪd","📌","ตั้งอยู่","The hotel *is* located ~near~ the station.","โรงแรมตั้งอยู่ใกล้สถานี"],
+["Places & Locations / สถานที่","right side","raɪt saɪd","▶️","ด้านขวา","The exit *is* ~on the right side~.","ทางออกอยู่ทางด้านขวา"],
+["Places & Locations / สถานที่","parking area","ˈpɑːkɪŋ ˈeəriə","🅿️","บริเวณจอดรถ","The parking area *is* ~behind~ the building.","บริเวณจอดรถอยู่ด้านหลังอาคาร"],
+["Places & Locations / สถานที่","across from","əˈkrɒs frɒm","🔁","ตรงข้าม","The bank *is* ~across from~ the hospital.","ธนาคารอยู่ตรงข้ามโรงพยาบาล"],
+["Places & Locations / สถานที่","café","ˈkæfeɪ","☕","ร้านกาแฟ","The café *is* ~in front of~ the station.","ร้านกาแฟอยู่หน้าสถานี"],
+["Places & Locations / สถานที่","stand","stænd","🏨","ตั้งอยู่","The hotel *stands* ~on the left side of the road~.","โรงแรมตั้งอยู่ทางซ้ายของถนน"],
+["Places & Locations / สถานที่","on the corner","ɒn ðə ˈkɔːnə","📐","ตรงหัวมุม","The café *is* ~on the corner~.","ร้านกาแฟอยู่ตรงหัวมุม"],
+["Places & Locations / สถานที่","across the street","əˈkrɒs ðə striːt","↔️","อีกฝั่งถนน","The school *is* ~across the street~.","โรงเรียนอยู่อีกฝั่งถนน"],
+["Places & Locations / สถานที่","villages","ˈvɪlɪdʒɪz","🏘️","หมู่บ้าน (หลายแห่ง)","The bridge *connects* the two villages.","สะพานเชื่อมสองหมู่บ้านเข้าด้วยกัน"],
+["Places & Locations / สถานที่","mountain","ˈmaʊntɪn","⛰️","ภูเขา","The tunnel *runs* ~under~ the mountain.","อุโมงค์ลอดใต้ภูเขา"],
+["Places & Locations / สถานที่","forest","ˈfɒrɪst","🌲","ป่า","The path *goes* ~through the forest~.","ทางเดินผ่านป่าไป"],
+["Places & Locations / สถานที่","road ends","rəʊd endz","🏖️","ถนนสิ้นสุด","The road *ends* ~at the beach~.","ถนนสิ้นสุดที่ชายหาด"],
+["Places & Locations / สถานที่","run","rʌn","🏡","ทอดตัว/ไหล","The river *runs* ~behind~ the village.","แม่น้ำไหลอยู่หลังหมู่บ้าน"],
+["Places & Locations / สถานที่","point","pɔɪnt","👆","ชี้","The sign *points* ~to~ the museum.","ป้ายชี้ไปทางพิพิธภัณฑ์"],
+["Places & Locations / สถานที่","information center","ˌɪnfəˈmeɪʃn ˈsentə","ℹ️","ศูนย์ข้อมูล","The information center *is* ~near the main gate~.","ศูนย์ข้อมูลอยู่ใกล้ประตูหลัก"],
+["Places & Locations / สถานที่","ticket counter","ˈtɪkɪt ˈkaʊntə","🎫","เคาน์เตอร์ตั๋ว","The ticket counter *is* ~inside~ the station.","เคาน์เตอร์ตั๋วอยู่ภายในสถานี"],
+["He / She","near the bank","nɪə ðə bæŋk","🏦","ใกล้ธนาคาร","She *turns* ~right near the bank~.","เธอเลี้ยวขวาใกล้ธนาคาร"],
+["He / She","near the hospital","nɪə ðə ˈhɒspɪtl","🏥","ใกล้โรงพยาบาล","He *turns* ~left at the traffic light near the hospital~.","เขาเลี้ยวซ้ายที่ไฟจราจรใกล้โรงพยาบาล"],
+["He / She","after the bridge","ˈɑːftə ðə brɪdʒ","🌉","หลังสะพาน","He *turns* ~right after the bridge~.","เขาเลี้ยวขวาหลังสะพาน"],
+["He / She","at the roundabout","æt ðə ˈraʊndəbaʊt","🔄","ที่วงเวียน","She *turns* ~left at the roundabout~.","เธอเลี้ยวซ้ายที่วงเวียน"],
+["He / She","beside the park","bɪˈsaɪd ðə pɑːk","🌳","ข้างสวนสาธารณะ","She *turns* ~right beside the park~.","เธอเลี้ยวขวาข้างสวนสาธารณะ"],
+["We / They","before the bridge","bɪˈfɔː ðə brɪdʒ","🛑","ก่อนถึงสะพาน","We *turn* ~right before the bridge~.","เราเลี้ยวขวาก่อนถึงสะพาน"],
+["We / They","go straight ahead","ɡəʊ streɪt əˈhed","⬆️","เดินตรงไปข้างหน้า","They *go* ~straight ahead~ to the museum.","พวกเขาเดินตรงไปที่พิพิธภัณฑ์"],
+["We / They","straight to the station","streɪt tə ðə ˈsteɪʃn","🚉","ตรงไปสถานี","They *go* ~straight to the station~ every morning.","พวกเขาไปสถานีโดยตรงทุกเช้า"],
+["We / They","near the market","nɪə ðə ˈmɑːkɪt","🥬","ใกล้ตลาด","They *turn* ~right near the market~.","พวกเขาเลี้ยวขวาใกล้ตลาด"],
+["We / They","past the hospital","pɑːst ðə ˈhɒspɪtl","🚶","ผ่านโรงพยาบาลไป","They *walk* ~past the hospital~ to the library.","พวกเขาเดินผ่านโรงพยาบาลไปห้องสมุด"],
+["Family & People / ครอบครัวและผู้คน","to work","tə wɜːk","💼","ไปทำงาน","My father *drives* ~along the highway~ to work.","พ่อขับรถไปตามทางหลวงเพื่อไปทำงาน"],
+["Family & People / ครอบครัวและผู้คน","across the road","əˈkrɒs ðə rəʊd","🚸","ข้ามถนน","My mother *walks* ~across the road~ to the market.","แม่เดินข้ามถนนไปตลาด"],
+["Family & People / ครอบครัวและผู้คน","GPS route","ˌdʒiː piː ˈes ruːt","📍","เส้นทางจีพีเอส","The driver *follows* the GPS route to ~the destination~.","คนขับรถตามเส้นทางจีพีเอสไปยังจุดหมาย"],
+["Family & People / ครอบครัวและผู้คน","for directions","fə dəˈrekʃnz","🧭","เพื่อหาทิศทาง","People *use* maps for directions when traveling.","ผู้คนใช้แผนที่หาทางเมื่อเดินทาง"],
+["Family & People / ครอบครัวและผู้คน","following","ˈfɒləʊɪŋ","🪧","โดยตามป้าย","The student *walks* to the classroom following the signs.","นักเรียนเดินไปห้องเรียนโดยตามป้ายบอกทาง"],
+["You / คุณ","at the corner","æt ðə ˈkɔːnə","📐","ที่หัวมุม","You *turn* ~right at the corner~.","คุณเลี้ยวขวาที่หัวมุม"],
+["You / คุณ","cross the street","krɒs ðə striːt","🚸","ข้ามถนน","You *cross* the street ~at the crosswalk~.","คุณข้ามถนนที่ทางม้าลาย"],
+["You / คุณ","follow the signs","ˈfɒləʊ ðə saɪnz","🛫","ตามป้ายไป","You *follow* ~the signs to the airport~.","คุณตามป้ายไปสนามบิน"],
+["You / คุณ","the first right","ðə fɜːst raɪt","1️⃣","ขวาแรก","You *take* ~the first right after the bridge~.","คุณเลี้ยวขวาแรกหลังสะพาน"],
+["You / คุณ","across the bridge","əˈkrɒs ðə brɪdʒ","🌁","ข้ามสะพาน","You *walk* ~across the bridge~.","คุณเดินข้ามสะพาน"],
+["You / คุณ","down the hill","daʊn ðə hɪl","🏔️","ลงเนิน","You *go* ~down the hill~.","คุณเดินลงเนินไป"],
+["You / คุณ","to reach","tə riːtʃ","🎯","เพื่อไปให้ถึง","You *cross* the bridge to reach the park.","คุณข้ามสะพานเพื่อไปให้ถึงสวนสาธารณะ"],
+["You / คุณ","shopping mall","ˈʃɒpɪŋ mɔːl","🛍️","ห้างสรรพสินค้า","You *head* ~toward~ the shopping mall.","คุณมุ่งหน้าไปห้างสรรพสินค้า"],
+["You / คุณ","station entrance","ˈsteɪʃn ˈentrəns","🚇","ทางเข้าสถานี","You *walk* ~toward~ the station entrance.","คุณเดินไปทางทางเข้าสถานี"],
+["You / คุณ","along the river","əˈlɒŋ ðə ˈrɪvə","🏞️","ไปตามแม่น้ำ","You *drive* ~along the river~.","คุณขับรถไปตามแม่น้ำ"],
+["You / คุณ","through the city center","θruː ðə ˈsɪti ˈsentə","🏙️","ผ่านใจกลางเมือง","You *ride* ~through the city center~.","คุณขี่ผ่านใจกลางเมือง"],
+["You / คุณ","toward the highway","təˈwɔːd ðə ˈhaɪweɪ","🛣️","มุ่งหน้าไปทางทางหลวง","The sign *points* ~toward the highway~.","ป้ายชี้ไปทางทางหลวง"],
+["You / คุณ","continue toward","kənˈtɪnjuː təˈwɔːd","➡️","ต่อไปทาง","The street *continues* ~toward~ the market.","ถนนทอดต่อไปทางตลาด"],
+["Places & Locations / สถานที่","behind the park","bɪˈhaɪnd ðə pɑːk","🏛️","หลังสวนสาธารณะ","The museum *is* ~behind the park~.","พิพิธภัณฑ์อยู่หลังสวนสาธารณะ"],
+["Places & Locations / สถานที่","near the temple","nɪə ðə ˈtempl","🛕","ใกล้วัด","The school *is* located ~near the temple~.","โรงเรียนตั้งอยู่ใกล้วัด"],
+["Places & Locations / สถานที่","beside the bank","bɪˈsaɪd ðə bæŋk","💊","ข้างธนาคาร","The pharmacy *is* ~beside the bank~.","ร้านขายยาอยู่ข้างธนาคาร"],
+["Places & Locations / สถานที่","next to the stairs","nekst tə ðə steəz","🛗","ข้างบันได","The elevator *is* ~next to the stairs~.","ลิฟต์อยู่ข้างบันได"],
+["Places & Locations / สถานที่","next to the supermarket","nekst tə ðə ˈsuːpəmɑːkɪt","🛒","ข้างซูเปอร์มาร์เก็ต","The pharmacy *is* ~next to the supermarket~.","ร้านขายยาอยู่ข้างซูเปอร์มาร์เก็ต"],
+["Places & Locations / สถานที่","library","ˈlaɪbrəri","📖","ห้องสมุด","The hospital *is* ~across from~ the library.","โรงพยาบาลอยู่ตรงข้ามห้องสมุด"],
+["Places & Locations / สถานที่","between the café and the bank","bɪˈtwiːn ðə ˈkæfeɪ ənd ðə bæŋk","📚","ระหว่างร้านกาแฟกับธนาคาร","The bookstore *is* ~between the café and the bank~.","ร้านหนังสืออยู่ระหว่างร้านกาแฟกับธนาคาร"],
+["Places & Locations / สถานที่","in front of the museum","ɪn frʌnt əv ðə mjuˈziːəm","🚏","หน้าพิพิธภัณฑ์","The bus stop *is* ~in front of the museum~.","ป้ายรถเมล์อยู่หน้าพิพิธภัณฑ์"],
+["Places & Locations / สถานที่","airport","ˈeəpɔːt","✈️","สนามบิน","The hotel *is* ~near~ the airport.","โรงแรมอยู่ใกล้สนามบิน"],
+["Places & Locations / สถานที่","end of this road","end əv ðɪs rəʊd","🔚","สุดถนนเส้นนี้","The train station *is* ~at the end of this road~.","สถานีรถไฟอยู่สุดถนนเส้นนี้"],
+["Places & Locations / สถานที่","beside the river","bɪˈsaɪd ðə ˈrɪvə","🍴","ข้างแม่น้ำ","The restaurant *is* ~beside the river~.","ร้านอาหารอยู่ข้างแม่น้ำ"],
+["Places & Locations / สถานที่","leads to","liːdz tuː","🛬","นำไปสู่","This road *leads* ~to the airport~.","ถนนเส้นนี้นำไปสู่สนามบิน"],
+["Places & Locations / สถานที่","on the left side","ɒn ðə left saɪd","◀️","ทางด้านซ้าย","The entrance *is* ~on the left side~.","ทางเข้าอยู่ทางด้านซ้าย"],
+["Places & Locations / สถานที่","in front of the school","ɪn frʌnt əv ðə skuːl","🚸","หน้าโรงเรียน","The crosswalk *is* ~in front of the school~.","ทางม้าลายอยู่หน้าโรงเรียน"],
+["Places & Locations / สถานที่","at the intersection","æt ði ˌɪntəˈsekʃn","🚥","ที่สี่แยก","The traffic light *stands* ~at the intersection~.","ไฟจราจรตั้งอยู่ที่สี่แยก"],
+["Places & Locations / สถานที่","located on the right","ləʊˈkeɪtɪd ɒn ðə raɪt","▶️","ตั้งอยู่ทางขวา","The bank *is* located ~on the right side of the street~.","ธนาคารตั้งอยู่ทางด้านขวาของถนน"]
+];
+const P=["#ffd9e2","#d6ecff","#e2f5d3","#fff1c9","#e6dcff","#ffe0cc","#d3f3ee"];
+const cats=[...new Set(D.map(d=>d[0]))];
+const tabs=[];cats.forEach(c=>{const r=D.filter(d=>d[0]===c);for(let i=0;i<r.length;i+=25)tabs.push({n:c+(r.length>25?" "+(i/25+1):""),r:r.slice(i,i+25)})});
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class="v">$1</span>').replace(/~(.+?)~/g,'<span class="t">$1</span>');
+const plain=s=>s.replace(/[*~]/g,"");
+function say(txt,e){e&&e.stopPropagation();try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang="en-GB";u.rate=.85;const vs=speechSynthesis.getVoices(),v=vs.find(v=>/en-GB/i.test(v.lang)&&/(google|natural|premium|enhanced)/i.test(v.name))||vs.find(v=>/en-GB/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(x){}}
+function show(k){
+ document.getElementById("tabs").innerHTML=tabs.map((t,i)=>`<button class="tab${i===k?" on":""}" data-i="${i}">${t.n}</button>`).join("");
+ document.getElementById("grid").innerHTML=tabs[k].r.map((d,i)=>`<div class="card"><div class="in"><div class="face" style="background:${P[i%7]}"><div class="pic">${d[3]}</div><div class="w">${d[1]}</div><div class="ipa">/${d[2]}/</div><button class="spk" data-s="${i}" aria-label="Play">🔊</button></div><div class="face back" style="background:${P[(i+3)%7]}"><div class="th">${d[4]}</div><div class="en">${fmt(d[5])}</div><div class="tt">${d[6]}</div></div></div></div>`).join("");
+ document.getElementById("tb").innerHTML=tabs[k].r.map((d,i)=>`<tr><td>${i+1}</td><td><b>${d[1]}</b></td><td style="font-family:'Times New Roman',serif">/${d[2]}/</td><td class="th2">${d[4]}</td><td><button class="spk" data-s="${i}" aria-label="Play">🔊</button>${fmt(d[5])}</td><td class="th2">${d[6]}</td></tr>`).join("");
+ window.cur=k;
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".spk");
+ if(b){const d=tabs[cur].r[+b.dataset.s];say(b.closest(".face")?d[1]:plain(d[5]),e);return}
+ const t=e.target.closest(".tab");if(t){show(+t.dataset.i);return}
+ const c=e.target.closest(".card");if(c)c.classList.toggle("f");
+});
+show(0);
+</script></body></html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Telling Time Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8f5;--tx:#3b3b4f;--sf:#fff;--bd:#e6dfe8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}}
+:root[data-theme="dark"]{--bg:#1d1b24;--tx:#ece9f3;--sf:#2a2733;--bd:#3d384a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,'Segoe UI',Arial,sans-serif;padding:16px;max-width:980px;margin:auto}
+h1{font-size:1.4rem;text-align:center;margin:8px 0 2px}
+.sub{text-align:center;font-family:'Sarabun',sans-serif;opacity:.7;margin-bottom:14px;font-size:.9rem}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.tab{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:7px 14px;border-radius:20px;cursor:pointer;font:inherit}
+.tab.on{background:#cfd8ff;color:#2d3561;border-color:#b3c0ff;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{perspective:800px;height:190px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#33334a;box-shadow:0 2px 8px #0002;overflow:hidden}
+.back{transform:rotateY(180deg)}
+.pic{font-size:2.3rem;line-height:1}
+.w{font-family:Calibri,Arial,sans-serif;font-size:1.25rem;font-weight:700;margin-top:4px}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:1rem;opacity:.85}
+.spk{border:0;background:#ffffffaa;border-radius:50%;width:32px;height:32px;cursor:pointer;margin-top:6px;font-size:1rem}
+.th{font-family:'Sarabun',sans-serif;font-size:1.1rem;font-weight:700}
+.en{font-size:.88rem;margin-top:6px}.tt{font-family:'Sarabun',sans-serif;font-size:.8rem;margin-top:3px;opacity:.85}
+.v{color:#0b3fd1;font-weight:700}.t{color:#5a2d0c;font-weight:700}
+.wrap{overflow-x:auto;margin-top:22px}
+table{border-collapse:collapse;width:100%;min-width:640px;background:var(--sf);border-radius:12px}
+th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;font-size:.92rem}
+th{background:#e8e2f7;color:#33334a}
+td.th2{font-family:'Sarabun',sans-serif}
+td .spk{margin:0 6px 0 0;width:28px;height:28px;background:#e8e2f7}
+@media(max-width:560px){.grid{gap:8px}.card{height:175px}.w{font-size:1.05rem}.en{font-size:.78rem}}
+</style></head><body>
+<h1>⏰ Affirmative Sentences: Telling Time</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยค · กดปุ่ม 🔊 เพื่อฟังเสียง</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ไทย</th><th>Sentence</th><th>คำแปลประโยค</th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+// [category, word, IPA, emoji, thai word, sentence (*verb*, ~time~), thai sentence]
+const D=[
+["I / ฉัน","wake up","weɪk ʌp","😴","ตื่นนอน","I *wake up* at ~6:00 a.m. every morning~.","ฉันตื่นนอนตอน 6 โมงเช้าทุกเช้า"],
+["I / ฉัน","breakfast","ˈbrekfəst","🍳","อาหารเช้า","I *have* breakfast at ~7:00 a.m.~ before school.","ฉันกินอาหารเช้าตอน 7 โมงเช้าก่อนไปโรงเรียน"],
+["I / ฉัน","school","skuːl","🏫","โรงเรียน","I *go* to school at ~7:30 a.m. every weekday~.","ฉันไปโรงเรียนตอน 7 โมงครึ่งทุกวันธรรมดา"],
+["I / ฉัน","study","ˈstʌdi","📚","เรียน","I *study* English at ~4:00 p.m.~ after school.","ฉันเรียนภาษาอังกฤษตอน 4 โมงเย็นหลังเลิกเรียน"],
+["I / ฉัน","bed","bed","🛏️","เตียง","I *go* to bed at ~10:00 p.m. every night~.","ฉันเข้านอนตอน 4 ทุ่มทุกคืน"],
+["You / คุณ","start work","stɑːt wɜːk","💼","เริ่มงาน","You *start* work at ~8:00 a.m. every day~.","คุณเริ่มงานตอน 8 โมงเช้าทุกวัน"],
+["You / คุณ","lunch","lʌntʃ","🥪","อาหารกลางวัน","You *eat* lunch at ~noon~ with your friends.","คุณกินอาหารกลางวันตอนเที่ยงกับเพื่อน ๆ"],
+["You / คุณ","arrive","əˈraɪv","🏠","มาถึง","You *arrive* home at ~6:00 p.m.~ after work.","คุณถึงบ้านตอน 6 โมงเย็นหลังเลิกงาน"],
+["You / คุณ","exercise","ˈeksəsaɪz","🏃","ออกกำลังกาย","You *exercise* at ~5:30 p.m.~ in the park.","คุณออกกำลังกายตอน 5 โมงครึ่งในสวนสาธารณะ"],
+["You / คุณ","check","tʃek","🕒","ตรวจดู","You *check* the time ~every hour~ during work.","คุณดูเวลาทุกชั่วโมงระหว่างทำงาน"],
+["He / She","get up","ɡet ʌp","🌅","ลุกจากเตียง","He *gets up* at ~5:30 a.m.~ to prepare for work.","เขาตื่นตอน 5 โมงครึ่งเพื่อเตรียมตัวไปทำงาน"],
+["He / She","break","breɪk","☕","พัก","He *takes* a break at ~10:00 a.m. every morning~.","เขาพักตอน 10 โมงเช้าทุกเช้า"],
+["He / She","football","ˈfʊtbɔːl","⚽","ฟุตบอล","He *plays* football at ~4:30 p.m.~ with his friends.","เขาเล่นฟุตบอลตอน 4 โมงครึ่งกับเพื่อน ๆ"],
+["He / She","coffee","ˈkɒfi","🍵","กาแฟ","She *drinks* coffee at ~9:00 a.m.~ at work.","เธอดื่มกาแฟตอน 9 โมงเช้าที่ทำงาน"],
+["He / She","dinner","ˈdɪnə","🍲","อาหารเย็น","She *cooks* dinner at ~6:30 p.m.~ for her family.","เธอทำอาหารเย็นตอน 6 โมงครึ่งให้ครอบครัว"],
+["Things / สิ่งของ","clock","klɒk","🕰️","นาฬิกาแขวน","The clock *shows* the correct time.","นาฬิกาบอกเวลาที่ถูกต้อง"],
+["Things / สิ่งของ","alarm","əˈlɑːm","⏰","นาฬิกาปลุก","The alarm *rings* at ~7:00 a.m. every day~.","นาฬิกาปลุกดังตอน 7 โมงเช้าทุกวัน"],
+["Things / สิ่งของ","watch","wɒtʃ","⌚","นาฬิกาข้อมือ","The watch *displays* the time clearly.","นาฬิกาข้อมือแสดงเวลาได้ชัดเจน"],
+["Things / สิ่งของ","train","treɪn","🚆","รถไฟ","The train *arrives* at ~9:45 a.m.~","รถไฟมาถึงตอน 9 โมง 45 นาที"],
+["Things / สิ่งของ","shop","ʃɒp","🏪","ร้านค้า","The shop *opens* at ~9:00 a.m.~","ร้านเปิดตอน 9 โมงเช้า"],
+["Things / สิ่งของ","museum","mjuˈziːəm","🏛️","พิพิธภัณฑ์","The museum *closes* at ~4:30 p.m.~","พิพิธภัณฑ์ปิดตอน 4 โมงครึ่ง"],
+["We / They","meet","miːt","🤝","พบกัน","We *meet* at ~9:00 a.m.~ for our project.","เราพบกันตอน 9 โมงเช้าเพื่อทำโปรเจกต์"],
+["We / They","leave","liːv","🚪","ออกจาก","We *leave* home at ~7:15 a.m. every morning~.","เราออกจากบ้านตอน 7 โมง 15 ทุกเช้า"],
+["We / They","movie","ˈmuːvi","🎬","ภาพยนตร์","We *watch* movies ~at night on weekends~.","เราดูหนังตอนกลางคืนในวันหยุดสุดสัปดาห์"],
+["We / They","meeting","ˈmiːtɪŋ","📅","การประชุม","They *arrive* at ~10:00 a.m.~ for the meeting.","พวกเขามาถึงตอน 10 โมงเช้าเพื่อประชุม"],
+["We / They","practice","ˈpræktɪs","🏅","ฝึกซ้อม","They *practice* sports ~in the afternoon~.","พวกเขาฝึกซ้อมกีฬาตอนบ่าย"],
+["We / They","sleep","sliːp","💤","นอนหลับ","They *sleep* at ~11:00 p.m. every night~.","พวกเขานอนตอน 5 ทุ่มทุกคืน"],
+["Telling Time / บอกเวลา","half past","hɑːf pɑːst","🕣","ครึ่ง (หลัง…)","It *is* ~half past eight~.","ตอนนี้เป็นเวลา 8 โมงครึ่ง"],
+["Telling Time / บอกเวลา","quarter past","ˈkwɔːtə pɑːst","🕘","เลย…15 นาที","It *is* ~a quarter past nine~.","ตอนนี้เป็นเวลา 9 โมง 15 นาที"],
+["Telling Time / บอกเวลา","quarter to","ˈkwɔːtə tuː","🕤","อีก 15 นาที…","It *is* ~a quarter to ten~.","ตอนนี้เป็นเวลา 9 โมง 45 นาที"],
+["Telling Time / บอกเวลา","five past","faɪv pɑːst","🕚","เลย…5 นาที","It *is* ~five past eleven~.","ตอนนี้เป็นเวลา 11 โมง 5 นาที"],
+["Telling Time / บอกเวลา","ten to","ten tuː","🕛","อีก 10 นาที…","It *is* ~ten to twelve~.","ตอนนี้เป็นเวลา 11 โมง 50 นาที"],
+["Telling Time / บอกเวลา","noon","nuːn","☀️","เที่ยงวัน","Lunch *starts* at ~noon~.","มื้อกลางวันเริ่มตอนเที่ยง"],
+["Telling Time / บอกเวลา","twenty past","ˈtwenti pɑːst","🕖","เลย…20 นาที","It *is* ~twenty past seven~.","ตอนนี้เป็นเวลา 7 โมง 20 นาที"],
+["Telling Time / บอกเวลา","twenty-five to","ˈtwenti faɪv tuː","🕢","อีก 25 นาที…","It *is* ~twenty-five to eight~.","ตอนนี้เป็นเวลา 7 โมง 35 นาที"],
+["Telling Time / บอกเวลา","almost","ˈɔːlməʊst","🌙","เกือบ","It *is* ~almost midnight~.","ตอนนี้เกือบเที่ยงคืนแล้ว"],
+["Telling Time / บอกเวลา","exactly","ɪɡˈzæktli","🎯","ตรงเป๊ะ","It *is* ~exactly noon~.","ตอนนี้เที่ยงตรงพอดี"],
+["Family / ครอบครัว","father","ˈfɑːðə","👨","พ่อ","My father *goes* to work at ~7:00 a.m. every day~.","พ่อไปทำงานตอน 7 โมงเช้าทุกวัน"],
+["Family / ครอบครัว","mother","ˈmʌðə","👩","แม่","My mother *prepares* breakfast at ~6:30 a.m.~","แม่เตรียมอาหารเช้าตอน 6 โมงครึ่ง"],
+["Family / ครอบครัว","brother","ˈbrʌðə","👦","พี่/น้องชาย","My brother *plays* games at ~8:00 p.m.~","น้องชายเล่นเกมตอน 2 ทุ่ม"],
+["Family / ครอบครัว","sister","ˈsɪstə","👧","พี่/น้องสาว","My sister *does* homework at ~5:00 p.m.~","พี่สาวทำการบ้านตอน 5 โมงเย็น"],
+["Family / ครอบครัว","family","ˈfæməli","👨‍👩‍👧","ครอบครัว","My family *has* dinner at ~7:30 p.m.~ together.","ครอบครัวของฉันกินอาหารเย็นด้วยกันตอน 1 ทุ่มครึ่ง"],
+["Family / ครอบครัว","home","həʊm","🏡","บ้าน","My brother *gets* home at ~5:45 p.m.~","น้องชายถึงบ้านตอน 5 โมง 45 นาที"],
+["People / กลุ่มคน","students","ˈstjuːdnts","🧑‍🎓","นักเรียน","Students *begin* classes at ~8:30 a.m.~","นักเรียนเริ่มเรียนตอน 8 โมงครึ่ง"],
+["People / กลุ่มคน","teachers","ˈtiːtʃəz","👩‍🏫","ครู","Teachers *finish* teaching at ~4:00 p.m.~","ครูสอนเสร็จตอน 4 โมงเย็น"],
+["People / กลุ่มคน","workers","ˈwɜːkəz","👷","คนงาน","Workers *take* lunch breaks at ~noon~.","คนงานพักกลางวันตอนเที่ยง"],
+["People / กลุ่มคน","doctors","ˈdɒktəz","🧑‍⚕️","หมอ","Doctors *start* work ~early in the morning~.","หมอเริ่มงานแต่เช้าตรู่"],
+["People / กลุ่มคน","drivers","ˈdraɪvəz","🚗","คนขับรถ","Drivers *leave* home at ~6:00 a.m.~","คนขับรถออกจากบ้านตอน 6 โมงเช้า"],
+["People / กลุ่มคน","people","ˈpiːpl","👥","ผู้คน","People *check* the time ~every day~.","ผู้คนดูเวลาทุกวัน"],
+["People / กลุ่มคน","use","juːz","🕰️","ใช้","Many people *use* clocks to know the time.","หลายคนใช้นาฬิกาเพื่อดูเวลา"],
+["People / กลุ่มคน","everyone","ˈevriwʌn","🙌","ทุกคน","Everyone *has* schedules ~every day~.","ทุกคนมีตารางเวลาทุกวัน"],
+["People / กลุ่มคน","children","ˈtʃɪldrən","🧒","เด็ก ๆ","The children *play* after school at ~4:00 p.m.~","เด็ก ๆ เล่นหลังเลิกเรียนตอน 4 โมงเย็น"],
+["People / กลุ่มคน","teacher","ˈtiːtʃə","🧑‍🏫","ครู (คนเดียว)","The teacher *arrives* before class at ~7:50 a.m.~","ครูมาถึงก่อนเข้าเรียนตอน 7 โมง 50 นาที"],
+["Places & Events / สถานที่","bus","bʌs","🚌","รถเมล์","The bus *arrives* at ~8:45 a.m.~","รถเมล์มาถึงตอน 8 โมง 45 นาที"],
+["Places & Events / สถานที่","concert","ˈkɒnsət","🎤","คอนเสิร์ต","The concert *starts* at ~7:00 p.m.~","คอนเสิร์ตเริ่มตอน 1 ทุ่ม"],
+["Places & Events / สถานที่","game","ɡeɪm","🎮","เกม/การแข่งขัน","The game *kicks off* at ~8:00 p.m.~","เกมเริ่มตอน 2 ทุ่ม"],
+["Places & Events / สถานที่","exam","ɪɡˈzæm","📝","การสอบ","The exam *takes place* at ~10:00 a.m.~","การสอบจัดตอน 10 โมงเช้า"],
+["Places & Events / สถานที่","flight","flaɪt","✈️","เที่ยวบิน","The flight *departs* at ~11:45 a.m.~","เที่ยวบินออกตอน 11 โมง 45 นาที"],
+["Places & Events / สถานที่","plane","pleɪn","🛫","เครื่องบิน","The plane *takes off* at ~6:50 p.m.~","เครื่องบินขึ้นตอน 6 โมง 50 นาทีเย็น"],
+["Places & Events / สถานที่","library","ˈlaɪbrəri","📖","ห้องสมุด","The library *opens* at ~8:30 a.m.~","ห้องสมุดเปิดตอน 8 โมงครึ่ง"],
+["Places & Events / สถานที่","café","ˈkæfeɪ","🥐","ร้านกาแฟ","The café *opens* early at ~7:00 a.m.~","ร้านกาแฟเปิดเช้าตอน 7 โมง"],
+["Places & Events / สถานที่","match","mætʃ","🏟️","การแข่งขัน","The match *ends* at ~9:30 p.m.~","การแข่งขันจบตอน 3 ทุ่มครึ่ง"],
+["Places & Events / สถานที่","ceremony","ˈserəməni","🎊","พิธี","The ceremony *begins* at exactly ~10:00 a.m.~","พิธีเริ่มตอน 10 โมงเช้าตรง"],
+["Places & Events / สถานที่","office","ˈɒfɪs","🏢","สำนักงาน","The office *closes* at ~sunset~.","สำนักงานปิดตอนพระอาทิตย์ตก"],
+["Places & Events / สถานที่","sun","sʌn","🌅","ดวงอาทิตย์","The sun *rises* at about ~6:00 a.m.~","ดวงอาทิตย์ขึ้นราว 6 โมงเช้า"],
+["Places & Events / สถานที่","bank","bæŋk","🏦","ธนาคาร","The bank *closes* at ~3:30 p.m.~","ธนาคารปิดตอน 3 โมงครึ่ง"],
+["Places & Events / สถานที่","restaurant","ˈrestrɒnt","🍽️","ร้านอาหาร","The restaurant *opens* at ~11:00 a.m.~","ร้านอาหารเปิดตอน 11 โมง"],
+["Places & Events / สถานที่","supermarket","ˈsuːpəmɑːkɪt","🛒","ซูเปอร์มาร์เก็ต","The supermarket *closes* at ~10:00 p.m.~","ซูเปอร์มาร์เก็ตปิดตอน 4 ทุ่ม"],
+["Places & Events / สถานที่","lesson","ˈlesn","📘","บทเรียน","The lesson *lasts* for ~45 minutes~.","บทเรียนใช้เวลา 45 นาที"],
+["Places & Events / สถานที่","bell","bel","🔔","ระฆัง","The bell *rings* at ~the end of the class~.","กริ่งดังเมื่อจบคาบเรียน"],
+["Places & Events / สถานที่","timer","ˈtaɪmə","⏲️","ตัวจับเวลา","The timer *counts down* from ~ten minutes~.","ตัวจับเวลานับถอยหลังจาก 10 นาที"],
+["Places & Events / สถานที่","fireworks","ˈfaɪəwɜːks","🎆","ดอกไม้ไฟ","The fireworks *begin* at ~midnight~.","ดอกไม้ไฟเริ่มตอนเที่ยงคืน"],
+["He / She","TV","ˌtiː ˈviː","📺","ทีวี","He *watches* TV at ~8:00 p.m.~ after dinner.","เขาดูทีวีตอน 2 ทุ่มหลังอาหารเย็น"],
+["He / She","bedtime","ˈbedtaɪm","🌜","เวลาเข้านอน","He *reads* books ~before bedtime every night~.","เขาอ่านหนังสือก่อนนอนทุกคืน"],
+["He / She","finish","ˈfɪnɪʃ","✅","เสร็จ","She *finishes* work at ~5:00 p.m. every day~.","เธอเลิกงานตอน 5 โมงเย็นทุกวัน"],
+["He / She","shopping","ˈʃɒpɪŋ","🛍️","ซื้อของ","She *goes* shopping on ~Saturday morning~.","เธอไปซื้อของเช้าวันเสาร์"],
+["We / They","together","təˈɡeðə","👫","ด้วยกัน","We *have* dinner at ~7:00 p.m.~ together.","เรากินอาหารเย็นด้วยกันตอน 1 ทุ่ม"],
+["We / They","travel","ˈtrævl","🧳","เดินทาง","We *travel* during ~holidays every year~.","เราเดินทางท่องเที่ยวช่วงวันหยุดทุกปี"],
+["We / They","work","wɜːk","🏭","งาน","They *leave* work at ~5:30 p.m. every day~.","พวกเขาเลิกงานตอน 5 โมงครึ่งทุกวัน"],
+["We / They","after school","ˈɑːftə skuːl","🎒","หลังเลิกเรียน","They *study* together ~after school~.","พวกเขาเรียนด้วยกันหลังเลิกเรียน"],
+["Things / สิ่งของ","digital clock","ˈdɪdʒɪtl klɒk","🔢","นาฬิกาดิจิทัล","The digital clock *changes* ~every minute~.","นาฬิกาดิจิทัลเปลี่ยนตัวเลขทุกนาที"],
+["Things / สิ่งของ","old clock","əʊld klɒk","🕰️","นาฬิกาเก่า","The old clock *stops* at ~midnight~.","นาฬิกาเก่าหยุดเดินตอนเที่ยงคืน"],
+["Things / สิ่งของ","station","ˈsteɪʃn","🚉","สถานี","The train *leaves* at ~8:15 a.m.~","รถไฟออกตอน 8 โมง 15 นาที"],
+["Telling Time / บอกเวลา","ten past","ten pɑːst","🕐","เลย…10 นาที","It *is* ~ten past one~.","ตอนนี้เป็นเวลาบ่ายโมง 10 นาที"],
+["Telling Time / บอกเวลา","twenty to","ˈtwenti tuː","🕕","อีก 20 นาที…","It *is* ~twenty to six~.","ตอนนี้เป็นเวลา 5 โมง 40 นาที"],
+["Telling Time / บอกเวลา","just after","dʒʌst ˈɑːftə","🕔","เลย…ไปนิดหน่อย","It *is* ~just after five~.","ตอนนี้เลย 5 โมงมานิดหน่อย"],
+["Telling Time / บอกเวลา","o’clock","əˈklɒk","🕖","นาฬิกา (ตรง)","It *is* ~almost six o’clock~.","ตอนนี้เกือบ 6 โมงตรงแล้ว"],
+["Telling Time / บอกเวลา","lunchtime","ˈlʌntʃtaɪm","🍱","เวลาพักเที่ยง","We *meet* at ~lunchtime~.","เราพบกันตอนพักเที่ยง"],
+["Places & Events / สถานที่","begin","bɪˈɡɪn","🎞️","เริ่ม","The movie *begins* at ~1:30 p.m.~","หนังเริ่มตอนบ่ายโมงครึ่ง"],
+["Places & Events / สถานที่","class","klɑːs","🏫","คาบเรียน","Our class *ends* at ~3:00 p.m.~","คาบเรียนของเราจบตอน 3 โมงเย็น"],
+["Places & Events / สถานที่","served","sɜːvd","🍛","เสิร์ฟ","Dinner *is served* at ~6:30 p.m.~","อาหารเย็นเสิร์ฟตอน 6 โมงครึ่ง"],
+["Places & Events / สถานที่","land","lænd","🛬","ลงจอด","The flight *lands* at ~2:20 p.m.~","เที่ยวบินลงจอดตอนบ่าย 2 โมง 20 นาที"],
+["Places & Events / สถานที่","end","end","🏁","จบ","The meeting *ends* at ~4:30 p.m.~","การประชุมจบตอน 4 โมงครึ่ง"],
+["Places & Events / สถานที่","final exam","ˈfaɪnl ɪɡˈzæm","🎓","สอบปลายภาค","The final exam *begins* at ~1:00 p.m.~","สอบปลายภาคเริ่มตอนบ่ายโมง"],
+["Places & Events / สถานที่","first","fɜːst","1️⃣","แรก","The first lesson *begins* at ~8:00 a.m.~","คาบแรกเริ่มตอน 8 โมงเช้า"],
+["Places & Events / สถานที่","every","ˈevri","🔁","ทุก ๆ","The bus *comes* ~every 20 minutes~.","รถเมล์มาทุก 20 นาที"],
+["Places & Events / สถานที่","daily","ˈdeɪli","📆","ทุกวัน","The coffee shop *opens* at ~6:00 a.m. daily~.","ร้านกาแฟเปิดตอน 6 โมงเช้าทุกวัน"],
+["Places & Events / สถานที่","Monday","ˈmʌndeɪ","📅","วันจันทร์","My English class *starts* at ~8:30 a.m. every Monday~.","คาบภาษาอังกฤษเริ่มตอน 8 โมงครึ่งทุกวันจันทร์"],
+["Places & Events / สถานที่","weekdays","ˈwiːkdeɪz","🗓️","วันธรรมดา","The office *opens* at ~8:00 a.m. on weekdays~.","สำนักงานเปิดตอน 8 โมงเช้าในวันธรรมดา"],
+["Places & Events / สถานที่","return","rɪˈtɜːn","↩️","กลับ","The children *return* home at ~4:00 p.m.~","เด็ก ๆ กลับบ้านตอน 4 โมงเย็น"],
+["Places & Events / สถานที่","set","set","🌇","ตก (ดวงอาทิตย์)","The sun *sets* at about ~6:30 p.m.~","ดวงอาทิตย์ตกราว 6 โมงครึ่ง"],
+["Places & Events / สถานที่","sunrise","ˈsʌnraɪz","🌄","พระอาทิตย์ขึ้น","The ceremony *takes place* at ~sunrise~.","พิธีจัดตอนพระอาทิตย์ขึ้น"],
+["Duration & Until / ระยะเวลา","minutes","ˈmɪnɪts","⏳","นาที","The break *lasts* for ~15 minutes~.","เวลาพักยาว 15 นาที"],
+["Duration & Until / ระยะเวลา","show","ʃəʊ","🎭","การแสดง","The show *begins* in ~five minutes~.","การแสดงจะเริ่มในอีก 5 นาที"],
+["Duration & Until / ระยะเวลา","guests","ɡests","🧑‍🤝‍🧑","แขก","The guests *arrive* on time at ~6:00 p.m.~","แขกมาถึงตรงเวลาตอน 6 โมงเย็น"],
+["Duration & Until / ระยะเวลา","wait","weɪt","⏱️","รอ","Everyone *waits* until ~8:00 a.m.~","ทุกคนรอจนถึง 8 โมงเช้า"],
+["Duration & Until / ระยะเวลา","continue","kənˈtɪnjuː","➡️","ดำเนินต่อไป","The meeting *continues* until ~noon~.","การประชุมดำเนินไปจนถึงเที่ยง"],
+["Duration & Until / ระยะเวลา","stay open","steɪ ˈəʊpən","🔓","เปิดอยู่","The shop *stays* open until ~9:00 p.m.~","ร้านเปิดอยู่จนถึง 3 ทุ่ม"],
+["Duration & Until / ระยะเวลา","remain","rɪˈmeɪn","📚","คงอยู่","The library *remains* open until ~8:00 p.m.~","ห้องสมุดเปิดอยู่จนถึง 2 ทุ่ม"],
+["Duration & Until / ระยะเวลา","right now","raɪt naʊ","▶️","ตอนนี้เลย","The program *starts* ~right now~.","รายการเริ่มตอนนี้เลย"],
+["Duration & Until / ระยะเวลา","fast","fɑːst","⏩","เร็ว","The clock *is* ~five minutes~ fast.","นาฬิกาเร็วไป 5 นาที"],
+["Duration & Until / ระยะเวลา","slow","sləʊ","🐢","ช้า","My watch *is* ~two minutes~ slow.","นาฬิกาของฉันช้าไป 2 นาที"]
+];
+const P=["#ffd9e2","#d6ecff","#e2f5d3","#fff1c9","#e6dcff","#ffe0cc","#d3f3ee"];
+const cats=[...new Set(D.map(d=>d[0]))];
+const tabs=[];cats.forEach(c=>{const r=D.filter(d=>d[0]===c);for(let i=0;i<r.length;i+=25)tabs.push({n:c+(r.length>25?" "+(i/25+1):""),r:r.slice(i,i+25)})});
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class="v">$1</span>').replace(/~(.+?)~/g,'<span class="t">$1</span>');
+const plain=s=>s.replace(/[*~]/g,"");
+function say(txt,e){e&&e.stopPropagation();try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang="en-GB";u.rate=.85;const vs=speechSynthesis.getVoices(),v=vs.find(v=>/en-GB/i.test(v.lang)&&/(google|natural|premium|enhanced)/i.test(v.name))||vs.find(v=>/en-GB/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(x){}}
+function show(k){
+ document.getElementById("tabs").innerHTML=tabs.map((t,i)=>`<button class="tab${i===k?" on":""}" data-i="${i}">${t.n}</button>`).join("");
+ document.getElementById("grid").innerHTML=tabs[k].r.map((d,i)=>`<div class="card"><div class="in"><div class="face" style="background:${P[i%7]}"><div class="pic">${d[3]}</div><div class="w">${d[1]}</div><div class="ipa">/${d[2]}/</div><button class="spk" data-s="${i}" aria-label="Play">🔊</button></div><div class="face back" style="background:${P[(i+3)%7]}"><div class="th">${d[4]}</div><div class="en">${fmt(d[5])}</div><div class="tt">${d[6]}</div></div></div></div>`).join("");
+ document.getElementById("tb").innerHTML=tabs[k].r.map((d,i)=>`<tr><td>${i+1}</td><td><b>${d[1]}</b></td><td style="font-family:'Times New Roman',serif">/${d[2]}/</td><td class="th2">${d[4]}</td><td><button class="spk" data-s="${i}" aria-label="Play">🔊</button>${fmt(d[5])}</td><td class="th2">${d[6]}</td></tr>`).join("");
+ window.cur=k;
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest(".spk");
+ if(b){const d=tabs[cur].r[+b.dataset.s];say(b.closest(".face")?d[1]:plain(d[5]),e);return}
+ const t=e.target.closest(".tab");if(t){show(+t.dataset.i);return}
+ const c=e.target.closest(".card");if(c)c.classList.toggle("f");
+});
+show(0);
+</script></body></html>
