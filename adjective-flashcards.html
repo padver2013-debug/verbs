@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Descriptive Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.25rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#c2185b;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Type of Adjective: Descriptive Adjectives</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Size & Appearance":`tall|tɔːl|🦒|สูง|The _giraffe_ is *tall*.|ยีราฟตัวสูง
+short|ʃɔːt|📏|เตี้ย, สั้น|He is *short*, but very strong.|เขาเตี้ยแต่แข็งแรงมาก
+big|bɪɡ|🐘|ใหญ่|I want a *big* slice of _cake_.|ฉันอยากได้เค้กชิ้นใหญ่
+small|smɔːl|🐭|เล็ก|That _dog_ is *small* but loud.|หมาตัวนั้นเล็กแต่เสียงดัง
+heavy|ˈhevi|🏋️|หนัก|This _box_ is *heavy* and hard to carry.|กล่องนี้หนักและยกยาก
+light|laɪt|🪶|เบา|This _bag_ is *light* and easy to carry.|กระเป๋าใบนี้เบาและถือง่าย
+long|lɒŋ|🚂|ยาว|That _river_ is very *long*.|แม่น้ำสายนั้นยาวมาก
+wide|waɪd|🛣️|กว้าง|The _river_ is very *wide* here.|แม่น้ำตรงนี้กว้างมาก
+narrow|ˈnærəʊ|🚧|แคบ|This _path_ is too *narrow* for cars.|ทางนี้แคบเกินไปสำหรับรถ
+deep|diːp|🌊|ลึก|Be careful! The _water_ is *deep*.|ระวัง! น้ำลึก
+thin|θɪn|🎋|ผอม, บาง|She is *thin* because she exercises every day.|เธอผอมเพราะออกกำลังกายทุกวัน
+fat|fæt|🐷|อ้วน|My _cat_ is very *fat*.|แมวของฉันอ้วนมาก
+tiny|ˈtaɪni|🐜|เล็กจิ๋ว|Look at that *tiny* _kitten_!|ดูลูกแมวตัวจิ๋วนั่นสิ!
+beautiful|ˈbjuːtɪfl|🌸|สวยงาม|She is a *beautiful* _girl_.|เธอเป็นเด็กผู้หญิงที่สวยมาก
+pretty|ˈprɪti|👗|สวย, น่ารัก|She is very *pretty* in that _dress_.|เธอสวยมากในชุดนั้น
+ugly|ˈʌɡli|👹|น่าเกลียด|That _building_ looks *ugly*.|ตึกนั้นดูน่าเกลียด
+cute|kjuːt|🐣|น่ารัก|Your _baby_ is so *cute*!|ลูกของคุณน่ารักจัง!
+bright|braɪt|☀️|สว่าง, สดใส|The _sun_ is very *bright* today.|วันนี้แดดจ้ามาก
+dark|dɑːk|🌑|มืด|It’s too *dark* to see anything.|มืดเกินกว่าจะมองเห็นอะไร
+clean|kliːn|🧽|สะอาด|Please keep your _hands_ *clean*.|กรุณารักษามือให้สะอาด
+dirty|ˈdɜːti|🧦|สกปรก|His _clothes_ were *dirty* after working outside.|เสื้อผ้าของเขาสกปรกหลังทำงานข้างนอก
+neat|niːt|📐|เรียบร้อย|His _desk_ is always *neat*.|โต๊ะของเขาเรียบร้อยเสมอ
+messy|ˈmesi|🗑️|รก, เลอะเทอะ|Your _room_ is so *messy*!|ห้องของคุณรกมาก!
+tidy|ˈtaɪdi|🧹|เป็นระเบียบ|Please keep your _desk_ *tidy*.|กรุณาเก็บโต๊ะให้เป็นระเบียบ
+empty|ˈempti|🫙|ว่างเปล่า|The _house_ is *empty* now.|บ้านว่างเปล่าแล้วตอนนี้
+crowded|ˈkraʊdɪd|🚇|แออัด|The _train_ is *crowded* during rush hour.|รถไฟแออัดในช่วงชั่วโมงเร่งด่วน
+old|əʊld|👵|แก่, เก่า|My _grandmother_ is *old* but healthy.|ยายของฉันแก่แต่แข็งแรง
+young|jʌŋ|👶|อ่อนวัย, เยาว์|The _child_ is *young* and curious.|เด็กคนนี้ยังเล็กและช่างสงสัย
+fast|fɑːst|🐆|เร็ว|_Cheetahs_ are *fast* _animals_.|เสือชีตาห์เป็นสัตว์ที่วิ่งเร็ว
+slow|sləʊ|🐢|ช้า|_Turtles_ are *slow*.|เต่าเคลื่อนที่ช้า
+cheap|tʃiːp|🏷️|ถูก|This _shirt_ was very *cheap* but good quality.|เสื้อตัวนี้ถูกมากแต่คุณภาพดี
+expensive|ɪkˈspensɪv|💎|แพง|This _car_ is too *expensive*.|รถคันนี้แพงเกินไป
+fresh|freʃ|🥬|สด, สดใหม่|I bought some *fresh* _vegetables_.|ฉันซื้อผักสดมา`,
+"Feelings":`happy|ˈhæpi|😊|มีความสุข|I feel *happy* today.|วันนี้ฉันรู้สึกมีความสุข
+sad|sæd|😢|เศร้า|She looks *sad*.|เธอดูเศร้า
+tired|ˈtaɪəd|😫|เหนื่อย|I feel so *tired* after _work_.|ฉันรู้สึกเหนื่อยมากหลังเลิกงาน
+nervous|ˈnɜːvəs|😰|ประหม่า, กังวล|I’m feeling a bit *nervous* about the _exam_.|ฉันรู้สึกกังวลนิดหน่อยเรื่องการสอบ
+angry|ˈæŋɡri|😠|โกรธ|He gets *angry* when _people_ lie.|เขาโกรธเมื่อคนโกหก
+lonely|ˈləʊnli|😔|เหงา|He felt *lonely* after moving away.|เขารู้สึกเหงาหลังย้ายไปไกล
+proud|praʊd|🏆|ภูมิใจ|She is *proud* of her _success_.|เธอภูมิใจในความสำเร็จของเธอ
+jealous|ˈdʒeləs|😒|อิจฉา|He gets *jealous* easily.|เขาขี้อิจฉา
+shy|ʃaɪ|🙈|ขี้อาย|He’s too *shy* to talk to _strangers_.|เขาขี้อายเกินกว่าจะคุยกับคนแปลกหน้า
+boring|ˈbɔːrɪŋ|🥱|น่าเบื่อ|This _movie_ is really *boring*.|หนังเรื่องนี้น่าเบื่อมาก
+exciting|ɪkˈsaɪtɪŋ|🤩|น่าตื่นเต้น|That _movie_ was *exciting*!|หนังเรื่องนั้นน่าตื่นเต้นมาก!
+hopeful|ˈhəʊpfl|🌈|มีความหวัง|I’m still *hopeful* things will get better.|ฉันยังมีความหวังว่าทุกอย่างจะดีขึ้น
+calm|kɑːm|🧘|สงบ|The _sea_ is very *calm* today.|วันนี้ทะเลสงบมาก
+ashamed|əˈʃeɪmd|😳|ละอายใจ|She felt *ashamed* of her _mistake_.|เธอรู้สึกละอายใจกับความผิดพลาด
+grumpy|ˈɡrʌmpi|😾|ขี้หงุดหงิด|_Grandpa_ is *grumpy* when he’s tired.|คุณตาขี้หงุดหงิดเวลาเหนื่อย
+moody|ˈmuːdi|🌦️|อารมณ์แปรปรวน|He’s always *moody* in the _morning_.|เขาอารมณ์เสียทุกเช้า
+energetic|ˌenəˈdʒetɪk|⚡|กระตือรือร้น|The _kids_ are very *energetic* today.|วันนี้เด็กๆ พลังเยอะมาก
+joyful|ˈdʒɔɪfl|🎉|รื่นเริง|It was a *joyful* _celebration_.|เป็นงานเฉลิมฉลองที่รื่นเริง
+delightful|dɪˈlaɪtfl|🌇|น่ายินดี, น่าประทับใจ|What a *delightful* _evening_!|ช่างเป็นยามเย็นที่น่ายินดีจริงๆ!
+comfortable|ˈkʌmftəbl|🛋️|สบาย|This _sofa_ is very *comfortable*.|โซฟาตัวนี้นั่งสบายมาก
+uncomfortable|ʌnˈkʌmftəbl|🪑|ไม่สบาย, อึดอัด|The _bed_ was *uncomfortable* and hard.|เตียงนอนไม่สบายและแข็ง
+weak|wiːk|🥴|อ่อนแอ|After the _workout_, I felt *weak*.|หลังออกกำลังกายฉันรู้สึกอ่อนแรง
+healthy|ˈhelθi|🥗|แข็งแรง, สุขภาพดี|My _grandmother_ is old but *healthy*.|ยายของฉันแก่แต่สุขภาพแข็งแรง
+busy|ˈbɪzi|📅|ยุ่ง|My _schedule_ is *busy* today.|วันนี้ตารางงานของฉันยุ่งมาก
+curious|ˈkjʊəriəs|🔍|อยากรู้อยากเห็น|_Children_ are naturally *curious*.|เด็กๆ มักช่างสงสัยโดยธรรมชาติ`,
+"Senses":`hot|hɒt|☕|ร้อน|The _coffee_ is too *hot* to drink.|กาแฟร้อนเกินกว่าจะดื่ม
+cold|kəʊld|🧊|เย็น, หนาว|This _water_ is *cold*.|น้ำนี้เย็น
+soft|sɒft|🧸|นุ่ม|The _baby_ is *soft* and cuddly.|เด็กทารกนุ่มนิ่มน่ากอด
+hard|hɑːd|🪨|แข็ง, ยาก|This _table_ is made of *hard* _wood_.|โต๊ะนี้ทำจากไม้เนื้อแข็ง
+sweet|swiːt|🍬|หวาน|I like *sweet* _desserts_.|ฉันชอบของหวาน
+sour|ˈsaʊə|🍋|เปรี้ยว|_Lemons_ are very *sour*.|มะนาวเปรี้ยวมาก
+bitter|ˈbɪtə|🍫|ขม|The _medicine_ tastes *bitter*.|ยามีรสขม
+spicy|ˈspaɪsi|🌶️|เผ็ด|Thai _food_ is often very *spicy*.|อาหารไทยมักเผ็ดมาก
+loud|laʊd|📢|เสียงดัง|The _music_ is too *loud*.|เพลงเสียงดังเกินไป
+quiet|ˈkwaɪət|🤫|เงียบ|I like *quiet* _places_.|ฉันชอบสถานที่เงียบๆ
+smooth|smuːð|🧼|เรียบ, ลื่น|The _floor_ feels *smooth* after cleaning.|พื้นเรียบเนียนหลังทำความสะอาด
+rough|rʌf|🌵|หยาบ, ขรุขระ|The _rock_ surface is *rough*.|พื้นผิวหินขรุขระ
+wet|wet|🌧️|เปียก|Don’t go outside—it’s *wet* and raining.|อย่าออกไปข้างนอก ฝนตกและเปียก
+dry|draɪ|👕|แห้ง|My _clothes_ are *dry* now.|เสื้อผ้าของฉันแห้งแล้ว
+sharp|ʃɑːp|🔪|คม|Be careful, that _knife_ is very *sharp*.|ระวัง มีดเล่มนั้นคมมาก
+dull|dʌl|✏️|ทื่อ, ไม่คม|The _pencil_ is too *dull* to write with.|ดินสอทื่อเกินกว่าจะเขียน
+noisy|ˈnɔɪzi|🔊|เสียงดังวุ่นวาย|That _street_ is very *noisy*.|ถนนสายนั้นเสียงดังมาก
+delicious|dɪˈlɪʃəs|😋|อร่อย|This _cake_ is *delicious*.|เค้กชิ้นนี้อร่อยมาก
+greasy|ˈɡriːsi|🍗|มันเยิ้ม|This fried _chicken_ is too *greasy*.|ไก่ทอดนี้มันเกินไป`,
+"Personality":`kind|kaɪnd|🐶|ใจดี|She is always *kind* to _animals_.|เธอใจดีต่อสัตว์เสมอ
+polite|pəˈlaɪt|🙏|สุภาพ|Always be *polite* to _elders_.|จงสุภาพกับผู้ใหญ่เสมอ
+brave|breɪv|🦁|กล้าหาญ|The _soldier_ was *brave* in the _battle_.|ทหารกล้าหาญในการรบ
+clever|ˈklevə|🧠|ฉลาด|That _girl_ is very *clever*.|เด็กผู้หญิงคนนั้นฉลาดมาก
+lazy|ˈleɪzi|😴|ขี้เกียจ|Don’t be *lazy*, finish your _homework_.|อย่าขี้เกียจ ทำการบ้านให้เสร็จ
+rude|ruːd|😤|หยาบคาย|It’s *rude* to interrupt someone.|การขัดจังหวะผู้อื่นเป็นเรื่องไม่สุภาพ
+honest|ˈɒnɪst|🤝|ซื่อสัตย์|We need an *honest* _answer_.|เราต้องการคำตอบที่ซื่อสัตย์
+generous|ˈdʒenərəs|🎁|ใจกว้าง, ใจบุญ|My _aunt_ is very *generous*.|ป้าของฉันใจกว้างมาก
+friendly|ˈfrendli|👋|เป็นมิตร|Our _neighbors_ are very *friendly*.|เพื่อนบ้านของเราเป็นมิตรมาก
+funny|ˈfʌni|😂|ตลก|He told a *funny* _joke_.|เขาเล่ามุกตลก
+strict|strɪkt|👩‍🏫|เข้มงวด|The _teacher_ is very *strict*.|ครูเข้มงวดมาก
+stubborn|ˈstʌbən|🐂|ดื้อรั้น|She’s too *stubborn* to apologize.|เธอดื้อเกินกว่าจะขอโทษ
+serious|ˈsɪəriəs|🧐|จริงจัง|She is very *serious* about her _work_.|เธอจริงจังกับงานมาก
+smart|smɑːt|🎓|ฉลาด|You are a *smart* _student_.|คุณเป็นนักเรียนที่ฉลาด
+silly|ˈsɪli|🤪|โง่ๆ, ไร้สาระ|Don’t be *silly* in _class_.|อย่าทำตัวไร้สาระในห้องเรียน
+careful|ˈkeəfl|⚠️|ระมัดระวัง|Be *careful* when crossing the _street_.|ระวังเวลาข้ามถนน
+careless|ˈkeələs|📱|ประมาท|She was *careless* and lost her _phone_.|เธอประมาทและทำโทรศัพท์หาย
+gentle|ˈdʒentl|🕊️|อ่อนโยน|He spoke in a *gentle* _voice_.|เขาพูดด้วยน้ำเสียงอ่อนโยน
+rich|rɪtʃ|💰|รวย|He is very *rich* and owns three _houses_.|เขารวยมากและมีบ้านสามหลัง
+poor|pɔː|🪙|ยากจน|Many _people_ in the _village_ are *poor*.|ชาวบ้านหลายคนในหมู่บ้านยากจน
+dangerous|ˈdeɪndʒərəs|🐍|อันตราย|Don’t touch the _snake_. It’s *dangerous*.|อย่าแตะงู มันอันตราย
+famous|ˈfeɪməs|🌟|มีชื่อเสียง|She is a *famous* _actress_.|เธอเป็นนักแสดงที่มีชื่อเสียง
+helpful|ˈhelpfl|🗺️|เป็นประโยชน์|That _map_ was very *helpful*.|แผนที่นั้นมีประโยชน์มาก
+harmful|ˈhɑːmfl|🚬|เป็นอันตราย|Smoking is *harmful* to your _health_.|การสูบบุหรี่เป็นอันตรายต่อสุขภาพ
+confident|ˈkɒnfɪdənt|💪|มั่นใจ|You should be more *confident*.|คุณควรมั่นใจมากขึ้น
+loyal|ˈlɔɪəl|🐕|ภักดี|_Dogs_ are known to be *loyal* _animals_.|สุนัขขึ้นชื่อว่าเป็นสัตว์ที่ซื่อสัตย์
+faithful|ˈfeɪθfl|🦮|จงรักภักดี|_Dogs_ are known to be *faithful* _animals_.|สุนัขขึ้นชื่อว่าเป็นสัตว์ที่จงรักภักดี
+thoughtful|ˈθɔːtfl|💝|ช่างคิด, รอบคอบ|That was a very *thoughtful* _gift_.|นั่นเป็นของขวัญที่คิดมาอย่างดี
+creative|kriˈeɪtɪv|🎨|สร้างสรรค์|He is a *creative* _artist_.|เขาเป็นศิลปินที่สร้างสรรค์
+talkative|ˈtɔːkətɪv|🗣️|ช่างพูด|My _sister_ is very *talkative*.|พี่สาวของฉันช่างพูดมาก
+mean|miːn|😈|ใจร้าย|Don’t be *mean* to your _friends_.|อย่าใจร้ายกับเพื่อนๆ
+outgoing|ˌaʊtˈɡəʊɪŋ|🥳|เปิดเผย, ชอบเข้าสังคม|She’s an *outgoing* and fun _person_.|เธอเป็นคนเปิดเผยและสนุกสนาน
+charming|ˈtʃɑːmɪŋ|😁|มีเสน่ห์|He has a *charming* _smile_.|เขามีรอยยิ้มที่มีเสน่ห์
+mature|məˈtʃʊə|🧑‍💼|เป็นผู้ใหญ่|She’s very *mature* for her _age_.|เธอเป็นผู้ใหญ่มากสำหรับวัยของเธอ
+naughty|ˈnɔːti|🙊|ซน, ดื้อ|That _boy_ is very *naughty* in _class_.|เด็กชายคนนั้นซนมากในห้องเรียน
+obedient|əˈbiːdiənt|🐕‍🦺|เชื่อฟัง|The _dog_ is very *obedient*.|สุนัขตัวนี้เชื่อฟังมาก
+patient|ˈpeɪʃnt|⏳|อดทน|Be *patient*—your _turn_ will come.|อดทนหน่อย เดี๋ยวก็ถึงคิวคุณ
+responsible|rɪˈspɒnsəbl|📋|รับผิดชอบ|He is a *responsible* _leader_.|เขาเป็นผู้นำที่มีความรับผิดชอบ
+sensitive|ˈsensətɪv|🥺|อ่อนไหว|She’s too *sensitive*, don’t tease her.|เธออ่อนไหวเกินไป อย่าแกล้งเธอ
+wild|waɪld|🦓|ป่า, ดุร้าย|The *wild* _animals_ live in the _forest_.|สัตว์ป่าอาศัยอยู่ในป่า
+strong|strɒŋ|🦸|แข็งแรง|He is short, but very *strong*.|เขาเตี้ยแต่แข็งแรงมาก
+interesting|ˈɪntrəstɪŋ|💡|น่าสนใจ|Your _idea_ sounds *interesting*.|ไอเดียของคุณฟังดูน่าสนใจ`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ voice=v.find(x=>/natural|online|google/i.test(x.name))||v.find(x=>/daniel|serena|kate|libby|sonia/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>
