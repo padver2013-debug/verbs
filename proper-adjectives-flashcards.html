@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Proper Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:170px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#c2185b;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Type of Adjective: Proper Adjectives</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Asia & Middle East":`Chinese restaurant|ˌtʃaɪˈniːz ˈrestrɒnt|🥡|ร้านอาหารจีน|We went to a *Chinese* _restaurant_.|เราไปร้านอาหารจีน
+Thai food|taɪ fuːd|🍜|อาหารไทย|I enjoy *Thai* _food_.|ฉันชอบอาหารไทย
+Japanese car|ˌdʒæpəˈniːz kɑː|🚙|รถญี่ปุ่น|He drives a *Japanese* _car_.|เขาขับรถญี่ปุ่น
+Indian curry|ˈɪndiən ˈkʌri|🍛|แกงกะหรี่อินเดีย|I love spicy *Indian* _curry_.|ฉันชอบแกงกะหรี่อินเดียรสเผ็ด
+Korean dramas|kəˈriːən ˈdrɑːməz|📺|ซีรีส์เกาหลี|I watch many *Korean* _dramas_.|ฉันดูซีรีส์เกาหลีหลายเรื่อง
+Vietnamese spring rolls|ˌvjetnəˈmiːz sprɪŋ rəʊlz|🌯|ปอเปี๊ยะเวียดนาม|I ordered some *Vietnamese* _spring rolls_.|ฉันสั่งปอเปี๊ยะเวียดนาม
+Turkish bath|ˈtɜːkɪʃ bɑːθ|🛁|โรงอาบน้ำตุรกี|They visited a *Turkish* _bath_.|พวกเขาไปเยี่ยมชมโรงอาบน้ำแบบตุรกี
+Israeli politics|ɪzˈreɪli ˈpɒlətɪks|🗳️|การเมืองอิสราเอล|He studied *Israeli* _politics_.|เขาศึกษาการเมืองอิสราเอล
+Palestinian cuisine|ˌpælɪˈstɪniən kwɪˈziːn|🥙|อาหารปาเลสไตน์|*Palestinian* _cuisine_ is very flavorful.|อาหารปาเลสไตน์มีรสชาติจัดจ้านมาก
+Malaysian food|məˈleɪʒn fuːd|🍲|อาหารมาเลเซีย|*Malaysian* _food_ is spicy and diverse.|อาหารมาเลเซียเผ็ดและหลากหลาย
+Filipino TV shows|ˌfɪlɪˈpiːnəʊ ˌtiː ˈviː ʃəʊz|📡|รายการทีวีฟิลิปปินส์|I like watching *Filipino* _TV shows_.|ฉันชอบดูรายการทีวีฟิลิปปินส์
+Iranian history|ɪˈreɪniən ˈhɪstri|📜|ประวัติศาสตร์อิหร่าน|We learned about *Iranian* _history_.|เราเรียนเรื่องประวัติศาสตร์อิหร่าน
+Syrian bakery|ˈsɪriən ˈbeɪkəri|🥐|ร้านเบเกอรีซีเรีย|There is a famous *Syrian* _bakery_ downtown.|มีร้านเบเกอรีซีเรียชื่อดังในตัวเมือง
+Lebanese hummus|ˌlebəˈniːz ˈhʊməs|🧆|ฮัมมุสเลบานอน|I had some *Lebanese* _hummus_.|ฉันกินฮัมมุสเลบานอน
+Iraqi culture|ɪˈrɑːki ˈkʌltʃə|🕌|วัฒนธรรมอิรัก|She wrote a paper on *Iraqi* _culture_.|เธอเขียนรายงานเรื่องวัฒนธรรมอิรัก
+Afghan artwork|ˈæfɡæn ˈɑːtwɜːk|🖼️|งานศิลปะอัฟกัน|The museum had *Afghan* _artwork_.|พิพิธภัณฑ์มีงานศิลปะอัฟกัน
+Syrian food|ˈsɪriən fuːd|🍽️|อาหารซีเรีย|*Syrian* _food_ is very flavorful.|อาหารซีเรียมีรสชาติจัดจ้านมาก`,
+"Europe":`French|frentʃ|🥖|ภาษาฝรั่งเศส|She speaks *French* fluently.|เธอพูดภาษาฝรั่งเศสได้คล่อง
+British humor|ˈbrɪtɪʃ ˈhjuːmə|🎭|อารมณ์ขันอังกฤษ|*British* _humor_ is unique.|อารมณ์ขันแบบอังกฤษมีเอกลักษณ์
+German cars|ˈdʒɜːmən kɑːz|🏎️|รถเยอรมัน|*German* _cars_ are popular worldwide.|รถเยอรมันได้รับความนิยมทั่วโลก
+Italian pizza|ɪˈtæliən ˈpiːtsə|🍕|พิซซ่าอิตาเลียน|We had a delicious *Italian* _pizza_.|เรากินพิซซ่าอิตาเลียนแสนอร่อย
+Spanish music|ˈspænɪʃ ˈmjuːzɪk|💃|ดนตรีสเปน|He listens to *Spanish* _music_.|เขาฟังเพลงสเปน
+Russian museum|ˈrʌʃn mjuːˈziːəm|🏛️|พิพิธภัณฑ์รัสเซีย|They visited a *Russian* _museum_.|พวกเขาไปเยี่ยมชมพิพิธภัณฑ์รัสเซีย
+Greek history|ɡriːk ˈhɪstri|🏺|ประวัติศาสตร์กรีก|We studied *Greek* _history_ in class.|เราเรียนประวัติศาสตร์กรีกในห้องเรียน
+Scandinavian style|ˌskændɪˈneɪviən staɪl|🪑|สไตล์สแกนดิเนเวีย|The design has a *Scandinavian* _style_.|งานออกแบบนี้มีสไตล์สแกนดิเนเวีย
+Dutch cheese|dʌtʃ tʃiːz|🧀|ชีสดัตช์|We bought *Dutch* _cheese_.|เราซื้อชีสดัตช์
+Portuguese culture|ˌpɔːtʃuˈɡiːz ˈkʌltʃə|🏰|วัฒนธรรมโปรตุเกส|She learned *Portuguese* _culture_ in school.|เธอเรียนรู้วัฒนธรรมโปรตุเกสที่โรงเรียน
+Scottish kilt|ˈskɒtɪʃ kɪlt|🥁|กิลต์สกอตแลนด์|He wore a *Scottish* _kilt_.|เขาสวมกิลต์สก็อตแลนด์
+Irish folk music|ˈaɪrɪʃ fəʊk ˈmjuːzɪk|☘️|เพลงพื้นบ้านไอริช|I enjoy *Irish* _folk music_.|ฉันชอบเพลงพื้นบ้านไอริช
+Finnish people|ˈfɪnɪʃ ˈpiːpl|🌲|ผู้คนฟินแลนด์|*Finnish* _people_ love nature.|ชาวฟินแลนด์รักธรรมชาติ
+Swiss watch|swɪs wɒtʃ|⌚|นาฬิกาสวิส|He has a *Swiss* _watch_.|เขามีนาฬิกาสวิส
+Icelandic myths|aɪsˈlændɪk mɪθs|🌋|ตำนานไอซ์แลนด์|I read a book about *Icelandic* _myths_.|ฉันอ่านหนังสือเกี่ยวกับตำนานไอซ์แลนด์
+Austrian music|ˈɒstriən ˈmjuːzɪk|🎻|ดนตรีออสเตรีย|*Austrian* _music_ is part of classical tradition.|ดนตรีออสเตรียเป็นส่วนหนึ่งของประเพณีคลาสสิก
+Belgian chocolates|ˈbeldʒən ˈtʃɒklɪts|🍫|ช็อกโกแลตเบลเยียม|We tried some *Belgian* _chocolates_.|เราลองช็อกโกแลตเบลเยียม
+Czech beer|tʃek bɪə|🍺|เบียร์เช็ก|The *Czech* _beer_ was excellent.|เบียร์เช็กยอดเยี่ยมมาก`,
+"Americas & Oceania":`American movies|əˈmerɪkən ˈmuːviz|🎬|ภาพยนตร์อเมริกัน|I love *American* _movies_.|ฉันรักหนังอเมริกัน
+Canadian passport|kəˈneɪdiən ˈpɑːspɔːt|🛂|หนังสือเดินทางแคนาดา|She has a *Canadian* _passport_.|เธอมีหนังสือเดินทางแคนาดา
+Australian tourist|ɒˈstreɪliən ˈtʊərɪst|🦘|นักท่องเที่ยวออสเตรเลีย|I met an *Australian* _tourist_ today.|วันนี้ฉันพบนักท่องเที่ยวชาวออสเตรเลีย
+Brazilian festival|brəˈzɪliən ˈfestɪvl|🎉|เทศกาลบราซิล|We enjoyed the *Brazilian* _festival_.|เราสนุกกับเทศกาลบราซิล
+Mexican restaurant|ˈmeksɪkən ˈrestrɒnt|🌮|ร้านอาหารเม็กซิกัน|Let’s eat at that *Mexican* _restaurant_.|ไปกินที่ร้านอาหารเม็กซิกันร้านนั้นกันเถอะ
+Colombian coffee|kəˈlɒmbiən ˈkɒfi|☕|กาแฟโคลอมเบีย|*Colombian* _coffee_ is world-famous.|กาแฟโคลอมเบียมีชื่อเสียงระดับโลก
+Argentinian dance|ˌɑːdʒənˈtɪniən dɑːns|🪘|การเต้นรำอาร์เจนตินา|They performed a traditional *Argentinian* _dance_.|พวกเขาแสดงการเต้นรำอาร์เจนตินาแบบดั้งเดิม
+Chilean landscape|ˈtʃɪliən ˈlændskeɪp|🏔️|ทิวทัศน์ชิลี|The *Chilean* _landscape_ is breathtaking.|ทิวทัศน์ชิลีงดงามตระการตา
+Cuban jazz|ˈkjuːbən dʒæz|🎷|แจ๊สคิวบา|We listened to *Cuban* _jazz_.|เราฟังแจ๊สคิวบา
+Peruvian food|pəˈruːviən fuːd|🥔|อาหารเปรู|*Peruvian* _food_ is getting popular.|อาหารเปรูกำลังได้รับความนิยม`,
+"Africa":`African culture|ˈæfrɪkən ˈkʌltʃə|🌍|วัฒนธรรมแอฟริกัน|The *African* _culture_ is rich and diverse.|วัฒนธรรมแอฟริกันอุดมสมบูรณ์และหลากหลาย
+Egyptian mythology book|ɪˈdʒɪpʃn mɪˈθɒlədʒi bʊk|🔺|หนังสือเทพนิยายอียิปต์|I’m reading an *Egyptian* _mythology book_.|ฉันกำลังอ่านหนังสือเทพนิยายอียิปต์
+Moroccan couscous|məˈrɒkən ˈkʊskʊs|🥘|คูสคูสโมร็อกโก|I tried *Moroccan* _couscous_ last night.|เมื่อคืนฉันลองคูสคูสโมร็อกโก
+Nigerian music|naɪˈdʒɪəriən ˈmjuːzɪk|🥁|ดนตรีไนจีเรีย|*Nigerian* _music_ is energetic and lively.|ดนตรีไนจีเรียมีพลังและมีชีวิตชีวา
+Ethiopian coffee|ˌiːθiˈəʊpiən ˈkɒfi|🫘|กาแฟเอธิโอเปีย|He ordered *Ethiopian* _coffee_.|เขาสั่งกาแฟเอธิโอเปีย`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ voice=v.find(x=>/natural|online|google/i.test(x.name))||v.find(x=>/daniel|serena|kate|libby|sonia/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>

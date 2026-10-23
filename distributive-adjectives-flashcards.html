@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Distributive Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:170px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#c2185b;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Type of Adjective: Distributive Adjectives</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Each (แต่ละ)":`each child|iːtʃ tʃaɪld|🧒|แต่ละเด็ก|*Each* _child_ received a gift on their birthday.|เด็กแต่ละคนได้รับของขวัญในวันเกิด
+each books|iːtʃ bʊks|📚|แต่ละหนังสือ|*Each* of the _books_ on the shelf is interesting.|หนังสือแต่ละเล่มบนชั้นน่าสนใจ
+each team member|iːtʃ tiːm ˈmembə|🧑‍🤝‍🧑|แต่ละสมาชิกทีม|*Each* _team member_ has a specific role.|สมาชิกทีมแต่ละคนมีบทบาทเฉพาะ
+each student|iːtʃ ˈstjuːdnt|🎒|แต่ละนักเรียน|The teacher gave *each* _student_ a book.|ครูให้หนังสือนักเรียนแต่ละคน
+each player|iːtʃ ˈpleɪə|🏃|แต่ละผู้เล่น|*Each* _player_ contributed to the victory.|ผู้เล่นแต่ละคนมีส่วนช่วยให้ชนะ
+each sentence|iːtʃ ˈsentəns|✍️|แต่ละประโยค|*Each* _sentence_ in the essay is important.|แต่ละประโยคในเรียงความสำคัญ
+each participant|iːtʃ pɑːˈtɪsɪpənt|🙌|แต่ละผู้เข้าร่วม|*Each* _participant_ received a certificate.|ผู้เข้าร่วมแต่ละคนได้รับประกาศนียบัตร
+each day|iːtʃ deɪ|📆|แต่ละวัน|*Each* _day_ brings new challenges.|แต่ละวันนำความท้าทายใหม่มา
+each assignment|iːtʃ əˈsaɪnmənt|📋|แต่ละงาน|The students worked hard on *each* _assignment_.|นักเรียนตั้งใจทำงานแต่ละชิ้น
+each family member|iːtʃ ˈfæməli ˈmembə|👨‍👩‍👧|แต่ละสมาชิกในครอบครัว|*Each* _family member_ helped prepare the meal.|สมาชิกในครอบครัวแต่ละคนช่วยเตรียมอาหาร
+each employee|iːtʃ ɪmˈplɔɪiː|👔|แต่ละพนักงาน|*Each* _employee_ has a unique skill.|พนักงานแต่ละคนมีทักษะเฉพาะตัว
+each flower|iːtʃ ˈflaʊə|🌼|แต่ละดอกไม้|*Each* _flower_ in the garden was beautifully blooming.|ดอกไม้แต่ละดอกในสวนบานสวยงาม
+each student|iːtʃ ˈstjuːdnt|🎒|แต่ละนักเรียน|The teacher praised *each* _student_ for their effort.|ครูชมนักเรียนแต่ละคนที่พยายาม
+each country|iːtʃ ˈkʌntri|🗺️|แต่ละประเทศ|*Each* _country_ has its own culture.|แต่ละประเทศมีวัฒนธรรมของตนเอง
+each participant|iːtʃ pɑːˈtɪsɪpənt|🙌|แต่ละผู้เข้าร่วม|The rules apply to *each* _participant_.|กฎใช้กับผู้เข้าร่วมแต่ละคน
+each player|iːtʃ ˈpleɪə|🏃|แต่ละผู้เล่น|The coach talked to *each* _player_ individually.|โค้ชคุยกับผู้เล่นแต่ละคนเป็นรายบุคคล`,
+"Every (ทุก)":`every morning|ˈevri ˈmɔːnɪŋ|🌅|ทุกตอนเช้า|*Every* _morning_, I go for a jog.|ทุกเช้าฉันไปวิ่งจ๊อกกิ้ง
+every student|ˈevri ˈstjuːdnt|🎒|ทุกนักเรียน|*Every* _student_ must wear a uniform.|นักเรียนทุกคนต้องใส่เครื่องแบบ
+every flower|ˈevri ˈflaʊə|🌼|ทุกดอกไม้|*Every* _flower_ in the garden is blooming.|ดอกไม้ทุกดอกในสวนกำลังบาน
+every child|ˈevri tʃaɪld|🧒|ทุกเด็ก|*Every* _child_ deserves a good education.|เด็กทุกคนสมควรได้รับการศึกษาที่ดี
+every day|ˈevri deɪ|📆|ทุกวัน|*Every* _day_ is a new opportunity.|ทุกวันคือโอกาสใหม่
+every part|ˈevri pɑːt|⚙️|ทุกส่วน|*Every* _part_ of the machine must be checked.|ต้องตรวจทุกส่วนของเครื่องจักร
+every house|ˈevri haʊs|🏡|ทุกบ้าน|*Every* _house_ in the neighborhood has a garden.|ทุกบ้านในละแวกนี้มีสวน
+every player|ˈevri ˈpleɪə|🏃|ทุกผู้เล่น|*Every* _player_ must follow the rules.|ผู้เล่นทุกคนต้องปฏิบัติตามกฎ
+every visitor|ˈevri ˈvɪzɪtə|🧳|ทุกผู้มาเยือน|*Every* _visitor_ received a welcome gift.|ผู้มาเยือนทุกคนได้รับของขวัญต้อนรับ
+every student|ˈevri ˈstjuːdnt|🎒|ทุกนักเรียน|*Every* _student_ needs a laptop for the course.|นักเรียนทุกคนต้องมีแล็ปท็อปสำหรับคอร์สนี้
+every worker|ˈevri ˈwɜːkə|👷|ทุกคนงาน|*Every* _worker_ must wear safety equipment.|คนงานทุกคนต้องสวมอุปกรณ์ความปลอดภัย
+every evening|ˈevri ˈiːvnɪŋ|🌆|ทุกตอนเย็น|*Every* _evening_, the family gathers for dinner.|ทุกเย็นครอบครัวมารวมตัวกันทานอาหารเย็น
+every corner|ˈevri ˈkɔːnə|🏙️|ทุกมุม|*Every* _corner_ of the city has something interesting.|ทุกมุมของเมืองมีสิ่งน่าสนใจ
+every member|ˈevri ˈmembə|🧑‍💼|ทุกสมาชิก|*Every* _member_ of the team contributed to the win.|สมาชิกทุกคนในทีมมีส่วนช่วยให้ชนะ
+every day|ˈevri deɪ|📆|ทุกวัน|*Every* _day_ offers a new opportunity to learn.|ทุกวันมีโอกาสใหม่ให้เรียนรู้
+every lesson|ˈevri ˈlesn|📖|ทุกบทเรียน|*Every* _lesson_ is important for the final exam.|ทุกบทเรียนสำคัญสำหรับสอบปลายภาค`,
+"Either (อย่างใดอย่างหนึ่ง)":`either road|ˈaɪðə rəʊd|🛣️|ถนนใดก็ได้ (จากสอง)|You can take *either* _road_ to reach the city.|คุณไปถนนสายไหนก็ถึงเมือง
+either option|ˈaɪðə ˈɒpʃn|🔀|ตัวเลือกใดก็ได้ (จากสอง)|*Either* _option_ is fine with me.|ตัวเลือกไหนฉันก็โอเค
+either candidate|ˈaɪðə ˈkændɪdət|🗳️|ผู้สมัครใดก็ได้ (จากสอง)|*Either* _candidate_ will be a good choice.|ผู้สมัครคนไหนก็เป็นตัวเลือกที่ดี
+either umbrella|ˈaɪðə ʌmˈbrelə|☂️|ร่มใดก็ได้ (จากสอง)|Take *either* _umbrella_; both are fine.|เอาร่มคันไหนก็ได้ ใช้ได้ทั้งคู่
+either shirt|ˈaɪðə ʃɜːt|👕|เสื้อใดก็ได้ (จากสอง)|You can wear *either* _shirt_; both look good.|ใส่เสื้อตัวไหนก็ได้ ดูดีทั้งคู่
+either way|ˈaɪðə weɪ|🧭|ทางใดก็ได้ (จากสอง)|*Either* _way_ is fine with me.|ทางไหนฉันก็โอเค
+either answer|ˈaɪðə ˈɑːnsə|📝|คำตอบใดก็ได้ (จากสอง)|*Either* _answer_ could be correct.|คำตอบไหนก็อาจถูก
+either Monday|ˈaɪðə ˈmʌndeɪ|📅|วันจันทร์ใดก็ได้ (จากสอง)|You may come on *either* _Monday_ or Tuesday.|คุณมาวันจันทร์หรือวันอังคารก็ได้
+either phone|ˈaɪðə fəʊn|📱|โทรศัพท์ใดก็ได้ (จากสอง)|*Either* _phone_ will work for the meeting.|โทรศัพท์เครื่องไหนก็ใช้ประชุมได้
+either route|ˈaɪðə ruːt|🗺️|เส้นทางใดก็ได้ (จากสอง)|Take *either* _route_; both lead to the museum.|ไปเส้นทางไหนก็ได้ ไปพิพิธภัณฑ์ได้ทั้งคู่
+either candidate|ˈaɪðə ˈkændɪdət|🗳️|ผู้สมัครใดก็ได้ (จากสอง)|*Either* _candidate_ would make a good leader.|ผู้สมัครคนไหนก็เป็นผู้นำที่ดีได้
+either chair|ˈaɪðə tʃeə|🪑|เก้าอี้ใดก็ได้ (จากสอง)|You can sit in *either* _chair_; both are comfortable.|นั่งเก้าอี้ตัวไหนก็ได้ สบายทั้งคู่
+either answer|ˈaɪðə ˈɑːnsə|📝|คำตอบใดก็ได้ (จากสอง)|*Either* _answer_ is acceptable.|คำตอบไหนก็ยอมรับได้
+either option|ˈaɪðə ˈɒpʃn|🔀|ตัวเลือกใดก็ได้ (จากสอง)|*Either* _option_ will work for the project.|ตัวเลือกไหนก็ใช้กับโปรเจกต์ได้
+either direction|ˈaɪðə dəˈrekʃn|➡️|ทิศทางใดก็ได้ (จากสอง)|*Either* _direction_ will lead you to the park.|ทิศทางไหนก็พาคุณไปสวนได้
+either dessert|ˈaɪðə dɪˈzɜːt|🍨|ของหวานใดก็ได้ (จากสอง)|You may choose *either* _dessert_ after dinner.|คุณเลือกของหวานอย่างไหนก็ได้หลังอาหารเย็น`,
+"Neither (ไม่ทั้งสอง)":`neither answers|ˈnaɪðə ˈɑːnsəz|✅|ไม่มีคำตอบใดเลย|*Neither* of the _answers_ is correct.|ไม่มีคำตอบใดถูกเลย
+neither dog|ˈnaɪðə dɒɡ|🐕|ไม่มีสุนัขใดเลย|*Neither* _dog_ is allowed in the park.|ไม่อนุญาตให้สุนัขตัวใดเข้าสวน
+neither coffee|ˈnaɪðə ˈkɒfi|☕|ไม่มีกาแฟใดเลย|I want *neither* _coffee_ nor tea.|ฉันไม่เอาทั้งกาแฟและชา
+neither answer|ˈnaɪðə ˈɑːnsə|📝|ไม่มีคำตอบใดเลย|*Neither* _answer_ seemed convincing.|ไม่มีคำตอบใดน่าเชื่อถือ
+neither time|ˈnaɪðə taɪm|⏳|ไม่มีเวลาใดเลย|I have *neither* _time_ nor money to travel now.|ตอนนี้ฉันไม่มีทั้งเวลาและเงินไปเที่ยว
+neither path|ˈnaɪðə pɑːθ|🥾|ไม่มีเส้นทางใดเลย|*Neither* _path_ leads to the destination.|ไม่มีเส้นทางใดนำไปสู่จุดหมาย
+neither option|ˈnaɪðə ˈɒpʃn|🔀|ไม่มีตัวเลือกใดเลย|*Neither* _option_ seems suitable.|ไม่มีตัวเลือกใดดูเหมาะสม
+neither student|ˈnaɪðə ˈstjuːdnt|🎒|ไม่มีนักเรียนใดเลย|*Neither* _student_ passed the difficult exam.|ไม่มีนักเรียนคนใดสอบผ่านข้อสอบยาก
+neither time|ˈnaɪðə taɪm|⏳|ไม่มีเวลาใดเลย|I have *neither* the _time_ nor the skills to do it.|ฉันไม่มีทั้งเวลาและทักษะที่จะทำ
+neither answers|ˈnaɪðə ˈɑːnsəz|✅|ไม่มีคำตอบใดเลย|*Neither* of the _answers_ was accepted.|ไม่มีคำตอบใดถูกยอมรับ
+neither road|ˈnaɪðə rəʊd|🛣️|ไม่มีถนนใดเลย|*Neither* _road_ is safe during the storm.|ไม่มีถนนสายใดปลอดภัยในช่วงพายุ
+neither candidate|ˈnaɪðə ˈkændɪdət|🗳️|ไม่มีผู้สมัครใดเลย|*Neither* _candidate_ met the qualifications.|ไม่มีผู้สมัครคนใดมีคุณสมบัติตรงตามเกณฑ์
+neither choice|ˈnaɪðə tʃɔɪs|✅|ไม่มีทางเลือกใดเลย|*Neither* _choice_ seems good to me.|ฉันว่าไม่มีทางเลือกไหนดี
+neither dog|ˈnaɪðə dɒɡ|🐕|ไม่มีสุนัขใดเลย|*Neither* _dog_ is allowed inside the house.|ไม่อนุญาตให้สุนัขตัวใดเข้าบ้าน
+neither tea|ˈnaɪðə tiː|🍵|ไม่มีชาใดเลย|I want *neither* _tea_ nor coffee.|ฉันไม่เอาทั้งชาและกาแฟ
+neither option|ˈnaɪðə ˈɒpʃn|🔀|ไม่มีตัวเลือกใดเลย|*Neither* _option_ satisfies my needs.|ไม่มีตัวเลือกใดตอบโจทย์ฉัน`,
+"Any (ใดก็ได้)":`any color|ˈeni ˈkʌlə|🎨|สีใดก็ได้|You can choose *any* _color_ you like.|คุณเลือกสีไหนก็ได้ที่ชอบ
+any chance|ˈeni tʃɑːns|🌦️|โอกาสใดก็ได้|Is there *any* _chance_ of rain today?|วันนี้มีโอกาสฝนตกไหม?
+any questions|ˈeni ˈkwestʃənz|❓|คำถามใดก็ได้|Do you have *any* _questions_?|คุณมีคำถามไหม?
+any country|ˈeni ˈkʌntri|🗺️|ประเทศใดก็ได้|You can visit *any* _country_ you want.|คุณไปประเทศไหนก็ได้ที่ต้องการ
+any book|ˈeni bʊk|📕|หนังสือใดก็ได้|Take *any* _book_ from the shelf.|หยิบหนังสือเล่มไหนก็ได้จากชั้น
+any suggestions|ˈeni səˈdʒestʃənz|💬|ข้อเสนอแนะใดก็ได้|Do you have *any* _suggestions_ for improvement?|คุณมีข้อเสนอแนะเพื่อปรับปรุงไหม?
+any fruit|ˈeni fruːt|🍓|ผลไม้ใดก็ได้|You can pick *any* _fruit_ from the basket.|คุณเลือกผลไม้อะไรก็ได้จากตะกร้า
+any water|ˈeni ˈwɔːtə|💧|น้ำใดก็ได้|Is there *any* _water_ left in the bottle?|ในขวดมีน้ำเหลืออยู่ไหม?
+any help|ˈeni help|🤝|ความช่วยเหลือใดก็ได้|Do you want *any* _help_ with your homework?|คุณต้องการความช่วยเหลือเรื่องการบ้านไหม?
+any time|ˈeni taɪm|⏳|เวลาใดก็ได้|You can come at *any* _time_ that suits you.|คุณมาเวลาไหนก็ได้ที่สะดวก
+any student|ˈeni ˈstjuːdnt|🎒|นักเรียนใดก็ได้|*Any* _student_ can join the club.|นักเรียนคนไหนก็เข้าชมรมได้
+any route|ˈeni ruːt|🗺️|เส้นทางใดก็ได้|Take *any* _route_ you prefer.|ไปเส้นทางไหนก็ได้ที่คุณชอบ
+any idea|ˈeni aɪˈdɪə|💭|ความคิดใดก็ได้|Do you have *any* _idea_ where he went?|คุณพอรู้ไหมว่าเขาไปไหน?
+any books|ˈeni bʊks|📚|หนังสือใดก็ได้|You can borrow *any* of my _books_.|คุณยืมหนังสือเล่มไหนของฉันก็ได้
+any food|ˈeni fuːd|🍱|อาหารใดก็ได้|Is there *any* _food_ left in the fridge?|ในตู้เย็นมีอาหารเหลืออยู่ไหม?
+any member|ˈeni ˈmembə|🧑‍💼|สมาชิกใดก็ได้|*Any* _member_ can propose new ideas.|สมาชิกคนไหนก็เสนอความคิดใหม่ได้
+any questions|ˈeni ˈkwestʃənz|❓|คำถามใดก็ได้|Feel free to ask *any* _questions_.|ถามคำถามอะไรก็ได้ตามสบาย`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ voice=v.find(x=>/natural|online|google/i.test(x.name))||v.find(x=>/daniel|serena|kate|libby|sonia/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>

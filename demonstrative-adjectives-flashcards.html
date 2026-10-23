@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Demonstrative Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:170px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#c2185b;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Type of Adjective: Demonstrative Adjectives</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"This (เอกพจน์ ใกล้)":`this pen|ðɪs pen|🖊️|ปากกาด้ามนี้|*This* _pen_ writes smoothly.|ปากกาด้ามนี้เขียนลื่น
+this song|ðɪs sɒŋ|🎵|เพลงนี้|I like *this* _song_.|ฉันชอบเพลงนี้
+this room|ðɪs ruːm|🚪|ห้องนี้|*This* _room_ is too small.|ห้องนี้เล็กเกินไป
+this jacket|ðɪs ˈdʒækɪt|🧥|เสื้อแจ็กเก็ตตัวนี้|*This* _jacket_ is warm.|เสื้อแจ็กเก็ตตัวนี้อุ่น
+this cake|ðɪs keɪk|🎂|เค้กชิ้นนี้|I made *this* _cake_ for you.|ฉันทำเค้กชิ้นนี้ให้คุณ
+this question|ðɪs ˈkwestʃən|❓|คำถามข้อนี้|*This* _question_ is difficult.|คำถามข้อนี้ยาก
+this movie|ðɪs ˈmuːvi|🎬|หนังเรื่องนี้|*This* _movie_ is boring.|หนังเรื่องนี้น่าเบื่อ
+this|ðɪs|✋|สิ่งนี้, อันนี้|Can you hold *this* for a second?|ช่วยถืออันนี้แป๊บหนึ่งได้ไหม
+this coffee|ðɪs ˈkɒfi|☕|กาแฟแก้วนี้|I drink *this* _coffee_ every _morning_.|ฉันดื่มกาแฟแก้วนี้ทุกเช้า
+this bag|ðɪs bæɡ|🎒|กระเป๋าใบนี้|*This* _bag_ belongs to my _sister_.|กระเป๋าใบนี้เป็นของพี่สาวฉัน
+this phone|ðɪs fəʊn|📱|โทรศัพท์เครื่องนี้|I love *this* _phone_.|ฉันรักโทรศัพท์เครื่องนี้
+this city|ðɪs ˈsɪti|🏙️|เมืองนี้|*This* _city_ is very busy.|เมืองนี้วุ่นวายมาก
+this book|ðɪs bʊk|📘|หนังสือเล่มนี้|*This* _book_ is easy to read.|หนังสือเล่มนี้อ่านง่าย`,
+"That (เอกพจน์ ไกล)":`that car|ðæt kɑː|🚗|รถคันนั้น|Is *that* your _car_?|นั่นรถของคุณใช่ไหม?
+that story|ðæt ˈstɔːri|📖|เรื่องราวนั้น|I remember *that* _story_.|ฉันจำเรื่องราวนั้นได้
+that window|ðæt ˈwɪndəʊ|🪟|หน้าต่างบานนั้น|Please close *that* _window_.|กรุณาปิดหน้าต่างบานนั้น
+that man|ðæt mæn|🧔|ผู้ชายคนนั้น|I don’t trust *that* _man_.|ฉันไม่ไว้ใจผู้ชายคนนั้น
+that bird|ðæt bɜːd|🐦|นกตัวนั้น|Look at *that* _bird_!|ดูนกตัวนั้นสิ!
+that book|ðæt bʊk|📕|หนังสือเล่มนั้น|Can you bring me *that* _book_?|ช่วยหยิบหนังสือเล่มนั้นมาให้ฉันได้ไหม?
+that decision|ðæt dɪˈsɪʒn|⚖️|การตัดสินใจนั้น|I don’t agree with *that* _decision_.|ฉันไม่เห็นด้วยกับการตัดสินใจนั้น
+that box|ðæt bɒks|📦|กล่องใบนั้น|What’s inside *that* _box_?|ในกล่องใบนั้นมีอะไร?
+that dog|ðæt dɒɡ|🐕|หมาตัวนั้น|*That* _dog_ is very friendly.|หมาตัวนั้นเป็นมิตรมาก
+that building|ðæt ˈbɪldɪŋ|🏢|ตึกหลังนั้น|*That* _building_ is the tallest in _town_.|ตึกหลังนั้นสูงที่สุดในเมือง
+that shop|ðæt ʃɒp|🏪|ร้านนั้น|I often buy things at *that* _shop_.|ฉันมักซื้อของที่ร้านนั้น
+that tree|ðæt triː|🌳|ต้นไม้ต้นนั้น|We sat under *that* _tree_.|เรานั่งอยู่ใต้ต้นไม้ต้นนั้น
+that song|ðæt sɒŋ|🎶|เพลงนั้น|Do you know *that* _song_?|คุณรู้จักเพลงนั้นไหม?`,
+"These (พหูพจน์ ใกล้)":`these apples|ðiːz ˈæplz|🍎|แอปเปิลเหล่านี้|*These* _apples_ are fresh.|แอปเปิลเหล่านี้สดใหม่
+these students|ðiːz ˈstjuːdnts|🧑‍🎓|นักเรียนเหล่านี้|*These* _students_ are very polite.|นักเรียนเหล่านี้สุภาพมาก
+these shoes|ðiːz ʃuːz|👟|รองเท้าคู่นี้|I’ll take *these* _shoes_.|ฉันเอารองเท้าคู่นี้
+these flowers|ðiːz ˈflaʊəz|💐|ดอกไม้เหล่านี้|*These* _flowers_ smell lovely.|ดอกไม้เหล่านี้หอมน่ารัก
+these books|ðiːz bʊks|📚|หนังสือเหล่านี้|Have you read *these* _books_?|คุณเคยอ่านหนังสือเหล่านี้ไหม?
+these toys|ðiːz tɔɪz|🧸|ของเล่นเหล่านี้|*These* _toys_ are for the _kids_.|ของเล่นเหล่านี้สำหรับเด็กๆ
+these glasses|ðiːz ˈɡlɑːsɪz|👓|แว่นตาอันนี้|Where did you buy *these* _glasses_?|คุณซื้อแว่นตาอันนี้ที่ไหน?
+these cookies|ðiːz ˈkʊkiz|🍪|คุกกี้เหล่านี้|*These* _cookies_ taste delicious.|คุกกี้เหล่านี้อร่อยมาก
+these pictures|ðiːz ˈpɪktʃəz|🖼️|รูปภาพเหล่านี้|I took *these* _pictures_ last _year_.|ฉันถ่ายรูปเหล่านี้เมื่อปีที่แล้ว
+these keys|ðiːz kiːz|🔑|กุญแจเหล่านี้|Whose are *these* _keys_?|กุญแจเหล่านี้เป็นของใคร?
+these socks|ðiːz sɒks|🧦|ถุงเท้าคู่นี้|*These* _socks_ are too small.|ถุงเท้าคู่นี้เล็กเกินไป
+these tickets|ðiːz ˈtɪkɪts|🎫|ตั๋วเหล่านี้|I bought *these* _tickets_ online.|ฉันซื้อตั๋วเหล่านี้ทางออนไลน์`,
+"Those (พหูพจน์ ไกล)":`those chairs|ðəʊz tʃeəz|🪑|เก้าอี้เหล่านั้น|*Those* _chairs_ look uncomfortable.|เก้าอี้เหล่านั้นดูไม่สบาย
+those people|ðəʊz ˈpiːpl|👥|คนเหล่านั้น|Who are *those* _people_?|คนเหล่านั้นเป็นใคร?
+those mountains|ðəʊz ˈmaʊntɪnz|⛰️|ภูเขาเหล่านั้น|*Those* _mountains_ are far away.|ภูเขาเหล่านั้นอยู่ไกลมาก
+those colors|ðəʊz ˈkʌləz|🎨|สีเหล่านั้น|I don’t like *those* _colors_.|ฉันไม่ชอบสีเหล่านั้น
+those lights|ðəʊz laɪts|💡|ไฟเหล่านั้น|*Those* _lights_ are too bright.|ไฟเหล่านั้นสว่างเกินไป
+those houses|ðəʊz ˈhaʊzɪz|🏘️|บ้านเหล่านั้น|I used to live in *those* _houses_.|ฉันเคยอาศัยอยู่ในบ้านเหล่านั้น
+those wires|ðəʊz ˈwaɪəz|🔌|สายไฟเหล่านั้น|Don’t touch *those* _wires_.|อย่าแตะสายไฟเหล่านั้น
+those birds|ðəʊz bɜːdz|🐦|นกเหล่านั้น|*Those* _birds_ are singing loudly.|นกเหล่านั้นร้องเสียงดัง
+those boys|ðəʊz bɔɪz|⚽|เด็กผู้ชายเหล่านั้น|*Those* _boys_ are playing _football_.|เด็กผู้ชายเหล่านั้นกำลังเล่นฟุตบอล
+those clouds|ðəʊz klaʊdz|☁️|เมฆเหล่านั้น|*Those* _clouds_ look dark.|เมฆเหล่านั้นดูมืดครึ้ม
+those cars|ðəʊz kɑːz|🚙|รถเหล่านั้น|*Those* _cars_ are very expensive.|รถเหล่านั้นแพงมาก
+those stars|ðəʊz stɑːz|⭐|ดาวเหล่านั้น|I love *those* _stars_ at _night_.|ฉันรักดาวเหล่านั้นในยามค่ำคืน`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ voice=v.find(x=>/natural|online|google/i.test(x.name))||v.find(x=>/daniel|serena|kate|libby|sonia/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>
