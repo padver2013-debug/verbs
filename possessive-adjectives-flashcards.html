@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Possessive Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#c2185b;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Type of Adjective: Possessive Adjectives</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"My (ของฉัน)":`my keys|maɪ kiːz|🔑|กุญแจของฉัน|I forgot *my* _keys_ at home.|ฉันลืมกุญแจไว้ที่บ้าน
+my brother|maɪ ˈbrʌðə|👦|พี่/น้องชายของฉัน|*My* _brother_ is taller than me.|พี่ชายของฉันสูงกว่าฉัน
+my notebook|maɪ ˈnəʊtbʊk|📓|สมุดจดของฉัน|I always carry *my* _notebook_.|ฉันพกสมุดจดติดตัวเสมอ
+my country|maɪ ˈkʌntri|🏳️|ประเทศของฉัน|I’m proud of *my* _country_.|ฉันภูมิใจในประเทศของฉัน
+my dog|maɪ dɒɡ|🐶|สุนัขของฉัน|I love *my* _dog_.|ฉันรักสุนัขของฉัน
+my parents|maɪ ˈpeərənts|👨‍👩‍👧|พ่อแม่ของฉัน|*My* _parents_ are doctors.|พ่อแม่ของฉันเป็นหมอ
+my phone|maɪ fəʊn|📱|โทรศัพท์ของฉัน|Where is *my* _phone_?|โทรศัพท์ของฉันอยู่ไหน?
+my ID card|maɪ aɪ ˈdiː kɑːd|🪪|บัตรประชาชนของฉัน|I lost *my* _ID card_.|ฉันทำบัตรประชาชนหาย
+my room|maɪ ruːm|🛏️|ห้องของฉัน|I’m cleaning *my* _room_.|ฉันกำลังทำความสะอาดห้องของฉัน
+my reflection|maɪ rɪˈflekʃn|🪞|เงาสะท้อนของฉัน|I saw *my* _reflection_ in the mirror.|ฉันเห็นเงาสะท้อนของฉันในกระจก
+my resume|maɪ ˈrezjuːmeɪ|📄|เรซูเม่ของฉัน|I updated *my* _resume_.|ฉันอัปเดตเรซูเม่ของฉัน
+my coffee|maɪ ˈkɒfi|☕|กาแฟของฉัน|*My* _coffee_ is getting cold.|กาแฟของฉันกำลังเย็นลง
+my favorite movie|maɪ ˈfeɪvrɪt ˈmuːvi|🎬|หนังเรื่องโปรดของฉัน|That’s *my* _favorite movie_.|นั่นคือหนังเรื่องโปรดของฉัน
+my leg|maɪ leɡ|🦵|ขาของฉัน|I hurt *my* _leg_ while running.|ฉันเจ็บขาตอนวิ่ง
+my spot|maɪ spɒt|📍|ที่ประจำของฉัน|This is *my* _spot_.|นี่คือที่ของฉัน
+my opinion|maɪ əˈpɪnjən|💭|ความคิดเห็นของฉัน|*My* _opinion_ is different.|ความคิดเห็นของฉันต่างออกไป
+my shoes|maɪ ʃuːz|👟|รองเท้าของฉัน|I cleaned *my* _shoes_.|ฉันทำความสะอาดรองเท้าของฉัน
+my guitar|maɪ ɡɪˈtɑː|🎸|กีตาร์ของฉัน|I brought *my* _guitar_.|ฉันเอากีตาร์ของฉันมา`,
+"Your (ของคุณ)":`your umbrella|jɔː ʌmˈbrelə|☂️|ร่มของคุณ|Where is *your* _umbrella_?|ร่มของคุณอยู่ที่ไหน?
+your homework|jɔː ˈhəʊmwɜːk|📝|การบ้านของคุณ|Don’t forget *your* _homework_.|อย่าลืมการบ้านของคุณ
+your phone|jɔː fəʊn|📱|โทรศัพท์ของคุณ|*Your* _phone_ is ringing.|โทรศัพท์ของคุณกำลังดัง
+your favorite color|jɔː ˈfeɪvrɪt ˈkʌlə|🎨|สีโปรดของคุณ|What’s *your* _favorite color_?|สีโปรดของคุณคือสีอะไร?
+your pencil|jɔː ˈpensl|✏️|ดินสอของคุณ|Is this *your* _pencil_?|นี่ดินสอของคุณใช่ไหม?
+your brother|jɔː ˈbrʌðə|👦|พี่/น้องชายของคุณ|I saw *your* _brother_ at the mall.|ฉันเห็นพี่ชายของคุณที่ห้าง
+your lunch|jɔː lʌntʃ|🍱|อาหารกลางวันของคุณ|Don’t forget *your* _lunch_.|อย่าลืมอาหารกลางวันของคุณ
+your dress|jɔː dres|👗|ชุดเดรสของคุณ|*Your* _dress_ is beautiful.|ชุดเดรสของคุณสวยมาก
+your name|jɔː neɪm|📛|ชื่อของคุณ|What’s *your* _name_?|คุณชื่ออะไร?
+your health|jɔː helθ|🩺|สุขภาพของคุณ|Take care of *your* _health_.|ดูแลสุขภาพของคุณด้วย
+your courage|jɔː ˈkʌrɪdʒ|🦁|ความกล้าหาญของคุณ|I admire *your* _courage_.|ฉันชื่นชมความกล้าหาญของคุณ
+your name|jɔː neɪm|🖋️|ชื่อของคุณ|Please write *your* _name_ here.|กรุณาเขียนชื่อของคุณที่นี่
+your wallet|jɔː ˈwɒlɪt|👛|กระเป๋าสตางค์ของคุณ|Don’t forget *your* _wallet_.|อย่าลืมกระเป๋าสตางค์ของคุณ
+your parents|jɔː ˈpeərənts|👨‍👩‍👧|พ่อแม่ของคุณ|Where are *your* _parents_ from?|พ่อแม่ของคุณมาจากที่ไหน?
+your notebook|jɔː ˈnəʊtbʊk|📔|สมุดจดของคุณ|I found *your* _notebook_.|ฉันเจอสมุดจดของคุณ
+your weekend|jɔː ˌwiːkˈend|🏖️|วันหยุดสุดสัปดาห์ของคุณ|How was *your* _weekend_?|วันหยุดสุดสัปดาห์ของคุณเป็นอย่างไรบ้าง?
+your email|jɔː ˈiːmeɪl|📧|อีเมลของคุณ|You should check *your* _email_.|คุณควรเช็กอีเมลของคุณ
+your advice|jɔː ədˈvaɪs|💡|คำแนะนำของคุณ|I need *your* _advice_.|ฉันต้องการคำแนะนำจากคุณ`,
+"His (ของเขา - ชาย)":`his bike|hɪz baɪk|🚲|จักรยานของเขา|I borrowed *his* _bike_.|ฉันยืมจักรยานของเขา
+his mother|hɪz ˈmʌðə|👩|แม่ของเขา|*His* _mother_ is a teacher.|แม่ของเขาเป็นครู
+his wallet|hɪz ˈwɒlɪt|👛|กระเป๋าสตางค์ของเขา|He lost *his* _wallet_.|เขาทำกระเป๋าสตางค์หาย
+his job|hɪz dʒɒb|💼|งานของเขา|*His* _job_ is very stressful.|งานของเขาเครียดมาก
+his favorite song|hɪz ˈfeɪvrɪt sɒŋ|🎵|เพลงโปรดของเขา|This is *his* _favorite song_.|นี่คือเพลงโปรดของเขา
+his friends|hɪz frendz|🧑‍🤝‍🧑|เพื่อนๆของเขา|*His* _friends_ are waiting outside.|เพื่อนๆ ของเขารออยู่ข้างนอก
+his sister|hɪz ˈsɪstə|👧|พี่/น้องสาวของเขา|I met *his* _sister_ yesterday.|เมื่อวานฉันได้พบพี่สาวของเขา
+his car|hɪz kɑː|🚗|รถของเขา|*His* _car_ broke down.|รถของเขาเสีย
+his handwriting|hɪz ˈhændraɪtɪŋ|✍️|ลายมือของเขา|*His* _handwriting_ is neat.|ลายมือของเขาเรียบร้อย
+his ideas|hɪz aɪˈdɪəz|💡|ความคิดของเขา|*His* _ideas_ are creative.|ความคิดของเขาสร้างสรรค์
+his room|hɪz ruːm|🛏️|ห้องของเขา|*His* _room_ is always clean.|ห้องของเขาสะอาดเสมอ
+his problem|hɪz ˈprɒbləm|🧩|ปัญหาของเขา|What’s *his* _problem_?|เขามีปัญหาอะไร?
+his painting|hɪz ˈpeɪntɪŋ|🖼️|ภาพวาดของเขา|I saw *his* _painting_ in the gallery.|ฉันเห็นภาพวาดของเขาในแกลเลอรี
+his voice|hɪz vɔɪs|🎙️|เสียงของเขา|*His* _voice_ is very deep.|เสียงของเขาทุ้มลึกมาก
+his favorite sport|hɪz ˈfeɪvrɪt spɔːt|⚽|กีฬาโปรดของเขา|That is *his* _favorite sport_.|นั่นคือกีฬาโปรดของเขา
+his bag|hɪz bæɡ|🎒|กระเป๋าของเขา|He packed *his* _bag_ quickly.|เขาจัดกระเป๋าของเขาอย่างรวดเร็ว
+his lunch|hɪz lʌntʃ|🍱|อาหารกลางวันของเขา|This is *his* _lunch_.|นี่คืออาหารกลางวันของเขา`,
+"Her (ของเธอ)":`her birthday party|hɜː ˈbɜːθdeɪ ˈpɑːti|🎉|ปาร์ตี้วันเกิดของเธอ|We went to *her* _birthday party_.|เราไปงานวันเกิดของเธอ
+her voice|hɜː vɔɪs|🎤|เสียงของเธอ|I like *her* _voice_.|ฉันชอบเสียงของเธอ
+her bag|hɜː bæɡ|👜|กระเป๋าของเธอ|Don’t touch *her* _bag_.|อย่าแตะกระเป๋าของเธอ
+her new bag|hɜː njuː bæɡ|🛍️|กระเป๋าใบใหม่ของเธอ|That’s *her* _new bag_.|นั่นกระเป๋าใบใหม่ของเธอ
+her office|hɜː ˈɒfɪs|🏢|ออฟฟิศของเธอ|*Her* _office_ is on the second floor.|ออฟฟิศของเธออยู่ชั้นสอง
+her dictionary|hɜː ˈdɪkʃənri|📖|พจนานุกรมของเธอ|I borrowed *her* _dictionary_.|ฉันยืมพจนานุกรมของเธอ
+her phone number|hɜː fəʊn ˈnʌmbə|☎️|เบอร์โทรศัพท์ของเธอ|*Her* _phone number_ changed.|เบอร์โทรศัพท์ของเธอเปลี่ยนแล้ว
+her laptop|hɜː ˈlæptɒp|💻|แล็ปท็อปของเธอ|This is *her* _laptop_.|นี่คือแล็ปท็อปของเธอ
+her cooking|hɜː ˈkʊkɪŋ|🍳|ฝีมือทำอาหารของเธอ|*Her* _cooking_ is delicious.|ฝีมือทำอาหารของเธออร่อยมาก
+her dream|hɜː driːm|🌠|ความฝันของเธอ|*Her* _dream_ is to become a doctor.|ความฝันของเธอคืออยากเป็นหมอ
+her blog|hɜː blɒɡ|📰|บล็อกของเธอ|I read *her* _blog_ every day.|ฉันอ่านบล็อกของเธอทุกวัน
+her shoes|hɜː ʃuːz|👠|รองเท้าของเธอ|*Her* _shoes_ are under the table.|รองเท้าของเธออยู่ใต้โต๊ะ
+her seat|hɜː siːt|💺|ที่นั่งของเธอ|This is *her* _seat_.|นี่คือที่นั่งของเธอ
+her determination|hɜː dɪˌtɜːmɪˈneɪʃn|🔥|ความมุ่งมั่นของเธอ|I admire *her* _determination_.|ฉันชื่นชมความมุ่งมั่นของเธอ
+her phone|hɜː fəʊn|📱|โทรศัพท์ของเธอ|That’s *her* _phone_ ringing.|นั่นโทรศัพท์ของเธอกำลังดัง
+her jacket|hɜː ˈdʒækɪt|🧥|แจ็กเก็ตของเธอ|She wears *her* _jacket_ every day.|เธอใส่แจ็กเก็ตของเธอทุกวัน
+her handwriting|hɜː ˈhændraɪtɪŋ|✍️|ลายมือของเธอ|*Her* _handwriting_ is beautiful.|ลายมือของเธอสวยมาก`,
+"Its (ของมัน)":`its paw|ɪts pɔː|🐾|อุ้งเท้าของมัน|The cat licked *its* _paw_.|แมวเลียอุ้งเท้าของมัน
+its leaves|ɪts liːvz|🍂|ใบไม้ของมัน|The tree lost *its* _leaves_.|ต้นไม้ผลัดใบของมัน
+its cover|ɪts ˈkʌvə|🔌|ฝาครอบของมัน|The machine is missing *its* _cover_.|เครื่องจักรขาดฝาครอบ
+its nest|ɪts nest|🪺|รังของมัน|The bird built *its* _nest_ in the tree.|นกสร้างรังของมันบนต้นไม้
+its function|ɪts ˈfʌŋkʃn|⚙️|การทำงานของมัน|The machine has lost *its* _function_.|เครื่องจักรสูญเสียการทำงานของมัน
+its cubs|ɪts kʌbz|🦁|ลูกสิงโตของมัน|The lion protects *its* _cubs_.|สิงโตปกป้องลูกของมัน
+its roof|ɪts ruːf|🏠|หลังคาของมัน|The house lost *its* _roof_ in the storm.|บ้านหลังคาหลุดในพายุ
+its policy|ɪts ˈpɒləsi|📜|นโยบายของมัน|The company updated *its* _policy_.|บริษัทปรับปรุงนโยบายของตน
+its program|ɪts ˈprəʊɡræm|🤖|โปรแกรมของมัน|The robot follows *its* _program_.|หุ่นยนต์ทำตามโปรแกรมของมัน
+its leaves|ɪts liːvz|🍁|ใบไม้ของมัน|The tree dropped *its* _leaves_.|ต้นไม้ทิ้งใบของมัน
+its tail|ɪts teɪl|🐕|หางของมัน|The dog wagged *its* _tail_.|สุนัขกระดิกหางของมัน
+its final move|ɪts ˈfaɪnl muːv|🎯|การเคลื่อนไหวสุดท้ายของมัน|The machine made *its* _final move_.|เครื่องจักรขยับครั้งสุดท้าย
+its cover|ɪts ˈkʌvə|🪢|ฝาครอบของมัน|Don’t touch the wire; it lost *its* _cover_.|อย่าแตะสายไฟ ฝาครอบของมันหลุดแล้ว
+its logo|ɪts ˈləʊɡəʊ|🏷️|โลโก้ของมัน|The company changed *its* _logo_.|บริษัทเปลี่ยนโลโก้ของตน
+its owner|ɪts ˈəʊnə|🧑|เจ้าของของมัน|That cat loves *its* _owner_.|แมวตัวนั้นรักเจ้าของของมัน
+its skin|ɪts skɪn|🐍|หนัง/ผิวของมัน|The snake shed *its* _skin_.|งูลอกคราบของมัน
+its tank|ɪts tæŋk|🐟|ตู้ปลาของมัน|The fish is in *its* _tank_.|ปลาอยู่ในตู้ของมัน`,
+"Our (ของเรา)":`our first trip|ˈaʊə fɜːst trɪp|🧳|ทริปแรกของเรา|This is *our* _first trip_ together.|นี่คือทริปแรกของเราด้วยกัน
+our family|ˈaʊə ˈfæməli|👨‍👩‍👧‍👦|ครอบครัวของเรา|We love *our* _family_.|เรารักครอบครัวของเรา
+our team|ˈaʊə tiːm|🏅|ทีมของเรา|*Our* _team_ won the game.|ทีมของเราชนะเกม
+our grandparents|ˈaʊə ˈɡrænpeərənts|👴|ปู่ย่าตายายของเรา|We love *our* _grandparents_.|เรารักปู่ย่าตายายของเรา
+our last chance|ˈaʊə lɑːst tʃɑːns|⏰|โอกาสสุดท้ายของเรา|This is *our* _last chance_.|นี่คือโอกาสสุดท้ายของเรา
+our house|ˈaʊə haʊs|🏠|บ้านของเรา|Let’s clean *our* _house_ together.|มาทำความสะอาดบ้านของเราด้วยกันเถอะ
+our cat|ˈaʊə kæt|🐱|แมวของเรา|*Our* _cat_ is very friendly.|แมวของเราเป็นมิตรมาก
+our school|ˈaʊə skuːl|🏫|โรงเรียนของเรา|*Our* _school_ is near the park.|โรงเรียนของเราอยู่ใกล้สวน
+our vacation|ˈaʊə vəˈkeɪʃn|🏝️|วันหยุดพักผ่อนของเรา|*Our* _vacation_ starts next week.|วันหยุดพักผ่อนของเราเริ่มสัปดาห์หน้า
+our project|ˈaʊə ˈprɒdʒekt|📊|โปรเจกต์ของเรา|We presented *our* _project_ today.|วันนี้เรานำเสนอโปรเจกต์ของเรา
+our trip|ˈaʊə trɪp|🚌|ทริปของเรา|We enjoyed *our* _trip_ to Chiang Mai.|เราสนุกกับทริปไปเชียงใหม่ของเรา
+our best|ˈaʊə best|🥇|ความพยายามสูงสุดของเรา|Let’s do *our* _best_.|มาทำให้ดีที่สุดกันเถอะ
+our parents|ˈaʊə ˈpeərənts|👨‍👩‍👧|พ่อแม่ของเรา|*Our* _parents_ are friends.|พ่อแม่ของเราเป็นเพื่อนกัน
+our secret|ˈaʊə ˈsiːkrɪt|🤫|ความลับของเรา|This is *our* _secret_.|นี่คือความลับของเรา
+our culture|ˈaʊə ˈkʌltʃə|🎎|วัฒนธรรมของเรา|We should respect *our* _culture_.|เราควรเคารพวัฒนธรรมของเรา
+our dreams|ˈaʊə driːmz|🌟|ความฝันของเรา|*Our* _dreams_ are valid.|ความฝันของเรามีความหมาย
+our tickets|ˈaʊə ˈtɪkɪts|🎫|ตั๋วของเรา|We forgot *our* _tickets_.|เราลืมตั๋วของเรา`,
+"Their (ของพวกเขา)":`their children|ðeə ˈtʃɪldrən|🧒|ลูกๆของพวกเขา|*Their* _children_ are polite.|ลูกๆ ของพวกเขาสุภาพ
+their house|ðeə haʊs|🏡|บ้านของพวกเขา|We visited *their* _house_ yesterday.|เมื่อวานเราไปเยี่ยมบ้านของพวกเขา
+their house|ðeə haʊs|🏘️|บ้านของพวกเขา|*Their* _house_ is next to ours.|บ้านของพวกเขาอยู่ติดกับบ้านเรา
+their team|ðeə tiːm|🏆|ทีมของพวกเขา|*Their* _team_ won the match.|ทีมของพวกเขาชนะการแข่งขัน
+their children|ðeə ˈtʃɪldrən|👧|ลูกๆของพวกเขา|I met *their* _children_ yesterday.|เมื่อวานฉันได้พบลูกๆ ของพวกเขา
+their car|ðeə kɑː|🚙|รถของพวกเขา|This is *their* _car_.|นี่คือรถของพวกเขา
+their house|ðeə haʊs|🌳|บ้านของพวกเขา|*Their* _house_ has a big garden.|บ้านของพวกเขามีสวนใหญ่
+their attitude|ðeə ˈætɪtjuːd|😒|ทัศนคติของพวกเขา|I don’t like *their* _attitude_.|ฉันไม่ชอบทัศนคติของพวกเขา
+their opinion|ðeə əˈpɪnjən|💭|ความเห็นของพวกเขา|*Their* _opinion_ matters.|ความเห็นของพวกเขาสำคัญ
+their dog|ðeə dɒɡ|🐕|สุนัขของพวกเขา|*Their* _dog_ is barking loudly.|สุนัขของพวกเขาเห่าเสียงดัง
+their cousin|ðeə ˈkʌzn|🧑‍🤝‍🧑|ลูกพี่ลูกน้องของพวกเขา|I met *their* _cousin_ last week.|ฉันได้พบลูกพี่ลูกน้องของพวกเขาเมื่อสัปดาห์ก่อน
+their house|ðeə haʊs|🪧|บ้านของพวกเขา|*Their* _house_ is for sale.|บ้านของพวกเขากำลังขาย
+their garden|ðeə ˈɡɑːdn|🌷|สวนของพวกเขา|I love *their* _garden_.|ฉันรักสวนของพวกเขา
+their plan|ðeə plæn|🗺️|แผนของพวกเขา|What’s *their* _plan_?|แผนของพวกเขาคืออะไร?
+their passports|ðeə ˈpɑːspɔːts|🛂|หนังสือเดินทางของพวกเขา|They lost *their* _passports_.|พวกเขาทำหนังสือเดินทางหาย
+their answers|ðeə ˈɑːnsəz|✅|คำตอบของพวกเขา|*Their* _answers_ were correct.|คำตอบของพวกเขาถูกต้อง
+their farm|ðeə fɑːm|🚜|ฟาร์มของพวกเขา|I visited *their* _farm_.|ฉันไปเยี่ยมฟาร์มของพวกเขา`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en[-_]GB/i.test(x.lang));
+ voice=v.find(x=>/natural|online|google/i.test(x.name))||v.find(x=>/daniel|serena|kate|libby|sonia/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>
