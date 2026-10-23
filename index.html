@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><title>English Verbs Flashcards — สารบัญ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#e8f8f1;--card:#fff;--g:#2fb08e;--o:#ff8a3d;--t:#1d3b33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10261f;--card:#173a30;--t:#e6fff6}}
+body{margin:0;background:var(--bg);color:var(--t);font-family:Arial,sans-serif;font-weight:300}
+header{text-align:center;padding:16px 10px 6px}
+h1{margin:0;font-size:clamp(20px,5.5vw,32px);font-weight:400;background:linear-gradient(90deg,var(--g),var(--o));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:4px 0 0;font-size:13px;color:var(--o)}
+.q{display:block;margin:10px auto 4px;width:calc(100% - 24px);max-width:520px;padding:10px 14px;border:2px solid var(--g);border-radius:24px;font:inherit;font-size:15px;background:var(--card);color:var(--t);box-sizing:border-box}
+main{max-width:960px;margin:auto;padding:4px 10px 24px}
+h2{font-size:clamp(15px,4vw,19px);font-weight:400;color:var(--g);border-bottom:2px solid var(--o);padding-bottom:4px;margin:18px 2px 8px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(min-width:700px){.g{grid-template-columns:repeat(3,1fr)}}
+a.c{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--g);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit}
+a.c:active,a.c:hover{border-color:var(--o);transform:translateY(-1px)}
+.e{height:clamp(46px,12vw,70px);display:flex;align-items:center;justify-content:center;font-size:clamp(26px,8vw,40px);background:linear-gradient(135deg,#bff0dc,#ffd0a8)}
+.b{padding:6px 8px 8px}.b b{display:block;font-size:clamp(13px,3.4vw,15px);font-weight:bold;color:var(--g)}
+.b span{display:block;font-size:clamp(11px,3vw,13px);margin-top:2px}.b i{display:inline-block;margin-top:4px;font-style:normal;font-size:11px;background:var(--o);color:#fff;border-radius:8px;padding:1px 7px}
+.none{text-align:center;color:var(--o);display:none;margin:20px}
+footer{text-align:center;font-size:12px;padding:6px 10px 18px;color:var(--o)}
+</style></head><body>
+<header><h1>🌿 English Verbs Flashcards</h1><p id="tot"></p>
+<input class="q" id="q" type="search" placeholder="ค้นหาชุด เช่น dare, work, กฎ, stative"></header>
+<main id="m"></main><p class="none" id="n">ไม่พบชุดที่ค้นหา</p>
+<footer>กดการ์ดเพื่อเปิดชุดแฟลชการ์ด · ในแต่ละชุดกด 🔊 เพื่อฟังเสียงและเผยคำแปล</footer>
+<script>
+const D=[["🦁 Modal Verb: DARE (กล้า)", [["dare.html", "🦁", "Modal Verb DARE", "100 ประโยค อ่านและแปล 5 tabs", "100 ประโยค · 5 tabs"], ["dare-to-verbs.html", "🗣️", "Dare To Verbs 1", "กริยาที่ใช้ตามหลัง dare (ชุดที่ 1)", "48 คำ · 2 tabs"], ["dare-to-verbs-2.html", "🚀", "Dare To Verbs 2", "กริยาที่ใช้ตามหลัง dare (ชุดที่ 2)", "46 คำ · 2 tabs"]]], ["🌿 ชีวิตประจำวัน", [["present-verbs.html", "📚", "Present Verbs", "กริยาพื้นฐานที่ใช้บ่อย", "89 คำ · 4 tabs"], ["everyday-verbs.html", "🏠", "Everyday Verbs", "กริยาในชีวิตประจำวัน", "32 คำ · 2 tabs"], ["everyday-actions-verbs.html", "🧹", "Everyday Actions", "กิจกรรมประจำวัน", "63 คำ · 3 tabs"], ["routines-hobbies-verbs.html", "🎣", "Routines & Hobbies", "กิจวัตรและงานอดิเรก", "73 คำ · 3 tabs"], ["weekend-verbs.html", "🏕️", "Weekend Activities", "กิจกรรมวันหยุด", "67 คำ · 3 tabs"], ["life-verbs.html", "🌈", "Life Situations", "สถานการณ์ในชีวิต", "69 คำ · 3 tabs"], ["mixed-verbs.html", "🎲", "Mixed Verbs", "กริยาหลากหลาย", "74 คำ · 3 tabs"], ["habits-verbs.html", "💪", "Good Habits", "นิสัยที่ดีและคำแนะนำ", "65 คำ · 3 tabs"], ["plans-events-verbs.html", "📅", "Plans & Events", "แผนงานและกิจกรรม", "71 คำ · 3 tabs"], ["ability-verbs.html", "🏊", "Ability Verbs", "ความสามารถและประสาทสัมผัส", "58 คำ · 3 tabs"]]], ["💼 ที่ทำงานและภาษาทางการ", [["jobs-verbs.html", "👷", "Jobs & Duties", "อาชีพและหน้าที่การงาน", "83 คำ · 4 tabs"], ["workplace-roles-verbs.html", "🏢", "Workplace Roles", "บทบาทในที่ทำงาน", "75 คำ · 3 tabs"], ["formal-verbs.html", "📋", "Formal Verbs", "ภาษาทางการและเอกสาร", "42 คำ · 2 tabs"], ["formal-writing-verbs.html", "📝", "Formal Writing", "ภาษาเขียนทางการ", "64 คำ · 3 tabs"], ["policy-trend-verbs.html", "📈", "Policy & Trend", "นโยบายและแนวโน้ม", "79 คำ · 4 tabs"], ["helpful-tasks-verbs.html", "🤝", "Helpful Tasks", "งานช่วยเหลือและคำขอ", "62 คำ · 3 tabs"], ["worries-deadlines-verbs.html", "⏰", "Worries & Deadlines", "ความกังวลและงานเร่งด่วน", "54 คำ · 3 tabs"]]], ["⚖️ กฎ ค่านิยม และคำขอ", [["rules-verbs.html", "🦺", "Rules & Obligations", "กฎระเบียบและหน้าที่", "56 คำ · 3 tabs"], ["compliance-verbs.html", "📜", "Compliance & Violation", "ปฏิบัติตามและฝ่าฝืนกฎ", "35 คำ · 2 tabs"], ["values-verbs.html", "🌍", "Values & Responsibility", "ค่านิยมและความรับผิดชอบ", "62 คำ · 3 tabs"], ["promises-verbs.html", "🤞", "Promises", "คำสัญญาและความมุ่งมั่น", "55 คำ · 3 tabs"], ["request-verbs.html", "🙏", "Request Verbs", "คำขอร้องและการบริการ", "50 คำ · 2 tabs"], ["polite-requests-verbs.html", "☕", "Polite Requests", "คำขอสุภาพ Would you mind...?", "18 คำ · 1 tabs"]]], ["🔄 เหตุการณ์และการเปลี่ยนแปลง", [["cause-effect-verbs.html", "🎯", "Cause & Effect", "สาเหตุและผลลัพธ์", "75 คำ · 3 tabs"], ["change-event-verbs.html", "⚡", "Change & Event", "การเปลี่ยนแปลงและเหตุการณ์", "77 คำ · 4 tabs"], ["outcome-verbs.html", "🏆", "Outcome Verbs", "ผลลัพธ์และการเปลี่ยนสถานะ", "59 คำ · 3 tabs"]]], ["💭 Stative Verbs (กริยาแสดงสภาวะ)", [["stative-verbs.html", "🧠", "Stative Verbs 1", "กริยาสภาวะ ชุดที่ 1 พร้อมประโยคตัวอย่าง", "21 คำ · 1 tabs"], ["stative-verbs-2.html", "❤️", "Stative Verbs 2", "กริยาสภาวะ ชุดที่ 2 พร้อมประโยคตัวอย่าง", "42 คำ · 2 tabs"]]]];
+const m=document.getElementById('m'),q=document.getElementById('q');
+let sets=0;D.forEach(g=>sets+=g[1].length);
+document.getElementById('tot').textContent=sets+' ชุด · เลือกชุดที่ต้องการฝึกได้เลย';
+function draw(){const k=q.value.trim().toLowerCase();m.innerHTML='';let any=false;
+D.forEach(([gt,items])=>{const r=items.filter(i=>!k||(i[2]+i[3]+gt).toLowerCase().includes(k));if(!r.length)return;any=true;
+const h=document.createElement('h2');h.textContent=gt;const g=document.createElement('div');g.className='g';
+r.forEach(i=>{g.insertAdjacentHTML('beforeend',`<a class="c" href="${i[0]}"><div class="e">${i[1]}</div><div class="b"><b>${i[2]}</b><span>${i[3]}</span><i>${i[4]}</i></div></a>`)});
+m.append(h,g)});document.getElementById('n').style.display=any?'none':'block'}
+q.oninput=draw;draw();
+</script></body></html>
