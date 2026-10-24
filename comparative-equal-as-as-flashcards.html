@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparative Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#b0006c;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Comparing Equal Things: as + adjective/adverb + as</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Size & Appearance":`as tall as|əz tɔːl əz|🦒|สูงเท่า|She is *as tall as* her _brother_.|เธอสูงเท่าพี่/น้องชายของเธอ
+as beautiful as|əz ˈbjuːtɪfl əz|🌺|สวยงามเท่า|The _view_ from here is *as beautiful as* the one from the other _side_.|วิวจากที่นี่สวยเท่าวิวจากอีกฝั่ง
+as big as|əz bɪɡ əz|🐘|ใหญ่เท่า|The _house_ is *as big as* the _mansion_ down the _street_.|บ้านหลังนี้ใหญ่เท่าคฤหาสน์ท้ายถนน
+as attractive as|əz əˈtræktɪv əz|✨|น่าดึงดูดเท่า|The two _options_ are *as attractive as* each other.|ทั้งสองตัวเลือกน่าดึงดูดพอๆ กัน
+as wide as|əz waɪd əz|🛣️|กว้างเท่า|The _road_ is *as wide as* the _highway_.|ถนนกว้างเท่าทางหลวง
+as beautiful as|əz ˈbjuːtɪfl əz|🌺|สวยงามเท่า|The _flowers_ are *as beautiful as* the ones in the _garden_.|ดอกไม้สวยเท่าดอกไม้ในสวน
+as spacious as|əz ˈspeɪʃəs əz|🏨|กว้างขวางเท่า|The hotel _room_ is *as spacious as* the one we stayed in before.|ห้องพักโรงแรมกว้างขวางเท่าห้องที่เราเคยพัก
+as neat as|əz niːt əz|📐|เรียบร้อยเท่า|His _handwriting_ is *as neat as* hers.|ลายมือของเขาเรียบร้อยเท่าของเธอ
+as deep as|əz diːp əz|🌊|ลึกเท่า|The _ocean_ is *as deep as* the one in the _Caribbean_.|มหาสมุทรลึกเท่าที่อยู่ในแคริบเบียน
+as clean as|əz kliːn əz|🧼|สะอาดเท่า|The _place_ is *as clean as* the _hospital_.|สถานที่นี้สะอาดเท่าโรงพยาบาล
+as dark as|əz dɑːk əz|🌌|มืดเท่า|The night _sky_ is *as dark as* the one last week.|ท้องฟ้ายามค่ำคืนมืดเท่าเมื่อสัปดาห์ก่อน
+as thick as|əz θɪk əz|📕|หนาเท่า|This _book_ is *as thick as* the last one I read.|หนังสือเล่มนี้หนาเท่าเล่มที่ฉันอ่านล่าสุด
+as stylish as|əz ˈstaɪlɪʃ əz|👗|มีสไตล์เท่า|The two _dresses_ are *as stylish as* each other.|ชุดสองตัวมีสไตล์พอๆ กัน
+as wide as|əz waɪd əz|🛣️|กว้างเท่า|This _road_ is *as wide as* the _highway_.|ถนนสายนี้กว้างเท่าทางหลวง
+as long as|əz lɒŋ əz|🚂|ยาวเท่า|The _movie_ was *as long as* the _book_.|หนังยาวเท่าหนังสือ
+as large as|əz lɑːdʒ əz|🏡|ใหญ่เท่า|Their _house_ is *as large as* the one on the _corner_.|บ้านของพวกเขาใหญ่เท่าบ้านหัวมุม
+as beautiful as|əz ˈbjuːtɪfl əz|🌺|สวยงามเท่า|Her _dress_ is *as beautiful as* the one in the _magazine_.|ชุดของเธอสวยเท่าชุดในนิตยสาร
+as clean as|əz kliːn əz|🧼|สะอาดเท่า|The _house_ is *as clean as* the hotel _rooms_.|บ้านสะอาดเท่าห้องพักโรงแรม
+as shiny as|əz ˈʃaɪni əz|✨|เงางามเท่า|Her _hair_ is *as shiny as* the _moonlight_.|ผมของเธอเงางามเท่าแสงจันทร์
+as soft as|əz sɒft əz|🧸|นุ่มเท่า|This _sweater_ is *as soft as* the one from the _boutique_.|เสื้อสเวตเตอร์ตัวนี้นุ่มเท่าตัวจากบูติก
+as elegant as|əz ˈelɪɡənt əz|👠|สง่างามเท่า|His _dress_ is *as elegant as* the one at the _gala_.|ชุดของเขาสง่างามเท่าชุดในงานกาลา
+as high as|əz haɪ əz|⛰️|สูงเท่า|The _mountain_ is *as high as* the one in the _Alps_.|ภูเขาสูงเท่าภูเขาในเทือกเขาแอลป์
+as modern as|əz ˈmɒdn əz|🏙️|ทันสมัยเท่า|This _phone_ is *as modern as* the latest _release_.|โทรศัพท์เครื่องนี้ทันสมัยเท่ารุ่นล่าสุด
+as soft as|əz sɒft əz|🧸|นุ่มเท่า|His _voice_ was *as soft as* a _whisper_.|เสียงของเขานุ่มเท่าเสียงกระซิบ
+as sleek as|əz sliːk əz|🚘|เพรียวลมเท่า|The _car_ is *as sleek as* the latest _model_.|รถคันนี้เพรียวลมเท่ารุ่นล่าสุด
+as fancy as|əz ˈfænsi əz|🍷|หรูหราเท่า|The _restaurant_ was *as fancy as* the one we went to last _month_.|ร้านอาหารหรูหราเท่าร้านที่เราไปเมื่อเดือนก่อน
+as heavy as|əz ˈhevi əz|🎒|หนักเท่า|This _backpack_ is *as heavy as* a _suitcase_.|กระเป๋าเป้ใบนี้หนักเท่ากระเป๋าเดินทาง
+as bright as|əz braɪt əz|🌞|สว่างเท่า|Her _smile_ is *as bright as* the _sun_.|รอยยิ้มของเธอสดใสเท่าดวงอาทิตย์
+as colorful as|əz ˈkʌləfl əz|🌈|สีสันสดใสเท่า|Their _garden_ is *as colorful as* a _rainbow_.|สวนของพวกเขาสีสันสดใสเท่าสายรุ้ง
+as bright as|əz braɪt əz|🌞|สว่างเท่า|The _light_ is *as bright as* _daylight_.|แสงไฟสว่างเท่าแสงกลางวัน
+as luxurious as|əz lʌɡˈʒʊəriəs əz|🏰|หรูหราเท่า|The _hotel_ was *as luxurious as* expected.|โรงแรมหรูหราเท่าที่คาดไว้
+as blue as|əz bluː əz|🔵|สีน้ำเงินเท่า|Her _eyes_ are *as blue as* the _ocean_.|ดวงตาของเธอสีน้ำเงินเท่ามหาสมุทร
+as steep as|əz stiːp əz|⛰️|ชันเท่า|The _hill_ is *as steep as* the one we climbed last year.|เนินเขาชันเท่าลูกที่เราปีนเมื่อปีที่แล้ว
+as new as|əz njuː əz|🆕|ใหม่เท่า|His _phone_ is *as new as* hers.|โทรศัพท์ของเขาใหม่เท่าของเธอ
+as clean as|əz kliːn əz|🧼|สะอาดเท่า|The _water_ is *as clean as* bottled _water_.|น้ำสะอาดเท่าน้ำบรรจุขวด
+as white as|əz waɪt əz|⚪|ขาวเท่า|His _shirt_ is *as white as* _snow_.|เสื้อของเขาขาวเท่าหิมะ
+as modern as|əz ˈmɒdn əz|🏙️|ทันสมัยเท่า|Their _house_ is *as modern as* any luxury _apartment_.|บ้านของพวกเขาทันสมัยเท่าอพาร์ตเมนต์หรูทั่วไป
+as still as|əz stɪl əz|🪞|นิ่งเท่า|The _lake_ was *as still as* a _mirror_.|ทะเลสาบนิ่งเท่ากระจก
+as full as|əz fʊl əz|🥤|เต็มเท่า|This _box_ is *as full as* the last one.|กล่องนี้เต็มเท่าใบที่แล้ว
+as red as|əz red əz|🔴|สีแดงเท่า|The _sky_ was *as red as* _fire_ during the _sunset_.|ท้องฟ้าแดงเท่าไฟในยามพระอาทิตย์ตก
+as dark as|əz dɑːk əz|🌌|มืดเท่า|His _mood_ is *as dark as* a stormy _night_.|อารมณ์ของเขามืดเท่าค่ำคืนพายุ
+as clean as|əz kliːn əz|🧼|สะอาดเท่า|The _table_ was *as clean as* a new one.|โต๊ะสะอาดเท่าของใหม่`,
+"People & Personality":`as playful as|əz ˈpleɪfl əz|🐕|ขี้เล่นเท่า|My _dog_ is *as playful as* your _dog_.|สุนัขของฉันขี้เล่นเท่าสุนัขของคุณ
+as amusing as|əz əˈmjuːzɪŋ əz|😄|ขบขันเท่า|His _story_ was *as amusing as* the last one.|เรื่องของเขาขบขันเท่าเรื่องที่แล้ว
+as skilled as|əz skɪld əz|🛠️|ชำนาญเท่า|She is *as skilled as* her _mentor_.|เธอชำนาญเท่าที่ปรึกษาของเธอ
+as strong as|əz strɒŋ əz|💪|แข็งแรงเท่า|His _voice_ is *as strong as* hers.|เสียงของเขาแข็งแรงเท่าของเธอ
+as excited as|əz ɪkˈsaɪtɪd əz|🤩|ตื่นเต้นเท่า|The _children_ are *as excited as* they were last _summer_.|เด็กๆ ตื่นเต้นเท่าฤดูร้อนที่แล้ว
+as quick as|əz kwɪk əz|⚡|รวดเร็วเท่า|His _reaction_ was *as quick as* hers.|ปฏิกิริยาของเขารวดเร็วเท่าของเธอ
+as friendly as|əz ˈfrendli əz|🐶|เป็นมิตรเท่า|The _dog_ is *as friendly as* the one we saw at the _park_.|สุนัขตัวนี้เป็นมิตรเท่าตัวที่เราเห็นที่สวน
+as creative as|əz kriˈeɪtɪv əz|🎨|สร้างสรรค์เท่า|His _idea_ is *as creative as* mine.|ไอเดียของเขาสร้างสรรค์เท่าของฉัน
+as lively as|əz ˈlaɪvli əz|🏙️|มีชีวิตชีวาเท่า|The _city_ is *as lively as* it was last year.|เมืองนี้มีชีวิตชีวาเท่าปีที่แล้ว
+as calm as|əz kɑːm əz|🌊|สงบเท่า|The _ocean_ was *as calm as* a _lake_.|มหาสมุทรสงบเท่าทะเลสาบ
+as happy as|əz ˈhæpi əz|😊|มีความสุขเท่า|She looked *as happy as* she did during the _holidays_.|เธอดูมีความสุขเท่าตอนช่วงวันหยุด
+as friendly as|əz ˈfrendli əz|🐶|เป็นมิตรเท่า|The _dog_ is *as friendly as* the one we saw in the _park_.|สุนัขตัวนี้เป็นมิตรเท่าตัวที่เราเห็นในสวน
+as strong as|əz strɒŋ əz|💪|แข็งแรงเท่า|He’s *as strong as* a professional _athlete_.|เขาแข็งแรงเท่านักกีฬาอาชีพ
+as motivated as|əz ˈməʊtɪveɪtɪd əz|🔥|มีแรงจูงใจเท่า|The _team_ is *as motivated as* ever.|ทีมมีแรงจูงใจเท่าที่เคย
+as emotional as|əz ɪˈməʊʃənl əz|😭|เต็มไปด้วยอารมณ์เท่า|His _speech_ was *as emotional as* hers.|คำปราศรัยของเขาเต็มไปด้วยอารมณ์เท่าของเธอ
+as curious as|əz ˈkjʊəriəs əz|🔭|อยากรู้อยากเห็นเท่า|The _child_ was *as curious as* a _scientist_.|เด็กอยากรู้อยากเห็นเท่านักวิทยาศาสตร์
+as funny as|əz ˈfʌni əz|😂|ตลกเท่า|The _movie_ was *as funny as* the _trailer_ suggested.|หนังตลกเท่าที่ตัวอย่างบอก
+as professional as|əz prəˈfeʃənl əz|👔|เป็นมืออาชีพเท่า|Their _service_ is *as professional as* any high-end _business_.|บริการของพวกเขาเป็นมืออาชีพเท่าธุรกิจระดับสูงทั่วไป
+as smart as|əz smɑːt əz|🧠|ฉลาดเท่า|The _student_ is *as smart as* the _teacher_.|นักเรียนฉลาดเท่าครู
+as gentle as|əz ˈdʒentl əz|🕊️|อ่อนโยนเท่า|Her _voice_ is *as gentle as* a _lullaby_.|เสียงของเธออ่อนโยนเท่าเพลงกล่อมเด็ก
+as positive as|əz ˈpɒzətɪv əz|😀|เชิงบวกเท่า|His _attitude_ is *as positive as* hers.|ทัศนคติของเขาเป็นบวกเท่าของเธอ
+as obedient as|əz əˈbiːdiənt əz|🐕‍🦺|เชื่อฟังเท่า|The _dog_ is *as obedient as* a trained police _dog_.|สุนัขตัวนี้เชื่อฟังเท่าสุนัขตำรวจที่ฝึกมา`,
+"Things & Quality":`as fast as|əz fɑːst əz|🏎️|เร็วเท่า|The _car_ is *as fast as* the _bike_.|รถเร็วเท่าจักรยาน
+as interesting as|əz ˈɪntrəstɪŋ əz|📖|น่าสนใจเท่า|The _movie_ was *as interesting as* the _book_.|หนังน่าสนใจเท่าหนังสือ
+as good as|əz ɡʊd əz|👍|ดีเท่า|His _performance_ was *as good as* mine.|การแสดงของเขาดีเท่าของฉัน
+as delicious as|əz dɪˈlɪʃəs əz|😋|อร่อยเท่า|This _cake_ is *as delicious as* the one we had last week.|เค้กนี้อร่อยเท่าก้อนที่เรากินเมื่อสัปดาห์ก่อน
+as challenging as|əz ˈtʃælɪndʒɪŋ əz|🧩|ท้าทายเท่า|This _puzzle_ is *as challenging as* the last one.|ปริศนานี้ท้าทายเท่าอันที่แล้ว
+as cold as|əz kəʊld əz|🧊|เย็น/หนาวเท่า|The _weather_ today is *as cold as* yesterday.|อากาศวันนี้หนาวเท่าเมื่อวาน
+as correct as|əz kəˈrekt əz|✅|ถูกต้องเท่า|His _answer_ was *as correct as* yours.|คำตอบของเขาถูกต้องเท่าของคุณ
+as hard as|əz hɑːd əz|💪|ยาก/หนักเท่า|She works *as hard as* her _colleagues_.|เธอทำงานหนักเท่าเพื่อนร่วมงาน
+as easy as|əz ˈiːzi əz|😌|ง่ายเท่า|This _test_ is *as easy as* the previous one.|การสอบนี้ง่ายเท่าครั้งก่อน
+as loud as|əz laʊd əz|📢|ดังเท่า|The _music_ is *as loud as* it was before.|ดนตรีดังเท่าเมื่อก่อน
+as clear as|əz klɪə əz|🔍|ชัดเจนเท่า|His _speech_ was *as clear as* hers.|คำปราศรัยของเขาชัดเจนเท่าของเธอ
+as fresh as|əz freʃ əz|🥬|สดเท่า|The _food_ is *as fresh as* the one from the _market_.|อาหารสดเท่าของจากตลาด
+as powerful as|əz ˈpaʊəfl əz|🦾|ทรงพลังเท่า|This _computer_ is *as powerful as* the one I bought last year.|คอมพิวเตอร์เครื่องนี้ทรงพลังเท่าเครื่องที่ฉันซื้อเมื่อปีที่แล้ว
+as comfortable as|əz ˈkʌmftəbl əz|🛋️|สบายเท่า|The _chair_ is *as comfortable as* the one in my _office_.|เก้าอี้สบายเท่าตัวในออฟฟิศของฉัน
+as good as|əz ɡʊd əz|👍|ดีเท่า|Your _idea_ is *as good as* mine.|ไอเดียของคุณดีเท่าของฉัน
+as informative as|əz ɪnˈfɔːmətɪv əz|💡|ให้ความรู้เท่า|The _lecture_ was *as informative as* last week's.|การบรรยายให้ความรู้เท่าของสัปดาห์ที่แล้ว
+as captivating as|əz ˈkæptɪveɪtɪŋ əz|📚|น่าหลงใหลเท่า|The two _books_ are *as captivating as* each other.|หนังสือสองเล่มน่าหลงใหลพอๆ กัน
+as expensive as|əz ɪkˈspensɪv əz|💎|แพงเท่า|The new _model_ is *as expensive as* the previous one.|รุ่นใหม่แพงเท่ารุ่นก่อน
+as sturdy as|əz ˈstɜːdi əz|🪑|แข็งแรงทนทานเท่า|This _chair_ is *as sturdy as* the other one.|เก้าอี้ตัวนี้แข็งแรงเท่าอีกตัว
+as busy as|əz ˈbɪzi əz|🍽️|ยุ่ง/คึกคักเท่า|This _restaurant_ is *as busy as* the one downtown.|ร้านอาหารนี้คึกคักเท่าร้านในตัวเมือง
+as fun as|əz fʌn əz|🎉|สนุกเท่า|The _party_ was *as fun as* we imagined.|ปาร์ตี้สนุกเท่าที่เรานึกไว้
+as comfortable as|əz ˈkʌmftəbl əz|🛋️|สบายเท่า|The _chairs_ are *as comfortable as* the ones at the movie _theater_.|เก้าอี้สบายเท่าที่โรงภาพยนตร์
+as thorough as|əz ˈθʌrə əz|🔬|ละเอียดถี่ถ้วนเท่า|His _explanation_ was *as thorough as* hers.|คำอธิบายของเขาละเอียดถี่ถ้วนเท่าของเธอ
+as entertaining as|əz ˌentəˈteɪnɪŋ əz|🎭|บันเทิงเท่า|The _play_ was *as entertaining as* the _movie_.|ละครเวทีบันเทิงเท่าภาพยนตร์
+as fresh as|əz freʃ əz|🥬|สดเท่า|The _air_ is *as fresh as* it was this morning.|อากาศสดชื่นเท่าเมื่อเช้า
+as reliable as|əz rɪˈlaɪəbl əz|🔧|เชื่อถือได้เท่า|This _car_ is *as reliable as* the other one we tested.|รถคันนี้เชื่อถือได้เท่าคันอื่นที่เราทดสอบ
+as loud as|əz laʊd əz|📢|ดังเท่า|The _music_ is *as loud as* last night’s _concert_.|ดนตรีดังเท่าคอนเสิร์ตเมื่อคืน
+as warm as|əz wɔːm əz|☀️|อุ่นเท่า|The _weather_ today is *as warm as* yesterday.|อากาศวันนี้อุ่นเท่าเมื่อวาน
+as fast as|əz fɑːst əz|🏎️|เร็วเท่า|She runs *as fast as* he does.|เธอวิ่งเร็วเท่าเขา
+as hot as|əz hɒt əz|☕|ร้อนเท่า|The _coffee_ is *as hot as* the one we had earlier.|กาแฟร้อนเท่าแก้วที่เรากินเมื่อครู่
+as clear as|əz klɪə əz|🔍|ชัดเจนเท่า|His _explanation_ was *as clear as* the one before.|คำอธิบายของเขาชัดเจนเท่าครั้งก่อน
+as fresh as|əz freʃ əz|🥬|สดเท่า|The _food_ tastes *as fresh as* it did last week.|อาหารรสสดเท่าเมื่อสัปดาห์ก่อน
+as expensive as|əz ɪkˈspensɪv əz|💎|แพงเท่า|The two _cars_ are *as expensive as* each other.|รถสองคันแพงพอๆ กัน
+as hard as|əz hɑːd əz|💪|ยาก/หนักเท่า|He studies *as hard as* his _classmates_.|เขาเรียนหนักเท่าเพื่อนร่วมชั้น
+as accurate as|əz ˈækjərət əz|🎯|แม่นยำเท่า|The _results_ are *as accurate as* last time.|ผลลัพธ์แม่นยำเท่าครั้งที่แล้ว
+as informative as|əz ɪnˈfɔːmətɪv əz|💡|ให้ความรู้เท่า|The _presentation_ was *as informative as* last week's.|การนำเสนอให้ความรู้เท่าของสัปดาห์ก่อน
+as humid as|əz ˈhjuːmɪd əz|💦|ชื้นเท่า|The _weather_ is *as humid as* in the _tropics_.|อากาศชื้นเท่าในเขตร้อน
+as exciting as|əz ɪkˈsaɪtɪŋ əz|🎢|น่าตื่นเต้นเท่า|The second _book_ is *as exciting as* the first.|หนังสือเล่มที่สองน่าตื่นเต้นเท่าเล่มแรก
+as peaceful as|əz ˈpiːsfl əz|🕊️|สงบสุขเท่า|The _park_ is *as peaceful as* the _library_.|สวนสาธารณะสงบสุขเท่าห้องสมุด
+as easy as|əz ˈiːzi əz|😌|ง่ายเท่า|This _test_ is *as easy as* the previous one.|การสอบนี้ง่ายเท่าครั้งก่อน
+as cozy as|əz ˈkəʊzi əz|🏠|อบอุ่นสบายเท่า|Their _house_ is *as cozy as* a _cottage_.|บ้านของพวกเขาอบอุ่นสบายเท่ากระท่อม
+as effective as|əz ɪˈfektɪv əz|🎯|ได้ผลเท่า|His _solution_ was *as effective as* yours.|วิธีแก้ของเขาได้ผลเท่าของคุณ
+as sweet as|əz swiːt əz|🍬|หวานเท่า|The _cake_ tastes *as sweet as* the one we had last time.|เค้กรสหวานเท่าก้อนที่เรากินครั้งก่อน
+as interesting as|əz ˈɪntrəstɪŋ əz|📖|น่าสนใจเท่า|The _book_ is *as interesting as* the _movie_.|หนังสือน่าสนใจเท่าภาพยนตร์
+as delicious as|əz dɪˈlɪʃəs əz|😋|อร่อยเท่า|The _soup_ was *as delicious as* the one I had last night.|ซุปอร่อยเท่าที่ฉันกินเมื่อคืน
+as comfortable as|əz ˈkʌmftəbl əz|🛋️|สบายเท่า|This _chair_ is *as comfortable as* a _sofa_.|เก้าอี้ตัวนี้สบายเท่าโซฟา
+as crowded as|əz ˈkraʊdɪd əz|🛍️|แออัดเท่า|The _store_ was *as crowded as* the _mall_ during the holiday _season_.|ร้านแออัดเท่าห้างในช่วงเทศกาล
+as fast as|əz fɑːst əz|🏎️|เร็วเท่า|This _computer_ is *as fast as* the one at the _office_.|คอมพิวเตอร์เครื่องนี้เร็วเท่าเครื่องที่ออฟฟิศ
+as exciting as|əz ɪkˈsaɪtɪŋ əz|🎢|น่าตื่นเต้นเท่า|The _party_ was *as exciting as* last year’s _celebration_.|ปาร์ตี้น่าตื่นเต้นเท่างานฉลองปีที่แล้ว
+as useful as|əz ˈjuːsfl əz|🧰|มีประโยชน์เท่า|The _lesson_ was *as useful as* the last one.|บทเรียนมีประโยชน์เท่าบทที่แล้ว
+as breathtaking as|əz ˈbreθteɪkɪŋ əz|🏔️|งดงามตระการตาเท่า|The mountain _view_ is *as breathtaking as* the one from the _valley_.|วิวภูเขางดงามตระการตาเท่าวิวจากหุบเขา
+as impressive as|əz ɪmˈpresɪv əz|🌟|น่าประทับใจเท่า|Her _performance_ was *as impressive as* his.|การแสดงของเธอน่าประทับใจเท่าของเขา
+as engaging as|əz ɪnˈɡeɪdʒɪŋ əz|🎓|ดึงดูดใจเท่า|This _lesson_ was *as engaging as* the last one.|บทเรียนนี้ดึงดูดใจเท่าบทที่แล้ว
+as difficult as|əz ˈdɪfɪkəlt əz|😰|ยากเท่า|This _task_ is *as difficult as* the last one.|งานนี้ยากเท่างานที่แล้ว
+as fast as|əz fɑːst əz|🏎️|เร็วเท่า|The _train_ was *as fast as* a sports _car_.|รถไฟเร็วเท่ารถสปอร์ต
+as obvious as|əz ˈɒbviəs əz|👀|ชัดเจนเห็นได้ง่ายเท่า|The _answer_ is *as obvious as* it could be.|คำตอบชัดเจนเท่าที่จะชัดได้
+as detailed as|əz ˈdiːteɪld əz|📋|ละเอียดเท่า|My _explanation_ was *as detailed as* the _teacher_’s.|คำอธิบายของฉันละเอียดเท่าของครู
+as valuable as|əz ˈvæljuəbl əz|🖼️|มีค่าเท่า|The _painting_ is *as valuable as* a museum _piece_.|ภาพวาดมีค่าเท่าชิ้นงานในพิพิธภัณฑ์
+as believable as|əz bɪˈliːvəbl əz|🤔|น่าเชื่อถือเท่า|Your _story_ is *as believable as* his.|เรื่องของคุณน่าเชื่อถือเท่าของเขา
+as cold as|əz kəʊld əz|🧊|เย็น/หนาวเท่า|This _winter_ is *as cold as* the last one.|ฤดูหนาวนี้หนาวเท่าปีที่แล้ว
+as urgent as|əz ˈɜːdʒənt əz|🚨|เร่งด่วนเท่า|The _email_ was *as urgent as* it sounded.|อีเมลเร่งด่วนเท่าที่ฟังดู
+as tasty as|əz ˈteɪsti əz|🥪|อร่อยเท่า|This _sandwich_ is *as tasty as* the one from the _café_.|แซนด์วิชนี้อร่อยเท่าของจากคาเฟ่
+as well-organized as|əz ˌwel ˈɔːɡənaɪzd əz|🗂️|จัดการดีเท่า|The _event_ was *as well-organized as* the _brochure_ promised.|งานจัดการได้ดีเท่าที่โบรชัวร์สัญญา
+as well-written as|əz ˌwel ˈrɪtn əz|📕|เขียนดีเท่า|The _book_ is *as well-written as* the award-winning _novel_.|หนังสือเขียนดีเท่านวนิยายรางวัล
+as fast as|əz fɑːst əz|🏎️|เร็วเท่า|The _horse_ is *as fast as* the _wind_.|ม้าเร็วเท่าสายลม
+as useful as|əz ˈjuːsfl əz|🧰|มีประโยชน์เท่า|This _app_ is *as useful as* a _notebook_.|แอปนี้มีประโยชน์เท่าสมุดจด
+as quiet as|əz ˈkwaɪət əz|🤫|เงียบเท่า|The _town_ is *as quiet as* a countryside _village_.|เมืองนี้เงียบเท่าหมู่บ้านชนบท
+as crowded as|əz ˈkraʊdɪd əz|🛍️|แออัดเท่า|The _city_ is *as crowded as* ever.|เมืองแออัดเท่าที่เคย
+as efficient as|əz ɪˈfɪʃnt əz|⚙️|มีประสิทธิภาพเท่า|This _method_ is *as efficient as* the old one.|วิธีนี้มีประสิทธิภาพเท่าวิธีเก่า
+as logical as|əz ˈlɒdʒɪkl əz|🧩|มีเหตุผลเท่า|Her _decision_ was *as logical as* it was emotional.|การตัดสินใจของเธอมีเหตุผลพอๆ กับที่มีอารมณ์
+as dangerous as|əz ˈdeɪndʒərəs əz|⚠️|อันตรายเท่า|The _road_ was *as dangerous as* they warned us.|ถนนอันตรายเท่าที่เขาเตือนเรา
+as fast as|əz fɑːst əz|🏎️|เร็วเท่า|The _service_ was *as fast as* a drive-thru.|บริการเร็วเท่าไดรฟ์ทรู
+as helpful as|əz ˈhelpfl əz|🧭|เป็นประโยชน์เท่า|That _email_ was *as helpful as* a _guidebook_.|อีเมลนั้นเป็นประโยชน์เท่าหนังสือคู่มือ
+as clear as|əz klɪə əz|🔍|ชัดเจนเท่า|Your _explanation_ is *as clear as* _crystal_.|คำอธิบายของคุณชัดเจนเท่าคริสตัล
+as good as|əz ɡʊd əz|👍|ดีเท่า|Her _results_ were *as good as* the top _scorer_’s.|ผลของเธอดีเท่าผู้ทำคะแนนสูงสุด`,
+"Actions (as + adverb + as)":`as well as|əz wel əz|🎯|ดีเท่า|The _team_ played *as well as* they did last _season_.|ทีมเล่นได้ดีเท่าฤดูกาลที่แล้ว
+as confidently as|əz ˈkɒnfɪdəntli əz|😎|อย่างมั่นใจเท่า|She answered the _question_ *as confidently as* he did.|เธอตอบคำถามอย่างมั่นใจเท่าเขา
+as quickly as|əz ˈkwɪkli əz|⏱️|อย่างรวดเร็วเท่า|He solved the _puzzle_ *as quickly as* I did.|เขาแก้ปริศนาได้เร็วเท่าฉัน
+as fluently as|əz ˈfluːəntli əz|🗣️|อย่างคล่องแคล่วเท่า|She speaks *as fluently as* a native _speaker_.|เธอพูดได้คล่องเท่าเจ้าของภาษา
+as well as|əz wel əz|🎯|ดีเท่า|The _team_ played *as well as* the _champions_.|ทีมเล่นได้ดีเท่าแชมป์
+as fluently as|əz ˈfluːəntli əz|🗣️|อย่างคล่องแคล่วเท่า|She speaks *as fluently as* a native _speaker_.|เธอพูดได้คล่องเท่าเจ้าของภาษา
+as efficiently as|əz ɪˈfɪʃntli əz|⚙️|อย่างมีประสิทธิภาพเท่า|She completed the _project_ *as efficiently as* her _team_.|เธอทำโปรเจกต์เสร็จอย่างมีประสิทธิภาพเท่าทีมของเธอ
+as efficiently as|əz ɪˈfɪʃntli əz|⚙️|อย่างมีประสิทธิภาพเท่า|He works *as efficiently as* anyone in the _department_.|เขาทำงานมีประสิทธิภาพเท่าใครๆ ในแผนก
+as stylishly as|əz ˈstaɪlɪʃli əz|🎬|อย่างมีสไตล์เท่า|She dressed *as stylishly as* the _celebrities_ on the red _carpet_.|เธอแต่งตัวมีสไตล์เท่าเหล่าคนดังบนพรมแดง
+as smoothly as|əz ˈsmuːðli əz|💃|อย่างราบรื่นเท่า|The _dancer_ moved *as smoothly as* _water_.|นักเต้นเคลื่อนไหวอย่างราบรื่นเท่าสายน้ำ
+as quickly as|əz ˈkwɪkli əz|⏱️|อย่างรวดเร็วเท่า|The _student_ answered *as quickly as* the _teacher_ hoped.|นักเรียนตอบเร็วเท่าที่ครูหวัง`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const all=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ const sc=x=>{const n=x.name;let s=0;if(/^en[-_]GB/i.test(x.lang))s+=100;if(/natural|neural/i.test(n))s+=50;if(/online/i.test(n))s+=40;if(/google uk english female/i.test(n))s+=35;if(/premium|enhanced/i.test(n))s+=30;if(/sonia|libby|ryan|serena|daniel|kate|oliver/i.test(n))s+=20;if(/google/i.test(n))s+=10;if(x.localService===false)s+=5;return s};
+ voice=all.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>

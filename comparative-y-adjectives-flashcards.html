@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparative Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#b0006c;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Comparative: adjectives ending in -y (-ier + than)</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Feelings & Personality":`happier than|ˈhæpiə ðən|😊|มีความสุขกว่า|She is *happier than* she was last year.|เธอมีความสุขกว่าเมื่อปีที่แล้ว
+busier than|ˈbɪziə ðən|📅|ยุ่งกว่า|My _job_ is *busier than* it used to be.|งานของฉันยุ่งกว่าที่เคยเป็น
+angrier than|ˈæŋɡriə ðən|😠|โกรธกว่า|He looks *angrier than* usual.|เขาดูโกรธกว่าปกติ
+luckier than|ˈlʌkiə ðən|🍀|โชคดีกว่า|She seems *luckier than* her _sister_.|เธอดูโชคดีกว่าพี่/น้องสาวของเธอ
+moodier than|ˈmuːdiə ðən|🌦️|อารมณ์แปรปรวนกว่า|His _mood_ is *moodier than* ever.|อารมณ์ของเขาแปรปรวนกว่าที่เคย
+friendlier than|ˈfrendliə ðən|🤝|เป็นมิตรกว่า|This _dog_ is *friendlier than* the last one.|สุนัขตัวนี้เป็นมิตรกว่าตัวที่แล้ว
+chattier than|ˈtʃætiə ðən|💬|ช่างพูดกว่า|My _daughter_ is *chattier than* her _brother_.|ลูกสาวของฉันช่างพูดกว่าพี่/น้องชายของเธอ
+goofier than|ˈɡuːfiə ðən|🤡|ตลกโปกฮากว่า|That _clown_ is *goofier than* anyone I’ve seen.|ตัวตลกคนนั้นตลกโปกฮากว่าใครที่ฉันเคยเห็น
+whinier than|ˈwaɪniə ðən|😭|ขี้บ่นกว่า|Their _child_ is *whinier than* ours.|ลูกของพวกเขาขี้บ่นกว่าลูกของเรา
+lazier than|ˈleɪziə ðən|😴|ขี้เกียจกว่า|That _joke_ is *lazier than* clever.|มุกนั้นขี้เกียจคิดมากกว่าฉลาด
+jumpier than|ˈdʒʌmpiə ðən|🐱|ขี้ตกใจกว่า|The _kitten_ is *jumpier than* the _puppy_.|ลูกแมวขี้ตกใจกว่าลูกสุนัข
+merrier than|ˈmeriə ðən|🎉|ร่าเริงกว่า|Their _daughter_ is *merrier than* ever.|ลูกสาวของพวกเขาร่าเริงกว่าที่เคย
+sneakier than|ˈsniːkiə ðən|🐾|แอบแฝงกว่า|The new _kitten_ is *sneakier than* the old one.|ลูกแมวตัวใหม่แอบแฝงกว่าตัวเก่า
+rowdier than|ˈraʊdiə ðən|🥳|อึกทึกกว่า|The _party_ was *rowdier than* we planned.|ปาร์ตี้อึกทึกกว่าที่เราวางแผนไว้
+grumpier than|ˈɡrʌmpiə ðən|😾|ขี้หงุดหงิดกว่า|My _brother_ is *grumpier than* me in the _morning_.|พี่/น้องชายของฉันขี้หงุดหงิดกว่าฉันตอนเช้า
+lovelier than|ˈlʌvliə ðən|💐|น่ารักน่าเอ็นดูกว่า|My _grandma_ is *lovelier than* ever.|คุณยายของฉันน่ารักน่าเอ็นดูกว่าที่เคย
+clumsier than|ˈklʌmziə ðən|🤕|เงอะงะกว่า|That _kid_ is *clumsier than* his _twin_.|เด็กคนนั้นเงอะงะกว่าฝาแฝดของเขา
+moodier than|ˈmuːdiə ðən|🌦️|อารมณ์แปรปรวนกว่า|Her _painting_ is *moodier than* his.|ภาพวาดของเธออารมณ์หนักกว่าของเขา
+lazier than|ˈleɪziə ðən|😴|ขี้เกียจกว่า|This _day_ is *lazier than* any _weekend_.|วันนี้ขี้เกียจกว่าวันหยุดสุดสัปดาห์ใดๆ
+snobbier than|ˈsnɒbiə ðən|🧐|หยิ่งกว่า|His _attitude_ is *snobbier than* last year.|ทัศนคติของเขาหยิ่งกว่าปีที่แล้ว
+nastier than|ˈnɑːstiə ðən|😡|ร้ายกาจกว่า|His _comment_ was *nastier than* hers.|ความเห็นของเขาร้ายกาจกว่าของเธอ
+testier than|ˈtestiə ðən|😤|หงุดหงิดง่ายกว่า|His _reply_ was *testier than* normal.|คำตอบของเขาหงุดหงิดกว่าปกติ
+sassier than|ˈsæsiə ðən|💅|กวนปากกว่า|Her _reply_ was *sassier than* I expected.|คำตอบของเธอกวนปากกว่าที่ฉันคาดไว้
+grumpier than|ˈɡrʌmpiə ðən|😾|ขี้หงุดหงิดกว่า|That old _man_ is *grumpier than* a _cat_ in the _rain_.|ชายแก่คนนั้นขี้หงุดหงิดกว่าแมวตากฝน
+snottier than|ˈsnɒtiə ðən|😒|ยโสกว่า|The _tone_ of the _email_ was *snottier than* it should have been.|น้ำเสียงของอีเมลยโสกว่าที่ควรจะเป็น
+perkier than|ˈpɜːkiə ðən|🌞|สดใสกว่า|Her _personality_ is *perkier than* her _sister_’s.|นิสัยของเธอสดใสกว่าพี่/น้องสาว
+jumpier than|ˈdʒʌmpiə ðən|🐱|ขี้ตกใจกว่า|That _kid_ is *jumpier than* the others.|เด็กคนนั้นขี้ตกใจกว่าคนอื่น
+moodier than|ˈmuːdiə ðən|🌦️|อารมณ์แปรปรวนกว่า|The _actor_’s _performance_ was *moodier than* expected.|การแสดงของนักแสดงอารมณ์หนักกว่าที่คาดไว้`,
+"Appearance & Texture":`cuter than|ˈkjuːtə ðən|🐶|น่ารักกว่า|This _puppy_ is *cuter than* the last one.|ลูกสุนัขตัวนี้น่ารักกว่าตัวที่แล้ว
+prettier than|ˈprɪtiə ðən|👗|สวยกว่า|That _dress_ is *prettier than* mine.|ชุดนั้นสวยกว่าของฉัน
+messier than|ˈmesiə ðən|🗑️|รกกว่า|Your _handwriting_ is *messier than* mine.|ลายมือของคุณรกกว่าของฉัน
+cozier than|ˈkəʊziə ðən|🛋️|อบอุ่นสบายกว่า|The _room_ feels *cozier than* my _bedroom_.|ห้องนี้อบอุ่นสบายกว่าห้องนอนของฉัน
+shinier than|ˈʃaɪniə ðən|💍|เงางามกว่า|Her _hair_ is *shinier than* mine.|ผมของเธอเงางามกว่าของฉัน
+comfier than|ˈkʌmfiə ðən|🛏️|สบายกว่า|This _couch_ is *comfier than* the other one.|โซฟาตัวนี้นั่งสบายกว่าตัวอื่น
+chubbier than|ˈtʃʌbiə ðən|👶|อวบกว่า|Their _baby_ is *chubbier than* mine was.|ลูกของพวกเขาอวบกว่าลูกของฉันตอนนั้น
+dirtier than|ˈdɜːtiə ðən|👞|สกปรกกว่า|My _shoes_ are *dirtier than* yours.|รองเท้าของฉันสกปรกกว่าของคุณ
+glossier than|ˈɡlɒsiə ðən|📖|มันวาวกว่า|The new _version_ is *glossier than* the old one.|เวอร์ชันใหม่มันวาวกว่าอันเก่า
+hairier than|ˈheəriə ðən|🐕|ขนเยอะกว่า|The _dog_ is *hairier than* the _cat_.|สุนัขขนเยอะกว่าแมว
+squishier than|ˈskwɪʃiə ðən|🫧|นิ่มยวบกว่า|This _pillow_ is *squishier than* the old one.|หมอนใบนี้นิ่มยวบกว่าใบเก่า
+frizzier than|ˈfrɪziə ðən|💇|ฟูกว่า|Her _hair_ is *frizzier than* mine today.|วันนี้ผมของเธอฟูกว่าของฉัน
+comfier than|ˈkʌmfiə ðən|🛏️|สบายกว่า|This _chair_ is *comfier than* the last one.|เก้าอี้ตัวนี้สบายกว่าตัวที่แล้ว
+woollier than|ˈwʊliə ðən|🧦|ขนแกะกว่า|My _socks_ are *woollier than* yours.|ถุงเท้าของฉันขนแกะกว่าของคุณ
+fuzzier than|ˈfʌziə ðən|🧶|ขนฟูกว่า|My _blanket_ is *fuzzier than* yours.|ผ้าห่มของฉันขนฟูกว่าของคุณ
+glassier than|ˈɡlɑːsiə ðən|👁️|ตาแข็งใสกว่า|Her _eyes_ look *glassier than* before.|ดวงตาของเธอดูใสแข็งกว่าเมื่อก่อน
+curlier than|ˈkɜːliə ðən|🌀|หยิกกว่า|Her _handwriting_ is *curlier than* mine.|ลายมือของเธอหยิกกว่าของฉัน
+fluffier than|ˈflʌfiə ðən|☁️|ฟูกว่า|The _clouds_ are *fluffier than* they were earlier.|เมฆฟูกว่าเมื่อครู่
+fancier than|ˈfænsiə ðən|🏰|หรูหรากว่า|Their _bedroom_ is *fancier than* ours.|ห้องนอนของพวกเขาหรูกว่าห้องของเรา
+silkier than|ˈsɪlkiə ðən|🧣|เนียนนุ่มกว่า|Your _scarf_ is *silkier than* mine.|ผ้าพันคอของคุณเนียนนุ่มกว่าของฉัน
+stickier than|ˈstɪkiə ðən|🍯|เหนียวเหนอะกว่า|His _bag_ is *stickier than* yours.|กระเป๋าของเขาเหนียวเหนอะกว่าของคุณ
+boxier than|ˈbɒksiə ðən|📦|เป็นทรงกล่องกว่า|The new _car_ looks *boxier than* the old _model_.|รถคันใหม่ดูเป็นทรงกล่องกว่ารุ่นเก่า
+bouncier than|ˈbaʊnsiə ðən|🛏️|เด้งกว่า|The _pillow_ is *bouncier than* the _mattress_.|หมอนเด้งกว่าที่นอน
+pudgier than|ˈpʌdʒiə ðən|🐈|อ้วนป้อมกว่า|My _cat_ is *pudgier than* my _dog_.|แมวของฉันอ้วนป้อมกว่าสุนัขของฉัน
+shinier than|ˈʃaɪniə ðən|💍|เงางามกว่า|Her new _shoes_ are *shinier than* mine.|รองเท้าใหม่ของเธอเงางามกว่าของฉัน
+fuzzier than|ˈfʌziə ðən|🧶|ขนฟูกว่า|The kitten’s _fur_ is *fuzzier than* the puppy’s.|ขนของลูกแมวฟูกว่าของลูกสุนัข
+chubbier than|ˈtʃʌbiə ðən|👶|อวบกว่า|The _baby_ is *chubbier than* last month.|ทารกอวบกว่าเดือนที่แล้ว
+rosier than|ˈrəʊziə ðən|🌹|แดงระเรื่อกว่า|Her _cheeks_ are *rosier than* usual.|แก้มของเธอแดงระเรื่อกว่าปกติ
+shaggier than|ˈʃæɡiə ðən|🧸|ขนยาวรุงรังกว่า|This _rug_ is *shaggier than* the one in the _hall_.|พรมผืนนี้ขนยาวรุงรังกว่าผืนในโถง
+cozier than|ˈkəʊziə ðən|🛋️|อบอุ่นสบายกว่า|This _blanket_ is *cozier than* yours.|ผ้าห่มผืนนี้อบอุ่นสบายกว่าของคุณ
+stickier than|ˈstɪkiə ðən|🍯|เหนียวเหนอะกว่า|The _surface_ is *stickier than* I thought.|พื้นผิวเหนียวเหนอะกว่าที่ฉันคิด
+glassier than|ˈɡlɑːsiə ðən|👁️|ตาแข็งใสกว่า|The dog’s _eyes_ are *glassier than* yesterday.|ตาของสุนัขใสแข็งกว่าเมื่อวาน
+messier than|ˈmesiə ðən|🗑️|รกกว่า|The _notes_ in this _draft_ are *messier than* the last.|บันทึกในร่างนี้รกกว่าอันที่แล้ว
+squishier than|ˈskwɪʃiə ðən|🫧|นิ่มยวบกว่า|This _pillow_ is *squishier than* it looks.|หมอนใบนี้นิ่มยวบกว่าที่เห็น
+shinier than|ˈʃaɪniə ðən|💍|เงางามกว่า|This _phone_ is *shinier than* the older _model_.|โทรศัพท์เครื่องนี้เงางามกว่ารุ่นเก่า`,
+"Weather & Places":`bumpier than|ˈbʌmpiə ðən|🚧|ขรุขระกว่า|This _road_ is *bumpier than* the main _street_.|ถนนสายนี้ขรุขระกว่าถนนสายหลัก
+muddier than|ˈmʌdiə ðən|🥾|เป็นโคลนกว่า|This _path_ is *muddier than* the _trail_ we took before.|ทางนี้เป็นโคลนกว่าเส้นทางที่เราเดินก่อนหน้า
+cloudier than|ˈklaʊdiə ðən|☁️|มีเมฆมากกว่า|The _sky_ is *cloudier than* it was this morning.|ท้องฟ้ามีเมฆมากกว่าเมื่อเช้า
+drier than|ˈdraɪə ðən|🏜️|แห้งกว่า|The _air_ today is *drier than* yesterday.|อากาศวันนี้แห้งกว่าเมื่อวาน
+stormier than|ˈstɔːmiə ðən|⛈️|มีพายุกว่า|The _sky_ looks *stormier than* before.|ท้องฟ้าดูมีพายุกว่าเมื่อก่อน
+windier than|ˈwɪndiə ðən|🌬️|ลมแรงกว่า|The _weather_ is *windier than* yesterday.|อากาศลมแรงกว่าเมื่อวาน
+grayer than|ˈɡreɪə ðən|🌫️|เทากว่า|The _sky_ is *grayer than* it was this morning.|ท้องฟ้าเทากว่าเมื่อเช้า
+dustier than|ˈdʌstiə ðən|🌪️|ฝุ่นเยอะกว่า|The _street_ today is *dustier than* yesterday.|ถนนวันนี้ฝุ่นเยอะกว่าเมื่อวาน
+rockier than|ˈrɒkiə ðən|🪨|เป็นหินกว่า|The mountain _path_ is *rockier than* I thought.|ทางขึ้นเขาเป็นหินกว่าที่ฉันคิด
+leafier than|ˈliːfiə ðən|🍃|ร่มรื่นกว่า|This _path_ is *leafier than* the _shortcut_.|ทางนี้ร่มรื่นกว่าทางลัด
+smokier than|ˈsməʊkiə ðən|💨|มีควันมากกว่า|The _sky_ is *smokier than* before.|ท้องฟ้ามีควันมากกว่าเมื่อก่อน
+snowier than|ˈsnəʊiə ðən|❄️|หิมะตกมากกว่า|The _weather_ is *snowier than* last week.|อากาศหิมะตกมากกว่าสัปดาห์ที่แล้ว
+cloudier than|ˈklaʊdiə ðən|☁️|มีเมฆมากกว่า|That _explanation_ is *cloudier than* before.|คำอธิบายนั้นคลุมเครือกว่าเมื่อก่อน
+sunnier than|ˈsʌniə ðən|☀️|แดดจ้ากว่า|The _weather_ is foggy but still *sunnier than* yesterday.|อากาศมีหมอกแต่ก็ยังแดดจ้ากว่าเมื่อวาน
+muggier than|ˈmʌɡiə ðən|🥵|อบอ้าวกว่า|The _air_ outside is *muggier than* I thought.|อากาศข้างนอกอบอ้าวกว่าที่ฉันคิด
+dustier than|ˈdʌstiə ðən|🌪️|ฝุ่นเยอะกว่า|The old _road_ is *dustier than* the new one.|ถนนสายเก่าฝุ่นเยอะกว่าสายใหม่
+muddier than|ˈmʌdiə ðən|🥾|เป็นโคลนกว่า|My _thoughts_ feel *muddier than* they did this morning.|ความคิดของฉันขุ่นมัวกว่าเมื่อเช้า
+smokier than|ˈsməʊkiə ðən|💨|มีควันมากกว่า|The _room_ became *smokier than* before.|ห้องมีควันมากกว่าเมื่อก่อน`,
+"Food & Senses":`greasier than|ˈɡriːsiə ðən|🍔|มันกว่า|My _hair_ is *greasier than* yours.|ผมของฉันมันกว่าของคุณ
+noisier than|ˈnɔɪziə ðən|🔊|เสียงดังกว่า|The _kids_ are *noisier than* yesterday.|เด็กๆ เสียงดังกว่าเมื่อวาน
+tastier than|ˈteɪstiə ðən|😋|อร่อยกว่า|My _lunch_ was *tastier than* yours.|มื้อเที่ยงของฉันอร่อยกว่าของคุณ
+juicier than|ˈdʒuːsiə ðən|🍊|ฉ่ำกว่า|The _fruit_ is *juicier than* what I bought last week.|ผลไม้นี้ฉ่ำกว่าที่ฉันซื้อเมื่อสัปดาห์ก่อน
+spicier than|ˈspaɪsiə ðən|🌶️|เผ็ดกว่า|That _recipe_ is *spicier than* I expected.|สูตรนั้นเผ็ดกว่าที่ฉันคาดไว้
+creamier than|ˈkriːmiə ðən|🍲|ครีมมี่กว่า|The _soup_ is *creamier than* usual.|ซุปครีมมี่กว่าปกติ
+spicier than|ˈspaɪsiə ðən|🌶️|เผ็ดกว่า|My mom’s _cooking_ is *spicier than* my dad’s.|อาหารของแม่เผ็ดกว่าของพ่อ
+fruitier than|ˈfruːtiə ðən|🍓|กลิ่นผลไม้แรงกว่า|This _juice_ is *fruitier than* the one I had before.|น้ำผลไม้นี้กลิ่นผลไม้แรงกว่าแก้วที่ฉันดื่มก่อนหน้า
+raspier than|ˈrɑːspiə ðən|🗣️|แหบกว่า|His _voice_ is *raspier than* usual.|เสียงของเขาแหบกว่าปกติ
+syrupier than|ˈsɪrəpiə ðən|🍩|เชื่อมหวานกว่า|This _donut_ is *syrupier than* it should be.|โดนัทนี้เชื่อมหวานกว่าที่ควรเป็น
+cracklier than|ˈkræklɪə ðən|🔈|เสียงแตกกว่า|My _voice_ is *cracklier than* normal today.|วันนี้เสียงของฉันแตกพร่ากว่าปกติ
+squeakier than|ˈskwiːkiə ðən|🐭|แหลมเล็กกว่า|His _laugh_ is *squeakier than* a _mouse_.|เสียงหัวเราะของเขาแหลมเล็กกว่าหนู
+zestier than|ˈzestiə ðən|🍋|สดซ่ากว่า|This _salad_ is *zestier than* the last one.|สลัดนี้สดซ่ากว่าจานที่แล้ว
+tangier than|ˈtæŋiə ðən|🍅|เปรี้ยวจี๊ดกว่า|This _sauce_ is *tangier than* the last one.|ซอสนี้เปรี้ยวจี๊ดกว่าอันที่แล้ว
+butterier than|ˈbʌtəriə ðən|🧈|เนยเยอะกว่า|This _cake_ is *butterier than* the previous one.|เค้กนี้เนยเยอะกว่าก้อนก่อนหน้า
+fruitier than|ˈfruːtiə ðən|🍓|กลิ่นผลไม้แรงกว่า|That _soap_ smells *fruitier than* mine.|สบู่นั้นกลิ่นผลไม้แรงกว่าของฉัน
+jazzier than|ˈdʒæziə ðən|🎷|สไตล์แจ๊สกว่า|The _music_ is *jazzier than* I like.|ดนตรีนี้แจ๊สกว่าที่ฉันชอบ
+gooier than|ˈɡuːiə ðən|🧁|เหนียวหนึบกว่า|The second _slice_ of _pie_ is *gooier than* the first.|พายชิ้นที่สองเหนียวหนึบกว่าชิ้นแรก
+huskier than|ˈhʌskiə ðən|🎙️|แหบพร่ากว่า|Her _voice_ is *huskier than* mine.|เสียงของเธอแหบพร่ากว่าของฉัน
+creamier than|ˈkriːmiə ðən|🍲|ครีมมี่กว่า|The _frosting_ is *creamier than* the _filling_.|ครีมหน้าเค้กครีมมี่กว่าไส้
+milkier than|ˈmɪlkiə ðən|🍦|นมเยอะกว่า|The ice _cream_ is *milkier than* the _gelato_.|ไอศกรีมนมเยอะกว่าเจลาโต้`,
+"Stories, Ideas & Style":`funnier than|ˈfʌniə ðən|😂|ตลกกว่า|That _movie_ was *funnier than* the one before.|หนังเรื่องนั้นตลกกว่าเรื่องก่อนหน้า
+sillier than|ˈsɪliə ðən|🤪|เพี้ยน/โง่กว่า|His _story_ is *sillier than* yours.|เรื่องของเขาเพี้ยนกว่าของคุณ
+catchier than|ˈkætʃiə ðən|🎵|ติดหูกว่า|The new _song_ is *catchier than* the old one.|เพลงใหม่ติดหูกว่าเพลงเก่า
+cornier than|ˈkɔːniə ðən|🌽|เลี่ยน/มุขเก่ากว่า|That _joke_ is *cornier than* the last one.|มุกนั้นเลี่ยนกว่ามุกที่แล้ว
+flimsier than|ˈflɪmziə ðən|📄|ไม่น่าเชื่อถือกว่า|His _excuse_ was *flimsier than* expected.|ข้ออ้างของเขาฟังไม่ขึ้นกว่าที่คาดไว้
+riskier than|ˈrɪskiə ðən|⚠️|เสี่ยงกว่า|Her _argument_ is *riskier than* his.|ข้อโต้แย้งของเธอเสี่ยงกว่าของเขา
+creepier than|ˈkriːpiə ðən|👻|น่าขนลุกกว่า|The second _act_ was *creepier than* the first.|องก์ที่สองน่าขนลุกกว่าองก์แรก
+trickier than|ˈtrɪkiə ðən|🧮|ยุ่งยากกว่า|This math _problem_ is *trickier than* the last one.|โจทย์เลขข้อนี้ยุ่งยากกว่าข้อที่แล้ว
+flashier than|ˈflæʃiə ðən|🚗|หรูหราฉูดฉาดกว่า|His _car_ is *flashier than* mine.|รถของเขาหรูฉูดฉาดกว่ารถของฉัน
+zanier than|ˈzeɪniə ðən|🤯|พิลึกกว่า|Your _idea_ is *zanier than* what I had in mind.|ไอเดียของคุณพิลึกกว่าที่ฉันคิดไว้
+wordier than|ˈwɜːdiə ðən|📝|ยืดยาวกว่า|This _explanation_ is *wordier than* it needs to be.|คำอธิบายนี้ยืดยาวกว่าที่จำเป็น
+soapier than|ˈsəʊpiə ðən|📺|ดราม่ากว่า|The TV _show_ got *soapier than* before.|รายการทีวีดราม่ากว่าเมื่อก่อน
+dreamier than|ˈdriːmiə ðən|💭|เหมือนฝันกว่า|Your _story_ is *dreamier than* mine.|เรื่องของคุณเหมือนฝันกว่าของฉัน
+crazier than|ˈkreɪziə ðən|🌀|บ้าคลั่งกว่า|The _plot_ became *crazier than* the first _season_.|โครงเรื่องบ้าคลั่งกว่าซีซันแรก
+snarkier than|ˈsnɑːkiə ðən|😏|เหน็บแนมกว่า|His _response_ was *snarkier than* needed.|คำตอบของเขาเหน็บแนมเกินจำเป็น
+wittier than|ˈwɪtiə ðən|🎭|เฉลียวฉลาดกว่า|His _reply_ was *wittier than* I expected.|คำตอบของเขาเฉลียวฉลาดกว่าที่ฉันคาดไว้
+trendier than|ˈtrendiə ðən|✨|ทันสมัยกว่า|Her _outfit_ is *trendier than* mine.|ชุดของเธอทันสมัยกว่าของฉัน
+loopier than|ˈluːpiə ðən|🎢|เพี้ยนกว่า|Your _story_ is *loopier than* mine.|เรื่องของคุณเพี้ยนกว่าของฉัน
+edgier than|ˈedʒiə ðən|🎸|แหวกแนวกว่า|This _game_ is *edgier than* the previous _version_.|เกมนี้แหวกแนวกว่าเวอร์ชันก่อนหน้า
+sappier than|ˈsæpiə ðən|💕|เลี่ยนซึ้งกว่า|The _ending_ was *sappier than* expected.|ตอนจบเลี่ยนซึ้งกว่าที่คาดไว้
+weepier than|ˈwiːpiə ðən|😢|เรียกน้ำตากว่า|This _movie_ is *weepier than* the original.|หนังเรื่องนี้เรียกน้ำตากว่าต้นฉบับ
+cheesier than|ˈtʃiːziə ðən|🧀|เลี่ยนเชยกว่า|The _joke_ was *cheesier than* anything I've heard.|มุกนั้นเลี่ยนเชยกว่าอะไรที่ฉันเคยได้ยิน
+bloodier than|ˈblʌdiə ðən|🩸|นองเลือดกว่า|His _story_ is *bloodier than* I imagined.|เรื่องของเขานองเลือดกว่าที่ฉันนึกไว้
+scarier than|ˈskeəriə ðən|🎃|น่ากลัวกว่า|The horror _film_ was *scarier than* I expected.|หนังสยองขวัญน่ากลัวกว่าที่ฉันคาดไว้
+scarier than|ˈskeəriə ðən|🎃|น่ากลัวกว่า|This _alley_ is narrower and *scarier than* the other one.|ซอยนี้แคบและน่ากลัวกว่าซอยอื่น
+dreamier than|ˈdriːmiə ðən|💭|เหมือนฝันกว่า|That _actor_ is *dreamier than* his co-star.|นักแสดงคนนั้นเหมือนฝันกว่าเพื่อนร่วมแสดง
+flashier than|ˈflæʃiə ðən|🚗|หรูหราฉูดฉาดกว่า|The new _design_ is *flashier than* the _prototype_.|ดีไซน์ใหม่ฉูดฉาดกว่าต้นแบบ
+riskier than|ˈrɪskiə ðən|⚠️|เสี่ยงกว่า|Your _plan_ is *riskier than* I thought.|แผนของคุณเสี่ยงกว่าที่ฉันคิด
+quirkier than|ˈkwɜːkiə ðən|🦄|แปลกเฉพาะตัวกว่า|Her _style_ is *quirkier than* most people’s.|สไตล์ของเธอแปลกเฉพาะตัวกว่าคนส่วนใหญ่
+wordier than|ˈwɜːdiə ðən|📝|ยืดยาวกว่า|The second _book_ is *wordier than* the first.|หนังสือเล่มที่สองยืดยาวกว่าเล่มแรก
+gloomier than|ˈɡluːmiə ðən|🌧️|หม่นหมองกว่า|The _ending_ was *gloomier than* I expected.|ตอนจบหม่นหมองกว่าที่ฉันคาดไว้
+snarkier than|ˈsnɑːkiə ðən|😏|เหน็บแนมกว่า|His _tone_ was *snarkier than* necessary.|น้ำเสียงของเขาเหน็บแนมเกินจำเป็น
+loopier than|ˈluːpiə ðən|🎢|เพี้ยนกว่า|Her _handwriting_ is *loopier than* it used to be.|ลายมือของเธอเป็นวงกว่าที่เคย
+zanier than|ˈzeɪniə ðən|🤯|พิลึกกว่า|The _joke_ was *zanier than* I expected.|มุกนั้นพิลึกกว่าที่ฉันคาดไว้
+cornier than|ˈkɔːniə ðən|🌽|เลี่ยน/มุขเก่ากว่า|That _story_ was *cornier than* any soap _opera_.|เรื่องนั้นเลี่ยนกว่าละครน้ำเน่าใดๆ
+creepier than|ˈkriːpiə ðən|👻|น่าขนลุกกว่า|My _dream_ last night was stranger and *creepier than* ever.|ความฝันเมื่อคืนแปลกและน่าขนลุกกว่าที่เคย
+trendier than|ˈtrendiə ðən|✨|ทันสมัยกว่า|His _style_ is *trendier than* last _season_.|สไตล์ของเขาทันสมัยกว่าฤดูกาลที่แล้ว
+scarier than|ˈskeəriə ðən|🎃|น่ากลัวกว่า|The final _level_ is *scarier than* the earlier ones.|ด่านสุดท้ายน่ากลัวกว่าด่านก่อนหน้า
+wordier than|ˈwɜːdiə ðən|📝|ยืดยาวกว่า|The second _chapter_ was *wordier than* the first.|บทที่สองยืดยาวกว่าบทแรก
+jerkier than|ˈdʒɜːkiə ðən|🤖|กระตุกกว่า|His _movements_ are *jerkier than* usual.|ท่าทางของเขากระตุกกว่าปกติ
+zanier than|ˈzeɪniə ðən|🤯|พิลึกกว่า|Your _idea_ sounds *zanier than* his.|ไอเดียของคุณฟังพิลึกกว่าของเขา
+cartoonier than|kɑːˈtuːniə ðən|🖍️|เหมือนการ์ตูนกว่า|His _drawing_ is *cartoonier than* hers.|ภาพวาดของเขาเหมือนการ์ตูนกว่าของเธอ
+soapier than|ˈsəʊpiə ðən|📺|ดราม่ากว่า|The third _act_ was *soapier than* expected.|องก์ที่สามดราม่ากว่าที่คาดไว้
+edgier than|ˈedʒiə ðən|🎸|แหวกแนวกว่า|Her _behavior_ is *edgier than* it was last week.|พฤติกรรมของเธอแหวกแนวกว่าสัปดาห์ที่แล้ว
+edgier than|ˈedʒiə ðən|🎸|แหวกแนวกว่า|His _haircut_ is *edgier than* mine.|ทรงผมของเขาแหวกแนวกว่าของฉัน
+flashier than|ˈflæʃiə ðən|🚗|หรูหราฉูดฉาดกว่า|His _speech_ was *flashier than* his _ideas_.|คำปราศรัยของเขาฉูดฉาดกว่าความคิดของเขา
+funnier than|ˈfʌniə ðən|😂|ตลกกว่า|That _comedian_ is *funnier than* anyone I’ve seen.|นักแสดงตลกคนนั้นตลกกว่าใครที่ฉันเคยเห็น
+snarkier than|ˈsnɑːkiə ðən|😏|เหน็บแนมกว่า|Her _jokes_ are *snarkier than* necessary.|มุกของเธอเหน็บแนมเกินจำเป็น`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const all=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ const sc=x=>{const n=x.name;let s=0;if(/^en[-_]GB/i.test(x.lang))s+=100;if(/natural|neural/i.test(n))s+=50;if(/online/i.test(n))s+=40;if(/google uk english female/i.test(n))s+=35;if(/premium|enhanced/i.test(n))s+=30;if(/sonia|libby|ryan|serena|daniel|kate|oliver/i.test(n))s+=20;if(/google/i.test(n))s+=10;if(x.localService===false)s+=5;return s};
+ voice=all.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparative Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#b0006c;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Comparative: more / less + adjective + than</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"More: People & Behavior":`more beautiful|mɔː ˈbjuːtɪfl|🌺|สวยงามกว่า|She is *more beautiful than* her _sister_.|เธอสวยกว่าพี่/น้องสาวของเธอ
+more responsible|mɔː rɪˈspɒnsəbl|📋|มีความรับผิดชอบกว่า|He is *more responsible than* his _classmates_.|เขามีความรับผิดชอบมากกว่าเพื่อนร่วมชั้น
+more knowledgeable|mɔː ˈnɒlɪdʒəbl|🎓|มีความรู้กว่า|This _teacher_ is *more knowledgeable than* the others.|ครูคนนี้มีความรู้มากกว่าคนอื่น
+more creative|mɔː kriˈeɪtɪv|🎨|สร้างสรรค์กว่า|Your _design_ is *more creative than* mine.|งานออกแบบของคุณสร้างสรรค์กว่าของฉัน
+more respectful|mɔː rɪˈspektfl|🙏|เคารพผู้อื่นกว่า|His _behavior_ is *more respectful than* before.|พฤติกรรมของเขาให้เกียรติผู้อื่นมากกว่าเมื่อก่อน
+more ambitious|mɔː æmˈbɪʃəs|🚀|มีความทะเยอทะยานกว่า|He’s *more ambitious than* his _coworkers_.|เขามีความทะเยอทะยานมากกว่าเพื่อนร่วมงาน
+more thoughtful|mɔː ˈθɔːtfl|💝|ช่างคิด/รอบคอบกว่า|Her _response_ was *more thoughtful than* I expected.|คำตอบของเธอรอบคอบกว่าที่ฉันคาดไว้
+more professional|mɔː prəˈfeʃənl|👔|เป็นมืออาชีพกว่า|Their _presentation_ was *more professional than* ours.|การนำเสนอของพวกเขามืออาชีพกว่าของเรา
+more approachable|mɔː əˈprəʊtʃəbl|🤝|เข้าถึงง่ายกว่า|The new _manager_ is *more approachable than* the last one.|ผู้จัดการคนใหม่เข้าถึงง่ายกว่าคนก่อน
+more generous|mɔː ˈdʒenərəs|🎁|ใจกว้างกว่า|Their _offer_ is *more generous than* expected.|ข้อเสนอของพวกเขาใจกว้างกว่าที่คาดไว้
+more confident|mɔː ˈkɒnfɪdənt|💪|มั่นใจกว่า|She’s *more confident than* last _semester_.|เธอมั่นใจกว่าภาคเรียนที่แล้ว
+more energetic|mɔː ˌenəˈdʒetɪk|⚡|กระตือรือร้นกว่า|Her _performance_ was *more energetic than* the others.|การแสดงของเธอกระฉับกระเฉงกว่าคนอื่น
+more positive|mɔː ˈpɒzətɪv|😀|เชิงบวกกว่า|Her _attitude_ is *more positive than* it used to be.|ทัศนคติของเธอเป็นบวกกว่าที่เคยเป็น
+more respectful|mɔː rɪˈspektfl|🙏|เคารพผู้อื่นกว่า|His _tone_ was *more respectful than* hers.|น้ำเสียงของเขาให้เกียรติกว่าของเธอ
+more dynamic|mɔː daɪˈnæmɪk|🔥|มีพลังไดนามิกกว่า|Her _presentation_ was *more dynamic than* his.|การนำเสนอของเธอมีพลังกว่าของเขา
+more cooperative|mɔː kəʊˈɒpərətɪv|🤲|ให้ความร่วมมือกว่า|Their _attitude_ is *more cooperative than* competitive.|ทัศนคติของพวกเขาร่วมมือมากกว่าแข่งขัน
+more supportive|mɔː səˈpɔːtɪv|🫶|คอยสนับสนุนกว่า|The _environment_ here is *more supportive than* my last _job_.|สภาพแวดล้อมที่นี่สนับสนุนมากกว่างานเก่าของฉัน
+more fashionable|mɔː ˈfæʃnəbl|👗|ทันสมัยตามแฟชั่นกว่า|Her _dress_ is *more fashionable than* mine.|ชุดของเธอทันสมัยกว่าของฉัน
+more attractive|mɔː əˈtræktɪv|🏛️|น่าดึงดูดกว่า|That _building_ is *more attractive than* the others.|อาคารนั้นน่าดึงดูดกว่าหลังอื่น`,
+"More: Things & Technology":`more complicated|mɔː ˈkɒmplɪkeɪtɪd|🧩|ซับซ้อนกว่า|This _problem_ is *more complicated than* I thought.|ปัญหานี้ซับซ้อนกว่าที่ฉันคิด
+more expensive|mɔː ɪkˈspensɪv|💎|แพงกว่า|That _dress_ is *more expensive than* mine.|ชุดนั้นแพงกว่าของฉัน
+more reliable|mɔː rɪˈlaɪəbl|📱|เชื่อถือได้กว่า|My _phone_ is *more reliable than* my _laptop_.|โทรศัพท์ของฉันเชื่อถือได้กว่าแล็ปท็อป
+more spacious|mɔː ˈspeɪʃəs|🏢|กว้างขวางกว่า|The new _apartment_ is *more spacious than* our old one.|อพาร์ตเมนต์ใหม่กว้างขวางกว่าที่เก่าของเรา
+more practical|mɔː ˈpræktɪkl|🔧|ใช้ได้จริงกว่า|That _solution_ is *more practical than* the one we used.|วิธีแก้นั้นใช้ได้จริงกว่าวิธีที่เราใช้
+more flexible|mɔː ˈfleksəbl|🤸|ยืดหยุ่นกว่า|This _schedule_ is *more flexible than* last year’s.|ตารางนี้ยืดหยุ่นกว่าของปีที่แล้ว
+more efficient|mɔː ɪˈfɪʃnt|⚙️|มีประสิทธิภาพกว่า|The new _system_ is *more efficient than* the old one.|ระบบใหม่มีประสิทธิภาพกว่าระบบเก่า
+more advanced|mɔː ədˈvɑːnst|🛰️|ก้าวหน้ากว่า|This _version_ is *more advanced than* the beta _release_.|เวอร์ชันนี้ก้าวหน้ากว่ารุ่นเบต้า
+more sustainable|mɔː səˈsteɪnəbl|♻️|ยั่งยืนกว่า|This _solution_ is *more sustainable than* what we discussed.|วิธีแก้นี้ยั่งยืนกว่าที่เราคุยกัน
+more user-friendly|mɔː ˌjuːzə ˈfrendli|📲|ใช้งานง่ายกว่า|This _app_ is *more user-friendly than* the previous _version_.|แอปนี้ใช้งานง่ายกว่าเวอร์ชันก่อน
+more comfortable|mɔː ˈkʌmftəbl|🛋️|สบายกว่า|This _sofa_ is *more comfortable than* that _chair_.|โซฟานี้สบายกว่าเก้าอี้ตัวนั้น
+more organized|mɔː ˈɔːɡənaɪzd|🗃️|เป็นระเบียบกว่า|This _room_ is *more organized than* mine.|ห้องนี้เป็นระเบียบกว่าห้องของฉัน
+more powerful|mɔː ˈpaʊəfl|🦾|ทรงพลังกว่า|Her _voice_ is *more powerful than* I remembered.|เสียงของเธอทรงพลังกว่าที่ฉันจำได้
+more innovative|mɔː ˈɪnəveɪtɪv|💡|สร้างสรรค์นวัตกรรมกว่า|This _system_ is *more innovative than* the previous one.|ระบบนี้สร้างสรรค์นวัตกรรมกว่าระบบก่อน
+more original|mɔː əˈrɪdʒənl|🌟|เป็นต้นฉบับกว่า|Their _ideas_ are *more original than* ours.|ความคิดของพวกเขาเป็นต้นฉบับกว่าของเรา
+more durable|mɔː ˈdjʊərəbl|🛡️|ทนทานกว่า|This _phone_ is *more durable than* the old _model_.|โทรศัพท์เครื่องนี้ทนทานกว่ารุ่นเก่า
+more modern|mɔː ˈmɒdn|🏙️|ทันสมัยกว่า|That _building_ is *more modern than* the rest.|อาคารนั้นทันสมัยกว่าหลังอื่น
+more delicate|mɔː ˈdelɪkət|🪡|บอบบางกว่า|That _fabric_ is *more delicate than* it appears.|ผ้านั้นบอบบางกว่าที่เห็น
+more restrictive|mɔː rɪˈstrɪktɪv|🚫|เข้มงวดจำกัดกว่า|The new _law_ is *more restrictive than* the previous one.|กฎหมายใหม่เข้มงวดกว่าฉบับก่อน
+more portable|mɔː ˈpɔːtəbl|💼|พกพาสะดวกกว่า|This _laptop_ is *more portable than* the _desktop_.|แล็ปท็อปเครื่องนี้พกพาสะดวกกว่าเครื่องตั้งโต๊ะ
+more economical|mɔː ˌiːkəˈnɒmɪkl|💰|ประหยัดกว่า|That _option_ is *more economical than* what we considered.|ตัวเลือกนั้นประหยัดกว่าที่เราพิจารณา
+more functional|mɔː ˈfʌŋkʃənl|🛠️|ใช้งานได้กว่า|Her _design_ is *more functional than* decorative.|งานออกแบบของเธอใช้งานได้มากกว่าประดับตกแต่ง
+more luxurious|mɔː lʌɡˈʒʊəriəs|🏰|หรูหรากว่า|The _house_ is *more luxurious than* we thought.|บ้านหลังนี้หรูหรากว่าที่เราคิด
+more industrial|mɔː ɪnˈdʌstriəl|🏭|ด้านอุตสาหกรรมกว่า|This _city_ is *more industrial than* rural.|เมืองนี้เป็นอุตสาหกรรมมากกว่าชนบท
+more efficient|mɔː ɪˈfɪʃnt|⚙️|มีประสิทธิภาพกว่า|This _model_ is *more efficient than* last year’s.|รุ่นนี้มีประสิทธิภาพกว่ารุ่นปีที่แล้ว
+more affordable|mɔː əˈfɔːdəbl|🏷️|ราคาย่อมเยากว่า|This _tablet_ is *more affordable than* most.|แท็บเล็ตเครื่องนี้ราคาย่อมเยากว่าส่วนใหญ่`,
+"More: Work & Ideas":`more detailed|mɔː ˈdiːteɪld|🔬|ละเอียดกว่า|His _explanation_ was *more detailed than* yours.|คำอธิบายของเขาละเอียดกว่าของคุณ
+more effective|mɔː ɪˈfektɪv|🎯|มีประสิทธิภาพกว่า|This _method_ is *more effective than* the old one.|วิธีนี้มีประสิทธิภาพกว่าวิธีเก่า
+more accurate|mɔː ˈækjərət|📐|แม่นยำกว่า|Her _answer_ is *more accurate than* his.|คำตอบของเธอแม่นยำกว่าของเขา
+more logical|mɔː ˈlɒdʒɪkl|🧠|มีเหตุผลกว่า|Her _explanation_ was *more logical than* his.|คำอธิบายของเธอมีเหตุผลกว่าของเขา
+more unpredictable|mɔː ˌʌnprɪˈdɪktəbl|🌦️|คาดเดาไม่ได้กว่า|The _weather_ is *more unpredictable than* usual.|อากาศคาดเดายากกว่าปกติ
+more consistent|mɔː kənˈsɪstənt|📈|สม่ำเสมอกว่า|His _work_ is *more consistent than* hers.|งานของเขาสม่ำเสมอกว่าของเธอ
+more legible|mɔː ˈledʒəbl|🔤|อ่านออกง่ายกว่า|Your _handwriting_ is *more legible than* mine.|ลายมือของคุณอ่านง่ายกว่าของฉัน
+more controversial|mɔː ˌkɒntrəˈvɜːʃl|🔥|ก่อให้เกิดข้อโต้แย้งกว่า|The _topic_ is *more controversial than* we realized.|หัวข้อนี้เป็นที่ถกเถียงกว่าที่เราคิด
+more consistent|mɔː kənˈsɪstənt|📈|สม่ำเสมอกว่า|His _results_ were *more consistent than* before.|ผลลัพธ์ของเขาสม่ำเสมอกว่าเมื่อก่อน
+more believable|mɔː bɪˈliːvəbl|🤔|น่าเชื่อถือกว่า|Your _story_ is *more believable than* his.|เรื่องของคุณน่าเชื่อถือกว่าของเขา
+more informative|mɔː ɪnˈfɔːmətɪv|💡|ให้ความรู้กว่า|The _lecture_ was *more informative than* last week’s.|การบรรยายให้ความรู้มากกว่าของสัปดาห์ที่แล้ว
+more persuasive|mɔː pəˈsweɪsɪv|🗣️|โน้มน้าวใจกว่า|Their _explanation_ was *more persuasive than* yours.|คำอธิบายของพวกเขาโน้มน้าวใจกว่าของคุณ
+more logical|mɔː ˈlɒdʒɪkl|🧠|มีเหตุผลกว่า|Their _answers_ were *more logical than* expected.|คำตอบของพวกเขามีเหตุผลกว่าที่คาดไว้
+more educational|mɔː ˌedʒuˈkeɪʃənl|🏫|ให้ความรู้ทางการศึกษากว่า|This _documentary_ is *more educational than* entertaining.|สารคดีนี้ให้ความรู้มากกว่าสร้างความบันเทิง
+more analytical|mɔː ˌænəˈlɪtɪkl|📊|เชิงวิเคราะห์กว่า|Your _essay_ is *more analytical than* descriptive.|เรียงความของคุณเชิงวิเคราะห์มากกว่าเชิงบรรยาย
+more philosophical|mɔː ˌfɪləˈsɒfɪkl|🤯|เชิงปรัชญากว่า|The second _part_ was *more philosophical than* the first.|ภาคที่สองเชิงปรัชญากว่าภาคแรก
+more rational|mɔː ˈræʃnəl|⚖️|มีเหตุผลกว่า|His _decisions_ are *more rational than* emotional.|การตัดสินใจของเขามีเหตุผลมากกว่าใช้อารมณ์
+more strategic|mɔː strəˈtiːdʒɪk|♟️|เชิงกลยุทธ์กว่า|His _thinking_ is *more strategic than* mine.|ความคิดของเขาเชิงกลยุทธ์กว่าของฉัน
+more meaningful|mɔː ˈmiːnɪŋfl|📜|มีความหมายกว่า|The _novel_ is *more meaningful than* I anticipated.|นวนิยายเล่มนี้มีความหมายกว่าที่ฉันคาดไว้
+more beneficial|mɔː ˌbenɪˈfɪʃl|✅|เป็นประโยชน์กว่า|This _exercise_ is *more beneficial than* it seems.|การออกกำลังกายนี้เป็นประโยชน์กว่าที่เห็น
+more appropriate|mɔː əˈprəʊpriət|👌|เหมาะสมกว่า|Your _response_ was *more appropriate than* his.|คำตอบของคุณเหมาะสมกว่าของเขา
+more reasonable|mɔː ˈriːznəbl|🤝|สมเหตุสมผลกว่า|This _solution_ is *more reasonable than* the _alternative_.|วิธีแก้นี้สมเหตุสมผลกว่าทางเลือกอื่น
+more consistent|mɔː kənˈsɪstənt|📈|สม่ำเสมอกว่า|Her _work_ is *more consistent than* before.|งานของเธอสม่ำเสมอกว่าเมื่อก่อน
+more realistic|mɔː ˌriːəˈlɪstɪk|🎯|สมจริงกว่า|Your _plan_ is *more realistic than* his.|แผนของคุณสมจริงกว่าของเขา
+more acceptable|mɔː əkˈseptəbl|👍|ยอมรับได้กว่า|His _proposal_ was *more acceptable than* the last.|ข้อเสนอของเขายอมรับได้กว่าครั้งที่แล้ว
+more constructive|mɔː kənˈstrʌktɪv|🏗️|สร้างสรรค์กว่า|This _feedback_ is *more constructive than* negative.|ข้อเสนอแนะนี้สร้างสรรค์มากกว่าเชิงลบ
+more effective|mɔː ɪˈfektɪv|🎯|มีประสิทธิภาพกว่า|That _strategy_ is *more effective than* the old one.|กลยุทธ์นั้นมีประสิทธิภาพกว่ากลยุทธ์เก่า
+more convincing|mɔː kənˈvɪnsɪŋ|✨|น่าเชื่อกว่า|His _argument_ was *more convincing than* yours.|ข้อโต้แย้งของเขาน่าเชื่อกว่าของคุณ
+more acceptable|mɔː əkˈseptəbl|👍|ยอมรับได้กว่า|That _explanation_ was *more acceptable than* the first.|คำอธิบายนั้นยอมรับได้กว่าอันแรก
+more insightful|mɔː ˈɪnsaɪtfl|🔍|ลึกซึ้งกว่า|Her _comments_ were *more insightful than* offensive.|ความเห็นของเธอลึกซึ้งมากกว่าล่วงเกิน`,
+"More: Experiences & Senses":`more interesting|mɔː ˈɪntrəstɪŋ|📖|น่าสนใจกว่า|This _book_ is *more interesting than* the last one.|หนังสือเล่มนี้น่าสนใจกว่าเล่มที่แล้ว
+more difficult|mɔː ˈdɪfɪkəlt|😰|ยากกว่า|This _exam_ was *more difficult than* the previous one.|ข้อสอบนี้ยากกว่าครั้งก่อน
+more dangerous|mɔː ˈdeɪndʒərəs|⚠️|อันตรายกว่า|That _mountain_ is *more dangerous than* it looks.|ภูเขาลูกนั้นอันตรายกว่าที่เห็น
+more confusing|mɔː kənˈfjuːzɪŋ|😵|น่าสับสนกว่า|The _instructions_ are *more confusing than* helpful.|คำแนะนำสับสนมากกว่าเป็นประโยชน์
+more delicious|mɔː dɪˈlɪʃəs|😋|อร่อยกว่า|The _food_ here is *more delicious than* at the other place.|อาหารที่นี่อร่อยกว่าอีกที่หนึ่ง
+more impressive|mɔː ɪmˈpresɪv|🏆|น่าประทับใจกว่า|Their _performance_ was *more impressive than* ours.|การแสดงของพวกเขาน่าประทับใจกว่าของเรา
+more emotional|mɔː ɪˈməʊʃənl|😭|เต็มไปด้วยอารมณ์กว่า|This _movie_ is *more emotional than* the _book_.|หนังเรื่องนี้เต็มไปด้วยอารมณ์กว่าหนังสือ
+more picturesque|mɔː ˌpɪktʃəˈresk|🏞️|งามราวภาพวาดกว่า|The _scenery_ here is *more picturesque than* _downtown_.|ทิวทัศน์ที่นี่งามราวภาพวาดกว่าในตัวเมือง
+more dramatic|mɔː drəˈmætɪk|🎭|ดราม่า/น่าตื่นเต้นกว่า|The second _act_ was *more dramatic than* the first.|องก์ที่สองดราม่ากว่าองก์แรก
+more stressful|mɔː ˈstresfl|😫|เครียดกว่า|That _test_ was *more stressful than* I anticipated.|การสอบนั้นเครียดกว่าที่ฉันคาดไว้
+more addictive|mɔː əˈdɪktɪv|🎮|ติดงอมแงมกว่า|This _game_ is *more addictive than* I thought.|เกมนี้ติดงอมแงมกว่าที่ฉันคิด
+more demanding|mɔː dɪˈmɑːndɪŋ|📚|เรียกร้องสูงกว่า|That _project_ is *more demanding than* I can handle.|โปรเจกต์นั้นเรียกร้องสูงกว่าที่ฉันรับไหว
+more satisfying|mɔː ˈsætɪsfaɪɪŋ|🍽️|น่าพอใจกว่า|The _meal_ was *more satisfying than* anything I’ve had all week.|มื้อนี้น่าพอใจกว่าทุกอย่างที่ฉันกินมาทั้งสัปดาห์
+more impressive|mɔː ɪmˈpresɪv|🏆|น่าประทับใจกว่า|His _results_ are *more impressive than* mine.|ผลลัพธ์ของเขาน่าประทับใจกว่าของฉัน
+more manageable|mɔː ˈmænɪdʒəbl|🗂️|จัดการได้กว่า|My _workload_ is *more manageable than* it was last year.|ปริมาณงานของฉันจัดการได้ง่ายกว่าปีที่แล้ว
+more colorful|mɔː ˈkʌləfl|🌈|สีสันสดใสกว่า|That _painting_ is *more colorful than* the others.|ภาพวาดนั้นสีสันสดใสกว่าภาพอื่น
+more challenging|mɔː ˈtʃælɪndʒɪŋ|🧗|ท้าทายกว่า|This _course_ is *more challenging than* the last one.|คอร์สนี้ท้าทายกว่าคอร์สที่แล้ว
+more emotional|mɔː ɪˈməʊʃənl|😭|เต็มไปด้วยอารมณ์กว่า|The _book_ was *more emotional than* the _movie_.|หนังสือเต็มไปด้วยอารมณ์กว่าหนัง
+more entertaining|mɔː ˌentəˈteɪnɪŋ|🎬|บันเทิงกว่า|That _film_ was *more entertaining than* I expected.|หนังเรื่องนั้นบันเทิงกว่าที่ฉันคาดไว้
+more impressive|mɔː ɪmˈpresɪv|🏆|น่าประทับใจกว่า|The _museum_ was *more impressive than* we thought.|พิพิธภัณฑ์น่าประทับใจกว่าที่เราคิด
+more peaceful|mɔː ˈpiːsfl|🕊️|สงบสุขกว่า|The _lake_ is *more peaceful than* the _beach_.|ทะเลสาบสงบสุขกว่าชายหาด
+more dramatic|mɔː drəˈmætɪk|🎭|ดราม่า/น่าตื่นเต้นกว่า|The _scenery_ there is *more dramatic than* I expected.|ทิวทัศน์ที่นั่นน่าตื่นตากว่าที่ฉันคาดไว้
+more exhausting|mɔː ɪɡˈzɔːstɪŋ|🥵|เหนื่อยล้ากว่า|This _workout_ is *more exhausting than* yesterday’s.|การออกกำลังกายนี้เหนื่อยกว่าของเมื่อวาน
+more inspirational|mɔː ˌɪnspəˈreɪʃənl|🌅|สร้างแรงบันดาลใจกว่า|His _speech_ was *more inspirational than* political.|คำปราศรัยของเขาสร้างแรงบันดาลใจมากกว่าเรื่องการเมือง
+more memorable|mɔː ˈmemərəbl|📸|น่าจดจำกว่า|My _experience_ was *more memorable than* yours.|ประสบการณ์ของฉันน่าจดจำกว่าของคุณ`,
+"Less: People & Behavior":`less respectful|les rɪˈspektfl|🙏|เคารพผู้อื่นน้อยกว่า|His _tone_ was *less respectful than* before.|น้ำเสียงของเขาให้เกียรติน้อยกว่าเมื่อก่อน
+less responsible|les rɪˈspɒnsəbl|📋|มีความรับผิดชอบน้อยกว่า|That _student_ is *less responsible than* his _classmates_.|นักเรียนคนนั้นรับผิดชอบน้อยกว่าเพื่อนร่วมชั้น
+less creative|les kriˈeɪtɪv|🎨|สร้างสรรค์น้อยกว่า|This _design_ is *less creative than* yours.|งานออกแบบนี้สร้างสรรค์น้อยกว่าของคุณ
+less formal|les ˈfɔːml|🎩|เป็นทางการน้อยกว่า|Her _writing_ is *less formal than* his.|งานเขียนของเธอเป็นทางการน้อยกว่าของเขา
+less generous|les ˈdʒenərəs|🎁|ใจกว้างน้อยกว่า|Their _offer_ was *less generous than* expected.|ข้อเสนอของพวกเขาใจกว้างน้อยกว่าที่คาดไว้
+less professional|les prəˈfeʃənl|👔|เป็นมืออาชีพน้อยกว่า|His _work_ is *less professional than* hers.|งานของเขามืออาชีพน้อยกว่าของเธอ
+less helpful|les ˈhelpfl|🤗|เป็นประโยชน์/ช่วยเหลือน้อยกว่า|The _service_ was *less helpful than* usual.|บริการเป็นประโยชน์น้อยกว่าปกติ
+less enthusiastic|les ɪnˌθjuːziˈæstɪk|🤩|กระตือรือร้นน้อยกว่า|Her _tone_ was *less enthusiastic than* before.|น้ำเสียงของเธอกระตือรือร้นน้อยกว่าเมื่อก่อน
+less fashionable|les ˈfæʃnəbl|👗|ทันสมัยตามแฟชั่นน้อยกว่า|This _outfit_ is *less fashionable than* hers.|ชุดนี้ทันสมัยน้อยกว่าของเธอ
+less cooperative|les kəʊˈɒpərətɪv|🤲|ให้ความร่วมมือน้อยกว่า|His _behavior_ is *less cooperative than* before.|พฤติกรรมของเขาให้ความร่วมมือน้อยกว่าเมื่อก่อน
+less thoughtful|les ˈθɔːtfl|💝|ช่างคิด/รอบคอบน้อยกว่า|Your _answer_ is *less thoughtful than* hers.|คำตอบของคุณรอบคอบน้อยกว่าของเธอ
+less enthusiastic|les ɪnˌθjuːziˈæstɪk|🤩|กระตือรือร้นน้อยกว่า|Her _reply_ was *less enthusiastic than* I expected.|คำตอบของเธอกระตือรือร้นน้อยกว่าที่ฉันคาดไว้
+less formal|les ˈfɔːml|🎩|เป็นทางการน้อยกว่า|Her _dress_ was *less formal than* the others at the _event_.|ชุดของเธอเป็นทางการน้อยกว่าคนอื่นในงาน
+less thoughtful|les ˈθɔːtfl|💝|ช่างคิด/รอบคอบน้อยกว่า|His _decision_ was *less thoughtful than* hers.|การตัดสินใจของเขารอบคอบน้อยกว่าของเธอ
+less aggressive|les əˈɡresɪv|😡|ก้าวร้าวน้อยกว่า|His _approach_ is *less aggressive than* the others.|วิธีของเขาก้าวร้าวน้อยกว่าคนอื่น
+less lively|les ˈlaɪvli|🎉|มีชีวิตชีวาน้อยกว่า|The _presentation_ was *less lively than* the previous one.|การนำเสนอมีชีวิตชีวาน้อยกว่าครั้งก่อน
+less stylish|les ˈstaɪlɪʃ|🧥|มีสไตล์น้อยกว่า|The _clothes_ are *less stylish than* what you wore before.|เสื้อผ้านี้มีสไตล์น้อยกว่าที่คุณใส่ก่อนหน้า
+less elegant|les ˈelɪɡənt|👠|สง่างามน้อยกว่า|This _dress_ is *less elegant than* the one she wore last time.|ชุดนี้สง่างามน้อยกว่าที่เธอใส่ครั้งก่อน`,
+"Less: Things & Technology":`less complicated|les ˈkɒmplɪkeɪtɪd|🧩|ซับซ้อนน้อยกว่า|This _task_ is *less complicated than* the last one.|งานนี้ซับซ้อนน้อยกว่างานที่แล้ว
+less expensive|les ɪkˈspensɪv|💎|แพงน้อยกว่า|The new _phone_ is *less expensive than* I expected.|โทรศัพท์เครื่องใหม่แพงน้อยกว่าที่ฉันคาดไว้
+less durable|les ˈdjʊərəbl|🛡️|ทนทานน้อยกว่า|This _product_ is *less durable than* the old one.|ผลิตภัณฑ์นี้ทนทานน้อยกว่าอันเก่า
+less practical|les ˈpræktɪkl|🔧|ใช้ได้จริงน้อยกว่า|Your _suggestion_ is *less practical than* mine.|ข้อเสนอของคุณใช้ได้จริงน้อยกว่าของฉัน
+less spacious|les ˈspeɪʃəs|🏢|กว้างขวางน้อยกว่า|The _apartment_ is *less spacious than* our old one.|อพาร์ตเมนต์กว้างขวางน้อยกว่าที่เก่าของเรา
+less useful|les ˈjuːsfl|🧰|มีประโยชน์น้อยกว่า|This _tool_ is *less useful than* it claims to be.|เครื่องมือนี้มีประโยชน์น้อยกว่าที่อ้าง
+less powerful|les ˈpaʊəfl|🦾|ทรงพลังน้อยกว่า|The _speech_ was *less powerful than* anticipated.|คำปราศรัยทรงพลังน้อยกว่าที่คาดไว้
+less comfortable|les ˈkʌmftəbl|🛋️|สบายน้อยกว่า|This _keyboard_ is *less comfortable than* my old one.|คีย์บอร์ดนี้สบายน้อยกว่าอันเก่าของฉัน
+less user-friendly|les ˌjuːzə ˈfrendli|📲|ใช้งานง่ายน้อยกว่า|The _app_ is *less user-friendly than* the _website_.|แอปใช้งานง่ายน้อยกว่าเว็บไซต์
+less industrial|les ɪnˈdʌstriəl|🏭|ด้านอุตสาหกรรมน้อยกว่า|This _city_ is *less industrial than* our _hometown_.|เมืองนี้เป็นอุตสาหกรรมน้อยกว่าบ้านเกิดของเรา
+less efficient|les ɪˈfɪʃnt|⚙️|มีประสิทธิภาพน้อยกว่า|This _model_ is *less efficient than* the previous one.|รุ่นนี้มีประสิทธิภาพน้อยกว่ารุ่นก่อน
+less organized|les ˈɔːɡənaɪzd|🗃️|เป็นระเบียบน้อยกว่า|The _team_ was *less organized than* last _season_.|ทีมเป็นระเบียบน้อยกว่าฤดูกาลที่แล้ว
+less sustainable|les səˈsteɪnəbl|♻️|ยั่งยืนน้อยกว่า|That _strategy_ is *less sustainable than* our _plan_.|กลยุทธ์นั้นยั่งยืนน้อยกว่าแผนของเรา
+less convenient|les kənˈviːniənt|🛣️|สะดวกน้อยกว่า|This _route_ is *less convenient than* the _highway_.|เส้นทางนี้สะดวกน้อยกว่าทางหลวง
+less modern|les ˈmɒdn|🏙️|ทันสมัยน้อยกว่า|Their _house_ is *less modern than* ours.|บ้านของพวกเขาทันสมัยน้อยกว่าบ้านของเรา
+less restrictive|les rɪˈstrɪktɪv|🚫|เข้มงวดจำกัดน้อยกว่า|The new _rules_ are *less restrictive than* we feared.|กฎใหม่เข้มงวดน้อยกว่าที่เรากลัว
+less efficient|les ɪˈfɪʃnt|⚙️|มีประสิทธิภาพน้อยกว่า|The second _model_ is *less efficient than* the first one.|รุ่นที่สองมีประสิทธิภาพน้อยกว่ารุ่นแรก
+less complex|les ˈkɒmpleks|🕸️|ซับซ้อนน้อยกว่า|The _project_ is *less complex than* the one last year.|โปรเจกต์ซับซ้อนน้อยกว่าของปีที่แล้ว
+less user-friendly|les ˌjuːzə ˈfrendli|📲|ใช้งานง่ายน้อยกว่า|The new _software_ is *less user-friendly than* the older _version_.|ซอฟต์แวร์ใหม่ใช้งานง่ายน้อยกว่าเวอร์ชันเก่า
+less advanced|les ədˈvɑːnst|🛰️|ก้าวหน้าน้อยกว่า|The _technology_ is *less advanced than* the one used in larger _companies_.|เทคโนโลยีก้าวหน้าน้อยกว่าที่บริษัทใหญ่ใช้
+less intricate|les ˈɪntrɪkət|🕷️|ประณีตซับซ้อนน้อยกว่า|This _design_ is *less intricate than* the original _sketch_.|งานออกแบบนี้ประณีตซับซ้อนน้อยกว่าภาพร่างต้นฉบับ
+less polished|les ˈpɒlɪʃt|💍|เรียบเนียน/สมบูรณ์น้อยกว่า|The first _draft_ is *less polished than* the final _version_.|ร่างแรกเรียบเนียนน้อยกว่าฉบับสุดท้าย
+less powerful|les ˈpaʊəfl|🦾|ทรงพลังน้อยกว่า|This _laptop_ is *less powerful than* my _desktop_.|แล็ปท็อปนี้ทรงพลังน้อยกว่าเครื่องตั้งโต๊ะของฉัน
+less original|les əˈrɪdʒənl|🌟|เป็นต้นฉบับน้อยกว่า|Their _idea_ was *less original than* ours.|ความคิดของพวกเขาเป็นต้นฉบับน้อยกว่าของเรา
+less comfortable|les ˈkʌmftəbl|🛋️|สบายน้อยกว่า|The _room_ is *less comfortable than* my _bedroom_.|ห้องนี้สบายน้อยกว่าห้องนอนของฉัน
+less practical|les ˈpræktɪkl|🔧|ใช้ได้จริงน้อยกว่า|The second _suggestion_ was *less practical than* the first.|ข้อเสนอที่สองใช้ได้จริงน้อยกว่าข้อแรก
+less sustainable|les səˈsteɪnəbl|♻️|ยั่งยืนน้อยกว่า|The _solution_ you proposed is *less sustainable than* the one we discussed.|วิธีแก้ที่คุณเสนอยั่งยืนน้อยกว่าที่เราคุยกัน
+less reliable|les rɪˈlaɪəbl|📱|เชื่อถือได้น้อยกว่า|This _version_ is *less reliable than* the previous one.|เวอร์ชันนี้เชื่อถือได้น้อยกว่าเวอร์ชันก่อน
+less restrictive|les rɪˈstrɪktɪv|🚫|เข้มงวดจำกัดน้อยกว่า|The new _guidelines_ are *less restrictive than* the previous ones.|แนวปฏิบัติใหม่เข้มงวดน้อยกว่าฉบับก่อน
+less stable|les ˈsteɪbl|📶|เสถียรน้อยกว่า|The internet _connection_ is *less stable than* yesterday.|การเชื่อมต่ออินเทอร์เน็ตเสถียรน้อยกว่าเมื่อวาน
+less interactive|les ˌɪntərˈæktɪv|🖱️|โต้ตอบได้น้อยกว่า|The online _course_ is *less interactive than* the in-person _class_.|คอร์สออนไลน์โต้ตอบได้น้อยกว่าคลาสในห้อง
+less fuel-efficient|les ˌfjuːəl ɪˈfɪʃnt|⛽|ประหยัดน้ำมันน้อยกว่า|The _car_ is *less fuel-efficient than* the newer _models_.|รถคันนี้ประหยัดน้ำมันน้อยกว่ารุ่นใหม่`,
+"Less: Work & Ideas":`less detailed|les ˈdiːteɪld|🔬|ละเอียดน้อยกว่า|Her _explanation_ was *less detailed than* yours.|คำอธิบายของเธอละเอียดน้อยกว่าของคุณ
+less accurate|les ˈækjərət|📐|แม่นยำน้อยกว่า|His _answer_ was *less accurate than* hers.|คำตอบของเขาแม่นยำน้อยกว่าของเธอ
+less effective|les ɪˈfektɪv|🎯|มีประสิทธิภาพน้อยกว่า|Their _plan_ is *less effective than* ours.|แผนของพวกเขามีประสิทธิภาพน้อยกว่าของเรา
+less informative|les ɪnˈfɔːmətɪv|💡|ให้ความรู้น้อยกว่า|The second _lesson_ was *less informative than* the first.|บทเรียนที่สองให้ความรู้น้อยกว่าบทแรก
+less clear|les klɪə|🔎|ชัดเจนน้อยกว่า|My _explanation_ was *less clear than* I intended.|คำอธิบายของฉันชัดเจนน้อยกว่าที่ตั้งใจ
+less predictable|les prɪˈdɪktəbl|🔮|คาดเดาได้น้อยกว่า|The _weather_ is *less predictable than* usual.|อากาศคาดเดาได้น้อยกว่าปกติ
+less appropriate|les əˈprəʊpriət|👌|เหมาะสมน้อยกว่า|That _response_ was *less appropriate than* I expected.|คำตอบนั้นเหมาะสมน้อยกว่าที่ฉันคาดไว้
+less consistent|les kənˈsɪstənt|📈|สม่ำเสมอน้อยกว่า|His _routine_ is *less consistent than* hers.|กิจวัตรของเขาสม่ำเสมอน้อยกว่าของเธอ
+less logical|les ˈlɒdʒɪkl|🧠|มีเหตุผลน้อยกว่า|The _explanation_ was *less logical than* needed.|คำอธิบายมีเหตุผลน้อยกว่าที่ควร
+less successful|les səkˈsesfl|🏅|ประสบความสำเร็จน้อยกว่า|The _update_ was *less successful than* the original _launch_.|การอัปเดตประสบความสำเร็จน้อยกว่าการเปิดตัวครั้งแรก
+less rational|les ˈræʃnəl|⚖️|มีเหตุผลน้อยกว่า|That _decision_ was *less rational than* it should have been.|การตัดสินใจนั้นมีเหตุผลน้อยกว่าที่ควรเป็น
+less believable|les bɪˈliːvəbl|🤔|น่าเชื่อถือน้อยกว่า|His _excuse_ was *less believable than* yours.|ข้ออ้างของเขาน่าเชื่อน้อยกว่าของคุณ
+less acceptable|les əkˈseptəbl|👍|ยอมรับได้น้อยกว่า|This _suggestion_ is *less acceptable than* the earlier one.|ข้อเสนอนี้ยอมรับได้น้อยกว่าข้อก่อน
+less productive|les prəˈdʌktɪv|📈|มีประสิทธิผลน้อยกว่า|The _meeting_ was *less productive than* I expected.|การประชุมมีประสิทธิผลน้อยกว่าที่ฉันคาดไว้
+less distinct|les dɪˈstɪŋkt|🔊|ชัดเจนเฉพาะตัวน้อยกว่า|Her _voice_ is *less distinct than* his.|เสียงของเธอชัดเจนน้อยกว่าของเขา
+less urgent|les ˈɜːdʒənt|🚨|เร่งด่วนน้อยกว่า|The _problem_ was *less urgent than* we thought.|ปัญหาเร่งด่วนน้อยกว่าที่เราคิด
+less thorough|les ˈθʌrə|🧐|ละเอียดถี่ถ้วนน้อยกว่า|The _explanation_ was *less thorough than* the one provided earlier.|คำอธิบายละเอียดถี่ถ้วนน้อยกว่าที่ให้ไว้ก่อนหน้า
+less effective|les ɪˈfektɪv|🎯|มีประสิทธิภาพน้อยกว่า|This _method_ is *less effective than* the older _technique_.|วิธีนี้มีประสิทธิภาพน้อยกว่าเทคนิคเก่า
+less convincing|les kənˈvɪnsɪŋ|✨|น่าเชื่อน้อยกว่า|His _argument_ was *less convincing than* hers.|ข้อโต้แย้งของเขาน่าเชื่อน้อยกว่าของเธอ
+less informative|les ɪnˈfɔːmətɪv|💡|ให้ความรู้น้อยกว่า|The _conference_ was *less informative than* last year’s.|งานประชุมให้ความรู้น้อยกว่าของปีที่แล้ว
+less clear|les klɪə|🔎|ชัดเจนน้อยกว่า|The _instructions_ were *less clear than* the ones from the _guide_.|คำแนะนำชัดเจนน้อยกว่าของคู่มือ`,
+"Less: Experiences & Senses":`less exciting|les ɪkˈsaɪtɪŋ|🎢|น่าตื่นเต้นน้อยกว่า|The second _movie_ was *less exciting than* the first.|หนังภาคสองน่าตื่นเต้นน้อยกว่าภาคแรก
+less delicious|les dɪˈlɪʃəs|😋|อร่อยน้อยกว่า|This _cake_ is *less delicious than* the one you baked.|เค้กนี้อร่อยน้อยกว่าที่คุณอบ
+less dangerous|les ˈdeɪndʒərəs|⚠️|อันตรายน้อยกว่า|That _path_ is *less dangerous than* it looks.|ทางนั้นอันตรายน้อยกว่าที่เห็น
+less interesting|les ˈɪntrəstɪŋ|📖|น่าสนใจน้อยกว่า|The _book_ is *less interesting than* the _film_.|หนังสือน่าสนใจน้อยกว่าหนัง
+less emotional|les ɪˈməʊʃənl|😭|เต็มไปด้วยอารมณ์น้อยกว่า|Her _reaction_ was *less emotional than* his.|ปฏิกิริยาของเธอมีอารมณ์น้อยกว่าของเขา
+less impressive|les ɪmˈpresɪv|🏆|น่าประทับใจน้อยกว่า|The _scenery_ here is *less impressive than* in the _mountains_.|ทิวทัศน์ที่นี่น่าประทับใจน้อยกว่าบนภูเขา
+less personal|les ˈpɜːsənl|💬|ส่วนตัวน้อยกว่า|The _conversation_ was *less personal than* I hoped.|บทสนทนาเป็นส่วนตัวน้อยกว่าที่ฉันหวัง
+less dramatic|les drəˈmætɪk|🎭|ดราม่า/น่าตื่นเต้นน้อยกว่า|The _film_ was *less dramatic than* the _trailer_ suggested.|หนังดราม่าน้อยกว่าที่ตัวอย่างบอก
+less intense|les ɪnˈtens|💡|เข้มข้นน้อยกว่า|The _light_ here is *less intense than* in the other _room_.|แสงที่นี่เข้มข้นน้อยกว่าในห้องอื่น
+less refreshing|les rɪˈfreʃɪŋ|🥤|สดชื่นน้อยกว่า|This _drink_ is *less refreshing than* the _lemonade_.|เครื่องดื่มนี้สดชื่นน้อยกว่าน้ำมะนาว
+less thrilling|les ˈθrɪlɪŋ|🎥|ระทึกใจน้อยกว่า|This _movie_ is *less thrilling than* the _preview_ made it seem.|หนังเรื่องนี้ระทึกใจน้อยกว่าที่ตัวอย่างทำให้ดู
+less sunny|les ˈsʌni|☀️|แดดจ้าน้อยกว่า|The _weather_ today is *less sunny than* yesterday.|วันนี้แดดจ้าน้อยกว่าเมื่อวาน
+less captivating|les ˈkæptɪveɪtɪŋ|📕|น่าหลงใหลน้อยกว่า|The _book_ was *less captivating than* the movie _adaptation_.|หนังสือน่าหลงใหลน้อยกว่าหนังที่ดัดแปลง
+less tasty|les ˈteɪsti|🍴|อร่อยน้อยกว่า|The _food_ at this _restaurant_ is *less tasty than* at the other one.|อาหารร้านนี้อร่อยน้อยกว่าอีกร้าน
+less sweet|les swiːt|🍰|หวานน้อยกว่า|The _cake_ is *less sweet than* the one you baked last week.|เค้กหวานน้อยกว่าที่คุณอบเมื่อสัปดาห์ก่อน
+less engaging|les ɪnˈɡeɪdʒɪŋ|🎤|ดึงดูดความสนใจน้อยกว่า|His _presentation_ was *less engaging than* the first one.|การนำเสนอของเขาดึงดูดน้อยกว่าครั้งแรก
+less demanding|les dɪˈmɑːndɪŋ|📚|เรียกร้องสูงน้อยกว่า|This _job_ is *less demanding than* the previous one.|งานนี้เรียกร้องน้อยกว่างานก่อน
+less dramatic|les drəˈmætɪk|🎭|ดราม่า/น่าตื่นเต้นน้อยกว่า|The _movie_ was *less dramatic than* the _plot_ suggested.|หนังดราม่าน้อยกว่าที่โครงเรื่องบอก
+less rocky|les ˈrɒki|🪨|เป็นหินน้อยกว่า|This _path_ is *less rocky than* the mountain _trail_.|ทางนี้เป็นหินน้อยกว่าทางเดินเขา
+less strong|les strɒŋ|☕|เข้ม/แข็งแรงน้อยกว่า|The _coffee_ is *less strong than* it used to be.|กาแฟเข้มน้อยกว่าที่เคยเป็น
+less engaging|les ɪnˈɡeɪdʒɪŋ|🎤|ดึงดูดความสนใจน้อยกว่า|The second _chapter_ was *less engaging than* the first.|บทที่สองดึงดูดน้อยกว่าบทแรก
+less spicy|les ˈspaɪsi|🌶️|เผ็ดน้อยกว่า|The second _dish_ was *less spicy than* the first one.|จานที่สองเผ็ดน้อยกว่าจานแรก
+less exhausting|les ɪɡˈzɔːstɪŋ|🥵|เหนื่อยล้าน้อยกว่า|The _hike_ was *less exhausting than* I thought it would be.|การเดินป่าเหนื่อยน้อยกว่าที่ฉันคิด
+less impactful|les ˈɪmpæktfl|💥|ส่งผลกระทบมากน้อยกว่า|The _music_ in the _movie_ was *less impactful than* I expected.|ดนตรีในหนังส่งผลกระทบน้อยกว่าที่ฉันคาดไว้
+less fresh|les freʃ|🥬|สดน้อยกว่า|The _food_ in this _restaurant_ is *less fresh than* the other one.|อาหารในร้านนี้สดน้อยกว่าอีกร้าน
+less scenic|les ˈsiːnɪk|🌄|วิวสวยน้อยกว่า|This _route_ is *less scenic than* the main _highway_.|เส้นทางนี้วิวสวยน้อยกว่าทางหลวงสายหลัก
+less challenging|les ˈtʃælɪndʒɪŋ|🧗|ท้าทายน้อยกว่า|The _competition_ was *less challenging than* last year’s.|การแข่งขันท้าทายน้อยกว่าปีที่แล้ว
+less creamy|les ˈkriːmi|🍮|ครีมมี่น้อยกว่า|The _dessert_ was *less creamy than* I thought.|ของหวานครีมมี่น้อยกว่าที่ฉันคิด
+less crowded|les ˈkraʊdɪd|🏖️|แออัดน้อยกว่า|The _mountain_ is *less crowded than* the _beach_.|ภูเขาแออัดน้อยกว่าชายหาด`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const all=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ const sc=x=>{const n=x.name;let s=0;if(/^en[-_]GB/i.test(x.lang))s+=100;if(/natural|neural/i.test(n))s+=50;if(/online/i.test(n))s+=40;if(/google uk english female/i.test(n))s+=35;if(/premium|enhanced/i.test(n))s+=30;if(/sonia|libby|ryan|serena|daniel|kate|oliver/i.test(n))s+=20;if(/google/i.test(n))s+=10;if(x.localService===false)s+=5;return s};
+ voice=all.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>

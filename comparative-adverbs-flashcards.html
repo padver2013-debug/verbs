@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparative Adjectives Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf5;--tx:#3b3340;--card:#fff;--line:#eadff0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a2530;--tx:#f1e9f5;--card:#3a3342;--line:#52485c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif}
+.w{max-width:860px;margin:0 auto;padding:16px 12px 40px}
+h1{font-size:1.3rem;margin:4px 0 2px;text-align:center}
+.sub{text-align:center;font-family:Sarabun,sans-serif;font-size:.85rem;opacity:.75;margin-bottom:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tabs button{border:1px solid var(--line);background:var(--card);color:var(--tx);border-radius:20px;padding:6px 14px;font:inherit;cursor:pointer}
+.tabs button.on{background:#f6b8d1;color:#4a1030;border-color:#f6b8d1;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.c{perspective:800px;height:195px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;color:#3b3340;box-shadow:0 2px 6px #0002;overflow:hidden}
+.fb{transform:rotateY(180deg);font-size:.82rem;gap:3px}
+.em{font-size:2.3rem;line-height:1.1}
+.wd{font-family:Calibri,Carlito,sans-serif;font-size:1.1rem;font-weight:700}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:.95rem}
+.sp{border:0;background:#fff9;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:.9rem;margin-top:3px;color:#333}
+.th{font-family:Sarabun,sans-serif;font-size:1.05rem;font-weight:600}
+.es{font-family:Calibri,Carlito,sans-serif}.ts{font-family:Sarabun,sans-serif;font-size:.78rem}
+.a{color:#b0006c;font-weight:700}.n{color:#0b6b2e;font-weight:700}
+h2{font-size:1.05rem;margin:24px 0 8px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:var(--card);border-radius:12px;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+th{background:#fbe3ee;color:#4a1030}
+td.t{font-family:Sarabun,sans-serif}
+td.e{font-family:Calibri,Carlito,sans-serif}
+td .sp{background:#f6b8d1;flex:none}
+</style></head><body><div class="w">
+<h1>Comparative Adverbs: adverb + than</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปล · กดปุ่ม 🔊 เพื่อฟังเสียง (UK)</div>
+<div class="tabs" id="tabs"></div>
+<div class="tabs" id="pg"></div>
+<div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์และประโยค</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Sentence</th><th>ความหมาย</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+// word|ipa|emoji|Thai|sentence (*adj* _noun_)|Thai sentence
+const D={
+"Short adverbs (-er / irregular)":`faster than|ˈfɑːstə ðən|🏃|เร็วกว่า|He runs *faster than* I do.|เขาวิ่งเร็วกว่าฉัน
+better than|ˈbetə ðən|👍|ดีกว่า|She sings *better than* anyone else in the _group_.|เธอร้องเพลงได้ดีกว่าใครๆ ในกลุ่ม
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|She arrived *earlier than* her _coworkers_.|เธอมาถึงเร็วกว่าเพื่อนร่วมงาน
+harder than|ˈhɑːdə ðən|💪|หนักกว่า/ยากกว่า|The _students_ worked *harder than* last _semester_.|นักเรียนตั้งใจทำงานหนักกว่าภาคเรียนที่แล้ว
+better than|ˈbetə ðən|👍|ดีกว่า|The _team_ played *better than* the other _team_.|ทีมเล่นได้ดีกว่าอีกทีม
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|I woke up *earlier than* usual this _morning_.|เช้านี้ฉันตื่นเร็วกว่าปกติ
+clearer than|ˈklɪərə ðən|🔍|ชัดเจนกว่า|His _explanation_ was *clearer than* hers.|คำอธิบายของเขาชัดเจนกว่าของเธอ
+harder than|ˈhɑːdə ðən|💪|หนักกว่า/ยากกว่า|She worked *harder than* she did last _year_.|เธอทำงานหนักกว่าปีที่แล้ว
+neater than|ˈniːtə ðən|📐|เรียบร้อยกว่า|His _handwriting_ is *neater than* hers.|ลายมือของเขาเรียบร้อยกว่าของเธอ
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|They arrived *earlier than* expected.|พวกเขามาถึงเร็วกว่าที่คาดไว้
+higher than|ˈhaɪə ðən|🦘|สูงกว่า|The _dog_ jumped *higher than* I thought it could.|สุนัขกระโดดได้สูงกว่าที่ฉันคิด
+better than|ˈbetə ðən|👍|ดีกว่า|He dances *better than* his _friends_.|เขาเต้นได้ดีกว่าเพื่อนๆ
+louder than|ˈlaʊdə ðən|📢|ดังกว่า|She laughed *louder than* everyone else.|เธอหัวเราะดังกว่าทุกคน
+later than|ˈleɪtə ðən|🌇|ช้ากว่า/สายกว่า|The _store_ opens *later than* the others in the _neighborhood_.|ร้านเปิดช้ากว่าร้านอื่นในละแวกนี้
+better than|ˈbetə ðən|👍|ดีกว่า|You played *better than* I expected.|คุณเล่นได้ดีกว่าที่ฉันคาดไว้
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|We finished *earlier than* expected.|เราเสร็จเร็วกว่าที่คาดไว้
+better than|ˈbetə ðən|👍|ดีกว่า|I felt *better than* I did yesterday.|ฉันรู้สึกดีกว่าเมื่อวาน
+faster than|ˈfɑːstə ðən|🏃|เร็วกว่า|She can run *faster than* her _brother_.|เธอวิ่งเร็วกว่าพี่/น้องชายของเธอ
+better than|ˈbetə ðən|👍|ดีกว่า|The _dog_ behaved *better than* it did last time.|สุนัขประพฤติตัวดีกว่าครั้งที่แล้ว
+later than|ˈleɪtə ðən|🌇|ช้ากว่า/สายกว่า|The _meeting_ started *later than* usual.|การประชุมเริ่มช้ากว่าปกติ
+louder than|ˈlaʊdə ðən|📢|ดังกว่า|He talks *louder than* anyone else in the _room_.|เขาพูดเสียงดังกว่าใครๆ ในห้อง
+better than|ˈbetə ðən|👍|ดีกว่า|The _company_ performed *better than* last year.|บริษัททำผลงานได้ดีกว่าปีที่แล้ว
+faster than|ˈfɑːstə ðən|🏃|เร็วกว่า|She runs *faster than* the rest of the _team_.|เธอวิ่งเร็วกว่าคนอื่นในทีม
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|I arrived *earlier than* she did.|ฉันมาถึงเร็วกว่าเธอ
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|I woke up *earlier than* I usually do.|ฉันตื่นเร็วกว่าที่ปกติเป็น
+better than|ˈbetə ðən|👍|ดีกว่า|The _dog_ behaved *better than* we expected.|สุนัขประพฤติตัวดีกว่าที่เราคาดไว้
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|The _storm_ came *earlier than* predicted.|พายุมาเร็วกว่าที่พยากรณ์ไว้
+later than|ˈleɪtə ðən|🌇|ช้ากว่า/สายกว่า|The _meeting_ ended *later than* I thought it would.|การประชุมจบช้ากว่าที่ฉันคิด
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|They arrived *earlier than* we had planned.|พวกเขามาถึงเร็วกว่าที่เราวางแผนไว้
+harder than|ˈhɑːdə ðən|💪|หนักกว่า/ยากกว่า|She worked *harder than* I did on the _project_.|เธอทำงานโปรเจกต์หนักกว่าฉัน
+faster than|ˈfɑːstə ðən|🏃|เร็วกว่า|He finished the _race_ *faster than* everyone else.|เขาจบการแข่งขันเร็วกว่าทุกคน
+better than|ˈbetə ðən|👍|ดีกว่า|I feel *better than* I did yesterday.|ฉันรู้สึกดีกว่าเมื่อวาน
+colder than|ˈkəʊldə ðən|🧊|เย็นกว่า|The _weather_ is getting *colder than* it was earlier.|อากาศเย็นลงกว่าเมื่อครู่
+earlier than|ˈɜːliə ðən|🌅|เร็วกว่า/ก่อนกว่า|They arrived *earlier than* they had planned.|พวกเขามาถึงเร็วกว่าที่วางแผนไว้
+later than|ˈleɪtə ðən|🌇|ช้ากว่า/สายกว่า|The _train_ was running *later than* expected.|รถไฟมาช้ากว่าที่คาดไว้
+tastier than|ˈteɪstiə ðən|😋|อร่อยกว่า|The _food_ at this _restaurant_ is *tastier than* the one down the _street_.|อาหารร้านนี้อร่อยกว่าร้านท้ายถนน
+later than|ˈleɪtə ðən|🌇|ช้ากว่า/สายกว่า|The _sun_ is setting *later than* usual.|ดวงอาทิตย์ตกช้ากว่าปกติ`,
+"more + adverb (-ly)":`more efficiently than|mɔː ɪˈfɪʃntli ðən|⚙️|อย่างมีประสิทธิภาพกว่า|You completed the _task_ *more efficiently than* I expected.|คุณทำงานเสร็จอย่างมีประสิทธิภาพกว่าที่ฉันคาดไว้
+more clearly than|mɔː ˈklɪəli ðən|🗣️|อย่างชัดเจนกว่า|He speaks *more clearly than* she does.|เขาพูดชัดเจนกว่าเธอ
+more confidently than|mɔː ˈkɒnfɪdəntli ðən|😎|อย่างมั่นใจกว่า|He acted *more confidently than* I thought.|เขาแสดงออกอย่างมั่นใจกว่าที่ฉันคิด
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|I drove *more carefully than* I usually do today.|วันนี้ฉันขับรถระมัดระวังกว่าปกติ
+more attentively than|mɔː əˈtentɪvli ðən|👂|อย่างตั้งใจกว่า|She listens *more attentively than* the others.|เธอฟังอย่างตั้งใจกว่าคนอื่น
+more politely than|mɔː pəˈlaɪtli ðən|🙏|อย่างสุภาพกว่า|He answered *more politely than* expected.|เขาตอบอย่างสุภาพกว่าที่คาดไว้
+more slowly than|mɔː ˈsləʊli ðən|🐢|อย่างช้าๆ กว่า|The _teacher_ speaks *more slowly than* the others.|ครูพูดช้ากว่าคนอื่น
+more smoothly than|mɔː ˈsmuːðli ðən|🚗|อย่างราบรื่นกว่า|She drives *more smoothly than* I do.|เธอขับรถราบรื่นกว่าฉัน
+more accurately than|mɔː ˈækjərətli ðən|🎯|อย่างแม่นยำกว่า|You answered the _question_ *more accurately than* I could.|คุณตอบคำถามได้แม่นยำกว่าที่ฉันตอบได้
+more quickly than|mɔː ˈkwɪkli ðən|⚡|อย่างรวดเร็วกว่า|I reacted *more quickly than* he did.|ฉันตอบสนองได้เร็วกว่าเขา
+more happily than|mɔː ˈhæpɪli ðən|😊|อย่างมีความสุขกว่า|The _children_ played *more happily than* usual.|เด็กๆ เล่นอย่างมีความสุขกว่าปกติ
+more slowly than|mɔː ˈsləʊli ðən|🐢|อย่างช้าๆ กว่า|He speaks *more slowly than* me.|เขาพูดช้ากว่าฉัน
+more easily than|mɔː ˈiːzɪli ðən|😌|อย่างง่ายดายกว่า|I understood the _lesson_ *more easily than* I thought.|ฉันเข้าใจบทเรียนได้ง่ายกว่าที่คิด
+more elegantly than|mɔː ˈelɪɡəntli ðən|💃|อย่างสง่างามกว่า|She performed *more elegantly than* anyone else.|เธอแสดงได้สง่างามกว่าใครๆ
+more diligently than|mɔː ˈdɪlɪdʒəntli ðən|📚|อย่างขยันกว่า|He studies *more diligently than* I do.|เขาเรียนอย่างขยันกว่าฉัน
+more casually than|mɔː ˈkæʒuəli ðən|👕|อย่างสบายๆ กว่า|She dressed *more casually than* I anticipated.|เธอแต่งตัวสบายๆ กว่าที่ฉันคาดไว้
+more effectively than|mɔː ɪˈfektɪvli ðən|🛠️|อย่างได้ผลกว่า|The _team_ worked *more effectively than* before.|ทีมทำงานได้ผลกว่าเมื่อก่อน
+more promptly than|mɔː ˈprɒmptli ðən|⏰|อย่างทันท่วงทีกว่า|You arrived *more promptly than* I expected.|คุณมาถึงทันเวลากว่าที่ฉันคาดไว้
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|I need to concentrate *more carefully than* I usually do.|ฉันต้องมีสมาธิระมัดระวังกว่าปกติ
+more brightly than|mɔː ˈbraɪtli ðən|😁|อย่างสดใสกว่า|She smiled *more brightly than* I remembered.|เธอยิ้มสดใสกว่าที่ฉันจำได้
+more thoroughly than|mɔː ˈθʌrəli ðən|🔬|อย่างละเอียดถี่ถ้วนกว่า|I read the _book_ *more thoroughly than* he did.|ฉันอ่านหนังสืออย่างละเอียดกว่าเขา
+more generously than|mɔː ˈdʒenərəsli ðən|🎁|อย่างใจกว้างกว่า|They responded *more generously than* I thought.|พวกเขาตอบสนองอย่างใจกว้างกว่าที่ฉันคิด
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|She listens *more carefully than* her _friends_.|เธอฟังอย่างระมัดระวังกว่าเพื่อนๆ
+more quickly than|mɔː ˈkwɪkli ðən|⚡|อย่างรวดเร็วกว่า|I completed the _project_ *more quickly than* I expected.|ฉันทำโปรเจกต์เสร็จเร็วกว่าที่คาดไว้
+more kindly than|mɔː ˈkaɪndli ðən|💖|อย่างใจดีกว่า|She acted *more kindly than* anyone else.|เธอทำตัวใจดีกว่าใครๆ
+more diligently than|mɔː ˈdɪlɪdʒəntli ðən|📚|อย่างขยันกว่า|They worked *more diligently than* I imagined.|พวกเขาทำงานขยันกว่าที่ฉันนึกไว้
+more healthily than|mɔː ˈhelθɪli ðən|🥗|อย่างมีสุขภาพดีกว่า|He eats *more healthily than* I do.|เขากินอย่างมีสุขภาพดีกว่าฉัน
+more clearly than|mɔː ˈklɪəli ðən|🗣️|อย่างชัดเจนกว่า|The _teacher_ explained the _topic_ *more clearly than* before.|ครูอธิบายหัวข้อชัดเจนกว่าเมื่อก่อน
+more easily than|mɔː ˈiːzɪli ðən|😌|อย่างง่ายดายกว่า|She completed the _test_ *more easily than* I did.|เธอทำข้อสอบได้ง่ายกว่าฉัน
+more softly than|mɔː ˈsɒftli ðən|🤫|อย่างเบาๆ กว่า|He speaks *more softly than* his _brother_.|เขาพูดเบากว่าพี่/น้องชายของเขา
+more gracefully than|mɔː ˈɡreɪsfəli ðən|🩰|อย่างอ่อนช้อยกว่า|She dances *more gracefully than* anyone else in the _class_.|เธอเต้นอย่างอ่อนช้อยกว่าใครๆ ในชั้น
+more energetically than|mɔː ˌenəˈdʒetɪkli ðən|🏃‍♀️|อย่างกระฉับกระเฉงกว่า|The _children_ ran *more energetically than* I anticipated.|เด็กๆ วิ่งอย่างกระฉับกระเฉงกว่าที่ฉันคาดไว้
+more efficiently than|mɔː ɪˈfɪʃntli ðən|⚙️|อย่างมีประสิทธิภาพกว่า|He solved the _problem_ *more efficiently than* I could.|เขาแก้ปัญหาได้อย่างมีประสิทธิภาพกว่าที่ฉันทำได้
+more beautifully than|mɔː ˈbjuːtɪfli ðən|🎤|อย่างไพเราะงดงามกว่า|She sang *more beautifully than* anyone else at the _concert_.|เธอร้องเพลงไพเราะกว่าใครๆ ในคอนเสิร์ต
+more effectively than|mɔː ɪˈfektɪvli ðən|🛠️|อย่างได้ผลกว่า|We finished the _work_ *more effectively than* expected.|เราทำงานเสร็จอย่างได้ผลกว่าที่คาดไว้
+more intensely than|mɔː ɪnˈtensli ðən|🔥|อย่างเข้มข้นกว่า|He studied *more intensely than* his _classmates_.|เขาเรียนอย่างเข้มข้นกว่าเพื่อนร่วมชั้น
+more calmly than|mɔː ˈkɑːmli ðən|🧘|อย่างสงบกว่า|You responded *more calmly than* I would have.|คุณตอบสนองอย่างสงบกว่าที่ฉันจะทำ
+more aggressively than|mɔː əˈɡresɪvli ðən|😤|อย่างก้าวร้าวกว่า|He played *more aggressively than* anyone else on the _team_.|เขาเล่นอย่างก้าวร้าวกว่าใครๆ ในทีม
+more emotionally than|mɔː ɪˈməʊʃənəli ðən|😢|อย่างมีอารมณ์กว่า|I reacted *more emotionally than* I expected.|ฉันตอบสนองด้วยอารมณ์มากกว่าที่คาดไว้
+more convincingly than|mɔː kənˈvɪnsɪŋli ðən|📣|อย่างน่าเชื่อกว่า|She made the _presentation_ *more convincingly than* the others.|เธอนำเสนออย่างน่าเชื่อกว่าคนอื่น
+more thoroughly than|mɔː ˈθʌrəli ðən|🔬|อย่างละเอียดถี่ถ้วนกว่า|He finished his _homework_ *more thoroughly than* I did.|เขาทำการบ้านเสร็จอย่างละเอียดกว่าฉัน
+more passionately than|mɔː ˈpæʃənətli ðən|❤️|อย่างลุ่มหลงกว่า|She danced *more passionately than* anyone else.|เธอเต้นอย่างลุ่มหลงกว่าใครๆ
+more vigorously than|mɔː ˈvɪɡərəsli ðən|🗯️|อย่างแข็งขันกว่า|They argued *more vigorously than* expected.|พวกเขาโต้เถียงอย่างแข็งขันกว่าที่คาดไว้
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|I studied *more carefully than* I did last time.|ฉันเรียนอย่างระมัดระวังกว่าครั้งที่แล้ว
+more energetically than|mɔː ˌenəˈdʒetɪkli ðən|🏃‍♀️|อย่างกระฉับกระเฉงกว่า|She ran *more energetically than* the others.|เธอวิ่งอย่างกระฉับกระเฉงกว่าคนอื่น
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|The _work_ was done *more carefully than* last time.|งานถูกทำอย่างระมัดระวังกว่าครั้งที่แล้ว
+more politely than|mɔː pəˈlaɪtli ðən|🙏|อย่างสุภาพกว่า|He responded *more politely than* anyone else.|เขาตอบอย่างสุภาพกว่าใครๆ
+more gracefully than|mɔː ˈɡreɪsfəli ðən|🩰|อย่างอ่อนช้อยกว่า|She handled the _situation_ *more gracefully than* I would have.|เธอรับมือสถานการณ์อย่างอ่อนช้อยกว่าที่ฉันจะทำ
+more successfully than|mɔː səkˈsesfəli ðən|🏅|อย่างประสบความสำเร็จกว่า|She completed the _task_ *more successfully than* anyone else.|เธอทำงานสำเร็จกว่าใครๆ
+more beautifully than|mɔː ˈbjuːtɪfli ðən|🎤|อย่างไพเราะงดงามกว่า|She sings *more beautifully than* I do.|เธอร้องเพลงไพเราะกว่าฉัน
+more quickly than|mɔː ˈkwɪkli ðən|⚡|อย่างรวดเร็วกว่า|The _dog_ runs *more quickly than* the other _dogs_.|สุนัขตัวนี้วิ่งเร็วกว่าตัวอื่น
+more calmly than|mɔː ˈkɑːmli ðən|🧘|อย่างสงบกว่า|He replied *more calmly than* anyone else in the _room_.|เขาตอบอย่างสงบกว่าใครๆ ในห้อง
+more seriously than|mɔː ˈsɪəriəsli ðən|🧑‍🎓|อย่างจริงจังกว่า|You are studying *more seriously than* before.|คุณเรียนอย่างจริงจังกว่าเมื่อก่อน
+more clearly than|mɔː ˈklɪəli ðən|🗣️|อย่างชัดเจนกว่า|She explains _things_ *more clearly than* her _colleague_.|เธออธิบายเรื่องต่างๆ ชัดเจนกว่าเพื่อนร่วมงาน
+more strongly than|mɔː ˈstrɒŋli ðən|💥|อย่างรุนแรงกว่า|He reacted *more strongly than* I expected.|เขาตอบสนองรุนแรงกว่าที่ฉันคาดไว้
+more neatly than|mɔː ˈniːtli ðən|✍️|อย่างเรียบร้อยกว่า|He writes *more neatly than* anyone else in _class_.|เขาเขียนเรียบร้อยกว่าใครๆ ในชั้น
+more efficiently than|mɔː ɪˈfɪʃntli ðən|⚙️|อย่างมีประสิทธิภาพกว่า|She worked *more efficiently than* I thought she would.|เธอทำงานอย่างมีประสิทธิภาพกว่าที่ฉันคิด
+more creatively than|mɔː kriˈeɪtɪvli ðən|🎨|อย่างสร้างสรรค์กว่า|He solved the _puzzle_ *more creatively than* the others.|เขาแก้ปริศนาอย่างสร้างสรรค์กว่าคนอื่น
+more loudly than|mɔː ˈlaʊdli ðən|🔊|อย่างเสียงดังกว่า|The _kids_ played *more loudly than* I wanted them to.|เด็กๆ เล่นเสียงดังกว่าที่ฉันต้องการ
+more quickly than|mɔː ˈkwɪkli ðən|⚡|อย่างรวดเร็วกว่า|She is progressing *more quickly than* I imagined.|เธอพัฒนาเร็วกว่าที่ฉันนึกไว้
+more smoothly than|mɔː ˈsmuːðli ðən|🚗|อย่างราบรื่นกว่า|He swims *more smoothly than* anyone in the _competition_.|เขาว่ายน้ำราบรื่นกว่าใครๆ ในการแข่งขัน
+more diligently than|mɔː ˈdɪlɪdʒəntli ðən|📚|อย่างขยันกว่า|I studied *more diligently than* I did last time.|ฉันเรียนอย่างขยันกว่าครั้งที่แล้ว
+more wisely than|mɔː ˈwaɪzli ðən|🦉|อย่างชาญฉลาดกว่า|You made the _decision_ *more wisely than* I would have.|คุณตัดสินใจอย่างชาญฉลาดกว่าที่ฉันจะทำ
+more gracefully than|mɔː ˈɡreɪsfəli ðən|🩰|อย่างอ่อนช้อยกว่า|She dances *more gracefully than* I expected.|เธอเต้นอย่างอ่อนช้อยกว่าที่ฉันคาดไว้
+more thoroughly than|mɔː ˈθʌrəli ðən|🔬|อย่างละเอียดถี่ถ้วนกว่า|He explained it *more thoroughly than* I could.|เขาอธิบายอย่างละเอียดถี่ถ้วนกว่าที่ฉันทำได้
+more smoothly than|mɔː ˈsmuːðli ðən|🚗|อย่างราบรื่นกว่า|The new _app_ works *more smoothly than* the previous one.|แอปใหม่ทำงานราบรื่นกว่าแอปก่อน
+more carefully than|mɔː ˈkeəfəli ðən|🧐|อย่างระมัดระวังกว่า|The _food_ was cooked *more carefully than* before.|อาหารถูกปรุงอย่างระมัดระวังกว่าเมื่อก่อน
+more punctually than|mɔː ˈpʌŋktʃuəli ðən|🕰️|อย่างตรงเวลากว่า|I arrived *more punctually than* I did last time.|ฉันมาถึงตรงเวลากว่าครั้งที่แล้ว
+more independently than|mɔː ˌɪndɪˈpendəntli ðən|🧍|อย่างอิสระกว่า|She worked *more independently than* expected.|เธอทำงานอย่างอิสระกว่าที่คาดไว้
+more rapidly than|mɔː ˈræpɪdli ðən|🚀|อย่างรวดเร็วกว่า|His _skills_ improved *more rapidly than* his _colleagues_.|ทักษะของเขาพัฒนาเร็วกว่าเพื่อนร่วมงาน
+more enthusiastically than|mɔː ɪnˌθjuːziˈæstɪkli ðən|🙌|อย่างกระตือรือร้นกว่า|The _teacher_ explained the _lesson_ *more enthusiastically than* I expected.|ครูอธิบายบทเรียนอย่างกระตือรือร้นกว่าที่ฉันคาดไว้
+more calmly than|mɔː ˈkɑːmli ðən|🧘|อย่างสงบกว่า|The _cat_ is behaving *more calmly than* usual.|แมวทำตัวสงบกว่าปกติ
+more quickly than|mɔː ˈkwɪkli ðən|⚡|อย่างรวดเร็วกว่า|They finished the _project_ *more quickly than* anticipated.|พวกเขาทำโปรเจกต์เสร็จเร็วกว่าที่คาดไว้
+more directly than|mɔː dəˈrektli ðən|➡️|อย่างตรงไปตรงมากว่า|He answered *more directly than* I would have.|เขาตอบตรงไปตรงมากว่าที่ฉันจะทำ
+more methodically than|mɔː məˈθɒdɪkli ðən|🗂️|อย่างเป็นระบบกว่า|She approached the _problem_ *more methodically than* anyone else.|เธอเข้าหาปัญหาอย่างเป็นระบบกว่าใครๆ
+more frequently than|mɔː ˈfriːkwəntli ðən|🔁|บ่อยกว่า|He runs *more frequently than* I do.|เขาวิ่งบ่อยกว่าฉัน
+more tastefully than|mɔː ˈteɪstfəli ðən|🏡|อย่างมีรสนิยมกว่า|The _house_ was decorated *more tastefully than* I imagined.|บ้านตกแต่งอย่างมีรสนิยมกว่าที่ฉันนึกไว้
+more confidently than|mɔː ˈkɒnfɪdəntli ðən|😎|อย่างมั่นใจกว่า|The _team_ played *more confidently than* last _season_.|ทีมเล่นอย่างมั่นใจกว่าฤดูกาลที่แล้ว
+more promptly than|mɔː ˈprɒmptli ðən|⏰|อย่างทันท่วงทีกว่า|He answered the _question_ *more promptly than* I expected.|เขาตอบคำถามเร็วกว่าที่ฉันคาดไว้
+more thoroughly than|mɔː ˈθʌrəli ðən|🔬|อย่างละเอียดถี่ถ้วนกว่า|She completed the _assignment_ *more thoroughly than* the others.|เธอทำงานที่ได้รับมอบหมายอย่างละเอียดกว่าคนอื่น
+more diplomatically than|mɔː ˌdɪpləˈmætɪkli ðən|🤝|อย่างมีชั้นเชิงกว่า|He responded *more diplomatically than* I would have.|เขาตอบอย่างมีชั้นเชิงกว่าที่ฉันจะทำ`,
+"more + adjective":`more interesting than|mɔː ˈɪntrəstɪŋ ðən|📖|น่าสนใจกว่า|This _book_ is *more interesting than* the last one I read.|หนังสือเล่มนี้น่าสนใจกว่าเล่มที่แล้วที่ฉันอ่าน
+more exciting than|mɔː ɪkˈsaɪtɪŋ ðən|🎢|น่าตื่นเต้นกว่า|This _movie_ was *more exciting than* the first one.|หนังเรื่องนี้น่าตื่นเต้นกว่าเรื่องแรก
+more emotional than|mɔː ɪˈməʊʃənl ðən|😭|เต็มไปด้วยอารมณ์กว่า|The second _film_ was *more emotional than* the first.|หนังภาคสองเต็มไปด้วยอารมณ์กว่าภาคแรก
+more challenging than|mɔː ˈtʃælɪndʒɪŋ ðən|🧗|ท้าทายกว่า|This _lesson_ is *more challenging than* yesterday's.|บทเรียนนี้ท้าทายกว่าของเมื่อวาน
+more correct than|mɔː kəˈrekt ðən|✅|ถูกต้องกว่า|This _answer_ is *more correct than* the last one.|คำตอบนี้ถูกต้องกว่าข้อที่แล้ว
+more exciting than|mɔː ɪkˈsaɪtɪŋ ðən|🎢|น่าตื่นเต้นกว่า|The _movie_ was *more exciting than* I imagined.|หนังเรื่องนี้น่าตื่นเต้นกว่าที่ฉันนึกไว้
+more successful than|mɔː səkˈsesfl ðən|🏆|ประสบความสำเร็จกว่า|This _season_ was *more successful than* last year's.|ฤดูกาลนี้ประสบความสำเร็จกว่าของปีที่แล้ว
+more impressive than|mɔː ɪmˈpresɪv ðən|🌟|น่าประทับใจกว่า|His _performance_ was *more impressive than* the last one.|การแสดงของเขาน่าประทับใจกว่าครั้งที่แล้ว
+more enjoyable than|mɔː ɪnˈdʒɔɪəbl ðən|🎉|สนุกกว่า|The _concert_ was *more enjoyable than* the last one.|คอนเสิร์ตสนุกกว่าครั้งที่แล้ว
+more entertaining than|mɔː ˌentəˈteɪnɪŋ ðən|🎬|บันเทิงกว่า|The _movie_ was *more entertaining than* I thought.|หนังเรื่องนี้บันเทิงกว่าที่ฉันคิด
+more confusing than|mɔː kənˈfjuːzɪŋ ðən|😵|สับสนกว่า|His _explanation_ was *more confusing than* the first one.|คำอธิบายของเขาสับสนกว่าอันแรก
+more excited than|mɔː ɪkˈsaɪtɪd ðən|🤩|ตื่นเต้นกว่า|She looked *more excited than* I have ever seen her.|เธอดูตื่นเต้นกว่าที่ฉันเคยเห็นเธอ
+more difficult than|mɔː ˈdɪfɪkəlt ðən|😰|ยากกว่า|This _class_ was *more difficult than* the one last _semester_.|คลาสนี้ยากกว่าคลาสในภาคเรียนที่แล้ว
+more nervous than|mɔː ˈnɜːvəs ðən|😬|ประหม่ากว่า|I felt *more nervous than* I thought I would.|ฉันรู้สึกประหม่ากว่าที่คิด
+more thrilling than|mɔː ˈθrɪlɪŋ ðən|🎥|ระทึกใจกว่า|The second _movie_ was *more thrilling than* the first.|หนังภาคสองระทึกใจกว่าภาคแรก
+more user-friendly than|mɔː ˌjuːzə ˈfrendli ðən|📲|ใช้งานง่ายกว่า|The new _app_ is *more user-friendly than* the old one.|แอปใหม่ใช้งานง่ายกว่าแอปเก่า
+more relaxed than|mɔː rɪˈlækst ðən|🛀|ผ่อนคลายกว่า|He looked *more relaxed than* before.|เขาดูผ่อนคลายกว่าเมื่อก่อน
+more useful than|mɔː ˈjuːsfl ðən|🧰|มีประโยชน์กว่า|This _explanation_ was *more useful than* the previous one.|คำอธิบายนี้มีประโยชน์กว่าคำอธิบายก่อนหน้า
+more delicious than|mɔː dɪˈlɪʃəs ðən|🍽️|อร่อยกว่า|The _food_ tasted *more delicious than* we imagined.|อาหารอร่อยกว่าที่เรานึกไว้
+more complicated than|mɔː ˈkɒmplɪkeɪtɪd ðən|🧩|ซับซ้อนกว่า|His _explanation_ was *more complicated than* I thought.|คำอธิบายของเขาซับซ้อนกว่าที่ฉันคิด
+more confident than|mɔː ˈkɒnfɪdənt ðən|💪|มั่นใจกว่า|I felt *more confident than* the first time I tried.|ฉันรู้สึกมั่นใจกว่าครั้งแรกที่ลอง
+more difficult than|mɔː ˈdɪfɪkəlt ðən|😰|ยากกว่า|The second round of _questions_ was *more difficult than* the first.|คำถามรอบสองยากกว่ารอบแรก
+more accurate than|mɔː ˈækjərət ðən|📏|แม่นยำกว่า|His _answer_ was *more accurate than* mine.|คำตอบของเขาแม่นยำกว่าของฉัน
+more suspenseful than|mɔː səˈspensfl ðən|🎞️|ลุ้นระทึกกว่า|The new _movie_ was *more suspenseful than* the first one.|หนังเรื่องใหม่ลุ้นระทึกกว่าเรื่องแรก
+more compelling than|mɔː kəmˈpelɪŋ ðən|🎙️|น่าติดตามกว่า|The second _speech_ was *more compelling than* the first.|คำปราศรัยที่สองน่าติดตามกว่าครั้งแรก
+more helpful than|mɔː ˈhelpfl ðən|🤗|ช่วยเหลือดีกว่า|The customer _service_ is *more helpful than* I anticipated.|บริการลูกค้าช่วยเหลือดีกว่าที่ฉันคาดไว้
+more energetic than|mɔː ˌenəˈdʒetɪk ðən|🔋|กระฉับกระเฉงกว่า|I feel *more energetic than* I did earlier.|ฉันรู้สึกกระฉับกระเฉงกว่าเมื่อครู่
+more challenging than|mɔː ˈtʃælɪndʒɪŋ ðən|🧗|ท้าทายกว่า|This _test_ was *more challenging than* the last one.|การสอบนี้ท้าทายกว่าครั้งที่แล้ว
+more detailed than|mɔː ˈdiːteɪld ðən|📋|ละเอียดกว่า|His _explanation_ was *more detailed than* the others.|คำอธิบายของเขาละเอียดกว่าคนอื่น
+more relaxed than|mɔː rɪˈlækst ðən|🛀|ผ่อนคลายกว่า|She looks *more relaxed than* she did earlier.|เธอดูผ่อนคลายกว่าเมื่อครู่
+more scenic than|mɔː ˈsiːnɪk ðən|🌄|วิวสวยกว่า|The _road_ was *more scenic than* I had imagined.|ถนนสายนี้วิวสวยกว่าที่ฉันนึกไว้
+more peaceful than|mɔː ˈpiːsfl ðən|🕊️|สงบสุขกว่า|The _night_ was *more peaceful than* I thought.|ค่ำคืนสงบสุขกว่าที่ฉันคิด`};
+const P=['#fde2e4','#e2ece9','#dfe7fd','#fff1c9','#e8dff5','#d6f0e4'];
+const fmt=s=>s.replace(/\*(.+?)\*/g,'<span class=a>$1</span>').replace(/_(.+?)_/g,'<span class=n>$1</span>');
+const plain=s=>s.replace(/[*_]/g,'');
+let voice=null;
+function pick(){const all=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ const sc=x=>{const n=x.name;let s=0;if(/^en[-_]GB/i.test(x.lang))s+=100;if(/natural|neural/i.test(n))s+=50;if(/online/i.test(n))s+=40;if(/google uk english female/i.test(n))s+=35;if(/premium|enhanced/i.test(n))s+=30;if(/sonia|libby|ryan|serena|daniel|kate|oliver/i.test(n))s+=20;if(/google/i.test(n))s+=10;if(x.localService===false)s+=5;return s};
+ voice=all.sort((a,b)=>sc(b)-sc(a))[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+const names=Object.keys(D);let cur=0,pg=0;
+function show(i,p){cur=i;pg=p||0;
+ document.getElementById('tabs').innerHTML=names.map((n,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${n}</button>`).join('');
+ const all=D[names[i]].split('\n').map(r=>r.split('|')),rows=all.slice(pg*25,pg*25+25),np=Math.ceil(all.length/25);document.getElementById('pg').innerHTML=np>1?Array.from({length:np},(_,n)=>`<button class=\"${n==pg?'on':''}\" onclick=\"show(${i},${n})\">หน้า ${n+1}</button>`).join(''):'';
+ document.getElementById('grid').innerHTML=rows.map((r,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+ <div class="fa" style="background:${P[k%6]}"><div class="em">${r[2]}</div><div class="wd">${r[0]}</div><div class="ipa">/${r[1]}/</div><button class="sp" onclick="say('${r[0]}',event)" aria-label="ฟังเสียง">🔊</button></div>
+ <div class="fb" style="background:${P[(k+3)%6]}"><div class="th">${r[3]}</div><div class="es">${fmt(r[4])}</div><div class="ts">${r[5]}</div><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)" aria-label="ฟังประโยค">🔊</button></div></div></div>`).join('');
+ document.getElementById('tb').innerHTML=rows.map((r,k)=>`<tr><td>${pg*25+k+1}</td><td><b>${r[2]} ${r[0]}</b><br><span class="ipa">/${r[1]}/</span></td>
+ <td class="e"><div style="display:flex;gap:8px;align-items:center"><button class="sp" onclick="say('${plain(r[4]).replace(/'/g,"\\'")}',event)">🔊</button><span>${fmt(r[4])}</span></div></td><td class="t">${r[3]}<br>${r[5]}</td></tr>`).join('')}
+show(0);
+</script></body></html>
