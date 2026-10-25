@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noun Phrase with Quantifiers or Numbers Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#b0125f;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(176,18,95,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Noun Phrase with Quantifiers or Numbers</b>”: <i>Noun Phrase in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#Quantifiers: Countable
+several books|ˈsevrəl bʊks|📚|หนังสือหลายเล่ม|Several books were left on the table.|มีหนังสือหลายเล่มถูกวางทิ้งไว้บนโต๊ะ
+a few people|ə fjuː ˈpiːpl|👥|ผู้คนไม่กี่คน|A few people attended the event.|มีคนไม่กี่คนเข้าร่วมงาน
+many questions|ˈmeni ˈkwestʃənz|❓|คำถามมากมาย|I have many questions about the project.|ฉันมีคำถามมากมายเกี่ยวกับโครงการนี้
+some students|səm ˈstjuːdnts|🧑‍🎓|นักเรียนบางคน|Some students didn't finish their homework on time.|นักเรียนบางคนทำการบ้านไม่เสร็จทันเวลา
+numerous challenges|ˈnjuːmərəs ˈtʃælɪndʒɪz|🧗|ความท้าทายมากมาย|There were numerous challenges during the project.|มีความท้าทายมากมายระหว่างโครงการ
+a couple of gifts|ə ˈkʌpl əv ɡɪfts|🎁|ของขวัญสองสามชิ้น|They brought a couple of gifts for the host.|พวกเขานำของขวัญสองสามชิ้นมาให้เจ้าภาพ
+a handful of employees|ə ˈhændfʊl əv ɪmˈplɔɪiːz|🧑‍💼|พนักงานจำนวนหยิบมือ|The company has a handful of employees working remotely.|บริษัทมีพนักงานจำนวนหยิบมือที่ทำงานระยะไกล
+a great number of participants|ə ɡreɪt ˈnʌmbər əv pɑːˈtɪsɪpənts|🙋|ผู้เข้าร่วมจำนวนมาก|A great number of participants signed up for the conference.|ผู้เข้าร่วมจำนวนมากลงทะเบียนเข้าร่วมการประชุม
+a large number of applications|ə lɑːdʒ ˈnʌmbər əv ˌæplɪˈkeɪʃnz|📨|ใบสมัครจำนวนมาก|We received a large number of applications for the position.|เราได้รับใบสมัครจำนวนมากสำหรับตำแหน่งนี้
+too many tasks|tuː ˈmeni tɑːsks|📋|งานมากเกินไป|We have too many tasks to complete by the end of the day.|เรามีงานมากเกินไปที่ต้องทำให้เสร็จภายในสิ้นวัน
+few people|fjuː ˈpiːpl|🤫|คนน้อยมาก|Few people knew about the surprise event.|มีคนน้อยมากที่รู้เรื่องงานเซอร์ไพรส์
+a small number of submissions|ə smɔːl ˈnʌmbər əv səbˈmɪʃnz|📥|ผลงานที่ส่งเข้ามาจำนวนน้อย|They received a small number of submissions for the contest.|พวกเขาได้รับผลงานที่ส่งเข้าประกวดจำนวนน้อย
+all the guests|ɔːl ðə ɡests|🎉|แขกทุกคน|All the guests enjoyed the dinner at the party.|แขกทุกคนเพลิดเพลินกับอาหารเย็นในงานปาร์ตี้
+a large group of tourists|ə lɑːdʒ ɡruːp əv ˈtʊərɪsts|🧳|กลุ่มนักท่องเที่ยวขนาดใหญ่|A large group of tourists visited the museum today.|กลุ่มนักท่องเที่ยวขนาดใหญ่มาเยี่ยมพิพิธภัณฑ์วันนี้
+many opportunities|ˈmeni ˌɒpəˈtjuːnətiz|🚪|โอกาสมากมาย|Many opportunities were available for career advancement.|มีโอกาสมากมายสำหรับความก้าวหน้าในอาชีพ
+#Quantifiers: Amounts
+a lot of feedback|ə lɒt əv ˈfiːdbæk|💬|ข้อเสนอแนะมากมาย|We received a lot of feedback from our customers.|เราได้รับข้อเสนอแนะมากมายจากลูกค้า
+a large amount of money|ə lɑːdʒ əˈmaʊnt əv ˈmʌni|💰|เงินจำนวนมาก|A large amount of money was raised for the charity.|ระดมเงินจำนวนมากเพื่อการกุศลได้
+a significant amount of time|ə sɪɡˈnɪfɪkənt əˈmaʊnt əv taɪm|⏳|เวลาจำนวนมาก|A significant amount of time was spent preparing the proposal.|ใช้เวลาจำนวนมากในการเตรียมข้อเสนอ
+a great deal of effort|ə ɡreɪt diːl əv ˈefət|💪|ความพยายามอย่างมาก|A great deal of effort went into organizing the event.|ใช้ความพยายามอย่างมากในการจัดงาน
+a little bit of salt|ə ˈlɪtl bɪt əv sɔːlt|🧂|เกลือเล็กน้อย|A little bit of salt is all that is needed for the recipe.|สูตรนี้ต้องการเกลือเพียงเล็กน้อยเท่านั้น
+a small amount of sugar|ə smɔːl əˈmaʊnt əv ˈʃʊɡə|🍬|น้ำตาลจำนวนเล็กน้อย|We need a small amount of sugar for the recipe.|เราต้องการน้ำตาลจำนวนเล็กน้อยสำหรับสูตรนี้
+some food|səm fuːd|🍱|อาหารบางส่วน|Some food was left over after the party.|มีอาหารบางส่วนเหลือหลังงานปาร์ตี้
+a large portion of the population|ə lɑːdʒ ˈpɔːʃn əv ðə ˌpɒpjuˈleɪʃn|🌍|ประชากรส่วนใหญ่|A large portion of the population has been vaccinated.|ประชากรส่วนใหญ่ได้รับวัคซีนแล้ว
+a few drops of water|ə fjuː drɒps əv ˈwɔːtə|💧|น้ำไม่กี่หยด|A few drops of water spilled onto the table.|น้ำไม่กี่หยดหกลงบนโต๊ะ
+a little time|ə ˈlɪtl taɪm|🕐|เวลาเล็กน้อย|We had a little time left to explore the city.|เรามีเวลาเหลือเล็กน้อยให้สำรวจเมือง
+#Numbers
+three pairs of shoes|θriː peəz əv ʃuːz|👟|รองเท้าสามคู่|He bought three pairs of shoes yesterday.|เขาซื้อรองเท้าสามคู่เมื่อวานนี้
+two cars|tuː kɑːz|🚙|รถสองคัน|There are two cars parked in the driveway.|มีรถสองคันจอดอยู่ในทางเข้าบ้าน
+five dogs|faɪv dɒɡz|🐕|สุนัขห้าตัว|She owns five dogs and three cats.|เธอมีสุนัขห้าตัวและแมวสามตัว
+ten boxes|ten ˈbɒksɪz|📦|กล่องสิบกล่อง|Ten boxes were delivered to the office today.|กล่องสิบกล่องถูกส่งมาที่สำนักงานวันนี้
+two hours|tuː ˈaʊəz|⏰|สองชั่วโมง|Two hours passed before the meeting started.|ผ่านไปสองชั่วโมงก่อนการประชุมจะเริ่ม
+one person|wʌn ˈpɜːsn|🧍|หนึ่งคน|One person arrived early for the meeting.|มีหนึ่งคนมาถึงการประชุมเร็ว
+a dozen eggs|ə ˈdʌzn eɡz|🥚|ไข่หนึ่งโหล|She bought a dozen eggs for breakfast.|เธอซื้อไข่หนึ่งโหลสำหรับมื้อเช้า
+three children|θriː ˈtʃɪldrən|🧒|เด็กสามคน|Three children were playing in the park.|เด็กสามคนกำลังเล่นอยู่ในสวนสาธารณะ
+hundreds of people|ˈhʌndrədz əv ˈpiːpl|🏟️|ผู้คนหลายร้อยคน|Hundreds of people attended the concert last night.|ผู้คนหลายร้อยคนไปชมคอนเสิร์ตเมื่อคืนนี้
+two cups of flour|tuː kʌps əv ˈflaʊə|🥣|แป้งสองถ้วยตวง|Two cups of flour were added to the mixture.|เติมแป้งสองถ้วยตวงลงในส่วนผสม
+four siblings|fɔː ˈsɪblɪŋz|👨‍👩‍👧‍👦|พี่น้องสี่คน|She has four siblings in total.|เธอมีพี่น้องทั้งหมดสี่คน
+six boxes of supplies|sɪks ˈbɒksɪz əv səˈplaɪz|🗃️|อุปกรณ์หกกล่อง|We ordered six boxes of supplies for the office.|เราสั่งอุปกรณ์สำนักงานหกกล่อง
+three sandwiches|θriː ˈsænwɪdʒɪz|🥪|แซนด์วิชสามชิ้น|He ate three sandwiches before lunch.|เขากินแซนด์วิชสามชิ้นก่อนมื้อกลางวัน
+two hundred tickets|tuː ˈhʌndrəd ˈtɪkɪts|🎫|ตั๋วสองร้อยใบ|They sold two hundred tickets for the concert.|พวกเขาขายตั๋วคอนเสิร์ตได้สองร้อยใบ
+three bedrooms and two bathrooms|θriː ˈbedruːmz ənd tuː ˈbɑːθruːmz|🛏️|ห้องนอนสามห้องและห้องน้ำสองห้อง|The apartment has three bedrooms and two bathrooms.|อพาร์ตเมนต์มีห้องนอนสามห้องและห้องน้ำสองห้อง`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' ');return `<span class="d">${w[0]}</span> <span class="n">${w.slice(1).join(' ')}</span>`};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Noun Phrase with Quantifiers or Numbers</div><div class="lab2">Noun Phrase in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Appositive Noun Phrase Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#b0125f;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(176,18,95,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Appositive Noun Phrase</b>”: <i>Noun Phrase in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#People
+My brother, a skilled musician|maɪ ˈbrʌðə ə skɪld mjuˈzɪʃn|🎸|พี่/น้องชายของฉัน นักดนตรีผู้ชำนาญ|My brother, a skilled musician, is performing tonight.|พี่ชายของฉัน นักดนตรีผู้ชำนาญ จะแสดงคืนนี้
+Sarah, my best friend|ˈseərə maɪ best frend|👭|ซาร่าห์ เพื่อนสนิทของฉัน|Sarah, my best friend, is moving to another city.|ซาร่าห์ เพื่อนสนิทของฉัน กำลังจะย้ายไปอีกเมือง
+John, a talented artist|dʒɒn ə ˈtæləntɪd ˈɑːtɪst|🎨|จอห์น ศิลปินผู้มีพรสวรรค์|John, a talented artist, painted this masterpiece.|จอห์น ศิลปินผู้มีพรสวรรค์ วาดผลงานชิ้นเอกนี้
+Mr. Smith, my neighbor|ˈmɪstə smɪθ maɪ ˈneɪbə|🏘️|คุณสมิธ เพื่อนบ้านของฉัน|Mr. Smith, my neighbor, is a lawyer.|คุณสมิธ เพื่อนบ้านของฉัน เป็นทนายความ
+Maria, the CEO of the company|məˈriːə ðə ˌsiː iː ˈəʊ əv ðə ˈkʌmpəni|👩‍💼|มาเรีย ซีอีโอของบริษัท|Maria, the CEO of the company, will attend the meeting.|มาเรีย ซีอีโอของบริษัท จะเข้าร่วมการประชุม
+Their daughter, a talented gymnast|ðeə ˈdɔːtə ə ˈtæləntɪd ˈdʒɪmnæst|🤸|ลูกสาวของพวกเขา นักยิมนาสติกผู้มีพรสวรรค์|Their daughter, a talented gymnast, won the competition.|ลูกสาวของพวกเขา นักยิมนาสติกผู้มีพรสวรรค์ ชนะการแข่งขัน
+My neighbor, a retired police officer|maɪ ˈneɪbə ə rɪˈtaɪəd pəˈliːs ˈɒfɪsə|👮|เพื่อนบ้านของฉัน ตำรวจที่เกษียณแล้ว|My neighbor, a retired police officer, has many fascinating stories.|เพื่อนบ้านของฉัน ตำรวจที่เกษียณแล้ว มีเรื่องเล่าน่าสนใจมากมาย
+My grandmother, a gifted storyteller|maɪ ˈɡrænmʌðə ə ˈɡɪftɪd ˈstɔːritelə|👵|คุณยายของฉัน นักเล่าเรื่องผู้มีพรสวรรค์|My grandmother, a gifted storyteller, can keep us entertained for hours.|คุณยายของฉัน นักเล่าเรื่องผู้มีพรสวรรค์ เล่าให้เราเพลิดเพลินได้เป็นชั่วโมง
+My aunt, a professional chef|maɪ ɑːnt ə prəˈfeʃnl ʃef|👩‍🍳|ป้า/น้าของฉัน เชฟมืออาชีพ|My aunt, a professional chef, is opening a new restaurant.|ป้าของฉัน เชฟมืออาชีพ กำลังจะเปิดร้านอาหารแห่งใหม่
+The athlete, a world champion swimmer|ði ˈæθliːt ə wɜːld ˈtʃæmpiən ˈswɪmə|🏊|นักกีฬา แชมป์โลกว่ายน้ำ|The athlete, a world champion swimmer, is competing in the Olympics next year.|นักกีฬา แชมป์โลกว่ายน้ำ จะแข่งโอลิมปิกปีหน้า
+#Places & Buildings
+The city, a vibrant metropolis|ðə ˈsɪti ə ˈvaɪbrənt məˈtrɒpəlɪs|🌆|เมือง มหานครที่คึกคัก|The city, a vibrant metropolis, has much to offer.|เมือง มหานครที่คึกคัก มีสิ่งน่าสนใจมากมาย
+The restaurant, a cozy Italian place|ðə ˈrestrɒnt ə ˈkəʊzi ɪˈtæljən pleɪs|🍝|ร้านอาหาร ร้านอิตาเลียนอบอุ่น|The restaurant, a cozy Italian place, serves the best pizza in town.|ร้านอาหาร ร้านอิตาเลียนอบอุ่น เสิร์ฟพิซซ่าที่อร่อยที่สุดในเมือง
+The island, a tropical paradise|ðə ˈaɪlənd ə ˈtrɒpɪkl ˈpærədaɪs|🏝️|เกาะ สวรรค์เขตร้อน|The island, a tropical paradise, is known for its crystal-clear waters.|เกาะ สวรรค์เขตร้อน มีชื่อเสียงเรื่องน้ำทะเลใสราวคริสตัล
+The building, an architectural wonder|ðə ˈbɪldɪŋ ən ˌɑːkɪˈtektʃrəl ˈwʌndə|🏢|อาคาร สิ่งมหัศจรรย์ทางสถาปัตยกรรม|The building, an architectural wonder, is over 100 years old.|อาคาร สิ่งมหัศจรรย์ทางสถาปัตยกรรม มีอายุกว่า 100 ปี
+The beach, a popular tourist destination|ðə biːtʃ ə ˈpɒpjələ ˈtʊərɪst ˌdestɪˈneɪʃn|🏖️|ชายหาด แหล่งท่องเที่ยวยอดนิยม|The beach, a popular tourist destination, is always crowded during summer.|ชายหาด แหล่งท่องเที่ยวยอดนิยม แออัดเสมอในหน้าร้อน
+The neighborhood, a quiet suburb|ðə ˈneɪbəhʊd ə ˈkwaɪət ˈsʌbɜːb|🏘️|ย่านที่อยู่อาศัย ชานเมืองที่เงียบสงบ|The neighborhood, a quiet suburb, is perfect for raising a family.|ย่านที่อยู่อาศัย ชานเมืองที่เงียบสงบ เหมาะกับการเลี้ยงดูครอบครัวมาก
+The museum, a center of art and culture|ðə mjuˈziːəm ə ˈsentər əv ɑːt ənd ˈkʌltʃə|🏛️|พิพิธภัณฑ์ ศูนย์กลางศิลปะและวัฒนธรรม|The museum, a center of art and culture, hosts many exhibitions.|พิพิธภัณฑ์ ศูนย์กลางศิลปะและวัฒนธรรม จัดนิทรรศการมากมาย
+The village, a small community in the mountains|ðə ˈvɪlɪdʒ ə smɔːl kəˈmjuːnəti ɪn ðə ˈmaʊntɪnz|⛰️|หมู่บ้าน ชุมชนเล็กๆ บนภูเขา|The village, a small community in the mountains, is known for its beautiful scenery.|หมู่บ้าน ชุมชนเล็กๆ บนภูเขา มีชื่อเสียงเรื่องทัศนียภาพสวยงาม
+The park, a peaceful escape from the city|ðə pɑːk ə ˈpiːsfl ɪˈskeɪp frəm ðə ˈsɪti|🌳|สวนสาธารณะ แหล่งหลีกหนีความวุ่นวายอันสงบ|The park, a peaceful escape from the city, is my favorite spot to relax.|สวนสาธารณะ แหล่งหลีกหนีความวุ่นวายอันสงบ เป็นที่พักผ่อนที่ฉันชอบ
+The bridge, an engineering feat|ðə brɪdʒ ən ˌendʒɪˈnɪərɪŋ fiːt|🌉|สะพาน ผลงานวิศวกรรมอันน่าทึ่ง|The bridge, an engineering feat, connects the two cities.|สะพาน ผลงานวิศวกรรมอันน่าทึ่ง เชื่อมสองเมืองเข้าด้วยกัน
+#Arts & Media
+The novel, a thrilling mystery|ðə ˈnɒvl ə ˈθrɪlɪŋ ˈmɪstri|🔍|นิยาย เรื่องลึกลับสุดระทึก|The novel, a thrilling mystery, kept me up all night.|นิยาย เรื่องลึกลับสุดระทึก ทำให้ฉันนอนไม่หลับทั้งคืน
+The movie, a romantic comedy|ðə ˈmuːvi ə rəʊˈmæntɪk ˈkɒmədi|🎬|ภาพยนตร์ โรแมนติกคอมเมดี้|The movie, a romantic comedy, was a huge hit at the box office.|ภาพยนตร์ โรแมนติกคอมเมดี้ ประสบความสำเร็จอย่างมากที่บ็อกซ์ออฟฟิศ
+The song, a catchy tune|ðə sɒŋ ə ˈkætʃi tjuːn|🎶|เพลง ท่วงทำนองติดหู|The song, a catchy tune, became a chart-topper.|เพลง ท่วงทำนองติดหู ขึ้นอันดับหนึ่งบนชาร์ต
+The painting, an abstract piece|ðə ˈpeɪntɪŋ ən ˈæbstrækt piːs|🖼️|ภาพวาด ผลงานแนวนามธรรม|The painting, an abstract piece, is displayed in the gallery.|ภาพวาด ผลงานแนวนามธรรม จัดแสดงอยู่ในแกลเลอรี
+The play, a classic Shakespearean tragedy|ðə pleɪ ə ˈklæsɪk ˌʃeɪkˈspɪəriən ˈtrædʒədi|🎭|ละครเวที โศกนาฏกรรมคลาสสิกของเชกสเปียร์|The play, a classic Shakespearean tragedy, was performed last weekend.|ละครเวที โศกนาฏกรรมคลาสสิกของเชกสเปียร์ แสดงเมื่อสุดสัปดาห์ที่แล้ว
+The poem, a beautiful expression of love|ðə ˈpəʊɪm ə ˈbjuːtɪfl ɪkˈspreʃn əv lʌv|📜|บทกวี การแสดงออกถึงความรักอันงดงาม|The poem, a beautiful expression of love, won the competition.|บทกวี การแสดงออกถึงความรักอันงดงาม ชนะการประกวด
+The photograph, a stunning black-and-white image|ðə ˈfəʊtəɡrɑːf ə ˈstʌnɪŋ ˌblæk ən ˈwaɪt ˈɪmɪdʒ|📷|รูปถ่าย ภาพขาวดำที่งดงามตระการตา|The photograph, a stunning black-and-white image, was taken in Paris.|รูปถ่าย ภาพขาวดำที่งดงามตระการตา ถ่ายที่ปารีส
+The concert, an unforgettable experience|ðə ˈkɒnsət ən ˌʌnfəˈɡetəbl ɪkˈspɪəriəns|🎤|คอนเสิร์ต ประสบการณ์ที่ไม่มีวันลืม|The concert, an unforgettable experience, left us speechless.|คอนเสิร์ต ประสบการณ์ที่ไม่มีวันลืม ทำให้เราพูดไม่ออก
+The book, a thrilling page-turner|ðə bʊk ə ˈθrɪlɪŋ ˈpeɪdʒ ˌtɜːnə|📚|หนังสือ เล่มที่น่าตื่นเต้นจนวางไม่ลง|The book, a thrilling page-turner, kept me hooked until the last chapter.|หนังสือ เล่มที่น่าตื่นเต้นจนวางไม่ลง ทำให้ฉันติดจนถึงบทสุดท้าย
+The festival, a celebration of culture and art|ðə ˈfestɪvl ə ˌselɪˈbreɪʃn əv ˈkʌltʃər ənd ɑːt|🎪|เทศกาล การเฉลิมฉลองวัฒนธรรมและศิลปะ|The festival, a celebration of culture and art, is held every summer.|เทศกาล การเฉลิมฉลองวัฒนธรรมและศิลปะ จัดขึ้นทุกฤดูร้อน
+#Animals, Things & Ideas
+My dog, a golden retriever|maɪ dɒɡ ə ˈɡəʊldən rɪˈtriːvə|🐕|สุนัขของฉัน พันธุ์โกลเด้นรีทรีฟเวอร์|My dog, a golden retriever, loves to play fetch.|สุนัขของฉัน พันธุ์โกลเด้นรีทรีฟเวอร์ ชอบเล่นเก็บของ
+The cat, a playful Siamese|ðə kæt ə ˈpleɪfl ˌsaɪəˈmiːz|🐈|แมว วิเชียรมาศที่ขี้เล่น|The cat, a playful Siamese, loves to chase strings.|แมว วิเชียรมาศที่ขี้เล่น ชอบไล่จับเชือก
+His car, a vintage Corvette|hɪz kɑː ə ˈvɪntɪdʒ kɔːˈvet|🚗|รถของเขา คอร์เวตต์รุ่นวินเทจ|His car, a vintage Corvette, is his pride and joy.|รถของเขา คอร์เวตต์รุ่นวินเทจ เป็นความภาคภูมิใจของเขา
+The cake, a chocolate masterpiece|ðə keɪk ə ˈtʃɒklət ˈmɑːstəpiːs|🍰|เค้ก ผลงานชิ้นเอกช็อกโกแลต|The cake, a chocolate masterpiece, was decorated beautifully.|เค้ก ผลงานชิ้นเอกช็อกโกแลต ถูกตกแต่งอย่างสวยงาม
+The dress, a vintage find|ðə dres ə ˈvɪntɪdʒ faɪnd|👗|ชุดเดรส ของวินเทจที่ค้นพบ|The dress, a vintage find, is absolutely beautiful.|ชุดเดรส ของวินเทจที่ค้นพบ สวยมากจริงๆ
+The computer, a powerful machine|ðə kəmˈpjuːtə ə ˈpaʊəfl məˈʃiːn|💻|คอมพิวเตอร์ เครื่องที่ทรงพลัง|The computer, a powerful machine, can handle heavy software.|คอมพิวเตอร์ เครื่องที่ทรงพลัง รองรับซอฟต์แวร์หนักๆ ได้
+The recipe, a family heirloom|ðə ˈresəpi ə ˈfæməli ˈeəluːm|🍳|สูตรอาหาร มรดกตกทอดของครอบครัว|The recipe, a family heirloom, was passed down through generations.|สูตรอาหาร มรดกตกทอดของครอบครัว ถูกส่งต่อกันมาหลายรุ่น
+The decision, a difficult one|ðə dɪˈsɪʒn ə ˈdɪfɪkəlt wʌn|⚖️|การตัดสินใจ เรื่องที่ยากลำบาก|The decision, a difficult one, took hours to make.|การตัดสินใจ เรื่องที่ยากลำบาก ใช้เวลาหลายชั่วโมง
+The project, a collaborative effort|ðə ˈprɒdʒekt ə kəˈlæbərətɪv ˈefət|🤝|โครงการ ความพยายามร่วมกัน|The project, a collaborative effort, will take several months.|โครงการ ความพยายามร่วมกัน จะใช้เวลาหลายเดือน
+The vacation, a much-needed break|ðə vəˈkeɪʃn ə ˌmʌtʃ ˈniːdɪd breɪk|🌴|วันหยุดพักผ่อน การพักที่จำเป็นอย่างยิ่ง|The vacation, a much-needed break, was exactly what I needed.|วันหยุดพักผ่อน การพักที่จำเป็นอย่างยิ่ง คือสิ่งที่ฉันต้องการพอดี`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' ');return `<span class="d">${w[0]}</span> <span class="n">${w.slice(1).join(' ')}</span>`};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Appositive Noun Phrase</div><div class="lab2">Noun Phrase in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>

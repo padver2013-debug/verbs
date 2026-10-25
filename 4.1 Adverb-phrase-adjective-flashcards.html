@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Adverb Phrase (Adjective) Flashcards</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap">
+<style>
+:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#fbf8ff;--tx:#3b3550}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Sarabun',sans-serif;padding:16px}
+h1{font:700 20px Calibri,'Sarabun',sans-serif;text-align:center;margin:4px 0 2px}
+.sub{text-align:center;font:15px 'Times New Roman',serif;color:#7a7390;margin-bottom:12px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{border:0;border-radius:20px;padding:8px 16px;background:#ece6f7;font:700 14px 'Sarabun';cursor:pointer;color:var(--tx)}
+.tabs button.on{background:#b9a6e8;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:760px;margin:0 auto}
+@media(max-width:560px){.grid{grid-template-columns:repeat(2,1fr)}}
+.card{perspective:800px;height:190px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;padding:10px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 2px 8px #0001}
+.back{transform:rotateY(180deg)}
+.emo{font-size:40px}
+.w{font:700 16px Calibri,sans-serif;margin:4px 0}
+.ipa{font:14px 'Times New Roman',serif;color:#5d5675}
+.th{font:700 15px 'Sarabun'}
+.s{font:14px Calibri,sans-serif;margin:4px 0}
+.st{font:13px 'Sarabun';color:#5d5675}
+.r{color:#9b1c1c;font-weight:700}.g{color:#14532d}
+.sp{border:0;background:#fff9;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;margin-top:4px}
+table{border-collapse:collapse;max-width:760px;width:100%;margin:22px auto 0;background:#fff;border-radius:12px;overflow:hidden;font:14px Calibri,'Sarabun',sans-serif}
+td,th{padding:7px 9px;border-bottom:1px solid #eee;text-align:left}th{background:#ece6f7}
+td.t{font-family:'Sarabun'}
+.wrap{overflow-x:auto;max-width:760px;margin:0 auto}
+</style></head><body>
+<h1>Adverb Phrase to describe an Adjective</h1><div class="sub">Click a card to flip • 🔊 to listen</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div><div class="wrap"><table id="tb"></table></div>
+<script>
+const C=[
+["Feelings 😊","#fde2e4",[
+["extremely proud of *his team*","/ɪkˈstriːmli praʊd əv hɪz tiːm/","ภูมิใจในทีมของเขาอย่างยิ่ง","He was extremely proud of his team.","เขาภูมิใจในทีมของเขาอย่างยิ่ง","🏆"],
+["really excited about *the trip*","/ˈrɪəli ɪkˈsaɪtɪd əˈbaʊt ðə trɪp/","ตื่นเต้นกับการเดินทางมากๆ","We are really excited about the trip.","เราตื่นเต้นกับการเดินทางมากๆ","🧳"],
+["a bit nervous before *the exam*","/ə bɪt ˈnɜːvəs bɪˈfɔː ðɪ ɪɡˈzæm/","ประหม่านิดหน่อยก่อนสอบ","She felt a bit nervous before the exam.","เธอรู้สึกประหม่านิดหน่อยก่อนสอบ","📝"],
+["terribly upset about *the news*","/ˈterəbli ʌpˈset əˈbaʊt ðə njuːz/","เสียใจมากกับข่าว","He is terribly upset about the news.","เขาเสียใจมากกับข่าวนี้","📰"],
+["quite happy with *the result*","/kwaɪt ˈhæpi wɪð ðə rɪˈzʌlt/","ค่อนข้างพอใจกับผลลัพธ์","I'm quite happy with the result.","ฉันค่อนข้างพอใจกับผลลัพธ์","😄"],
+["afraid of *the dark*","/əˈfreɪd əv ðə dɑːk/","กลัวความมืด","The child is afraid of the dark.","เด็กกลัวความมืด","🌑"],
+["bored with *this movie*","/bɔːd wɪð ðɪs ˈmuːvi/","เบื่อหนังเรื่องนี้","I'm bored with this movie.","ฉันเบื่อหนังเรื่องนี้","🥱"],
+["jealous of *her friend's success*","/ˈdʒeləs əv hɜː frendz səkˈses/","อิจฉาความสำเร็จของเพื่อน","She was jealous of her friend's success.","เธออิจฉาความสำเร็จของเพื่อน","😒"],
+["furious with *his attitude*","/ˈfjʊəriəs wɪð hɪz ˈætɪtjuːd/","โกรธมากกับทัศนคติของเขา","She became furious with his attitude.","เธอโกรธมากกับทัศนคติของเขา","😡"],
+["so sure about *his answer*","/səʊ ʃɔːr əˈbaʊt hɪz ˈɑːnsə/","มั่นใจในคำตอบมาก","He's so sure about his answer.","เขามั่นใจในคำตอบของเขามาก","✅"],
+["fully aware of *the risks*","/ˈfʊli əˈweər əv ðə rɪsks/","ตระหนักถึงความเสี่ยงอย่างเต็มที่","They were fully aware of the risks.","พวกเขาตระหนักถึงความเสี่ยงอย่างเต็มที่","⚠️"],
+["tired of *waiting*","/ˈtaɪəd əv ˈweɪtɪŋ/","เบื่อหน่ายกับการรอ","He's tired of waiting.","เขาเบื่อการรอ","⌛"]]],
+["Skills 🛠️","#dff3e4",[
+["very good at *dancing*","/ˈveri ɡʊd æt ˈdɑːnsɪŋ/","เก่งมากเรื่องเต้นรำ","She is very good at dancing.","เธอเต้นรำเก่งมาก","💃"],
+["excellent at *solving puzzles*","/ˈeksələnt æt ˈsɒlvɪŋ ˈpʌzlz/","เยี่ยมเรื่องแก้ปริศนา","She is excellent at solving puzzles.","เธอเก่งเยี่ยมเรื่องแก้ปริศนา","🧩"],
+["excellent at *drawing portraits*","/ˈeksələnt æt ˈdrɔːɪŋ ˈpɔːtrəts/","เยี่ยมเรื่องวาดภาพเหมือน","He is excellent at drawing portraits.","เขาวาดภาพเหมือนได้เยี่ยม","🎨"],
+["skilled at *fixing electronics*","/skɪld æt ˈfɪksɪŋ ɪˌlekˈtrɒnɪks/","ชำนาญการซ่อมอุปกรณ์อิเล็กทรอนิกส์","He is skilled at fixing electronics.","เขาชำนาญการซ่อมอุปกรณ์อิเล็กทรอนิกส์","🔧"],
+["brilliant at *solving problems*","/ˈbrɪliənt æt ˈsɒlvɪŋ ˈprɒbləmz/","เก่งกาจเรื่องแก้ปัญหา","He's brilliant at solving problems.","เขาเก่งกาจเรื่องแก้ปัญหา","💡"],
+["capable of *doing it alone*","/ˈkeɪpəbl əv ˈduːɪŋ ɪt əˈləʊn/","สามารถทำเองได้คนเดียว","She is capable of doing it alone.","เธอสามารถทำเองได้คนเดียว","💪"],
+["strong in *mathematics*","/strɒŋ ɪn ˌmæθˈmætɪks/","เก่งคณิตศาสตร์","He is strong in mathematics.","เขาเก่งคณิตศาสตร์","➗"],
+["talented in many *areas*","/ˈtæləntɪd ɪn ˈmeni ˈeəriəz/","มีพรสวรรค์หลายด้าน","She is talented in many areas.","เธอมีพรสวรรค์หลายด้าน","🌟"],
+["skilled in *graphic design*","/skɪld ɪn ˈɡræfɪk dɪˈzaɪn/","ชำนาญด้านกราฟิกดีไซน์","She's skilled in graphic design.","เธอชำนาญด้านกราฟิกดีไซน์","🖥️"],
+["generous with his *time*","/ˈdʒenərəs wɪð hɪz taɪm/","ใจกว้างเรื่องเวลา","He is generous with his time.","เขาใจกว้างเรื่องการให้เวลา","🕰️"],
+["careful with my *words*","/ˈkeəfl wɪð maɪ wɜːdz/","ระมัดระวังคำพูดของฉัน","I'm careful with my words.","ฉันระมัดระวังคำพูดของฉัน","💬"],
+["clear in her *explanation*","/klɪər ɪn hɜː ˌekspləˈneɪʃn/","ชัดเจนในคำอธิบายของเธอ","She was clear in her explanation.","เธออธิบายได้ชัดเจน","📢"]]],
+["Relations 🤝","#dcebfb",[
+["familiar with this *area*","/fəˈmɪliə wɪð ðɪs ˈeəriə/","คุ้นเคยกับพื้นที่นี้","I'm familiar with this area.","ฉันคุ้นเคยกับพื้นที่นี้","🗺️"],
+["responsible for the *project*","/rɪˈspɒnsəbl fɔː ðə ˈprɒdʒekt/","รับผิดชอบโครงการ","She is responsible for the project.","เธอรับผิดชอบโครงการนี้","📋"],
+["late for the *meeting*","/leɪt fɔː ðə ˈmiːtɪŋ/","สายสำหรับการประชุม","They were late for the meeting.","พวกเขามาประชุมสาย","⏰"],
+["busy with the *report*","/ˈbɪzi wɪð ðə rɪˈpɔːt/","ยุ่งกับรายงาน","The manager is busy with the report.","ผู้จัดการยุ่งกับรายงาน","📊"],
+["ready for the *challenge*","/ˈredi fɔː ðə ˈtʃælɪndʒ/","พร้อมสำหรับความท้าทาย","She looked ready for the challenge.","เธอดูพร้อมสำหรับความท้าทาย","🥊"],
+["new to the *company*","/njuː tə ðə ˈkʌmpəni/","ใหม่ในบริษัท","He's new to the company.","เขาเป็นคนใหม่ในบริษัท","🏢"],
+["different from his *brother*","/ˈdɪfrənt frɒm hɪz ˈbrʌðə/","แตกต่างจากพี่/น้องชาย","He is different from his brother.","เขาแตกต่างจากพี่/น้องชายของเขา","👬"],
+["close to his *family*","/kləʊs tə hɪz ˈfæməli/","ใกล้ชิดกับครอบครัว","He's close to his family.","เขาใกล้ชิดกับครอบครัว","👨‍👩‍👧"],
+["used to the *weather* here","/juːst tə ðə ˈweðə hɪə/","ชินกับอากาศที่นี่","I'm used to the weather here.","ฉันชินกับอากาศที่นี่","🌦️"],
+["popular among the *students*","/ˈpɒpjələ əˈmʌŋ ðə ˈstjuːdnts/","เป็นที่นิยมในหมู่นักเรียน","She's popular among the students.","เธอเป็นที่นิยมในหมู่นักเรียน","🎓"],
+["fond of *animals*","/fɒnd əv ˈænɪmlz/","ชอบสัตว์","The child is fond of animals.","เด็กชอบสัตว์","🐶"],
+["loyal to her *team*","/ˈlɔɪəl tə hɜː tiːm/","ภักดีต่อทีมของเธอ","She is loyal to her team.","เธอภักดีต่อทีมของเธอ","🤝"]]]];
+let V=null;
+function voice(){const a=speechSynthesis.getVoices().filter(v=>/en[-_]GB/i.test(v.lang));return a.find(v=>/natural|google|online|premium|enhanced/i.test(v.name))||a[0]||null}
+function say(t,e){e&&e.stopPropagation();speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;const v=voice();if(v)u.voice=v;speechSynthesis.speak(u)}
+const plain=p=>p.replace(/\*/g,''),hl=p=>p.replace(/\*(.+?)\*/,'<span class=g>$1</span>');
+const sent=r=>r[3].replace(plain(r[0]),'<b class=r>'+hl(r[0])+'</b>');
+const tabs=document.getElementById('tabs'),grid=document.getElementById('grid'),tb=document.getElementById('tb');
+function show(i){
+ [...tabs.children].forEach((b,j)=>b.classList.toggle('on',i==j));
+ const [,col,rows]=C[i];grid.innerHTML='';
+ rows.forEach((r,k)=>{const d=document.createElement('div');d.className='card';
+  d.innerHTML=`<div class=in><div class=face style="background:${col}"><div class=emo>${r[5]}</div><div class=w>${hl(r[0])}</div><div class=ipa>${r[1]}</div><button class=sp>🔊</button></div><div class="face back" style="background:#fff8e1"><div class=th>${r[2]}</div><div class=s>${sent(r)}</div><div class=st>${r[4]}</div><button class=sp>🔊</button></div></div>`;
+  d.onclick=()=>d.classList.toggle('f');
+  d.querySelectorAll('.sp')[0].onclick=e=>say(plain(r[0]),e);
+  d.querySelectorAll('.sp')[1].onclick=e=>say(r[3],e);
+  grid.appendChild(d)});
+ tb.innerHTML='<tr><th>#</th><th>Vocabulary</th><th>ไทย</th><th>Sentence</th><th>🔊</th></tr>';
+ rows.forEach((r,k)=>{const tr=tb.insertRow();tr.innerHTML=`<td>${k+1}</td><td>${hl(r[0])}<br><span class=ipa>${r[1]}</span></td><td class=t>${r[2]}</td><td>${sent(r)}<br><span class=st>${r[4]}</span></td><td><button class=sp>🔊</button></td>`;tr.querySelector('.sp').onclick=e=>say(r[3],e)});
+}
+C.forEach((c,i)=>{const b=document.createElement('button');b.textContent=c[0];b.onclick=()=>show(i);tabs.appendChild(b)});
+speechSynthesis.onvoiceschanged=()=>{};show(0);
+</script></body></html>

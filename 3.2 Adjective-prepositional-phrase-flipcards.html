@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adjective + prepositional phrase Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#a50e1e;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(165,14,30,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Adjective + prepositional phrase</b>”: <i>Adjective + prepositional phrase in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#Adjective + of
+afraid of spiders|əˈfreɪd əv ˈspaɪdəz|🕷️|กลัวแมงมุม|She is afraid of spiders.|เธอกลัวแมงมุม
+proud of his achievements|praʊd əv hɪz əˈtʃiːvmənts|🏆|ภูมิใจในความสำเร็จของเขา|He was proud of his achievements.|เขาภูมิใจในความสำเร็จของตนเอง
+fond of animals|fɒnd əv ˈænɪmlz|🐾|ชอบสัตว์|She is fond of animals.|เธอชอบสัตว์
+capable of hard work|ˈkeɪpəbl əv hɑːd wɜːk|💪|สามารถทำงานหนักได้|He’s capable of hard work.|เขาสามารถทำงานหนักได้
+tired of waiting|ˈtaɪəd əv ˈweɪtɪŋ|⌛|เบื่อการรอ|I’m tired of waiting.|ฉันเบื่อการรอ
+afraid of heights|əˈfreɪd əv haɪts|🏔️|กลัวความสูง|He is afraid of heights.|เขากลัวความสูง
+jealous of his brother|ˈdʒeləs əv hɪz ˈbrʌðə|😒|อิจฉาพี่/น้องชาย|He’s jealous of his brother.|เขาอิจฉาพี่ชายของเขา
+aware of the risks|əˈweər əv ðə rɪsks|⚠️|ตระหนักถึงความเสี่ยง|I’m aware of the risks.|ฉันตระหนักถึงความเสี่ยง
+ashamed of her behavior|əˈʃeɪmd əv hɜː bɪˈheɪvjə|😳|อายในพฤติกรรมของเธอ|She felt ashamed of her behavior.|เธอรู้สึกอายกับพฤติกรรมของตัวเอง
+supportive of her friends|səˈpɔːtɪv əv hɜː frendz|🤗|สนับสนุนเพื่อนๆ|She is supportive of her friends.|เธอสนับสนุนเพื่อนๆ ของเธอ
+#Adjective + about
+excited about the trip|ɪkˈsaɪtɪd əˈbaʊt ðə trɪp|🎒|ตื่นเต้นเรื่องการเดินทาง|The children are excited about the trip.|เด็กๆ ตื่นเต้นกับการเดินทาง
+concerned about the environment|kənˈsɜːnd əˈbaʊt ði ɪnˈvaɪrənmənt|🌍|กังวลเรื่องสิ่งแวดล้อม|They are concerned about the environment.|พวกเขากังวลเรื่องสิ่งแวดล้อม
+upset about the mistake|ʌpˈset əˈbaʊt ðə mɪˈsteɪk|😞|เสียใจเรื่องความผิดพลาด|He was upset about the mistake.|เขาเสียใจกับความผิดพลาด
+worried about her health|ˈwʌrid əˈbaʊt hɜː helθ|🩺|กังวลเรื่องสุขภาพ|She is worried about her health.|เธอกังวลเรื่องสุขภาพของเธอ
+hopeful about the future|ˈhəʊpfl əˈbaʊt ðə ˈfjuːtʃə|🌅|มีความหวังเรื่องอนาคต|I’m hopeful about the future.|ฉันมีความหวังเรื่องอนาคต
+curious about the noise|ˈkjʊəriəs əˈbaʊt ðə nɔɪz|👂|สงสัยเรื่องเสียง|He was curious about the noise.|เขาสงสัยเรื่องเสียงนั้น
+optimistic about the outcome|ˌɒptɪˈmɪstɪk əˈbaʊt ðɪ ˈaʊtkʌm|😄|มองโลกในแง่ดีเรื่องผลลัพธ์|We were optimistic about the outcome.|เรามองผลลัพธ์ในแง่ดี
+anxious about the results|ˈæŋkʃəs əˈbaʊt ðə rɪˈzʌlts|😰|กระวนกระวายเรื่องผล|I’m anxious about the results.|ฉันกังวลเรื่องผลลัพธ์
+nervous about the presentation|ˈnɜːvəs əˈbaʊt ðə ˌprezənˈteɪʃn|🎤|ประหม่าเรื่องการนำเสนอ|She’s nervous about the presentation.|เธอประหม่าเรื่องการนำเสนอ
+enthusiastic about the event|ɪnˌθjuːziˈæstɪk əˈbaʊt ði ɪˈvent|🎉|กระตือรือร้นกับงาน|She’s enthusiastic about the event.|เธอกระตือรือร้นกับงานนี้
+#Adjective + with
+angry with the students|ˈæŋɡri wɪð ðə ˈstjuːdnts|😠|โกรธนักเรียน|The teacher is angry with the students.|ครูโกรธนักเรียน
+satisfied with the answer|ˈsætɪsfaɪd wɪð ði ˈɑːnsə|👍|พอใจกับคำตอบ|I’m satisfied with the answer.|ฉันพอใจกับคำตอบ
+happy with their progress|ˈhæpi wɪð ðeə ˈprəʊɡres|📈|พอใจกับความคืบหน้า|They are happy with their progress.|พวกเขาพอใจกับความคืบหน้าของตน
+impressed with his work|ɪmˈprest wɪð hɪz wɜːk|👏|ประทับใจผลงานของเขา|We are impressed with his work.|เราประทับใจผลงานของเขา
+familiar with this topic|fəˈmɪliə wɪð ðɪs ˈtɒpɪk|📘|คุ้นเคยกับหัวข้อนี้|They are familiar with this topic.|พวกเขาคุ้นเคยกับหัวข้อนี้
+bored with this routine|bɔːd wɪð ðɪs ruːˈtiːn|🥱|เบื่อกิจวัตรนี้|We’re bored with this routine.|เราเบื่อกิจวัตรแบบนี้
+obsessed with his appearance|əbˈsest wɪð hɪz əˈpɪərəns|🪞|หมกมุ่นกับรูปลักษณ์|He’s obsessed with his appearance.|เขาหมกมุ่นกับรูปลักษณ์ของตัวเอง
+pleased with your progress|pliːzd wɪð jɔː ˈprəʊɡres|😊|พอใจกับความก้าวหน้าของคุณ|I’m pleased with your progress.|ฉันพอใจกับความก้าวหน้าของคุณ
+#Adjective + in / at
+disappointed in the results|ˌdɪsəˈpɔɪntɪd ɪn ðə rɪˈzʌlts|😔|ผิดหวังกับผลลัพธ์|We were disappointed in the results.|เราผิดหวังกับผลลัพธ์
+confident in her skills|ˈkɒnfɪdənt ɪn hɜː skɪlz|💪|มั่นใจในทักษะ|She is confident in her skills.|เธอมั่นใจในทักษะของเธอ
+involved in community service|ɪnˈvɒlvd ɪn kəˈmjuːnəti ˈsɜːvɪs|🤝|มีส่วนร่วมในงานบริการชุมชน|He’s involved in community service.|เขามีส่วนร่วมในงานบริการชุมชน
+engaged in a discussion|ɪnˈɡeɪdʒd ɪn ə dɪˈskʌʃn|🗣️|ร่วมการสนทนา|They were engaged in a discussion.|พวกเขากำลังร่วมสนทนากัน
+interested in music|ˈɪntrəstɪd ɪn ˈmjuːzɪk|🎵|สนใจดนตรี|They are interested in music.|พวกเขาสนใจดนตรี
+good at drawing|ɡʊd æt ˈdrɔːɪŋ|✏️|เก่งการวาดภาพ|She seems good at drawing.|เธอดูเก่งการวาดภาพ
+angry at the delay|ˈæŋɡri æt ðə dɪˈleɪ|⏰|โกรธเรื่องความล่าช้า|She was angry at the delay.|เธอโกรธเรื่องความล่าช้า
+surprised at the reaction|səˈpraɪzd æt ðə riˈækʃn|😲|แปลกใจกับปฏิกิริยา|We were surprised at the reaction.|เราแปลกใจกับปฏิกิริยานั้น
+skilled at woodworking|skɪld æt ˈwʊdwɜːkɪŋ|🪚|ชำนาญงานไม้|He is skilled at woodworking.|เขาชำนาญงานไม้
+interested in ancient history|ˈɪntrəstɪd ɪn ˈeɪnʃənt ˈhɪstri|🏺|สนใจประวัติศาสตร์โบราณ|He’s interested in ancient history.|เขาสนใจประวัติศาสตร์โบราณ
+#Adjective + for / to
+famous for his paintings|ˈfeɪməs fə hɪz ˈpeɪntɪŋz|🖼️|มีชื่อเสียงจากภาพวาด|He is famous for his paintings.|เขามีชื่อเสียงจากภาพวาดของเขา
+responsible for the accident|rɪˈspɒnsəbl fə ði ˈæksɪdənt|🚑|รับผิดชอบต่ออุบัติเหตุ|She felt responsible for the accident.|เธอรู้สึกว่าตนต้องรับผิดชอบต่ออุบัติเหตุ
+ready for the test|ˈredi fə ðə test|📝|พร้อมสำหรับการสอบ|She is ready for the test.|เธอพร้อมสำหรับการสอบ
+grateful for your help|ˈɡreɪtfl fə jɔː help|🙏|ขอบคุณความช่วยเหลือ|We are grateful for your help.|เราขอบคุณความช่วยเหลือของคุณ
+eager for a challenge|ˈiːɡə fər ə ˈtʃælɪndʒ|🔥|กระหายความท้าทาย|She’s eager for a challenge.|เธอกระหายความท้าทาย
+sorry for the mistake|ˈsɒri fə ðə mɪˈsteɪk|😔|เสียใจกับความผิดพลาด|They felt sorry for the mistake.|พวกเขารู้สึกเสียใจกับความผิดพลาด
+accustomed to the climate|əˈkʌstəmd tə ðə ˈklaɪmət|🌡️|ชินกับสภาพอากาศ|They are accustomed to the climate.|พวกเขาชินกับสภาพอากาศ
+addicted to video games|əˈdɪktɪd tə ˈvɪdiəʊ ɡeɪmz|🎮|ติดเกม|He is addicted to video games.|เขาติดวิดีโอเกม
+committed to the project|kəˈmɪtɪd tə ðə ˈprɒdʒekt|📌|มุ่งมั่นต่อโครงการ|He is committed to the project.|เขามุ่งมั่นต่อโครงการ
+dedicated to her career|ˈdedɪkeɪtɪd tə hɜː kəˈrɪə|💼|อุทิศตนให้อาชีพ|She is dedicated to her career.|เธออุทิศตนให้กับอาชีพของเธอ
+loyal to his team|ˈlɔɪəl tə hɪz tiːm|🏅|ภักดีต่อทีม|He is loyal to his team.|เขาภักดีต่อทีมของเขา
+opposed to the idea|əˈpəʊzd tə ði aɪˈdɪə|🙅|คัดค้านความคิดนี้|They are opposed to the idea.|พวกเขาคัดค้านความคิดนี้
+open to suggestions|ˈəʊpən tə səˈdʒestʃənz|💬|เปิดรับข้อเสนอแนะ|She is open to suggestions.|เธอเปิดรับข้อเสนอแนะ
+sensitive to criticism|ˈsensətɪv tə ˈkrɪtɪsɪzəm|💔|อ่อนไหวต่อคำวิจารณ์|He’s sensitive to criticism.|เขาอ่อนไหวต่อคำวิจารณ์
+#Adjective + by / on
+shocked by the news|ʃɒkt baɪ ðə njuːz|📰|ตกใจกับข่าว|We were shocked by the news.|เราตกใจกับข่าวนี้
+relieved by the news|rɪˈliːvd baɪ ðə njuːz|😌|โล่งใจกับข่าว|They were relieved by the news.|พวกเขาโล่งใจกับข่าวนี้
+dependent on his parents|dɪˈpendənt ɒn hɪz ˈpeərənts|👨‍👩‍👦|พึ่งพาพ่อแม่|He’s dependent on his parents.|เขาพึ่งพาพ่อแม่ของเขา
+keen on photography|kiːn ɒn fəˈtɒɡrəfi|📷|หลงใหลการถ่ายภาพ|She’s keen on photography.|เธอหลงใหลการถ่ายภาพ`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' ');return `<span class="n">${w[0]}</span>`+(w.length>1?` <span class="d">${w.slice(1).join(' ')}</span>`:'')};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Adjective + prepositional phrase</div><div class="lab2">Adjective + prepositional phrase in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>

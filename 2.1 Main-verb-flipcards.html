@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Main Verb Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#a50e1e;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(165,14,30,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Main Verb</b>”: <i>Main Verb in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#Simple Present
+runs|rʌnz|🏃|วิ่ง|She runs every morning.|เธอวิ่งทุกเช้า
+cook|kʊk|🍳|ทำอาหาร|They cook dinner together.|พวกเขาทำอาหารเย็นด้วยกัน
+drinks|drɪŋks|☕|ดื่ม|He drinks coffee in the evening.|เขาดื่มกาแฟตอนเย็น
+read|riːd|📖|อ่าน|I read novels in my free time.|ฉันอ่านนิยายในเวลาว่าง
+play|pleɪ|♟️|เล่น|We play chess on weekends.|เราเล่นหมากรุกในวันหยุดสุดสัปดาห์
+barks|bɑːks|🐶|เห่า|The dog barks loudly at strangers.|สุนัขเห่าเสียงดังใส่คนแปลกหน้า
+explains|ɪkˈspleɪnz|👩‍🏫|อธิบาย|The teacher explains the lesson clearly.|ครูอธิบายบทเรียนอย่างชัดเจน
+travel|ˈtrævl|✈️|เดินทาง|We travel to Europe every summer.|เราเดินทางไปยุโรปทุกฤดูร้อน
+#Continuous Tenses
+are eating|ɑːr ˈiːtɪŋ|🍱|กำลังกิน|They are eating lunch now.|พวกเขากำลังกินมื้อกลางวันอยู่ตอนนี้
+was studying|wɒz ˈstʌdiɪŋ|📚|กำลังเรียน/อ่านหนังสือ (อดีต)|He was studying all night.|เขาอ่านหนังสือทั้งคืน
+were watching|wɜː ˈwɒtʃɪŋ|🎬|กำลังดู (อดีต)|We were watching a movie.|เรากำลังดูหนังอยู่
+am writing|æm ˈraɪtɪŋ|✍️|กำลังเขียน|I am writing a letter.|ฉันกำลังเขียนจดหมาย
+were playing|wɜː ˈpleɪɪŋ|⚽|กำลังเล่น (อดีต)|They were playing soccer in the rain.|พวกเขากำลังเล่นฟุตบอลท่ามกลางสายฝน
+is singing|ɪz ˈsɪŋɪŋ|🎤|กำลังร้องเพลง|He is singing beautifully.|เขากำลังร้องเพลงได้ไพเราะ
+is sleeping|ɪz ˈsliːpɪŋ|😴|กำลังนอนหลับ|The baby is sleeping peacefully.|ทารกกำลังนอนหลับอย่างสงบ
+am learning|æm ˈlɜːnɪŋ|🇪🇸|กำลังเรียนรู้|I am learning Spanish.|ฉันกำลังเรียนภาษาสเปน
+#Perfect Tenses
+has finished|hæz ˈfɪnɪʃt|✅|ทำเสร็จแล้ว|She has finished her work.|เธอทำงานเสร็จแล้ว
+have eaten|həv ˈiːtn|🍽️|กินแล้ว|They have eaten already.|พวกเขากินแล้ว
+had gone|həd ɡɒn|🚪|ไปแล้ว (ก่อนหน้านั้น)|He had gone before I arrived.|เขาไปแล้วก่อนที่ฉันจะมาถึง
+have seen|həv siːn|👀|เคยเห็น/ดูแล้ว|We have seen that movie.|เราเคยดูหนังเรื่องนั้นแล้ว
+had completed|həd kəmˈpliːtɪd|📝|ทำเสร็จแล้ว (ก่อนหน้านั้น)|I had completed the assignment.|ฉันทำงานที่ได้รับมอบหมายเสร็จแล้ว
+has left|hæz left|🏢|ออกไปแล้ว|She has left the office.|เธอออกจากออฟฟิศไปแล้ว
+have arrived|həv əˈraɪvd|🛬|มาถึงแล้ว|They have arrived on time.|พวกเขามาถึงตรงเวลา
+has departed|hæz dɪˈpɑːtɪd|🚆|ออกเดินทางแล้ว|The train has departed.|รถไฟออกเดินทางไปแล้ว
+#Future & Modals
+will go|wɪl ɡəʊ|🛒|จะไป|She will go to the market.|เธอจะไปตลาด
+will study|wɪl ˈstʌdi|📖|จะเรียน/อ่านหนังสือ|They will study for the test.|พวกเขาจะอ่านหนังสือสอบ
+can swim|kæn swɪm|🏊|ว่ายน้ำได้|She can swim very fast.|เธอว่ายน้ำได้เร็วมาก
+might come|maɪt kʌm|🎉|อาจจะมา|They might come to the party.|พวกเขาอาจจะมางานปาร์ตี้
+should stay|ʃʊd steɪ|🏠|ควรอยู่|He should stay home today.|เขาควรอยู่บ้านวันนี้
+must finish|mʌst ˈfɪnɪʃ|⏰|ต้องทำให้เสร็จ|We must finish this by tomorrow.|เราต้องทำสิ่งนี้ให้เสร็จภายในพรุ่งนี้
+would like|wʊd laɪk|☕|อยากได้|He would like some coffee.|เขาอยากได้กาแฟสักหน่อย
+ought to help|ɔːt tə help|🤝|ควรช่วยเหลือ|We ought to help the poor.|เราควรช่วยเหลือคนยากจน
+#Passive & Emphatic
+was built|wɒz bɪlt|🏠|ถูกสร้าง|The house was built in 1990.|บ้านหลังนี้ถูกสร้างในปี 1990
+was prepared|wɒz prɪˈpeəd|👨‍🍳|ถูกเตรียม/ปรุง|The food was prepared by the chef.|อาหารถูกปรุงโดยเชฟ
+was written|wɒz ˈrɪtn|✒️|ถูกเขียน|The book was written by a famous author.|หนังสือเล่มนี้เขียนโดยนักเขียนชื่อดัง
+was sold|wɒz səʊld|🖼️|ถูกขาย|The painting was sold for a million dollars.|ภาพวาดถูกขายในราคาหนึ่งล้านดอลลาร์
+did go|dɪd ɡəʊ|🥳|ไปจริงๆ (เน้น)|He did go to the party.|เขาไปงานปาร์ตี้จริงๆ นะ
+does sing|dʌz sɪŋ|🎶|ร้องเพลงเก่งจริงๆ (เน้น)|She does sing very well.|เธอร้องเพลงเก่งมากจริงๆ
+did try|dɪd traɪ|💯|พยายามแล้วจริงๆ (เน้น)|We did try our best.|เราพยายามอย่างเต็มที่แล้วจริงๆ
+do appreciate|duː əˈpriːʃieɪt|🙏|ขอบคุณจริงๆ (เน้น)|We do appreciate your help.|เราขอบคุณความช่วยเหลือของคุณจริงๆ
+#Simple Present 2
+teaches|ˈtiːtʃɪz|🧮|สอน|She teaches math at the high school.|เธอสอนคณิตศาสตร์ที่โรงเรียนมัธยม
+writes|raɪts|📓|เขียน|He writes in his journal daily.|เขาเขียนบันทึกประจำวันทุกวัน
+visit|ˈvɪzɪt|👵|ไปเยี่ยม|They visit their grandparents every month.|พวกเขาไปเยี่ยมปู่ย่าตายายทุกเดือน
+celebrate|ˈselɪbreɪt|🎂|ฉลอง|We celebrate birthdays with cake.|เราฉลองวันเกิดด้วยเค้ก
+listen|ˈlɪsn|🎧|ฟัง|I listen to music when I study.|ฉันฟังเพลงตอนอ่านหนังสือ
+rises|ˈraɪzɪz|🌅|ขึ้น (ดวงอาทิตย์)|The sun rises in the east.|ดวงอาทิตย์ขึ้นทางทิศตะวันออก
+laughs|lɑːfs|🤡|หัวเราะ|The child laughs at the clown.|เด็กหัวเราะให้ตัวตลก
+paints|peɪnts|🎨|วาดภาพ|She paints beautiful landscapes.|เธอวาดภาพทิวทัศน์ที่สวยงาม
+drives|draɪvz|🚗|ขับรถ|He drives to work every day.|เขาขับรถไปทำงานทุกวัน
+plant|plɑːnt|🌷|ปลูก|They plant flowers in spring.|พวกเขาปลูกดอกไม้ในฤดูใบไม้ผลิ
+enjoys|ɪnˈdʒɔɪz|🎻|ชอบ/เพลิดเพลิน|She enjoys classical music.|เธอชอบดนตรีคลาสสิก
+fixes|ˈfɪksɪz|🔧|ซ่อม|He fixes his own car.|เขาซ่อมรถของตัวเอง
+#Perfect Continuous
+have been reading|həv biːn ˈriːdɪŋ|📕|อ่านมาตลอด|I have been reading this book for hours.|ฉันอ่านหนังสือเล่มนี้มาหลายชั่วโมงแล้ว
+has been working|həz biːn ˈwɜːkɪŋ|💼|ทำงานมาตลอด|She has been working since morning.|เธอทำงานมาตั้งแต่เช้า
+has been crying|həz biːn ˈkraɪɪŋ|😭|ร้องไห้มาตลอด|He has been crying all day.|เขาร้องไห้มาทั้งวัน
+have been trying|həv biːn ˈtraɪɪŋ|📞|พยายามมาตลอด|We have been trying to call you.|เราพยายามโทรหาคุณมาตลอด
+had been walking|həd biːn ˈwɔːkɪŋ|🥾|เดินมาตลอด (ก่อนหน้านั้น)|They had been walking for miles.|พวกเขาเดินมาหลายไมล์แล้ว
+had been studying|həd biːn ˈstʌdiɪŋ|📚|เรียนอยู่ (ก่อนหน้านั้น)|I had been studying when you called.|ฉันกำลังอ่านหนังสืออยู่ตอนที่คุณโทรมา
+had been living|həd biːn ˈlɪvɪŋ|🏙️|อาศัยอยู่ (ก่อนหน้านั้น)|She had been living in London.|เธออาศัยอยู่ในลอนดอนมาก่อน
+has been practicing|həz biːn ˈpræktɪsɪŋ|🎹|ฝึกซ้อมมาตลอด|He has been practicing the piano.|เขาฝึกเล่นเปียโนมาตลอด
+have been preparing|həv biːn prɪˈpeərɪŋ|📝|เตรียมตัวมาตลอด|We have been preparing for the exam.|เราเตรียมตัวสอบมาตลอด
+have been playing|həv biːn ˈpleɪɪŋ|🛝|เล่นมาตลอด|The kids have been playing outside.|เด็กๆ เล่นอยู่ข้างนอกมาตลอด
+#Continuous Tenses 2
+am cooking|æm ˈkʊkɪŋ|🍲|กำลังทำอาหาร|I am cooking dinner now.|ฉันกำลังทำอาหารเย็นอยู่
+is watching|ɪz ˈwɒtʃɪŋ|📺|กำลังดู|She is watching a documentary.|เธอกำลังดูสารคดี
+are dancing|ɑː ˈdɑːnsɪŋ|💃|กำลังเต้นรำ|They are dancing to the music.|พวกเขากำลังเต้นตามเสียงเพลง
+are cleaning|ɑː ˈkliːnɪŋ|🧹|กำลังทำความสะอาด|They are cleaning the house.|พวกเขากำลังทำความสะอาดบ้าน
+#Perfect Tenses 2
+has traveled|həz ˈtrævld|🌏|เดินทางมาแล้ว|She has traveled to five countries.|เธอเดินทางไปมาแล้วห้าประเทศ
+have forgotten|həv fəˈɡɒtn|🔐|ลืมแล้ว|I have forgotten my password.|ฉันลืมรหัสผ่านแล้ว
+have decided|həv dɪˈsaɪdɪd|📦|ตัดสินใจแล้ว|We have decided to move.|เราตัดสินใจย้ายบ้านแล้ว
+has made|həz meɪd|📅|ทำ/จองแล้ว|He has made a reservation.|เขาจองที่ไว้แล้ว
+have booked|həv bʊkt|🎫|จองแล้ว|We have booked the tickets.|เราจองตั๋วแล้ว
+#Passive Voice 2
+was completed|wɒz kəmˈpliːtɪd|✔️|ถูกทำให้เสร็จ|The project was completed on time.|โครงการเสร็จตามกำหนดเวลา
+was sent|wɒz sent|📧|ถูกส่ง|The email was sent last night.|อีเมลถูกส่งเมื่อคืนนี้
+was washed|wɒz wɒʃt|🚿|ถูกล้าง|The car was washed this morning.|รถถูกล้างเมื่อเช้านี้
+was served|wɒz sɜːvd|🥶|ถูกเสิร์ฟ|The food was served cold.|อาหารถูกเสิร์ฟมาเย็นชืด
+was admired|wɒz ədˈmaɪəd|👏|ได้รับการชื่นชม|The painting was admired by everyone.|ภาพวาดได้รับการชื่นชมจากทุกคน
+were uploaded|wɜː ʌpˈləʊdɪd|☁️|ถูกอัปโหลด|The files were uploaded yesterday.|ไฟล์ถูกอัปโหลดเมื่อวาน
+#Modal Perfect & Progressive
+must have forgotten|mʌst həv fəˈɡɒtn|🔑|คงจะลืมไปแล้ว|You must have forgotten your keys.|คุณคงลืมกุญแจไว้
+could have been hurt|kʊd həv biːn hɜːt|🚑|อาจจะได้รับบาดเจ็บ|He could have been hurt in the accident.|เขาอาจจะได้รับบาดเจ็บในอุบัติเหตุ
+might have left|maɪt həv left|🚶|อาจจะออกไปแล้ว|She might have left already.|เธออาจจะออกไปแล้ว
+should have told|ʃʊd həv təʊld|🗣️|น่าจะบอก (แต่ไม่ได้บอก)|They should have told us earlier.|พวกเขาน่าจะบอกเราให้เร็วกว่านี้
+would have gone|wʊd həv ɡɒn|🧳|คงไปแล้ว (แต่ไม่ได้ไป)|I would have gone if I could.|ฉันคงไปแล้วถ้าไปได้
+may have missed|meɪ həv mɪst|🚉|อาจจะพลาด|We may have missed the train.|เราอาจจะพลาดรถไฟ
+must be sleeping|mʌst biː ˈsliːpɪŋ|🛌|คงกำลังนอนอยู่|She must be sleeping now.|ตอนนี้เธอคงกำลังนอนหลับอยู่
+will have finished|wɪl həv ˈfɪnɪʃt|🕛|จะทำเสร็จแล้ว|He will have finished the work by noon.|เขาจะทำงานเสร็จภายในเที่ยง
+#Continuous Tenses 3
+is running|ɪz ˈrʌnɪŋ|⏱️|กำลังวิ่ง (running late = มาสาย)|She is running late today.|วันนี้เธอมาสาย
+is reading|ɪz ˈriːdɪŋ|📗|กำลังอ่าน|She is reading a new book.|เธอกำลังอ่านหนังสือเล่มใหม่
+is fixing|ɪz ˈfɪksɪŋ|🚲|กำลังซ่อม|He is fixing the bike.|เขากำลังซ่อมจักรยาน
+am waiting|æm ˈweɪtɪŋ|📞|กำลังรอ|I am waiting for a call.|ฉันกำลังรอโทรศัพท์
+is taking|ɪz ˈteɪkɪŋ|📝|กำลังสอบ|She is taking her final exam.|เธอกำลังสอบปลายภาค
+is preparing|ɪz prɪˈpeərɪŋ|📊|กำลังเตรียม|He is preparing the report.|เขากำลังเตรียมรายงาน
+are having|ɑː ˈhævɪŋ|🛋️|กำลังมี/ต้อนรับ|We are having guests over.|เรากำลังมีแขกมาเยี่ยมที่บ้าน
+are heading|ɑː ˈhedɪŋ|🛫|กำลังมุ่งหน้า|We are heading to the airport.|เรากำลังมุ่งหน้าไปสนามบิน
+#Perfect Tenses 3
+had slept|həd slept|🛏️|นอนมาแล้ว (ก่อนหน้านั้น)|He had slept for eight hours.|เขานอนมาแปดชั่วโมงแล้ว
+have taken|həv ˈteɪkən|📋|สอบแล้ว|We have taken the exam.|เราสอบเสร็จแล้ว
+have studied|həv ˈstʌdid|🇫🇷|เรียนมาแล้ว|They have studied French.|พวกเขาเคยเรียนภาษาฝรั่งเศสมาแล้ว
+has worked|həz wɜːkt|🏢|ทำงานมาแล้ว|He has worked here for ten years.|เขาทำงานที่นี่มาสิบปีแล้ว
+has changed|həz tʃeɪndʒd|📱|เปลี่ยนแล้ว|She has changed her number.|เธอเปลี่ยนเบอร์โทรแล้ว
+have left|həv left|👋|ออกไปแล้ว|They have left already.|พวกเขาออกไปแล้ว
+have heard|həv hɜːd|👂|เคยได้ยินแล้ว|I have heard that story.|ฉันเคยได้ยินเรื่องนั้นแล้ว
+#Future Simple
+will play|wɪl pleɪ|🎸|จะเล่น|He will play guitar tonight.|คืนนี้เขาจะเล่นกีตาร์
+will leave|wɪl liːv|🕕|จะออกเดินทาง|We will leave at 6 p.m.|เราจะออกเดินทางตอนหกโมงเย็น
+will start|wɪl stɑːt|🚀|จะเริ่ม|I will start a new project.|ฉันจะเริ่มโครงการใหม่
+will attend|wɪl əˈtend|🗓️|จะเข้าร่วม|She will attend the meeting.|เธอจะเข้าร่วมประชุม
+will join|wɪl dʒɔɪn|🙌|จะมาร่วม|They will join us later.|พวกเขาจะมาร่วมกับเราทีหลัง
+will help|wɪl help|🧺|จะช่วย|He will help with the chores.|เขาจะช่วยทำงานบ้าน
+will meet|wɪl miːt|🚉|จะพบกัน|We will meet at the station.|เราจะพบกันที่สถานี
+will bring|wɪl brɪŋ|🗂️|จะนำมา|I will bring the documents.|ฉันจะนำเอกสารมา
+#Modals 2
+could see|kʊd siː|🌌|มองเห็นได้|I could see the stars clearly.|ฉันมองเห็นดวงดาวได้ชัดเจน
+may call|meɪ kɔːl|☎️|อาจจะโทร|She may call you later.|เธออาจจะโทรหาคุณทีหลัง
+shall go|ʃæl ɡəʊ|🚌|จะไป|They shall go with us.|พวกเขาจะไปกับเรา
+need to study|niːd tə ˈstʌdi|📚|จำเป็นต้องเรียน|I need to study harder.|ฉันต้องตั้งใจเรียนให้มากกว่านี้
+shall return|ʃæl rɪˈtɜːn|🔙|จะกลับมา|He shall return tomorrow.|เขาจะกลับมาพรุ่งนี้
+would prefer|wʊd prɪˈfɜː|🏠|อยากจะ...มากกว่า|They would prefer to stay home.|พวกเขาอยากอยู่บ้านมากกว่า
+ought to call|ɔːt tə kɔːl|👨‍👩‍👧|ควรโทร|I ought to call my parents.|ฉันควรโทรหาพ่อแม่
+could be arriving|kʊd bi əˈraɪvɪŋ|🛬|อาจจะกำลังมาถึง|They could be arriving soon.|พวกเขาอาจจะมาถึงเร็วๆ นี้
+might be working|maɪt bi ˈwɜːkɪŋ|🌙|อาจจะกำลังทำงาน|I might be working late tonight.|คืนนี้ฉันอาจจะทำงานดึก
+will be traveling|wɪl bi ˈtrævəlɪŋ|🧳|จะกำลังเดินทาง|She will be traveling next week.|สัปดาห์หน้าเธอจะเดินทาง
+must be joking|mʌst bi ˈdʒəʊkɪŋ|😂|คงกำลังล้อเล่น|We must be joking.|เราคงกำลังล้อเล่นอยู่
+could have tried|kʊd həv traɪd|💪|น่าจะพยายามได้|You could have tried harder.|คุณน่าจะพยายามให้มากกว่านี้ได้
+may have forgotten|meɪ həv fəˈɡɒtn|🕰️|อาจจะลืม|She may have forgotten the time.|เธออาจจะลืมเวลา
+should have listened|ʃʊd həv ˈlɪsnd|🙉|น่าจะฟัง (แต่ไม่ได้ฟัง)|I should have listened to you.|ฉันน่าจะฟังคุณ
+ought to have helped|ɔːt tə həv helpt|🤲|น่าจะช่วย (แต่ไม่ได้ช่วย)|He ought to have helped her.|เขาน่าจะช่วยเธอ
+#Passive Voice 3
+was locked|wɒz lɒkt|🔒|ถูกล็อก|The door was locked when I arrived.|ประตูถูกล็อกตอนที่ฉันมาถึง
+was canceled|wɒz ˈkænsld|🌧️|ถูกยกเลิก|The meeting was canceled due to rain.|การประชุมถูกยกเลิกเพราะฝนตก
+were signed|wɜː saɪnd|✍️|ถูกลงนาม|The documents were signed by the manager.|เอกสารถูกลงนามโดยผู้จัดการ
+was won|wɒz wʌn|🏆|ถูกชนะ|The game was won by our team.|ทีมของเราเป็นฝ่ายชนะเกมนี้
+was eaten|wɒz ˈiːtn|🍰|ถูกกิน|The cake was eaten quickly.|เค้กถูกกินหมดอย่างรวดเร็ว
+was delivered|wɒz dɪˈlɪvəd|📬|ถูกส่ง|The letter was delivered late.|จดหมายถูกส่งมาช้า
+was given|wɒz ˈɡɪvn|🎙️|ถูกกล่าว/มอบ|The speech was given by the mayor.|สุนทรพจน์ถูกกล่าวโดยนายกเทศมนตรี
+was repaired|wɒz rɪˈpeəd|🛠️|ถูกซ่อม|The phone was repaired quickly.|โทรศัพท์ถูกซ่อมอย่างรวดเร็ว
+were approved|wɜː əˈpruːvd|📑|ได้รับการอนุมัติ|The documents were approved by the board.|เอกสารได้รับการอนุมัติจากคณะกรรมการ
+#Emphatic Do
+do like|duː laɪk|❤️|ชอบจริงๆ (เน้น)|I do like this movie.|ฉันชอบหนังเรื่องนี้จริงๆ
+did finish|dɪd ˈfɪnɪʃ|🏁|ทำเสร็จจริงๆ (เน้น)|They did finish the project on time.|พวกเขาทำโครงการเสร็จตรงเวลาจริงๆ
+does believe|dʌz bɪˈliːv|💼|เชื่อจริงๆ (เน้น)|He does believe in hard work.|เขาเชื่อในการทำงานหนักจริงๆ
+did read|dɪd red|💌|อ่านแล้วจริงๆ (เน้น)|I did read your message.|ฉันอ่านข้อความของคุณแล้วจริงๆ
+do know|duː nəʊ|💡|รู้จริงๆ (เน้น)|They do know the answer.|พวกเขารู้คำตอบจริงๆ
+did mention|dɪd ˈmenʃn|⚠️|พูดถึงจริงๆ (เน้น)|She did mention the problem.|เธอพูดถึงปัญหานั้นจริงๆ
+#Simple Present 3
+fly|flaɪ|🦅|บิน|Birds fly south in winter.|นกบินไปทางใต้ในฤดูหนาว
+works|wɜːks|💻|ทำงาน|My brother works at a tech company.|พี่ชายของฉันทำงานที่บริษัทเทคโนโลยี
+admires|ədˈmaɪəz|🧑‍🏫|ชื่นชม|She admires her teacher.|เธอชื่นชมครูของเธอ
+builds|bɪldz|✈️|สร้าง|He builds model airplanes.|เขาสร้างโมเดลเครื่องบิน
+organize|ˈɔːɡənaɪz|🎗️|จัดงาน|They organize charity events.|พวกเขาจัดงานการกุศล
+prefer|prɪˈfɜː|🍵|ชอบมากกว่า|I prefer tea over coffee.|ฉันชอบชามากกว่ากาแฟ
+discuss|dɪˈskʌs|🗣️|หารือ|We discuss important topics during meetings.|เราหารือหัวข้อสำคัญระหว่างการประชุม
+cries|kraɪz|🍼|ร้องไห้|The baby cries when she's hungry.|ทารกร้องไห้เมื่อหิว
+sleeps|sliːps|🛋️|นอน|The cat sleeps on the sofa.|แมวนอนอยู่บนโซฟา
+explore|ɪkˈsplɔː|🧭|สำรวจ|They explore new places every year.|พวกเขาสำรวจสถานที่ใหม่ๆ ทุกปี`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' '),l=w.pop();return (w.length?`<span class="d">${w.join(' ')}</span> `:'')+`<span class="n">${l}</span>`};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Main Verb</div><div class="lab2">Main Verb in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>

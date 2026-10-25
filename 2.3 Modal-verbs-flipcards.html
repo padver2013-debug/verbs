@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modal Verbs (optional) Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#a50e1e;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(165,14,30,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Modal Verbs (optional)</b>”: <i>Modal Verbs (optional) in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#Can
+can come|kæn kʌm|🚶|ไปด้วยได้|You can come with us if you want.|คุณมาด้วยกันกับเราได้ถ้าต้องการ
+can speak|kæn spiːk|🗣️|พูดได้|They can speak three languages.|พวกเขาพูดได้สามภาษา
+can play|kæn pleɪ|🎹|เล่นได้|She can play the piano very well.|เธอเล่นเปียโนได้ดีมาก
+can help|kæn help|🤝|ช่วยได้|We can help you with the project.|เราช่วยคุณทำโครงการได้
+can run|kæn rʌn|🏃|วิ่งได้|He can run faster than anyone else.|เขาวิ่งได้เร็วกว่าใครๆ
+can borrow|kæn ˈbɒrəʊ|🚗|ยืมได้|You can borrow my car for the weekend.|คุณยืมรถของฉันไปใช้ช่วงสุดสัปดาห์ได้
+can dance|kæn dɑːns|💃|เต้นได้|She can dance incredibly well.|เธอเต้นได้เก่งมาก
+can count on|kæn kaʊnt ɒn|💪|พึ่งพาได้|You can always count on me if you need support.|คุณพึ่งฉันได้เสมอถ้าต้องการการสนับสนุน
+can attend|kæn əˈtend|📅|เข้าร่วมได้|We can attend the meeting if necessary.|เราเข้าร่วมประชุมได้ถ้าจำเป็น
+can provide|kæn prəˈvaɪd|🛟|ให้ได้|They can provide the support you need.|พวกเขาให้การสนับสนุนที่คุณต้องการได้
+can finish|kæn ˈfɪnɪʃ|🏁|ทำให้เสร็จได้|She can finish the work by herself.|เธอทำงานให้เสร็จได้ด้วยตัวเอง
+can bring|kæn brɪŋ|🎊|นำมาได้|You can bring your friends to the party.|คุณพาเพื่อนมางานปาร์ตี้ได้
+can stay|kæn steɪ|🛏️|พักได้|He can stay at my place if his hotel booking falls through.|เขาพักที่บ้านฉันได้ถ้าโรงแรมที่จองไว้มีปัญหา
+can choose|kæn tʃuːz|🎞️|เลือกได้|They can choose whichever movie they want to watch.|พวกเขาเลือกหนังเรื่องไหนก็ได้ที่อยากดู
+can leave early|kæn liːv ˈɜːli|🚶|กลับก่อนได้|We can leave early today if we finish our work.|วันนี้เรากลับก่อนได้ถ้าทำงานเสร็จ
+can offer|kæn ˈɒfə|🏷️|เสนอให้ได้|They can offer you a better deal if you ask.|พวกเขาเสนอข้อตกลงที่ดีกว่านี้ให้ได้ถ้าคุณขอ
+can discuss|kæn dɪˈskʌs|💬|หารือได้|We can discuss this tomorrow if you prefer.|เราหารือเรื่องนี้พรุ่งนี้ได้ถ้าคุณต้องการ
+can watch|kæn wɒtʃ|🍿|ดูได้|We can watch the movie later, after we finish dinner.|เราดูหนังทีหลังได้ หลังกินข้าวเย็นเสร็จ
+can meet|kæn miːt|🤝|พบกันได้|We can meet tomorrow if that works for you.|เราพบกันพรุ่งนี้ได้ถ้าคุณสะดวก
+#Could
+could be|kʊd biː|📚|อาจจะอยู่/เป็น|She could be at the library right now.|ตอนนี้เธออาจจะอยู่ที่ห้องสมุด
+could try|kʊd traɪ|🧩|ลองได้|You could try a different approach to solve the problem.|คุณลองใช้วิธีอื่นแก้ปัญหาได้
+could go|kʊd ɡəʊ|🛒|ไปได้|I could go to the store if you need anything.|ฉันไปร้านให้ได้ถ้าคุณต้องการอะไร
+could explain|kʊd ɪkˈspleɪn|🗨️|อธิบายได้|You could explain the situation more clearly.|คุณน่าจะอธิบายสถานการณ์ให้ชัดเจนกว่านี้ได้
+could work|kʊd wɜːk|🏠|ทำงานได้|You could work from home tomorrow if you prefer.|คุณทำงานจากที่บ้านพรุ่งนี้ได้ถ้าต้องการ
+could meet|kʊd miːt|☕|พบได้|I could meet you later if that works for you.|ฉันพบคุณทีหลังได้ถ้าคุณสะดวก
+could improve|kʊd ɪmˈpruːv|📈|พัฒนาได้|He could improve his skills with more practice.|เขาพัฒนาทักษะได้ถ้าฝึกมากขึ้น
+could save|kʊd seɪv|💰|ประหยัดได้|You could save some money if you buy the items on sale.|คุณประหยัดเงินได้ถ้าซื้อของลดราคา
+could visit|kʊd ˈvɪzɪt|🏡|ไปเยี่ยมได้|I could visit you next weekend, if that’s okay.|ฉันไปเยี่ยมคุณสุดสัปดาห์หน้าได้ ถ้าไม่เป็นไร
+could give|kʊd ɡɪv|🚗|ให้ได้|He could give you a ride if you ask him.|เขาไปส่งคุณได้ถ้าคุณขอ
+could take a break|kʊd teɪk ə breɪk|☕|พักได้|I could take a break if I feel like it.|ฉันพักได้ถ้ารู้สึกอยากพัก
+could make it|kʊd meɪk ɪt|🗓️|ไปได้|I could make it to the meeting if it’s rescheduled.|ฉันไปประชุมได้ถ้ามีการเลื่อนนัด
+could come earlier|kʊd kʌm ˈɜːliə|🏃|มาเร็วขึ้นได้|He could come earlier if he leaves now.|เขามาเร็วกว่านี้ได้ถ้าออกเดี๋ยวนี้
+could be tired|kʊd biː ˈtaɪəd|🥱|อาจจะเหนื่อย|He could be tired after such a long trip.|เขาอาจจะเหนื่อยหลังเดินทางไกลขนาดนั้น
+could attend|kʊd əˈtend|⏳|เข้าร่วมได้|They could attend the meeting if they had more time.|พวกเขาเข้าร่วมประชุมได้ถ้ามีเวลามากกว่านี้
+could run|kʊd rʌn|🛒|ไปธุระได้|I could run to the store if you need anything.|ฉันวิ่งไปร้านให้ได้ถ้าคุณต้องการอะไร
+could offer|kʊd ˈɒfə|💡|เสนอได้|He could offer a solution if he thinks of one.|เขาเสนอทางแก้ได้ถ้าคิดออก
+#May & Might
+may not agree|meɪ nɒt əˈɡriː|🙅|อาจจะไม่เห็นด้วย|He may not agree with your decision.|เขาอาจจะไม่เห็นด้วยกับการตัดสินใจของคุณ
+may come|meɪ kʌm|🎉|อาจจะมา|She may come along if she finishes early.|เธออาจจะมาด้วยถ้าทำงานเสร็จเร็ว
+may join|meɪ dʒɔɪn|🕗|อาจจะมาร่วม|I may join you later, depending on my schedule.|ฉันอาจจะไปร่วมทีหลัง ขึ้นอยู่กับตารางของฉัน
+may have to reschedule|meɪ həv tə ˌriːˈʃedjuːl|🗓️|อาจจะต้องเลื่อนนัด|We may have to reschedule the meeting.|เราอาจจะต้องเลื่อนการประชุม
+may be late|meɪ bi leɪt|🌧️|อาจจะมาสาย|They may be late due to the weather.|พวกเขาอาจจะมาสายเพราะสภาพอากาศ
+may go|meɪ ɡəʊ|🏖️|อาจจะไป|They may go on vacation next month.|พวกเขาอาจจะไปพักร้อนเดือนหน้า
+might arrive|maɪt əˈraɪv|🚕|อาจจะมาถึง|They might arrive late.|พวกเขาอาจจะมาถึงช้า
+might skip|maɪt skɪp|😪|อาจจะข้าม/ไม่ไป|I might skip the event if I'm too tired.|ฉันอาจจะไม่ไปงานถ้าเหนื่อยเกินไป
+might visit|maɪt ˈvɪzɪt|🏛️|อาจจะไปเยี่ยม|We might visit a museum tomorrow.|พรุ่งนี้เราอาจจะไปพิพิธภัณฑ์
+might go|maɪt ɡəʊ|🚶‍♀️|อาจจะไป|I might go for a walk after dinner.|ฉันอาจจะไปเดินเล่นหลังอาหารเย็น
+might notice|maɪt ˈnəʊtɪs|👁️|อาจจะสังเกตเห็น|He might not even notice we're here.|เขาอาจจะไม่ทันสังเกตด้วยซ้ำว่าเรามาอยู่ที่นี่
+might decide|maɪt dɪˈsaɪd|🚫|อาจจะตัดสินใจ|They might decide to cancel the event.|พวกเขาอาจจะตัดสินใจยกเลิกงาน
+may be able to help|meɪ bi ˈeɪbl tə help|🧑‍🔧|อาจจะช่วยได้|She may be able to help with your project.|เธออาจจะช่วยโครงการของคุณได้
+may not have|meɪ nɒt hæv|📦|อาจจะไม่มี|They may not have the item in stock, but it’s worth asking.|พวกเขาอาจจะไม่มีสินค้าในสต็อก แต่ก็ควรลองถาม
+may decide|meɪ dɪˈsaɪd|🧳|อาจจะตัดสินใจ|They may decide to join us for the trip.|พวกเขาอาจจะตัดสินใจไปเที่ยวกับเรา
+may go to the gym|meɪ ɡəʊ tə ðə dʒɪm|🏋️|อาจจะไปยิม|I may go to the gym later this evening.|เย็นนี้ฉันอาจจะไปยิม
+might not be able to finish|maɪt nɒt bi ˈeɪbl tə ˈfɪnɪʃ|😓|อาจจะทำไม่เสร็จ|We might not be able to finish the work today.|วันนี้เราอาจจะทำงานไม่เสร็จ
+might consider|maɪt kənˈsɪdə|🤔|อาจจะพิจารณา|He might consider the idea if we explain it better.|เขาอาจจะพิจารณาความคิดนี้ถ้าเราอธิบายให้ดีกว่านี้
+might join|maɪt dʒɔɪn|🍽️|อาจจะไปร่วม|I might join you for dinner if I finish work early.|ฉันอาจจะไปกินมื้อเย็นกับคุณถ้าเลิกงานเร็ว
+might go hiking|maɪt ɡəʊ ˈhaɪkɪŋ|🥾|อาจจะไปเดินป่า|We might go hiking this weekend.|สุดสัปดาห์นี้เราอาจจะไปเดินป่า
+might be the one|maɪt bi ðə wʌn|🚪|อาจจะเป็นคนนั้น|He might be the one who left the door open.|เขาอาจจะเป็นคนที่ทิ้งประตูเปิดไว้
+might feel|maɪt fiːl|🫂|อาจจะรู้สึก|You might feel more comfortable if you talk to someone.|คุณอาจจะรู้สึกสบายใจขึ้นถ้าได้คุยกับใครสักคน
+might enjoy|maɪt ɪnˈdʒɔɪ|📚|อาจจะชอบ|You might enjoy this book, it’s one of my favorites.|คุณอาจจะชอบหนังสือเล่มนี้ เป็นเล่มโปรดของฉัน
+may need to revise|meɪ niːd tə rɪˈvaɪz|📄|อาจจะต้องแก้ไข|We may need to revise the document before submission.|เราอาจจะต้องแก้ไขเอกสารก่อนส่ง
+#Should & Must
+should leave|ʃʊd liːv|🚆|ควรออกไป|We should leave now if we want to catch the train.|เราควรออกเดินทางตอนนี้ถ้าอยากทันรถไฟ
+should visit|ʃʊd ˈvɪzɪt|👴|ควรไปเยี่ยม|You should visit your grandparents more often.|คุณควรไปเยี่ยมปู่ย่าตายายบ่อยขึ้น
+should call|ʃʊd kɔːl|📱|ควรโทร|She should call her mom more often.|เธอควรโทรหาแม่บ่อยขึ้น
+should take|ʃʊd teɪk|☕|ควรพัก|He should take a break if he's feeling tired.|เขาควรพักถ้ารู้สึกเหนื่อย
+should not ignore|ʃʊd nɒt ɪɡˈnɔː|⚠️|ไม่ควรเพิกเฉย|You should not ignore the warning signs.|คุณไม่ควรเพิกเฉยต่อสัญญาณเตือน
+should consider|ʃʊd kənˈsɪdə|💼|ควรพิจารณา|She should consider applying for the job.|เธอควรพิจารณาสมัครงานนี้
+must wear|mʌst weə|⛑️|ต้องสวม|You must wear a helmet when riding a bike.|คุณต้องสวมหมวกกันน็อกเมื่อขี่จักรยาน
+must finish|mʌst ˈfɪnɪʃ|📅|ต้องทำให้เสร็จ|I must finish this project by tomorrow.|ฉันต้องทำโครงการนี้ให้เสร็จภายในพรุ่งนี้
+must apologize|mʌst əˈpɒlədʒaɪz|🙇|ต้องขออภัย|I must apologize for the inconvenience.|ฉันต้องขออภัยในความไม่สะดวก
+must follow|mʌst ˈfɒləʊ|📋|ต้องปฏิบัติตาม|You must follow the instructions carefully.|คุณต้องปฏิบัติตามคำแนะนำอย่างระมัดระวัง
+must be aware|mʌst bi əˈweə|📢|ต้องรับรู้|They must be aware of the new rules by now.|ตอนนี้พวกเขาคงรับรู้กฎใหม่แล้ว
+must not park|mʌst nɒt pɑːk|🅿️|ห้ามจอด|You must not park in that area.|คุณห้ามจอดรถในบริเวณนั้น
+must complete|mʌst kəmˈpliːt|📝|ต้องทำให้เสร็จ|They must complete the report by Friday.|พวกเขาต้องทำรายงานให้เสร็จภายในวันศุกร์
+must respect|mʌst rɪˈspekt|🎲|ต้องเคารพ|You must respect the rules of the game.|คุณต้องเคารพกติกาของเกม
+should ask|ʃʊd ɑːsk|🙋|ควรขอ|They should ask for help if they’re confused.|พวกเขาควรขอความช่วยเหลือถ้าสับสน
+should check|ʃʊd tʃek|🔍|ควรตรวจสอบ|They should check the facts before making a decision.|พวกเขาควรตรวจสอบข้อเท็จจริงก่อนตัดสินใจ
+should arrive|ʃʊd əˈraɪv|🕕|น่าจะมาถึง|They should arrive by 6 PM if everything goes as planned.|พวกเขาน่าจะมาถึงภายในหกโมงเย็นถ้าทุกอย่างเป็นไปตามแผน
+should try|ʃʊd traɪ|🍜|ควรลอง|You should definitely try the new restaurant.|คุณควรลองร้านอาหารใหม่นั้นแน่ๆ
+should make a decision|ʃʊd meɪk ə dɪˈsɪʒn|⚖️|ควรตัดสินใจ|You should make a decision soon.|คุณควรตัดสินใจเร็วๆ นี้
+should take a moment|ʃʊd teɪk ə ˈməʊmənt|🧘|ควรใช้เวลาสักครู่|You should take a moment to relax.|คุณควรใช้เวลาสักครู่เพื่อผ่อนคลาย
+should not waste|ʃʊd nɒt weɪst|⏱️|ไม่ควรเสียเวลา|We should not waste any more time; let’s go.|เราไม่ควรเสียเวลาอีกแล้ว ไปกันเถอะ
+must read|mʌst riːd|📖|ต้องอ่าน|You must read the book before the class.|คุณต้องอ่านหนังสือเล่มนี้ก่อนเข้าเรียน
+must stay focused|mʌst steɪ ˈfəʊkəst|🎯|ต้องมีสมาธิ|We must stay focused to complete the task on time.|เราต้องมีสมาธิเพื่อให้งานเสร็จตรงเวลา
+must be joking|mʌst bi ˈdʒəʊkɪŋ|😂|คงล้อเล่น|You must be joking!|คุณคงล้อเล่นใช่ไหม!
+#Would
+would love|wʊd lʌv|🍽️|ยินดีที่จะ|I would love to join you for dinner.|ฉันยินดีไปร่วมมื้อเย็นกับคุณ
+would rather stay|wʊd ˈrɑːðə steɪ|🛋️|อยากอยู่มากกว่า|I would rather stay home tonight.|คืนนี้ฉันอยากอยู่บ้านมากกว่า
+would prefer|wʊd prɪˈfɜː|✈️|อยากได้มากกว่า|She would prefer to take the earlier flight.|เธออยากขึ้นเที่ยวบินที่เร็วกว่ามากกว่า
+would suggest|wʊd səˈdʒest|💡|จะแนะนำ|I would suggest a different approach.|ฉันขอเสนอวิธีอื่น
+would like|wʊd laɪk|☕|อยากได้|I would like a coffee, please.|ขอกาแฟสักแก้วครับ/ค่ะ
+would benefit|wʊd ˈbenɪfɪt|🏋️|จะได้ประโยชน์|You would benefit from practicing every day.|คุณจะได้ประโยชน์จากการฝึกทุกวัน
+would do well|wʊd duː wel|🎓|จะทำได้ดี|You would do well if you studied more.|คุณจะทำได้ดีถ้าตั้งใจเรียนมากขึ้น
+would have helped|wʊd həv helpt|🤲|คงจะช่วย (แต่ไม่ได้ช่วย)|I would have helped you if I had known.|ฉันคงช่วยคุณถ้าฉันรู้
+would have been upset|wʊd həv biːn ʌpˈset|😞|คงจะเสียใจ|He would have been upset if he missed the meeting.|เขาคงเสียใจถ้าพลาดการประชุม
+would rather wait|wʊd ˈrɑːðə weɪt|🪑|อยากรอมากกว่า|I would rather wait here than leave.|ฉันอยากรอที่นี่มากกว่าจะไป
+would prefer to eat|wʊd prɪˈfɜː tuː iːt|🍲|อยากกินมากกว่า|I would prefer to eat at home tonight.|คืนนี้ฉันอยากกินข้าวที่บ้านมากกว่า
+would like to come|wʊd laɪk tə kʌm|🙇‍♂️|อยากมา|He would like to come, but he’s busy.|เขาอยากมา แต่ติดธุระ
+#Modal Perfect
+could have helped|kʊd həv helpt|🆘|น่าจะช่วยได้|She could have helped if she knew.|เธอน่าจะช่วยได้ถ้าเธอรู้
+may have misunderstood|meɪ həv ˌmɪsʌndəˈstʊd|🤔|อาจจะเข้าใจผิด|They may have misunderstood your request.|พวกเขาอาจจะเข้าใจผิดคำขอของคุณ
+should have told|ʃʊd həv təʊld|📣|น่าจะบอก|She should have told us about the change in plans.|เธอน่าจะบอกเราเรื่องการเปลี่ยนแผน
+should have known|ʃʊd həv nəʊn|🧠|น่าจะรู้|They should have known the correct answer.|พวกเขาน่าจะรู้คำตอบที่ถูกต้อง
+may have left|meɪ həv left|👛|อาจจะลืมทิ้งไว้|I may have left my wallet in the car.|ฉันอาจจะลืมกระเป๋าสตางค์ไว้ในรถ
+might have taken|maɪt həv ˈteɪkən|🚂|อาจจะขึ้น|They might have taken the wrong train.|พวกเขาอาจจะขึ้นรถไฟผิดขบวน
+must have forgotten|mʌst həv fəˈɡɒtn|🗓️|คงจะลืม|She must have forgotten about the appointment.|เธอคงลืมเรื่องนัดไปแล้ว
+should have double-checked|ʃʊd həv ˈdʌbl tʃekt|🧮|น่าจะตรวจซ้ำ|I should have double-checked my calculations.|ฉันน่าจะตรวจสอบการคำนวณซ้ำ
+could have called|kʊd həv kɔːld|📲|น่าจะโทรมา|They could have called to let us know they were running late.|พวกเขาน่าจะโทรมาบอกว่ากำลังมาสาย
+should have finished|ʃʊd həv ˈfɪnɪʃt|✅|น่าจะทำเสร็จแล้ว|She should have finished the work by now.|ตอนนี้เธอน่าจะทำงานเสร็จแล้ว
+could have finished|kʊd həv ˈfɪnɪʃt|🏁|อาจจะทำเสร็จแล้ว|He could have finished the task by now.|ตอนนี้เขาอาจจะทำงานเสร็จแล้ว
+might have misunderstood|maɪt həv ˌmɪsʌndəˈstʊd|📃|อาจจะเข้าใจผิด|They might have misunderstood the instructions.|พวกเขาอาจจะเข้าใจคำแนะนำผิด
+might have finished|maɪt həv ˈfɪnɪʃt|🗂️|อาจจะทำเสร็จไปแล้ว|They might have already finished the report.|พวกเขาอาจจะทำรายงานเสร็จไปแล้ว
+should have asked|ʃʊd həv ɑːskt|🔏|น่าจะขอ|They should have asked for permission before making the decision.|พวกเขาน่าจะขออนุญาตก่อนตัดสินใจ
+should have studied|ʃʊd həv ˈstʌdid|📚|น่าจะอ่านหนังสือมากกว่านี้|I should have studied more for the exam.|ฉันน่าจะอ่านหนังสือสอบมากกว่านี้
+#Modal Phrases
+might want to try|maɪt wɒnt tə traɪ|🍴|น่าจะลอง|You might want to try the new restaurant downtown.|คุณน่าจะลองร้านอาหารใหม่ในตัวเมืองดู
+might want to bring|maɪt wɒnt tə brɪŋ|☂️|น่าจะนำมาด้วย|You might want to bring an umbrella just in case.|คุณน่าจะพกร่มไว้เผื่อ
+might want to reconsider|maɪt wɒnt tə ˌriːkənˈsɪdə|🔄|น่าจะทบทวน|You might want to reconsider that decision.|คุณน่าจะทบทวนการตัดสินใจนั้นอีกครั้ง
+may need|meɪ niːd|🙋‍♀️|อาจจะต้องการ|He may need your help to solve the issue.|เขาอาจจะต้องการความช่วยเหลือจากคุณเพื่อแก้ปัญหา
+might be able to come|maɪt bi ˈeɪbl tə kʌm|🎈|อาจจะมาได้|She might be able to come to the event after all.|เธออาจจะมางานได้ก็ได้
+may want to take|meɪ wɒnt tə teɪk|🛣️|น่าจะใช้|You may want to take the highway instead of the local roads.|คุณน่าจะใช้ทางด่วนแทนถนนในเมือง
+may not be able to attend|meɪ nɒt bi ˈeɪbl tu əˈtend|📆|อาจจะเข้าร่วมไม่ได้|They may not be able to attend due to a scheduling conflict.|พวกเขาอาจจะเข้าร่วมไม่ได้เพราะตารางงานชนกัน
+should probably call|ʃʊd ˈprɒbəbli kɔːl|☎️|น่าจะโทรไปก่อน|We should probably call ahead to make reservations.|เราน่าจะโทรไปจองล่วงหน้า
+should focus|ʃʊd ˈfəʊkəs|🎯|ควรโฟกัส|We should focus on one task at a time for better efficiency.|เราควรโฟกัสทีละงานเพื่อประสิทธิภาพที่ดีกว่า
+should plan|ʃʊd plæn|🌴|ควรวางแผน|We should plan a vacation for next summer.|เราควรวางแผนไปพักร้อนในหน้าร้อนปีหน้า
+might want to check|maɪt wɒnt tə tʃek|📬|น่าจะตรวจ|You might want to check your email for the latest updates.|คุณน่าจะเช็กอีเมลเพื่อดูข้อมูลล่าสุด
+might want to double-check|maɪt wɒnt tə ˌdʌbl ˈtʃek|📆|น่าจะตรวจซ้ำ|You might want to double-check the dates before confirming.|คุณน่าจะตรวจสอบวันที่ซ้ำก่อนยืนยัน
+might want to get|maɪt wɒnt tə ɡet|🧑‍⚕️|น่าจะขอ|You might want to get a second opinion on that idea.|คุณน่าจะขอความเห็นที่สองเกี่ยวกับไอเดียนั้น
+should definitely try|ʃʊd ˈdefɪnətli traɪ|☕|ควรลองแน่ๆ|We should definitely try that new café next time.|ครั้งหน้าเราควรลองคาเฟ่ใหม่นั้นแน่ๆ`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' '),l=w.pop();return (w.length?`<span class="d">${w.join(' ')}</span> `:'')+`<span class="n">${l}</span>`};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Modal Verbs (optional)</div><div class="lab2">Modal Verbs (optional) in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Negation (optional) Flipcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf8fc;--tx:#2b2b3a;--mut:#6b6b80;--sf:#fff;--bd:#e4dcef;--mag:#a50e1e;--grn:#0b5d2a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1a24;--tx:#eee;--mut:#aaa;--sf:#26243a;--bd:#3b3858}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Calibri,Carlito,'Segoe UI',sans-serif;padding:14px 10px 40px}
+.w{max-width:1000px;margin:0 auto}
+h1{font-size:17px;margin:0 0 4px;text-align:center}
+h1 b{color:var(--mag)} h1 i{color:var(--grn);font-style:normal}
+.sub{text-align:center;color:var(--mut);font:13px 'Sarabun',sans-serif;margin-bottom:10px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:12px}
+.tabs button{flex:none;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:6px 12px;font:600 13px Calibri,Carlito,sans-serif;cursor:pointer}
+.tabs button.on{background:var(--mag);color:#fff;border-color:var(--mag)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 14px;margin-top:6px}
+@media (max-width:640px){.grid{gap:10px 8px}}
+.c{perspective:800px;aspect-ratio:10/8.2;cursor:pointer}
+@media (max-width:640px){.c{aspect-ratio:3/3.9}}
+.in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.c.f .in{transform:rotateY(180deg)}
+.s{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:12px 12px;text-align:center;color:#2b2b3a;border:1px solid rgba(0,0,0,.06);overflow:hidden}
+.b{transform:rotateY(180deg);gap:2px}
+.em{font-size:calc(38px*var(--k,1));line-height:1}
+.p{font-weight:700;font-size:calc(clamp(14px,3.7vw,20px)*var(--k,1));line-height:1.15}
+.ipa{font-family:'Times New Roman',Times,serif;font-size:calc(clamp(12px,3.1vw,16px)*var(--k,1));color:#555}
+.d{color:var(--mag)} .n{color:var(--grn)}
+.th{font:700 calc(clamp(13px,3.4vw,16px)*var(--k,1)) 'Sarabun',sans-serif}
+.lab{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--mag);line-height:1.15}
+.lab2{font-weight:700;font-size:calc(clamp(9px,2.3vw,11px)*var(--k,1));color:var(--grn)}
+.se{font-weight:700;font-size:calc(clamp(14px,3.8vw,18px)*var(--k,1));line-height:1.2}
+.st{font:calc(clamp(12px,3.2vw,15px)*var(--k,1)) 'Sarabun',sans-serif;color:#444;line-height:1.2}
+.sp{border:0;background:rgba(255,255,255,.75);border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:14px;flex:none}
+h2{font-size:15px;margin:22px 0 8px}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px;background:var(--sf)}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--bd);vertical-align:middle}
+th{background:rgba(165,14,30,.1);font-size:13px}
+td.t{font-family:'Sarabun',sans-serif}
+td.i{font-family:'Times New Roman',serif;color:var(--mut);white-space:nowrap}
+.tp{font-family:'Sarabun',sans-serif;font-size:12px;color:var(--mut)}
+</style></head><body><div class="w">
+<h1>Words Containing “<b>Negation (optional)</b>”: <i>Negation (optional) in English Sentences</i> Vocabulary</h1>
+<div class="sub">คลิกการ์ดเพื่อพลิกดูคำแปลและประโยคตัวอย่าง · กด 🔊 เพื่อฟังเสียงอ่านสำเนียงอังกฤษ (UK)</div>
+<div class="tabs" id="tabs"></div><div class="grid" id="grid"></div>
+<h2>📋 ตารางคำศัพท์ (Vocabulary Table)</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Vocabulary</th><th>IPA (UK)</th><th>ความหมาย</th><th>Sentence</th><th>🔊</th></tr></thead><tbody id="tb"></tbody></table></div>
+</div>
+<script>
+const RAW=`#Don’t / Doesn’t
+don’t like|dəʊnt laɪk|🎬|ไม่ชอบ|I don’t like that movie.|ฉันไม่ชอบหนังเรื่องนั้น
+don’t need to bring|dəʊnt niːd tə brɪŋ|🎒|ไม่จำเป็นต้องนำมา|You don’t need to bring anything to the event.|คุณไม่ต้องนำอะไรมางานเลย
+doesn’t agree|ˈdʌznt əˈɡriː|🙅‍♀️|ไม่เห็นด้วย|She doesn’t agree with your opinion.|เธอไม่เห็นด้วยกับความเห็นของคุณ
+don’t think|dəʊnt θɪŋk|💭|ไม่คิดว่า|I don’t think that’s a good idea.|ฉันไม่คิดว่านั่นเป็นความคิดที่ดี
+doesn’t know|ˈdʌznt nəʊ|🤷‍♀️|ไม่รู้|She doesn’t know how to fix the issue.|เธอไม่รู้วิธีแก้ปัญหานี้
+don’t want|dəʊnt wɒnt|🚆|ไม่อยาก|We don’t want to miss the train.|เราไม่อยากพลาดรถไฟ
+doesn’t seem|ˈdʌznt siːm|😕|ดูเหมือนจะไม่|He doesn’t seem to understand the issue.|ดูเหมือนเขาจะไม่เข้าใจปัญหา
+don’t have to rush|dəʊnt hæv tə rʌʃ|🐢|ไม่ต้องรีบ|You don’t have to rush; we’re not in a hurry.|คุณไม่ต้องรีบ เราไม่ได้เร่งรีบ
+don’t feel like going|dəʊnt fiːl laɪk ˈɡəʊɪŋ|🛋️|ไม่อยากไป|I don’t feel like going out tonight.|คืนนี้ฉันไม่อยากออกไปข้างนอก
+doesn’t want|ˈdʌznt wɒnt|🔕|ไม่ต้องการ|She doesn’t want to be disturbed right now.|ตอนนี้เธอไม่ต้องการให้ใครรบกวน
+#Didn’t
+didn’t see|ˈdɪdnt siː|👀|ไม่ได้เห็น|I didn’t see you at the concert last night.|ฉันไม่เห็นคุณที่คอนเสิร์ตเมื่อคืน
+didn’t attend|ˈdɪdnt əˈtend|📅|ไม่ได้เข้าร่วม|She didn’t attend the meeting yesterday.|เธอไม่ได้เข้าร่วมประชุมเมื่อวาน
+didn’t mean|ˈdɪdnt miːn|😔|ไม่ได้ตั้งใจ|I didn’t mean to upset you.|ฉันไม่ได้ตั้งใจทำให้คุณเสียใจ
+didn’t enjoy|ˈdɪdnt ɪnˈdʒɔɪ|🍿|ไม่สนุก/ไม่ชอบ|She didn’t enjoy the movie as much as I did.|เธอไม่สนุกกับหนังเท่าที่ฉันสนุก
+didn’t understand|ˈdɪdnt ˌʌndəˈstænd|❓|ไม่เข้าใจ|I didn’t understand what you meant by that.|ฉันไม่เข้าใจสิ่งที่คุณหมายถึง
+didn’t expect|ˈdɪdnt ɪkˈspekt|😮|ไม่คาดคิด|I didn’t expect such a large crowd.|ฉันไม่คาดคิดว่าจะมีฝูงชนมากขนาดนี้
+didn’t follow|ˈdɪdnt ˈfɒləʊ|📋|ไม่ได้ทำตาม|They didn’t follow the instructions correctly.|พวกเขาไม่ได้ทำตามคำแนะนำอย่างถูกต้อง
+didn’t realize|ˈdɪdnt ˈriːəlaɪz|💡|ไม่ทันรู้ตัว|He didn’t realize the meeting had been canceled.|เขาไม่รู้ว่าการประชุมถูกยกเลิกแล้ว
+didn’t know|ˈdɪdnt nəʊ|🎉|ไม่รู้|He didn’t know about the surprise party.|เขาไม่รู้เรื่องปาร์ตี้เซอร์ไพรส์
+#Isn’t / Aren’t
+isn’t coming|ˈɪznt ˈkʌmɪŋ|🚫|ไม่มา|She isn’t coming to the party tonight.|คืนนี้เธอไม่มางานปาร์ตี้
+aren’t planning|ɑːnt ˈplænɪŋ|🗺️|ไม่ได้วางแผน|We aren’t planning to travel this summer.|เราไม่ได้วางแผนเดินทางในหน้าร้อนนี้
+isn’t available|ˈɪznt əˈveɪləbl|📵|ไม่ว่าง|He isn’t available for a call right now.|ตอนนี้เขาไม่ว่างคุยโทรศัพท์
+aren’t sure|ɑːnt ʃɔː|🤔|ไม่แน่ใจ|We aren’t sure if we can make it on time.|เราไม่แน่ใจว่าจะไปทันเวลาหรือเปล่า
+aren’t interested|ɑːnt ˈɪntrəstɪd|😑|ไม่สนใจ|They aren’t interested in the offer.|พวกเขาไม่สนใจข้อเสนอ
+aren’t ready|ɑːnt ˈredi|⏳|ยังไม่พร้อม|They aren’t ready to make a decision yet.|พวกเขายังไม่พร้อมตัดสินใจ
+aren’t allowed|ɑːnt əˈlaʊd|🅿️|ไม่ได้รับอนุญาต|We aren’t allowed to park here.|เราไม่ได้รับอนุญาตให้จอดรถที่นี่
+isn’t aware|ˈɪznt əˈweə|🙈|ไม่ทราบ|He isn’t aware of the changes that were made.|เขาไม่ทราบเรื่องการเปลี่ยนแปลงที่เกิดขึ้น
+isn’t feeling well|ˈɪznt ˈfiːlɪŋ wel|🤒|ไม่สบาย|She isn’t feeling well today, so she stayed home.|วันนี้เธอไม่สบายเลยอยู่บ้าน
+aren’t going|ɑːnt ˈɡəʊɪŋ|🦁|ไม่ไป|We aren’t going to the zoo after all.|สุดท้ายเราไม่ได้ไปสวนสัตว์แล้ว
+#Haven’t (Present Perfect)
+haven’t finished|ˈhævnt ˈfɪnɪʃt|📚|ยังไม่เสร็จ|They haven’t finished their homework yet.|พวกเขายังทำการบ้านไม่เสร็จ
+haven’t replied|ˈhævnt rɪˈplaɪd|📧|ยังไม่ได้ตอบ|They haven’t replied to my email yet.|พวกเขายังไม่ได้ตอบอีเมลของฉัน
+haven’t received|ˈhævnt rɪˈsiːvd|📥|ยังไม่ได้รับ|I haven’t received any updates from the team.|ฉันยังไม่ได้รับข้อมูลอัปเดตจากทีมเลย
+haven’t decided|ˈhævnt dɪˈsaɪdɪd|🏖️|ยังไม่ได้ตัดสินใจ|We haven’t decided on a vacation destination yet.|เรายังไม่ได้ตัดสินใจเลือกที่เที่ยว
+haven’t seen|ˈhævnt siːn|🎞️|ยังไม่เคยดู|I haven’t seen that movie before.|ฉันไม่เคยดูหนังเรื่องนั้นมาก่อน
+haven’t made|ˈhævnt meɪd|📉|ยังไม่ได้ทำ|They haven’t made any progress on the project yet.|พวกเขายังไม่คืบหน้าในโครงการเลย
+haven’t heard|ˈhævnt hɜːd|📞|ยังไม่ได้ยิน|I haven’t heard anything from them yet.|ฉันยังไม่ได้ข่าวอะไรจากพวกเขาเลย
+haven’t been to|ˈhævnt biːn tuː|🍽️|ไม่เคยไป|I haven’t been to that restaurant before.|ฉันไม่เคยไปร้านอาหารนั้นมาก่อน
+haven’t been able to reach|ˈhævnt biːn ˈeɪbl tə riːtʃ|📱|ยังติดต่อไม่ได้|I haven’t been able to reach him by phone.|ฉันยังติดต่อเขาทางโทรศัพท์ไม่ได้
+#Can’t
+can’t find|kɑːnt faɪnd|🔑|หาไม่เจอ|He can’t find his keys anywhere.|เขาหากุญแจไม่เจอเลย
+can’t afford|kɑːnt əˈfɔːd|🚗|ไม่มีปัญญาซื้อ|We can’t afford a new car right now.|ตอนนี้เราไม่มีปัญญาซื้อรถใหม่
+can’t speak|kɑːnt spiːk|🇫🇷|พูดไม่ได้|He can’t speak French very well.|เขาพูดภาษาฝรั่งเศสได้ไม่ค่อยดี
+can’t believe|kɑːnt bɪˈliːv|❄️|ไม่อยากเชื่อ|I can’t believe how much snow there is outside.|ฉันไม่อยากเชื่อว่าข้างนอกมีหิมะเยอะขนาดนี้
+can’t make it|kɑːnt meɪk ɪt|🗓️|ไปไม่ได้|She can’t make it to the meeting this afternoon.|บ่ายนี้เธอไปประชุมไม่ได้
+can’t remember|kɑːnt rɪˈmembə|📱|จำไม่ได้|He can’t remember where he left his phone.|เขาจำไม่ได้ว่าวางโทรศัพท์ไว้ที่ไหน
+can’t join|kɑːnt dʒɔɪn|📋|ร่วมไม่ได้|He can’t join us; he has another appointment.|เขามาร่วมกับเราไม่ได้ เขามีนัดอื่น
+can’t park|kɑːnt pɑːk|🚧|จอดไม่ได้|You can’t park here without a permit.|คุณจอดรถที่นี่ไม่ได้ถ้าไม่มีใบอนุญาต
+can’t risk|kɑːnt rɪsk|⏱️|เสี่ยงไม่ได้|We can’t risk missing the deadline.|เราเสี่ยงให้พลาดกำหนดส่งไม่ได้
+can’t eat|kɑːnt iːt|🧀|กินไม่ได้|She can’t eat dairy, so she avoids cheese.|เธอกินผลิตภัณฑ์นมไม่ได้ เลยเลี่ยงชีส
+#Won’t & Shouldn’t
+won’t be attending|wəʊnt biː əˈtendɪŋ|🚷|จะไม่เข้าร่วม|We won’t be attending the meeting tomorrow.|พรุ่งนี้เราจะไม่เข้าร่วมประชุม
+won’t be able to join|wəʊnt biː ˈeɪbl tə dʒɔɪn|🍝|จะไม่สามารถมาร่วมได้|They won’t be able to join us for dinner.|พวกเขาจะไม่สามารถมาร่วมมื้อเย็นกับเราได้
+won’t finish|wəʊnt ˈfɪnɪʃ|⏰|จะไม่เสร็จ|They won’t finish the work by tomorrow.|พวกเขาจะทำงานไม่เสร็จภายในพรุ่งนี้
+won’t be able to attend|wəʊnt biː ˈeɪbl tu əˈtend|💒|จะไม่สามารถเข้าร่วมได้|She won’t be able to attend the wedding.|เธอจะไม่สามารถไปงานแต่งงานได้
+shouldn’t worry|ˈʃʊdnt ˈwʌri|😌|ไม่ควรกังวล|You shouldn’t worry about it too much.|คุณไม่ควรกังวลเรื่องนี้มากเกินไป
+shouldn’t eat|ˈʃʊdnt iːt|🍟|ไม่ควรกิน|You shouldn’t eat too much junk food.|คุณไม่ควรกินอาหารขยะมากเกินไป
+shouldn’t rush|ˈʃʊdnt rʌʃ|📝|ไม่ควรรีบเร่ง|You shouldn’t rush through the assignment.|คุณไม่ควรรีบทำงานที่ได้รับมอบหมายให้เสร็จ
+shouldn’t speak|ˈʃʊdnt spiːk|🗯️|ไม่ควรพูด|You shouldn’t speak to her like that.|คุณไม่ควรพูดกับเธอแบบนั้น
+shouldn’t drive|ˈʃʊdnt draɪv|🌧️|ไม่ควรขับรถ|You shouldn’t drive in this weather.|คุณไม่ควรขับรถในสภาพอากาศแบบนี้
+shouldn’t skip|ˈʃʊdnt skɪp|🥞|ไม่ควรข้าม|You shouldn’t skip breakfast; it’s important.|คุณไม่ควรข้ามมื้อเช้า มันสำคัญ
+shouldn’t ignore|ˈʃʊdnt ɪɡˈnɔː|⚠️|ไม่ควรเพิกเฉย|You shouldn’t ignore those warning signs.|คุณไม่ควรเพิกเฉยต่อสัญญาณเตือนเหล่านั้น
+shouldn’t have eaten|ˈʃʊdnt həv ˈiːtn|🍰|ไม่น่ากิน (แต่กินไปแล้ว)|I shouldn’t have eaten so much cake.|ฉันไม่น่ากินเค้กเยอะขนาดนี้เลย`;
+const PAL=['#fde2e4','#e2f0cb','#d6e6ff','#fff1c9','#e8dcf7','#d4f1ec'];
+const cats=[];let cur;
+RAW.split('\n').forEach(l=>{if(l[0]=='#'){cur={n:l.slice(1),r:[]};cats.push(cur)}else{const a=l.split('|');cur.r.push({p:a[0],i:a[1],e:a[2],t:a[3],s:a[4],ts:a[5]})}});
+const tabs=[];cats.forEach(c=>{for(let k=0;k<c.r.length;k+=25)tabs.push({n:c.n,r:c.r.slice(k,k+25)})});
+let voice;
+function pick(){try{const v=speechSynthesis.getVoices(),g=v.filter(x=>/en[-_]GB/i.test(x.lang));voice=g.find(x=>/natural|online|google|sonia|libby|serena|daniel/i.test(x.name))||g[0]||v.find(x=>/^en/i.test(x.lang))}catch(e){}}
+try{speechSynthesis.onvoiceschanged=pick;pick()}catch(e){}
+function say(t,r){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);if(voice)u.voice=voice;u.lang='en-GB';u.rate=r;speechSynthesis.speak(u)}catch(e){}}
+const hl=p=>{const w=p.split(' '),l=w.pop();return (w.length?`<span class="d">${w.join(' ')}</span> `:'')+`<span class="n">${l}</span>`};
+let T=0;
+function show(i){T=i;
+document.getElementById('tabs').innerHTML=tabs.map((t,k)=>`<button class="${k==i?'on':''}" onclick="show(${k})">${t.n} (${t.r.length})</button>`).join('');
+const R=tabs[i].r;
+document.getElementById('grid').innerHTML=R.map((x,k)=>`<div class="c" onclick="this.classList.toggle('f')"><div class="in">
+<div class="s" style="background:${PAL[k%6]}"><div class="em">${x.e}</div><div class="p">${hl(x.p)}</div><div class="ipa">/${x.i}/</div><button class="sp" data-w="${k}" aria-label="Play word">🔊</button></div>
+<div class="s b" style="background:${PAL[(k+3)%6]}"><div class="lab">Negation (optional)</div><div class="lab2">Negation (optional) in English Sentences</div><div class="th">${x.t}</div><div class="se">${x.s}</div><div class="st">${x.ts}</div><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></div>
+</div></div>`).join('');
+document.getElementById('tb').innerHTML=R.map((x,k)=>`<tr><td>${k+1}</td><td><b>${hl(x.p)}</b></td><td class="i">/${x.i}/</td><td class="t">${x.t}</td><td>${x.s}<div class="tp">${x.ts}</div></td><td><button class="sp" data-s="${k}" aria-label="Play sentence">🔊</button></td></tr>`).join('');fit()}
+document.addEventListener('click',e=>{const b=e.target.closest('.sp');if(!b)return;e.stopPropagation();const R=tabs[T].r;
+if(b.dataset.w!=null)say(R[b.dataset.w].p,.8);else say(R[b.dataset.s].s,.9)},true);
+function fit(){document.querySelectorAll('.s').forEach(f=>{let k=1;f.style.setProperty('--k',1);const H=()=>[...f.children].reduce((a,c)=>a+c.offsetHeight+3,0)+14;while(H()>f.clientHeight-6&&k>.5){k-=.04;f.style.setProperty('--k',k.toFixed(2))}})}
+addEventListener('resize',fit);try{document.fonts.ready.then(fit)}catch(e){}
+show(0);
+</script></body></html>
