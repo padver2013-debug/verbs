@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interaction &amp; Conversation Actions</title>
+<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8ff;--tx:#2b2b36;--sf:#fff;--ln:#eadff3;--ac:#b9a3e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a24;--tx:#eee9f5;--sf:#2a2634;--ln:#403a4e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Thai",system-ui,sans-serif;padding:16px}
+h1{font-family:ABeeZee,sans-serif;text-align:center;margin:8px 0 14px;font-size:1.6rem}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;justify-content:safe center;flex-wrap:wrap}
+.tab{border:0;border-radius:999px;padding:9px 16px;font:600 .85rem "Noto Sans Thai",sans-serif;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 3px 10px rgba(120,90,160,.15);transition:.2s}
+.tab.on{background:var(--ac);color:#2b2b36;transform:translateY(-2px)}
+.sub{text-align:center;opacity:.7;font-size:.85rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.card{height:190px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;box-shadow:0 8px 20px rgba(100,80,140,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;text-align:center;color:#222}
+.back{transform:rotateY(180deg)}
+.em{font-size:3.2rem;line-height:1}
+.w{font-family:ABeeZee,sans-serif;font-size:1.45rem;color:#000;margin-top:6px}
+.ph{font-family:"Times New Roman",Times,serif;font-size:.95rem}
+.th{font-size:1.4rem;font-weight:600}
+.spk{position:absolute;top:8px;right:8px;border:0;background:rgba(255,255,255,.7);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer}
+.wrap{max-width:1100px;margin:28px auto 0;overflow-x:auto;border-radius:18px;box-shadow:0 6px 18px rgba(100,80,140,.15);background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--ln);vertical-align:top}
+th{background:var(--ac);color:#2b2b36;position:sticky;top:0}
+td.w2{font-family:ABeeZee,sans-serif;font-weight:700}
+td.p{font-family:"Times New Roman",serif}
+td button{border:0;background:none;cursor:pointer;font-size:1rem}
+</style></head><body>
+<h1>💬 Interaction &amp; Conversation Actions</h1>
+<div class="tabs" id="tabs"></div>
+<div class="sub" id="sub"></div>
+<div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Phonetics</th><th>ความหมาย</th><th>Example sentence</th><th>แปลประโยค</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=[
+["กล่าว ประกาศ และบอกเล่า","Stating & Informing",`address|əˈdres|กล่าวปราศรัย, พูดกับ|🎙️|The mayor addressed the crowd.|นายกเทศมนตรีกล่าวปราศรัยต่อฝูงชน
+announce|əˈnaʊns|ประกาศ|📢|They announce the winner.|พวกเขาประกาศผู้ชนะ
+assert|əˈsɜːt|ยืนยัน, กล่าวอย่างหนักแน่น|💪|He asserts his innocence.|เขายืนยันว่าตนบริสุทธิ์
+declare|dɪˈkleə|ประกาศ, แถลง|📜|They declare a holiday.|พวกเขาประกาศวันหยุด
+proclaim|prəˈkleɪm|ประกาศอย่างเป็นทางการ|👑|The king proclaimed peace.|กษัตริย์ประกาศสันติภาพ
+exclaim|ɪkˈskleɪm|อุทาน, ร้องออกมา|❗|She exclaimed with joy.|เธออุทานด้วยความดีใจ
+remark|rɪˈmɑːk|กล่าวถึง, ให้ความเห็น|💬|He remarked on the weather.|เขากล่าวถึงสภาพอากาศ
+mention|ˈmenʃən|พูดถึง, เอ่ยถึง|🗣️|Do not mention her name.|อย่าเอ่ยชื่อเธอ
+notify|ˈnəʊtɪfaɪ|แจ้งให้ทราบ|🔔|Please notify the office.|กรุณาแจ้งให้สำนักงานทราบ
+broadcast|ˈbrɔːdkɑːst|ออกอากาศ, กระจายข่าว|📺|They broadcast the game live.|พวกเขาถ่ายทอดสดการแข่งขัน
+brief|briːf|สรุปให้ฟัง, บรีฟงาน|📋|She briefed the team.|เธอบรีฟงานให้ทีม
+report|rɪˈpɔːt|รายงาน|📰|Reporters report the news.|นักข่าวรายงานข่าว
+recite|rɪˈsaɪt|ท่อง, ท่องจำ|📖|He recites a poem.|เขาท่องบทกวี
+quote|kwəʊt|อ้างคำพูด|❝|She quoted the teacher.|เธออ้างคำพูดของครู
+recount|rɪˈkaʊnt|เล่าเรื่องอย่างละเอียด|🧳|He recounted his trip.|เขาเล่าเรื่องการเดินทางอย่างละเอียด
+relate|rɪˈleɪt|เล่า, เกี่ยวข้อง|📚|Grandpa relates old stories.|คุณตาเล่าเรื่องเก่าๆ
+reiterate|riˈɪtəreɪt|ย้ำซ้ำ, กล่าวซ้ำ|🔁|Let me reiterate the rule.|ขอย้ำกฎอีกครั้ง
+repeat|rɪˈpiːt|พูดซ้ำ, ทำซ้ำ|🦜|Please repeat that.|กรุณาพูดซ้ำอีกครั้ง
+describe|dɪˈskraɪb|อธิบายลักษณะ, บรรยาย|🖼️|Describe the picture.|บรรยายภาพนี้
+explain|ɪkˈspleɪn|อธิบาย|👩‍🏫|The teacher explains clearly.|ครูอธิบายอย่างชัดเจน
+express|ɪkˈspres|แสดงออก, ถ่ายทอด|😊|Express your feelings.|แสดงความรู้สึกของคุณออกมา
+propound|prəˈpaʊnd|เสนอ (ทฤษฎี/แนวคิด)|🧪|He propounded a new theory.|เขาเสนอทฤษฎีใหม่`],
+["สนทนาและติดต่อ","Conversation & Contact",`chat|tʃæt|คุยเล่น, แชท|💬|We chat after class.|เราคุยเล่นกันหลังเลิกเรียน
+chitchat|ˈtʃɪttʃæt|คุยเรื่อยเปื่อย|☕|They chitchat over coffee.|พวกเขาคุยเรื่อยเปื่อยกับกาแฟ
+natter|ˈnætə|คุยจ้อ (ภาษาพูด UK)|🗨️|The ladies natter for hours.|คุณป้าๆ คุยจ้อกันหลายชั่วโมง
+converse|kənˈvɜːs|สนทนา|🧑‍🤝‍🧑|They converse in English.|พวกเขาสนทนาเป็นภาษาอังกฤษ
+interact|ˌɪntərˈækt|โต้ตอบ, มีปฏิสัมพันธ์|👋|Kids interact with each other.|เด็กๆ มีปฏิสัมพันธ์กัน
+exchange|ɪksˈtʃeɪndʒ|แลกเปลี่ยน|🔄|Let us exchange numbers.|มาแลกเบอร์กันเถอะ
+communicate|kəˈmjuːnɪkeɪt|สื่อสาร|📡|We communicate by email.|เราสื่อสารกันทางอีเมล
+call|kɔːl|โทรหา, เรียก|📞|Call me tonight.|โทรหาฉันคืนนี้
+phone|fəʊn|โทรศัพท์หา|📱|I will phone you later.|ฉันจะโทรหาคุณทีหลัง
+interview|ˈɪntəvjuː|สัมภาษณ์|🎤|They interview the candidate.|พวกเขาสัมภาษณ์ผู้สมัคร
+interject|ˌɪntəˈdʒekt|พูดแทรก|☝️|He interjected a question.|เขาพูดแทรกด้วยคำถาม
+interrupt|ˌɪntəˈrʌpt|ขัดจังหวะ|✋|Do not interrupt me.|อย่าขัดจังหวะฉัน
+gossip|ˈɡɒsɪp|นินทา, ซุบซิบ|🤭|They gossip about neighbors.|พวกเขานินทาเพื่อนบ้าน
+banter|ˈbæntə|หยอกล้อ, พูดแซวกัน|😜|Friends banter at lunch.|เพื่อนๆ หยอกล้อกันตอนกินข้าว
+babble|ˈbæbəl|พูดพล่าม, พูดไม่เป็นเรื่อง|👶|The baby babbles happily.|ทารกพูดอ้อแอ้อย่างมีความสุข
+prattle|ˈprætəl|พูดจ้อไร้สาระ|🐦|She prattles on and on.|เธอพูดจ้อไม่หยุด
+patter|ˈpætə|พูดเร็วรัว, พูดจ้อ|⚡|The seller patters fast.|พ่อค้าพูดรัวเร็ว`],
+["ถาม ตอบ และร้องขอ","Questions, Answers & Requests",`ask|ɑːsk|ถาม, ขอ|🙋|Ask me anything.|ถามอะไรฉันก็ได้
+answer|ˈɑːnsə|ตอบ|✅|Answer the question.|ตอบคำถาม
+reply|rɪˈplaɪ|ตอบกลับ|↩️|Please reply soon.|กรุณาตอบกลับเร็วๆ
+query|ˈkwɪəri|สอบถาม, ตั้งข้อสงสัย|❓|I query the price.|ฉันสอบถามเรื่องราคา
+question|ˈkwestʃən|ตั้งคำถาม, ซักถาม|🔍|Police question the witness.|ตำรวจซักถามพยาน
+request|rɪˈkwest|ร้องขอ, ขอร้อง|🙏|I request a day off.|ฉันขอลาหนึ่งวัน
+plead|pliːd|อ้อนวอน, วิงวอน|🥺|She pleaded for help.|เธออ้อนวอนขอความช่วยเหลือ
+refer|rɪˈfɜː|อ้างถึง, ส่งต่อ|👉|He referred to my report.|เขาอ้างถึงรายงานของฉัน`],
+["อภิปราย ปรึกษา และเจรจา","Discussion & Negotiation",`discuss|dɪˈskʌs|อภิปราย, พูดคุย|🗣️|We discuss the plan.|เราพูดคุยเรื่องแผน
+debate|dɪˈbeɪt|โต้วาที, ถกเถียง|🎙️|Students debate climate change.|นักเรียนโต้วาทีเรื่องสภาพภูมิอากาศ
+confer|kənˈfɜː|ปรึกษาหารือ|🧑‍💼|The doctors confer quietly.|แพทย์ปรึกษาหารือกันเงียบๆ
+consult|kənˈsʌlt|ปรึกษา|👨‍⚕️|Consult a lawyer first.|ปรึกษาทนายความก่อน
+counsel|ˈkaʊnsəl|ให้คำปรึกษา|🛋️|She counsels teenagers.|เธอให้คำปรึกษาวัยรุ่น
+negotiate|nɪˈɡəʊʃieɪt|เจรจาต่อรอง|🤝|They negotiate a deal.|พวกเขาเจรจาต่อรองข้อตกลง
+bargain|ˈbɑːɡɪn|ต่อรองราคา|🛍️|Tourists bargain at markets.|นักท่องเที่ยวต่อราคาที่ตลาด
+dispute|dɪˈspjuːt|โต้แย้ง, ทะเลาะ|⚔️|They dispute the bill.|พวกเขาโต้แย้งใบเรียกเก็บเงิน`],
+["คัดค้านและโต้แย้ง","Objection & Disagreement",`object|əbˈdʒekt|คัดค้าน|🙅|I object to this plan.|ฉันคัดค้านแผนนี้
+protest|prəˈtest|ประท้วง|🪧|Workers protest low pay.|คนงานประท้วงค่าจ้างต่ำ
+deny|dɪˈnaɪ|ปฏิเสธ, ปฏิเสธว่าไม่จริง|🚫|He denies the rumor.|เขาปฏิเสธข่าวลือ
+rebut|rɪˈbʌt|โต้แย้ง, หักล้าง|🛑|She rebutted the claim.|เธอโต้แย้งข้อกล่าวอ้าง
+refute|rɪˈfjuːt|พิสูจน์ว่าผิด, หักล้าง|❌|Scientists refute the theory.|นักวิทยาศาสตร์หักล้างทฤษฎีนั้น
+reject|rɪˈdʒekt|ปฏิเสธ, ไม่รับ|🙅‍♂️|They rejected my offer.|พวกเขาปฏิเสธข้อเสนอของฉัน
+critique|krɪˈtiːk|วิจารณ์|📝|He critiques the film.|เขาวิจารณ์ภาพยนตร์
+remonstrate|ˈremənstreɪt|คัดค้านอย่างจริงจัง, ทักท้วง|☝️|She remonstrated with the boss.|เธอทักท้วงเจ้านายอย่างจริงจัง`],
+["แนะนำ ชักจูง และสั่งการ","Advising, Persuading & Directing",`advise|ədˈvaɪz|แนะนำ, ให้คำแนะนำ|💡|I advise you to rest.|ฉันแนะนำให้คุณพักผ่อน
+recommend|ˌrekəˈmend|แนะนำ, เสนอแนะ|👍|I recommend this book.|ฉันแนะนำหนังสือเล่มนี้
+persuade|pəˈsweɪd|ชักจูง, โน้มน้าว|🧲|He persuaded me to join.|เขาโน้มน้าวให้ฉันเข้าร่วม
+propose|prəˈpəʊz|เสนอ|📨|I propose a new plan.|ฉันเสนอแผนใหม่
+endorse|ɪnˈdɔːs|รับรอง, สนับสนุน|🏅|Stars endorse the brand.|ดาราสนับสนุนแบรนด์นี้
+ratify|ˈrætɪfaɪ|ให้สัตยาบัน, รับรองอย่างเป็นทางการ|🖋️|Congress ratified the treaty.|สภารับรองสนธิสัญญาอย่างเป็นทางการ
+hint|hɪnt|บอกใบ้|😉|She hinted at the answer.|เธอบอกใบ้คำตอบ
+point|pɔɪnt|ชี้, ชี้ให้เห็น|👆|He pointed to the door.|เขาชี้ไปที่ประตู
+remind|rɪˈmaɪnd|เตือนความจำ|⏰|Remind me to call her.|เตือนฉันให้โทรหาเธอด้วย
+reassure|ˌriːəˈʃɔː|ทำให้มั่นใจอีกครั้ง|🫂|The nurse reassured him.|พยาบาลทำให้เขามั่นใจอีกครั้ง
+preach|priːtʃ|เทศนา, สั่งสอน|⛪|He preaches every Sunday.|เขาเทศนาทุกวันอาทิตย์
+lecture|ˈlektʃə|บรรยาย, สั่งสอนยาวๆ|🎓|Dad lectured me for an hour.|พ่อสั่งสอนฉันเป็นชั่วโมง
+dictate|dɪkˈteɪt|บอกให้จด, สั่งการ|📠|The boss dictates a letter.|เจ้านายบอกให้จดจดหมาย
+direct|daɪˈrekt|สั่ง, ชี้นำ, ชี้ทาง|🧭|Please direct me to the exit.|กรุณาชี้ทางไปทางออกให้ฉัน`],
+["สารภาพและเปิดเผย","Confessing & Disclosing",`acknowledge|əkˈnɒlɪdʒ|ยอมรับ, รับทราบ|🙇|He acknowledged his mistake.|เขายอมรับความผิดพลาด
+confess|kənˈfes|สารภาพ|😰|She confessed the truth.|เธอสารภาพความจริง
+disclose|dɪsˈkləʊz|เปิดเผย|📂|They disclose the results.|พวกเขาเปิดเผยผลลัพธ์
+divulge|daɪˈvʌldʒ|เปิดเผยความลับ|🤫|Never divulge the secret.|อย่าเปิดเผยความลับเด็ดขาด
+blurt|blɜːt|พูดพรวดออกมา|😳|He blurted out the news.|เขาพูดข่าวพรวดออกมา`],
+["การแสดงออกทางสังคม","Social Expressions",`greet|ɡriːt|ทักทาย|👋|Greet the guests warmly.|ทักทายแขกอย่างอบอุ่น
+praise|preɪz|ชมเชย|🌟|Teachers praise good work.|ครูชมเชยงานที่ดี
+rejoice|rɪˈdʒɔɪs|ชื่นชมยินดี|🎉|The town rejoiced at the news.|ชาวเมืองชื่นชมยินดีกับข่าวนั้น
+offer|ˈɒfə|เสนอ, ยื่นข้อเสนอ|🎁|I offer you a seat.|ฉันเสนอที่นั่งให้คุณ
+apologize|əˈpɒlədʒaɪz|ขอโทษ|🙏|I apologize for being late.|ฉันขอโทษที่มาสาย`],
+["ลักษณะการพูด อารมณ์ และการรบกวน","Manner of Speaking",`mumble|ˈmʌmbəl|พึมพำไม่ชัด|😶|Do not mumble, please.|กรุณาอย่าพึมพำ
+murmur|ˈmɜːmə|กระซิบ, พูดเบาๆ|🤏|She murmured a prayer.|เธอพูดคำอธิษฐานเบาๆ
+mutter|ˈmʌtə|บ่นพึมพำ|😒|He mutters to himself.|เขาบ่นพึมพำกับตัวเอง
+moan|məʊn|คร่ำครวญ, บ่น|😩|Stop moaning about work.|เลิกบ่นเรื่องงานได้แล้ว
+rant|rænt|พูดโวยวาย, ระบายอารมณ์|😤|He rants about traffic.|เขาโวยวายเรื่องรถติด
+gush|ɡʌʃ|พูดชมล้นเกิน|🤩|Fans gush over the singer.|แฟนๆ พูดชมนักร้องล้นเกิน
+boast|bəʊst|โอ้อวด|🦚|Do not boast about money.|อย่าโอ้อวดเรื่องเงิน
+pester|ˈpestə|รบเร้า, กวนใจ|🐝|Kids pester Mom for candy.|เด็กๆ รบเร้าแม่ขอลูกอม`],
+["อื่นๆ","Others",`reflect|rɪˈflekt|ทบทวน, สะท้อน|🪞|Reflect on your choices.|ทบทวนทางเลือกของคุณ
+render|ˈrendə|ทำให้เป็น, แปล/ถ่ายทอด, ให้ (บริการ)|🎬|The news rendered him speechless.|ข่าวนั้นทำให้เขาพูดไม่ออก
+bee|biː|ผึ้ง (คำนาม ไม่ใช่กริยา)|🐝|A bee landed on the flower.|ผึ้งตัวหนึ่งเกาะบนดอกไม้
+outspoken|aʊtˈspəʊkən|พูดตรงๆ, ตรงไปตรงมา (คำคุณศัพท์)|📣|She is an outspoken leader.|เธอเป็นผู้นำที่พูดตรงไปตรงมา`]
+];
+const C=["#ffd6e0","#d6ecff","#d9f5d9","#fff2c2","#e6d9ff","#ffe0cc","#c9f2ee","#f3d9f5"];
+const $=id=>document.getElementById(id);
+let cur=0,voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ voice=v.find(x=>/google uk english male/i.test(x.name))||v.find(x=>/daniel|alex|david|guy|ryan|fred|mark|male|james|george/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(voice){u.voice=voice;u.lang=voice.lang}u.rate=.85;u.pitch=.8;speechSynthesis.speak(u)}
+function rows(i){return D[i][2].split("\n").map(l=>l.split("|"))}
+function render(){
+ const r=rows(cur);$("sub").textContent=D[cur][1]+" • "+r.length+" คำ";
+ $("tabs").innerHTML=D.map((d,i)=>`<button class="tab${i==cur?' on':''}" data-i="${i}">${i+1}. ${d[0]}</button>`).join("");
+ $("grid").innerHTML=r.map((x,i)=>{const c=C[(i+cur)%C.length];return `<div class="card" data-i="${i}"><div class="in">
+ <div class="face" style="background:${c}"><button class="spk" data-s="${i}" title="ฟังเสียง">🔊</button><div class="em">${x[3]}</div><div class="w">${x[0]}</div><div class="ph">/${x[1]}/</div></div>
+ <div class="face back" style="background:${c}"><div class="th">${x[2]}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=r.map((x,i)=>`<tr><td>${i+1}</td><td class="w2">${x[0]}</td><td class="p">/${x[1]}/</td><td>${x[2]}</td><td>${x[4]}</td><td>${x[5]}</td><td><button data-t="${i}" title="ฟัง">🔊</button></td></tr>`).join("");
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest(".tab");if(t){cur=+t.dataset.i;render();return}
+ const s=e.target.closest("[data-s]");if(s){say(rows(cur)[s.dataset.s][0],e);return}
+ const b=e.target.closest("[data-t]");if(b){say(rows(cur)[b.dataset.t][4]);return}
+ const c=e.target.closest(".card");if(c){c.classList.toggle("f");if(!c.classList.contains("f"))say(rows(cur)[c.dataset.i][0])}
+});
+render();
+</script></body></html>
