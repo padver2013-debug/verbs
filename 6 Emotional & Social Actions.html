@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Creative &amp; Artistic Actions</title>
+<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8ff;--tx:#2b2b36;--sf:#fff;--ln:#eadff3;--ac:#b9a3e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a24;--tx:#eee9f5;--sf:#2a2634;--ln:#403a4e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Thai",system-ui,sans-serif;padding:16px}
+h1{font-family:ABeeZee,sans-serif;text-align:center;margin:8px 0 14px;font-size:1.6rem}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;justify-content:safe center;flex-wrap:wrap}
+.tab{border:0;border-radius:999px;padding:9px 16px;font:600 .85rem "Noto Sans Thai",sans-serif;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 3px 10px rgba(120,90,160,.15);transition:.2s}
+.tab.on{background:var(--ac);color:#2b2b36;transform:translateY(-2px)}
+.sub{text-align:center;opacity:.7;font-size:.85rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.card{height:190px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;box-shadow:0 8px 20px rgba(100,80,140,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;text-align:center;color:#222}
+.back{transform:rotateY(180deg)}
+.em{font-size:3.2rem;line-height:1}
+.w{font-family:ABeeZee,sans-serif;font-size:1.45rem;color:#000;margin-top:6px}
+.ph{font-family:"Times New Roman",Times,serif;font-size:.95rem}
+.th{font-size:1.4rem;font-weight:600}
+.spk{position:absolute;top:8px;right:8px;border:0;background:rgba(255,255,255,.7);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer}
+.wrap{max-width:1100px;margin:28px auto 0;overflow-x:auto;border-radius:18px;box-shadow:0 6px 18px rgba(100,80,140,.15);background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--ln);vertical-align:top}
+th{background:var(--ac);color:#2b2b36;position:sticky;top:0}
+td.w2{font-family:ABeeZee,sans-serif;font-weight:700}
+td.p{font-family:"Times New Roman",serif}
+td button{border:0;background:none;cursor:pointer;font-size:1rem}
+</style></head><body>
+<h1>🎨 Creative &amp; Artistic Actions</h1>
+<div class="tabs" id="tabs"></div>
+<div class="sub" id="sub"></div>
+<div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Phonetics</th><th>ความหมาย</th><th>Example sentence</th><th>แปลประโยค</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=[
+["คิดและสร้างแรงบันดาลใจ","Ideas & Inspiration",`brainstorm|ˈbreɪnstɔːm|ระดมความคิด|🧠|Let us brainstorm new ideas.|มาระดมความคิดหาไอเดียใหม่กัน
+conceptualise|kənˈseptʃuəlaɪz|สร้างแนวคิด|💡|She conceptualised the logo.|เธอสร้างแนวคิดของโลโก้
+imagine|ɪˈmædʒɪn|จินตนาการ|💭|Imagine a world of color.|จินตนาการถึงโลกที่เต็มไปด้วยสีสัน
+invent|ɪnˈvent|ประดิษฐ์, คิดค้น|⚙️|He invented a new toy.|เขาประดิษฐ์ของเล่นใหม่
+inspire|ɪnˈspaɪə|สร้างแรงบันดาลใจ|🌠|Nature inspires artists.|ธรรมชาติสร้างแรงบันดาลใจให้ศิลปิน
+experiment|ɪkˈsperɪment|ทดลอง|🧪|We experiment with colors.|เราทดลองกับสีต่างๆ
+collaborate|kəˈlæbəreɪt|ร่วมมือกัน|🧩|They collaborate on a mural.|พวกเขาร่วมกันทำภาพจิตรกรรมฝาผนัง
+create|kriˈeɪt|สร้างสรรค์|🎨|Artists create beauty.|ศิลปินสร้างสรรค์ความงาม`],
+["วาดและระบายสี","Drawing & Painting",`draw|drɔː|วาด|✏️|She draws a cat.|เธอวาดรูปแมว
+redraw|ˌriːˈdrɔː|วาดใหม่|🔁|Please redraw the map.|กรุณาวาดแผนที่ใหม่
+sketch|sketʃ|ร่างภาพ, สเก็ตช์|📝|He sketches the park.|เขาสเก็ตช์ภาพสวนสาธารณะ
+outline|ˈaʊtlaɪn|ร่างโครง, วาดเส้นขอบ|🖊️|Outline the shape first.|วาดเส้นขอบของรูปทรงก่อน
+trace|treɪs|ลอกลาย, ตามรอย|🪞|Trace the picture on paper.|ลอกลายภาพลงบนกระดาษ
+shade|ʃeɪd|ลงเงา, แรเงา|🌗|Shade the apple lightly.|แรเงาแอปเปิลเบาๆ
+colour|ˈkʌlə|ระบายสี, ลงสี|🖍️|Kids colour the picture.|เด็กๆ ระบายสีรูปภาพ
+paint|peɪnt|ทาสี, วาดภาพสี|🖌️|He paints the wall blue.|เขาทาผนังสีฟ้า
+illustrate|ˈɪləstreɪt|วาดภาพประกอบ|📖|She illustrates children books.|เธอวาดภาพประกอบหนังสือเด็ก
+splash|splæʃ|สาด, สาดสี|💦|He splashed paint on canvas.|เขาสาดสีลงบนผืนผ้าใบ
+spray|spreɪ|พ่น, สเปรย์|🎨|They spray the wall art.|พวกเขาพ่นสีทำศิลปะบนกำแพง
+drip|drɪp|หยด, เทหยด|💧|Paint drips from the brush.|สีหยดจากพู่กัน
+smear|smɪə|ป้าย, เกลี่ย|🫳|Do not smear the ink.|อย่าป้ายหมึกให้เลอะ
+stamp|stæmp|ประทับตรา, ปั๊ม|🔖|Stamp the card here.|ประทับตราการ์ดตรงนี้
+erase|ɪˈreɪz|ลบ|🧽|Erase the wrong line.|ลบเส้นที่ผิดออก`],
+["ปั้น แกะสลัก และงานฝีมือ","Sculpting & Crafts",`sculpt|skʌlpt|ปั้น, แกะสลักรูปปั้น|🗿|He sculpts a horse.|เขาปั้นรูปม้า
+carve|kɑːv|แกะสลัก, แกะ|🎃|We carve a pumpkin.|เราแกะสลักฟักทอง
+engrave|ɪnˈɡreɪv|สลักลาย, สลักตัวอักษร|🏆|Engrave his name on it.|สลักชื่อเขาลงบนนั้น
+etch|etʃ|กัดลาย, สลักด้วยกรด|🔬|She etched the glass.|เธอกัดลายบนแก้ว
+mould|məʊld|ปั้นขึ้นรูป, หล่อ|🏺|Mould the clay by hand.|ปั้นดินเหนียวด้วยมือ
+shape|ʃeɪp|ขึ้นรูป, ทำให้เป็นรูปร่าง|🔷|Shape the dough into a ball.|ขึ้นรูปแป้งเป็นก้อนกลม
+build|bɪld|สร้าง, ก่อสร้าง|🧱|Kids build a sandcastle.|เด็กๆ สร้างปราสาททราย
+construct|kənˈstrʌkt|ก่อสร้าง, ประกอบ|🏗️|They construct a bridge.|พวกเขาก่อสร้างสะพาน
+craft|krɑːft|ประดิษฐ์ด้วยฝีมือ|🧶|She crafts paper flowers.|เธอประดิษฐ์ดอกไม้กระดาษ
+cut|kʌt|ตัด|✂️|Cut the paper in half.|ตัดกระดาษครึ่งหนึ่ง
+tear|teə|ฉีก|📄|Tear the page carefully.|ฉีกหน้ากระดาษอย่างระมัดระวัง
+fold|fəʊld|พับ|🦢|Fold the paper into a crane.|พับกระดาษเป็นนกกระเรียน
+glue|ɡluː|ติดกาว|🧴|Glue the pieces together.|ติดกาวชิ้นส่วนเข้าด้วยกัน
+mix|mɪks|ผสม|🥣|Mix red and yellow.|ผสมสีแดงกับสีเหลือง
+blend|blend|ผสมกลมกลืน|🌅|Blend the colors softly.|ผสมสีให้กลมกลืนอย่างนุ่มนวล
+sew|səʊ|เย็บ|🪡|Grandma sews a dress.|คุณยายเย็บชุด
+stitch|stɪtʃ|เย็บ, ปักเย็บ|🧵|Stitch the edge neatly.|เย็บขอบให้เรียบร้อย
+knit|nɪt|ถัก|🧣|She knits a scarf.|เธอถักผ้าพันคอ
+weave|wiːv|ทอ|🧺|They weave a basket.|พวกเขาสานตะกร้า`],
+["ออกแบบและตกแต่งผลงาน","Design & Refinement",`design|dɪˈzaɪn|ออกแบบ|📐|She designs posters.|เธอออกแบบโปสเตอร์
+develop|dɪˈveləp|พัฒนา|🌱|He develops his style.|เขาพัฒนาสไตล์ของตัวเอง
+draft|drɑːft|ร่าง|🗒️|Draft the plan first.|ร่างแผนก่อน
+compose|kəmˈpəʊz|ประพันธ์, เรียบเรียง|🎼|He composes a song.|เขาประพันธ์เพลง
+arrange|əˈreɪndʒ|จัดวาง, เรียบเรียง|💐|Arrange the flowers nicely.|จัดดอกไม้ให้สวยงาม
+decorate|ˈdekəreɪt|ตกแต่ง|🎄|We decorate the room.|เราตกแต่งห้อง
+embellish|ɪmˈbelɪʃ|ประดับประดา, เสริมแต่ง|💫|She embellished the dress.|เธอประดับตกแต่งชุด
+stylise|ˈstaɪlaɪz|ทำให้เป็นสไตล์เฉพาะ|🕶️|He stylises his drawings.|เขาทำให้ภาพวาดมีสไตล์เฉพาะตัว
+frame|freɪm|ใส่กรอบ|🖼️|Frame the photo.|ใส่กรอบรูปภาพ
+mount|maʊnt|ติดตั้ง, ติดภาพบนฐาน|📌|Mount the print on board.|ติดภาพพิมพ์บนแผ่นบอร์ด
+crop|krɒp|ตัดแต่งภาพ, ครอบ|🔲|Crop the edges of the photo.|ตัดขอบรูปภาพออก
+retouch|ˌriːˈtʌtʃ|แต่งภาพ, ตกแต่งเพิ่ม|🪄|He retouches old photos.|เขาแต่งรูปถ่ายเก่า
+edit|ˈedɪt|แก้ไข, ตัดต่อ|🎞️|She edits the video.|เธอตัดต่อวิดีโอ
+revise|rɪˈvaɪz|ปรับปรุง, แก้ไข|📋|Revise your essay.|ปรับปรุงเรียงความของคุณ
+rewrite|ˌriːˈraɪt|เขียนใหม่|✍️|Rewrite the last chapter.|เขียนบทสุดท้ายใหม่
+refine|rɪˈfaɪn|ขัดเกลา, ปรับให้ละเอียด|🔍|Refine the details.|ปรับรายละเอียดให้ละเอียดขึ้น
+polish|ˈpɒlɪʃ|ขัดเงา, ขัดเกลา|✨|Polish the statue.|ขัดเงารูปปั้น`],
+["การแสดงและดนตรี","Performing Arts & Music",`act|ækt|แสดง (ละคร/ภาพยนตร์)|🎬|She acts in a movie.|เธอแสดงภาพยนตร์
+dramatise|ˈdræmətaɪz|ดัดแปลงเป็นละคร, ทำให้ดูเป็นละคร|🎭|They dramatise the novel.|พวกเขาดัดแปลงนิยายเป็นละคร
+perform|pəˈfɔːm|แสดง, ปฏิบัติการแสดง|🎪|The band performs tonight.|วงดนตรีแสดงคืนนี้
+rehearse|rɪˈhɜːs|ซ้อม (การแสดง)|📜|We rehearse every day.|เราซ้อมทุกวัน
+practise|ˈpræktɪs|ฝึกฝน, ซ้อม|🎹|He practises piano daily.|เขาฝึกเปียโนทุกวัน
+improvise|ˈɪmprəvaɪz|แสดงสด, ด้นสด|🎷|Jazz players improvise.|นักดนตรีแจ๊สด้นสด
+direct|dəˈrekt|กำกับ|📢|She directs the play.|เธอกำกับละครเวที
+choreograph|ˈkɒriəɡrɑːf|ออกแบบท่าเต้น|🩰|He choreographs the show.|เขาออกแบบท่าเต้นของโชว์
+dance|dɑːns|เต้นรำ|💃|They dance on stage.|พวกเขาเต้นบนเวที
+sing|sɪŋ|ร้องเพลง|🎤|She sings beautifully.|เธอร้องเพลงไพเราะ
+play|pleɪ|เล่น (ดนตรี/บทบาท)|🎻|He plays the violin.|เขาเล่นไวโอลิน
+strum|strʌm|ดีด (กีตาร์) แบบรูดสาย|🎸|Strum the guitar softly.|รูดสายกีตาร์เบาๆ
+pluck|plʌk|ดีด (สายเครื่องดนตรี) ทีละสาย|🪕|Pluck each string slowly.|ดีดสายทีละเส้นช้าๆ`],
+["ถ่ายภาพ บันทึก และเผยแพร่","Media & Publishing",`photograph|ˈfəʊtəɡrɑːf|ถ่ายภาพ|📷|He photographs birds.|เขาถ่ายภาพนก
+film|fɪlm|ถ่ายทำ, ถ่ายวิดีโอ|🎥|They film a short movie.|พวกเขาถ่ายทำหนังสั้น
+capture|ˈkæptʃə|บันทึกภาพ, จับภาพ|📸|Capture the sunset.|บันทึกภาพพระอาทิตย์ตก
+record|rɪˈkɔːd|บันทึก (เสียง/ภาพ)|🎙️|We record a podcast.|เราบันทึกเสียงพอดแคสต์
+print|prɪnt|พิมพ์|🖨️|Print the photo in color.|พิมพ์ภาพเป็นสี
+publish|ˈpʌblɪʃ|ตีพิมพ์, เผยแพร่|📰|She publishes her book.|เธอตีพิมพ์หนังสือของเธอ`],
+["จัดแสดงและนำเสนอ","Display & Presentation",`display|dɪˈspleɪ|จัดแสดง, แสดงผล|🛍️|They display the paintings.|พวกเขาจัดแสดงภาพวาด
+exhibit|ɪɡˈzɪbɪt|จัดนิทรรศการ, แสดงผลงาน|🏛️|He exhibits his sculptures.|เขาแสดงผลงานประติมากรรม
+showcase|ˈʃəʊkeɪs|นำเสนอผลงานอย่างโดดเด่น|🌟|The fair showcases young artists.|งานนี้นำเสนอศิลปินรุ่นใหม่
+hang|hæŋ|แขวน, ติดผนัง|🪝|Hang the picture here.|แขวนรูปภาพตรงนี้`],
+["สื่อความหมายและเล่าเรื่อง","Meaning & Expression",`express|ɪkˈspres|แสดงออก, สื่อ|😊|Art expresses feelings.|ศิลปะแสดงความรู้สึก
+communicate|kəˈmjuːnɪkeɪt|สื่อสาร|💬|Images communicate ideas.|ภาพสื่อความคิดได้
+depict|dɪˈpɪkt|พรรณนา, วาดภาพให้เห็น|🏞️|The painting depicts a storm.|ภาพวาดนี้พรรณนาถึงพายุ
+portray|pɔːˈtreɪ|ถ่ายทอด, แสดงภาพลักษณ์|🧑‍🎨|He portrays a brave king.|เขาถ่ายทอดบทกษัตริย์ผู้กล้าหาญ
+represent|ˌreprɪˈzent|เป็นตัวแทน, แทนความหมาย|🏳️|The dove represents peace.|นกพิราบเป็นตัวแทนของสันติภาพ
+symbolise|ˈsɪmbəlaɪz|เป็นสัญลักษณ์ของ|☮️|Red symbolises love.|สีแดงเป็นสัญลักษณ์ของความรัก
+evoke|ɪˈvəʊk|กระตุ้นความรู้สึก, ปลุกอารมณ์|🎶|The song evokes memories.|เพลงนี้ปลุกความทรงจำ
+visualise|ˈvɪʒuəlaɪz|มองเห็นภาพในใจ, ทำให้เห็นภาพ|👁️|Visualise your dream room.|ลองนึกภาพห้องในฝันของคุณ
+narrate|nəˈreɪt|เล่าเรื่อง, บรรยาย|📚|Grandpa narrates a tale.|คุณตาเล่านิทาน
+write|raɪt|เขียน|🖋️|She writes poems.|เธอเขียนกลอน`]
+];
+const C=["#ffd6e0","#d6ecff","#d9f5d9","#fff2c2","#e6d9ff","#ffe0cc","#c9f2ee","#f3d9f5"];
+const $=id=>document.getElementById(id);
+let cur=0,voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ voice=v.find(x=>/google uk english male/i.test(x.name))||v.find(x=>/daniel|alex|david|guy|ryan|fred|mark|male|james|george/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(voice){u.voice=voice;u.lang=voice.lang}u.rate=.85;u.pitch=.8;speechSynthesis.speak(u)}
+function rows(i){return D[i][2].split("\n").map(l=>l.split("|"))}
+function render(){
+ const r=rows(cur);$("sub").textContent=D[cur][1]+" • "+r.length+" คำ";
+ $("tabs").innerHTML=D.map((d,i)=>`<button class="tab${i==cur?' on':''}" data-i="${i}">${i+1}. ${d[0]}</button>`).join("");
+ $("grid").innerHTML=r.map((x,i)=>{const c=C[(i+cur)%C.length];return `<div class="card" data-i="${i}"><div class="in">
+ <div class="face" style="background:${c}"><button class="spk" data-s="${i}" title="ฟังเสียง">🔊</button><div class="em">${x[3]}</div><div class="w">${x[0]}</div><div class="ph">/${x[1]}/</div></div>
+ <div class="face back" style="background:${c}"><div class="th">${x[2]}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=r.map((x,i)=>`<tr><td>${i+1}</td><td class="w2">${x[0]}</td><td class="p">/${x[1]}/</td><td>${x[2]}</td><td>${x[4]}</td><td>${x[5]}</td><td><button data-t="${i}" title="ฟัง">🔊</button></td></tr>`).join("");
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest(".tab");if(t){cur=+t.dataset.i;render();return}
+ const s=e.target.closest("[data-s]");if(s){say(rows(cur)[s.dataset.s][0],e);return}
+ const b=e.target.closest("[data-t]");if(b){say(rows(cur)[b.dataset.t][4]);return}
+ const c=e.target.closest(".card");if(c){c.classList.toggle("f");if(!c.classList.contains("f"))say(rows(cur)[c.dataset.i][0])}
+});
+render();
+</script></body></html>

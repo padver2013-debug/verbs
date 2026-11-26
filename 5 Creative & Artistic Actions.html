@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flip Card Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8ff;--tx:#2b2b36;--sf:#fff;--ln:#eadff3;--ac:#b9a3e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a24;--tx:#eee9f5;--sf:#2a2634;--ln:#403a4e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Thai",system-ui,sans-serif;padding:16px}
+h1{font-family:ABeeZee,sans-serif;text-align:center;margin:8px 0 14px;font-size:1.6rem}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;justify-content:safe center;flex-wrap:wrap}
+.tab{border:0;border-radius:999px;padding:9px 16px;font:600 .85rem "Noto Sans Thai",sans-serif;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 3px 10px rgba(120,90,160,.15);transition:.2s}
+.tab.on{background:var(--ac);color:#2b2b36;transform:translateY(-2px)}
+.sub{text-align:center;opacity:.7;font-size:.85rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.card{height:190px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;box-shadow:0 8px 20px rgba(100,80,140,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;text-align:center;color:#222}
+.back{transform:rotateY(180deg)}
+.em{font-size:3.2rem;line-height:1}
+.w{font-family:ABeeZee,sans-serif;font-size:1.45rem;color:#000;margin-top:6px}
+.ph{font-family:"Times New Roman",Times,serif;font-size:.95rem}
+.th{font-size:1.4rem;font-weight:600}
+.spk{position:absolute;top:8px;right:8px;border:0;background:rgba(255,255,255,.7);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer}
+.wrap{max-width:1100px;margin:28px auto 0;overflow-x:auto;border-radius:18px;box-shadow:0 6px 18px rgba(100,80,140,.15);background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--ln);vertical-align:top}
+th{background:var(--ac);color:#2b2b36;position:sticky;top:0}
+td.w2{font-family:ABeeZee,sans-serif;font-weight:700}
+td.p{font-family:"Times New Roman",serif}
+td button{border:0;background:none;cursor:pointer;font-size:1rem}
+</style></head><body>
+<h1>📚 Flip Card Vocabulary</h1>
+<div class="tabs" id="tabs"></div>
+<div class="sub" id="sub"></div>
+<div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Phonetics</th><th>ความหมาย</th><th>Example sentence</th><th>แปลประโยค</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=[
+["ชื่นชมและยกย่อง","Admiration & Praise",`admire|ədˈmaɪə|ชื่นชม|🤩|I admire her courage.|ฉันชื่นชมความกล้าของเธอ
+adore|əˈdɔː|รักใคร่, บูชา|😍|She adores her puppy.|เธอรักลูกสุนัขของเธอมาก
+applaud|əˈplɔːd|ปรบมือ, ยกย่อง|👏|They applaud the singer.|พวกเขาปรบมือให้นักร้อง
+appreciate|əˈpriːʃieɪt|เห็นคุณค่า, ซาบซึ้ง|🙏|I appreciate your help.|ฉันซาบซึ้งในความช่วยเหลือของคุณ
+approve|əˈpruːv|เห็นชอบ, อนุมัติ|✅|The boss approves the plan.|เจ้านายอนุมัติแผนนี้
+cheer|tʃɪə|เชียร์, ส่งเสียงเชียร์|📣|Fans cheer for the team.|แฟนๆ เชียร์ทีมของพวกเขา
+commend|kəˈmend|ชมเชย, ยกย่อง|🏅|He commended her effort.|เขาชมเชยความพยายามของเธอ
+compliment|ˈkɒmplɪment|ชมเชย|💬|She complimented my dress.|เธอชมชุดของฉัน
+congratulate|kənˈɡrætʃʊleɪt|แสดงความยินดี|🎉|Let me congratulate you!|ขอแสดงความยินดีด้วยนะ
+flatter|ˈflætə|ประจบ, ยกยอ|🧁|Do not flatter me.|อย่ามาประจบฉัน
+praise|preɪz|ชม, สรรเสริญ|🌟|Teachers praise good work.|ครูชมงานที่ดี
+respect|rɪˈspekt|เคารพ|🤝|We respect our elders.|เราเคารพผู้ใหญ่
+value|ˈvæljuː|ให้คุณค่า, เห็นความสำคัญ|💎|I value our friendship.|ฉันให้คุณค่ากับมิตรภาพของเรา`],
+["ความรัก ความผูกพัน และการต้อนรับ","Affection & Bonding",`associate|əˈsəʊsieɪt|คบหา, เชื่อมโยง|👥|Do not associate with liars.|อย่าคบหากับคนโกหก
+attract|əˈtrækt|ดึงดูด|🧲|Magnets attract metal.|แม่เหล็กดึงดูดโลหะ
+befriend|bɪˈfrend|ผูกมิตร, เป็นเพื่อนด้วย|🧑‍🤝‍🧑|She befriended the new girl.|เธอผูกมิตรกับเด็กใหม่
+captivate|ˈkæptɪveɪt|ตรึงใจ, สะกดใจ|✨|The story captivated us.|เรื่องราวนั้นตรึงใจเรา
+care|keə|ใส่ใจ, ห่วงใย|🫶|I care about you.|ฉันห่วงใยคุณ
+connect|kəˈnekt|เชื่อมต่อ, สร้างความสัมพันธ์|🔗|Music connects people.|ดนตรีเชื่อมผู้คนเข้าด้วยกัน
+court|kɔːt|เกี้ยวพาราสี, จีบ|🌹|He courted her for years.|เขาจีบเธอมาหลายปี
+cuddle|ˈkʌdəl|กอดแนบแน่น, ซุกอ้อมกอด|🧸|The baby cuddles a teddy.|ทารกกอดตุ๊กตาหมีแน่น
+dedicate|ˈdedɪkeɪt|อุทิศ|🎗️|He dedicated his life to science.|เขาอุทิศชีวิตให้วิทยาศาสตร์
+delight|dɪˈlaɪt|ทำให้ยินดี, ทำให้ปลื้มใจ|😊|The gift delighted her.|ของขวัญทำให้เธอปลื้มใจ
+devote|dɪˈvəʊt|ทุ่มเท, อุทิศตัว|💪|She devotes time to art.|เธอทุ่มเวลาให้งานศิลปะ
+greet|ɡriːt|ทักทาย|👋|Greet the guests at the door.|ทักทายแขกที่ประตู
+hug|hʌɡ|กอด|🤗|Give me a hug.|กอดฉันหน่อย
+smile|smaɪl|ยิ้ม|😄|She smiles every morning.|เธอยิ้มทุกเช้า
+trust|trʌst|ไว้วางใจ|🔐|I trust my best friend.|ฉันไว้ใจเพื่อนสนิท
+welcome|ˈwelkəm|ต้อนรับ|🏠|We welcome new members.|เราต้อนรับสมาชิกใหม่`],
+["ช่วยเหลือ ปลอบใจ และให้กำลังใจ","Support & Comfort",`amuse|əˈmjuːz|ทำให้ขบขัน|🤡|The clown amuses kids.|ตัวตลกทำให้เด็กๆ ขบขัน
+assist|əˈsɪst|ช่วยเหลือ|🛟|Can I assist you?|ให้ฉันช่วยไหม
+assure|əˈʃɔː|รับรอง, ให้ความมั่นใจ|👌|I assure you it is safe.|ฉันรับรองว่าปลอดภัย
+calm|kɑːm|ทำให้สงบ, ปลอบให้ใจเย็น|😌|Calm down, please.|ใจเย็นๆ นะ
+cater|ˈkeɪtə|จัดหาให้, ให้บริการ|🍽️|They cater weddings.|พวกเขารับจัดเลี้ยงงานแต่ง
+cheer up|tʃɪər ʌp|ปลอบให้ร่าเริง, ให้กำลังใจ|🌈|Cheer up, my friend!|ร่าเริงหน่อยนะเพื่อน
+comfort|ˈkʌmfət|ปลอบโยน|🛋️|She comforted the child.|เธอปลอบโยนเด็กน้อย
+console|kənˈsəʊl|ปลอบใจ (ยามเสียใจ)|🫂|He consoled his sister.|เขาปลอบใจน้องสาว
+counsel|ˈkaʊnsəl|ให้คำปรึกษา|🗣️|She counsels students.|เธอให้คำปรึกษานักเรียน
+defend|dɪˈfend|ปกป้อง|🛡️|Defend your friends.|ปกป้องเพื่อนของคุณ
+encourage|ɪnˈkʌrɪdʒ|ให้กำลังใจ, ส่งเสริม|📈|Parents encourage kids.|พ่อแม่ให้กำลังใจลูก
+entertain|ˌentəˈteɪn|ให้ความบันเทิง, รับรองแขก|🎭|He entertains the guests.|เขาให้ความบันเทิงแขก
+forgive|fəˈɡɪv|ให้อภัย|🕊️|Please forgive me.|ได้โปรดให้อภัยฉัน
+reassure|ˌriːəˈʃɔː|ทำให้มั่นใจอีกครั้ง|👍|The nurse reassured him.|พยาบาลทำให้เขามั่นใจอีกครั้ง
+share|ʃeə|แบ่งปัน|🍰|Let us share the cake.|มาแบ่งเค้กกันเถอะ
+support|səˈpɔːt|สนับสนุน|🤲|We support each other.|เราสนับสนุนกันและกัน
+sympathize|ˈsɪmpəθaɪz|เห็นอกเห็นใจ|💙|I sympathize with you.|ฉันเห็นใจคุณ`],
+["ร่วมมือ ประนีประนอม และมารยาท","Cooperation & Courtesy",`apologize|əˈpɒlədʒaɪz|ขอโทษ|🙇|I apologize for being late.|ฉันขอโทษที่มาสาย
+collaborate|kəˈlæbəreɪt|ร่วมมือกัน (ทำงานร่วมกัน)|🧩|We collaborate on projects.|เราทำโครงการร่วมกัน
+communicate|kəˈmjuːnɪkeɪt|สื่อสาร|📡|Good teams communicate.|ทีมที่ดีสื่อสารกัน
+compromise|ˈkɒmprəmaɪz|ประนีประนอม|⚖️|Let us compromise.|มาประนีประนอมกันเถอะ
+concede|kənˈsiːd|ยอมรับ, ยอมแพ้|🏳️|He conceded the race.|เขายอมแพ้การแข่งขัน
+conciliate|kənˈsɪlieɪt|ไกล่เกลี่ย, สมานไมตรี|🌤️|She conciliated the rivals.|เธอไกล่เกลี่ยคู่แข่ง
+cooperate|kəʊˈɒpəreɪt|ให้ความร่วมมือ|🤜|Please cooperate with us.|กรุณาให้ความร่วมมือกับเรา
+thank|θæŋk|ขอบคุณ|💐|I thank you very much.|ฉันขอบคุณมากๆ`],
+["ขัดแย้งและเผชิญหน้า","Conflict & Confrontation",`accuse|əˈkjuːz|กล่าวหา|👉|Do not accuse him.|อย่ากล่าวหาเขา
+aggress|əˈɡres|รุกราน, แสดงความก้าวร้าว (พบน้อย)|😠|The dog began to aggress.|สุนัขเริ่มแสดงความก้าวร้าว
+argue|ˈɑːɡjuː|โต้เถียง|🗯️|They argue every day.|พวกเขาเถียงกันทุกวัน
+avenge|əˈvendʒ|แก้แค้น|⚔️|He vowed to avenge his father.|เขาสาบานว่าจะแก้แค้นให้พ่อ
+bicker|ˈbɪkə|เถียงกันเรื่องจุกจิก|🐔|The twins bicker a lot.|ฝาแฝดเถียงกันบ่อย
+challenge|ˈtʃælɪndʒ|ท้าทาย|🥊|I challenge you to a race.|ฉันท้าคุณแข่งวิ่ง
+complain|kəmˈpleɪn|บ่น, ร้องเรียน|😤|He complains about food.|เขาบ่นเรื่องอาหาร
+confront|kənˈfrʌnt|เผชิญหน้า|🆚|She confronted the thief.|เธอเผชิญหน้ากับขโมย
+contradict|ˌkɒntrəˈdɪkt|ขัดแย้ง, แย้ง|❌|Do not contradict me.|อย่ามาแย้งฉัน
+disagree|ˌdɪsəˈɡriː|ไม่เห็นด้วย|🙅|I disagree with you.|ฉันไม่เห็นด้วยกับคุณ
+interrupt|ˌɪntəˈrʌpt|ขัดจังหวะ|✋|Please do not interrupt.|กรุณาอย่าขัดจังหวะ
+provoke|prəˈvəʊk|ยั่วยุ|🔥|Do not provoke the dog.|อย่ายั่วยุสุนัข`],
+["ตำหนิ ดูถูก และทำลายขวัญ","Criticism & Contempt",`blame|bleɪm|โทษ, กล่าวโทษ|👈|Do not blame me.|อย่าโทษฉัน
+chastise|tʃæsˈtaɪz|ตำหนิอย่างรุนแรง|📢|The coach chastised the team.|โค้ชตำหนิทีมอย่างรุนแรง
+condemn|kənˈdem|ประณาม|🚫|Leaders condemn violence.|ผู้นำประณามความรุนแรง
+contemn|kənˈtem|ดูหมิ่น (ทางการ/โบราณ)|🧐|He contemned the rules.|เขาดูหมิ่นกฎ
+criticize|ˈkrɪtɪsaɪz|วิจารณ์, ติเตียน|📝|Critics criticize the film.|นักวิจารณ์ติเตียนหนังเรื่องนี้
+deflate|dɪˈfleɪt|ทำให้หมดกำลังใจ, ทำให้แฟบ|🎈|The loss deflated the team.|ความพ่ายแพ้ทำให้ทีมหมดกำลังใจ
+degrade|dɪˈɡreɪd|ทำให้เสื่อมเสีย, ลดเกียรติ|📉|Never degrade others.|อย่าลดเกียรติผู้อื่น
+demoralize|dɪˈmɒrəlaɪz|ทำลายขวัญกำลังใจ|😞|Defeat can demoralize us.|ความพ่ายแพ้ทำลายขวัญเราได้
+denounce|dɪˈnaʊns|ประณามอย่างเปิดเผย|🎤|He denounced the lies.|เขาประณามคำโกหกอย่างเปิดเผย
+despise|dɪˈspaɪz|เหยียดหยาม, ดูแคลน|😒|She despises cheaters.|เธอเหยียดคนโกง
+detest|dɪˈtest|เกลียดชัง|🤢|I detest spiders.|ฉันเกลียดแมงมุม
+insult|ɪnˈsʌlt|ดูถูก, สบประมาท|🤬|He insulted my cooking.|เขาดูถูกฝีมือทำอาหารของฉัน
+judge|dʒʌdʒ|ตัดสิน, ตัดสินคนอื่น|⚖️|Do not judge people.|อย่าตัดสินคนอื่น
+mock|mɒk|เยาะเย้ย, ล้อเลียน|🤪|Kids mocked his accent.|เด็กๆ ล้อเลียนสำเนียงเขา
+scold|skəʊld|ดุด่า|👩‍🏫|Mom scolded the boy.|แม่ดุเด็กชาย`],
+["พฤติกรรมไม่เหมาะสม หลอกลวง และรบกวน","Negative Behaviour",`annoy|əˈnɔɪ|ทำให้รำคาญ|😣|Noise annoys me.|เสียงดังทำให้ฉันรำคาญ
+banter|ˈbæntə|หยอกล้อ, พูดแซวกัน|😜|Friends banter at lunch.|เพื่อนๆ หยอกล้อกันตอนกินข้าว
+betray|bɪˈtreɪ|ทรยศ, หักหลัง|🗡️|He betrayed his friend.|เขาหักหลังเพื่อน
+boast|bəʊst|โอ้อวด, โม้|🦚|Do not boast about money.|อย่าโอ้อวดเรื่องเงิน
+bother|ˈbɒðə|รบกวน|🙄|Sorry to bother you.|ขอโทษที่รบกวนนะ
+bribe|braɪb|ติดสินบน|💰|He tried to bribe the guard.|เขาพยายามติดสินบนยาม
+deceive|dɪˈsiːv|หลอกลวง|🎭|Do not deceive people.|อย่าหลอกลวงผู้คน
+envy|ˈenvi|อิจฉา|😒|I envy your talent.|ฉันอิจฉาพรสวรรค์ของคุณ
+gossip|ˈɡɒsɪp|นินทา|🤭|They gossip about neighbors.|พวกเขานินทาเพื่อนบ้าน
+ignore|ɪɡˈnɔː|เพิกเฉย, ไม่สนใจ|🙉|Do not ignore the signs.|อย่าเพิกเฉยต่อป้าย
+neglect|nɪˈɡlekt|ละเลย|🥀|He neglected his garden.|เขาละเลยสวนของตัวเอง
+offend|əˈfend|ทำให้ขุ่นเคือง, ล่วงเกิน|😡|My joke offended her.|มุกของฉันทำให้เธอขุ่นเคือง
+tease|tiːz|แหย่, แกล้งหยอก|😝|Do not tease the cat.|อย่าแกล้งแหย่แมว
+threaten|ˈθretən|ขู่, คุกคาม|⚠️|He threatened to quit.|เขาขู่ว่าจะลาออก
+warn|wɔːn|เตือน|🚨|I warn you, it is hot.|ฉันเตือนแล้วนะ มันร้อน`],
+["อื่นๆ","Others",`approach|əˈprəʊtʃ|เข้าหา, ติดต่อ|🚶|He approached the manager.|เขาเข้าไปหาผู้จัดการ
+depict|dɪˈpɪkt|พรรณนา, วาดภาพให้เห็น|🖼️|The painting depicts a storm.|ภาพวาดนี้พรรณนาถึงพายุ`]
+];
+const C=["#ffd6e0","#d6ecff","#d9f5d9","#fff2c2","#e6d9ff","#ffe0cc","#c9f2ee","#f3d9f5"];
+const $=id=>document.getElementById(id);
+let cur=0,voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ voice=v.find(x=>/google uk english male/i.test(x.name))||v.find(x=>/daniel|alex|david|guy|ryan|fred|mark|male|james|george/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(voice){u.voice=voice;u.lang=voice.lang}u.rate=.85;u.pitch=.8;speechSynthesis.speak(u)}
+function rows(i){return D[i][2].split("\n").map(l=>l.split("|"))}
+function render(){
+ const r=rows(cur);$("sub").textContent=D[cur][1]+" • "+r.length+" คำ";
+ $("tabs").innerHTML=D.map((d,i)=>`<button class="tab${i==cur?' on':''}" data-i="${i}">${i+1}. ${d[0]}</button>`).join("");
+ $("grid").innerHTML=r.map((x,i)=>{const c=C[(i+cur)%C.length];return `<div class="card" data-i="${i}"><div class="in">
+ <div class="face" style="background:${c}"><button class="spk" data-s="${i}" title="ฟังเสียง">🔊</button><div class="em">${x[3]}</div><div class="w">${x[0]}</div><div class="ph">/${x[1]}/</div></div>
+ <div class="face back" style="background:${c}"><div class="th">${x[2]}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=r.map((x,i)=>`<tr><td>${i+1}</td><td class="w2">${x[0]}</td><td class="p">/${x[1]}/</td><td>${x[2]}</td><td>${x[4]}</td><td>${x[5]}</td><td><button data-t="${i}" title="ฟัง">🔊</button></td></tr>`).join("");
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest(".tab");if(t){cur=+t.dataset.i;render();return}
+ const s=e.target.closest("[data-s]");if(s){say(rows(cur)[s.dataset.s][0],e);return}
+ const b=e.target.closest("[data-t]");if(b){say(rows(cur)[b.dataset.t][4]);return}
+ const c=e.target.closest(".card");if(c){c.classList.toggle("f");if(!c.classList.contains("f"))say(rows(cur)[c.dataset.i][0])}
+});
+render();
+</script></body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Problem-Solving &amp; Decision-Making</title>
+<link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Noto+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fdf8ff;--tx:#2b2b36;--sf:#fff;--ln:#eadff3;--ac:#b9a3e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1a24;--tx:#eee9f5;--sf:#2a2634;--ln:#403a4e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Thai",system-ui,sans-serif;padding:16px}
+h1{font-family:ABeeZee,sans-serif;text-align:center;margin:8px 0 14px;font-size:1.6rem}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;justify-content:safe center;flex-wrap:wrap}
+.tab{border:0;border-radius:999px;padding:9px 16px;font:600 .85rem "Noto Sans Thai",sans-serif;cursor:pointer;background:var(--sf);color:var(--tx);box-shadow:0 3px 10px rgba(120,90,160,.15);transition:.2s}
+.tab.on{background:var(--ac);color:#2b2b36;transform:translateY(-2px)}
+.sub{text-align:center;opacity:.7;font-size:.85rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;max-width:1100px;margin:0 auto}
+.card{height:190px;perspective:900px;cursor:pointer}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;box-shadow:0 8px 20px rgba(100,80,140,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px;text-align:center;color:#222}
+.back{transform:rotateY(180deg)}
+.em{font-size:3.2rem;line-height:1}
+.w{font-family:ABeeZee,sans-serif;font-size:1.45rem;color:#000;margin-top:6px}
+.ph{font-family:"Times New Roman",Times,serif;font-size:.95rem}
+.th{font-size:1.4rem;font-weight:600}
+.spk{position:absolute;top:8px;right:8px;border:0;background:rgba(255,255,255,.7);border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer}
+.wrap{max-width:1100px;margin:28px auto 0;overflow-x:auto;border-radius:18px;box-shadow:0 6px 18px rgba(100,80,140,.15);background:var(--sf)}
+table{border-collapse:collapse;width:100%;min-width:700px;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--ln);vertical-align:top}
+th{background:var(--ac);color:#2b2b36;position:sticky;top:0}
+td.w2{font-family:ABeeZee,sans-serif;font-weight:700}
+td.p{font-family:"Times New Roman",serif}
+td button{border:0;background:none;cursor:pointer;font-size:1rem}
+</style></head><body>
+<h1>🧠 Problem-Solving &amp; Decision-Making</h1>
+<div class="tabs" id="tabs"></div>
+<div class="sub" id="sub"></div>
+<div class="grid" id="grid"></div>
+<div class="wrap"><table><thead><tr><th>#</th><th>Vocabulary</th><th>Phonetics</th><th>ความหมาย</th><th>Example sentence</th><th>แปลประโยค</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<script>
+const D=[
+["คิดและไตร่ตรอง","Thinking & Reflecting",`think|θɪŋk|คิด|🤔|Think before you speak.|คิดก่อนพูด
+consider|kənˈsɪdə|พิจารณา|🧐|Consider all the options.|พิจารณาทุกตัวเลือก
+reconsider|ˌriːkənˈsɪdə|พิจารณาใหม่|🔄|Please reconsider your offer.|กรุณาพิจารณาข้อเสนอใหม่
+rethink|ˌriːˈθɪŋk|คิดใหม่|💭|We must rethink the plan.|เราต้องคิดแผนใหม่
+contemplate|ˈkɒntəmpleɪt|ใคร่ครวญ, ครุ่นคิด|🧘|He contemplates his future.|เขาใคร่ครวญถึงอนาคตของตน
+deliberate|dɪˈlɪbəreɪt|ปรึกษาหารืออย่างรอบคอบ, ไตร่ตรอง|⚖️|The jury deliberated for hours.|คณะลูกขุนไตร่ตรองหลายชั่วโมง
+reflect|rɪˈflekt|ทบทวน, สะท้อนคิด|🪞|Reflect on what you learned.|ทบทวนสิ่งที่คุณได้เรียนรู้
+reason|ˈriːzən|ใช้เหตุผล, คิดอย่างมีเหตุผล|🧠|Try to reason calmly.|พยายามใช้เหตุผลอย่างใจเย็น
+speculate|ˈspekjəleɪt|คาดเดา, สันนิษฐาน|🔮|People speculate about prices.|ผู้คนคาดเดาเรื่องราคา
+guess|ɡes|เดา|🎲|Can you guess the answer?|คุณเดาคำตอบได้ไหม
+predict|prɪˈdɪkt|ทำนาย, คาดการณ์|📊|Experts predict rain.|ผู้เชี่ยวชาญคาดว่าฝนจะตก
+focus|ˈfəʊkəs|โฟกัส, จดจ่อ|🎯|Focus on your goal.|จดจ่อกับเป้าหมายของคุณ`],
+["วิเคราะห์และประเมิน","Analysing & Evaluating",`analyze|ˈænəlaɪz|วิเคราะห์|🔬|We analyze the data.|เราวิเคราะห์ข้อมูล
+assess|əˈses|ประเมิน|📋|Doctors assess the risk.|แพทย์ประเมินความเสี่ยง
+evaluate|ɪˈvæljueɪt|ประเมินค่า|⭐|Teachers evaluate essays.|ครูประเมินค่าเรียงความ
+examine|ɪɡˈzæmɪn|ตรวจสอบ, พิจารณาอย่างละเอียด|🔍|He examines the evidence.|เขาตรวจสอบหลักฐาน
+re-examine|ˌriːɪɡˈzæmɪn|ตรวจสอบใหม่|🔎|Re-examine the results.|ตรวจสอบผลลัพธ์อีกครั้ง
+scrutinize|ˈskruːtɪnaɪz|พิจารณาอย่างถี่ถ้วน|🧾|She scrutinized the contract.|เธอพิจารณาสัญญาอย่างถี่ถ้วน
+review|rɪˈvjuː|ทบทวน, ตรวจทาน|📝|Review your notes tonight.|ทบทวนโน้ตของคุณคืนนี้
+calculate|ˈkælkjəleɪt|คำนวณ|🧮|Calculate the total cost.|คำนวณค่าใช้จ่ายทั้งหมด
+compare|kəmˈpeə|เปรียบเทียบ|🆚|Compare the two prices.|เปรียบเทียบราคาทั้งสอง
+measure|ˈmeʒə|วัด|📏|Measure the table.|วัดโต๊ะ`],
+["สืบค้นและทดสอบ","Investigating & Testing",`investigate|ɪnˈvestɪɡeɪt|สืบสวน, สอบสวน|🕵️|Police investigate the case.|ตำรวจสืบสวนคดีนี้
+probe|prəʊb|สอบสวนลึก, ตรวจสอบเจาะลึก|🩺|Reporters probe the scandal.|นักข่าวตรวจสอบเจาะลึกเรื่องอื้อฉาว
+explore|ɪkˈsplɔː|สำรวจ, ศึกษาค้นคว้า|🧭|Let us explore the cave.|มาสำรวจถ้ำกันเถอะ
+search|sɜːtʃ|ค้นหา|🔦|I search for my keys.|ฉันค้นหากุญแจ
+survey|səˈveɪ|สำรวจ, ทำแบบสำรวจ|🗳️|They survey customers.|พวกเขาสำรวจความเห็นลูกค้า
+study|ˈstʌdi|ศึกษา|📚|She studies biology.|เธอศึกษาชีววิทยา
+monitor|ˈmɒnɪtə|ติดตามตรวจสอบ|🖥️|Nurses monitor patients.|พยาบาลติดตามอาการผู้ป่วย
+track|træk|ติดตาม|📍|Track your parcel online.|ติดตามพัสดุออนไลน์
+trace|treɪs|สืบย้อนรอย|👣|Police traced the call.|ตำรวจสืบย้อนรอยสายโทรศัพท์
+test|test|ทดสอบ|🧫|We test the new app.|เราทดสอบแอปใหม่
+trial|ˈtraɪəl|ทดลองใช้, ทดสอบ|🧰|They trial the new system.|พวกเขาทดลองใช้ระบบใหม่
+experiment|ɪkˈsperɪment|ทดลอง|🧪|Students experiment in class.|นักเรียนทดลองในชั้นเรียน
+simulate|ˈsɪmjəleɪt|จำลอง|🕹️|Pilots simulate a landing.|นักบินจำลองการลงจอด`],
+["ค้นพบและทำความเข้าใจ","Detecting & Understanding",`detect|dɪˈtekt|ตรวจจับ, สังเกตพบ|📡|The alarm detects smoke.|สัญญาณเตือนตรวจจับควัน
+discern|dɪˈsɜːn|แยกแยะ, มองเห็นความแตกต่าง|👓|I can discern a faint light.|ฉันมองเห็นแสงจางๆ ได้
+discover|dɪˈskʌvə|ค้นพบ|🗺️|He discovered a new planet.|เขาค้นพบดาวเคราะห์ดวงใหม่
+uncover|ʌnˈkʌvə|เปิดเผย, ค้นพบสิ่งที่ซ่อนอยู่|🏺|They uncovered old coins.|พวกเขาค้นพบเหรียญเก่า
+identify|aɪˈdentɪfaɪ|ระบุ, ชี้ชัด|🪪|Can you identify this bird?|คุณระบุนกชนิดนี้ได้ไหม
+diagnose|ˌdaɪəɡˈnəʊz|วินิจฉัย|🏥|Doctors diagnose the illness.|แพทย์วินิจฉัยโรค
+unravel|ʌnˈrævəl|คลี่คลาย, ไขปม|🧶|She unraveled the mystery.|เธอไขปริศนาได้
+understand|ˌʌndəˈstænd|เข้าใจ|💡|I understand the rule.|ฉันเข้าใจกฎนี้
+define|dɪˈfaɪn|นิยาม, กำหนดความหมาย|📖|Define the word clearly.|นิยามคำนี้ให้ชัดเจน
+clarify|ˈklærɪfaɪ|ทำให้กระจ่าง, ชี้แจง|🔆|Please clarify your point.|กรุณาชี้แจงประเด็นของคุณ`],
+["สรุปเหตุผลและพิสูจน์","Reasoning & Proving",`conclude|kənˈkluːd|สรุป|🏁|We conclude the meeting.|เราสรุปการประชุม
+deduce|dɪˈdjuːs|อนุมาน, หาข้อสรุปจากเหตุผล|🕵️|He deduced who did it.|เขาอนุมานได้ว่าใครเป็นคนทำ
+determine|dɪˈtɜːmɪn|กำหนด, ตัดสินให้แน่ชัด|📌|Tests determine the cause.|การทดสอบกำหนดสาเหตุได้
+prove|pruːv|พิสูจน์|✔️|Prove your answer.|พิสูจน์คำตอบของคุณ
+substantiate|səbˈstænʃieɪt|ยืนยันด้วยหลักฐาน|🗂️|Substantiate your claim.|ยืนยันข้อกล่าวอ้างด้วยหลักฐาน
+validate|ˈvælɪdeɪt|ตรวจสอบความถูกต้อง, ยืนยันความสมเหตุสมผล|✅|Validate the results.|ตรวจสอบความถูกต้องของผลลัพธ์
+rebut|rɪˈbʌt|โต้แย้ง, หักล้าง|🛑|She rebutted his argument.|เธอโต้แย้งข้อโต้เถียงของเขา
+rationalize|ˈræʃənəlaɪz|หาเหตุผลมาอธิบาย|🗨️|He rationalizes his mistake.|เขาหาเหตุผลมาอธิบายความผิดพลาด
+query|ˈkwɪəri|สอบถาม, ตั้งข้อสงสัย|❓|I query the bill.|ฉันสอบถามเรื่องใบเรียกเก็บเงิน
+question|ˈkwestʃən|ตั้งคำถาม, สงสัย|🙋|Never stop questioning.|อย่าหยุดตั้งคำถาม
+judge|dʒʌdʒ|ตัดสิน|👨‍⚖️|The judge decides fairly.|ผู้พิพากษาตัดสินอย่างยุติธรรม`],
+["ตัดสินใจและเลือก","Decision Making",`decide|dɪˈsaɪd|ตัดสินใจ|🪙|I decided to go.|ฉันตัดสินใจไป
+choose|tʃuːz|เลือก|👆|Choose a color.|เลือกสีสักสี
+select|sɪˈlekt|คัดเลือก|🎯|They select the best player.|พวกเขาคัดเลือกผู้เล่นที่ดีที่สุด
+weigh|weɪ|ชั่งน้ำหนัก, พิจารณาข้อดีข้อเสีย|⚖️|Weigh the pros and cons.|ชั่งข้อดีข้อเสีย
+prioritize|praɪˈɒrɪtaɪz|จัดลำดับความสำคัญ|🥇|Prioritize urgent tasks.|จัดลำดับงานด่วนก่อน
+eliminate|ɪˈlɪmɪneɪt|ตัดออก, กำจัด|🗑️|Eliminate the weak options.|ตัดตัวเลือกที่อ่อนออก
+finalize|ˈfaɪnəlaɪz|สรุปขั้นสุดท้าย, ทำให้เสร็จสมบูรณ์|🏆|We finalize the deal today.|เราสรุปดีลวันนี้
+resolve|rɪˈzɒlv|ตกลงใจ, แก้ไขให้ยุติ|🔐|They resolved the dispute.|พวกเขาแก้ไขข้อพิพาทให้ยุติ
+settle|ˈsetəl|ตกลง, ทำให้ยุติ|🤝|Let us settle this now.|มาตกลงเรื่องนี้กันตอนนี้เลย`],
+["วางแผนและลงมือทำ","Planning & Implementing",`plan|plæn|วางแผน|🗓️|We plan a trip.|เราวางแผนเที่ยว
+design|dɪˈzaɪn|ออกแบบ|📐|She designs apps.|เธอออกแบบแอป
+formulate|ˈfɔːmjəleɪt|กำหนดสูตร, วางหลักการ|🧬|Formulate a clear strategy.|วางหลักการกลยุทธ์ให้ชัดเจน
+propose|prəˈpəʊz|เสนอ|📨|I propose a new idea.|ฉันเสนอไอเดียใหม่
+strategize|ˈstrætədʒaɪz|วางกลยุทธ์|♟️|Let us strategize together.|มาวางกลยุทธ์ด้วยกัน
+implement|ˈɪmplɪment|นำไปปฏิบัติ|🚀|We implement the plan.|เรานำแผนไปปฏิบัติ
+optimize|ˈɒptɪmaɪz|ปรับให้เหมาะสมที่สุด|⚡|Optimize your schedule.|ปรับตารางเวลาให้เหมาะสมที่สุด
+trade-off|ˈtreɪd ɒf|แลกระหว่างข้อดีข้อเสีย (ส่วนใหญ่ใช้เป็นคำนาม)|⚖️|Every choice has a trade-off.|ทุกทางเลือกมีสิ่งที่ต้องแลก`],
+["แก้ปัญหา","Problem Solving",`solve|sɒlv|แก้ปัญหา, ไขปริศนา|🧩|She solves puzzles fast.|เธอไขปริศนาได้เร็ว
+tackle|ˈtækəl|รับมือ, จัดการ (ปัญหา)|💪|We tackle the problem.|เรารับมือกับปัญหา
+overcome|ˌəʊvəˈkʌm|เอาชนะ, ฝ่าฟัน|🏔️|He overcame his fear.|เขาเอาชนะความกลัว
+troubleshoot|ˈtrʌbəlʃuːt|แก้ไขปัญหา, หาจุดบกพร่อง|🛠️|Troubleshoot the network.|หาจุดบกพร่องของเครือข่าย
+remedy|ˈremədi|เยียวยา, แก้ไข|💊|Rest can remedy stress.|การพักผ่อนช่วยเยียวยาความเครียด
+rectify|ˈrektɪfaɪ|แก้ไขให้ถูกต้อง|🩹|Rectify the error.|แก้ไขข้อผิดพลาดให้ถูกต้อง
+repair|rɪˈpeə|ซ่อมแซม|🔧|He repairs bikes.|เขาซ่อมจักรยาน
+reduce|rɪˈdjuːs|ลด|📉|Reduce the waste.|ลดขยะ`],
+["จัดระเบียบและปรับปรุงข้อมูล","Organising & Refining",`categorize|ˈkætəɡəraɪz|จัดหมวดหมู่|🗃️|Categorize the files.|จัดหมวดหมู่ไฟล์
+sort|sɔːt|คัดแยก|📦|Sort the mail by city.|คัดแยกจดหมายตามเมือง
+filter|ˈfɪltə|กรอง|🧪|Filter the results.|กรองผลลัพธ์
+organise|ˈɔːɡənaɪz|จัดระเบียบ|🗄️|Organise your desk.|จัดโต๊ะทำงานให้เป็นระเบียบ
+simplify|ˈsɪmplɪfaɪ|ทำให้ง่ายขึ้น|🪄|Simplify the steps.|ทำขั้นตอนให้ง่ายขึ้น
+standardize|ˈstændədaɪz|กำหนดมาตรฐาน|📏|We standardize the forms.|เรากำหนดมาตรฐานแบบฟอร์ม
+systematize|ˈsɪstəmətaɪz|ทำให้เป็นระบบ|🧱|Systematize your workflow.|ทำขั้นตอนงานให้เป็นระบบ
+synthesize|ˈsɪnθəsaɪz|สังเคราะห์|⚗️|Synthesize the findings.|สังเคราะห์ผลการค้นพบ
+summarize|ˈsʌməraɪz|สรุปย่อ|📄|Summarize the article.|สรุปย่อบทความ
+refine|rɪˈfaɪn|ปรับปรุงให้ละเอียด, ขัดเกลา|✨|Refine your draft.|ขัดเกลาร่างของคุณ
+revise|rɪˈvaɪz|ทบทวน, ปรับปรุงแก้ไข|✏️|Revise before the exam.|ทบทวนก่อนสอบ
+transform|trænsˈfɔːm|เปลี่ยนรูป, แปลงโฉม|🦋|A caterpillar transforms.|หนอนผีเสื้อแปลงร่าง
+translate|trænzˈleɪt|แปล, แปลงความหมาย|🌐|Translate it into Thai.|แปลเป็นภาษาไทย`],
+["ปรึกษาและสื่อสารร่วมกัน","Communication & Collaboration",`brainstorm|ˈbreɪnstɔːm|ระดมความคิด|⛈️|Let us brainstorm ideas.|มาระดมความคิดกัน
+collaborate|kəˈlæbəreɪt|ร่วมมือกัน|👥|Teams collaborate daily.|ทีมร่วมมือกันทุกวัน
+consult|kənˈsʌlt|ปรึกษา|👨‍⚕️|Consult a doctor first.|ปรึกษาแพทย์ก่อน
+discuss|dɪˈskʌs|อภิปราย, พูดคุย|💬|We discuss the budget.|เราพูดคุยเรื่องงบประมาณ
+negotiate|nɪˈɡəʊʃieɪt|เจรจาต่อรอง|🤝|They negotiate a price.|พวกเขาเจรจาต่อรองราคา
+suggest|səˈdʒest|เสนอแนะ|💁|I suggest a short break.|ฉันเสนอให้พักสั้นๆ`]
+];
+const C=["#ffd6e0","#d6ecff","#d9f5d9","#fff2c2","#e6d9ff","#ffe0cc","#c9f2ee","#f3d9f5"];
+const $=id=>document.getElementById(id);
+let cur=0,voice=null;
+function pick(){const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));
+ voice=v.find(x=>/google uk english male/i.test(x.name))||v.find(x=>/daniel|alex|david|guy|ryan|fred|mark|male|james|george/i.test(x.name))||v[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,e){if(e)e.stopPropagation();if(!('speechSynthesis' in window))return;speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(voice){u.voice=voice;u.lang=voice.lang}u.rate=.85;u.pitch=.8;speechSynthesis.speak(u)}
+function rows(i){return D[i][2].split("\n").map(l=>l.split("|"))}
+function render(){
+ const r=rows(cur);$("sub").textContent=D[cur][1]+" • "+r.length+" คำ";
+ $("tabs").innerHTML=D.map((d,i)=>`<button class="tab${i==cur?' on':''}" data-i="${i}">${i+1}. ${d[0]}</button>`).join("");
+ $("grid").innerHTML=r.map((x,i)=>{const c=C[(i+cur)%C.length];return `<div class="card" data-i="${i}"><div class="in">
+ <div class="face" style="background:${c}"><button class="spk" data-s="${i}" title="ฟังเสียง">🔊</button><div class="em">${x[3]}</div><div class="w">${x[0]}</div><div class="ph">/${x[1]}/</div></div>
+ <div class="face back" style="background:${c}"><div class="th">${x[2]}</div></div></div></div>`}).join("");
+ $("tb").innerHTML=r.map((x,i)=>`<tr><td>${i+1}</td><td class="w2">${x[0]}</td><td class="p">/${x[1]}/</td><td>${x[2]}</td><td>${x[4]}</td><td>${x[5]}</td><td><button data-t="${i}" title="ฟัง">🔊</button></td></tr>`).join("");
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest(".tab");if(t){cur=+t.dataset.i;render();return}
+ const s=e.target.closest("[data-s]");if(s){say(rows(cur)[s.dataset.s][0],e);return}
+ const b=e.target.closest("[data-t]");if(b){say(rows(cur)[b.dataset.t][4]);return}
+ const c=e.target.closest(".card");if(c){c.classList.toggle("f");if(!c.classList.contains("f"))say(rows(cur)[c.dataset.i][0])}
+});
+render();
+</script></body></html>
